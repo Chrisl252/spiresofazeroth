@@ -1,0 +1,323 @@
+/* Act-transition healer scene (js/ui/healer.js): Uther the Lightbringer Guardian Room.
+   Full-screen Slay the Spire 2 style sanctuary with centered layout, Holy Light paladin halo,
+   and clean centered typography. */
+
+.sx-screen.sx-healer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: radial-gradient(ellipse 75% 65% at 50% 32%, rgba(255, 220, 110, 0.14) 0%, rgba(24, 18, 10, 0.5) 55%, rgba(6, 4, 2, 0.88) 100%);
+  pointer-events: auto;
+}
+
+/* Full-screen sanctuary area beneath the run bar */
+.hl-sanctuary {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 48px;
+  width: 100%;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+/* Divine godrays streaming from above */
+.hl-rays {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1200px;
+  height: 800px;
+  background: conic-gradient(
+    from 165deg at 50% 0%,
+    transparent 0deg,
+    rgba(255, 235, 160, 0.07) 10deg,
+    transparent 18deg,
+    rgba(255, 220, 110, 0.12) 32deg,
+    transparent 42deg,
+    rgba(255, 235, 160, 0.08) 52deg,
+    transparent 65deg
+  );
+  pointer-events: none;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 80%);
+  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 80%);
+  animation: hl-ray-shimmer 7s ease-in-out infinite alternate;
+}
+
+/* Ambient holy aura behind Uther */
+.hl-ambient-glow {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    rgba(255, 230, 130, 0.28) 0%,
+    rgba(240, 195, 70, 0.12) 45%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  pointer-events: none;
+  filter: blur(24px);
+  animation: hl-ambient-pulse 4.5s ease-in-out infinite;
+}
+
+/* Centered Guardian Blessing Card */
+.hl-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: min(880px, 92%);
+  margin: 0 auto;
+  padding: 44px 54px 38px;
+  box-sizing: border-box;
+  pointer-events: auto;
+  filter: drop-shadow(0 20px 48px rgba(0, 0, 0, 0.88)) drop-shadow(0 0 32px rgba(255, 215, 90, 0.22));
+  animation: hl-card-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Holy Light Icon & Golden Paladin Halo */
+.hl-halo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 144px;
+  height: 144px;
+  margin: -68px auto 14px;
+  z-index: 3;
+}
+
+.hl-halo::before {
+  content: "";
+  position: absolute;
+  inset: -28px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 236, 140, 0.88) 0%,
+    rgba(255, 210, 80, 0.42) 45%,
+    rgba(255, 190, 40, 0) 72%
+  );
+  animation: hl-pulse 3.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hl-halo::after {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 225, 120, 0.55);
+  box-shadow: 0 0 18px rgba(255, 210, 80, 0.4);
+  animation: hl-spin 32s linear infinite;
+  pointer-events: none;
+}
+
+.hl-frame {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 114px;
+  height: 114px;
+  border: 5px solid #d4af37;
+  border-radius: 50%;
+  background: #1a1208;
+  box-shadow: 0 0 0 3px #3a2410, 0 10px 28px rgba(0, 0, 0, 0.75), 0 0 36px rgba(255, 215, 80, 0.65), inset 0 0 18px rgba(255, 215, 80, 0.4);
+  overflow: hidden;
+  z-index: 2;
+}
+
+.hl-ico {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: auto;
+  border-radius: 50%;
+  display: block;
+}
+
+/* Guardian Banner & Heading */
+.hl-card .sx-banner {
+  padding: 0;
+  background: none;
+  width: 100%;
+  text-align: center;
+}
+
+.hl-card .sx-banner h2 {
+  font-size: 52px;
+  line-height: 1.1;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.hl-card .sx-banner p {
+  font-size: 24px;
+  margin: 6px 0 0;
+  color: #5a3d1b;
+  text-shadow: none;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.hl-card .sx-banner::after {
+  width: 440px;
+  max-width: 75%;
+  height: 4px;
+  margin: 14px auto 0;
+  background: linear-gradient(90deg, transparent, #c9a24b 25%, #fff0a8 50%, #c9a24b 75%, transparent);
+  box-shadow: 0 0 10px rgba(255, 209, 0, 0.5);
+}
+
+/* Centered authentic spoken quote */
+.hl-line {
+  margin: 18px auto 14px;
+  font-size: 28px;
+  line-height: 1.35;
+  font-style: italic;
+  color: #2b1a08;
+  text-align: center;
+  border-left: none;
+  padding: 0 20px;
+  max-width: 760px;
+  box-sizing: border-box;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* Centered heal result */
+.hl-result {
+  margin: 0 auto 24px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #14602a;
+  text-align: center;
+  max-width: 760px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.01em;
+}
+
+/* Centered Continue button */
+.hl-go {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.hl-continue-btn {
+  min-width: 260px;
+}
+
+/* Portrait adaptations */
+.sp-portrait .hl-card {
+  width: min(940px, 94%);
+  padding: 38px 32px 32px;
+}
+
+.sp-portrait .hl-card .sx-banner h2 {
+  font-size: 60px;
+}
+
+.sp-portrait .hl-card .sx-banner p {
+  font-size: 28px;
+}
+
+.sp-portrait .hl-line {
+  font-size: 32px;
+}
+
+.sp-portrait .hl-result {
+  font-size: 30px;
+}
+
+/* Animations */
+@keyframes hl-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hl-pulse {
+  0%, 100% {
+    opacity: 0.72;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes hl-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hl-ambient-pulse {
+  0%, 100% {
+    opacity: 0.75;
+    transform: translateX(-50%) scale(0.96);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.05);
+  }
+}
+
+@keyframes hl-ray-shimmer {
+  0% {
+    opacity: 0.7;
+    transform: translateX(-50%) rotate(-1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) rotate(1deg);
+  }
+}
+
+/* Reduced motion */
+.sx-healer--still .hl-card,
+.sx-healer--still .hl-halo::before,
+.sx-healer--still .hl-halo::after,
+.sx-healer--still .hl-rays,
+.sx-healer--still .hl-ambient-glow {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hl-card,
+  .hl-halo::before,
+  .hl-halo::after,
+  .hl-rays,
+  .hl-ambient-glow {
+    animation: none;
+  }
+}

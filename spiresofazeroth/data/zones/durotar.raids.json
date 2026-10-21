@@ -1,0 +1,61 @@
+[
+ {"id":"ragefire-chasm","name":"Ragefire Chasm","unlock":"act_complete","levelBand":[13,18],"lore":"The fire-wracked caverns beneath Orgrimmar, home to the Searing Blade cult.","encounters":{"normal":[["ragefire-trogg","earthborer"],["ragefire-trogg","ragefire-shaman"],["earthborer","molten-elemental"],["searing-blade-cultist","searing-blade-enforcer"],["molten-elemental","searing-blade-cultist","searing-blade-warlock"]],"elite":[["oggleflint"],["taragaman-the-hungerer"]],"boss":[["jergosh-the-invoker"],["bazzalan"]]},"finalBoss":"bazzalan",
+  "enemies":[
+   {"id":"ragefire-trogg","name":"Ragefire Trogg","tier":"raid","family":"humanoid","type":"trogg","level":[13,14],"hp":[13,17],"icon":"inv_misc_head_kobold_01","npcId":null,"traits":[],"moves":[{"id":"smash","name":"Smash","intent":"attack","effects":[{"op":"damage","amount":7}],"weight":3},{"id":"enrage","name":"Enrage","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}]},
+   {"id":"earthborer","name":"Earthborer","tier":"raid","family":"beast","type":"worm","level":[13,15],"hp":[13,18],"icon":"ability_hunter_pet_worm","npcId":null,"traits":[],"moves":[{"id":"bite","name":"Bite","intent":"attack","effects":[{"op":"damage","amount":4}],"weight":3},{"id":"burrow","name":"Burrow","intent":"block","effects":[{"op":"block","amount":6,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"ragefire-shaman","name":"Ragefire Shaman","tier":"raid","family":"humanoid","type":"trogg","level":[14,15],"hp":[14,19],"icon":"inv_misc_head_kobold_01","npcId":null,"traits":["caster"],"moves":[{"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":5,"school":"nature"}],"weight":2},{"id":"healing-wave","name":"Healing Wave","intent":"heal","effects":[{"op":"heal","amount":6,"target":"ally"}],"weight":1,"cooldown":3},{"id":"earth-shock","name":"Earth Shock","intent":"cast","effects":[{"op":"damage","amount":3,"school":"nature"},{"op":"apply","status":"weak","stacks":1,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"molten-elemental","name":"Molten Elemental","tier":"raid","family":"elemental","type":"fire","level":[14,16],"hp":[14,20],"icon":"spell_fire_elemental_totem","npcId":null,"traits":["resist:fire"],"moves":[{"id":"fire-blast","name":"Fire Blast","intent":"cast","effects":[{"op":"damage","amount":5,"school":"fire"},{"op":"apply","status":"burn","stacks":2,"target":"enemy"}],"weight":3},{"id":"flame-shock","name":"Flame Shock","intent":"cast","effects":[{"op":"damage","amount":3,"school":"fire"},{"op":"apply","status":"burn","stacks":3,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"searing-blade-cultist","name":"Searing Blade Cultist","tier":"raid","family":"humanoid","type":"orc","level":[15,17],"hp":[16,22],"icon":"inv_misc_head_orc_01","npcId":null,"traits":["caster"],"moves":[{"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":5,"school":"shadow"}],"weight":2},{"id":"curse-of-weakness","name":"Curse of Weakness","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"searing-blade-enforcer","name":"Searing Blade Enforcer","tier":"raid","family":"humanoid","type":"orc","level":[15,17],"hp":[16,22],"icon":"inv_misc_head_orc_02","npcId":null,"traits":[],"moves":[{"id":"slash","name":"Slash","intent":"attack","effects":[{"op":"damage","amount":5}],"weight":3},{"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":3},{"op":"apply","status":"bleed","stacks":2,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"searing-blade-warlock","name":"Searing Blade Warlock","tier":"raid","family":"humanoid","type":"orc","level":[16,18],"hp":[17,24],"icon":"inv_misc_head_orc_01","npcId":null,"traits":["caster"],"moves":[{"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":5,"school":"shadow"}],"weight":2},{"id":"corruption","name":"Corruption","intent":"debuff","effects":[{"op":"damage","amount":2,"school":"shadow"},{"op":"apply","status":"poison","stacks":3,"target":"enemy"}],"weight":1,"cooldown":3},{"id":"curse-of-agony","name":"Curse of Agony","intent":"debuff","effects":[{"op":"apply","status":"curse","stacks":2,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"oggleflint","name":"Oggleflint","tier":"elite","family":"humanoid","type":"trogg","level":[13,14],"hp":[36,47],"icon":"inv_misc_head_kobold_01","npcId":null,"traits":[],
+    "moves":[
+     {"id":"cleave","name":"Cleave","intent":"attack","effects":[{"op":"damage","amount":6,"target":"all_enemies"}],"weight":2},
+     {"id":"slam","name":"Slam","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":3},
+     {"id":"rage","name":"Rage","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}
+    ],
+    "pattern":["slam","cleave","slam","rage"],
+    "phases":[
+     {"hpBelowPct":40,"name":"Enraged","pattern":["cleave","slam","cleave"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+    ]
+   },
+   {"id":"taragaman-the-hungerer","name":"Taragaman the Hungerer","tier":"elite","family":"demon","type":"fiend","level":[15,16],"hp":[40,53],"icon":"spell_shadow_summonvoidwalker","npcId":null,"traits":[],
+    "moves":[
+     {"id":"fire-nova","name":"Fire Nova","intent":"cast","effects":[{"op":"damage","amount":7,"target":"all_enemies","school":"fire"},{"op":"apply","status":"burn","stacks":2,"target":"enemy"}],"weight":2,"cooldown":3},
+     {"id":"uppercut","name":"Uppercut","intent":"attack","effects":[{"op":"damage","amount":9},{"op":"apply","status":"stun","stacks":1,"target":"enemy"}],"weight":2,"cooldown":3},
+     {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":8}],"weight":2}
+    ],
+    "pattern":["claw","uppercut","fire-nova","claw","fire-nova"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Hunger","pattern":["fire-nova","uppercut","fire-nova"],"onEnter":[{"op":"apply","status":"strength","stacks":2,"target":"self"}]}
+    ]
+   },
+   {"id":"jergosh-the-invoker","name":"Jergosh the Invoker","tier":"elite","family":"humanoid","type":"orc","level":[16,17],"hp":[42,56],"icon":"inv_misc_head_orc_01","npcId":null,"traits":["caster"],
+    "moves":[
+     {"id":"immolate","name":"Immolate","intent":"cast","effects":[{"op":"damage","amount":5,"school":"fire"},{"op":"apply","status":"burn","stacks":3,"target":"enemy"}],"weight":2,"cooldown":3},
+     {"id":"curse-of-weakness","name":"Curse of Weakness","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":3,"target":"enemy"}],"weight":1,"cooldown":3},
+     {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":10,"school":"shadow"}],"weight":3},
+     {"id":"summon-voidwalker","name":"Summon Voidwalker","intent":"summon","effects":[{"op":"summon","unit":"summoned-voidwalker","count":1}],"weight":1,"cooldown":6}
+    ],
+    "pattern":["shadow-bolt","curse-of-weakness","immolate","shadow-bolt","summon-voidwalker"],
+    "phases":[
+     {"hpBelowPct":40,"name":"Invocation","pattern":["shadow-bolt","immolate","shadow-bolt","curse-of-weakness"],"onEnter":[{"op":"summon","unit":"summoned-voidwalker","count":1}]}
+    ]
+   },
+   {"id":"bazzalan","name":"Bazzalan","tier":"boss","family":"humanoid","type":"orc","level":[17,18],"hp":[89,118],"icon":"inv_misc_head_orc_02","npcId":null,"traits":[],
+    "moves":[
+     {"id":"sinister-strike","name":"Sinister Strike","intent":"attack","effects":[{"op":"damage","amount":10}],"weight":3},
+     {"id":"poison","name":"Poison","intent":"debuff","effects":[{"op":"damage","amount":5},{"op":"apply","status":"poison","stacks":4,"target":"enemy"}],"weight":2,"cooldown":3},
+     {"id":"deadly-poison","name":"Deadly Poison","intent":"debuff","effects":[{"op":"damage","amount":6},{"op":"apply","status":"poison","stacks":5,"target":"enemy"}],"weight":1,"cooldown":4},
+     {"id":"backstab","name":"Backstab","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":1,"cooldown":3}
+    ],
+    "pattern":["sinister-strike","poison","backstab","deadly-poison","sinister-strike"],
+    "phases":[
+     {"hpBelowPct":60,"name":"Venom Blade","pattern":["poison","sinister-strike","deadly-poison","backstab"],"onEnter":[{"op":"apply","status":"strength","stacks":2,"target":"self"}]},
+     {"hpBelowPct":30,"name":"Cornered","pattern":["backstab","deadly-poison","backstab","sinister-strike"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"},{"op":"block","amount":10,"target":"self"}]}
+    ]
+   },
+   {"id":"summoned-voidwalker","name":"Summoned Voidwalker","tier":"normal","family":"demon","type":"voidwalker","level":[16,17],"hp":[12,17],"icon":"spell_shadow_summonvoidwalker","npcId":null,"summonOnly":true,"traits":[],"moves":[{"id":"torment","name":"Torment","intent":"attack","effects":[{"op":"damage","amount":4}],"weight":3},{"id":"consume-shadows","name":"Consume Shadows","intent":"block","effects":[{"op":"block","amount":6,"target":"self"}],"weight":1,"cooldown":3},{"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":4,"school":"shadow"}],"weight":1,"cooldown":3}]}
+  ]
+ }
+]

@@ -1,0 +1,425 @@
+{
+ "id": "mulgore",
+ "name": "Mulgore",
+ "start": {
+  "name": "Bloodhoof Village Inn",
+  "icon": "inv_misc_beer_01"
+ },
+ "continent": "kal",
+ "act": 1,
+ "levelBand": [
+  1,
+  10
+ ],
+ "spire": {
+  "name": "Red Cloud Mesa",
+  "lore": "A sun-baked mesa above Camp Narache and Bloodhoof Village, with the Venture Co. mine drilling at its flank and Bristleback war camps ringing the plains."
+ },
+ "theme": {
+  "primary": "#c98a3d",
+  "secondary": "#4a3318",
+  "accent": "#9fd14a",
+  "background": "mulgore"
+ },
+ "zoneMechanic": {
+  "id": "stampede",
+  "name": "Stampede",
+  "icon": "ability_mount_kodo_01",
+  "text": "From turn 3 each round, the herd tramples your defences: you gain 1 Frail. Killing a beast heals 1 HP.",
+  "hooks": {
+   "on_turn_start": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "turn_number",
+      "min": 3
+     },
+     "then": [
+      {
+       "op": "apply",
+       "status": "frail",
+       "stacks": 1,
+       "target": "enemy"
+      }
+     ]
+    }
+   ],
+   "on_kill": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "target_is_family",
+      "family": "beast"
+     },
+     "then": [
+      {
+       "op": "heal",
+       "amount": 1,
+       "target": "self"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "camp-narache-fire",
+  "name": "Camp Narache Fire",
+  "icon": "spell_fire_fire",
+  "text": "Share a meal at Camp Narache Fire: heal 20% of max HP and gain 3 Max HP.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 20,
+    "target": "self"
+   },
+   {
+    "op": "max_hp",
+    "amount": 3,
+    "target": "self"
+   }
+  ]
+ },
+ "enemiesFile": "mulgore.enemies.json",
+ "encounters": {
+  "normal": [
+   [
+    "plainstrider",
+    "plainstrider"
+   ],
+   [
+    "prairie-wolf",
+    "prairie-wolf"
+   ],
+   [
+    "plainstrider",
+    "mountain-cougar"
+   ],
+   [
+    "adult-plainstrider",
+    "swoop"
+   ],
+   [
+    "prairie-wolf",
+    "prairie-wolf",
+    "prairie-stalker"
+   ],
+   [
+    "palemane-skinner",
+    "palemane-poacher"
+   ],
+   [
+    "bristleback-interloper",
+    "bristleback-hunter"
+   ],
+   [
+    "prairie-stalker",
+    "prairie-wolf-alpha"
+   ],
+   [
+    "bristleback-water-seeker",
+    "bristleback-quilboar"
+   ],
+   [
+    "venture-co-laborer",
+    "venture-co-laborer"
+   ],
+   [
+    "palemane-skinner",
+    "palemane-poacher",
+    "palemane-tanner"
+   ],
+   [
+    "bristleback-thornweaver",
+    "bristleback-battleboar",
+    "bristleback-quilboar"
+   ],
+   [
+    "venture-co-engineer",
+    "venture-co-supervisor"
+   ],
+   [
+    "swoop",
+    "flatland-prowler"
+   ],
+   [
+    "bristleback-hunter",
+    "bristleback-invader",
+    "bristleback-geomancer"
+   ],
+   [
+    "bristleback-battleboar",
+    "bristleback-quilboar",
+    "bristleback-invader",
+    "bristleback-shaman"
+   ],
+   [
+    "adult-plainstrider",
+    "elder-plainstrider"
+   ]
+  ],
+  "elite": [
+   [
+    "mountain-cougar",
+    "the-rake"
+   ],
+   [
+    "bristleback-hunter",
+    "snagglespear"
+   ],
+   [
+    "prairie-wolf",
+    "prairie-wolf",
+    "ghost-howl"
+   ]
+  ],
+  "boss": [
+   [
+    "bristleback-battleboar",
+    "chief-sharptusk-thornmantle",
+    "bristleback-shaman"
+   ],
+   [
+    "bristleback-thornweaver",
+    "snagglespear"
+   ],
+   [
+    "the-rake"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "rites-of-the-earthmother",
+   "name": "Rites of the Earthmother",
+   "icon": "spell_nature_earthquake",
+   "text": "The shaman of Bloodhoof offer you the rites of the Earthmother at the Thunder Totem.",
+   "options": [
+    {
+     "label": "Take the rites (heal 15, max HP +2)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 15,
+       "target": "self"
+      },
+      {
+       "op": "max_hp",
+       "amount": 2
+      }
+     ]
+    },
+    {
+     "label": "Offer coin to the totem (lose 20 gold, gain a card)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": -20
+      },
+      {
+       "op": "random_card",
+       "pool": "neutral",
+       "rarity": "common",
+       "to": "deck_permanent"
+      }
+     ],
+     "requires": {
+      "gold": 20
+     }
+    },
+    {
+     "label": "Decline politely",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "kyle-the-frenzied",
+   "name": "Kyle the Frenzied",
+   "icon": "ability_hunter_pet_wolf",
+   "text": "A mad wolf-hound named Kyle bares his teeth at Camp Narache. The tauren say a bit of meat might calm him.",
+   "options": [
+    {
+     "label": "Feed Kyle (lose 10 gold, heal 12)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": -10
+      },
+      {
+       "op": "heal",
+       "amount": 12,
+       "target": "self"
+      }
+     ],
+     "requires": {
+      "gold": 10
+     }
+    },
+    {
+     "label": "Calm him with the old rites (take 4 damage, max HP +2)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 4,
+       "target": "self"
+      },
+      {
+       "op": "max_hp",
+       "amount": 2
+      }
+     ]
+    },
+    {
+     "label": "Back away slowly",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "venture-co-mine",
+   "name": "The Venture Co. Mine",
+   "icon": "inv_misc_gear_01",
+   "text": "Goblin engineers have drilled into Red Cloud Mesa. The overseers are on break.",
+   "options": [
+    {
+     "label": "Raid the payroll (gold +45, take 8 damage)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 45
+      },
+      {
+       "op": "damage",
+       "amount": 8,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Sabotage a drill (heal 6, gain a card)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "random_card",
+       "pool": "neutral",
+       "rarity": "common",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Leave them to it",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "swoop-hunting",
+   "name": "Swoop Hunting",
+   "icon": "ability_hunter_pet_owl",
+   "text": "Swoop feathers fetch a fine price in Bloodhoof. The birds nest among the thorny scrub.",
+   "options": [
+    {
+     "label": "Hunt the swoops (gold +30, take 5 damage)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 30
+      },
+      {
+       "op": "damage",
+       "amount": 5,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Gather shed plumes (gold +12)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 12
+      }
+     ]
+    },
+    {
+     "label": "Walk on",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "earthroot",
+   "name": "Earthroot",
+   "icon": "inv_misc_herb_17",
+   "rarity": "common",
+   "itemId": null,
+   "zone": "mulgore",
+   "class": null,
+   "text": "At the end of your turn, if you have no Block, gain 3 Block.",
+   "triggers": {
+    "on_turn_end": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "resource_at_least",
+       "resource": "block",
+       "amount": 1
+      },
+      "then": [],
+      "else": [
+       {
+        "op": "block",
+        "amount": 3,
+        "target": "self"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "plainstrider-feather",
+   "name": "Plainstrider Feather",
+   "icon": "inv_misc_cape_18",
+   "rarity": "common",
+   "itemId": null,
+   "zone": "mulgore",
+   "class": null,
+   "text": "Gain 1 energy on the first turn of each combat.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "energy_next_turn",
+      "amount": 1
+     }
+    ]
+   }
+  },
+  {
+   "id": "swoop-gizzard",
+   "name": "Swoop Gizzard",
+   "icon": "inv_misc_organ_03",
+   "rarity": "uncommon",
+   "itemId": null,
+   "zone": "mulgore",
+   "class": null,
+   "text": "Whenever you kill an enemy, draw 1 card.",
+   "triggers": {
+    "on_kill": [
+     {
+      "op": "draw",
+      "count": 1
+     }
+    ]
+   }
+  }
+ ]
+}

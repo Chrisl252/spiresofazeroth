@@ -1,0 +1,2555 @@
+{
+  "id": "shaman",
+  "name": "Shaman",
+  "icon": "classicon_shaman",
+  "color": "#0070DE",
+  "lore": "Master of the primordial elements: plant autonomous totems, enchant weapons with Windfury or Flame, and call down lightning shocks.",
+  "startingHp": 75,
+  "startingGold": 99,
+  "defaultContinent": "kal",
+  "resource": {
+    "id": "totems",
+    "name": "Totems",
+    "tip": "Plant up to four elemental totems (Earth, Fire, Water, Air). Each totem acts at the start of your turn until destroyed.",
+    "icon": "spell_fire_searingtotem",
+    "max": 4,
+    "slots": [
+      "earth",
+      "fire",
+      "water",
+      "air"
+    ],
+    "rules": "Summon totems across four elemental slots to provide passive attacks, shields, and buffs each turn. Enchant your weapons with Imbues to add bonus damage and status effects to every melee strike.",
+    "energyPerTurn": 3,
+    "startOfCombat": 0,
+    "gainOnDamageDealt": 0,
+    "gainOnDamageTaken": 0,
+    "decayPerTurn": 0
+  },
+  "archetypes": [
+    {
+      "id": "elemental",
+      "name": "Elemental Combat",
+      "icon": "spell_nature_lightning",
+      "text": "Shocks, bolts and fire totems: burn the room down."
+    },
+    {
+      "id": "enhancement",
+      "name": "Enhancement",
+      "icon": "ability_shaman_stormstrike",
+      "text": "Weapon imbues and Stormstrike: melee with thorns and Windfury."
+    },
+    {
+      "id": "restoration",
+      "name": "Restoration",
+      "icon": "spell_nature_healingwavegreater",
+      "text": "Healing totems, Chain Heal and mana: outlast everything."
+    }
+  ],
+  "relics": [
+    {
+      "id": "ankh",
+      "name": "Ankh",
+      "icon": "spell_nature_reincarnation",
+      "rarity": "uncommon",
+      "itemId": 17030,
+      "zone": null,
+      "class": "shaman",
+      "text": "The first time each combat you fall below 25% HP, heal 12 HP.",
+      "triggers": {
+        "on_hp_loss": [
+          {
+            "op": "conditional",
+            "if": {
+              "type": "hp_below_pct",
+              "value": 25
+            },
+            "then": [
+              {
+                "op": "heal",
+                "amount": 12
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "earthfury-helmet",
+      "name": "Earthfury Helmet",
+      "icon": "inv_helmet_05",
+      "rarity": "rare",
+      "itemId": null,
+      "zone": null,
+      "class": "shaman",
+      "text": "At the start of each turn, 35% chance to gain 1 Energy.",
+      "triggers": {
+        "on_turn_start": [
+          {
+            "op": "conditional",
+            "if": {
+              "type": "chance",
+              "value": 35
+            },
+            "then": [
+              {
+                "op": "gain_energy",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "starterDeck": [
+    "lightning-bolt",
+    "lightning-bolt",
+    "lightning-bolt",
+    "earth-shock",
+    "earth-shock",
+    "stoneskin-totem",
+    "stoneskin-totem",
+    "searing-totem",
+    "healing-wave",
+    "ghost-wolf"
+  ],
+  "units": {
+    "searing": {
+      "name": "Searing Totem",
+      "icon": "spell_fire_searingtotem",
+      "hp": 6,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Searing Totem",
+          "intent": "attack",
+          "effects": [
+            {
+              "op": "damage",
+              "amount": 3,
+              "school": "fire",
+              "target": "random_enemy"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "searing_2": {
+      "name": "Searing Totem",
+      "icon": "spell_fire_searingtotem",
+      "hp": 8,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Searing Totem",
+          "intent": "attack",
+          "effects": [
+            {
+              "op": "damage",
+              "amount": 5,
+              "school": "fire",
+              "target": "random_enemy"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "fire_nova": {
+      "name": "Fire Nova Totem",
+      "icon": "spell_fire_sealoffire",
+      "hp": 5,
+      "expiresAfterAct": true,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Fire Nova Totem",
+          "intent": "attack",
+          "effects": [
+            {
+              "op": "damage",
+              "amount": 12,
+              "school": "fire",
+              "target": "all_enemies"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "fire_nova_2": {
+      "name": "Fire Nova Totem",
+      "icon": "spell_fire_sealoffire",
+      "hp": 5,
+      "expiresAfterAct": true,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Fire Nova Totem",
+          "intent": "attack",
+          "effects": [
+            {
+              "op": "damage",
+              "amount": 18,
+              "school": "fire",
+              "target": "all_enemies"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "magma": {
+      "name": "Magma Totem",
+      "icon": "spell_fire_selfdestruct",
+      "hp": 8,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Magma Totem",
+          "intent": "attack",
+          "effects": [
+            {
+              "op": "damage",
+              "amount": 4,
+              "school": "fire",
+              "target": "all_enemies"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "magma_2": {
+      "name": "Magma Totem",
+      "icon": "spell_fire_selfdestruct",
+      "hp": 10,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Magma Totem",
+          "intent": "attack",
+          "effects": [
+            {
+              "op": "damage",
+              "amount": 6,
+              "school": "fire",
+              "target": "all_enemies"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "flametongue": {
+      "name": "Flametongue Totem",
+      "icon": "spell_nature_guardianward",
+      "hp": 7,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Flametongue Totem",
+          "intent": "buff",
+          "effects": [
+            {
+              "op": "apply",
+              "status": "spell_power",
+              "stacks": 2,
+              "target": "self"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "flametongue_2": {
+      "name": "Flametongue Totem",
+      "icon": "spell_nature_guardianward",
+      "hp": 9,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Flametongue Totem",
+          "intent": "buff",
+          "effects": [
+            {
+              "op": "apply",
+              "status": "spell_power",
+              "stacks": 3,
+              "target": "self"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "stoneskin": {
+      "name": "Stoneskin Totem",
+      "icon": "spell_nature_stoneskintotem",
+      "hp": 6,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Stoneskin Totem",
+          "intent": "block",
+          "effects": [
+            {
+              "op": "block",
+              "amount": 3,
+              "target": "player"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "stoneskin_2": {
+      "name": "Stoneskin Totem",
+      "icon": "spell_nature_stoneskintotem",
+      "hp": 8,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Stoneskin Totem",
+          "intent": "block",
+          "effects": [
+            {
+              "op": "block",
+              "amount": 5,
+              "target": "player"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "stoneclaw": {
+      "name": "Stoneclaw Totem",
+      "icon": "spell_nature_stoneclawtotem",
+      "hp": 10,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Stoneclaw Totem",
+          "intent": "block",
+          "effects": [
+            {
+              "op": "taunt"
+            },
+            {
+              "op": "block",
+              "amount": 8,
+              "target": "self"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "stoneclaw_2": {
+      "name": "Stoneclaw Totem",
+      "icon": "spell_nature_stoneclawtotem",
+      "hp": 14,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Stoneclaw Totem",
+          "intent": "block",
+          "effects": [
+            {
+              "op": "taunt"
+            },
+            {
+              "op": "block",
+              "amount": 12,
+              "target": "self"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "strength_of_earth": {
+      "name": "Strength of Earth Totem",
+      "icon": "spell_nature_strengthofearthtotem02",
+      "hp": 6,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Strength of Earth Totem",
+          "intent": "buff",
+          "effects": [
+            {
+              "op": "apply",
+              "status": "strength",
+              "stacks": 1,
+              "target": "player",
+              "duration": 1
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "strength_of_earth_2": {
+      "name": "Strength of Earth Totem",
+      "icon": "spell_nature_strengthofearthtotem02",
+      "hp": 8,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Strength of Earth Totem",
+          "intent": "buff",
+          "effects": [
+            {
+              "op": "apply",
+              "status": "strength",
+              "stacks": 2,
+              "target": "player",
+              "duration": 1
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "earthbind": {
+      "name": "Earthbind Totem",
+      "icon": "spell_nature_earthbindtotem",
+      "hp": 5,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Earthbind Totem",
+          "intent": "debuff",
+          "effects": [
+            {
+              "op": "apply",
+              "status": "weak",
+              "stacks": 1,
+              "target": "all_enemies"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "tremor": {
+      "name": "Tremor Totem",
+      "icon": "spell_nature_tremortotem",
+      "hp": 6,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Tremor Totem",
+          "intent": "buff",
+          "effects": [
+            {
+              "op": "remove",
+              "status": "fear",
+              "target": "player"
+            },
+            {
+              "op": "remove",
+              "status": "sleep",
+              "target": "player"
+            },
+            {
+              "op": "remove",
+              "status": "stun",
+              "target": "player"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "healing_stream": {
+      "name": "Healing Stream Totem",
+      "icon": "inv_spear_04",
+      "hp": 6,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Healing Stream Totem",
+          "intent": "heal",
+          "effects": [
+            {
+              "op": "heal",
+              "amount": 3,
+              "target": "player"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "healing_stream_2": {
+      "name": "Healing Stream Totem",
+      "icon": "inv_spear_04",
+      "hp": 8,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Healing Stream Totem",
+          "intent": "heal",
+          "effects": [
+            {
+              "op": "heal",
+              "amount": 5,
+              "target": "player"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "mana_spring": {
+      "name": "Mana Spring Totem",
+      "icon": "spell_nature_manaregentotem",
+      "hp": 6,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Mana Spring Totem",
+          "intent": "buff",
+          "effects": [
+            {
+              "op": "conditional",
+              "if": {
+                "type": "turn_number",
+                "every": 2
+              },
+              "then": [
+                {
+                  "op": "gain_energy",
+                  "amount": 1
+                }
+              ]
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "mana_spring_2": {
+      "name": "Mana Spring Totem",
+      "icon": "spell_nature_manaregentotem",
+      "hp": 8,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Mana Spring Totem",
+          "intent": "buff",
+          "effects": [
+            {
+              "op": "gain_energy",
+              "amount": 1
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "mana_tide": {
+      "name": "Mana Tide Totem",
+      "icon": "spell_frost_summonwaterelemental",
+      "hp": 8,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Mana Tide Totem",
+          "intent": "buff",
+          "effects": [
+            {
+              "op": "gain_energy",
+              "amount": 2
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "poison_cleansing": {
+      "name": "Poison Cleansing Totem",
+      "icon": "spell_nature_poisoncleansingtotem",
+      "hp": 6,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Poison Cleansing Totem",
+          "intent": "heal",
+          "effects": [
+            {
+              "op": "remove",
+              "status": "poison",
+              "target": "player"
+            },
+            {
+              "op": "heal",
+              "amount": 2,
+              "target": "player"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "disease_cleansing": {
+      "name": "Disease Cleansing Totem",
+      "icon": "spell_nature_diseasecleansingtotem",
+      "hp": 6,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Disease Cleansing Totem",
+          "intent": "heal",
+          "effects": [
+            {
+              "op": "remove",
+              "status": "disease",
+              "target": "player"
+            },
+            {
+              "op": "heal",
+              "amount": 2,
+              "target": "player"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "windfury": {
+      "name": "Windfury Totem",
+      "icon": "spell_nature_windfury",
+      "hp": 6,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Windfury Totem",
+          "intent": "buff",
+          "effects": [
+            {
+              "op": "apply",
+              "status": "strength",
+              "stacks": 2,
+              "target": "player",
+              "duration": 1
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "windfury_2": {
+      "name": "Windfury Totem",
+      "icon": "spell_nature_windfury",
+      "hp": 8,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Windfury Totem",
+          "intent": "buff",
+          "effects": [
+            {
+              "op": "apply",
+              "status": "strength",
+              "stacks": 3,
+              "target": "player",
+              "duration": 1
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "grace_of_air": {
+      "name": "Grace of Air Totem",
+      "icon": "spell_nature_invisibilitytotem",
+      "hp": 6,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Grace of Air Totem",
+          "intent": "buff",
+          "effects": [
+            {
+              "op": "apply",
+              "status": "dexterity",
+              "stacks": 1,
+              "target": "player",
+              "duration": 1
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "grace_of_air_2": {
+      "name": "Grace of Air Totem",
+      "icon": "spell_nature_invisibilitytotem",
+      "hp": 8,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Grace of Air Totem",
+          "intent": "buff",
+          "effects": [
+            {
+              "op": "apply",
+              "status": "dexterity",
+              "stacks": 2,
+              "target": "player",
+              "duration": 1
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "grounding": {
+      "name": "Grounding Totem",
+      "icon": "spell_nature_groundingtotem",
+      "hp": 5,
+      "expiresAfterAct": true,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Grounding Totem",
+          "intent": "buff",
+          "effects": [
+            {
+              "op": "cast_interrupt"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "fire_resistance": {
+      "name": "Fire Resistance Totem",
+      "icon": "spell_fireresistancetotem_01",
+      "hp": 6,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Fire Resistance Totem",
+          "intent": "buff",
+          "effects": [
+            {
+              "op": "apply",
+              "status": "resist_fire",
+              "stacks": 3,
+              "target": "player",
+              "duration": 1
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "frost_resistance": {
+      "name": "Frost Resistance Totem",
+      "icon": "spell_frostresistancetotem_01",
+      "hp": 6,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Frost Resistance Totem",
+          "intent": "buff",
+          "effects": [
+            {
+              "op": "apply",
+              "status": "resist_frost",
+              "stacks": 3,
+              "target": "player",
+              "duration": 1
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "nature_resistance": {
+      "name": "Nature Resistance Totem",
+      "icon": "spell_nature_natureresistancetotem",
+      "hp": 6,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Nature Resistance Totem",
+          "intent": "buff",
+          "effects": [
+            {
+              "op": "apply",
+              "status": "resist_nature",
+              "stacks": 3,
+              "target": "player",
+              "duration": 1
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "sentry": {
+      "name": "Sentry Totem",
+      "icon": "spell_nature_removecurse",
+      "hp": 6,
+      "moves": [
+        {
+          "id": "tick",
+          "name": "Sentry Totem",
+          "intent": "block",
+          "effects": [
+            {
+              "op": "block",
+              "amount": 6,
+              "target": "self"
+            },
+            {
+              "op": "remove",
+              "status": "stealth",
+              "target": "all_enemies"
+            }
+          ],
+          "weight": 1
+        }
+      ]
+    }
+  },
+  "spellIdSource": "rank-1 ids from classic knowledge; DB wow_classic_era name lookup agreed on 104/130 names (rest: DB min(spell_id) hit older ids); not individually class-verified",
+  "cards": [
+    {
+      "id": "lightning-bolt",
+      "name": "Lightning Bolt",
+      "icon": "spell_nature_lightning",
+      "spellId": 403,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "elemental",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 nature damage.",
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 6,
+          "school": "nature"
+        }
+      ],
+      "upgrade": {
+        "name": "Lightning Bolt (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 nature damage.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 9,
+            "school": "nature"
+          }
+        ]
+      }
+    },
+    {
+      "id": "earth-shock",
+      "name": "Earth Shock",
+      "icon": "spell_nature_earthshock",
+      "spellId": 8042,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "elemental",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 7 nature damage. Gain 4 Block. Interrupt the enemy cast.",
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 7,
+          "school": "nature"
+        },
+        {
+          "op": "block",
+          "amount": 4
+        },
+        {
+          "op": "cast_interrupt"
+        }
+      ],
+      "upgrade": {
+        "name": "Earth Shock (Rank 2)",
+        "cost": 1,
+        "text": "Deal 10 nature damage. Gain 6 Block. Interrupt the enemy cast.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 10,
+            "school": "nature"
+          },
+          {
+            "op": "block",
+            "amount": 6
+          },
+          {
+            "op": "cast_interrupt"
+          }
+        ]
+      }
+    },
+    {
+      "id": "healing-wave",
+      "name": "Healing Wave",
+      "icon": "spell_nature_magicimmunity",
+      "spellId": 331,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "basic",
+      "archetype": "restoration",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 5 Block. Heal 6 HP.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 5
+        },
+        {
+          "op": "heal",
+          "amount": 6
+        }
+      ],
+      "upgrade": {
+        "name": "Healing Wave (Rank 2)",
+        "cost": 1,
+        "text": "Gain 8 Block. Heal 9 HP.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 8
+          },
+          {
+            "op": "heal",
+            "amount": 9
+          }
+        ]
+      }
+    },
+    {
+      "id": "stoneskin-totem",
+      "name": "Stoneskin Totem",
+      "icon": "spell_nature_stoneskintotem",
+      "spellId": 8071,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "basic",
+      "archetype": "restoration",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 5 Block. Earth totem: gains 3 Block each turn for you.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 5
+        },
+        {
+          "op": "totem",
+          "slot": "earth",
+          "unit": "stoneskin"
+        }
+      ],
+      "upgrade": {
+        "name": "Stoneskin Totem (Rank 2)",
+        "cost": 1,
+        "text": "Gain 8 Block. Earth totem: gains 5 Block each turn for you.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 8
+          },
+          {
+            "op": "totem",
+            "slot": "earth",
+            "unit": "stoneskin_2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "searing-totem",
+      "name": "Searing Totem",
+      "icon": "spell_fire_searingtotem",
+      "spellId": 3599,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "basic",
+      "archetype": "elemental",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Deal 4 fire damage. Fire totem: deals 3 fire damage to a random enemy each turn.",
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 4,
+          "school": "fire"
+        },
+        {
+          "op": "totem",
+          "slot": "fire",
+          "unit": "searing"
+        }
+      ],
+      "upgrade": {
+        "name": "Searing Totem (Rank 2)",
+        "cost": 1,
+        "text": "Deal 6 fire damage. Fire totem: deals 5 fire damage to a random enemy each turn.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 6,
+            "school": "fire"
+          },
+          {
+            "op": "totem",
+            "slot": "fire",
+            "unit": "searing_2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "flame-shock",
+      "name": "Flame Shock",
+      "icon": "spell_fire_flameshock",
+      "spellId": 8050,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "elemental",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 fire damage. Apply Burn 6.",
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 6,
+          "school": "fire"
+        },
+        {
+          "op": "apply",
+          "status": "burn",
+          "stacks": 6,
+          "target": "enemy"
+        }
+      ],
+      "upgrade": {
+        "name": "Flame Shock (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 fire damage. Apply Burn 9.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 9,
+            "school": "fire"
+          },
+          {
+            "op": "apply",
+            "status": "burn",
+            "stacks": 9,
+            "target": "enemy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "frost-shock",
+      "name": "Frost Shock",
+      "icon": "spell_frost_frostshock",
+      "spellId": 8056,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "elemental",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 frost damage. Gain 4 Block. Apply Weak 2.",
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 6,
+          "school": "frost"
+        },
+        {
+          "op": "block",
+          "amount": 4
+        },
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 2,
+          "target": "enemy"
+        }
+      ],
+      "upgrade": {
+        "name": "Frost Shock (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 frost damage. Gain 6 Block. Apply Weak 3.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 9,
+            "school": "frost"
+          },
+          {
+            "op": "block",
+            "amount": 6
+          },
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 3,
+            "target": "enemy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "purge",
+      "name": "Purge",
+      "icon": "spell_nature_purge",
+      "spellId": 370,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "elemental",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Remove Strength, Enrage and Shield from the enemy. Deal 3 nature damage.",
+      "effects": [
+        {
+          "op": "remove",
+          "status": "strength",
+          "target": "enemy"
+        },
+        {
+          "op": "remove",
+          "status": "enrage",
+          "target": "enemy"
+        },
+        {
+          "op": "remove",
+          "status": "shield",
+          "target": "enemy"
+        },
+        {
+          "op": "damage",
+          "amount": 3,
+          "school": "nature"
+        }
+      ],
+      "upgrade": {
+        "name": "Purge (Rank 2)",
+        "cost": 1,
+        "text": "Remove Strength, Enrage and Shield. Deal 6 nature damage.",
+        "effects": [
+          {
+            "op": "remove",
+            "status": "strength",
+            "target": "enemy"
+          },
+          {
+            "op": "remove",
+            "status": "enrage",
+            "target": "enemy"
+          },
+          {
+            "op": "remove",
+            "status": "shield",
+            "target": "enemy"
+          },
+          {
+            "op": "damage",
+            "amount": 6,
+            "school": "nature"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fire-nova-totem",
+      "name": "Fire Nova Totem",
+      "icon": "spell_fire_sealoffire",
+      "spellId": 1535,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "common",
+      "archetype": "elemental",
+      "cost": 2,
+      "target": "self",
+      "flags": [],
+      "text": "Fire totem: after one turn it explodes for 12 fire damage to ALL enemies. Replaces your fire totem.",
+      "effects": [
+        {
+          "op": "totem",
+          "slot": "fire",
+          "unit": "fire_nova"
+        }
+      ],
+      "upgrade": {
+        "name": "Fire Nova Totem (Rank 2)",
+        "cost": 2,
+        "text": "Fire totem: after one turn it explodes for 18 fire damage to ALL enemies.",
+        "effects": [
+          {
+            "op": "totem",
+            "slot": "fire",
+            "unit": "fire_nova_2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "earthbind-totem",
+      "name": "Earthbind Totem",
+      "icon": "spell_nature_earthbindtotem",
+      "spellId": 2484,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "common",
+      "archetype": "elemental",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Earth totem: applies Weak 1 to ALL enemies each turn. Replaces your earth totem.",
+      "effects": [
+        {
+          "op": "totem",
+          "slot": "earth",
+          "unit": "earthbind"
+        }
+      ],
+      "upgrade": {
+        "name": "Earthbind Totem (Rank 2)",
+        "cost": 1,
+        "text": "Earth totem: Weak 1 to ALL enemies each turn. Gain 6 Block.",
+        "effects": [
+          {
+            "op": "totem",
+            "slot": "earth",
+            "unit": "earthbind"
+          },
+          {
+            "op": "block",
+            "amount": 6
+          }
+        ]
+      }
+    },
+    {
+      "id": "rockbiter-weapon",
+      "name": "Rockbiter Weapon",
+      "icon": "spell_nature_rockbiter",
+      "spellId": 8017,
+      "rank": 1,
+      "type": "power",
+      "rarity": "common",
+      "archetype": "enhancement",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Power. Gain 6 Block. Attacks deal +2 damage and you gain 2 Block per attack.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 6
+        },
+        {
+          "op": "apply",
+          "status": "weapon_imbue_rockbiter",
+          "stacks": 1,
+          "target": "self"
+        },
+        {
+          "op": "apply",
+          "status": "strength",
+          "stacks": 2,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Rockbiter Weapon (Rank 2)",
+        "cost": 1,
+        "text": "Power. Gain 9 Block. Attacks deal +3 damage and you gain 2 Block per attack.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 9
+          },
+          {
+            "op": "apply",
+            "status": "weapon_imbue_rockbiter",
+            "stacks": 1,
+            "target": "self"
+          },
+          {
+            "op": "apply",
+            "status": "strength",
+            "stacks": 3,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "flametongue-weapon",
+      "name": "Flametongue Weapon",
+      "icon": "spell_fire_flametounge",
+      "spellId": 8024,
+      "rank": 1,
+      "type": "power",
+      "rarity": "common",
+      "archetype": "enhancement",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Weapon imbue: each attack also deals 2 fire damage.",
+      "effects": [
+        {
+          "op": "apply",
+          "status": "weapon_imbue_flametongue",
+          "stacks": 1,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Flametongue Weapon (Rank 2)",
+        "cost": 1,
+        "text": "Weapon imbue: each attack also deals 4 fire damage.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "weapon_imbue_flametongue_2",
+            "stacks": 1,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "frostbrand-weapon",
+      "name": "Frostbrand Weapon",
+      "icon": "spell_frost_frostbrand",
+      "spellId": 8033,
+      "rank": 1,
+      "type": "power",
+      "rarity": "common",
+      "archetype": "enhancement",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Weapon imbue: each attack also applies Weak 1.",
+      "effects": [
+        {
+          "op": "apply",
+          "status": "weapon_imbue_frostbrand",
+          "stacks": 1,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Frostbrand Weapon (Rank 2)",
+        "cost": 1,
+        "text": "Weapon imbue: each attack applies Weak 1 and 2 frost damage.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "weapon_imbue_frostbrand_2",
+            "stacks": 1,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lightning-shield",
+      "name": "Lightning Shield",
+      "icon": "spell_nature_lightningshield",
+      "spellId": 324,
+      "rank": 1,
+      "type": "power",
+      "rarity": "common",
+      "archetype": "enhancement",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Power. Gain 8 Block. Gain Thorns 4.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 8
+        },
+        {
+          "op": "apply",
+          "status": "thorns",
+          "stacks": 4,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Lightning Shield (Rank 2)",
+        "cost": 1,
+        "text": "Power. Gain 11 Block. Gain Thorns 6.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 11
+          },
+          {
+            "op": "apply",
+            "status": "thorns",
+            "stacks": 6,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "stoneclaw-totem",
+      "name": "Stoneclaw Totem",
+      "icon": "spell_nature_stoneclawtotem",
+      "spellId": 5730,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "common",
+      "archetype": "enhancement",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 8 Block. Earth totem: taunts all enemies and gains 8 Block each turn.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 8
+        },
+        {
+          "op": "totem",
+          "slot": "earth",
+          "unit": "stoneclaw"
+        }
+      ],
+      "upgrade": {
+        "name": "Stoneclaw Totem (Rank 2)",
+        "cost": 1,
+        "text": "Gain 12 Block. Earth totem: taunts all enemies and gains 12 Block each turn.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 12
+          },
+          {
+            "op": "totem",
+            "slot": "earth",
+            "unit": "stoneclaw_2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "strength-of-earth-totem",
+      "name": "Strength of Earth Totem",
+      "icon": "spell_nature_strengthofearthtotem02",
+      "spellId": 8075,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "common",
+      "archetype": "enhancement",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Earth totem: you gain Strength 1 at the start of each turn this totem stands.",
+      "effects": [
+        {
+          "op": "totem",
+          "slot": "earth",
+          "unit": "strength_of_earth"
+        }
+      ],
+      "upgrade": {
+        "name": "Strength of Earth Totem (Rank 2)",
+        "cost": 1,
+        "text": "Earth totem: you gain Strength 2 at the start of each turn it stands.",
+        "effects": [
+          {
+            "op": "totem",
+            "slot": "earth",
+            "unit": "strength_of_earth_2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ghost-wolf",
+      "name": "Ghost Wolf",
+      "icon": "spell_nature_spiritwolf",
+      "spellId": 2645,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "enhancement",
+      "cost": 0,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Gain 6 Block and draw 1 card. Exhaust.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 6
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Ghost Wolf (Rank 2)",
+        "cost": 0,
+        "text": "Gain 9 Block and draw 2 cards. Exhaust.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 9
+          },
+          {
+            "op": "draw",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "lesser-healing-wave",
+      "name": "Lesser Healing Wave",
+      "icon": "spell_nature_healingwavelesser",
+      "spellId": 8004,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "restoration",
+      "cost": 0,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 4 Block. Heal 4 HP.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 4
+        },
+        {
+          "op": "heal",
+          "amount": 4
+        }
+      ],
+      "upgrade": {
+        "name": "Lesser Healing Wave (Rank 2)",
+        "cost": 0,
+        "text": "Gain 6 Block. Heal 7 HP.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 6
+          },
+          {
+            "op": "heal",
+            "amount": 7
+          }
+        ]
+      }
+    },
+    {
+      "id": "healing-stream-totem",
+      "name": "Healing Stream Totem",
+      "icon": "inv_spear_04",
+      "spellId": 5394,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "common",
+      "archetype": "restoration",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Water totem: heals you 3 HP at the start of each turn. Replaces your water totem.",
+      "effects": [
+        {
+          "op": "totem",
+          "slot": "water",
+          "unit": "healing_stream"
+        }
+      ],
+      "upgrade": {
+        "name": "Healing Stream Totem (Rank 2)",
+        "cost": 1,
+        "text": "Water totem: heals you 5 HP at the start of each turn.",
+        "effects": [
+          {
+            "op": "totem",
+            "slot": "water",
+            "unit": "healing_stream_2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mana-spring-totem",
+      "name": "Mana Spring Totem",
+      "icon": "spell_nature_manaregentotem",
+      "spellId": 5675,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "common",
+      "archetype": "restoration",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Water totem: gain 1 extra Energy every other turn. Replaces your water totem.",
+      "effects": [
+        {
+          "op": "totem",
+          "slot": "water",
+          "unit": "mana_spring"
+        }
+      ],
+      "upgrade": {
+        "name": "Mana Spring Totem (Rank 2)",
+        "cost": 1,
+        "text": "Water totem: gain 1 extra Energy every turn. Replaces your water totem.",
+        "effects": [
+          {
+            "op": "totem",
+            "slot": "water",
+            "unit": "mana_spring_2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tremor-totem",
+      "name": "Tremor Totem",
+      "icon": "spell_nature_tremortotem",
+      "spellId": 8143,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "common",
+      "archetype": "restoration",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Earth totem: removes Fear, Sleep and Stun from you each turn. Replaces your earth totem.",
+      "effects": [
+        {
+          "op": "totem",
+          "slot": "earth",
+          "unit": "tremor"
+        }
+      ],
+      "upgrade": {
+        "name": "Tremor Totem (Rank 2)",
+        "cost": 1,
+        "text": "Earth totem: removes Fear, Sleep and Stun from you each turn. Gain 6 Block.",
+        "effects": [
+          {
+            "op": "totem",
+            "slot": "earth",
+            "unit": "tremor"
+          },
+          {
+            "op": "block",
+            "amount": 6
+          }
+        ]
+      }
+    },
+    {
+      "id": "chain-lightning",
+      "name": "Chain Lightning",
+      "icon": "spell_nature_chainlightning",
+      "spellId": 421,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "elemental",
+      "cost": 2,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Deal 14 nature damage to ALL enemies.",
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 14,
+          "school": "nature",
+          "target": "all_enemies"
+        }
+      ],
+      "upgrade": {
+        "name": "Chain Lightning (Rank 2)",
+        "cost": 2,
+        "text": "Deal 18 nature damage to ALL enemies.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 18,
+            "school": "nature",
+            "target": "all_enemies"
+          }
+        ]
+      }
+    },
+    {
+      "id": "magma-totem",
+      "name": "Magma Totem",
+      "icon": "spell_fire_selfdestruct",
+      "spellId": 8190,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "uncommon",
+      "archetype": "elemental",
+      "cost": 2,
+      "target": "self",
+      "flags": [],
+      "text": "Fire totem: deals 4 fire damage to ALL enemies each turn. Replaces your fire totem.",
+      "effects": [
+        {
+          "op": "totem",
+          "slot": "fire",
+          "unit": "magma"
+        }
+      ],
+      "upgrade": {
+        "name": "Magma Totem (Rank 2)",
+        "cost": 2,
+        "text": "Fire totem: deals 6 fire damage to ALL enemies each turn.",
+        "effects": [
+          {
+            "op": "totem",
+            "slot": "fire",
+            "unit": "magma_2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "flametongue-totem",
+      "name": "Flametongue Totem",
+      "icon": "spell_nature_guardianward",
+      "spellId": 8227,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "uncommon",
+      "archetype": "elemental",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Fire totem: your fire and nature spells deal +2 damage. Replaces your fire totem.",
+      "effects": [
+        {
+          "op": "totem",
+          "slot": "fire",
+          "unit": "flametongue"
+        }
+      ],
+      "upgrade": {
+        "name": "Flametongue Totem (Rank 2)",
+        "cost": 1,
+        "text": "Fire totem: your fire and nature spells deal +3 damage.",
+        "effects": [
+          {
+            "op": "totem",
+            "slot": "fire",
+            "unit": "flametongue_2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "windfury-weapon",
+      "name": "Windfury Weapon",
+      "icon": "spell_nature_cyclone",
+      "spellId": 8232,
+      "rank": 1,
+      "type": "power",
+      "rarity": "uncommon",
+      "archetype": "enhancement",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Weapon imbue: your first attack each turn hits twice.",
+      "effects": [
+        {
+          "op": "apply",
+          "status": "weapon_imbue_windfury",
+          "stacks": 1,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Windfury Weapon (Rank 2)",
+        "cost": 1,
+        "text": "Weapon imbue: your first attack each turn hits twice for +2 damage.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "weapon_imbue_windfury_2",
+            "stacks": 1,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "grace-of-air-totem",
+      "name": "Grace of Air Totem",
+      "icon": "spell_nature_invisibilitytotem",
+      "spellId": 8835,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "uncommon",
+      "archetype": "enhancement",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Air totem: you gain Dexterity 1 at the start of each turn it stands. Replaces your air totem.",
+      "effects": [
+        {
+          "op": "totem",
+          "slot": "air",
+          "unit": "grace_of_air"
+        }
+      ],
+      "upgrade": {
+        "name": "Grace of Air Totem (Rank 2)",
+        "cost": 1,
+        "text": "Air totem: you gain Dexterity 2 at the start of each turn it stands.",
+        "effects": [
+          {
+            "op": "totem",
+            "slot": "air",
+            "unit": "grace_of_air_2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "poison-cleansing-totem",
+      "name": "Poison Cleansing Totem",
+      "icon": "spell_nature_poisoncleansingtotem",
+      "spellId": 8166,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "uncommon",
+      "archetype": "restoration",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Water totem: removes Poison from you each turn, and heals 2 HP. Replaces your water totem.",
+      "effects": [
+        {
+          "op": "totem",
+          "slot": "water",
+          "unit": "poison_cleansing"
+        }
+      ],
+      "upgrade": {
+        "name": "Poison Cleansing Totem (Rank 2)",
+        "cost": 1,
+        "text": "Water totem: removes Poison and heals 2 HP each turn. Heal 4 HP now.",
+        "effects": [
+          {
+            "op": "totem",
+            "slot": "water",
+            "unit": "poison_cleansing"
+          },
+          {
+            "op": "heal",
+            "amount": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "disease-cleansing-totem",
+      "name": "Disease Cleansing Totem",
+      "icon": "spell_nature_diseasecleansingtotem",
+      "spellId": 8170,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "uncommon",
+      "archetype": "restoration",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Water totem: removes Disease from you each turn, and heals 2 HP. Replaces your water totem.",
+      "effects": [
+        {
+          "op": "totem",
+          "slot": "water",
+          "unit": "disease_cleansing"
+        }
+      ],
+      "upgrade": {
+        "name": "Disease Cleansing Totem (Rank 2)",
+        "cost": 1,
+        "text": "Water totem: removes Disease and heals 2 HP each turn. Heal 4 HP now.",
+        "effects": [
+          {
+            "op": "totem",
+            "slot": "water",
+            "unit": "disease_cleansing"
+          },
+          {
+            "op": "heal",
+            "amount": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "cure-poison",
+      "name": "Cure Poison",
+      "icon": "spell_nature_nullifypoison",
+      "spellId": 526,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "restoration",
+      "cost": 0,
+      "target": "self",
+      "flags": [],
+      "text": "Remove Poison from you. Heal 3 HP. Draw 1 card.",
+      "effects": [
+        {
+          "op": "remove",
+          "status": "poison",
+          "target": "self"
+        },
+        {
+          "op": "heal",
+          "amount": 3
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Cure Poison (Rank 2)",
+        "cost": 0,
+        "text": "Remove Poison from you. Heal 6 HP. Draw 1 card.",
+        "effects": [
+          {
+            "op": "remove",
+            "status": "poison",
+            "target": "self"
+          },
+          {
+            "op": "heal",
+            "amount": 6
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "cure-disease",
+      "name": "Cure Disease",
+      "icon": "spell_nature_nullifydisease",
+      "spellId": 2870,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "restoration",
+      "cost": 0,
+      "target": "self",
+      "flags": [],
+      "text": "Remove Disease from you. Heal 3 HP. Draw 1 card.",
+      "effects": [
+        {
+          "op": "remove",
+          "status": "disease",
+          "target": "self"
+        },
+        {
+          "op": "heal",
+          "amount": 3
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Cure Disease (Rank 2)",
+        "cost": 0,
+        "text": "Remove Disease from you. Heal 6 HP. Draw 1 card.",
+        "effects": [
+          {
+            "op": "remove",
+            "status": "disease",
+            "target": "self"
+          },
+          {
+            "op": "heal",
+            "amount": 6
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "fire-resistance-totem",
+      "name": "Fire Resistance Totem",
+      "icon": "spell_fireresistancetotem_01",
+      "spellId": 8184,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "uncommon",
+      "archetype": "elemental",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Air totem: you take 3 less fire damage from each hit. Replaces your air totem.",
+      "effects": [
+        {
+          "op": "totem",
+          "slot": "air",
+          "unit": "fire_resistance"
+        }
+      ],
+      "upgrade": {
+        "name": "Fire Resistance Totem (Rank 2)",
+        "cost": 1,
+        "text": "Air totem: you take 3 less fire damage per hit. Gain 6 Block.",
+        "effects": [
+          {
+            "op": "totem",
+            "slot": "air",
+            "unit": "fire_resistance"
+          },
+          {
+            "op": "block",
+            "amount": 6
+          }
+        ]
+      }
+    },
+    {
+      "id": "frost-resistance-totem",
+      "name": "Frost Resistance Totem",
+      "icon": "spell_frostresistancetotem_01",
+      "spellId": 8181,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "uncommon",
+      "archetype": "elemental",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Air totem: you take 3 less frost damage from each hit. Replaces your air totem.",
+      "effects": [
+        {
+          "op": "totem",
+          "slot": "air",
+          "unit": "frost_resistance"
+        }
+      ],
+      "upgrade": {
+        "name": "Frost Resistance Totem (Rank 2)",
+        "cost": 1,
+        "text": "Air totem: you take 3 less frost damage per hit. Gain 6 Block.",
+        "effects": [
+          {
+            "op": "totem",
+            "slot": "air",
+            "unit": "frost_resistance"
+          },
+          {
+            "op": "block",
+            "amount": 6
+          }
+        ]
+      }
+    },
+    {
+      "id": "nature-resistance-totem",
+      "name": "Nature Resistance Totem",
+      "icon": "spell_nature_natureresistancetotem",
+      "spellId": 10595,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "uncommon",
+      "archetype": "enhancement",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Air totem: you take 3 less nature damage from each hit. Replaces your air totem.",
+      "effects": [
+        {
+          "op": "totem",
+          "slot": "air",
+          "unit": "nature_resistance"
+        }
+      ],
+      "upgrade": {
+        "name": "Nature Resistance Totem (Rank 2)",
+        "cost": 1,
+        "text": "Air totem: you take 3 less nature damage per hit. Gain 6 Block.",
+        "effects": [
+          {
+            "op": "totem",
+            "slot": "air",
+            "unit": "nature_resistance"
+          },
+          {
+            "op": "block",
+            "amount": 6
+          }
+        ]
+      }
+    },
+    {
+      "id": "sentry-totem",
+      "name": "Sentry Totem",
+      "icon": "spell_nature_removecurse",
+      "spellId": 6495,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "uncommon",
+      "archetype": "enhancement",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Air totem: a lookout that gains 6 Block each turn and spots Stealth. Replaces your air totem.",
+      "effects": [
+        {
+          "op": "totem",
+          "slot": "air",
+          "unit": "sentry"
+        }
+      ],
+      "upgrade": {
+        "name": "Sentry Totem (Rank 2)",
+        "cost": 1,
+        "text": "Air totem: lookout gains 6 Block each turn and spots Stealth. Draw 1 card.",
+        "effects": [
+          {
+            "op": "totem",
+            "slot": "air",
+            "unit": "sentry"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "windfury-totem",
+      "name": "Windfury Totem",
+      "icon": "spell_nature_windfury",
+      "spellId": 8512,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "rare",
+      "archetype": "enhancement",
+      "cost": 2,
+      "target": "self",
+      "flags": [],
+      "text": "Air totem: you gain Strength 2 for the turn at the start of each turn. Replaces your air totem.",
+      "effects": [
+        {
+          "op": "totem",
+          "slot": "air",
+          "unit": "windfury"
+        }
+      ],
+      "upgrade": {
+        "name": "Windfury Totem (Rank 2)",
+        "cost": 2,
+        "text": "Air totem: you gain Strength 3 for the turn at the start of each turn.",
+        "effects": [
+          {
+            "op": "totem",
+            "slot": "air",
+            "unit": "windfury_2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "grounding-totem",
+      "name": "Grounding Totem",
+      "icon": "spell_nature_groundingtotem",
+      "spellId": 8177,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "rare",
+      "archetype": "enhancement",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Air totem: absorbs the next enemy cast, then crumbles. Replaces your air totem.",
+      "effects": [
+        {
+          "op": "totem",
+          "slot": "air",
+          "unit": "grounding"
+        }
+      ],
+      "upgrade": {
+        "name": "Grounding Totem (Rank 2)",
+        "cost": 1,
+        "text": "Air totem: absorbs the next enemy cast, then crumbles. Gain 8 Block.",
+        "effects": [
+          {
+            "op": "totem",
+            "slot": "air",
+            "unit": "grounding"
+          },
+          {
+            "op": "block",
+            "amount": 8
+          }
+        ]
+      }
+    },
+    {
+      "id": "natures-swiftness",
+      "name": "Nature's Swiftness",
+      "icon": "spell_nature_ravenform",
+      "spellId": 16188,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "restoration",
+      "cost": 0,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Your next spell costs 0. Draw 1 card. Exhaust.",
+      "effects": [
+        {
+          "op": "apply",
+          "status": "free_cast",
+          "stacks": 1,
+          "target": "self"
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Nature's Swiftness (Rank 2)",
+        "cost": 0,
+        "text": "Your next spell costs 0. Draw 2 cards. Exhaust.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "free_cast",
+            "stacks": 1,
+            "target": "self"
+          },
+          {
+            "op": "draw",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "mana-tide-totem",
+      "name": "Mana Tide Totem",
+      "icon": "spell_frost_summonwaterelemental",
+      "spellId": 16190,
+      "rank": 1,
+      "type": "totem",
+      "rarity": "rare",
+      "archetype": "restoration",
+      "cost": 2,
+      "target": "self",
+      "flags": [],
+      "text": "Water totem: you gain 2 Energy at the start of each of the next 2 turns. Replaces your water totem.",
+      "effects": [
+        {
+          "op": "totem",
+          "slot": "water",
+          "unit": "mana_tide"
+        }
+      ],
+      "upgrade": {
+        "name": "Mana Tide Totem (Rank 2)",
+        "cost": 2,
+        "text": "Water totem: gain 2 Energy at the start of the next 2 turns. Draw 2 cards.",
+        "effects": [
+          {
+            "op": "totem",
+            "slot": "water",
+            "unit": "mana_tide"
+          },
+          {
+            "op": "draw",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "chain-heal",
+      "name": "Chain Heal",
+      "icon": "spell_nature_healingwavegreater",
+      "spellId": 1064,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "restoration",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 8 Block. Heal 8 HP, then heal totems 5 HP.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 8
+        },
+        {
+          "op": "heal",
+          "amount": 8
+        },
+        {
+          "op": "heal",
+          "amount": 5,
+          "target": "allies"
+        }
+      ],
+      "upgrade": {
+        "name": "Chain Heal (Rank 2)",
+        "cost": 1,
+        "text": "Gain 11 Block. Heal 12 HP, then heal totems 8 HP.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 11
+          },
+          {
+            "op": "heal",
+            "amount": 12
+          },
+          {
+            "op": "heal",
+            "amount": 8,
+            "target": "allies"
+          }
+        ]
+      }
+    },
+    {
+      "id": "reincarnation",
+      "name": "Reincarnation",
+      "icon": "spell_nature_reincarnation",
+      "spellId": 20608,
+      "rank": 1,
+      "type": "power",
+      "rarity": "rare",
+      "archetype": "restoration",
+      "cost": 2,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Power. When you would die this combat, return at 40% HP once. Exhaust.",
+      "effects": [
+        {
+          "op": "apply",
+          "status": "reincarnation",
+          "stacks": 1,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Reincarnation (Rank 2)",
+        "cost": 1,
+        "text": "Power. When you would die this combat, return at 40% HP once. Costs 1.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "reincarnation",
+            "stacks": 1,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ancestral-spirit",
+      "name": "Ancestral Spirit",
+      "icon": "spell_nature_regenerate",
+      "spellId": 2008,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "restoration",
+      "cost": 2,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Return the last card you exhausted to your hand, then heal 6 HP. Exhaust.",
+      "effects": [
+        {
+          "op": "add_card",
+          "card": "last_exhausted",
+          "to": "hand",
+          "count": 1
+        },
+        {
+          "op": "heal",
+          "amount": 6
+        }
+      ],
+      "upgrade": {
+        "name": "Ancestral Spirit (Rank 2)",
+        "cost": 1,
+        "text": "Return the last exhausted card to your hand, upgraded, then heal 10 HP.",
+        "effects": [
+          {
+            "op": "add_card",
+            "card": "last_exhausted",
+            "to": "hand",
+            "count": 1,
+            "upgraded": true
+          },
+          {
+            "op": "heal",
+            "amount": 10
+          }
+        ]
+      }
+    },
+    {
+      "id": "stormstrike",
+      "name": "Stormstrike",
+      "icon": "ability_shaman_stormstrike",
+      "spellId": 17364,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "epic",
+      "archetype": "enhancement",
+      "cost": 2,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 14 damage twice. Apply Vulnerable 2 (nature).",
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 14
+        },
+        {
+          "op": "damage",
+          "amount": 14
+        },
+        {
+          "op": "apply",
+          "status": "vulnerable",
+          "stacks": 2,
+          "target": "enemy",
+          "school": "nature"
+        }
+      ],
+      "upgrade": {
+        "name": "Stormstrike (Rank 2)",
+        "cost": 2,
+        "text": "Deal 18 damage twice. Apply Vulnerable 3 (nature).",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 18
+          },
+          {
+            "op": "damage",
+            "amount": 18
+          },
+          {
+            "op": "apply",
+            "status": "vulnerable",
+            "stacks": 3,
+            "target": "enemy",
+            "school": "nature"
+          }
+        ]
+      }
+    },
+    {
+      "id": "elemental-mastery",
+      "name": "Elemental Mastery",
+      "icon": "spell_nature_wispheal",
+      "spellId": 16166,
+      "rank": 1,
+      "type": "power",
+      "rarity": "epic",
+      "archetype": "elemental",
+      "cost": 1,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Gain 2 Energy. Your next spell crits (double damage). Exhaust.",
+      "effects": [
+        {
+          "op": "gain_energy",
+          "amount": 2
+        },
+        {
+          "op": "double_damage_next"
+        }
+      ],
+      "upgrade": {
+        "name": "Elemental Mastery (Rank 2)",
+        "cost": 1,
+        "text": "Gain 3 Energy, draw 1. Your next spell crits (double damage). Exhaust.",
+        "effects": [
+          {
+            "op": "gain_energy",
+            "amount": 3
+          },
+          {
+            "op": "double_damage_next"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,400 @@
+{
+ "id": "thousand-needles",
+ "name": "Thousand Needles",
+ "start": {
+  "name": "Freewind Post",
+  "icon": "spell_fire_fire"
+ },
+ "continent": "kal",
+ "act": 3,
+ "levelBand": [
+  24,
+  35
+ ],
+ "spire": {
+  "name": "Freewind Post Spire",
+  "lore": "A rope-and-timber spire over the Shimmering Flats and the Great Lift, with the bone-cold warrens of Razorfen Downs gaping at the edge of the canyon."
+ },
+ "theme": {
+  "primary": "#c98a5a",
+  "secondary": "#3a2418",
+  "accent": "#7fd0e0",
+  "background": "needles"
+ },
+ "zoneMechanic": {
+  "id": "bone-mesa",
+  "name": "Bone Mesa",
+  "icon": "spell_frost_frozenorb",
+  "text": "Cold winds off the Bone Mesa: every third turn you gain 1 Cold. Killing an undead or frost-touched enemy restores 2 HP.",
+  "hooks": {
+   "on_turn_start": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "turn_number",
+      "min": 3,
+      "every": 3
+     },
+     "then": [
+      {
+       "op": "apply",
+       "status": "cold",
+       "stacks": 1,
+       "target": "enemy"
+      }
+     ]
+    }
+   ],
+   "on_kill": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "target_is_family",
+      "family": "undead"
+     },
+     "then": [
+      {
+       "op": "heal",
+       "amount": 2,
+       "target": "self"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "freewind-post",
+  "name": "Freewind Post",
+  "icon": "inv_misc_food_15",
+  "text": "Sleep in a real bed at the Freewind Post: heal 20% of max HP and gain 3 Max HP.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 20,
+    "target": "self"
+   },
+   {
+    "op": "max_hp",
+    "amount": 3,
+    "target": "self"
+   }
+  ]
+ },
+ "enemiesFile": "thousand-needles.enemies.json",
+ "encounters": {
+  "normal": [
+   [
+    "sparkleshell-tortoise",
+    "pesterhide-hyena"
+   ],
+   [
+    "crag-stalker",
+    "windfury-harpy"
+   ],
+   [
+    "pesterhide-hyena",
+    "sparkleshell-borer",
+    "pesterhide-snarler"
+   ],
+   [
+    "galak-scout",
+    "galak-outrunner"
+   ],
+   [
+    "windfury-harpy",
+    "windfury-wind-witch"
+   ],
+   [
+    "galak-scout",
+    "galak-wrangler",
+    "galak-packhound"
+   ],
+   [
+    "sparkleshell-borer",
+    "sparkleshell-snapper"
+   ],
+   [
+    "grimtotem-brute",
+    "grimtotem-stomper"
+   ],
+   [
+    "galak-stormer",
+    "galak-marauder"
+   ],
+   [
+    "windfury-harpy",
+    "windfury-wind-witch",
+    "windfury-sorceress"
+   ],
+   [
+    "grimtotem-brute",
+    "grimtotem-stomper",
+    "grimtotem-mystic"
+   ],
+   [
+    "galak-outrunner",
+    "galak-stormer",
+    "galak-marauder",
+    "galak-packhound"
+   ],
+   [
+    "grimtotem-mystic",
+    "grimtotem-reaver"
+   ]
+  ],
+  "elite": [
+   [
+    "pesterhide-hyena",
+    "pesterhide-snarler",
+    "gnashjaw"
+   ],
+   [
+    "windfury-sorceress",
+    "windfury-matriarch"
+   ],
+   [
+    "galak-wrangler",
+    "galak-messenger"
+   ]
+  ],
+  "boss": [
+   [
+    "amnennar-the-coldbringer"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "shimmering-flats-racers",
+   "name": "Shimmering Flats Racers",
+   "icon": "inv_misc_gear_08",
+   "text": "Goblin and gnome racers hurtle around the Shimmering Flats course. Bet on a winner or jump in a rocket car.",
+   "options": [
+    {
+     "label": "Bet on the goblin racer (lose 20 gold, gain 45 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": -20
+      },
+      {
+       "op": "gold",
+       "amount": 45
+      }
+     ],
+     "requires": {
+      "gold": 20
+     }
+    },
+    {
+     "label": "Drive a rocket car (take 8 damage, gold +40)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 8,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 40
+      }
+     ]
+    },
+    {
+     "label": "Watch from the stands",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "freewind-post-aid",
+   "name": "Freewind Post",
+   "icon": "inv_misc_head_tauren_01",
+   "text": "Freewind Post tauren ask for help against the Galak raiders.",
+   "options": [
+    {
+     "label": "Guard the post (heal 14, max HP +2)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 14,
+       "target": "self"
+      },
+      {
+       "op": "max_hp",
+       "amount": 2
+      }
+     ]
+    },
+    {
+     "label": "Hire out as a scout (gold +45, take 6 damage)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 45
+      },
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Rest and move on",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "weeglis-barrel",
+   "name": "Weegli's Barrel",
+   "icon": "inv_misc_enggizmos_swissarmy",
+   "text": "Weegli Blastfuse needs a barrel rolled to the Shimmering Flats and packed with something loud.",
+   "options": [
+    {
+     "label": "Roll the barrel (take 5 damage, gold +35)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 5,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 35
+      }
+     ]
+    },
+    {
+     "label": "Light the fuse (take 10 damage, gain a card)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 10,
+       "target": "self"
+      },
+      {
+       "op": "random_card",
+       "pool": "neutral",
+       "rarity": "common",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Leave it",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "great-lift",
+   "name": "The Great Lift",
+   "icon": "spell_nature_slow",
+   "text": "The Great Lift creaks above the canyon. A merchant offers wares for the descent.",
+   "options": [
+    {
+     "label": "Buy provisions (lose 20 gold, heal 14)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": -20
+      },
+      {
+       "op": "heal",
+       "amount": 14,
+       "target": "self"
+      }
+     ],
+     "requires": {
+      "gold": 20
+     }
+    },
+    {
+     "label": "Ride down with the cargo (gold +25)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 25
+      }
+     ]
+    },
+    {
+     "label": "Take the long way",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "deathchill-armor",
+   "name": "Deathchill Armor",
+   "icon": "inv_chest_cloth_01",
+   "rarity": "rare",
+   "itemId": null,
+   "zone": "thousand-needles",
+   "class": null,
+   "text": "At the start of each combat, gain 6 Block and apply 1 Cold to the enemy.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 6,
+      "target": "self"
+     },
+     {
+      "op": "apply",
+      "status": "cold",
+      "stacks": 1,
+      "target": "enemy"
+     }
+    ]
+   }
+  },
+  {
+   "id": "robes-of-the-lich",
+   "name": "Robes of the Lich",
+   "icon": "inv_chest_cloth_01",
+   "rarity": "rare",
+   "itemId": null,
+   "zone": "thousand-needles",
+   "class": null,
+   "text": "When you kill an enemy, heal 2 HP and gain 1 energy next turn.",
+   "triggers": {
+    "on_kill": [
+     {
+      "op": "heal",
+      "amount": 2,
+      "target": "self"
+     },
+     {
+      "op": "energy_next_turn",
+      "amount": 1
+     }
+    ]
+   }
+  },
+  {
+   "id": "glowing-eye-of-mordresh",
+   "name": "Glowing Eye of Mordresh",
+   "icon": "inv_misc_eye_01",
+   "rarity": "uncommon",
+   "itemId": null,
+   "zone": "thousand-needles",
+   "class": null,
+   "text": "Scry 3 at the start of each turn.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "scry",
+      "count": 3
+     }
+    ]
+   }
+  }
+ ],
+ "raidFloorsFile": "thousand-needles.raids.json"
+}

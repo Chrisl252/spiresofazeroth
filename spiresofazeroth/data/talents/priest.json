@@ -1,0 +1,458 @@
+{
+ "classId": "priest",
+ "trees": [
+  {
+   "id": "discipline",
+   "name": "Discipline",
+   "icon": "spell_holy_wordfortitude",
+   "talents": [
+    {
+     "id": "priest:discipline:0",
+     "name": "Unbreakable Will",
+     "icon": "spell_magic_magearmor",
+     "tier": 1,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "hp",
+      "per": 3
+     }
+    },
+    {
+     "id": "priest:discipline:1",
+     "name": "Wand Specialization",
+     "icon": "inv_wand_01",
+     "tier": 1,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "priest:discipline:2",
+     "name": "Silent Resolve",
+     "icon": "spell_nature_manaregentotem",
+     "tier": 2,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "regen",
+      "per": 1
+     }
+    },
+    {
+     "id": "priest:discipline:3",
+     "name": "Improved Power Word: Fortitude",
+     "icon": "spell_holy_wordfortitude",
+     "tier": 2,
+     "col": 1,
+     "max": 2,
+     "effect": {
+      "key": "hp",
+      "per": 6
+     }
+    },
+    {
+     "id": "priest:discipline:4",
+     "name": "Improved Power Word: Shield",
+     "icon": "spell_holy_powerwordshield",
+     "tier": 3,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "block",
+      "per": 2
+     }
+    },
+    {
+     "id": "priest:discipline:5",
+     "name": "Martyrdom",
+     "icon": "spell_nature_tranquility",
+     "tier": 3,
+     "col": 1,
+     "max": 2,
+     "effect": {
+      "key": "thorns",
+      "per": 1
+     }
+    },
+    {
+     "id": "priest:discipline:6",
+     "name": "Inner Focus",
+     "icon": "spell_frost_windwalkon",
+     "tier": 4,
+     "col": 0,
+     "max": 1,
+     "effect": {
+      "key": "energy1",
+      "per": 1
+     }
+    },
+    {
+     "id": "priest:discipline:7",
+     "name": "Meditation",
+     "icon": "spell_nature_sleep",
+     "tier": 4,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "heal",
+      "per": 8
+     }
+    },
+    {
+     "id": "priest:discipline:8",
+     "name": "Mental Agility",
+     "icon": "ability_hibernation",
+     "tier": 5,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "goldpct",
+      "per": 3
+     }
+    },
+    {
+     "id": "priest:discipline:9",
+     "name": "Mental Strength",
+     "icon": "spell_nature_enchantarmor",
+     "tier": 5,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "dex",
+      "per": 1
+     }
+    },
+    {
+     "id": "priest:discipline:10",
+     "name": "Divine Spirit",
+     "icon": "spell_holy_divinespirit",
+     "tier": 6,
+     "col": 0,
+     "max": 1,
+     "effect": {
+      "key": "draw1",
+      "per": 1
+     }
+    },
+    {
+     "id": "priest:discipline:11",
+     "name": "Power Infusion",
+     "icon": "spell_holy_powerinfusion",
+     "tier": 6,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "energy1",
+      "per": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "holy",
+   "name": "Holy",
+   "icon": "spell_holy_guardianspirit",
+   "talents": [
+    {
+     "id": "priest:holy:0",
+     "name": "Healing Focus",
+     "icon": "spell_holy_healingfocus",
+     "tier": 1,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "heal",
+      "per": 10
+     }
+    },
+    {
+     "id": "priest:holy:1",
+     "name": "Improved Renew",
+     "icon": "spell_holy_renew",
+     "tier": 1,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "regen",
+      "per": 1
+     }
+    },
+    {
+     "id": "priest:holy:2",
+     "name": "Holy Specialization",
+     "icon": "spell_holy_sealofsalvation",
+     "tier": 2,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "priest:holy:3",
+     "name": "Spell Warding",
+     "icon": "spell_holy_spellwarding",
+     "tier": 2,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "block",
+      "per": 1
+     }
+    },
+    {
+     "id": "priest:holy:4",
+     "name": "Divine Fury",
+     "icon": "spell_holy_sealofwrath",
+     "tier": 3,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "priest:holy:5",
+     "name": "Holy Nova",
+     "icon": "spell_holy_holynova",
+     "tier": 3,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "thorns",
+      "per": 2
+     }
+    },
+    {
+     "id": "priest:holy:6",
+     "name": "Blessed Recovery",
+     "icon": "spell_holy_blessedrecovery",
+     "tier": 4,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "regen",
+      "per": 1
+     }
+    },
+    {
+     "id": "priest:holy:7",
+     "name": "Inspiration",
+     "icon": "spell_holy_layonhands",
+     "tier": 4,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "dex",
+      "per": 1
+     }
+    },
+    {
+     "id": "priest:holy:8",
+     "name": "Holy Reach",
+     "icon": "spell_holy_purify",
+     "tier": 5,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "draw1",
+      "per": 1
+     }
+    },
+    {
+     "id": "priest:holy:9",
+     "name": "Improved Healing",
+     "icon": "spell_holy_heal02",
+     "tier": 5,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "heal",
+      "per": 10
+     }
+    },
+    {
+     "id": "priest:holy:10",
+     "name": "Spiritual Guidance",
+     "icon": "spell_holy_spiritualguidence",
+     "tier": 6,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "hp",
+      "per": 3
+     }
+    },
+    {
+     "id": "priest:holy:11",
+     "name": "Lightwell",
+     "icon": "spell_holy_summonlightwell",
+     "tier": 6,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "hp",
+      "per": 10
+     }
+    }
+   ]
+  },
+  {
+   "id": "shadow",
+   "name": "Shadow",
+   "icon": "spell_shadow_shadowwordpain",
+   "talents": [
+    {
+     "id": "priest:shadow:0",
+     "name": "Spirit Tap",
+     "icon": "spell_shadow_requiem",
+     "tier": 1,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "goldpct",
+      "per": 4
+     }
+    },
+    {
+     "id": "priest:shadow:1",
+     "name": "Blackout",
+     "icon": "spell_shadow_gathershadows",
+     "tier": 1,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "dex",
+      "per": 1
+     }
+    },
+    {
+     "id": "priest:shadow:2",
+     "name": "Shadow Affinity",
+     "icon": "spell_shadow_shadowward",
+     "tier": 2,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "hp",
+      "per": 3
+     }
+    },
+    {
+     "id": "priest:shadow:3",
+     "name": "Improved Shadow Word: Pain",
+     "icon": "spell_shadow_shadowwordpain",
+     "tier": 2,
+     "col": 1,
+     "max": 2,
+     "effect": {
+      "key": "thorns",
+      "per": 2
+     }
+    },
+    {
+     "id": "priest:shadow:4",
+     "name": "Shadow Focus",
+     "icon": "spell_shadow_burningspirit",
+     "tier": 3,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "priest:shadow:5",
+     "name": "Improved Psychic Scream",
+     "icon": "spell_shadow_psychicscream",
+     "tier": 3,
+     "col": 1,
+     "max": 2,
+     "effect": {
+      "key": "block",
+      "per": 3
+     }
+    },
+    {
+     "id": "priest:shadow:6",
+     "name": "Improved Mind Blast",
+     "icon": "spell_shadow_unholyfrenzy",
+     "tier": 4,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "priest:shadow:7",
+     "name": "Mind Flay",
+     "icon": "spell_shadow_siphonmana",
+     "tier": 4,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "draw1",
+      "per": 1
+     }
+    },
+    {
+     "id": "priest:shadow:8",
+     "name": "Silence",
+     "icon": "spell_shadow_impphaseshift",
+     "tier": 5,
+     "col": 0,
+     "max": 1,
+     "effect": {
+      "key": "energy1",
+      "per": 1
+     }
+    },
+    {
+     "id": "priest:shadow:9",
+     "name": "Vampiric Embrace",
+     "icon": "spell_shadow_unsummonbuilding",
+     "tier": 5,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "regen",
+      "per": 3
+     }
+    },
+    {
+     "id": "priest:shadow:10",
+     "name": "Darkness",
+     "icon": "spell_shadow_twilight",
+     "tier": 6,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "priest:shadow:11",
+     "name": "Shadowform",
+     "icon": "spell_shadow_shadowform",
+     "tier": 6,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "block",
+      "per": 6
+     }
+    }
+   ]
+  }
+ ]
+}

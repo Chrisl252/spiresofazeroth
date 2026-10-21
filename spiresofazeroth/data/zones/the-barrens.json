@@ -1,0 +1,518 @@
+{
+ "id": "the-barrens",
+ "name": "The Barrens",
+ "start": {
+  "name": "The Crossroads Inn",
+  "icon": "inv_misc_beer_01"
+ },
+ "continent": "kal",
+ "act": 2,
+ "levelBand": [
+  10,
+  25
+ ],
+ "spire": {
+  "name": "The Crossroads Watchtower",
+  "lore": "The Horde watchtower at the Crossroads, with the Wailing Caverns gaping beneath it to the west and the thorn-choked warrens of Razorfen Kraul to the south."
+ },
+ "theme": {
+  "primary": "#c8a24a",
+  "secondary": "#4a3a18",
+  "accent": "#e86a3c",
+  "background": "barrens"
+ },
+ "zoneMechanic": {
+  "id": "mankriks-wife",
+  "name": "Mankrik's Wife",
+  "icon": "inv_misc_questionmark",
+  "text": "An event chain runs across floors: each Mankrik's Wife step you finish unlocks the next, and the final step grants gold and max HP. Hecklefang and Kolkar fights each add a clue (a counter) toward the chain.",
+  "hooks": {
+   "on_spire_start": [
+    {
+     "op": "set_flag",
+     "flag": "mankriks-wife-0"
+    }
+   ],
+   "on_kill": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "target_is_family",
+      "family": "hyena"
+     },
+     "then": [
+      {
+       "op": "set_flag",
+       "flag": "mankriks-wife-clue"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "crossroads-inn",
+  "name": "The Crossroads Inn",
+  "icon": "inv_misc_food_15",
+  "text": "Sleep in a real bed at the The Crossroads Inn: heal 20% of max HP and gain 3 Max HP.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 20,
+    "target": "self"
+   },
+   {
+    "op": "max_hp",
+    "amount": 3,
+    "target": "self"
+   }
+  ]
+ },
+ "enemiesFile": "the-barrens.enemies.json",
+ "encounters": {
+  "normal": [
+   [
+    "savannah-cub",
+    "savannah-cub"
+   ],
+   [
+    "zhevra-runner",
+    "oasis-snapjaw"
+   ],
+   [
+    "razormane-scout",
+    "hecklefang-hyena"
+   ],
+   [
+    "clattering-scorpid",
+    "savannah-prowler"
+   ],
+   [
+    "zhevra-charger",
+    "greater-plainstrider"
+   ],
+   [
+    "southsea-cutthroat",
+    "southsea-brigand"
+   ],
+   [
+    "hecklefang-hyena",
+    "hecklefang-hyena",
+    "hecklefang-snarler"
+   ],
+   [
+    "thunderhawk-hatchling",
+    "bloodtalon-taillasher"
+   ],
+   [
+    "razormane-quilboar",
+    "razormane-dustrunner",
+    "venture-co-lumberjack"
+   ],
+   [
+    "sunscale-screecher",
+    "sunscale-scytheclaw"
+   ],
+   [
+    "witchwing-harpy",
+    "witchwing-slayer"
+   ],
+   [
+    "southsea-cutthroat",
+    "southsea-brigand",
+    "southsea-privateer"
+   ],
+   [
+    "razormane-battleguard",
+    "razormane-geomancer",
+    "razormane-defender"
+   ],
+   [
+    "kolkar-drudge",
+    "kolkar-packhound"
+   ],
+   [
+    "savannah-prowler",
+    "savannah-huntress"
+   ],
+   [
+    "thunderhawk-cloudscraper",
+    "greater-thunderhawk"
+   ],
+   [
+    "kolkar-drudge",
+    "kolkar-outrunner",
+    "kolkar-stormer"
+   ],
+   [
+    "witchwing-roguefeather",
+    "witchwing-windcaller",
+    "witchwing-ambusher"
+   ],
+   [
+    "kolkar-packhound",
+    "kolkar-marauder",
+    "kolkar-windchaser"
+   ],
+   [
+    "savannah-matriarch",
+    "savannah-highmane"
+   ],
+   [
+    "dustwind-harpy",
+    "dustwind-savage",
+    "dustwind-pillager",
+    "dustwind-storm-witch"
+   ]
+  ],
+  "elite": [
+   [
+    "sunscale-scytheclaw",
+    "takk-the-leaper"
+   ],
+   [
+    "razormane-quilboar",
+    "razormane-geomancer",
+    "verog-the-dervish"
+   ],
+   [
+    "brontus"
+   ],
+   [
+    "lady-anacondra"
+   ],
+   [
+    "lord-cobrahn"
+   ],
+   [
+    "verdan-the-everliving"
+   ]
+  ],
+  "boss": [
+   [
+    "mutanus-the-devourer"
+   ],
+   [
+    "lady-anacondra",
+    "lord-cobrahn"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "mankriks-wife-1",
+   "name": "Mankrik's Wife: The Missing Wife",
+   "icon": "inv_misc_questionmark",
+   "text": "Mankrik slumps at the Crossroads. His wife went missing and Kolkar raiders were seen. He asks for your help.",
+   "chainId": "mankriks-wife",
+   "chainStep": 1,
+   "options": [
+    {
+     "label": "Promise to search (set the trail)",
+     "effects": [
+      {
+       "op": "set_flag",
+       "flag": "mankriks-wife-1"
+      }
+     ]
+    },
+    {
+     "label": "Take his coin and move on (gold +20)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 20
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mankriks-wife-2",
+   "name": "Mankrik's Wife: The Trail",
+   "icon": "spell_nature_slow",
+   "text": "The trail leads through hyena dens near the Forgotten Pools. Fresh blood on the grass.",
+   "chainId": "mankriks-wife",
+   "chainStep": 2,
+   "requires": {
+    "flag": "mankriks-wife-1"
+   },
+   "options": [
+    {
+     "label": "Follow the trail (take 6 damage, trail grows)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "set_flag",
+       "flag": "mankriks-wife-2"
+      }
+     ]
+    },
+    {
+     "label": "Give up the search (gold +15)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 15
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mankriks-wife-3",
+   "name": "Mankrik's Wife: Vengeance",
+   "icon": "ability_warrior_charge",
+   "text": "Her body lies by the Forgotten Pools. Mankrik's cry carries across the plains.",
+   "chainId": "mankriks-wife",
+   "chainStep": 3,
+   "requires": {
+    "flag": "mankriks-wife-2"
+   },
+   "options": [
+    {
+     "label": "Bring Mankrik her token (gold +60, max HP +3)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 60
+      },
+      {
+       "op": "max_hp",
+       "amount": 3
+      },
+      {
+       "op": "set_flag",
+       "flag": "mankriks-wife-3"
+      }
+     ]
+    },
+    {
+     "label": "Bury her and move on (heal 12)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 12,
+       "target": "self"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "wharfmaster-dizzywig",
+   "npc": {
+    "name": "Wharfmaster Dizzywig",
+    "npcId": 3453,
+    "displayId": 7053,
+    "scale": 0.78
+   },
+   "name": "Wharfmaster Dizzywig",
+   "icon": "inv_misc_coin_01",
+   "text": "At Ratchet, Wharfmaster Dizzywig needs a crate hauled before the Southsea men raid it.",
+   "options": [
+    {
+     "label": "Haul the crate (gold +35, take 5 damage)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 35
+      },
+      {
+       "op": "damage",
+       "amount": 5,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Skim the crate (gold +50, Curse 1)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 50
+      },
+      {
+       "op": "apply",
+       "status": "curse",
+       "stacks": 1,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Pass",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "sludge-fen",
+   "name": "The Sludge Fen",
+   "icon": "spell_nature_corrosivebreath",
+   "text": "A foul bog festers in the Sludge Fen, thick with ooze and oily reeds.",
+   "options": [
+    {
+     "label": "Wade in for reagents (gold +30, Poison 2)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 30
+      },
+      {
+       "op": "apply",
+       "status": "poison",
+       "stacks": 2,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Scoop clean water (heal 8)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 8,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Skirt the fen",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "chens-empty-keg",
+   "name": "Chen's Empty Keg",
+   "icon": "inv_misc_food_15",
+   "text": "Brewmaster Chen has lost his keg again. He pays in drink and cheer.",
+   "options": [
+    {
+     "label": "Refill the keg (lose 15 gold, heal 14)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": -15
+      },
+      {
+       "op": "heal",
+       "amount": 14,
+       "target": "self"
+      }
+     ],
+     "requires": {
+      "gold": 15
+     }
+    },
+    {
+     "label": "Drink his reserve (heal 10, Weak 1)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 10,
+       "target": "self"
+      },
+      {
+       "op": "apply",
+       "status": "weak",
+       "stacks": 1,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Decline",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "serpents-kiss",
+   "name": "Serpent's Kiss",
+   "icon": "inv_weapon_shortblade_05",
+   "rarity": "uncommon",
+   "itemId": null,
+   "zone": "the-barrens",
+   "class": null,
+   "text": "Your first attack each turn applies 2 Poison.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "apply",
+      "status": "poison",
+      "stacks": 2,
+      "target": "enemy"
+     }
+    ]
+   }
+  },
+  {
+   "id": "robe-of-the-moccasin",
+   "name": "Robe of the Moccasin",
+   "icon": "inv_pants_cloth_01",
+   "rarity": "uncommon",
+   "itemId": null,
+   "zone": "the-barrens",
+   "class": null,
+   "text": "Start each combat with 5 Block.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 5,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "tusken-helm",
+   "name": "Tusken Helm",
+   "icon": "inv_helmet_01",
+   "rarity": "rare",
+   "itemId": null,
+   "zone": "the-barrens",
+   "class": null,
+   "text": "Gain 1 Thorns at the start of each turn.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "apply",
+      "status": "thorns",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "corpsemaker",
+   "name": "Corpsemaker",
+   "icon": "inv_axe_02",
+   "rarity": "rare",
+   "itemId": null,
+   "zone": "the-barrens",
+   "class": null,
+   "text": "When you kill an enemy, gain 1 Strength.",
+   "triggers": {
+    "on_kill": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  }
+ ],
+ "raidFloorsFile": "the-barrens.raids.json"
+}

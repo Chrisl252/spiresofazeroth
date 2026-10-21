@@ -1,0 +1,586 @@
+{
+ "_doc": "Spire map length and type budget per act. A zone picks its profile from its zones/index.json `act` (profileByAct); a zone JSON may set `mapProfile` to a profile id or an inline object to override. mode weighted = the original per-node type table (long spire); mode budget = exact map-wide counts [min,max] per type placed inside the `where` floor windows, the rest fights. Fixed floors: floor 0 is all fights, floor preBossRest is one campfire, the last floor is the boss. encCount / tierCurve / eliteTier / extra tune run.js pickEncounter (enemies per fight, how far down the weak-to-strong encounter list a floor may reach, escorts added to elites and bosses); combatMods layers on the heroic modifiers (enemyHpMult number or per tier, *Strength added); goldMult scales fight and treasure gold; normalGearRate = chance a normal-fight win drops a gear piece. 2026-10-21: per-act full3..full6 profiles ramp enemy HP (acts 3-6 previously had no combatMods at all: act-3 clear was 98-100% in act-sim while act 2 was a 40-60% cliff); medium boss 1.7 -> 1.5; goldMult short 0.3 -> 0.6, medium 0.6 -> 0.8 so a normal act-1 fight pays 6-12 gold instead of 3-6.",
+ "profileByAct": {
+  "1": "short",
+  "2": "medium",
+  "3": "full",
+  "4": "full4",
+  "5": "full5",
+  "6": "full6",
+  "default": "full"
+ },
+ "profiles": {
+  "short": {
+   "floors": 8,
+   "mode": "budget",
+   "preBossRest": 6,
+   "treasureFloor": null,
+   "laneSets": [
+    [
+     [
+      0,
+      1
+     ],
+     3
+    ],
+    [
+     [
+      1,
+      2
+     ],
+     3
+    ],
+    [
+     [
+      0,
+      2
+     ],
+     3
+    ]
+   ],
+   "startLanes": [
+    [
+     [
+      0,
+      1
+     ],
+     3
+    ],
+    [
+     [
+      1,
+      2
+     ],
+     3
+    ],
+    [
+     [
+      0,
+      2
+     ],
+     3
+    ],
+    [
+     [
+      0,
+      1,
+      2
+     ],
+     2
+    ]
+   ],
+   "budget": {
+    "elite": [
+     1,
+     1
+    ],
+    "event": [
+     2,
+     3
+    ],
+    "vendor": [
+     1,
+     2
+    ],
+    "treasure": [
+     1,
+     1
+    ],
+    "rest": [
+     0,
+     0
+    ]
+   },
+   "where": {
+    "elite": [
+     3,
+     5
+    ],
+    "vendor": [
+     1,
+     5
+    ],
+    "treasure": [
+     2,
+     4
+    ],
+    "rest": [
+     2,
+     5
+    ],
+    "event": [
+     1,
+     5
+    ]
+   },
+   "encCount": {
+    "early": [
+     1,
+     2
+    ],
+    "earlyUntil": 2,
+    "late": [
+     2,
+     3
+    ]
+   },
+   "tierCurve": [
+    0.2,
+    0.75
+   ],
+   "eliteTier": 0.5,
+   "extra": {
+    "elite": 1,
+    "boss": 2
+   },
+   "combatMods": {
+    "enemyHpMult": {
+     "normal": 1.0,
+     "elite": 1.2,
+     "boss": 1.4
+    }
+   },
+   "goldMult": 0.6,
+   "normalGearRate": 0.2
+  },
+  "medium": {
+   "floors": 11,
+   "mode": "budget",
+   "preBossRest": 9,
+   "treasureFloor": 5,
+   "laneSets": [
+    [
+     [
+      0,
+      1
+     ],
+     2
+    ],
+    [
+     [
+      1,
+      2
+     ],
+     2
+    ],
+    [
+     [
+      0,
+      2
+     ],
+     2
+    ],
+    [
+     [
+      0,
+      1,
+      2
+     ],
+     3
+    ]
+   ],
+   "startLanes": [
+    [
+     [
+      0,
+      1
+     ],
+     2
+    ],
+    [
+     [
+      1,
+      2
+     ],
+     2
+    ],
+    [
+     [
+      0,
+      2
+     ],
+     2
+    ],
+    [
+     [
+      0,
+      1,
+      2
+     ],
+     4
+    ]
+   ],
+   "budget": {
+    "elite": [
+     1,
+     3
+    ],
+    "event": [
+     1,
+     3
+    ],
+    "vendor": [
+     1,
+     3
+    ],
+    "treasure": [
+     0,
+     0
+    ],
+    "rest": [
+     0,
+     1
+    ]
+   },
+   "where": {
+    "elite": [
+     3,
+     8
+    ],
+    "vendor": [
+     2,
+     8
+    ],
+    "rest": [
+     3,
+     8
+    ],
+    "event": [
+     1,
+     8
+    ]
+   },
+   "encCount": {
+    "early": [
+     1,
+     2
+    ],
+    "earlyUntil": 1,
+    "late": [
+     2,
+     3
+    ]
+   },
+   "tierCurve": [
+    0.3,
+    0.9
+   ],
+   "eliteTier": 0.75,
+   "extra": {
+    "elite": 1,
+    "boss": 1
+   },
+   "combatMods": {
+    "enemyHpMult": {
+     "normal": 1.3,
+     "elite": 1.4,
+     "boss": 1.45
+    }
+   },
+   "goldMult": 0.8,
+   "normalGearRate": 0.25
+  },
+  "full": {
+   "floors": 15,
+   "mode": "weighted",
+   "preBossRest": 13,
+   "treasureFloor": 7,
+   "laneSets": [
+    [
+     [
+      0,
+      1,
+      2
+     ],
+     2
+    ],
+    [
+     [
+      0,
+      1
+     ],
+     1
+    ],
+    [
+     [
+      1,
+      2
+     ],
+     1
+    ],
+    [
+     [
+      0,
+      2
+     ],
+     1
+    ]
+   ],
+   "startLanes": [
+    [
+     [
+      0,
+      1,
+      2
+     ],
+     55
+    ],
+    [
+     [
+      0,
+      1
+     ],
+     15
+    ],
+    [
+     [
+      1,
+      2
+     ],
+     15
+    ],
+    [
+     [
+      0,
+      2
+     ],
+     15
+    ]
+   ],
+   "combatMods": {
+    "enemyHpMult": {
+     "normal": 1.2,
+     "elite": 1.35,
+     "boss": 1.4
+    }
+   }
+  },
+  "full4": {
+   "floors": 15,
+   "mode": "weighted",
+   "preBossRest": 13,
+   "treasureFloor": 7,
+   "laneSets": [
+    [
+     [
+      0,
+      1,
+      2
+     ],
+     2
+    ],
+    [
+     [
+      0,
+      1
+     ],
+     1
+    ],
+    [
+     [
+      1,
+      2
+     ],
+     1
+    ],
+    [
+     [
+      0,
+      2
+     ],
+     1
+    ]
+   ],
+   "startLanes": [
+    [
+     [
+      0,
+      1,
+      2
+     ],
+     55
+    ],
+    [
+     [
+      0,
+      1
+     ],
+     15
+    ],
+    [
+     [
+      1,
+      2
+     ],
+     15
+    ],
+    [
+     [
+      0,
+      2
+     ],
+     15
+    ]
+   ],
+   "combatMods": {
+    "enemyHpMult": {
+     "normal": 1.25,
+     "elite": 1.3,
+     "boss": 1.1
+    }
+   }
+  },
+  "full5": {
+   "floors": 15,
+   "mode": "weighted",
+   "preBossRest": 13,
+   "treasureFloor": 7,
+   "laneSets": [
+    [
+     [
+      0,
+      1,
+      2
+     ],
+     2
+    ],
+    [
+     [
+      0,
+      1
+     ],
+     1
+    ],
+    [
+     [
+      1,
+      2
+     ],
+     1
+    ],
+    [
+     [
+      0,
+      2
+     ],
+     1
+    ]
+   ],
+   "startLanes": [
+    [
+     [
+      0,
+      1,
+      2
+     ],
+     55
+    ],
+    [
+     [
+      0,
+      1
+     ],
+     15
+    ],
+    [
+     [
+      1,
+      2
+     ],
+     15
+    ],
+    [
+     [
+      0,
+      2
+     ],
+     15
+    ]
+   ],
+   "combatMods": {
+    "enemyHpMult": {
+     "normal": 1.4,
+     "elite": 1.5,
+     "boss": 1.5
+    },
+    "eliteStrength": 1
+   }
+  },
+  "full6": {
+   "floors": 15,
+   "mode": "weighted",
+   "preBossRest": 13,
+   "treasureFloor": 7,
+   "laneSets": [
+    [
+     [
+      0,
+      1,
+      2
+     ],
+     2
+    ],
+    [
+     [
+      0,
+      1
+     ],
+     1
+    ],
+    [
+     [
+      1,
+      2
+     ],
+     1
+    ],
+    [
+     [
+      0,
+      2
+     ],
+     1
+    ]
+   ],
+   "startLanes": [
+    [
+     [
+      0,
+      1,
+      2
+     ],
+     55
+    ],
+    [
+     [
+      0,
+      1
+     ],
+     15
+    ],
+    [
+     [
+      1,
+      2
+     ],
+     15
+    ],
+    [
+     [
+      0,
+      2
+     ],
+     15
+    ]
+   ],
+   "combatMods": {
+    "enemyHpMult": {
+     "normal": 1.45,
+     "elite": 1.6,
+     "boss": 1.25
+    },
+    "eliteStrength": 1
+   }
+  }
+ }
+}

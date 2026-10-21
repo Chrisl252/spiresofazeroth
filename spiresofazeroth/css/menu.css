@@ -1,0 +1,15 @@
+/* Escape / Game Menu (js/ui/pauseMenu.js). Frame = the shared .sx-wood nineslice; this file only lays it out. */
+.pm-back { position: absolute; inset: 0; z-index: 80; display: grid; place-items: center; background: rgba(4,3,2,.78); pointer-events: auto; animation: sx-fade .15s ease both; }
+.pm-back * { box-sizing: border-box; }
+.pm-panel { width: min(1000px, 92%); display: flex; flex-direction: column; gap: 22px; }
+.pm-title { margin: 0 0 6px; text-align: center; font-family: var(--f-title); font-weight: 400; font-size: 64px; }
+.pm-row { display: grid; grid-template-columns: 360px 1fr 120px; align-items: center; gap: 24px; font-family: var(--f-ui); font-size: 36px; color: var(--ink2); }
+.pm-row:has(.pm-select) { grid-template-columns: 360px 1fr; }
+.pm-val { text-align: right; font-size: 34px; color: var(--parch-red, #7a1f12); }
+.pm-range { width: 100%; height: 14px; accent-color: #b8860b; cursor: pointer; }
+.pm-select { min-height: 64px; width: 100%; padding: 6px 16px; font-family: var(--f-ui); font-size: 32px; color: var(--ink); background: #120d08; border: 2px solid #6b5220; border-radius: 6px; }
+.pm-select:focus { outline: none; border-color: var(--gold); }
+.pm-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 10px; }
+.pm-btn { min-width: 260px; }
+.sp-portrait .pm-row, .sp-portrait .pm-row:has(.pm-select) { grid-template-columns: 1fr; gap: 10px; font-size: 44px; } .sp-portrait .pm-val { text-align: left; }
+@media (prefers-reduced-motion: reduce) { .pm-back { animation: none; } }

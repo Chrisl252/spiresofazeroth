@@ -1,0 +1,25 @@
+[
+ {"id":"onyxias-lair","name":"Onyxia's Lair","unlock":"act_complete","levelBand":[58,60],"lore":"The black dragon's lair in the Dustwallow cliffs. An optional hard floor: three phases of fire, flight and fear.","encounters":{"normal":[["onyxian-warder","onyxian-warder"]],"elite":[["onyxian-warder","onyxian-warder","onyxian-warder"]],"boss":[["onyxia"]]},"optional":true,"finalBoss":"onyxia",
+  "enemies":[
+   {"id":"onyxian-warder","name":"Onyxian Warder","tier":"raid","family":"dragonkin","type":"whelp","level":[58,60],"hp":[61,86],"icon":"inv_misc_head_dragon_black","npcId":null,"traits":["breath"],"moves":[{"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":7}],"weight":3},{"id":"fire-breath","name":"Fire Breath","intent":"attack","effects":[{"op":"damage","amount":7,"target":"all_enemies","school":"fire"}],"weight":1,"cooldown":4}]},
+   {"id":"onyxia","name":"Onyxia","tier":"boss","family":"dragonkin","type":"dragon","level":[60,60],"hp":[540,620],"icon":"inv_misc_head_dragon_black","npcId":10184,"traits":["breath"],
+    "moves":[
+     {"id":"cleave","name":"Cleave","intent":"attack","effects":[{"op":"damage","amount":18,"target":"all_enemies"}],"weight":3},
+     {"id":"wing-buffet","name":"Wing Buffet","intent":"attack","effects":[{"op":"damage","amount":16},{"op":"apply","status":"stun","stacks":1,"target":"enemy"}],"weight":2,"cooldown":3},
+     {"id":"flame-breath","name":"Flame Breath","intent":"attack","effects":[{"op":"damage","amount":22,"target":"all_enemies","school":"fire"},{"op":"apply","status":"burn","stacks":3,"target":"enemy"}],"weight":2,"cooldown":4},
+     {"id":"tail-sweep","name":"Tail Sweep","intent":"attack","effects":[{"op":"damage","amount":13,"target":"all_enemies"}],"weight":2,"cooldown":3},
+     {"id":"deep-breath","name":"Deep Breath","intent":"attack","effects":[{"op":"damage","amount":40,"target":"all_enemies","school":"fire"}],"weight":1,"cooldown":6},
+     {"id":"fireball","name":"Fireball","intent":"cast","effects":[{"op":"damage","amount":25,"school":"fire"},{"op":"apply","status":"burn","stacks":2,"target":"enemy"}],"weight":3},
+     {"id":"bellowing-roar","name":"Bellowing Roar","intent":"debuff","effects":[{"op":"damage","amount":11,"target":"all_enemies"},{"op":"apply","status":"fear","stacks":2,"target":"enemy"}],"weight":2,"cooldown":5},
+     {"id":"summon-onyxian-whelps","name":"Summon Onyxian Whelps","intent":"summon","effects":[{"op":"summon","unit":"onyxian-whelp","count":2}],"weight":1,"cooldown":5}
+    ],
+    "pattern":["cleave","wing-buffet","flame-breath","tail-sweep","cleave","flame-breath"],
+    "phases":[
+     {"hpBelowPct":65,"name":"Phase 2: In the Air","pattern":["fireball","summon-onyxian-whelps","fireball","deep-breath","fireball","summon-onyxian-whelps"],"onEnter":[{"op":"block","amount":54,"target":"self"},{"op":"summon","unit":"onyxian-whelp","count":2}]},
+     {"hpBelowPct":40,"name":"Phase 3: Landing","pattern":["bellowing-roar","cleave","flame-breath","tail-sweep","bellowing-roar"],"onEnter":[{"op":"apply","status":"strength","stacks":5,"target":"self"},{"op":"apply","status":"fear","stacks":1,"target":"enemy"}]}
+    ]
+   },
+   {"id":"onyxian-whelp","name":"Onyxian Whelp","tier":"normal","family":"dragonkin","type":"whelp","level":[55,56],"hp":[33,45],"icon":"inv_misc_head_dragon_black","npcId":11262,"summonOnly":true,"traits":["breath"],"moves":[{"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":7}],"weight":3},{"id":"fire-breath","name":"Fire Breath","intent":"attack","effects":[{"op":"damage","amount":7,"target":"all_enemies","school":"fire"}],"weight":1,"cooldown":4}]}
+  ]
+ }
+]

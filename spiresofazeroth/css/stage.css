@@ -1,0 +1,112 @@
+/* Spires of Azeroth v2 - the stage. 1920x1080 design space scaled by transform; every px below is a stage px.
+   Layer order: backdrop, fog, vignette, actors (WebGL), fx (canvas), ui. game.css still styles the legacy screens. */
+@font-face { font-family: "frizqt"; src: url("/assets/fonts/frizqt.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: "FrizQuadrata"; src: url("/assets/fonts/frizqt.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: "morpheus"; src: url("/assets/fonts/morpheus.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: "arialn"; src: url("/assets/fonts/arialn.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: "skurri"; src: url("/assets/fonts/skurri.woff2") format("woff2"); font-display: swap; }
+
+.sp-stage-host, .spires-app.sp-stage-host { --f-title: "morpheus", "Palatino Linotype", Georgia, serif; --f-ui: "frizqt", "Palatino Linotype", Georgia, serif; --f-num: "arialn", "Arial Narrow", Arial, sans-serif; --f-rune: "skurri", serif;
+  --t-xs: 20px; --t-sm: 24px; --t-md: 30px; --t-lg: 40px; --t-xl: 64px; --t-hero: 168px; --btn-h: 96px; --gold: #ffd100; --gold-soft: #e8c36a; --ink: #f4e9cc; }
+
+/* site chrome collapses to a 40 px strip while the stage is mounted */
+body.sp-stage-on { overflow: hidden; background: #050407; }
+body.sp-stage-on .wgf-shell-topbar { position: fixed; top: 0; left: 0; right: 0; height: 40px; overflow: hidden; z-index: 60; background: rgba(8,6,4,.92); border-bottom: 1px solid rgba(201,162,75,.35); }
+body.sp-stage-on .wgf-shell-topbar__inner { height: 40px; min-height: 0; padding-top: 0; padding-bottom: 0; align-items: center; }
+body.sp-stage-on .wgf-shell-nav, body.sp-stage-on .wgf-shell-searchband, body.sp-stage-on .wgf-shell-right, body.sp-stage-on .wgf-shell-nav-toggle, body.sp-stage-on .wgf-site-footer { display: none !important; }
+body.sp-stage-on .wgf-shell-logo { font-size: 15px; line-height: 40px; }
+body.sp-stage-on .wgf-skip-link { z-index: 70; }
+
+body.sp-stage-on main.spires-app.sp-stage-host { position: fixed; top: 40px; left: 0; right: 0; bottom: 0; max-width: none; margin: 0; padding: 0; min-height: 0; overflow: hidden; background: #050407; }
+/* letterbox fill: the zone art (set by backdrop.js as --sp-letterbox) blurred and dimmed behind the 16:9 stage, so a 4:3 or ultrawide window never shows black bars */
+body.sp-stage-on main.spires-app.sp-stage-host::before { content: ""; position: absolute; inset: -48px; background: var(--sp-letterbox, none) center / cover no-repeat; filter: blur(26px) brightness(.38) saturate(.85); pointer-events: none; }
+body.sp-stage-on main.spires-app.sp-stage-host > .sp-stage { z-index: 1; }
+
+.sp-stage { position: absolute; transform-origin: 0 0; overflow: hidden; background: #07060a; contain: layout paint; user-select: none; -webkit-user-select: none; }
+.sp-layer { position: absolute; inset: 0; }
+.sp-layer-backdrop { overflow: hidden; background: linear-gradient(180deg, #0b0d12, var(--bd-tint, #10131a)); }
+.sp-bd-sky { position: absolute; inset: -6% -6%; pointer-events: none; will-change: transform;
+  background: linear-gradient(180deg, var(--sky-top, #0a0e18) 0%, var(--sky-mid, #1c2b3d) 42%, var(--sky-haze, #486278) 72%, var(--sky-ground, #101520) 100%);
+  transform: translate3d(var(--px-sky, 0px), var(--py-sky, 0px), 0); }
+.sp-bd-sky::after { content: ""; position: absolute; top: 10%; left: 22%; width: 520px; height: 520px; border-radius: 50%;
+  background: radial-gradient(circle, var(--sky-sun, rgba(255, 214, 140, 0.5)) 0%, transparent 68%); opacity: .6; filter: blur(32px); pointer-events: none; }
+.sp-bd-slot { position: absolute; inset: -4% -4%; opacity: 0; transition: opacity .8s ease; will-change: transform, opacity;
+  transform: translate3d(var(--px-mid, var(--px, 0px)), var(--py-mid, var(--py, 0px)), 0) scale(1.06); }
+.sp-bd-slot.on { opacity: 1; }
+.sp-bd-slot img { position: absolute; max-width: none; display: block; filter: brightness(.76) saturate(.84) contrast(1.08); }
+/* floor plane: the zone's ground tile laid flat in perspective under the actors; the far edge melts into the vista through the zone haze,
+   the near edge darkens to the stage bottom. Shown only on scene screens (main.js toggles .sp-ground-on), never on menus. */
+.sp-bd-floor { --floor-tint: #2a3f1c; position: absolute; left: 0; right: 0; bottom: 0; top: 610px; overflow: hidden; perspective: 760px; perspective-origin: 50% 0; pointer-events: none; display: none;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, rgba(0,0,0,.6) 90px, #000 190px); mask-image: linear-gradient(180deg, transparent 0, rgba(0,0,0,.6) 90px, #000 190px); }
+.sp-stage.sp-ground-on:not(.sp-fluid) .sp-bd-floor { display: block; }
+.sp-bd-floor__tile { position: absolute; left: -100%; top: 0; width: 300%; height: 1800px; transform-origin: 50% 0; transform: translate3d(calc(var(--px, 0px) * .9), 0, 0) rotateX(57deg); background-repeat: repeat; background-position: 50% 0; will-change: transform; }
+.sp-bd-floor::before { content: ""; position: absolute; inset: 0; background:
+  linear-gradient(0deg, rgba(0,0,0,.92) 0, rgba(0,0,0,.55) 120px, transparent 330px),
+  radial-gradient(ellipse 46% 60% at 50% 42%, rgba(255,236,200,.10), transparent 70%); }
+.sp-bd-floor::after { content: ""; position: absolute; inset: 0; background: var(--floor-tint); mix-blend-mode: multiply; opacity: .55; }
+/* horizon haze over the vista bottom so the painting never ends on a hard line behind the actors */
+.sp-layer-backdrop::after { content: ""; position: absolute; left: 0; right: 0; top: 520px; height: 300px; background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--bd-haze, #507088) 42%, transparent) 50%, transparent); pointer-events: none; opacity: 0; transition: opacity .6s; }
+.sp-stage.sp-ground-on:not(.sp-fluid) .sp-layer-backdrop::after { opacity: 1; }
+.sp-stage.sp-portrait .sp-bd-floor { top: 860px; }
+.sp-stage.sp-portrait .sp-layer-backdrop::after { top: 740px; }
+
+.sp-layer-fog { pointer-events: none; mix-blend-mode: screen; opacity: .9; }
+.sp-layer-fog canvas { width: 100%; height: 100%; display: block; }
+.sp-layer-vignette { pointer-events: none;
+  background: radial-gradient(ellipse 78% 72% at 50% 48%, transparent 46%, rgba(0,0,0,.78) 100%), linear-gradient(180deg, rgba(0,0,0,.62), rgba(0,0,0,.18) 150px, transparent 24%, transparent 62%, rgba(0,0,0,.66)); }
+.sp-layer-actors, .sp-layer-fx { pointer-events: none; }
+.sp-layer-ui { pointer-events: none; }
+.sp-layer-ui > * { pointer-events: auto; }
+
+/* legacy (document-style) screens: unscaled, scrollable, centred column */
+.sp-stage.sp-fluid .sp-layer-ui { overflow-y: auto; overflow-x: hidden; padding: 12px 16px 96px; box-sizing: border-box; pointer-events: auto; }
+.sp-stage.sp-fluid .sp-layer-ui > * { max-width: 1100px; margin-left: auto; margin-right: auto; }
+.sp-stage.sp-fluid .sp-layer-vignette { background: radial-gradient(ellipse 90% 80% at 50% 40%, rgba(0,0,0,.35), rgba(0,0,0,.8)); }
+.sp-stage.sp-portrait { --t-xl: 84px; --t-hero: 150px; --btn-h: 150px; --t-md: 44px; --t-sm: 36px; --t-xs: 30px; }
+
+/* WoW red button: the client's own UI-Panel red button art, three-slice (left cap + tiled centre + right cap) from /assets/ui/128-redbutton-*.
+   Normal / pressed / disabled each use their own textures; hover brightens like the client's highlight overlay. No CSS gradients, no gloss. */
+.sp-wowbtn { --h: var(--btn-h, 96px); --cap: calc(var(--h) * 56 / 128); position: relative; display: inline-flex; align-items: center; justify-content: center; height: var(--h); min-width: calc(var(--h) * 3.2); padding: 0 var(--cap); box-sizing: border-box; cursor: pointer;
+  color: #ffd100; font-family: var(--f-ui, "frizqt", serif); font-size: calc(var(--h) * .34); letter-spacing: .01em; text-shadow: 0 2px 2px #000, 0 0 6px rgba(0,0,0,.7); line-height: 1; white-space: nowrap;
+  border: 0; border-radius: 0; background: url("/assets/ui/_128-redbutton-center.png") repeat-x center / auto 100%; background-clip: content-box; box-shadow: none; transition: filter .12s; -webkit-tap-highlight-color: transparent; }
+.sp-wowbtn::before, .sp-wowbtn::after { content: ""; position: absolute; top: 0; bottom: 0; width: calc(var(--cap) + 2px); background: no-repeat center / 100% 100%; pointer-events: none; } /* +2px: the caps overlap the tiled centre, so no sub-pixel seam at fractional stage scales */
+.sp-wowbtn::before { left: 0; background-image: url("/assets/ui/128-redbutton-left-cap.png"); }
+.sp-wowbtn::after { right: 0; background-image: url("/assets/ui/128-redbutton-right-cap.png"); }
+.sp-wowbtn:hover { color: #fff; filter: brightness(1.22) saturate(1.05); }
+.sp-wowbtn:active { filter: none; color: #ffd100; background-image: url("/assets/ui/_128-redbutton-center-pressed.png"); padding-top: 2px; }
+.sp-wowbtn:active::before { background-image: url("/assets/ui/128-redbutton-left-cap-pressed.png"); }
+.sp-wowbtn:active::after { background-image: url("/assets/ui/128-redbutton-right-cap-pressed.png"); }
+.sp-wowbtn:focus-visible { outline: 3px solid var(--gold); outline-offset: 5px; }
+.sp-wowbtn:disabled { cursor: not-allowed; color: #9d9d9d; filter: none; background-image: url("/assets/ui/_128-redbutton-center-disabled.png"); }
+.sp-wowbtn:disabled::before { background-image: url("/assets/ui/128-redbutton-left-cap-disabled.png"); }
+.sp-wowbtn:disabled::after { background-image: url("/assets/ui/128-redbutton-right-cap-disabled.png"); }
+.sp-wowbtn--lg { --h: calc(var(--btn-h, 96px) * 1.45); min-width: calc(var(--h) * 3); }
+.sp-wowbtn--sm { --h: calc(var(--btn-h, 96px) * .72); min-width: calc(var(--h) * 3.2); }
+
+/* title screen: the first stage-native screen */
+.sp-title-screen { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; color: var(--ink); text-align: center; }
+.sp-title-screen__logo { margin-top: 118px; display: flex; flex-direction: column; align-items: center; }
+.sp-title-screen__eyebrow { font-family: var(--f-ui); font-size: var(--t-md); letter-spacing: .5em; text-transform: uppercase; color: var(--gold-soft); text-shadow: 0 2px 6px #000; margin: 0 0 6px .5em; }
+.sp-title-screen h1 { margin: 0; font-family: var(--f-title); font-weight: 400; font-size: var(--t-hero); line-height: .95; letter-spacing: .01em; color: #f6d879;
+  background: linear-gradient(180deg, #fff6c8 8%, #f6c94a 46%, #a8741a 74%, #f1d27a 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 0 #2a1704) drop-shadow(0 10px 22px rgba(0,0,0,.85)); }
+.sp-title-screen__rule { width: 880px; max-width: 80%; height: 6px; margin: 22px 0 18px; background: linear-gradient(90deg, transparent, #c9a24b 25%, #fff0a8 50%, #c9a24b 75%, transparent); border-radius: 3px; box-shadow: 0 0 14px rgba(255,209,0,.45); }
+.sp-title-screen__tag { font-family: var(--f-ui); font-size: var(--t-lg); color: var(--ink); text-shadow: 0 2px 8px #000, 0 0 3px #000; margin: 0; max-width: 1200px; padding: 0 40px; }
+.sp-title-screen__menu { margin-top: auto; margin-bottom: 96px; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.sp-title-screen__row { display: flex; gap: 36px; }
+.sp-title-screen__stats { font-family: var(--f-num); font-size: var(--t-sm); color: var(--gold-soft); text-shadow: 0 2px 4px #000; letter-spacing: .06em; margin: 6px 0 0; }
+.sp-title-screen__foot { position: absolute; left: 0; right: 0; bottom: 26px; margin: 0; font-family: var(--f-num); font-size: var(--t-xs); color: rgba(244,233,204,.7); text-shadow: 0 1px 3px #000; }
+.sp-stage.sp-portrait .sp-title-screen__logo { margin-top: 240px; }
+.sp-stage.sp-portrait .sp-title-screen__menu { margin-bottom: 190px; gap: 36px; }
+.sp-stage.sp-portrait .sp-title-screen__row { flex-direction: column; gap: 30px; }
+.sp-stage.sp-portrait .sp-title-screen h1 { padding: 0 30px; }
+.sp-stage.sp-portrait .sp-title-screen__tag { font-size: 44px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-bd-slot, .sp-bd-sky { transition: none; }
+  .sp-wowbtn, .sp-wowbtn::after { transition: none; }
+}
+body.sp-stage-on .sp-reduce .sp-bd-slot { transition: none; }
+/* fullscreen: the stage host fills the screen on black */
+.sp-stage-host:fullscreen { background: #000; width: 100vw; height: 100vh; }
+.sp-stage-host:-webkit-full-screen { background: #000; width: 100vw; height: 100vh; }

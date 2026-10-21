@@ -1,0 +1,454 @@
+{
+ "id": "dustwallow-marsh",
+ "name": "Dustwallow Marsh",
+ "start": {
+  "name": "Theramore Inn",
+  "icon": "inv_misc_beer_01"
+ },
+ "continent": "kal",
+ "act": 4,
+ "levelBand": [
+  35,
+  45
+ ],
+ "spire": {
+  "name": "Theramore Tower",
+  "lore": "The Alliance fortress of Theramore Isle, besieged by Dragonmaw orcs, Bloodfen raptors and the shadow of the black dragon brood of Onyxia's Lair."
+ },
+ "theme": {
+  "primary": "#5a7a4a",
+  "secondary": "#1a2318",
+  "accent": "#e0a040",
+  "background": "marsh"
+ },
+ "zoneMechanic": {
+  "id": "deep-breath",
+  "name": "Deep Breath",
+  "icon": "spell_fire_flamebolt",
+  "text": "Black dragonkin breathe in cycles. Every 6th turn of a combat a huge fire breath hits you and your allies for 10 damage (this scales on Onyxia's Lair, where Onyxia's Deep Breath is the same timer).",
+  "hooks": {
+   "on_turn_start": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "turn_number",
+      "min": 6,
+      "every": 6
+     },
+     "then": [
+      {
+       "op": "damage",
+       "amount": 10,
+       "target": "self",
+       "school": "fire"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "theramore-inn",
+  "name": "Theramore Inn",
+  "icon": "inv_misc_food_15",
+  "text": "Sleep in a real bed at the Theramore Inn: heal 20% of max HP and gain 3 Max HP.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 20,
+    "target": "self"
+   },
+   {
+    "op": "max_hp",
+    "amount": 3,
+    "target": "self"
+   }
+  ]
+ },
+ "enemiesFile": "dustwallow-marsh.enemies.json",
+ "encounters": {
+  "normal": [
+   [
+    "mudrock-tortoise",
+    "mudrock-snapjaw"
+   ],
+   [
+    "bloodfen-screecher",
+    "bloodfen-raptor"
+   ],
+   [
+    "darkfang-creeper",
+    "darkfang-lurker"
+   ],
+   [
+    "mirefin-coastrunner",
+    "mirefin-warrior",
+    "mirefin-murloc"
+   ],
+   [
+    "drywhisker-digger",
+    "drywhisker-surveyor"
+   ],
+   [
+    "firemane-scout",
+    "firemane-scalebane"
+   ],
+   [
+    "mudrock-snapjaw",
+    "mudrock-burrower",
+    "mudrock-spikeshell"
+   ],
+   [
+    "bloodfen-raptor",
+    "bloodfen-scytheclaw",
+    "bloodfen-razormaw"
+   ],
+   [
+    "dragonmaw-swamprunner",
+    "dragonmaw-raider"
+   ],
+   [
+    "mirefin-warrior",
+    "mirefin-oracle",
+    "mirefin-puddlejumper"
+   ],
+   [
+    "black-broodling",
+    "firemane-ash-tail"
+   ],
+   [
+    "dragonmaw-scout",
+    "dragonmaw-raider",
+    "dragonmaw-shaman"
+   ],
+   [
+    "bloodfen-scytheclaw",
+    "bloodfen-razormaw",
+    "bloodfen-lashtail"
+   ],
+   [
+    "dragonmaw-swamprunner",
+    "dragonmaw-shaman",
+    "dragonmaw-bonewarder"
+   ],
+   [
+    "firemane-scalebane",
+    "black-broodling",
+    "firemane-flamecaller"
+   ],
+   [
+    "black-dragonspawn",
+    "black-wyrmkin"
+   ]
+  ],
+  "elite": [
+   [
+    "drogoth-the-roamer"
+   ],
+   [
+    "bloodfen-screecher",
+    "tethis"
+   ],
+   [
+    "dragonmaw-raider",
+    "dragonmaw-shaman",
+    "dragonmaw-centurion"
+   ]
+  ],
+  "boss": [
+   [
+    "dragonmaw-raider",
+    "dragonmaw-bonewarder",
+    "overlord-mokmorokk"
+   ],
+   [
+    "overlord-mokmorokk"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "theramore",
+   "name": "Theramore Isle",
+   "icon": "inv_misc_head_human_01",
+   "text": "Theramore's garrison offers a bounty on Dragonmaw raiders and a bunk in the inn.",
+   "options": [
+    {
+     "label": "Take the bounty (gold +55, take 7 damage)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 55
+      },
+      {
+       "op": "damage",
+       "amount": 7,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Rest at the garrison (heal 16)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 16,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Move on",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "tabethas-hut",
+   "npc": {
+    "name": "Tabetha",
+    "npcId": 6546,
+    "displayId": 5375
+   },
+   "name": "Tabetha's Hut",
+   "icon": "spell_shadow_gathershadows",
+   "text": "The hedge-witch Tabetha asks for a pinch of marsh herb and fears for Theramore.",
+   "options": [
+    {
+     "label": "Gather herbs (take 4 damage, gain a card)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 4,
+       "target": "self"
+      },
+      {
+       "op": "random_card",
+       "pool": "neutral",
+       "rarity": "common",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Pay for a charm (lose 20 gold, max HP +3)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": -20
+      },
+      {
+       "op": "max_hp",
+       "amount": 3
+      }
+     ],
+     "requires": {
+      "gold": 20
+     }
+    },
+    {
+     "label": "Decline",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "smolderwing",
+   "name": "Smolderwing",
+   "icon": "inv_misc_head_dragon_black",
+   "text": "A black drake called Smolderwing circles the Dragonmaw camp, cinders trailing from its wings.",
+   "options": [
+    {
+     "label": "Strike the drake's nest (gold +55, take 10 damage)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 55
+      },
+      {
+       "op": "damage",
+       "amount": 10,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Shelter in the cinders (Burn 1, gain a card)",
+     "effects": [
+      {
+       "op": "apply",
+       "status": "burn",
+       "stacks": 1,
+       "target": "self"
+      },
+      {
+       "op": "random_card",
+       "pool": "neutral",
+       "rarity": "common",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Wait it out",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "shady-rest-inn",
+   "name": "The Shady Rest Inn",
+   "icon": "spell_fire_fire",
+   "text": "Someone set the Shady Rest Inn ablaze. Brogus is shouting about insurance.",
+   "options": [
+    {
+     "label": "Fight the blaze (take 6 damage, gold +40)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 40
+      }
+     ]
+    },
+    {
+     "label": "Pull victims from the fire (heal 8, max HP +2)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 8,
+       "target": "self"
+      },
+      {
+       "op": "max_hp",
+       "amount": 2
+      }
+     ]
+    },
+    {
+     "label": "Pass",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "nat-pagle",
+   "npc": {
+    "name": "Nat Pagle",
+    "npcId": 12919,
+    "displayId": 13099
+   },
+   "name": "Nat Pagle",
+   "icon": "inv_misc_food_15",
+   "text": "Nat Pagle, extreme angler, offers a line and a fish bite.",
+   "options": [
+    {
+     "label": "Fish with Nat (heal 14)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 14,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Buy his catch (lose 25 gold, gain a card)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": -25
+      },
+      {
+       "op": "random_card",
+       "pool": "neutral",
+       "rarity": "common",
+       "to": "deck_permanent"
+      }
+     ],
+     "requires": {
+      "gold": 25
+     }
+    },
+    {
+     "label": "Leave the dock",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "head-of-onyxia",
+   "name": "Head of Onyxia",
+   "icon": "inv_misc_head_dragon_black",
+   "rarity": "epic",
+   "itemId": null,
+   "zone": "dustwallow-marsh",
+   "class": null,
+   "text": "At the start of each combat, gain 2 Strength; heal 2 when you play a power.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 2,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "onyxia-scale-cloak",
+   "name": "Onyxia Scale Cloak",
+   "icon": "inv_misc_cape_18",
+   "rarity": "rare",
+   "itemId": null,
+   "zone": "dustwallow-marsh",
+   "class": null,
+   "text": "You take 2 less fire damage; gain 5 Block at the start of each combat.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 5,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "drakefire-amulet",
+   "name": "Drakefire Amulet",
+   "icon": "inv_jewelry_necklace_07",
+   "rarity": "rare",
+   "itemId": null,
+   "zone": "dustwallow-marsh",
+   "class": null,
+   "text": "When you take fire damage, gain 2 Block.",
+   "triggers": {
+    "on_damage_taken": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "school_last",
+       "school": "fire"
+      },
+      "then": [
+       {
+        "op": "block",
+        "amount": 2,
+        "target": "self"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "raidFloorsFile": "dustwallow-marsh.raids.json"
+}

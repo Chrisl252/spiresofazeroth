@@ -1,0 +1,321 @@
+{
+ "class": "mage",
+ "set": {
+  "id": "arcanist-regalia",
+  "name": "Arcanist Regalia",
+  "icon": "inv_helmet_53",
+  "bonuses": [
+   {
+    "pieces": 2,
+    "name": "Arcane Intellect",
+    "text": "Start each combat: gain 2 Arcane Charges.",
+    "triggers": {
+     "on_combat_start": [
+      {
+       "op": "gain_resource",
+       "resource": "arcane_charges",
+       "amount": 2
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 4,
+    "name": "Presence of Mind",
+    "text": "Whenever you play a card: 15% chance to draw 1 card.",
+    "triggers": {
+     "on_card_played": [
+      {
+       "op": "conditional",
+       "if": {
+        "type": "chance",
+        "pct": 15
+       },
+       "then": [
+        {
+         "op": "draw",
+         "count": 1
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 6,
+    "name": "Clearcasting",
+    "text": "At the start of each turn: 20% chance to gain 1 Energy.",
+    "triggers": {
+     "on_turn_start": [
+      {
+       "op": "conditional",
+       "if": {
+        "type": "chance",
+        "pct": 20
+       },
+       "then": [
+        {
+         "op": "gain_energy",
+         "amount": 1
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 8,
+    "name": "Spellfire",
+    "text": "Start each combat: gain 2 Spell Power.",
+    "triggers": {
+     "on_combat_start": [
+      {
+       "op": "apply",
+       "status": "spell_power",
+       "stacks": 2,
+       "target": "self"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "pieces": [
+  {
+   "id": "arcanist-crown",
+   "name": "Arcanist Crown",
+   "slot": "head",
+   "set": "arcanist-regalia",
+   "setPiece": 1,
+   "item": 16795,
+   "icon": "inv_helmet_53",
+   "displayId": 31517,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 2 Arcane Charges.",
+   "class": "mage",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "gain_resource",
+      "resource": "arcane_charges",
+      "amount": 2
+     }
+    ]
+   }
+  },
+  {
+   "id": "arcanist-mantle",
+   "name": "Arcanist Mantle",
+   "slot": "shoulder",
+   "set": "arcanist-regalia",
+   "setPiece": 2,
+   "item": 16797,
+   "icon": "inv_shoulder_02",
+   "displayId": 30586,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: gain 2 Block.",
+   "class": "mage",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "block",
+      "amount": 2,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "arcanist-robes",
+   "name": "Arcanist Robes",
+   "slot": "chest",
+   "set": "arcanist-regalia",
+   "setPiece": 3,
+   "item": 16798,
+   "icon": "inv_chest_cloth_03",
+   "displayId": 30581,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 6 Block.",
+   "class": "mage",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 6,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "arcanist-bindings",
+   "name": "Arcanist Bindings",
+   "slot": "wrist",
+   "set": "arcanist-regalia",
+   "setPiece": 4,
+   "item": 16799,
+   "icon": "inv_belt_29",
+   "displayId": 30584,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Whenever you play a card: 12% chance to draw 1 card.",
+   "class": "mage",
+   "triggers": {
+    "on_card_played": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 12
+      },
+      "then": [
+       {
+        "op": "draw",
+        "count": 1
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "arcanist-gloves",
+   "name": "Arcanist Gloves",
+   "slot": "hands",
+   "set": "arcanist-regalia",
+   "setPiece": 5,
+   "item": 16801,
+   "icon": "inv_gauntlets_14",
+   "displayId": 30585,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 1 Ignite.",
+   "class": "mage",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "gain_resource",
+      "resource": "ignite",
+      "amount": 1
+     }
+    ]
+   }
+  },
+  {
+   "id": "arcanist-belt",
+   "name": "Arcanist Belt",
+   "slot": "waist",
+   "set": "arcanist-regalia",
+   "setPiece": 6,
+   "item": 16802,
+   "icon": "inv_belt_30",
+   "displayId": 30583,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "When you kill an enemy: gain 1 Arcane Charges.",
+   "class": "mage",
+   "triggers": {
+    "on_kill": [
+     {
+      "op": "gain_resource",
+      "resource": "arcane_charges",
+      "amount": 1
+     }
+    ]
+   }
+  },
+  {
+   "id": "arcanist-leggings",
+   "name": "Arcanist Leggings",
+   "slot": "legs",
+   "set": "arcanist-regalia",
+   "setPiece": 7,
+   "item": 16796,
+   "icon": "inv_pants_08",
+   "displayId": 30582,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: 15% chance to gain 1 Energy.",
+   "class": "mage",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 15
+      },
+      "then": [
+       {
+        "op": "gain_energy",
+        "amount": 1
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "arcanist-boots",
+   "name": "Arcanist Boots",
+   "slot": "feet",
+   "set": "arcanist-regalia",
+   "setPiece": 8,
+   "item": 16800,
+   "icon": "inv_boots_07",
+   "displayId": 30587,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 3 Block.",
+   "class": "mage",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 3,
+      "target": "self"
+     }
+    ]
+   }
+  }
+ ],
+ "weapon": {
+  "id": "azuresong-mageblade",
+  "name": "Azuresong Mageblade",
+  "slot": "mainHand",
+  "setPiece": 0,
+  "item": 17103,
+  "icon": "inv_sword_39",
+  "displayId": 29677,
+  "tier": 1,
+  "rarity": "epic",
+  "stats": "Tier 1 weapon",
+  "text": "Start each combat: gain 3 Arcane Charges and gain 1 Ignite.",
+  "class": "mage",
+  "triggers": {
+   "on_combat_start": [
+    {
+     "op": "gain_resource",
+     "resource": "arcane_charges",
+     "amount": 3
+    },
+    {
+     "op": "gain_resource",
+     "resource": "ignite",
+     "amount": 1
+    }
+   ]
+  }
+ }
+}

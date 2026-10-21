@@ -1,0 +1,101 @@
+[
+ {"id":"blackfathom-deeps","name":"Blackfathom Deeps","unlock":"act_complete","levelBand":[24,32],"lore":"The sunken Temple of Elune, now home to Twilight's Hammer cultists, naga and the Old God shadow of Aku'mai.","encounters":{"normal":[["murkshallow-softshell","murkshallow-snapclaw"],["barbed-crustacean","akumai-fisher"],["akumai-snapjaw","akumai-servant"],["blackfathom-tide-priestess","blackfathom-myrmidon"],["blackfathom-sea-witch","blackfathom-oracle","blackfathom-myrmidon"],["twilight-acolyte","twilight-aquamancer"],["twilight-acolyte","fallenroot-satyr","twilight-shadowmage"]],"elite":[["ghamoo-ra"],["lady-sarevess"],["gelihast"],["lorgus-jett"],["baron-aquanis"],["twilight-lord-kelris"],["old-serrakis"]],"boss":[["akumai"]]},"finalBoss":"akumai",
+  "enemies":[
+   {"id":"murkshallow-softshell","name":"Murkshallow Softshell","tier":"raid","family":"beast","type":"crab","level":[24,25],"hp":[32,43],"icon":"ability_hunter_pet_crab","npcId":null,"traits":[],"moves":[{"id":"pincer","name":"Pincer","intent":"attack","effects":[{"op":"damage","amount":5}],"weight":3},{"id":"claw-grab","name":"Claw Grab","intent":"debuff","effects":[{"op":"damage","amount":3},{"op":"apply","status":"frail","stacks":1,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"murkshallow-snapclaw","name":"Murkshallow Snapclaw","tier":"raid","family":"beast","type":"crab","level":[24,26],"hp":[33,44],"icon":"ability_hunter_pet_crab","npcId":null,"traits":[],"moves":[{"id":"pincer","name":"Pincer","intent":"attack","effects":[{"op":"damage","amount":5}],"weight":3},{"id":"claw-grab","name":"Claw Grab","intent":"debuff","effects":[{"op":"damage","amount":3},{"op":"apply","status":"frail","stacks":1,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"barbed-crustacean","name":"Barbed Crustacean","tier":"raid","family":"beast","type":"crab","level":[25,27],"hp":[35,47],"icon":"ability_hunter_pet_crab","npcId":null,"traits":[],"moves":[{"id":"pincer","name":"Pincer","intent":"attack","effects":[{"op":"damage","amount":5}],"weight":3},{"id":"claw-grab","name":"Claw Grab","intent":"debuff","effects":[{"op":"damage","amount":3},{"op":"apply","status":"frail","stacks":1,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"akumai-fisher","name":"Aku'mai Fisher","tier":"raid","family":"beast","type":"fish","level":[25,27],"hp":[35,47],"icon":"ability_hunter_pet_crocolisk","npcId":null,"traits":[],"moves":[{"id":"bite","name":"Bite","intent":"attack","effects":[{"op":"damage","amount":9},{"op":"apply","status":"bleed","stacks":1,"target":"enemy"}],"weight":3},{"id":"frenzy","name":"Frenzy","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}]},
+   {"id":"akumai-snapjaw","name":"Aku'mai Snapjaw","tier":"raid","family":"beast","type":"turtle","level":[26,28],"hp":[36,51],"icon":"ability_hunter_pet_turtle","npcId":null,"traits":["armor"],"moves":[{"id":"snap","name":"Snap","intent":"attack","effects":[{"op":"damage","amount":6}],"weight":3},{"id":"shell-shield","name":"Shell Shield","intent":"block","effects":[{"op":"block","amount":12,"target":"self"}],"weight":2,"cooldown":3}]},
+   {"id":"akumai-servant","name":"Aku'mai Servant","tier":"raid","family":"beast","type":"fish","level":[26,28],"hp":[36,51],"icon":"ability_hunter_pet_crocolisk","npcId":null,"traits":[],"moves":[{"id":"bite","name":"Bite","intent":"attack","effects":[{"op":"damage","amount":9},{"op":"apply","status":"bleed","stacks":1,"target":"enemy"}],"weight":3},{"id":"frenzy","name":"Frenzy","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}]},
+   {"id":"blackfathom-tide-priestess","name":"Blackfathom Tide Priestess","tier":"raid","family":"humanoid","type":"naga","level":[26,28],"hp":[36,51],"icon":"achievement_boss_elitenagamale","npcId":null,"traits":["caster"],"moves":[{"id":"frost-bolt","name":"Frost Bolt","intent":"cast","effects":[{"op":"damage","amount":8,"school":"frost"},{"op":"apply","status":"weak","stacks":1,"target":"enemy"}],"weight":3},{"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":8,"school":"nature"}],"weight":2},{"id":"heal","name":"Heal","intent":"heal","effects":[{"op":"heal","amount":9,"target":"ally"}],"weight":1,"cooldown":3}]},
+   {"id":"blackfathom-sea-witch","name":"Blackfathom Sea Witch","tier":"raid","family":"humanoid","type":"naga","level":[26,28],"hp":[36,51],"icon":"achievement_boss_elitenagamale","npcId":null,"traits":["caster"],"moves":[{"id":"frost-bolt","name":"Frost Bolt","intent":"cast","effects":[{"op":"damage","amount":8,"school":"frost"},{"op":"apply","status":"weak","stacks":1,"target":"enemy"}],"weight":3},{"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":8,"school":"nature"}],"weight":2},{"id":"heal","name":"Heal","intent":"heal","effects":[{"op":"heal","amount":9,"target":"ally"}],"weight":1,"cooldown":3}]},
+   {"id":"blackfathom-myrmidon","name":"Blackfathom Myrmidon","tier":"raid","family":"humanoid","type":"naga","level":[27,29],"hp":[38,54],"icon":"achievement_boss_elitenagamale","npcId":null,"traits":["caster"],"moves":[{"id":"lash","name":"Lash","intent":"attack","effects":[{"op":"damage","amount":8}],"weight":3},{"id":"frost-bolt","name":"Frost Bolt","intent":"cast","effects":[{"op":"damage","amount":8,"school":"frost"},{"op":"apply","status":"weak","stacks":1,"target":"enemy"}],"weight":2},{"id":"scale-armor","name":"Scale Armor","intent":"block","effects":[{"op":"block","amount":9,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"blackfathom-oracle","name":"Blackfathom Oracle","tier":"raid","family":"humanoid","type":"naga","level":[27,29],"hp":[38,54],"icon":"achievement_boss_elitenagamale","npcId":null,"traits":["caster"],"moves":[{"id":"frost-bolt","name":"Frost Bolt","intent":"cast","effects":[{"op":"damage","amount":8,"school":"frost"},{"op":"apply","status":"weak","stacks":1,"target":"enemy"}],"weight":3},{"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":8,"school":"nature"}],"weight":2},{"id":"heal","name":"Heal","intent":"heal","effects":[{"op":"heal","amount":9,"target":"ally"}],"weight":1,"cooldown":3}]},
+   {"id":"twilight-acolyte","name":"Twilight Acolyte","tier":"raid","family":"humanoid","type":"cultist","level":[27,29],"hp":[38,54],"icon":"inv_misc_head_human_01","npcId":null,"traits":["caster"],"moves":[{"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":8,"school":"shadow"}],"weight":2},{"id":"curse-of-weakness","name":"Curse of Weakness","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"twilight-aquamancer","name":"Twilight Aquamancer","tier":"raid","family":"humanoid","type":"cultist","level":[28,30],"hp":[40,57],"icon":"inv_misc_head_human_01","npcId":null,"traits":["caster"],"moves":[{"id":"frostbolt","name":"Frostbolt","intent":"cast","effects":[{"op":"damage","amount":8,"school":"frost"},{"op":"apply","status":"weak","stacks":1,"target":"enemy"}],"weight":3},{"id":"fireball","name":"Fireball","intent":"cast","effects":[{"op":"damage","amount":9,"school":"fire"}],"weight":2},{"id":"frost-nova","name":"Frost Nova","intent":"cast","effects":[{"op":"damage","amount":5,"school":"frost"},{"op":"apply","status":"frozen","stacks":1,"target":"enemy"}],"weight":1,"cooldown":4}]},
+   {"id":"twilight-shadowmage","name":"Twilight Shadowmage","tier":"raid","family":"humanoid","type":"cultist","level":[28,30],"hp":[40,57],"icon":"inv_misc_head_human_01","npcId":null,"traits":["caster"],"moves":[{"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":8,"school":"shadow"}],"weight":2},{"id":"corruption","name":"Corruption","intent":"debuff","effects":[{"op":"damage","amount":3,"school":"shadow"},{"op":"apply","status":"poison","stacks":3,"target":"enemy"}],"weight":1,"cooldown":3},{"id":"curse-of-agony","name":"Curse of Agony","intent":"debuff","effects":[{"op":"apply","status":"curse","stacks":2,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"fallenroot-satyr","name":"Fallenroot Satyr","tier":"raid","family":"demon","type":"satyr","level":[27,29],"hp":[38,54],"icon":"spell_shadow_summonsuccubus","npcId":null,"traits":["caster"],"moves":[{"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":8,"school":"shadow"}],"weight":2},{"id":"curse-of-weakness","name":"Curse of Weakness","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"enemy"}],"weight":1,"cooldown":3},{"id":"strike","name":"Strike","intent":"attack","effects":[{"op":"damage","amount":6}],"weight":2}]},
+   {"id":"ghamoo-ra","name":"Ghamoo-ra","tier":"elite","family":"beast","type":"turtle","level":[24,25],"hp":[91,118],"icon":"ability_hunter_pet_turtle","npcId":4887,"traits":["armor"],
+    "moves":[
+     {"id":"trample","name":"Trample","intent":"attack","effects":[{"op":"damage","amount":11,"target":"all_enemies"}],"weight":2,"cooldown":3},
+     {"id":"shell-shield","name":"Shell Shield","intent":"block","effects":[{"op":"block","amount":24,"target":"self"}],"weight":2,"cooldown":3},
+     {"id":"bite","name":"Bite","intent":"attack","effects":[{"op":"damage","amount":17}],"weight":3}
+    ],
+    "pattern":["bite","trample","shell-shield","bite","trample"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Shell Slam","pattern":["trample","bite","trample","shell-shield"],"onEnter":[{"op":"apply","status":"armor","stacks":5,"target":"self"}]}
+    ]
+   },
+   {"id":"lady-sarevess","name":"Lady Sarevess","tier":"elite","family":"humanoid","type":"naga","level":[26,27],"hp":[98,127],"icon":"achievement_boss_elitenagamale","npcId":4831,"traits":["caster"],
+    "moves":[
+     {"id":"frostbolt-volley","name":"Frostbolt Volley","intent":"cast","effects":[{"op":"damage","amount":11,"target":"all_enemies","school":"frost"},{"op":"apply","status":"weak","stacks":1,"target":"enemy"}],"weight":2,"cooldown":3},
+     {"id":"slow","name":"Slow","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"enemy"}],"weight":1,"cooldown":3},
+     {"id":"forked-lightning","name":"Forked Lightning","intent":"cast","effects":[{"op":"damage","amount":17,"school":"nature"}],"weight":3},
+     {"id":"summon-naga","name":"Summon Naga","intent":"summon","effects":[{"op":"summon","unit":"blackfathom-myrmidon","count":1}],"weight":1,"cooldown":6}
+    ],
+    "pattern":["frostbolt-volley","forked-lightning","slow","frostbolt-volley","summon-naga"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Tide Mistress","pattern":["frostbolt-volley","forked-lightning","frostbolt-volley"],"onEnter":[{"op":"summon","unit":"blackfathom-myrmidon","count":1}]}
+    ]
+   },
+   {"id":"gelihast","name":"Gelihast","tier":"elite","family":"humanoid","type":"murloc","level":[25,26],"hp":[94,122],"icon":"inv_misc_head_murloc_01","npcId":6243,"traits":[],
+    "moves":[
+     {"id":"net","name":"Net","intent":"debuff","effects":[{"op":"damage","amount":6},{"op":"apply","status":"weak","stacks":2,"target":"enemy"}],"weight":2,"cooldown":3},
+     {"id":"gelihast-bite","name":"Gelihast Bite","intent":"attack","effects":[{"op":"damage","amount":15}],"weight":3},
+     {"id":"mrrgl-call","name":"Mrrgl Call","intent":"summon","effects":[{"op":"summon","unit":"akumai-servant","count":1}],"weight":1,"cooldown":6}
+    ],
+    "pattern":["gelihast-bite","net","gelihast-bite","mrrgl-call"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Cornered","pattern":["net","gelihast-bite","gelihast-bite"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+    ]
+   },
+   {"id":"lorgus-jett","name":"Lorgus Jett","tier":"elite","family":"humanoid","type":"naga","level":[26,27],"hp":[98,127],"icon":"achievement_boss_elitenagamale","npcId":12902,"traits":["caster"],
+    "moves":[
+     {"id":"lightning-shield","name":"Lightning Shield","intent":"buff","effects":[{"op":"apply","status":"thorns","stacks":3,"target":"self"}],"weight":1,"cooldown":5},
+     {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":15,"school":"nature"}],"weight":3},
+     {"id":"healing-wave","name":"Healing Wave","intent":"heal","effects":[{"op":"heal","amount":21,"target":"self"}],"weight":1,"cooldown":4},
+     {"id":"earthgrab-totem","name":"Earthgrab Totem","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"enemy"}],"weight":1,"cooldown":4}
+    ],
+    "pattern":["lightning-bolt","lightning-shield","earthgrab-totem","lightning-bolt","healing-wave"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Totem Master","pattern":["earthgrab-totem","lightning-bolt","lightning-bolt"],"onEnter":[{"op":"apply","status":"thorns","stacks":3,"target":"self"}]}
+    ]
+   },
+   {"id":"baron-aquanis","name":"Baron Aquanis","tier":"elite","family":"elemental","type":"water","level":[28,29],"hp":[104,137],"icon":"spell_frost_summonwaterelemental","npcId":12876,"traits":["resist:frost"],
+    "moves":[
+     {"id":"frostbolt","name":"Frostbolt","intent":"cast","effects":[{"op":"damage","amount":17,"school":"frost"},{"op":"apply","status":"weak","stacks":1,"target":"enemy"}],"weight":3},
+     {"id":"frost-nova","name":"Frost Nova","intent":"cast","effects":[{"op":"damage","amount":11,"target":"all_enemies","school":"frost"},{"op":"apply","status":"frozen","stacks":1,"target":"enemy"}],"weight":2,"cooldown":4},
+     {"id":"water-shield","name":"Water Shield","intent":"block","effects":[{"op":"block","amount":24,"target":"self"}],"weight":1,"cooldown":4}
+    ],
+    "pattern":["frostbolt","frost-nova","frostbolt","water-shield","frost-nova"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Aquanis Unbound","pattern":["frost-nova","frostbolt","frost-nova"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+    ]
+   },
+   {"id":"twilight-lord-kelris","name":"Twilight Lord Kelris","tier":"elite","family":"humanoid","type":"cultist","level":[28,29],"hp":[104,137],"icon":"inv_misc_head_human_01","npcId":4832,"traits":["caster"],
+    "moves":[
+     {"id":"mind-blast","name":"Mind Blast","intent":"cast","effects":[{"op":"damage","amount":17,"school":"shadow"}],"weight":3},
+     {"id":"sleep","name":"Sleep","intent":"cast","effects":[{"op":"apply","status":"sleep","stacks":1,"target":"enemy"}],"weight":2,"cooldown":4},
+     {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":15,"school":"shadow"}],"weight":2},
+     {"id":"mind-control","name":"Mind Control","intent":"debuff","effects":[{"op":"apply","status":"fear","stacks":1,"target":"enemy"},{"op":"apply","status":"weak","stacks":2,"target":"enemy"}],"weight":1,"cooldown":5}
+    ],
+    "pattern":["mind-blast","sleep","shadow-bolt","mind-blast","mind-control"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Twilight Ascendant","pattern":["mind-blast","sleep","shadow-bolt","mind-blast"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+    ]
+   },
+   {"id":"old-serrakis","name":"Old Serra'kis","tier":"elite","family":"beast","type":"hydra","level":[29,30],"hp":[107,142],"icon":"ability_hunter_pet_crocolisk","npcId":4830,"traits":[],
+    "moves":[
+     {"id":"thrash","name":"Thrash","intent":"attack_multi","effects":[{"op":"damage","amount":9,"times":3}],"weight":3},
+     {"id":"water-spout","name":"Water Spout","intent":"cast","effects":[{"op":"damage","amount":12,"target":"all_enemies","school":"frost"}],"weight":2,"cooldown":3},
+     {"id":"thick-hide","name":"Thick Hide","intent":"block","effects":[{"op":"block","amount":24,"target":"self"}],"weight":1,"cooldown":3},
+     {"id":"bite","name":"Bite","intent":"attack","effects":[{"op":"damage","amount":18}],"weight":2}
+    ],
+    "pattern":["bite","thrash","water-spout","thick-hide","bite"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Serra'kis Enraged","pattern":["water-spout","thrash","bite","thrash"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+    ]
+   }
+  ]
+ }
+]

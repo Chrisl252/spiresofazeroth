@@ -1,0 +1,408 @@
+{
+ "id": "darkshore",
+ "name": "Darkshore",
+ "start": {
+  "name": "Auberdine Inn",
+  "icon": "inv_misc_beer_01"
+ },
+ "continent": "kal",
+ "act": 2,
+ "levelBand": [
+  10,
+  20
+ ],
+ "spire": {
+  "name": "Tower of Althalaxx",
+  "lore": "The ruined Highborne tower above the Darkshore coast, where Dark Strand cultists of the Twilight's Hammer drain the old arcane wards."
+ },
+ "theme": {
+  "primary": "#3d6f8f",
+  "secondary": "#10202b",
+  "accent": "#c9b6ff",
+  "background": "darkshore"
+ },
+ "zoneMechanic": {
+  "id": "twilight-cult",
+  "name": "Twilight Cult",
+  "icon": "spell_shadow_curseofsargeras",
+  "text": "Each Dark Strand cultist you kill whispers into your deck: a permanent Twilight Curse card (neutral curse, id twilight-curse) is shuffled in.",
+  "hooks": {
+   "on_kill": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "target_is_family",
+      "family": "cultist"
+     },
+     "then": [
+      {
+       "op": "add_card",
+       "card": "twilight-curse",
+       "to": "discard",
+       "count": 1
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "auberdine-inn",
+  "name": "Auberdine Inn",
+  "icon": "inv_misc_food_15",
+  "text": "Sleep in a real bed at the Auberdine Inn: heal 20% of max HP and gain 3 Max HP.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 20,
+    "target": "self"
+   },
+   {
+    "op": "max_hp",
+    "amount": 3,
+    "target": "self"
+   }
+  ]
+ },
+ "enemiesFile": "darkshore.enemies.json",
+ "encounters": {
+  "normal": [
+   [
+    "moonstalker-runt",
+    "moonstalker-runt"
+   ],
+   [
+    "thistle-boar",
+    "foreststrider-fledgling"
+   ],
+   [
+    "greymist-coastrunner",
+    "greymist-warrior"
+   ],
+   [
+    "encrusted-tide-crawler",
+    "encrusted-tide-crawler"
+   ],
+   [
+    "greymist-warrior",
+    "greymist-hunter",
+    "greymist-seer"
+   ],
+   [
+    "moonstalker",
+    "rabid-thistle-bear"
+   ],
+   [
+    "encrusted-tide-crawler",
+    "darkshore-thresher"
+   ],
+   [
+    "greymist-hunter",
+    "greymist-netter",
+    "greymist-raider"
+   ],
+   [
+    "blackwood-tracker",
+    "blackwood-warrior"
+   ],
+   [
+    "cursed-highborne",
+    "cursed-highborne"
+   ],
+   [
+    "blackwood-totemic",
+    "blackwood-warrior",
+    "blackwood-pathfinder"
+   ],
+   [
+    "greymist-raider",
+    "greymist-tidehunter",
+    "greymist-oracle"
+   ],
+   [
+    "cursed-highborne",
+    "highborne-apparition",
+    "highborne-lichling"
+   ],
+   [
+    "blackwood-windtalker",
+    "blackwood-ursa"
+   ],
+   [
+    "dark-strand-cultist",
+    "dark-strand-fanatic"
+   ],
+   [
+    "dark-strand-cultist",
+    "dark-strand-adept",
+    "dark-strand-excavator"
+   ],
+   [
+    "dark-strand-fanatic",
+    "dark-strand-cultist",
+    "dark-strand-voidcaller"
+   ]
+  ],
+  "elite": [
+   [
+    "blackwood-warrior",
+    "grimclaw"
+   ],
+   [
+    "moonstalker",
+    "moonstalker-sire"
+   ],
+   [
+    "grimclaw"
+   ]
+  ],
+  "boss": [
+   [
+    "dark-strand-cultist",
+    "dark-strand-cultist",
+    "athrikus-narassin"
+   ],
+   [
+    "dark-strand-voidcaller",
+    "athrikus-narassin"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "grimclaws-lair",
+   "name": "Grimclaw",
+   "icon": "ability_hunter_pet_bear",
+   "text": "Auberdine fishermen swear a giant bear named Grimclaw haunts the cliffs.",
+   "options": [
+    {
+     "label": "Track the bear's hoard (gold +40, take 8 damage)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 40
+      },
+      {
+       "op": "damage",
+       "amount": 8,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Bait it with fish (lose 15 gold, heal 12)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": -15
+      },
+      {
+       "op": "heal",
+       "amount": 12,
+       "target": "self"
+      }
+     ],
+     "requires": {
+      "gold": 15
+     }
+    },
+    {
+     "label": "Avoid the cliffs",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "tower-of-althalaxx",
+   "name": "Tower of Althalaxx",
+   "icon": "spell_shadow_curseofsargeras",
+   "text": "Arcane glyphs still hum in Althalaxx. A cultist's journal lies open beside them.",
+   "options": [
+    {
+     "label": "Study the glyphs (gain a card, Curse 1)",
+     "effects": [
+      {
+       "op": "random_card",
+       "pool": "neutral",
+       "rarity": "common",
+       "to": "deck_permanent"
+      },
+      {
+       "op": "apply",
+       "status": "curse",
+       "stacks": 1,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Burn the journal (heal 8)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 8,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Leave the tower",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "buzzbox-827",
+   "name": "Buzzbox 827",
+   "icon": "inv_gizmo_01",
+   "text": "Gnomish tinkering: a malfunctioning Buzzbox 827 keeps squawking at the Darkshore coast.",
+   "options": [
+    {
+     "label": "Rewire it (gold +30)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 30
+      }
+     ]
+    },
+    {
+     "label": "Bash it with a wrench (take 4 damage, draw 2)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 4,
+       "target": "self"
+      },
+      {
+       "op": "draw",
+       "count": 2
+      }
+     ]
+    },
+    {
+     "label": "Leave it buzzing",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "bashalaran",
+   "name": "Bashal'Aran",
+   "icon": "spell_nature_healingtouch",
+   "text": "Corrupted spirits rise from Bashal'Aran's moonwell, whispering of the Highborne.",
+   "options": [
+    {
+     "label": "Cleanse the well (heal 14, max HP +1)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 14,
+       "target": "self"
+      },
+      {
+       "op": "max_hp",
+       "amount": 1
+      }
+     ]
+    },
+    {
+     "label": "Take the Highborne coin (gold +35, Curse 1)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 35
+      },
+      {
+       "op": "apply",
+       "status": "curse",
+       "stacks": 1,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Walk the shoreline",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "cliffspring-river",
+   "name": "Cliffspring River",
+   "icon": "spell_frost_summonwaterelemental",
+   "text": "A water spirit offers a blessing at Cliffspring River.",
+   "options": [
+    {
+     "label": "Accept the blessing (max HP +2)",
+     "effects": [
+      {
+       "op": "max_hp",
+       "amount": 2
+      }
+     ]
+    },
+    {
+     "label": "Fill your waterskins (heal 10)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 10,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Continue",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "moonstalker-fang",
+   "name": "Moonstalker Fang",
+   "icon": "inv_misc_monsterfang_01",
+   "rarity": "common",
+   "itemId": null,
+   "zone": "darkshore",
+   "class": null,
+   "text": "Your first attack each turn applies 1 Bleed.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "apply",
+      "status": "bleed",
+      "stacks": 1,
+      "target": "enemy"
+     }
+    ]
+   }
+  },
+  {
+   "id": "twilight-pendant",
+   "name": "Twilight Pendant",
+   "icon": "inv_jewelry_necklace_07",
+   "rarity": "uncommon",
+   "itemId": null,
+   "zone": "darkshore",
+   "class": null,
+   "text": "Gain 1 energy at the start of each combat; gain 1 Curse.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "gain_energy",
+      "amount": 1
+     },
+     {
+      "op": "apply",
+      "status": "curse",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  }
+ ]
+}

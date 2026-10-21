@@ -1,0 +1,17 @@
+{
+ "_note": "Act-transition healers (js/engine/healer.js picks one per act, js/ui/healer.js shows it). Icons must exist in assets/icons-hd. `acts` = acts this healer greets after (empty/absent = default pool).",
+ "default": "uther-lightbringer",
+ "healers": [
+  { "id": "uther-lightbringer", "name": "Uther the Lightbringer", "title": "First Paladin of the Silver Hand", "icon": "spell_holy_holybolt", "model": "hero-paladin.glb", "acts": [1, 2, 3, 4, 5],
+    "lines": [
+      "Well fought, friend. A true champion of the Light never fights alone.",
+      "Hold your head high. I have seen worse odds, and I have seen them broken.",
+      "The Light will always shine upon those whose cause is just.",
+      "Stand resolute. Even in the deepest shadows, our faith illuminates the path."
+    ],
+    "heal": "Uther lays a hand upon you. The Light knits your deepest wounds." },
+  { "id": "priestess-of-elune", "name": "Priestess of Elune", "title": "Handmaiden of the Moon", "icon": "spell_holy_elunesgrace", "acts": [],
+    "lines": ["Elune watches over you, wanderer. Let her silver light wash the weariness away.", "The moon is full tonight. Be still, and be healed."],
+    "heal": "Moonlight soothes your wounds. You breathe easier." }
+ ]
+}

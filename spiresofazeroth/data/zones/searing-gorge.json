@@ -1,0 +1,52 @@
+{
+  "id": "searing-gorge",
+  "name": "Searing Gorge",
+  "start": {"name": "Thorium Point Inn", "icon": "inv_misc_beer_01"},
+  "continent": "ek",
+  "act": 5,
+  "levelBand": [43,51],
+  "spire": {
+    "name": "Thorium Point",
+    "lore": "The Dark Iron dwarves forge war machines in the Cauldron while Thorium Brotherhood outcasts watch the gorge from Thorium Point; Blackrock Mountain smolders beyond."
+  },
+  "theme": {
+    "primary": "#b23a1a",
+    "secondary": "#2a0d08",
+    "accent": "#ffb347",
+    "background": "lava-gorge"
+  },
+  "zoneMechanic": {
+    "id": "molten-floor",
+    "name": "Molten Floor",
+    "icon": "spell_fire_volcano",
+    "text": "At the end of each of your turns, if you have no Block you take 2 Burn.",
+    "hooks": {"on_turn_end":[{"op":"conditional","if":{"type":"block_at_least","amount":1},"then":[],"else":[{"op":"apply","status":"burn","stacks":2,"target":"self"}]}]}
+  },
+  "rest": {
+    "id": "thorium-point-forge",
+    "name": "Thorium Point Forge",
+    "icon": "inv_hammer_01",
+    "text": "Rest by the Brotherhood forge. Heal 25% of max HP and gain 3 Block next combat.",
+    "effects": [
+      {"op":"heal","amount":20,"target":"self"},
+      {"op":"block","amount":3,"target":"self"}
+    ]
+  },
+  "enemiesFile": "searing-gorge.enemies.json",
+  "encounters": {
+    "normal": [["lava-spider","glassweb-spider"],["dark-iron-slaver","dark-iron-taskmaster"],["dark-iron-slaver","dark-iron-lookout","dark-iron-sentry","dark-iron-marksman"],["imp","imp"],["fire-elemental","fire-elemental","magma-elemental","magma-elemental"],["searing-lava-spider","searing-blade-cultist","searing-blade-warlock"],["war-reaver","war-reaver"],["war-reaver"]],
+    "elite": [["dark-iron-steelshifter"],["searing-blade-enforcer"],["heavy-war-golem"]],
+    "boss": [["overseer-maltorius"],["overseer-maltorius","searing-blade-cultist","searing-blade-warlock"]]
+  },
+  "events": [
+    {"id":"thorium-brotherhood","name":"Thorium Brotherhood","icon":"inv_ingot_thorium","text":"Kharan Mighthammer of the Brotherhood is hiring for a hit on the Dark Iron foremen in the Cauldron.","options":[{"label":"Take the contract","effects":[{"op":"damage","amount":10,"target":"self"},{"op":"gold","amount":100}]},{"label":"Trade for a forged blade","effects":[{"op":"gold","amount":-50},{"op":"random_card","pool":"any","rarity":"rare","to":"hand"}],"requires":{"gold":50}},{"label":"Refuse","effects":[]}]},
+    {"id":"the-cauldron","name":"The Cauldron","icon":"spell_fire_volcano","text":"The Cauldron seethes with lava and Dark Iron slaves. A slave begs to be freed.","options":[{"label":"Free the slave","effects":[{"op":"damage","amount":6,"target":"self"},{"op":"max_hp","amount":4}]},{"label":"Seize the foreman's purse","effects":[{"op":"gold","amount":90},{"op":"apply","status":"burn","stacks":2,"target":"self"}]},{"label":"Move on","effects":[]}]},
+    {"id":"dark-iron-key","name":"Dark Iron Key","icon":"inv_misc_key_03","text":"A Dark Iron guard carries a key to the Black Anvil. A hot forge sits beside him.","options":[{"label":"Steal the key","effects":[{"op":"damage","amount":8,"target":"self"},{"op":"random_card","pool":"any","rarity":"uncommon","to":"hand"},{"op":"gold","amount":40}]},{"label":"Pay for it","effects":[{"op":"gold","amount":-60},{"op":"max_hp","amount":5}],"requires":{"gold":60}},{"label":"Walk away","effects":[]}]},
+    {"id":"grimsite-outpost","name":"Grimsite Outpost","icon":"inv_misc_gem_ruby_01","text":"Hotshot miners at the Grimsite outpost hand out ore for protection from fire elementals.","options":[{"label":"Guard the outpost","effects":[{"op":"damage","amount":9,"target":"self"},{"op":"gold","amount":70}]},{"label":"Mine for yourself","effects":[{"op":"damage","amount":5,"target":"self"},{"op":"gold","amount":50},{"op":"apply","status":"weak","stacks":1,"target":"self"}]},{"label":"Take a rest","effects":[{"op":"heal","amount":10,"target":"self"}]}]}
+  ],
+  "relics": [
+    {"id":"hand-of-justice","name":"Hand of Justice","icon":"inv_jewelry_talisman_01","rarity":"epic","itemId":11815,"zone":"searing-gorge","class":null,"text":"Whenever you play an attack, 15% chance to gain 1 energy.","triggers":{"on_attack":[{"op":"conditional","if":{"type":"chance","pct":15},"then":[{"op":"gain_energy","amount":1}]}]}},
+    {"id":"ironfoe","name":"Ironfoe","icon":"inv_hammer_01","rarity":"epic","itemId":11684,"zone":"searing-gorge","class":null,"text":"Whenever you play an attack, 15% chance to deal 8 additional damage.","triggers":{"on_attack":[{"op":"conditional","if":{"type":"chance","pct":15},"then":[{"op":"damage","amount":8,"target":"enemy"}]}]}}
+  ],
+  "raidFloorsFile": "searing-gorge.raids.json"
+}

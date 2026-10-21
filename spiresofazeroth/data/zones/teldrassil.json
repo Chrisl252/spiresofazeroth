@@ -1,0 +1,415 @@
+{
+ "id": "teldrassil",
+ "name": "Teldrassil",
+ "start": {
+  "name": "Dolanaar Inn",
+  "icon": "inv_misc_beer_01"
+ },
+ "continent": "kal",
+ "act": 1,
+ "levelBand": [
+  1,
+  10
+ ],
+ "spire": {
+  "name": "Ban'ethil Barrow Den",
+  "lore": "The corrupted burrow beneath the World Tree Teldrassil, where the Gnarlpine furbolgs and the taint of Lord Melenas fester just outside Dolanaar."
+ },
+ "theme": {
+  "primary": "#6a3f9c",
+  "secondary": "#1b1230",
+  "accent": "#7fe0c2",
+  "background": "teldrassil"
+ },
+ "zoneMechanic": {
+  "id": "corrupted-tree",
+  "name": "Corrupted Tree",
+  "icon": "ability_druid_treeoflife",
+  "text": "Timberlings and Grellkin feed on nature magic: every nature spell you play heals one enemy for 3. Fire and physical hits are unaffected.",
+  "hooks": {
+   "on_card_played": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "school_last",
+      "school": "nature"
+     },
+     "then": [
+      {
+       "op": "heal",
+       "amount": 3,
+       "target": "enemy"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "dolanaar-moonwell",
+  "name": "Dolanaar Moonwell",
+  "icon": "spell_nature_healingtouch",
+  "text": "Bathe in the Dolanaar Moonwell: heal 20% of max HP and wash away Disease, Curse and Poison.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 20,
+    "target": "self"
+   },
+   {
+    "op": "remove",
+    "status": "disease",
+    "target": "self"
+   },
+   {
+    "op": "remove",
+    "status": "curse",
+    "target": "self"
+   },
+   {
+    "op": "remove",
+    "status": "poison",
+    "target": "self"
+   }
+  ]
+ },
+ "enemiesFile": "teldrassil.enemies.json",
+ "encounters": {
+  "normal": [
+   [
+    "strigid-owl",
+    "mangy-nightsaber"
+   ],
+   [
+    "webwood-spider",
+    "webwood-spider"
+   ],
+   [
+    "mangy-nightsaber",
+    "mangy-nightsaber"
+   ],
+   [
+    "timberling-sprout",
+    "timberling-sprout",
+    "grellkin"
+   ],
+   [
+    "nightsaber",
+    "webwood-lurker"
+   ],
+   [
+    "strigid-owl",
+    "strigid-screecher"
+   ],
+   [
+    "gnarlpine-warrior",
+    "gnarlpine-ambusher"
+   ],
+   [
+    "grellkin",
+    "timberling-bark-ripper"
+   ],
+   [
+    "webwood-spider",
+    "webwood-lurker",
+    "webwood-venomfang"
+   ],
+   [
+    "gnarlpine-warrior",
+    "gnarlpine-mystic",
+    "gnarlpine-ambusher"
+   ],
+   [
+    "nightsaber",
+    "strigid-hunter"
+   ],
+   [
+    "timberling-bark-ripper",
+    "grellkin",
+    "timberling-mire-beast"
+   ],
+   [
+    "gnarlpine-mystic",
+    "gnarlpine-defender"
+   ],
+   [
+    "webwood-venomfang",
+    "webwood-silkspinner"
+   ],
+   [
+    "strigid-hunter",
+    "nightsaber-stalker"
+   ],
+   [
+    "gnarlpine-defender",
+    "gnarlpine-pathfinder",
+    "gnarlpine-augur"
+   ],
+   [
+    "timberling-mire-beast",
+    "timberling-trampler"
+   ]
+  ],
+  "elite": [
+   [
+    "webwood-spider",
+    "webwood-spider",
+    "githyiss-the-vile"
+   ],
+   [
+    "gnarlpine-defender",
+    "rageclaw"
+   ],
+   [
+    "rageclaw"
+   ]
+  ],
+  "boss": [
+   [
+    "grellkin",
+    "gnarlpine-augur",
+    "lord-melenas"
+   ],
+   [
+    "gnarlpine-mystic",
+    "rageclaw"
+   ],
+   [
+    "lord-melenas"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "banethil-barrow-den",
+   "name": "Ban'ethil Barrow Den",
+   "icon": "spell_nature_protectionformnature",
+   "text": "The den's mouth reeks of corruption. A druid's ghost points to a sealed chamber.",
+   "options": [
+    {
+     "label": "Cleanse the chamber (take 6 damage, gain a card)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "random_card",
+       "pool": "neutral",
+       "rarity": "common",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Take the fallen druid's purse (gold +35)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 35
+      }
+     ]
+    },
+    {
+     "label": "Seal the den and leave",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "timberling-seeds",
+   "name": "Timberling Seeds",
+   "icon": "ability_druid_treeoflife",
+   "text": "Ripe seeds hang from the bark of a corrupted timberling. Denalan wants them.",
+   "options": [
+    {
+     "label": "Harvest the seeds (gold +25, take 4 damage)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 25
+      },
+      {
+       "op": "damage",
+       "amount": 4,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Plant one in the moonwell soil (max HP +2)",
+     "effects": [
+      {
+       "op": "max_hp",
+       "amount": 2
+      }
+     ]
+    },
+    {
+     "label": "Leave them",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "denalans-pool",
+   "name": "Denalan's Earth",
+   "icon": "spell_nature_healingtouch",
+   "text": "Denalan the druid asks you to sprinkle his earth over the tainted pool.",
+   "options": [
+    {
+     "label": "Purify the pool (heal 14)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 14,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Drink from the pool (heal 8, gain Curse 1)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 8,
+       "target": "self"
+      },
+      {
+       "op": "apply",
+       "status": "curse",
+       "stacks": 1,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Refuse",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "zenn-foulhoof",
+   "name": "Zenn Foulhoof",
+   "icon": "inv_misc_pelt_wolf_01",
+   "text": "Zenn Foulhoof wants nightsaber fangs and offers a fair price, or a stern lecture on nature.",
+   "options": [
+    {
+     "label": "Sell fangs (gold +30)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 30
+      }
+     ]
+    },
+    {
+     "label": "Take his lecture (max HP +1, heal 6)",
+     "effects": [
+      {
+       "op": "max_hp",
+       "amount": 1
+      },
+      {
+       "op": "heal",
+       "amount": 6,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Walk away",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "timberling-seed",
+   "name": "Timberling Seed",
+   "icon": "inv_misc_flower_02",
+   "rarity": "common",
+   "itemId": null,
+   "zone": "teldrassil",
+   "class": null,
+   "text": "At the start of each combat, gain 1 Thorns.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "thorns",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "webwood-venom-sac",
+   "name": "Webwood Venom Sac",
+   "icon": "inv_misc_organ_03",
+   "rarity": "uncommon",
+   "itemId": null,
+   "zone": "teldrassil",
+   "class": null,
+   "text": "Your first attack each combat also applies 2 Poison.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "poison",
+      "stacks": 2,
+      "target": "enemy"
+     }
+    ]
+   }
+  },
+  {
+   "id": "strigid-owl-feather",
+   "name": "Strigid Owl Feather",
+   "icon": "inv_misc_cape_18",
+   "rarity": "common",
+   "itemId": null,
+   "zone": "teldrassil",
+   "class": null,
+   "text": "Scry 2 at the start of each turn.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "scry",
+      "count": 2
+     }
+    ]
+   }
+  },
+  {
+   "id": "denalans-earth",
+   "name": "Denalan's Earth",
+   "icon": "inv_stone_08",
+   "rarity": "rare",
+   "itemId": null,
+   "zone": "teldrassil",
+   "class": null,
+   "text": "Heal 2 HP at the end of each combat; rest sites heal 5 extra.",
+   "triggers": {
+    "on_combat_end": [
+     {
+      "op": "heal",
+      "amount": 2,
+      "target": "self"
+     }
+    ],
+    "on_rest": [
+     {
+      "op": "heal",
+      "amount": 5,
+      "target": "self"
+     }
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "stranglethorn-vale",
+  "name": "Stranglethorn Vale",
+  "start": {"name": "Salty Sailor Tavern", "icon": "inv_misc_beer_01"},
+  "continent": "ek",
+  "act": 4,
+  "levelBand": [30,45],
+  "spire": {
+    "name": "Zul'Gurub Outer Spire",
+    "lore": "The jungle crawls with Bloodscalp and Skullsplitter trolls, Venture Co. loggers and Bloodsail pirates; above it all rise the Gurubashi ruins and the Blood God's temple."
+  },
+  "theme": {
+    "primary": "#2f7a3a",
+    "secondary": "#12281a",
+    "accent": "#e0b64a",
+    "background": "jungle"
+  },
+  "zoneMechanic": {
+    "id": "bloodsail-bounty",
+    "name": "Bloodsail Bounty",
+    "icon": "inv_misc_coin_02",
+    "text": "Every kill pays 6 extra gold, but elites grow +1 Strength at the start of each turn.",
+    "hooks": {"on_kill":[{"op":"gold","amount":6}],"on_turn_start":[{"op":"conditional","if":{"type":"enemy_tier","is":"elite"},"then":[{"op":"apply","status":"strength","stacks":1,"target":"all_enemies"}]}]}
+  },
+  "rest": {
+    "id": "booty-bay-inn",
+    "name": "Booty Bay Inn",
+    "icon": "inv_drink_03",
+    "text": "Drink with the goblins. Heal 25% of max HP; lose 15 gold if you can afford the tab.",
+    "effects": [
+      {"op":"heal","amount":14,"target":"self"},
+      {"op":"gold","amount":-15}
+    ]
+  },
+  "enemiesFile": "stranglethorn-vale.enemies.json",
+  "encounters": {
+    "normal": [["young-panther","young-stranglethorn-tiger"],["venture-co-geologist","venture-co-drudger","venture-co-engineer","venture-co-logger"],["pygmy-surf-crawler","surf-crawler","panther"],["bloodscalp-scout","bloodscalp-warrior","bloodscalp-axe-thrower","bloodscalp-shaman"],["hecklefang-hyena","hecklefang-snarler"],["venture-co-logger","venture-co-mercenary","venture-co-supervisor"],["stranglethorn-raptor","stranglethorn-raptor","stranglethorn-tiger"],["giant-surf-crawler","giant-surf-crawler","giant-crocolisk"],["kurzen-jungle-fighter","kurzen-wrangler"],["bloodsail-mage","bloodsail-sea-dog"],["kurzen-jungle-fighter","kurzen-medicine-man","kurzen-commando","kurzen-headshrinker"],["elder-mistvale-gorilla","elder-mistvale-gorilla","elder-stranglethorn-tiger","elder-stranglethorn-tiger"],["moshogg-brute","moshogg-bonecrusher","moshogg-warmonger","moshogg-witch-doctor"],["moshogg-warmonger","moshogg-witch-doctor","moshogg-butcher"]],
+    "elite": [["colonel-kurzen"],["moshogg-lord"],["kurzen-subchief"],["king-bangalash"],["bhagthera"],["sindall"],["tethis"],["mokk-the-savage"]],
+    "boss": [["ganzulah"],["king-bangalash","elder-stranglethorn-tiger"],["ganzulah","skullsplitter-berserker","skullsplitter-mystic"]]
+  },
+  "events": [
+    {"id":"nesingwary-expedition","npc":{"name":"Hemet Nesingwary","npcId":715,"displayId":1410},"name":"Nesingwary's Expedition","icon":"inv_misc_head_tiger_01","text":"Hemet Nesingwary offers a share of the bounty for thinning the big cats around Camp Nesingwary.","options":[{"label":"Hunt panthers and tigers","effects":[{"op":"damage","amount":9,"target":"self"},{"op":"gold","amount":65},{"op":"max_hp","amount":2}]},{"label":"Hand over supplies","effects":[{"op":"gold","amount":-40},{"op":"random_card","pool":"any","rarity":"uncommon","to":"hand"}],"requires":{"gold":40}},{"label":"Pass","effects":[]}]},
+    {"id":"bloodsail-bribe","name":"Bloodsail Bribes at Booty Bay","icon":"ability_rogue_ghostpirate","text":"A Bloodsail quartermaster in Booty Bay offers safe passage -- for a fee -- or a cutlass fight in the harbor.","options":[{"label":"Pay the bribe","effects":[{"op":"gold","amount":-50},{"op":"heal","amount":12,"target":"self"}],"requires":{"gold":50}},{"label":"Fight the Bloodsail crew","effects":[{"op":"damage","amount":10,"target":"self"},{"op":"gold","amount":80}]},{"label":"Slip away","effects":[{"op":"apply","status":"weak","stacks":1,"target":"self"}]}]},
+    {"id":"kurzens-compound","name":"Kurzen's Compound","icon":"inv_misc_key_03","text":"A jungle prison hides Nesingwary's captured scouts. Kurzen mercenaries patrol the gate.","options":[{"label":"Break them out","effects":[{"op":"damage","amount":8,"target":"self"},{"op":"max_hp","amount":4}]},{"label":"Loot the armory","effects":[{"op":"gold","amount":70},{"op":"apply","status":"vulnerable","stacks":1,"target":"self"}]},{"label":"Leave quietly","effects":[]}]},
+    {"id":"gurubashi-arena","name":"Gurubashi Arena Chest","icon":"inv_misc_coin_05","text":"The Gurubashi Arena chest sits in the sand. Challenge the pit and the last fighter standing takes the booty.","options":[{"label":"Enter the arena","effects":[{"op":"damage","amount":14,"target":"self"},{"op":"gold","amount":130}]},{"label":"Bet on a champion","effects":[{"op":"gold","amount":-30},{"op":"random_card","pool":"any","rarity":"rare","to":"hand"}],"requires":{"gold":30}},{"label":"Watch from the stands","effects":[{"op":"heal","amount":6,"target":"self"}]}]}
+  ],
+  "relics": [
+    {"id":"zandalarian-hero-charm","name":"Zandalarian Hero Charm","icon":"inv_jewelry_talisman_06","rarity":"epic","itemId":19948,"zone":"stranglethorn-vale","class":null,"text":"Draw 1 extra card at the start of each turn.","triggers":{"on_turn_start":[{"op":"draw","count":1}]}},
+    {"id":"hazzarahs-charm-of-magic","name":"Hazza'rah's Charm of Magic","icon":"inv_misc_gem_pearl_04","rarity":"rare","itemId":null,"zone":"stranglethorn-vale","class":null,"text":"At the start of combat, gain 1 energy next turn.","triggers":{"on_combat_start":[{"op":"energy_next_turn","amount":1}]}}
+  ],
+  "raidFloorsFile": "stranglethorn-vale.raids.json"
+}

@@ -1,0 +1,224 @@
+[
+ {"id":"wastewander-rogue","name":"Wastewander Rogue","tier":"normal","family":"humanoid","type":"bandit","level":[42,44],"hp":[51,60],"icon":"inv_misc_head_human_01","npcId":null,"traits":["stealth"],
+  "moves":[
+   {"id":"backstab","name":"Backstab","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":2},
+   {"id":"deadly-poison","name":"Deadly Poison","intent":"attack","effects":[{"op":"damage","amount":6},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"gouge","name":"Gouge","intent":"debuff","effects":[{"op":"apply","status":"stun","stacks":1,"target":"player"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"wastewander-thief","name":"Wastewander Thief","tier":"normal","family":"humanoid","type":"bandit","level":[41,43],"hp":[48,56],"icon":"inv_misc_head_human_01","npcId":null,"traits":["stealth"],
+  "moves":[
+   {"id":"backstab","name":"Backstab","intent":"attack","effects":[{"op":"damage","amount":10}],"weight":2},
+   {"id":"pickpocket","name":"Pickpocket","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":2,"cooldown":3},
+   {"id":"stab","name":"Stab","intent":"attack","effects":[{"op":"damage","amount":7}],"weight":2}
+  ]},
+ {"id":"wastewander-scofflaw","name":"Wastewander Scofflaw","tier":"normal","family":"humanoid","type":"bandit","level":[43,45],"hp":[60,70],"icon":"inv_misc_head_human_01","npcId":null,"traits":["stealth"],
+  "moves":[
+   {"id":"backstab","name":"Backstab","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2},
+   {"id":"deadly-poison","name":"Deadly Poison","intent":"attack","effects":[{"op":"damage","amount":7},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"gouge","name":"Gouge","intent":"debuff","effects":[{"op":"apply","status":"stun","stacks":1,"target":"player"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"wastewander-assassin","name":"Wastewander Assassin","tier":"normal","family":"humanoid","type":"bandit","level":[44,46],"hp":[63,74],"icon":"inv_misc_head_human_01","npcId":null,"traits":["stealth"],
+  "moves":[
+   {"id":"backstab","name":"Backstab","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2},
+   {"id":"deadly-poison","name":"Deadly Poison","intent":"attack","effects":[{"op":"damage","amount":7},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"gouge","name":"Gouge","intent":"debuff","effects":[{"op":"apply","status":"stun","stacks":1,"target":"player"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"wastewander-shadow-mage","name":"Wastewander Shadow Mage","tier":"normal","family":"humanoid","type":"bandit","level":[43,45],"hp":[54,64],"icon":"spell_shadow_shadowbolt","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":10,"school":"shadow"}],"cast":true,"weight":2},
+   {"id":"immolate","name":"Immolate","intent":"cast","effects":[{"op":"damage","amount":7,"school":"fire"},{"op":"apply","status":"burn","stacks":2,"target":"player"}],"cast":true,"weight":2},
+   {"id":"curse-of-weakness","name":"Curse of Weakness","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"cast":true,"weight":2,"cooldown":3}
+  ]},
+ {"id":"wastewander-bandit","name":"Wastewander Bandit","tier":"normal","family":"humanoid","type":"bandit","level":[42,44],"hp":[51,60],"icon":"inv_misc_head_human_01","npcId":null,"traits":["stealth"],
+  "moves":[
+   {"id":"backstab","name":"Backstab","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":2},
+   {"id":"deadly-poison","name":"Deadly Poison","intent":"attack","effects":[{"op":"damage","amount":6},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"gouge","name":"Gouge","intent":"debuff","effects":[{"op":"apply","status":"stun","stacks":1,"target":"player"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"southsea-freebooter","name":"Southsea Freebooter","tier":"normal","family":"humanoid","type":"pirate","level":[42,44],"hp":[51,60],"icon":"inv_misc_head_human_01","npcId":null,"traits":[],
+  "moves":[
+   {"id":"cutlass-slash","name":"Cutlass Slash","intent":"attack","effects":[{"op":"damage","amount":8}],"weight":2},
+   {"id":"cannon-shot","name":"Cannon Shot","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2,"cooldown":3},
+   {"id":"yo-ho","name":"Yo Ho","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":1,"target":"self"}],"weight":1}
+  ]},
+ {"id":"southsea-cannoneer","name":"Southsea Cannoneer","tier":"normal","family":"humanoid","type":"pirate","level":[43,45],"hp":[54,64],"icon":"inv_misc_head_human_01","npcId":null,"traits":[],
+  "moves":[
+   {"id":"cannon-shot","name":"Cannon Shot","intent":"attack","effects":[{"op":"damage","amount":15}],"weight":2,"cooldown":2},
+   {"id":"pistol-shot","name":"Pistol Shot","intent":"attack","effects":[{"op":"damage","amount":8}],"weight":2},
+   {"id":"powder-keg","name":"Powder Keg","intent":"block","effects":[{"op":"block","amount":9,"target":"self"}],"weight":1}
+  ]},
+ {"id":"southsea-cutthroat","name":"Southsea Cutthroat","tier":"normal","family":"humanoid","type":"pirate","level":[43,45],"hp":[54,64],"icon":"inv_misc_head_human_01","npcId":null,"traits":[],
+  "moves":[
+   {"id":"cutlass-slash","name":"Cutlass Slash","intent":"attack","effects":[{"op":"damage","amount":10}],"weight":2},
+   {"id":"rending-slash","name":"Rending Slash","intent":"attack","effects":[{"op":"damage","amount":6},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"yo-ho","name":"Yo Ho","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":1,"target":"self"}],"weight":1}
+  ]},
+ {"id":"southsea-brigand","name":"Southsea Brigand","tier":"normal","family":"humanoid","type":"pirate","level":[44,46],"hp":[63,74],"icon":"inv_misc_head_human_01","npcId":null,"traits":[],
+  "moves":[
+   {"id":"cutlass-slash","name":"Cutlass Slash","intent":"attack","effects":[{"op":"damage","amount":10}],"weight":2},
+   {"id":"cannon-shot","name":"Cannon Shot","intent":"attack","effects":[{"op":"damage","amount":16}],"weight":2,"cooldown":3},
+   {"id":"yo-ho","name":"Yo Ho","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":1,"target":"self"}],"weight":1}
+  ]},
+ {"id":"dunemaul-warlock","name":"Dunemaul Warlock","tier":"elite","family":"giant","type":"ogre","level":[44,46],"hp":[152,178],"icon":"spell_shadow_shadowbolt","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":22,"school":"shadow"}],"cast":true,"weight":2},
+   {"id":"curse-of-agony","name":"Curse of Agony","intent":"cast","effects":[{"op":"apply","status":"curse","stacks":3,"target":"player"}],"cast":true,"weight":2,"cooldown":3},
+   {"id":"immolate","name":"Immolate","intent":"cast","effects":[{"op":"damage","amount":12,"school":"fire"},{"op":"apply","status":"burn","stacks":3,"target":"player"}],"cast":true,"weight":2},
+   {"id":"club-smash","name":"Club Smash","intent":"attack","effects":[{"op":"damage","amount":18}],"weight":2}
+  ]},
+ {"id":"dunemaul-brute","name":"Dunemaul Brute","tier":"normal","family":"giant","type":"ogre","level":[43,45],"hp":[60,70],"icon":"achievement_reputation_ogre","npcId":null,"traits":["slow"],
+  "moves":[
+   {"id":"smash","name":"Smash","intent":"attack","effects":[{"op":"damage","amount":15}],"weight":2},
+   {"id":"fist-of-stone","name":"Fist of Stone","intent":"buff","effects":[{"op":"apply","status":"armor","stacks":6,"target":"self"}],"weight":1,"cooldown":4},
+   {"id":"backhand","name":"Backhand","intent":"attack","effects":[{"op":"damage","amount":10}],"weight":2}
+  ]},
+ {"id":"dunemaul-enforcer","name":"Dunemaul Enforcer","tier":"elite","family":"giant","type":"ogre","level":[45,47],"hp":[158,186],"icon":"achievement_reputation_ogre","npcId":null,"traits":["slow"],
+  "moves":[
+   {"id":"skull-smash","name":"Skull Smash","intent":"attack","effects":[{"op":"damage","amount":26}],"weight":2},
+   {"id":"backhand-swipe","name":"Backhand Swipe","intent":"attack_multi","effects":[{"op":"damage","amount":12,"times":2}],"weight":2},
+   {"id":"enforce-order","name":"Enforce Order","intent":"buff","effects":[{"op":"apply","status":"armor","stacks":8,"target":"self"}],"weight":1,"cooldown":4},
+   {"id":"concussion","name":"Concussion","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":3}
+  ]},
+ {"id":"fire-roc","name":"Fire Roc","tier":"normal","family":"beast","type":"roc","level":[44,46],"hp":[58,68],"icon":"ability_hunter_pet_vulture","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"talon-rake","name":"Talon Rake","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":2},
+   {"id":"flame-wing","name":"Flame Wing","intent":"attack","effects":[{"op":"damage","amount":5,"school":"fire","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"dive","name":"Dive","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2,"cooldown":3}
+  ]},
+ {"id":"scorpid-hunter","name":"Scorpid Hunter","tier":"normal","family":"beast","type":"scorpid","level":[42,44],"hp":[51,60],"icon":"ability_hunter_pet_scorpid","npcId":null,"traits":[],
+  "moves":[
+   {"id":"sting","name":"Sting","intent":"attack","effects":[{"op":"damage","amount":6,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":8}],"weight":2},
+   {"id":"carapace","name":"Carapace","intent":"block","effects":[{"op":"block","amount":8,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"scorpid-dunestalker","name":"Scorpid Dunestalker","tier":"normal","family":"beast","type":"scorpid","level":[43,45],"hp":[57,67],"icon":"ability_hunter_pet_scorpid","npcId":null,"traits":[],
+  "moves":[
+   {"id":"sting","name":"Sting","intent":"attack","effects":[{"op":"damage","amount":7,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":2},
+   {"id":"carapace","name":"Carapace","intent":"block","effects":[{"op":"block","amount":9,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"scorpid-reaver","name":"Scorpid Reaver","tier":"normal","family":"beast","type":"scorpid","level":[44,46],"hp":[63,74],"icon":"ability_hunter_pet_scorpid","npcId":null,"traits":[],
+  "moves":[
+   {"id":"sting","name":"Sting","intent":"attack","effects":[{"op":"damage","amount":8,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":10}],"weight":2},
+   {"id":"carapace","name":"Carapace","intent":"block","effects":[{"op":"block","amount":10,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"scorpid-terror","name":"Scorpid Terror","tier":"normal","family":"beast","type":"scorpid","level":[45,47],"hp":[70,82],"icon":"ability_hunter_pet_scorpid","npcId":null,"traits":[],
+  "moves":[
+   {"id":"sting","name":"Sting","intent":"attack","effects":[{"op":"damage","amount":9,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":2},
+   {"id":"carapace","name":"Carapace","intent":"block","effects":[{"op":"block","amount":11,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"scorpid-tail-lasher","name":"Scorpid Tail Lasher","tier":"normal","family":"beast","type":"scorpid","level":[44,46],"hp":[58,68],"icon":"ability_hunter_pet_scorpid","npcId":null,"traits":[],
+  "moves":[
+   {"id":"sting","name":"Sting","intent":"attack","effects":[{"op":"damage","amount":7,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":2},
+   {"id":"carapace","name":"Carapace","intent":"block","effects":[{"op":"block","amount":9,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"scorpid-worker","name":"Scorpid Worker","tier":"normal","family":"beast","type":"scorpid","level":[40,42],"hp":[38,45],"icon":"ability_hunter_pet_scorpid","npcId":null,"traits":[],
+  "moves":[
+   {"id":"sting","name":"Sting","intent":"attack","effects":[{"op":"damage","amount":5,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":6}],"weight":2},
+   {"id":"carapace","name":"Carapace","intent":"block","effects":[{"op":"block","amount":6,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"glasshide-basilisk","name":"Glasshide Basilisk","tier":"normal","family":"beast","type":"basilisk","level":[41,43],"hp":[48,56],"icon":"ability_hunter_pet_crocolisk","npcId":null,"traits":[],
+  "moves":[
+   {"id":"bite","name":"Bite","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":2},
+   {"id":"petrify","name":"Petrify","intent":"attack","effects":[{"op":"damage","amount":6,"school":"nature"},{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":3},
+   {"id":"stone-hide","name":"Stone Hide","intent":"block","effects":[{"op":"block","amount":8,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"glasshide-gazer","name":"Glasshide Gazer","tier":"normal","family":"beast","type":"basilisk","level":[43,45],"hp":[54,64],"icon":"ability_hunter_pet_crocolisk","npcId":null,"traits":[],
+  "moves":[
+   {"id":"bite","name":"Bite","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":2},
+   {"id":"petrifying-gaze","name":"Petrifying Gaze","intent":"attack","effects":[{"op":"damage","amount":6,"school":"nature"},{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":3},
+   {"id":"stone-hide","name":"Stone Hide","intent":"block","effects":[{"op":"block","amount":9,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"glasshide-petrifier","name":"Glasshide Petrifier","tier":"normal","family":"beast","type":"basilisk","level":[44,46],"hp":[63,74],"icon":"ability_hunter_pet_crocolisk","npcId":null,"traits":[],
+  "moves":[
+   {"id":"bite","name":"Bite","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":2},
+   {"id":"petrify","name":"Petrify","intent":"attack","effects":[{"op":"damage","amount":7,"school":"nature"},{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":3},
+   {"id":"stone-hide","name":"Stone Hide","intent":"block","effects":[{"op":"block","amount":10,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"hecklefang-hyena","name":"Hecklefang Hyena","tier":"normal","family":"beast","type":"hyena","level":[40,42],"hp":[45,52],"icon":"ability_hunter_pet_hyena","npcId":null,"traits":["pack"],
+  "moves":[
+   {"id":"bite","name":"Bite","intent":"attack","effects":[{"op":"damage","amount":7}],"weight":2},
+   {"id":"cackle","name":"Cackle","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":2,"cooldown":3},
+   {"id":"rending-bite","name":"Rending Bite","intent":"attack","effects":[{"op":"damage","amount":6}],"weight":2}
+  ]},
+ {"id":"hecklefang-snarler","name":"Hecklefang Snarler","tier":"normal","family":"beast","type":"hyena","level":[42,44],"hp":[51,60],"icon":"ability_hunter_pet_hyena","npcId":null,"traits":["pack"],
+  "moves":[
+   {"id":"bite","name":"Bite","intent":"attack","effects":[{"op":"damage","amount":8}],"weight":2},
+   {"id":"cackle","name":"Cackle","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":2,"cooldown":3},
+   {"id":"rending-bite","name":"Rending Bite","intent":"attack","effects":[{"op":"damage","amount":7}],"weight":2}
+  ]},
+ {"id":"dust-stormer","name":"Dust Stormer","tier":"normal","family":"elemental","type":"air","level":[43,45],"hp":[54,64],"icon":"inv_elemental_primal_air","npcId":null,"traits":["resist:nature"],
+  "moves":[
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":10,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"whirlwind","name":"Whirlwind","intent":"attack","effects":[{"op":"damage","amount":6,"school":"nature","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"gale-slash","name":"Gale Slash","intent":"attack","effects":[{"op":"damage","amount":8}],"weight":2}
+  ]},
+ {"id":"saltscale-forager","name":"Saltscale Forager","tier":"normal","family":"humanoid","type":"murloc","level":[41,43],"hp":[43,51],"icon":"inv_misc_head_murloc_01","npcId":null,"traits":["pack"],
+  "moves":[
+   {"id":"stab","name":"Stab","intent":"attack","effects":[{"op":"damage","amount":7}],"weight":2},
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":6,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"scale-guard","name":"Scale Guard","intent":"block","effects":[{"op":"block","amount":6,"target":"self"}],"weight":2,"cooldown":3}
+  ]},
+ {"id":"saltscale-hunter","name":"Saltscale Hunter","tier":"normal","family":"humanoid","type":"murloc","level":[42,44],"hp":[51,60],"icon":"inv_misc_head_murloc_01","npcId":null,"traits":["pack"],
+  "moves":[
+   {"id":"stab","name":"Stab","intent":"attack","effects":[{"op":"damage","amount":8}],"weight":2},
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":6,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"scale-guard","name":"Scale Guard","intent":"block","effects":[{"op":"block","amount":7,"target":"self"}],"weight":2,"cooldown":3}
+  ]},
+ {"id":"saltscale-warrior","name":"Saltscale Warrior","tier":"normal","family":"humanoid","type":"murloc","level":[43,45],"hp":[60,70],"icon":"inv_misc_head_murloc_01","npcId":null,"traits":["pack"],
+  "moves":[
+   {"id":"stab","name":"Stab","intent":"attack","effects":[{"op":"damage","amount":10}],"weight":2},
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":8,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"scale-guard","name":"Scale Guard","intent":"block","effects":[{"op":"block","amount":9,"target":"self"}],"weight":2,"cooldown":3}
+  ]},
+ {"id":"centipaar-worker","name":"Centipaar Worker","tier":"normal","family":"beast","type":"silithid","level":[42,44],"hp":[46,54],"icon":"ability_hunter_pet_silithid","npcId":null,"traits":[],
+  "moves":[
+   {"id":"pincer","name":"Pincer","intent":"attack","effects":[{"op":"damage","amount":8}],"weight":2},
+   {"id":"chitin-shell","name":"Chitin Shell","intent":"block","effects":[{"op":"block","amount":8,"target":"self"}],"weight":1,"cooldown":3}
+  ]},
+ {"id":"centipaar-wasp","name":"Centipaar Wasp","tier":"normal","family":"beast","type":"silithid","level":[43,45],"hp":[54,64],"icon":"ability_hunter_pet_wasp","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"sting","name":"Sting","intent":"attack","effects":[{"op":"damage","amount":6,"school":"nature"},{"op":"apply","status":"poison","stacks":2,"target":"player"}],"weight":2},
+   {"id":"swarm","name":"Swarm","intent":"attack_multi","effects":[{"op":"damage","amount":5,"times":3}],"weight":2}
+  ]},
+ {"id":"centipaar-sandreaver","name":"Centipaar Sandreaver","tier":"normal","family":"beast","type":"silithid","level":[44,46],"hp":[63,74],"icon":"ability_hunter_pet_silithid","npcId":null,"traits":["burrow"],
+  "moves":[
+   {"id":"acid-spit","name":"Acid Spit","intent":"attack","effects":[{"op":"damage","amount":8,"school":"nature"},{"op":"apply","status":"vulnerable","stacks":1,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":10}],"weight":2},
+   {"id":"burrow","name":"Burrow","intent":"block","effects":[{"op":"block","amount":12,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"centipaar-swarmer","name":"Centipaar Swarmer","tier":"normal","family":"beast","type":"silithid","level":[42,44],"hp":[41,48],"icon":"ability_hunter_pet_wasp","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"sting","name":"Sting","intent":"attack","effects":[{"op":"damage","amount":5,"school":"nature"},{"op":"apply","status":"poison","stacks":2,"target":"player"}],"weight":2},
+   {"id":"swarm","name":"Swarm","intent":"attack_multi","effects":[{"op":"damage","amount":4,"times":3}],"weight":2}
+  ]},
+ {"id":"centipaar-tunneler","name":"Centipaar Tunneler","tier":"normal","family":"beast","type":"silithid","level":[45,47],"hp":[70,82],"icon":"ability_hunter_pet_silithid","npcId":null,"traits":["burrow"],
+  "moves":[
+   {"id":"acid-spit","name":"Acid Spit","intent":"attack","effects":[{"op":"damage","amount":9,"school":"nature"},{"op":"apply","status":"vulnerable","stacks":1,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":2},
+   {"id":"burrow","name":"Burrow","intent":"block","effects":[{"op":"block","amount":13,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"caliph-scorpidsting","name":"Caliph Scorpidsting","tier":"elite","family":"beast","type":"scorpid","level":[47,48],"hp":[168,197],"icon":"ability_hunter_pet_scorpid","npcId":null,"traits":[],
+  "moves":[
+   {"id":"deadly-sting","name":"Deadly Sting","intent":"attack","effects":[{"op":"damage","amount":22,"school":"nature"},{"op":"apply","status":"poison","stacks":5,"target":"player"}],"weight":2},
+   {"id":"claw-crush","name":"Claw Crush","intent":"attack","effects":[{"op":"damage","amount":20}],"weight":2},
+   {"id":"chitin-carapace","name":"Chitin Carapace","intent":"block","effects":[{"op":"block","amount":16,"target":"self"}],"weight":1,"cooldown":4},
+   {"id":"sand-whip","name":"Sand Whip","intent":"attack","effects":[{"op":"damage","amount":9,"school":"nature","target":"all_enemies"}],"weight":2,"cooldown":4}
+  ]},
+ {"id":"chief-ukorz-sandscalp","name":"Chief Ukorz Sandscalp","tier":"boss","family":"humanoid","type":"troll","level":[46,47],"hp":[360,410],"icon":"inv_misc_head_troll_01","npcId":7267,"traits":["regen"],"pattern":["cleave","rend","sandscalp-strike","cleave","troll-fury"],
+  "moves":[
+   {"id":"cleave","name":"Cleave","intent":"attack_multi","effects":[{"op":"damage","amount":14,"times":2}],"weight":2},
+   {"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":17},{"op":"apply","status":"bleed","stacks":4,"target":"player"}],"weight":2},
+   {"id":"sandscalp-strike","name":"Sandscalp Strike","intent":"attack","effects":[{"op":"damage","amount":25}],"weight":2},
+   {"id":"troll-fury","name":"Troll Fury","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":5},
+   {"id":"thunderous-roar","name":"Thunderous Roar","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":4}
+  ],
+  "phases":[
+   {"hpBelowPct":60,"pattern":["sandscalp-strike","thunderous-roar","cleave","rend"],"onEnter":[{"op":"apply","status":"strength","stacks":2,"target":"self"}]},
+   {"hpBelowPct":30,"pattern":["sandscalp-strike","sandscalp-strike","cleave"],"onEnter":[{"op":"block","amount":20,"target":"self"}]}
+  ]}
+]

@@ -1,0 +1,352 @@
+{
+ "class": "rogue",
+ "set": {
+  "id": "nightslayer-armor",
+  "name": "Nightslayer Armor",
+  "icon": "inv_helmet_41",
+  "bonuses": [
+   {
+    "pieces": 2,
+    "name": "Opening Gambit",
+    "text": "Start each combat: gain 1 Combo Point.",
+    "triggers": {
+     "on_combat_start": [
+      {
+       "op": "gain_resource",
+       "resource": "combo",
+       "amount": 1
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 4,
+    "name": "Deadly Brew",
+    "text": "When you attack: 20% chance to apply 2 Poison.",
+    "triggers": {
+     "on_attack": [
+      {
+       "op": "conditional",
+       "if": {
+        "type": "chance",
+        "pct": 20
+       },
+       "then": [
+        {
+         "op": "apply",
+         "status": "poison",
+         "stacks": 2,
+         "target": "enemy"
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 6,
+    "name": "Slice and Dice",
+    "text": "At the start of each turn: 25% chance to gain 1 Combo Point.",
+    "triggers": {
+     "on_turn_start": [
+      {
+       "op": "conditional",
+       "if": {
+        "type": "chance",
+        "pct": 25
+       },
+       "then": [
+        {
+         "op": "gain_resource",
+         "resource": "combo",
+         "amount": 1
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 8,
+    "name": "Night's Edge",
+    "text": "Start each combat: gain 1 Energy and gain 1 Dexterity.",
+    "triggers": {
+     "on_combat_start": [
+      {
+       "op": "gain_energy",
+       "amount": 1
+      },
+      {
+       "op": "apply",
+       "status": "dexterity",
+       "stacks": 1,
+       "target": "self"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "pieces": [
+  {
+   "id": "nightslayer-cover",
+   "name": "Nightslayer Cover",
+   "slot": "head",
+   "set": "nightslayer-armor",
+   "setPiece": 1,
+   "item": 16821,
+   "icon": "inv_helmet_41",
+   "displayId": 31514,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 1 Stealth.",
+   "class": "rogue",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "stealth",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "nightslayer-shoulder-pads",
+   "name": "Nightslayer Shoulder Pads",
+   "slot": "shoulder",
+   "set": "nightslayer-armor",
+   "setPiece": 2,
+   "item": 16823,
+   "icon": "inv_shoulder_25",
+   "displayId": 31343,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: gain 2 Block.",
+   "class": "rogue",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "block",
+      "amount": 2,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "nightslayer-chestpiece",
+   "name": "Nightslayer Chestpiece",
+   "slot": "chest",
+   "set": "nightslayer-armor",
+   "setPiece": 3,
+   "item": 16820,
+   "icon": "inv_chest_cloth_07",
+   "displayId": 31105,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 5 Block.",
+   "class": "rogue",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 5,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "nightslayer-bracelets",
+   "name": "Nightslayer Bracelets",
+   "slot": "wrist",
+   "set": "nightslayer-armor",
+   "setPiece": 4,
+   "item": 16825,
+   "icon": "inv_bracer_02",
+   "displayId": 31106,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Whenever you play a card: 12% chance to draw 1 card.",
+   "class": "rogue",
+   "triggers": {
+    "on_card_played": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 12
+      },
+      "then": [
+       {
+        "op": "draw",
+        "count": 1
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "nightslayer-gloves",
+   "name": "Nightslayer Gloves",
+   "slot": "hands",
+   "set": "nightslayer-armor",
+   "setPiece": 5,
+   "item": 16826,
+   "icon": "inv_gauntlets_21",
+   "displayId": 31503,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "When you attack: 20% chance to apply 1 Poison.",
+   "class": "rogue",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 20
+      },
+      "then": [
+       {
+        "op": "apply",
+        "status": "poison",
+        "stacks": 1,
+        "target": "enemy"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "nightslayer-belt",
+   "name": "Nightslayer Belt",
+   "slot": "waist",
+   "set": "nightslayer-armor",
+   "setPiece": 6,
+   "item": 16827,
+   "icon": "inv_belt_23",
+   "displayId": 31339,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "When you kill an enemy: gain 1 Combo Point.",
+   "class": "rogue",
+   "triggers": {
+    "on_kill": [
+     {
+      "op": "gain_resource",
+      "resource": "combo",
+      "amount": 1
+     }
+    ]
+   }
+  },
+  {
+   "id": "nightslayer-pants",
+   "name": "Nightslayer Pants",
+   "slot": "legs",
+   "set": "nightslayer-armor",
+   "setPiece": 7,
+   "item": 16822,
+   "icon": "inv_pants_06",
+   "displayId": 31340,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: 15% chance to gain 1 Energy.",
+   "class": "rogue",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 15
+      },
+      "then": [
+       {
+        "op": "gain_energy",
+        "amount": 1
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "nightslayer-boots",
+   "name": "Nightslayer Boots",
+   "slot": "feet",
+   "set": "nightslayer-armor",
+   "setPiece": 8,
+   "item": 16824,
+   "icon": "inv_boots_08",
+   "displayId": 31109,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 1 Dexterity.",
+   "class": "rogue",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "dexterity",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  }
+ ],
+ "weapon": {
+  "id": "perdition-s-blade",
+  "name": "Perdition's Blade",
+  "slot": "mainHand",
+  "setPiece": 0,
+  "item": 18816,
+  "icon": "inv_sword_48",
+  "displayId": 33615,
+  "tier": 1,
+  "rarity": "epic",
+  "stats": "Tier 1 weapon",
+  "text": "Start each combat: gain 1 Combo Point. When you attack: 25% chance to apply 1 Poison.",
+  "class": "rogue",
+  "triggers": {
+   "on_combat_start": [
+    {
+     "op": "gain_resource",
+     "resource": "combo",
+     "amount": 1
+    }
+   ],
+   "on_attack": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "chance",
+      "pct": 25
+     },
+     "then": [
+      {
+       "op": "apply",
+       "status": "poison",
+       "stacks": 1,
+       "target": "enemy"
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,231 @@
+[
+ {"id":"hiveashi-stinger","name":"Hive'Ashi Stinger","tier":"normal","family":"beast","type":"silithid","level":[55,57],"hp":[62,73],"icon":"ability_hunter_pet_wasp","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"sting","name":"Sting","intent":"attack","effects":[{"op":"damage","amount":7,"school":"nature"},{"op":"apply","status":"poison","stacks":2,"target":"player"}],"weight":2},
+   {"id":"swarm","name":"Swarm","intent":"attack_multi","effects":[{"op":"damage","amount":5,"times":3}],"weight":2}
+  ]},
+ {"id":"hiveashi-swarmer","name":"Hive'Ashi Swarmer","tier":"normal","family":"beast","type":"silithid","level":[55,56],"hp":[41,48],"icon":"ability_hunter_pet_wasp","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"sting","name":"Sting","intent":"attack","effects":[{"op":"damage","amount":5,"school":"nature"},{"op":"apply","status":"poison","stacks":2,"target":"player"}],"weight":2},
+   {"id":"swarm","name":"Swarm","intent":"attack_multi","effects":[{"op":"damage","amount":4,"times":3}],"weight":2}
+  ]},
+ {"id":"hiveashi-worker","name":"Hive'Ashi Worker","tier":"normal","family":"beast","type":"silithid","level":[55,57],"hp":[56,66],"icon":"ability_hunter_pet_silithid","npcId":null,"traits":[],
+  "moves":[
+   {"id":"pincer","name":"Pincer","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":2},
+   {"id":"chitin-shell","name":"Chitin Shell","intent":"block","effects":[{"op":"block","amount":9,"target":"self"}],"weight":1,"cooldown":3}
+  ]},
+ {"id":"hiveashi-drone","name":"Hive'Ashi Drone","tier":"normal","family":"beast","type":"silithid","level":[56,58],"hp":[71,83],"icon":"ability_hunter_pet_silithid","npcId":null,"traits":["burrow"],
+  "moves":[
+   {"id":"acid-spit","name":"Acid Spit","intent":"attack","effects":[{"op":"damage","amount":10,"school":"nature"},{"op":"apply","status":"vulnerable","stacks":1,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2},
+   {"id":"burrow","name":"Burrow","intent":"block","effects":[{"op":"block","amount":14,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"hiveashi-defender","name":"Hive'Ashi Defender","tier":"normal","family":"beast","type":"silithid","level":[57,59],"hp":[99,116],"icon":"ability_hunter_pet_silithid","npcId":null,"traits":["burrow"],
+  "moves":[
+   {"id":"pincer-crush","name":"Pincer Crush","intent":"attack","effects":[{"op":"damage","amount":19}],"weight":2},
+   {"id":"chitin-wall","name":"Chitin Wall","intent":"block","effects":[{"op":"block","amount":29,"target":"self"}],"weight":2,"cooldown":3},
+   {"id":"acid-spit","name":"Acid Spit","intent":"attack","effects":[{"op":"damage","amount":13,"school":"nature"},{"op":"apply","status":"vulnerable","stacks":1,"target":"player"}],"weight":2}
+  ]},
+ {"id":"hivezora-reaver","name":"Hive'Zora Reaver","tier":"normal","family":"beast","type":"silithid","level":[56,58],"hp":[78,91],"icon":"ability_hunter_pet_silithid","npcId":null,"traits":["burrow"],
+  "moves":[
+   {"id":"acid-spit","name":"Acid Spit","intent":"attack","effects":[{"op":"damage","amount":10,"school":"nature"},{"op":"apply","status":"vulnerable","stacks":1,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2},
+   {"id":"burrow","name":"Burrow","intent":"block","effects":[{"op":"block","amount":16,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"hivezora-waywatcher","name":"Hive'Zora Waywatcher","tier":"normal","family":"beast","type":"silithid","level":[56,58],"hp":[71,83],"icon":"ability_hunter_pet_wasp","npcId":null,"traits":[],
+  "moves":[
+   {"id":"barbed-shot","name":"Barbed Shot","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2},
+   {"id":"poison-dart","name":"Poison Dart","intent":"attack","effects":[{"op":"damage","amount":8,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"web","name":"Web","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":3}
+  ]},
+ {"id":"hivezora-hive-sister","name":"Hive'Zora Hive Sister","tier":"normal","family":"beast","type":"silithid","level":[57,59],"hp":[79,93],"icon":"ability_hunter_pet_silithid","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"arcane-blast","name":"Arcane Blast","intent":"cast","effects":[{"op":"damage","amount":16,"school":"arcane"}],"cast":true,"weight":2},
+   {"id":"mind-flay","name":"Mind Flay","intent":"cast","effects":[{"op":"apply","status":"silence","stacks":1,"target":"player"}],"cast":true,"weight":2,"cooldown":4},
+   {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":13,"school":"shadow"}],"cast":true,"weight":2}
+  ]},
+ {"id":"hivezora-tunneler","name":"Hive'Zora Tunneler","tier":"normal","family":"beast","type":"silithid","level":[56,58],"hp":[71,83],"icon":"ability_hunter_pet_silithid","npcId":null,"traits":["burrow"],
+  "moves":[
+   {"id":"acid-spit","name":"Acid Spit","intent":"attack","effects":[{"op":"damage","amount":10,"school":"nature"},{"op":"apply","status":"vulnerable","stacks":1,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2},
+   {"id":"burrow","name":"Burrow","intent":"block","effects":[{"op":"block","amount":14,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"hivezora-wasp","name":"Hive'Zora Wasp","tier":"normal","family":"beast","type":"silithid","level":[55,57],"hp":[62,73],"icon":"ability_hunter_pet_wasp","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"sting","name":"Sting","intent":"attack","effects":[{"op":"damage","amount":7,"school":"nature"},{"op":"apply","status":"poison","stacks":2,"target":"player"}],"weight":2},
+   {"id":"swarm","name":"Swarm","intent":"attack_multi","effects":[{"op":"damage","amount":5,"times":3}],"weight":2}
+  ]},
+ {"id":"hiveregal-burrower","name":"Hive'Regal Burrower","tier":"normal","family":"beast","type":"silithid","level":[57,59],"hp":[91,107],"icon":"ability_hunter_pet_silithid","npcId":null,"traits":["burrow"],
+  "moves":[
+   {"id":"acid-spit","name":"Acid Spit","intent":"attack","effects":[{"op":"damage","amount":12,"school":"nature"},{"op":"apply","status":"vulnerable","stacks":1,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":15}],"weight":2},
+   {"id":"burrow","name":"Burrow","intent":"block","effects":[{"op":"block","amount":18,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"hiveregal-slavemaker","name":"Hive'Regal Slavemaker","tier":"normal","family":"beast","type":"silithid","level":[58,60],"hp":[87,102],"icon":"ability_hunter_pet_silithid","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"dominate-mind","name":"Dominate Mind","intent":"cast","effects":[{"op":"apply","status":"sleep","stacks":1,"target":"player"}],"cast":true,"weight":2,"cooldown":4},
+   {"id":"arcane-blast","name":"Arcane Blast","intent":"cast","effects":[{"op":"damage","amount":15,"school":"arcane"}],"cast":true,"weight":2},
+   {"id":"hive-mend","name":"Hive Mend","intent":"heal","effects":[{"op":"heal","amount":15,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"hiveregal-ambusher","name":"Hive'Regal Ambusher","tier":"normal","family":"beast","type":"silithid","level":[57,59],"hp":[79,93],"icon":"ability_hunter_pet_silithid","npcId":null,"traits":["stealth"],
+  "moves":[
+   {"id":"ambush","name":"Ambush","intent":"attack","effects":[{"op":"damage","amount":20}],"weight":2},
+   {"id":"venom-sting","name":"Venom Sting","intent":"attack","effects":[{"op":"damage","amount":9,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"rake","name":"Rake","intent":"attack_multi","effects":[{"op":"damage","amount":7,"times":2}],"weight":2}
+  ]},
+ {"id":"hiveregal-spitfire","name":"Hive'Regal Spitfire","tier":"normal","family":"beast","type":"silithid","level":[58,60],"hp":[87,102],"icon":"ability_hunter_pet_wasp","npcId":null,"traits":["burrow"],
+  "moves":[
+   {"id":"acid-spit","name":"Acid Spit","intent":"attack","effects":[{"op":"damage","amount":14,"school":"nature"},{"op":"apply","status":"vulnerable","stacks":2,"target":"player"}],"weight":2},
+   {"id":"acid-spray","name":"Acid Spray","intent":"attack","effects":[{"op":"damage","amount":8,"school":"nature","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"sting","name":"Sting","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2}
+  ]},
+ {"id":"hiveregal-hive-lord","name":"Hive'Regal Hive Lord","tier":"elite","family":"beast","type":"silithid","level":[59,60],"hp":[231,271],"icon":"ability_hunter_pet_silithid","npcId":null,"traits":["burrow"],
+  "moves":[
+   {"id":"hive-lord-smash","name":"Hive Lord Smash","intent":"attack","effects":[{"op":"damage","amount":34}],"weight":2},
+   {"id":"call-brood","name":"Call Brood","intent":"summon","effects":[{"op":"summon","unit":"hivezara-larva","count":2}],"weight":2,"cooldown":4},
+   {"id":"regal-carapace","name":"Regal Carapace","intent":"block","effects":[{"op":"block","amount":24,"target":"self"}],"weight":2,"cooldown":4},
+   {"id":"acid-spit","name":"Acid Spit","intent":"attack","effects":[{"op":"damage","amount":16,"school":"nature"},{"op":"apply","status":"vulnerable","stacks":2,"target":"player"}],"weight":2}
+  ]},
+ {"id":"twilight-geolord","name":"Twilight Geolord","tier":"normal","family":"humanoid","type":"cultist","level":[57,59],"hp":[79,93],"icon":"inv_misc_head_human_02","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"earth-shock","name":"Earth Shock","intent":"cast","effects":[{"op":"damage","amount":14,"school":"nature"},{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":2},
+   {"id":"stoneskin","name":"Stoneskin","intent":"block","effects":[{"op":"block","amount":17,"target":"self"}],"weight":2,"cooldown":4},
+   {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":13,"school":"shadow"}],"cast":true,"weight":2},
+   {"id":"whispers-of-madness","name":"Whispers of Madness","intent":"debuff","effects":[{"op":"add_card","card":"madness","to":"discard","count":1}],"weight":1,"cooldown":5}
+  ]},
+ {"id":"twilight-master","name":"Twilight Master","tier":"normal","family":"humanoid","type":"cultist","level":[58,60],"hp":[100,118],"icon":"inv_misc_head_human_02","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":18,"school":"shadow"}],"cast":true,"weight":2},
+   {"id":"curse-of-the-elements","name":"Curse of the Elements","intent":"cast","effects":[{"op":"apply","status":"vulnerable","stacks":2,"target":"player"}],"cast":true,"weight":2,"cooldown":3},
+   {"id":"whispers-of-madness","name":"Whispers of Madness","intent":"debuff","effects":[{"op":"add_card","card":"madness","to":"discard","count":1}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"twilight-avenger","name":"Twilight Avenger","tier":"normal","family":"humanoid","type":"cultist","level":[57,59],"hp":[79,93],"icon":"inv_misc_head_human_02","npcId":null,"traits":["demon","cultist"],
+  "moves":[
+   {"id":"twilight-strike","name":"Twilight Strike","intent":"attack","effects":[{"op":"damage","amount":16}],"weight":2},
+   {"id":"cleave","name":"Cleave","intent":"attack_multi","effects":[{"op":"damage","amount":8,"times":2}],"weight":2},
+   {"id":"zealotry","name":"Zealotry","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"twilight-keeper","name":"Twilight Keeper","tier":"normal","family":"humanoid","type":"cultist","level":[58,60],"hp":[96,113],"icon":"inv_misc_head_human_02","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":18,"school":"shadow"}],"cast":true,"weight":2},
+   {"id":"curse-of-the-elements","name":"Curse of the Elements","intent":"cast","effects":[{"op":"apply","status":"vulnerable","stacks":2,"target":"player"}],"cast":true,"weight":2,"cooldown":3},
+   {"id":"whispers-of-madness","name":"Whispers of Madness","intent":"debuff","effects":[{"op":"add_card","card":"madness","to":"discard","count":1}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"abyssal-templar","name":"Abyssal Templar","tier":"normal","family":"elemental","type":"abyssal","level":[58,60],"hp":[100,118],"icon":"inv_elemental_primal_fire","npcId":null,"traits":["resist:fire"],
+  "moves":[
+   {"id":"fireball","name":"Fireball","intent":"cast","effects":[{"op":"damage","amount":18,"school":"fire"},{"op":"apply","status":"burn","stacks":2,"target":"player"}],"cast":true,"weight":2},
+   {"id":"flame-strike","name":"Flame Strike","intent":"attack","effects":[{"op":"damage","amount":16}],"weight":2},
+   {"id":"fire-shield","name":"Fire Shield","intent":"buff","effects":[{"op":"apply","status":"thorns","stacks":2,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"qiraji-gladiator","name":"Qiraji Gladiator","tier":"normal","family":"humanoid","type":"qiraji","level":[58,60],"hp":[105,123],"icon":"inv_misc_head_nerubian_01","npcId":null,"traits":["impale"],
+  "moves":[
+   {"id":"impale","name":"Impale","intent":"attack","effects":[{"op":"damage","amount":24}],"weight":2},
+   {"id":"cleave","name":"Cleave","intent":"attack_multi","effects":[{"op":"damage","amount":11,"times":2}],"weight":2},
+   {"id":"thunderclap","name":"Thunderclap","intent":"attack","effects":[{"op":"damage","amount":12,"target":"all_enemies"}],"weight":2,"cooldown":4}
+  ]},
+ {"id":"qiraji-swarmguard","name":"Qiraji Swarmguard","tier":"normal","family":"humanoid","type":"qiraji","level":[58,60],"hp":[105,123],"icon":"inv_misc_head_nerubian_01","npcId":null,"traits":["impale"],
+  "moves":[
+   {"id":"impale","name":"Impale","intent":"attack","effects":[{"op":"damage","amount":24}],"weight":2},
+   {"id":"cleave","name":"Cleave","intent":"attack_multi","effects":[{"op":"damage","amount":11,"times":2}],"weight":2},
+   {"id":"call-swarm","name":"Call Swarm","intent":"summon","effects":[{"op":"summon","unit":"qiraji-scarab","count":2}],"weight":2,"cooldown":5},
+   {"id":"chitin-guard","name":"Chitin Guard","intent":"block","effects":[{"op":"block","amount":20,"target":"self"}],"weight":1,"cooldown":3}
+  ]},
+ {"id":"dredge-crusher","name":"Dredge Crusher","tier":"normal","family":"elemental","type":"dredge","level":[55,57],"hp":[72,84],"icon":"spell_nature_stoneclawtotem","npcId":null,"traits":["resist:physical"],
+  "moves":[
+   {"id":"boulder-toss","name":"Boulder Toss","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2},
+   {"id":"rock-skin","name":"Rock Skin","intent":"block","effects":[{"op":"block","amount":14,"target":"self"}],"weight":1,"cooldown":4},
+   {"id":"pummel","name":"Pummel","intent":"attack_multi","effects":[{"op":"damage","amount":7,"times":2}],"weight":2}
+  ]},
+ {"id":"dredge-striker","name":"Dredge Striker","tier":"normal","family":"elemental","type":"dredge","level":[55,57],"hp":[62,73],"icon":"spell_nature_stoneclawtotem","npcId":null,"traits":["resist:physical"],
+  "moves":[
+   {"id":"boulder-toss","name":"Boulder Toss","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2},
+   {"id":"rock-skin","name":"Rock Skin","intent":"block","effects":[{"op":"block","amount":12,"target":"self"}],"weight":1,"cooldown":4},
+   {"id":"pummel","name":"Pummel","intent":"attack_multi","effects":[{"op":"damage","amount":6,"times":2}],"weight":2}
+  ]},
+ {"id":"desert-rumbler","name":"Desert Rumbler","tier":"normal","family":"elemental","type":"earth","level":[56,58],"hp":[85,99],"icon":"inv_elemental_primal_earth","npcId":null,"traits":["resist:physical"],
+  "moves":[
+   {"id":"rock-smash","name":"Rock Smash","intent":"attack","effects":[{"op":"damage","amount":18}],"weight":2},
+   {"id":"stoneskin","name":"Stoneskin","intent":"block","effects":[{"op":"block","amount":21,"target":"self"}],"weight":2,"cooldown":3},
+   {"id":"rubble","name":"Rubble","intent":"attack_multi","effects":[{"op":"damage","amount":8,"times":2}],"weight":2}
+  ]},
+ {"id":"cyclone-warrior","name":"Cyclone Warrior","tier":"normal","family":"elemental","type":"air","level":[57,59],"hp":[79,93],"icon":"inv_elemental_primal_air","npcId":null,"traits":["resist:nature"],
+  "moves":[
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":14,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"whirlwind","name":"Whirlwind","intent":"attack","effects":[{"op":"damage","amount":9,"school":"nature","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"gale-slash","name":"Gale Slash","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2}
+  ]},
+ {"id":"stonelash-scorpid","name":"Stonelash Scorpid","tier":"normal","family":"beast","type":"scorpid","level":[55,57],"hp":[62,73],"icon":"ability_hunter_pet_scorpid","npcId":null,"traits":[],
+  "moves":[
+   {"id":"sting","name":"Sting","intent":"attack","effects":[{"op":"damage","amount":8,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":10}],"weight":2},
+   {"id":"carapace","name":"Carapace","intent":"block","effects":[{"op":"block","amount":10,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"stonelash-flayer","name":"Stonelash Flayer","tier":"normal","family":"beast","type":"scorpid","level":[56,58],"hp":[78,91],"icon":"ability_hunter_pet_scorpid","npcId":null,"traits":[],
+  "moves":[
+   {"id":"sting","name":"Sting","intent":"attack","effects":[{"op":"damage","amount":10,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2},
+   {"id":"carapace","name":"Carapace","intent":"block","effects":[{"op":"block","amount":13,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"rock-stalker","name":"Rock Stalker","tier":"normal","family":"beast","type":"scorpid","level":[56,58],"hp":[71,83],"icon":"ability_hunter_pet_scorpid","npcId":null,"traits":[],
+  "moves":[
+   {"id":"pincer","name":"Pincer","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2},
+   {"id":"stinger","name":"Stinger","intent":"attack","effects":[{"op":"damage","amount":10,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"rock-shell","name":"Rock Shell","intent":"block","effects":[{"op":"block","amount":16,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"duke-of-cynders","name":"Duke of Cynders","tier":"elite","family":"elemental","type":"abyssal","level":[60,60],"hp":[239,281],"icon":"inv_elemental_primal_fire","npcId":null,"traits":["resist:fire"],
+  "moves":[
+   {"id":"fireball","name":"Fireball","intent":"cast","effects":[{"op":"damage","amount":30,"school":"fire"},{"op":"apply","status":"burn","stacks":3,"target":"player"}],"cast":true,"weight":2},
+   {"id":"fire-nova","name":"Fire Nova","intent":"attack","effects":[{"op":"damage","amount":12,"school":"fire","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"flame-strike","name":"Flame Strike","intent":"attack","effects":[{"op":"damage","amount":28}],"weight":2},
+   {"id":"cynders-shield","name":"Cynders Shield","intent":"buff","effects":[{"op":"apply","status":"thorns","stacks":3,"target":"self"}],"weight":1,"cooldown":5}
+  ]},
+ {"id":"duke-of-fathoms","name":"Duke of Fathoms","tier":"elite","family":"elemental","type":"abyssal","level":[60,60],"hp":[239,281],"icon":"inv_elemental_primal_water","npcId":null,"traits":["resist:frost"],
+  "moves":[
+   {"id":"frostbolt","name":"Frostbolt","intent":"cast","effects":[{"op":"damage","amount":28,"school":"frost"},{"op":"apply","status":"weak","stacks":2,"target":"player"}],"cast":true,"weight":2},
+   {"id":"tidal-wave","name":"Tidal Wave","intent":"attack","effects":[{"op":"damage","amount":12,"school":"frost","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"crushing-wave","name":"Crushing Wave","intent":"attack","effects":[{"op":"damage","amount":28}],"weight":2},
+   {"id":"fathoms-barrier","name":"Fathoms Barrier","intent":"block","effects":[{"op":"block","amount":24,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"duke-of-shards","name":"Duke of Shards","tier":"elite","family":"elemental","type":"abyssal","level":[60,60],"hp":[239,281],"icon":"inv_elemental_primal_earth","npcId":null,"traits":["resist:physical"],
+  "moves":[
+   {"id":"shard-slam","name":"Shard Slam","intent":"attack","effects":[{"op":"damage","amount":32}],"weight":2},
+   {"id":"shard-barrage","name":"Shard Barrage","intent":"attack_multi","effects":[{"op":"damage","amount":11,"times":3}],"weight":2},
+   {"id":"crystal-skin","name":"Crystal Skin","intent":"block","effects":[{"op":"block","amount":28,"target":"self"}],"weight":2,"cooldown":4},
+   {"id":"earth-shock","name":"Earth Shock","intent":"debuff","effects":[{"op":"apply","status":"stun","stacks":1,"target":"player"}],"weight":1,"cooldown":5}
+  ]},
+ {"id":"duke-of-zephyrs","name":"Duke of Zephyrs","tier":"elite","family":"elemental","type":"abyssal","level":[60,60],"hp":[239,281],"icon":"inv_elemental_primal_air","npcId":null,"traits":["resist:nature"],
+  "moves":[
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":28,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"whirlwind","name":"Whirlwind","intent":"attack","effects":[{"op":"damage","amount":13,"school":"nature","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"gale-strike","name":"Gale Strike","intent":"attack","effects":[{"op":"damage","amount":26}],"weight":2},
+   {"id":"cyclone","name":"Cyclone","intent":"debuff","effects":[{"op":"apply","status":"stun","stacks":1,"target":"player"}],"weight":1,"cooldown":5}
+  ]},
+ {"id":"prince-skaldrenox","name":"Prince Skaldrenox","tier":"elite","family":"elemental","type":"abyssal","level":[60,60],"hp":[239,281],"icon":"inv_elemental_primal_fire","npcId":null,"traits":["resist:fire"],
+  "moves":[
+   {"id":"searing-blade","name":"Searing Blade","intent":"attack","effects":[{"op":"damage","amount":30}],"weight":2},
+   {"id":"fireball","name":"Fireball","intent":"cast","effects":[{"op":"damage","amount":28,"school":"fire"},{"op":"apply","status":"burn","stacks":3,"target":"player"}],"cast":true,"weight":2},
+   {"id":"prince-wrath","name":"Prince Wrath","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":2,"cooldown":5},
+   {"id":"flame-wave","name":"Flame Wave","intent":"attack","effects":[{"op":"damage","amount":12,"school":"fire","target":"all_enemies"}],"weight":2,"cooldown":4}
+  ]},
+ {"id":"baron-kazum","name":"Baron Kazum","tier":"elite","family":"elemental","type":"abyssal","level":[60,60],"hp":[239,281],"icon":"inv_elemental_primal_earth","npcId":null,"traits":["resist:physical"],
+  "moves":[
+   {"id":"quake-strike","name":"Quake Strike","intent":"attack","effects":[{"op":"damage","amount":32}],"weight":2},
+   {"id":"granite-skin","name":"Granite Skin","intent":"block","effects":[{"op":"block","amount":26,"target":"self"}],"weight":2,"cooldown":4},
+   {"id":"earthquake","name":"Earthquake","intent":"attack","effects":[{"op":"damage","amount":12,"target":"all_enemies"}],"weight":2,"cooldown":5},
+   {"id":"rock-crush","name":"Rock Crush","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":1,"cooldown":3}
+  ]},
+ {"id":"high-marshal-whirlaxis","name":"High Marshal Whirlaxis","tier":"elite","family":"elemental","type":"abyssal","level":[60,60],"hp":[239,281],"icon":"inv_elemental_primal_water","npcId":null,"traits":["resist:frost"],
+  "moves":[
+   {"id":"marshal-strike","name":"Marshal Strike","intent":"attack","effects":[{"op":"damage","amount":30}],"weight":2},
+   {"id":"whirlpool","name":"Whirlpool","intent":"attack","effects":[{"op":"damage","amount":12,"school":"frost","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"frostbolt","name":"Frostbolt","intent":"cast","effects":[{"op":"damage","amount":26,"school":"frost"},{"op":"apply","status":"weak","stacks":2,"target":"player"}],"cast":true,"weight":2},
+   {"id":"water-shield","name":"Water Shield","intent":"block","effects":[{"op":"block","amount":22,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"lord-skwol","name":"Lord Skwol","tier":"elite","family":"elemental","type":"abyssal","level":[60,60],"hp":[239,281],"icon":"inv_elemental_primal_air","npcId":null,"traits":["resist:nature"],
+  "moves":[
+   {"id":"chain-lightning","name":"Chain Lightning","intent":"cast","effects":[{"op":"damage","amount":26,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"skwol-slash","name":"Skwol Slash","intent":"attack","effects":[{"op":"damage","amount":28}],"weight":2},
+   {"id":"cyclone-winds","name":"Cyclone Winds","intent":"attack","effects":[{"op":"damage","amount":12,"school":"nature","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"static-charge","name":"Static Charge","intent":"buff","effects":[{"op":"apply","status":"thorns","stacks":3,"target":"self"}],"weight":1,"cooldown":5}
+  ]}
+]

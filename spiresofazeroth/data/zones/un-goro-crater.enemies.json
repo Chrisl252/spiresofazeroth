@@ -1,0 +1,238 @@
+[
+ {"id":"scorching-elemental","name":"Scorching Elemental","tier":"normal","family":"elemental","type":"fire","level":[50,52],"hp":[55,65],"icon":"inv_elemental_primal_fire","npcId":null,"traits":["resist:fire"],
+  "moves":[
+   {"id":"fireball","name":"Fireball","intent":"cast","effects":[{"op":"damage","amount":10,"school":"fire"},{"op":"apply","status":"burn","stacks":2,"target":"player"}],"cast":true,"weight":2},
+   {"id":"flame-strike","name":"Flame Strike","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":2},
+   {"id":"fire-shield","name":"Fire Shield","intent":"buff","effects":[{"op":"apply","status":"thorns","stacks":2,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"blazing-elemental","name":"Blazing Elemental","tier":"normal","family":"elemental","type":"fire","level":[51,53],"hp":[66,77],"icon":"inv_elemental_primal_fire","npcId":null,"traits":["resist:fire"],
+  "moves":[
+   {"id":"fireball","name":"Fireball","intent":"cast","effects":[{"op":"damage","amount":12,"school":"fire"},{"op":"apply","status":"burn","stacks":2,"target":"player"}],"cast":true,"weight":2},
+   {"id":"flame-strike","name":"Flame Strike","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":2},
+   {"id":"fire-shield","name":"Fire Shield","intent":"buff","effects":[{"op":"apply","status":"thorns","stacks":2,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"living-blaze","name":"Living Blaze","tier":"normal","family":"elemental","type":"fire","level":[49,51],"hp":[40,48],"icon":"spell_fire_fire","npcId":null,"traits":["resist:fire"],
+  "moves":[
+   {"id":"flame-touch","name":"Flame Touch","intent":"attack","effects":[{"op":"damage","amount":7,"school":"fire"}],"weight":2},
+   {"id":"ignite","name":"Ignite","intent":"attack","effects":[{"op":"damage","amount":5,"school":"fire"},{"op":"apply","status":"burn","stacks":3,"target":"player"}],"weight":2},
+   {"id":"flare","name":"Flare","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":1,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"ungoro-thunderer","name":"Un'Goro Thunderer","tier":"normal","family":"beast","type":"thunder-lizard","level":[51,53],"hp":[60,70],"icon":"ability_hunter_pet_crocolisk","npcId":null,"traits":[],
+  "moves":[
+   {"id":"thunder-clap","name":"Thunder Clap","intent":"attack","effects":[{"op":"damage","amount":7,"school":"nature","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"stomp","name":"Stomp","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2},
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":10,"school":"nature"}],"cast":true,"weight":2}
+  ]},
+ {"id":"ungoro-stomper","name":"Un'Goro Stomper","tier":"normal","family":"beast","type":"thunder-lizard","level":[52,54],"hp":[77,91],"icon":"ability_hunter_pet_crocolisk","npcId":null,"traits":[],
+  "moves":[
+   {"id":"stomp","name":"Stomp","intent":"attack","effects":[{"op":"damage","amount":20}],"weight":2},
+   {"id":"charge","name":"Charge","intent":"attack","effects":[{"op":"damage","amount":20}],"weight":2,"cooldown":3},
+   {"id":"thick-hide","name":"Thick Hide","intent":"block","effects":[{"op":"block","amount":13,"target":"self"}],"weight":1}
+  ]},
+ {"id":"ungoro-gorilla","name":"Un'Goro Gorilla","tier":"normal","family":"beast","type":"gorilla","level":[50,52],"hp":[55,65],"icon":"ability_hunter_pet_gorilla","npcId":null,"traits":[],
+  "moves":[
+   {"id":"pound","name":"Pound","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2},
+   {"id":"thrash","name":"Thrash","intent":"attack_multi","effects":[{"op":"damage","amount":5,"times":2}],"weight":2},
+   {"id":"enrage","name":"Enrage","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"devilsaur","name":"Devilsaur","tier":"normal","family":"beast","type":"devilsaur","level":[52,54],"hp":[74,87],"icon":"ability_hunter_pet_devilsaur","npcId":null,"traits":["fear"],
+  "moves":[
+   {"id":"terrifying-roar","name":"Terrifying Roar","intent":"debuff","effects":[{"op":"apply","status":"fear","stacks":1,"target":"player"}],"weight":2,"cooldown":4},
+   {"id":"huge-bite","name":"Huge Bite","intent":"attack","effects":[{"op":"damage","amount":22}],"weight":2},
+   {"id":"tail-whip","name":"Tail Whip","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2}
+  ]},
+ {"id":"tar-lord","name":"Tar Lord","tier":"normal","family":"elemental","type":"tar","level":[52,54],"hp":[77,91],"icon":"spell_nature_acid_01","npcId":null,"traits":["acid"],
+  "moves":[
+   {"id":"tar-splash","name":"Tar Splash","intent":"attack","effects":[{"op":"damage","amount":10,"school":"nature"},{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2},
+   {"id":"smother","name":"Smother","intent":"attack","effects":[{"op":"damage","amount":17}],"weight":2},
+   {"id":"absorb-tar","name":"Absorb Tar","intent":"heal","effects":[{"op":"heal","amount":12,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"tar-lurker","name":"Tar Lurker","tier":"normal","family":"elemental","type":"tar","level":[51,53],"hp":[60,70],"icon":"spell_nature_acid_01","npcId":null,"traits":["acid"],
+  "moves":[
+   {"id":"acid-splash","name":"Acid Splash","intent":"attack","effects":[{"op":"damage","amount":8,"school":"nature"},{"op":"apply","status":"vulnerable","stacks":1,"target":"player"}],"weight":2},
+   {"id":"engulf","name":"Engulf","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":2},
+   {"id":"absorb","name":"Absorb","intent":"heal","effects":[{"op":"heal","amount":8,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"tar-creeper","name":"Tar Creeper","tier":"normal","family":"beast","type":"tar","level":[49,51],"hp":[46,53],"icon":"spell_nature_acid_01","npcId":null,"traits":["acid"],
+  "moves":[
+   {"id":"acid-splash","name":"Acid Splash","intent":"attack","effects":[{"op":"damage","amount":6,"school":"nature"},{"op":"apply","status":"vulnerable","stacks":1,"target":"player"}],"weight":2},
+   {"id":"engulf","name":"Engulf","intent":"attack","effects":[{"op":"damage","amount":8}],"weight":2},
+   {"id":"absorb","name":"Absorb","intent":"heal","effects":[{"op":"heal","amount":6,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"tar-beast","name":"Tar Beast","tier":"normal","family":"beast","type":"tar","level":[50,52],"hp":[58,68],"icon":"spell_nature_acid_01","npcId":null,"traits":["acid"],
+  "moves":[
+   {"id":"acid-splash","name":"Acid Splash","intent":"attack","effects":[{"op":"damage","amount":7,"school":"nature"},{"op":"apply","status":"vulnerable","stacks":1,"target":"player"}],"weight":2},
+   {"id":"engulf","name":"Engulf","intent":"attack","effects":[{"op":"damage","amount":10}],"weight":2},
+   {"id":"absorb","name":"Absorb","intent":"heal","effects":[{"op":"heal","amount":7,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"gorishi-worker","name":"Gorishi Worker","tier":"normal","family":"beast","type":"silithid","level":[49,51],"hp":[43,50],"icon":"ability_hunter_pet_silithid","npcId":null,"traits":[],
+  "moves":[
+   {"id":"pincer","name":"Pincer","intent":"attack","effects":[{"op":"damage","amount":7}],"weight":2},
+   {"id":"chitin-shell","name":"Chitin Shell","intent":"block","effects":[{"op":"block","amount":7,"target":"self"}],"weight":1,"cooldown":3}
+  ]},
+ {"id":"gorishi-wasp","name":"Gorishi Wasp","tier":"normal","family":"beast","type":"silithid","level":[50,52],"hp":[55,65],"icon":"ability_hunter_pet_wasp","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"sting","name":"Sting","intent":"attack","effects":[{"op":"damage","amount":6,"school":"nature"},{"op":"apply","status":"poison","stacks":2,"target":"player"}],"weight":2},
+   {"id":"swarm","name":"Swarm","intent":"attack_multi","effects":[{"op":"damage","amount":5,"times":3}],"weight":2}
+  ]},
+ {"id":"gorishi-reaver","name":"Gorishi Reaver","tier":"normal","family":"beast","type":"silithid","level":[51,53],"hp":[66,77],"icon":"ability_hunter_pet_silithid","npcId":null,"traits":["burrow"],
+  "moves":[
+   {"id":"acid-spit","name":"Acid Spit","intent":"attack","effects":[{"op":"damage","amount":9,"school":"nature"},{"op":"apply","status":"vulnerable","stacks":1,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":2},
+   {"id":"burrow","name":"Burrow","intent":"block","effects":[{"op":"block","amount":13,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"gorishi-stinger","name":"Gorishi Stinger","tier":"normal","family":"beast","type":"silithid","level":[52,54],"hp":[68,79],"icon":"ability_hunter_pet_wasp","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"sting","name":"Sting","intent":"attack","effects":[{"op":"damage","amount":8,"school":"nature"},{"op":"apply","status":"poison","stacks":2,"target":"player"}],"weight":2},
+   {"id":"swarm","name":"Swarm","intent":"attack_multi","effects":[{"op":"damage","amount":6,"times":3}],"weight":2}
+  ]},
+ {"id":"gorishi-tunneler","name":"Gorishi Tunneler","tier":"normal","family":"beast","type":"silithid","level":[52,54],"hp":[71,83],"icon":"ability_hunter_pet_silithid","npcId":null,"traits":["burrow"],
+  "moves":[
+   {"id":"acid-spit","name":"Acid Spit","intent":"attack","effects":[{"op":"damage","amount":10,"school":"nature"},{"op":"apply","status":"vulnerable","stacks":1,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2},
+   {"id":"burrow","name":"Burrow","intent":"block","effects":[{"op":"block","amount":14,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"diemetradon","name":"Diemetradon","tier":"normal","family":"beast","type":"diemetradon","level":[48,50],"hp":[46,54],"icon":"ability_hunter_pet_raptor","npcId":null,"traits":["pack"],
+  "moves":[
+   {"id":"savage-bite","name":"Savage Bite","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":2},
+   {"id":"rake","name":"Rake","intent":"attack","effects":[{"op":"damage","amount":6},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"lunge","name":"Lunge","intent":"attack","effects":[{"op":"damage","amount":7}],"weight":2}
+  ]},
+ {"id":"elder-diemetradon","name":"Elder Diemetradon","tier":"normal","family":"beast","type":"diemetradon","level":[52,54],"hp":[77,91],"icon":"ability_hunter_pet_raptor","npcId":null,"traits":["pack"],
+  "moves":[
+   {"id":"savage-bite","name":"Savage Bite","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2},
+   {"id":"rake","name":"Rake","intent":"attack","effects":[{"op":"damage","amount":9},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"lunge","name":"Lunge","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2}
+  ]},
+ {"id":"stegodon","name":"Stegodon","tier":"normal","family":"beast","type":"stegodon","level":[50,52],"hp":[55,65],"icon":"ability_hunter_pet_boar","npcId":null,"traits":[],
+  "moves":[
+   {"id":"charge","name":"Charge","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2,"cooldown":3},
+   {"id":"gore","name":"Gore","intent":"attack","effects":[{"op":"damage","amount":10}],"weight":2},
+   {"id":"thick-hide","name":"Thick Hide","intent":"block","effects":[{"op":"block","amount":9,"target":"self"}],"weight":1}
+  ]},
+ {"id":"plated-stegodon","name":"Plated Stegodon","tier":"normal","family":"beast","type":"stegodon","level":[52,54],"hp":[74,87],"icon":"ability_hunter_pet_boar","npcId":null,"traits":[],
+  "moves":[
+   {"id":"gore","name":"Gore","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2},
+   {"id":"plated-hide","name":"Plated Hide","intent":"block","effects":[{"op":"block","amount":22,"target":"self"}],"weight":2,"cooldown":3},
+   {"id":"charge","name":"Charge","intent":"attack","effects":[{"op":"damage","amount":18}],"weight":2,"cooldown":3}
+  ]},
+ {"id":"spiked-stegodon","name":"Spiked Stegodon","tier":"normal","family":"beast","type":"stegodon","level":[52,54],"hp":[71,83],"icon":"ability_hunter_pet_boar","npcId":null,"traits":[],
+  "moves":[
+   {"id":"charge","name":"Charge","intent":"attack","effects":[{"op":"damage","amount":18}],"weight":2,"cooldown":3},
+   {"id":"spikes","name":"Spikes","intent":"buff","effects":[{"op":"apply","status":"thorns","stacks":2,"target":"self"}],"weight":2,"cooldown":4},
+   {"id":"gore","name":"Gore","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2}
+  ]},
+ {"id":"thunderstomp-stegodon","name":"Thunderstomp Stegodon","tier":"normal","family":"beast","type":"stegodon","level":[53,55],"hp":[86,101],"icon":"ability_hunter_pet_boar","npcId":null,"traits":[],
+  "moves":[
+   {"id":"thunderstomp","name":"Thunderstomp","intent":"attack","effects":[{"op":"damage","amount":11,"school":"nature","target":"all_enemies"}],"weight":2,"cooldown":3},
+   {"id":"charge","name":"Charge","intent":"attack","effects":[{"op":"damage","amount":21}],"weight":2,"cooldown":3},
+   {"id":"gore","name":"Gore","intent":"attack","effects":[{"op":"damage","amount":17}],"weight":2}
+  ]},
+ {"id":"pterrordax","name":"Pterrordax","tier":"normal","family":"beast","type":"pterrordax","level":[49,51],"hp":[51,59],"icon":"ability_hunter_pet_windserpent","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"wing-buffet","name":"Wing Buffet","intent":"attack","effects":[{"op":"damage","amount":7}],"weight":2},
+   {"id":"dive","name":"Dive","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2,"cooldown":3},
+   {"id":"screech","name":"Screech","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":1}
+  ]},
+ {"id":"frenzied-pterrordax","name":"Frenzied Pterrordax","tier":"normal","family":"beast","type":"pterrordax","level":[52,54],"hp":[74,87],"icon":"ability_hunter_pet_windserpent","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"dive","name":"Dive","intent":"attack","effects":[{"op":"damage","amount":19}],"weight":2,"cooldown":3},
+   {"id":"frenzy","name":"Frenzy","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":2,"cooldown":4},
+   {"id":"talon-rake","name":"Talon Rake","intent":"attack_multi","effects":[{"op":"damage","amount":7,"times":2}],"weight":2}
+  ]},
+ {"id":"bloodpetal-lasher","name":"Bloodpetal Lasher","tier":"normal","family":"elemental","type":"plant","level":[50,52],"hp":[55,65],"icon":"spell_nature_protectionformnature","npcId":null,"traits":["root"],
+  "moves":[
+   {"id":"entangle","name":"Entangle","intent":"attack","effects":[{"op":"damage","amount":6,"school":"nature"},{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2},
+   {"id":"lash","name":"Lash","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":2},
+   {"id":"thorn-volley","name":"Thorn Volley","intent":"attack","effects":[{"op":"damage","amount":5,"school":"nature"},{"op":"apply","status":"poison","stacks":2,"target":"player"}],"weight":1}
+  ]},
+ {"id":"bloodpetal-flayer","name":"Bloodpetal Flayer","tier":"normal","family":"elemental","type":"plant","level":[52,54],"hp":[71,83],"icon":"spell_nature_protectionformnature","npcId":null,"traits":["root"],
+  "moves":[
+   {"id":"flaying-vines","name":"Flaying Vines","intent":"attack","effects":[{"op":"damage","amount":11},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"lash","name":"Lash","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2},
+   {"id":"entangle","name":"Entangle","intent":"attack","effects":[{"op":"damage","amount":7,"school":"nature"},{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":3}
+  ]},
+ {"id":"bloodpetal-trapper","name":"Bloodpetal Trapper","tier":"normal","family":"elemental","type":"plant","level":[51,53],"hp":[60,70],"icon":"spell_nature_protectionformnature","npcId":null,"traits":["root"],
+  "moves":[
+   {"id":"entangle","name":"Entangle","intent":"attack","effects":[{"op":"damage","amount":8,"school":"nature"},{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2},
+   {"id":"snap-trap","name":"Snap Trap","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2,"cooldown":3},
+   {"id":"photosynthesis","name":"Photosynthesis","intent":"heal","effects":[{"op":"heal","amount":8,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"bloodpetal-pest","name":"Bloodpetal Pest","tier":"normal","family":"elemental","type":"plant","level":[48,50],"hp":[28,32],"icon":"spell_nature_protectionformnature","npcId":null,"traits":["root"],
+  "moves":[
+   {"id":"entangle","name":"Entangle","intent":"attack","effects":[{"op":"damage","amount":4,"school":"nature"},{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2},
+   {"id":"lash","name":"Lash","intent":"attack","effects":[{"op":"damage","amount":5}],"weight":2},
+   {"id":"thorn-volley","name":"Thorn Volley","intent":"attack","effects":[{"op":"damage","amount":3,"school":"nature"},{"op":"apply","status":"poison","stacks":2,"target":"player"}],"weight":1}
+  ]},
+ {"id":"venomhide-ravasaur","name":"Venomhide Ravasaur","tier":"normal","family":"beast","type":"ravasaur","level":[52,54],"hp":[74,87],"icon":"ability_hunter_pet_ravager","npcId":null,"traits":["stealth"],
+  "moves":[
+   {"id":"poison-spit","name":"Poison Spit","intent":"attack","effects":[{"op":"damage","amount":8,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"pounce","name":"Pounce","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2},
+   {"id":"claw-swipe","name":"Claw Swipe","intent":"attack_multi","effects":[{"op":"damage","amount":7,"times":2}],"weight":2}
+  ]},
+ {"id":"ravasaur","name":"Ravasaur","tier":"normal","family":"beast","type":"ravasaur","level":[50,52],"hp":[55,65],"icon":"ability_hunter_pet_ravager","npcId":null,"traits":["stealth"],
+  "moves":[
+   {"id":"poison-spit","name":"Poison Spit","intent":"attack","effects":[{"op":"damage","amount":6,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"pounce","name":"Pounce","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":2},
+   {"id":"claw-swipe","name":"Claw Swipe","intent":"attack_multi","effects":[{"op":"damage","amount":5,"times":2}],"weight":2}
+  ]},
+ {"id":"ravasaur-hunter","name":"Ravasaur Hunter","tier":"normal","family":"beast","type":"ravasaur","level":[53,55],"hp":[79,93],"icon":"ability_hunter_pet_ravager","npcId":null,"traits":["stealth"],
+  "moves":[
+   {"id":"poison-spit","name":"Poison Spit","intent":"attack","effects":[{"op":"damage","amount":9,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"pounce","name":"Pounce","intent":"attack","effects":[{"op":"damage","amount":16}],"weight":2},
+   {"id":"claw-swipe","name":"Claw Swipe","intent":"attack_multi","effects":[{"op":"damage","amount":7,"times":2}],"weight":2}
+  ]},
+ {"id":"ravasaur-runner","name":"Ravasaur Runner","tier":"normal","family":"beast","type":"ravasaur","level":[49,51],"hp":[46,53],"icon":"ability_hunter_pet_ravager","npcId":null,"traits":["stealth"],
+  "moves":[
+   {"id":"poison-spit","name":"Poison Spit","intent":"attack","effects":[{"op":"damage","amount":5,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"pounce","name":"Pounce","intent":"attack","effects":[{"op":"damage","amount":8}],"weight":2},
+   {"id":"claw-swipe","name":"Claw Swipe","intent":"attack_multi","effects":[{"op":"damage","amount":4,"times":2}],"weight":2}
+  ]},
+ {"id":"tyrant-devilsaur","name":"Tyrant Devilsaur","tier":"elite","family":"beast","type":"devilsaur","level":[55,56],"hp":[184,216],"icon":"ability_hunter_pet_devilsaur","npcId":null,"traits":["fear"],
+  "moves":[
+   {"id":"terrifying-roar","name":"Terrifying Roar","intent":"debuff","effects":[{"op":"apply","status":"fear","stacks":1,"target":"player"}],"weight":2,"cooldown":4},
+   {"id":"huge-bite","name":"Huge Bite","intent":"attack","effects":[{"op":"damage","amount":36}],"weight":2},
+   {"id":"tail-whip","name":"Tail Whip","intent":"attack","effects":[{"op":"damage","amount":18}],"weight":2},
+   {"id":"rend","name":"Rend","intent":"attack_multi","effects":[{"op":"damage","amount":12,"times":2}],"weight":1}
+  ]},
+ {"id":"ironhide-devilsaur","name":"Ironhide Devilsaur","tier":"elite","family":"beast","type":"devilsaur","level":[54,55],"hp":[179,211],"icon":"ability_hunter_pet_devilsaur","npcId":null,"traits":["fear"],
+  "moves":[
+   {"id":"crushing-bite","name":"Crushing Bite","intent":"attack","effects":[{"op":"damage","amount":32}],"weight":2},
+   {"id":"ironhide","name":"Ironhide","intent":"block","effects":[{"op":"block","amount":20,"target":"self"}],"weight":2,"cooldown":4},
+   {"id":"terrifying-roar","name":"Terrifying Roar","intent":"debuff","effects":[{"op":"apply","status":"fear","stacks":1,"target":"player"}],"weight":2,"cooldown":4},
+   {"id":"tail-whip","name":"Tail Whip","intent":"attack","effects":[{"op":"damage","amount":16}],"weight":2}
+  ]},
+ {"id":"gorishi-hive-queen","name":"Gorishi Hive Queen","tier":"elite","family":"beast","type":"silithid","level":[55,56],"hp":[184,216],"icon":"ability_hunter_pet_silithid","npcId":null,"traits":["burrow"],
+  "moves":[
+   {"id":"summon-brood","name":"Summon Brood","intent":"summon","effects":[{"op":"summon","unit":"gorishi-grub","count":2}],"weight":2,"cooldown":4},
+   {"id":"poison-sting","name":"Poison Sting","intent":"attack","effects":[{"op":"damage","amount":20,"school":"nature"},{"op":"apply","status":"poison","stacks":4,"target":"player"}],"weight":2},
+   {"id":"queens-strike","name":"Queen's Strike","intent":"attack","effects":[{"op":"damage","amount":26}],"weight":2},
+   {"id":"hive-mend","name":"Hive Mend","intent":"heal","effects":[{"op":"heal","amount":14,"target":"self"}],"weight":1,"cooldown":5}
+  ]},
+ {"id":"clutchmother-zavas","name":"Clutchmother Zavas","tier":"elite","family":"beast","type":"raptor","level":[54,55],"hp":[179,211],"icon":"ability_hunter_pet_raptor","npcId":null,"traits":["pack"],
+  "moves":[
+   {"id":"savage-bite","name":"Savage Bite","intent":"attack","effects":[{"op":"damage","amount":26}],"weight":2},
+   {"id":"mothers-fury","name":"Mother's Fury","intent":"attack","effects":[{"op":"damage","amount":14},{"op":"apply","status":"bleed","stacks":4,"target":"player"}],"weight":2},
+   {"id":"defend-brood","name":"Defend Brood","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":2,"cooldown":4},
+   {"id":"rake","name":"Rake","intent":"attack_multi","effects":[{"op":"damage","amount":12,"times":2}],"weight":2}
+  ]},
+ {"id":"uhkloc","name":"Uhk'loc","tier":"elite","family":"beast","type":"gorilla","level":[54,55],"hp":[179,211],"icon":"ability_hunter_pet_gorilla","npcId":null,"traits":[],
+  "moves":[
+   {"id":"pound","name":"Pound","intent":"attack","effects":[{"op":"damage","amount":30}],"weight":2},
+   {"id":"thrash","name":"Thrash","intent":"attack_multi","effects":[{"op":"damage","amount":11,"times":3}],"weight":2},
+   {"id":"enrage","name":"Enrage","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":3,"target":"self"}],"weight":2,"cooldown":4},
+   {"id":"ground-slam","name":"Ground Slam","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":1,"cooldown":3}
+  ]},
+ {"id":"king-mosh","name":"King Mosh","tier":"boss","family":"beast","type":"devilsaur","level":[57,58],"hp":[360,410],"icon":"ability_hunter_pet_devilsaur","npcId":6584,"traits":["fear","huge-hits"],"pattern":["crushing-bite","terrifying-roar","rend-flesh","tail-sweep","crushing-bite"],
+  "moves":[
+   {"id":"crushing-bite","name":"Crushing Bite","intent":"attack","effects":[{"op":"damage","amount":30}],"weight":2},
+   {"id":"terrifying-roar","name":"Terrifying Roar","intent":"debuff","effects":[{"op":"apply","status":"fear","stacks":1,"target":"player"}],"weight":2,"cooldown":4},
+   {"id":"tail-sweep","name":"Tail Sweep","intent":"attack","effects":[{"op":"damage","amount":14,"target":"all_enemies"}],"weight":2,"cooldown":3},
+   {"id":"primal-fury","name":"Primal Fury","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":5},
+   {"id":"rend-flesh","name":"Rend Flesh","intent":"attack","effects":[{"op":"damage","amount":24}],"weight":2}
+  ],
+  "phases":[
+   {"hpBelowPct":60,"pattern":["crushing-bite","rend-flesh","terrifying-roar","tail-sweep"],"onEnter":[{"op":"apply","status":"strength","stacks":2,"target":"self"}]},
+   {"hpBelowPct":30,"pattern":["crushing-bite","crushing-bite","rend-flesh"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+  ]}
+]

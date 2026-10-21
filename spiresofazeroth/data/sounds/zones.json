@@ -1,0 +1,781 @@
+{
+ "elwynn-forest": {
+  "name": "Elwynn Forest",
+  "music": [
+   "/media/sounds/53492.mp3",
+   "/media/sounds/53493.mp3",
+   "/media/sounds/53494.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539131.ogg",
+   "night": "/media/sounds/539108.ogg"
+  },
+  "set": "forest",
+  "src": "biome:forest+forestnormal",
+  "musicNight": [
+   "/media/sounds/53495.mp3",
+   "/media/sounds/53496.mp3",
+   "/media/sounds/53497.mp3",
+   "/media/sounds/53498.mp3"
+  ]
+ },
+ "dun-morogh": {
+  "name": "Dun Morogh",
+  "music": [
+   "/media/sounds/53577.mp3",
+   "/media/sounds/53578.mp3",
+   "/media/sounds/53579.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539013.ogg",
+   "night": "/media/sounds/539023.ogg"
+  },
+  "set": "mountain",
+  "src": "biome:mountain+forestsnow",
+  "musicNight": [
+   "/media/sounds/53580.mp3",
+   "/media/sounds/53581.mp3",
+   "/media/sounds/53582.mp3",
+   "/media/sounds/53583.mp3"
+  ]
+ },
+ "tirisfal-glades": {
+  "name": "Tirisfal Glades",
+  "music": [
+   "/media/sounds/53486.mp3",
+   "/media/sounds/53487.mp3",
+   "/media/sounds/53488.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539098.ogg",
+   "night": "/media/sounds/538996.ogg"
+  },
+  "set": "evilforest",
+  "src": "biome:evilforest+forestscary",
+  "musicNight": [
+   "/media/sounds/53489.mp3",
+   "/media/sounds/53490.mp3",
+   "/media/sounds/53491.mp3"
+  ]
+ },
+ "loch-modan": {
+  "name": "Loch Modan",
+  "music": [
+   "/media/sounds/53577.mp3",
+   "/media/sounds/53578.mp3",
+   "/media/sounds/53579.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539131.ogg",
+   "night": "/media/sounds/539108.ogg"
+  },
+  "set": "mountain",
+  "src": "biome:mountain+forestnormal",
+  "musicNight": [
+   "/media/sounds/53580.mp3",
+   "/media/sounds/53581.mp3",
+   "/media/sounds/53582.mp3",
+   "/media/sounds/53583.mp3"
+  ]
+ },
+ "silverpine-forest": {
+  "name": "Silverpine Forest",
+  "music": [
+   "/media/sounds/53486.mp3",
+   "/media/sounds/53487.mp3",
+   "/media/sounds/53488.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539098.ogg",
+   "night": "/media/sounds/538996.ogg"
+  },
+  "set": "evilforest",
+  "src": "biome:evilforest+forestscary",
+  "musicNight": [
+   "/media/sounds/53489.mp3",
+   "/media/sounds/53490.mp3",
+   "/media/sounds/53491.mp3"
+  ]
+ },
+ "westfall": {
+  "name": "Westfall",
+  "music": [
+   "/media/sounds/53680.mp3",
+   "/media/sounds/53681.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539006.ogg",
+   "night": "/media/sounds/539121.ogg"
+  },
+  "set": "plains",
+  "src": "biome:plains+westfall",
+  "musicNight": [
+   "/media/sounds/53682.mp3",
+   "/media/sounds/53683.mp3"
+  ]
+ },
+ "redridge-mountains": {
+  "name": "Redridge Mountains",
+  "music": [
+   "/media/sounds/53577.mp3",
+   "/media/sounds/53578.mp3",
+   "/media/sounds/53579.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539056.ogg",
+   "night": "/media/sounds/539128.ogg"
+  },
+  "set": "mountain",
+  "src": "biome:mountain+grasslands",
+  "musicNight": [
+   "/media/sounds/53580.mp3",
+   "/media/sounds/53581.mp3",
+   "/media/sounds/53582.mp3",
+   "/media/sounds/53583.mp3"
+  ]
+ },
+ "duskwood": {
+  "name": "Duskwood",
+  "music": [
+   "/media/sounds/53486.mp3",
+   "/media/sounds/53487.mp3",
+   "/media/sounds/53488.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539114.ogg",
+   "night": "/media/sounds/539028.ogg"
+  },
+  "set": "evilforest",
+  "src": "biome:evilforest+forestdarkenchanted",
+  "musicNight": [
+   "/media/sounds/53489.mp3",
+   "/media/sounds/53490.mp3",
+   "/media/sounds/53491.mp3"
+  ]
+ },
+ "wetlands": {
+  "name": "Wetlands",
+  "music": [
+   "/media/sounds/53695.mp3",
+   "/media/sounds/53696.mp3",
+   "/media/sounds/53697.mp3",
+   "/media/sounds/53698.mp3",
+   "/media/sounds/53699.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539133.ogg",
+   "night": "/media/sounds/538993.ogg"
+  },
+  "set": "soggyplace",
+  "src": "biome:soggyplace+wetlands"
+ },
+ "hillsbrad-foothills": {
+  "name": "Hillsbrad Foothills",
+  "music": [
+   "/media/sounds/53680.mp3",
+   "/media/sounds/53681.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539056.ogg",
+   "night": "/media/sounds/539128.ogg"
+  },
+  "set": "plains",
+  "src": "biome:plains+grasslands",
+  "musicNight": [
+   "/media/sounds/53682.mp3",
+   "/media/sounds/53683.mp3"
+  ]
+ },
+ "alterac-mountains": {
+  "name": "Alterac Mountains",
+  "music": [
+   "/media/sounds/53577.mp3",
+   "/media/sounds/53578.mp3",
+   "/media/sounds/53579.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539013.ogg",
+   "night": "/media/sounds/539023.ogg"
+  },
+  "set": "mountain",
+  "src": "biome:mountain+forestsnow",
+  "musicNight": [
+   "/media/sounds/53580.mp3",
+   "/media/sounds/53581.mp3",
+   "/media/sounds/53582.mp3",
+   "/media/sounds/53583.mp3"
+  ]
+ },
+ "arathi-highlands": {
+  "name": "Arathi Highlands",
+  "music": [
+   "/media/sounds/53680.mp3",
+   "/media/sounds/53681.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539056.ogg",
+   "night": "/media/sounds/539128.ogg"
+  },
+  "set": "plains",
+  "src": "biome:plains+grasslands",
+  "musicNight": [
+   "/media/sounds/53682.mp3",
+   "/media/sounds/53683.mp3"
+  ]
+ },
+ "stranglethorn-vale": {
+  "name": "Stranglethorn Vale",
+  "music": [
+   "/media/sounds/53541.mp3",
+   "/media/sounds/53542.mp3",
+   "/media/sounds/53543.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539097.ogg",
+   "night": "/media/sounds/539092.ogg"
+  },
+  "set": "jungle",
+  "src": "biome:jungle+jungle",
+  "musicNight": [
+   "/media/sounds/53544.mp3",
+   "/media/sounds/53545.mp3",
+   "/media/sounds/53546.mp3"
+  ]
+ },
+ "badlands": {
+  "name": "Badlands",
+  "music": [
+   "/media/sounds/53432.mp3",
+   "/media/sounds/53433.mp3",
+   "/media/sounds/53434.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539024.ogg",
+   "night": "/media/sounds/539061.ogg"
+  },
+  "set": "desert",
+  "src": "biome:desert+canyondesert",
+  "musicNight": [
+   "/media/sounds/53435.mp3",
+   "/media/sounds/53436.mp3",
+   "/media/sounds/53437.mp3"
+  ]
+ },
+ "swamp-of-sorrows": {
+  "name": "Swamp of Sorrows",
+  "music": [
+   "/media/sounds/53695.mp3",
+   "/media/sounds/53696.mp3",
+   "/media/sounds/53697.mp3",
+   "/media/sounds/53698.mp3",
+   "/media/sounds/53699.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539084.ogg",
+   "night": "/media/sounds/539103.ogg"
+  },
+  "set": "soggyplace",
+  "src": "biome:soggyplace+marsh"
+ },
+ "the-hinterlands": {
+  "name": "The Hinterlands",
+  "music": [
+   "/media/sounds/53492.mp3",
+   "/media/sounds/53493.mp3",
+   "/media/sounds/53494.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539047.ogg",
+   "night": "/media/sounds/538994.ogg"
+  },
+  "set": "forest",
+  "src": "biome:forest+foresthigh",
+  "musicNight": [
+   "/media/sounds/53495.mp3",
+   "/media/sounds/53496.mp3",
+   "/media/sounds/53497.mp3",
+   "/media/sounds/53498.mp3"
+  ]
+ },
+ "searing-gorge": {
+  "name": "Searing Gorge",
+  "music": [
+   "/media/sounds/53812.mp3",
+   "/media/sounds/53813.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539073.ogg",
+   "night": "/media/sounds/539077.ogg"
+  },
+  "set": "volcanic",
+  "src": "biome:volcanic+volcanic",
+  "musicNight": [
+   "/media/sounds/53814.mp3",
+   "/media/sounds/53815.mp3"
+  ]
+ },
+ "burning-steppes": {
+  "name": "Burning Steppes",
+  "music": [
+   "/media/sounds/53812.mp3",
+   "/media/sounds/53813.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539073.ogg",
+   "night": "/media/sounds/539077.ogg"
+  },
+  "set": "volcanic",
+  "src": "biome:volcanic+volcanic",
+  "musicNight": [
+   "/media/sounds/53814.mp3",
+   "/media/sounds/53815.mp3"
+  ]
+ },
+ "blasted-lands": {
+  "name": "Blasted Lands",
+  "music": [
+   "/media/sounds/53426.mp3",
+   "/media/sounds/53427.mp3",
+   "/media/sounds/53428.mp3",
+   "/media/sounds/53429.mp3",
+   "/media/sounds/53430.mp3",
+   "/media/sounds/53431.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/594402.ogg",
+   "night": "/media/sounds/594555.ogg"
+  },
+  "set": "cursedland",
+  "src": "biome:cursedland+scorchline"
+ },
+ "western-plaguelands": {
+  "name": "Western Plaguelands",
+  "music": [
+   "/media/sounds/53426.mp3",
+   "/media/sounds/53427.mp3",
+   "/media/sounds/53428.mp3",
+   "/media/sounds/53429.mp3",
+   "/media/sounds/53430.mp3",
+   "/media/sounds/53431.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539019.ogg",
+   "night": "/media/sounds/539115.ogg"
+  },
+  "set": "cursedland",
+  "src": "biome:cursedland+plaguelands"
+ },
+ "eastern-plaguelands": {
+  "name": "Eastern Plaguelands",
+  "music": [
+   "/media/sounds/53426.mp3",
+   "/media/sounds/53427.mp3",
+   "/media/sounds/53428.mp3",
+   "/media/sounds/53429.mp3",
+   "/media/sounds/53430.mp3",
+   "/media/sounds/53431.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539019.ogg",
+   "night": "/media/sounds/539115.ogg"
+  },
+  "set": "cursedland",
+  "src": "biome:cursedland+plaguelands"
+ },
+ "deadwind-pass": {
+  "name": "Deadwind Pass",
+  "music": [
+   "/media/sounds/53426.mp3",
+   "/media/sounds/53427.mp3",
+   "/media/sounds/53428.mp3",
+   "/media/sounds/53429.mp3",
+   "/media/sounds/53430.mp3",
+   "/media/sounds/53431.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539031.ogg",
+   "night": "/media/sounds/539003.ogg"
+  },
+  "set": "cursedland",
+  "src": "biome:cursedland+deadwindpass"
+ },
+ "durotar": {
+  "name": "Durotar",
+  "music": [
+   "/media/sounds/53299.mp3",
+   "/media/sounds/53300.mp3",
+   "/media/sounds/53301.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539024.ogg",
+   "night": "/media/sounds/539061.ogg"
+  },
+  "set": "barrendry",
+  "src": "biome:barrendry+canyondesert",
+  "musicNight": [
+   "/media/sounds/53302.mp3",
+   "/media/sounds/53303.mp3",
+   "/media/sounds/53304.mp3"
+  ]
+ },
+ "mulgore": {
+  "name": "Mulgore",
+  "music": [
+   "/media/sounds/53680.mp3",
+   "/media/sounds/53681.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539015.ogg",
+   "night": "/media/sounds/539034.ogg"
+  },
+  "set": "plains",
+  "src": "biome:plains+plainsdesert",
+  "musicNight": [
+   "/media/sounds/53682.mp3",
+   "/media/sounds/53683.mp3"
+  ]
+ },
+ "teldrassil": {
+  "name": "Teldrassil",
+  "music": [
+   "/media/sounds/53453.mp3",
+   "/media/sounds/53454.mp3",
+   "/media/sounds/53455.mp3",
+   "/media/sounds/53456.mp3",
+   "/media/sounds/53457.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539058.ogg",
+   "night": "/media/sounds/538990.ogg"
+  },
+  "set": "enchantedforest",
+  "src": "biome:enchantedforest+enchantedforest"
+ },
+ "darkshore": {
+  "name": "Darkshore",
+  "music": [
+   "/media/sounds/53492.mp3",
+   "/media/sounds/53493.mp3",
+   "/media/sounds/53494.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539048.ogg",
+   "night": "/media/sounds/539125.ogg"
+  },
+  "set": "forest",
+  "src": "biome:forest+beach",
+  "musicNight": [
+   "/media/sounds/53495.mp3",
+   "/media/sounds/53496.mp3",
+   "/media/sounds/53497.mp3",
+   "/media/sounds/53498.mp3"
+  ]
+ },
+ "the-barrens": {
+  "name": "The Barrens",
+  "music": [
+   "/media/sounds/53299.mp3",
+   "/media/sounds/53300.mp3",
+   "/media/sounds/53301.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539015.ogg",
+   "night": "/media/sounds/539034.ogg"
+  },
+  "set": "barrendry",
+  "src": "biome:barrendry+plainsdesert",
+  "musicNight": [
+   "/media/sounds/53302.mp3",
+   "/media/sounds/53303.mp3",
+   "/media/sounds/53304.mp3"
+  ]
+ },
+ "stonetalon-mountains": {
+  "name": "Stonetalon Mountains",
+  "music": [
+   "/media/sounds/53577.mp3",
+   "/media/sounds/53578.mp3",
+   "/media/sounds/53579.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539047.ogg",
+   "night": "/media/sounds/538994.ogg"
+  },
+  "set": "mountain",
+  "src": "biome:mountain+foresthigh",
+  "musicNight": [
+   "/media/sounds/53580.mp3",
+   "/media/sounds/53581.mp3",
+   "/media/sounds/53582.mp3",
+   "/media/sounds/53583.mp3"
+  ]
+ },
+ "ashenvale": {
+  "name": "Ashenvale",
+  "music": [
+   "/media/sounds/53453.mp3",
+   "/media/sounds/53454.mp3",
+   "/media/sounds/53455.mp3",
+   "/media/sounds/53456.mp3",
+   "/media/sounds/53457.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539131.ogg",
+   "night": "/media/sounds/539108.ogg"
+  },
+  "set": "enchantedforest",
+  "src": "biome:enchantedforest+forestnormal"
+ },
+ "thousand-needles": {
+  "name": "Thousand Needles",
+  "music": [
+   "/media/sounds/53432.mp3",
+   "/media/sounds/53433.mp3",
+   "/media/sounds/53434.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539024.ogg",
+   "night": "/media/sounds/539061.ogg"
+  },
+  "set": "desert",
+  "src": "biome:desert+canyondesert",
+  "musicNight": [
+   "/media/sounds/53435.mp3",
+   "/media/sounds/53436.mp3",
+   "/media/sounds/53437.mp3"
+  ]
+ },
+ "desolace": {
+  "name": "Desolace",
+  "music": [
+   "/media/sounds/53432.mp3",
+   "/media/sounds/53433.mp3",
+   "/media/sounds/53434.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539015.ogg",
+   "night": "/media/sounds/539034.ogg"
+  },
+  "set": "desert",
+  "src": "biome:desert+plainsdesert",
+  "musicNight": [
+   "/media/sounds/53435.mp3",
+   "/media/sounds/53436.mp3",
+   "/media/sounds/53437.mp3"
+  ]
+ },
+ "dustwallow-marsh": {
+  "name": "Dustwallow Marsh",
+  "music": [
+   "/media/sounds/53695.mp3",
+   "/media/sounds/53696.mp3",
+   "/media/sounds/53697.mp3",
+   "/media/sounds/53698.mp3",
+   "/media/sounds/53699.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539084.ogg",
+   "night": "/media/sounds/539103.ogg"
+  },
+  "set": "soggyplace",
+  "src": "biome:soggyplace+marsh"
+ },
+ "feralas": {
+  "name": "Feralas",
+  "music": [
+   "/media/sounds/53541.mp3",
+   "/media/sounds/53542.mp3",
+   "/media/sounds/53543.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539097.ogg",
+   "night": "/media/sounds/539092.ogg"
+  },
+  "set": "jungle",
+  "src": "biome:jungle+jungle",
+  "musicNight": [
+   "/media/sounds/53544.mp3",
+   "/media/sounds/53545.mp3",
+   "/media/sounds/53546.mp3"
+  ]
+ },
+ "tanaris": {
+  "name": "Tanaris",
+  "music": [
+   "/media/sounds/53432.mp3",
+   "/media/sounds/53433.mp3",
+   "/media/sounds/53434.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539009.ogg",
+   "night": "/media/sounds/539074.ogg"
+  },
+  "set": "desert",
+  "src": "biome:desert+saltflats",
+  "musicNight": [
+   "/media/sounds/53435.mp3",
+   "/media/sounds/53436.mp3",
+   "/media/sounds/53437.mp3"
+  ]
+ },
+ "azshara": {
+  "name": "Azshara",
+  "music": [
+   "/media/sounds/53432.mp3",
+   "/media/sounds/53433.mp3",
+   "/media/sounds/53434.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539048.ogg",
+   "night": "/media/sounds/539125.ogg"
+  },
+  "set": "desert",
+  "src": "biome:desert+beach",
+  "musicNight": [
+   "/media/sounds/53435.mp3",
+   "/media/sounds/53436.mp3",
+   "/media/sounds/53437.mp3"
+  ]
+ },
+ "felwood": {
+  "name": "Felwood",
+  "music": [
+   "/media/sounds/53426.mp3",
+   "/media/sounds/53427.mp3",
+   "/media/sounds/53428.mp3",
+   "/media/sounds/53429.mp3",
+   "/media/sounds/53430.mp3",
+   "/media/sounds/53431.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539098.ogg",
+   "night": "/media/sounds/538996.ogg"
+  },
+  "set": "cursedland",
+  "src": "biome:cursedland+forestscary"
+ },
+ "un-goro-crater": {
+  "name": "Un'Goro Crater",
+  "music": [
+   "/media/sounds/53541.mp3",
+   "/media/sounds/53542.mp3",
+   "/media/sounds/53543.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539097.ogg",
+   "night": "/media/sounds/539092.ogg"
+  },
+  "set": "jungle",
+  "src": "biome:jungle+jungle",
+  "musicNight": [
+   "/media/sounds/53544.mp3",
+   "/media/sounds/53545.mp3",
+   "/media/sounds/53546.mp3"
+  ]
+ },
+ "winterspring": {
+  "name": "Winterspring",
+  "music": [
+   "/media/sounds/53577.mp3",
+   "/media/sounds/53578.mp3",
+   "/media/sounds/53579.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539013.ogg",
+   "night": "/media/sounds/539023.ogg"
+  },
+  "set": "mountain",
+  "src": "biome:mountain+forestsnow",
+  "musicNight": [
+   "/media/sounds/53580.mp3",
+   "/media/sounds/53581.mp3",
+   "/media/sounds/53582.mp3",
+   "/media/sounds/53583.mp3"
+  ]
+ },
+ "silithus": {
+  "name": "Silithus",
+  "music": [
+   "/media/sounds/53432.mp3",
+   "/media/sounds/53433.mp3",
+   "/media/sounds/53434.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539009.ogg",
+   "night": "/media/sounds/539074.ogg"
+  },
+  "set": "desert",
+  "src": "biome:desert+saltflats",
+  "musicNight": [
+   "/media/sounds/53435.mp3",
+   "/media/sounds/53436.mp3",
+   "/media/sounds/53437.mp3"
+  ]
+ },
+ "moonglade": {
+  "name": "Moonglade",
+  "music": [
+   "/media/sounds/53453.mp3",
+   "/media/sounds/53454.mp3",
+   "/media/sounds/53455.mp3",
+   "/media/sounds/53456.mp3",
+   "/media/sounds/53457.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539058.ogg",
+   "night": "/media/sounds/538990.ogg"
+  },
+  "set": "enchantedforest",
+  "src": "biome:enchantedforest+enchantedforest"
+ },
+ "hub": {
+  "name": "Moonglade (hub)",
+  "music": [
+   "/media/sounds/53453.mp3",
+   "/media/sounds/53454.mp3",
+   "/media/sounds/53455.mp3",
+   "/media/sounds/53456.mp3",
+   "/media/sounds/53457.mp3"
+  ],
+  "ambience": {
+   "day": "/media/sounds/539058.ogg",
+   "night": "/media/sounds/538990.ogg"
+  },
+  "set": "enchantedforest",
+  "src": "biome:enchantedforest+enchantedforest"
+ },
+ "title": {
+  "name": "Title",
+  "music": [
+   "/media/sounds/53223.mp3"
+  ],
+  "ambience": {},
+  "src": "gluescreen:wow_main_theme (no 'Legends of Azeroth' in library)"
+ },
+ "classSelect": {
+  "name": "Class select",
+  "music": [
+   "/media/sounds/53223.mp3"
+  ],
+  "ambience": {},
+  "src": "gluescreen:wow_main_theme"
+ },
+ "_stingers": {
+  "victory": "/media/sounds/567431.ogg",
+  "defeat": "/media/sounds/53519.mp3",
+  "loot": "/media/sounds/567439.ogg",
+  "boss": [
+   "/media/sounds/53684.mp3",
+   "/media/sounds/53685.mp3",
+   "/media/sounds/53686.mp3",
+   "/media/sounds/53687.mp3",
+   "/media/sounds/53688.mp3"
+  ],
+  "note": "classic has no per-zone boss track; boss = classic pvp/battleground set"
+ },
+ "_meta": {
+  "pattern": "/media/sounds/<fdid>.mp3|ogg",
+  "built_by": "tools/spires/build-zone-sounds.py",
+  "resolver": "library manifest paths (biome sets), not DB"
+ }
+}

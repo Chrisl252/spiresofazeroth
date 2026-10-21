@@ -1,0 +1,443 @@
+{
+ "id": "tirisfal-glades",
+ "name": "Tirisfal Glades",
+ "start": {
+  "name": "Gallows' End Tavern",
+  "icon": "inv_misc_beer_01"
+ },
+ "continent": "ek",
+ "act": 1,
+ "levelBand": [
+  1,
+  12
+ ],
+ "spire": {
+  "name": "Scarlet Watch Tower",
+  "lore": "The Scarlet Crusade raised this watch tower above the Undercity ruins at Brill. The glades below crawl with the restless dead, and the Crusade burns whatever is left."
+ },
+ "theme": {
+  "primary": "#5c6b4a",
+  "secondary": "#1a1f18",
+  "accent": "#a5d17a",
+  "background": "glades"
+ },
+ "zoneMechanic": {
+  "id": "rise-again",
+  "name": "Rise Again",
+  "icon": "spell_shadow_animatedead",
+  "text": "Undead enemies rise once when slain, returning at 25% HP.",
+  "hooks": {
+   "on_kill": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "target_is_family",
+      "family": "undead",
+      "oncePerEnemy": true
+     },
+     "then": [
+      {
+       "op": "revive",
+       "pct": 25
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "brill-inn",
+  "name": "Brill Inn",
+  "icon": "inv_misc_food_15",
+  "text": "Sleep in a real bed at the Brill Inn: heal 20% of max HP and gain 3 Max HP.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 20,
+    "target": "self"
+   },
+   {
+    "op": "max_hp",
+    "amount": 3,
+    "target": "self"
+   }
+  ]
+ },
+ "enemiesFile": "tirisfal-glades.enemies.json",
+ "raidFloorsFile": "tirisfal-glades.raids.json",
+ "encounters": {
+  "normal": [
+   [
+    "rattlecage-skeleton",
+    "rattlecage-skeleton"
+   ],
+   [
+    "rotting-dead",
+    "rotting-dead",
+    "mindless-zombie"
+   ],
+   [
+    "duskbat",
+    "duskbat",
+    "duskbat"
+   ],
+   [
+    "cursed-darkhound",
+    "rotting-dead"
+   ],
+   [
+    "scarlet-convert",
+    "scarlet-convert"
+   ],
+   [
+    "vile-fin-puddlejumper",
+    "vile-fin-puddlejumper",
+    "vile-fin-minor-oracle"
+   ],
+   [
+    "rattlecage-soldier",
+    "ravaged-corpse"
+   ],
+   [
+    "darkhound",
+    "darkhound",
+    "dread-wolf"
+   ],
+   [
+    "skeletal-warrior",
+    "skeletal-mage"
+   ],
+   [
+    "scarlet-initiate",
+    "scarlet-neophyte",
+    "scarlet-convert"
+   ],
+   [
+    "wretched-zombie",
+    "wretched-zombie",
+    "ravaged-corpse"
+   ],
+   [
+    "vile-fin-tidehunter",
+    "vile-fin-oracle",
+    "vile-fin-puddlejumper"
+   ],
+   [
+    "giant-duskbat",
+    "duskbat",
+    "duskbat"
+   ],
+   [
+    "scarlet-missionary",
+    "scarlet-zealot"
+   ],
+   [
+    "skeletal-raider",
+    "skeletal-mage",
+    "rattlecage-soldier"
+   ],
+   [
+    "scarlet-friar",
+    "scarlet-warrior"
+   ],
+   [
+    "scarlet-magus",
+    "scarlet-bodyguard",
+    "scarlet-initiate"
+   ],
+   [
+    "scarlet-protector",
+    "scarlet-zealot",
+    "scarlet-friar"
+   ]
+  ],
+  "elite": [
+   [
+    "executor-arren",
+    "rotting-dead",
+    "rotting-dead"
+   ],
+   [
+    "devlin-agamand",
+    "wretched-zombie"
+   ],
+   [
+    "lillith-nefara",
+    "imp"
+   ]
+  ],
+  "boss": [
+   [
+    "captain-perrine",
+    "scarlet-warrior",
+    "scarlet-warrior"
+   ],
+   [
+    "captain-perrine",
+    "scarlet-friar",
+    "scarlet-bodyguard"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "agamand-mills",
+   "name": "Agamand Mills",
+   "icon": "inv_misc_bone_humanskull_01",
+   "text": "The Agamand family's old mill crawls with Devlin's restless dead, and the family tombs hold coin.",
+   "options": [
+    {
+     "label": "Loot the family tombs (take 6 damage, +45 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 45
+      }
+     ]
+    },
+    {
+     "label": "Burn the mill (+20 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 20
+      }
+     ]
+    },
+    {
+     "label": "Leave the dead to rest",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "calvin-montague",
+   "npc": {
+    "name": "Calvin Montague",
+    "npcId": 6784,
+    "displayId": 5509
+   },
+   "name": "Calvin Montague",
+   "icon": "inv_misc_head_human_01",
+   "text": "Calvin Montague stumbles from Deathknell, dazed, with Scarlet blades at his back.",
+   "options": [
+    {
+     "label": "Cover his escape (take 5 damage, gain a card reward)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 5,
+       "target": "self"
+      },
+      {
+       "op": "random_card",
+       "pool": "class",
+       "rarity": "common",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Take his stray coins (+20 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 20
+      }
+     ]
+    },
+    {
+     "label": "Let the Crusade have him",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "executor-arren-bounty",
+   "name": "Executor Arren's Bounty",
+   "icon": "inv_scroll_03",
+   "text": "Executor Arren posts a bounty on defiled graves near Brill.",
+   "options": [
+    {
+     "label": "Claim the bounty (take 4 damage, +35 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 4,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 35
+      }
+     ]
+    },
+    {
+     "label": "Pray at the Brill graveyard (heal 6)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 6,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Ignore it",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "deathknell-chapel",
+   "name": "Deathknell Chapel",
+   "icon": "spell_holy_holybolt",
+   "text": "The Deathknell chapel bell tolls. Newly risen Forsaken press coins into your hand.",
+   "options": [
+    {
+     "label": "Accept the offering (+30 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 30
+      }
+     ]
+    },
+    {
+     "label": "Rest within the chapel (heal 10)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 10,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Walk past",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "scarlet-patrol",
+   "name": "Scarlet Patrol",
+   "icon": "inv_misc_head_human_02",
+   "text": "A Scarlet patrol marches the Brill road and demands you prove your faith.",
+   "options": [
+    {
+     "label": "Bluff your way through (take 4 damage, +25 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 4,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 25
+      }
+     ]
+    },
+    {
+     "label": "Slip into the dark",
+     "effects": [
+      {
+       "op": "block",
+       "amount": 4,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Refuse",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "whitemanes-chapeau",
+   "name": "Whitemane's Chapeau",
+   "icon": "inv_helmet_20",
+   "rarity": "rare",
+   "itemId": 7720,
+   "zone": "tirisfal-glades",
+   "class": null,
+   "text": "High Inquisitor Whitemane's hat. Heal 2 HP at the start of each turn.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "heal",
+      "amount": 2,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "herods-shoulder",
+   "name": "Herod's Shoulder",
+   "icon": "inv_shoulder_20",
+   "rarity": "rare",
+   "itemId": 7718,
+   "zone": "tirisfal-glades",
+   "class": null,
+   "text": "Herod's pauldron. Gain 3 Block at the start of each turn.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "block",
+      "amount": 3,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "mograines-might",
+   "name": "Mograine's Might",
+   "icon": "inv_gauntlets_26",
+   "rarity": "rare",
+   "itemId": 7723,
+   "zone": "tirisfal-glades",
+   "class": null,
+   "text": "Mograine's gauntlets. Start each combat with 1 Strength.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "hand-of-righteousness",
+   "name": "Hand of Righteousness",
+   "icon": "inv_mace_13",
+   "rarity": "rare",
+   "itemId": 7721,
+   "zone": "tirisfal-glades",
+   "class": null,
+   "text": "Mograine's hand. Your attacks deal 2 holy damage to all enemies.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "damage",
+      "amount": 2,
+      "target": "all_enemies"
+     }
+    ]
+   }
+  }
+ ]
+}

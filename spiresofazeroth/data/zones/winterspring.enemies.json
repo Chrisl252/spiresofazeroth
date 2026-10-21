@@ -1,0 +1,222 @@
+[
+ {"id":"cobalt-mageweaver","name":"Cobalt Mageweaver","tier":"normal","family":"dragonkin","type":"wyrmkin","level":[55,57],"hp":[72,84],"icon":"inv_misc_head_dragon_blue","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"frostbolt","name":"Frostbolt","intent":"cast","effects":[{"op":"damage","amount":13,"school":"frost"},{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":2},
+   {"id":"arcane-explosion","name":"Arcane Explosion","intent":"cast","effects":[{"op":"damage","amount":10,"school":"arcane"}],"cast":true,"weight":2,"cooldown":3},
+   {"id":"ice-barrier","name":"Ice Barrier","intent":"block","effects":[{"op":"block","amount":16,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"cobalt-scalebane","name":"Cobalt Scalebane","tier":"normal","family":"dragonkin","type":"dragonspawn","level":[56,58],"hp":[78,91],"icon":"inv_misc_head_dragon_blue","npcId":null,"traits":["breath"],
+  "moves":[
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2},
+   {"id":"frost-breath","name":"Frost Breath","intent":"attack","effects":[{"op":"damage","amount":12,"school":"frost","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"tail-sweep","name":"Tail Sweep","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":1}
+  ]},
+ {"id":"cobalt-wyrmkin","name":"Cobalt Wyrmkin","tier":"normal","family":"dragonkin","type":"wyrmkin","level":[55,57],"hp":[79,93],"icon":"inv_misc_head_dragon_blue","npcId":null,"traits":["breath"],
+  "moves":[
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2},
+   {"id":"frost-breath","name":"Frost Breath","intent":"attack","effects":[{"op":"damage","amount":12,"school":"frost","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"tail-sweep","name":"Tail Sweep","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":1}
+  ]},
+ {"id":"cobalt-broodling","name":"Cobalt Broodling","tier":"normal","family":"dragonkin","type":"whelp","level":[54,56],"hp":[39,46],"icon":"inv_misc_head_dragon_blue","npcId":null,"traits":["breath"],
+  "moves":[
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":7}],"weight":2},
+   {"id":"frost-breath","name":"Frost Breath","intent":"attack","effects":[{"op":"damage","amount":5,"school":"frost","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"tail-sweep","name":"Tail Sweep","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":1}
+  ]},
+ {"id":"hederine-initiate","name":"Hederine Initiate","tier":"normal","family":"demon","type":"hederine","level":[57,59],"hp":[84,98],"icon":"spell_shadow_summonsuccubus","npcId":null,"traits":["demon","caster"],
+  "moves":[
+   {"id":"mana-burn","name":"Mana Burn","intent":"attack","effects":[{"op":"damage","amount":13,"school":"arcane"},{"op":"heal","amount":8,"target":"self"}],"weight":2},
+   {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":15,"school":"shadow"}],"cast":true,"weight":2},
+   {"id":"curse-of-tongues","name":"Curse of Tongues","intent":"cast","effects":[{"op":"apply","status":"silence","stacks":1,"target":"player"}],"cast":true,"weight":1,"cooldown":4}
+  ]},
+ {"id":"hederine-manastalker","name":"Hederine Manastalker","tier":"normal","family":"demon","type":"hederine","level":[58,60],"hp":[99,116],"icon":"spell_shadow_manaburn","npcId":null,"traits":["demon","caster"],
+  "moves":[
+   {"id":"mana-burn","name":"Mana Burn","intent":"attack","effects":[{"op":"damage","amount":14,"school":"arcane"},{"op":"heal","amount":10,"target":"self"}],"weight":2},
+   {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":18,"school":"shadow"}],"cast":true,"weight":2},
+   {"id":"curse-of-tongues","name":"Curse of Tongues","intent":"cast","effects":[{"op":"apply","status":"silence","stacks":1,"target":"player"}],"cast":true,"weight":1,"cooldown":4}
+  ]},
+ {"id":"frostmaul-giant","name":"Frostmaul Giant","tier":"normal","family":"giant","type":"giant","level":[57,59],"hp":[113,133],"icon":"achievement_reputation_ogre","npcId":null,"traits":["slow","huge-hits"],
+  "moves":[
+   {"id":"boulder","name":"Boulder","intent":"attack","effects":[{"op":"damage","amount":36}],"weight":2,"cooldown":2},
+   {"id":"stomp","name":"Stomp","intent":"attack","effects":[{"op":"damage","amount":25}],"weight":2},
+   {"id":"earth-shock","name":"Earth Shock","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":1}
+  ]},
+ {"id":"winterfall-ursa","name":"Winterfall Ursa","tier":"normal","family":"humanoid","type":"furbolg","level":[55,57],"hp":[72,84],"icon":"ability_hunter_pet_bear","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":10},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"maul","name":"Maul","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2},
+   {"id":"chain-heal","name":"Chain Heal","intent":"heal","effects":[{"op":"heal","amount":14,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"winterfall-totemic","name":"Winterfall Totemic","tier":"normal","family":"humanoid","type":"furbolg","level":[56,58],"hp":[78,91],"icon":"ability_hunter_pet_bear","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":14,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"chain-heal","name":"Chain Heal","intent":"heal","effects":[{"op":"heal","amount":17,"target":"self"}],"weight":2,"cooldown":3},
+   {"id":"slowing-poison","name":"Slowing Poison","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":1}
+  ]},
+ {"id":"winterfall-pathfinder","name":"Winterfall Pathfinder","tier":"normal","family":"humanoid","type":"furbolg","level":[56,58],"hp":[78,91],"icon":"ability_hunter_pet_bear","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"shoot","name":"Shoot","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2},
+   {"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":10},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"chain-heal","name":"Chain Heal","intent":"heal","effects":[{"op":"heal","amount":14,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"winterfall-shaman","name":"Winterfall Shaman","tier":"normal","family":"humanoid","type":"furbolg","level":[57,59],"hp":[84,98],"icon":"ability_hunter_pet_bear","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":15,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"chain-heal","name":"Chain Heal","intent":"heal","effects":[{"op":"heal","amount":18,"target":"self"}],"weight":2,"cooldown":3},
+   {"id":"slowing-poison","name":"Slowing Poison","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":1}
+  ]},
+ {"id":"winterfall-den-watcher","name":"Winterfall Den Watcher","tier":"normal","family":"humanoid","type":"furbolg","level":[58,60],"hp":[103,121],"icon":"ability_hunter_pet_bear","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":14},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"maul","name":"Maul","intent":"attack","effects":[{"op":"damage","amount":20}],"weight":2},
+   {"id":"chain-heal","name":"Chain Heal","intent":"heal","effects":[{"op":"heal","amount":20,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"winterfall-runner","name":"Winterfall Runner","tier":"normal","family":"humanoid","type":"furbolg","level":[54,56],"hp":[59,69],"icon":"ability_hunter_pet_bear","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":8},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"maul","name":"Maul","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2},
+   {"id":"chain-heal","name":"Chain Heal","intent":"heal","effects":[{"op":"heal","amount":12,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"frostsaber-cub","name":"Frostsaber Cub","tier":"normal","family":"beast","type":"cat","level":[54,56],"hp":[39,46],"icon":"ability_hunter_pet_cat","npcId":null,"traits":["stealth"],
+  "moves":[
+   {"id":"pounce","name":"Pounce","intent":"attack","effects":[{"op":"damage","amount":5},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":6}],"weight":2},
+   {"id":"rake","name":"Rake","intent":"attack_multi","effects":[{"op":"damage","amount":3,"times":2}],"weight":2}
+  ]},
+ {"id":"frostsaber","name":"Frostsaber","tier":"normal","family":"beast","type":"cat","level":[56,58],"hp":[78,91],"icon":"ability_hunter_pet_cat","npcId":null,"traits":["stealth"],
+  "moves":[
+   {"id":"pounce","name":"Pounce","intent":"attack","effects":[{"op":"damage","amount":12},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2},
+   {"id":"rake","name":"Rake","intent":"attack_multi","effects":[{"op":"damage","amount":7,"times":2}],"weight":2}
+  ]},
+ {"id":"frostsaber-stalker","name":"Frostsaber Stalker","tier":"normal","family":"beast","type":"cat","level":[56,58],"hp":[78,91],"icon":"ability_hunter_pet_cat","npcId":null,"traits":["stealth"],
+  "moves":[
+   {"id":"pounce","name":"Pounce","intent":"attack","effects":[{"op":"damage","amount":12},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2},
+   {"id":"rake","name":"Rake","intent":"attack_multi","effects":[{"op":"damage","amount":7,"times":2}],"weight":2}
+  ]},
+ {"id":"frostsaber-huntress","name":"Frostsaber Huntress","tier":"normal","family":"beast","type":"cat","level":[58,60],"hp":[99,116],"icon":"ability_hunter_pet_cat","npcId":null,"traits":["stealth"],
+  "moves":[
+   {"id":"pounce","name":"Pounce","intent":"attack","effects":[{"op":"damage","amount":14},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":16}],"weight":2},
+   {"id":"rake","name":"Rake","intent":"attack_multi","effects":[{"op":"damage","amount":9,"times":2}],"weight":2}
+  ]},
+ {"id":"frostsaber-pride-watcher","name":"Frostsaber Pride Watcher","tier":"normal","family":"beast","type":"cat","level":[59,60],"hp":[111,131],"icon":"ability_hunter_pet_cat","npcId":null,"traits":["stealth"],
+  "moves":[
+   {"id":"pounce","name":"Pounce","intent":"attack","effects":[{"op":"damage","amount":16},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":18}],"weight":2},
+   {"id":"rake","name":"Rake","intent":"attack_multi","effects":[{"op":"damage","amount":10,"times":2}],"weight":2}
+  ]},
+ {"id":"chillwind-chimaera","name":"Chillwind Chimaera","tier":"normal","family":"beast","type":"chimera","level":[56,58],"hp":[78,91],"icon":"ability_hunter_pet_chimera","npcId":null,"traits":["breath"],
+  "moves":[
+   {"id":"bite","name":"Bite","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2},
+   {"id":"frost-breath","name":"Frost Breath","intent":"attack","effects":[{"op":"damage","amount":12,"school":"frost","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"poison-spit","name":"Poison Spit","intent":"attack","effects":[{"op":"damage","amount":9,"school":"nature"},{"op":"apply","status":"poison","stacks":2,"target":"player"}],"weight":2}
+  ]},
+ {"id":"chillwind-ravager","name":"Chillwind Ravager","tier":"normal","family":"beast","type":"chimera","level":[57,59],"hp":[96,113],"icon":"ability_hunter_pet_chimera","npcId":null,"traits":["breath"],
+  "moves":[
+   {"id":"bite","name":"Bite","intent":"attack","effects":[{"op":"damage","amount":18}],"weight":2},
+   {"id":"frost-breath","name":"Frost Breath","intent":"attack","effects":[{"op":"damage","amount":14,"school":"frost","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"poison-spit","name":"Poison Spit","intent":"attack","effects":[{"op":"damage","amount":11,"school":"nature"},{"op":"apply","status":"poison","stacks":2,"target":"player"}],"weight":2}
+  ]},
+ {"id":"shardtooth-bear","name":"Shardtooth Bear","tier":"normal","family":"beast","type":"bear","level":[55,57],"hp":[72,84],"icon":"ability_hunter_pet_bear","npcId":null,"traits":[],
+  "moves":[
+   {"id":"maul","name":"Maul","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2},
+   {"id":"swipe","name":"Swipe","intent":"attack_multi","effects":[{"op":"damage","amount":7,"times":2}],"weight":2},
+   {"id":"enrage","name":"Enrage","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"shardtooth-mauler","name":"Shardtooth Mauler","tier":"normal","family":"beast","type":"bear","level":[57,59],"hp":[96,113],"icon":"ability_hunter_pet_bear","npcId":null,"traits":[],
+  "moves":[
+   {"id":"maul","name":"Maul","intent":"attack","effects":[{"op":"damage","amount":19}],"weight":2},
+   {"id":"swipe","name":"Swipe","intent":"attack_multi","effects":[{"op":"damage","amount":10,"times":2}],"weight":2},
+   {"id":"enrage","name":"Enrage","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"shardtooth-elder","name":"Shardtooth Elder","tier":"normal","family":"beast","type":"bear","level":[58,60],"hp":[112,132],"icon":"ability_hunter_pet_bear","npcId":null,"traits":[],
+  "moves":[
+   {"id":"maul","name":"Maul","intent":"attack","effects":[{"op":"damage","amount":22}],"weight":2},
+   {"id":"swipe","name":"Swipe","intent":"attack_multi","effects":[{"op":"damage","amount":11,"times":2}],"weight":2},
+   {"id":"enrage","name":"Enrage","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"ice-thistle-yeti","name":"Ice Thistle Yeti","tier":"normal","family":"beast","type":"yeti","level":[54,56],"hp":[66,77],"icon":"inv_misc_pet_pandaren_yeti","npcId":null,"traits":[],
+  "moves":[
+   {"id":"pound","name":"Pound","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2},
+   {"id":"claw-swipe","name":"Claw Swipe","intent":"attack_multi","effects":[{"op":"damage","amount":7,"times":2}],"weight":2},
+   {"id":"frost-armor","name":"Frost Armor","intent":"buff","effects":[{"op":"apply","status":"armor","stacks":5,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"ice-thistle-matriarch","name":"Ice Thistle Matriarch","tier":"normal","family":"beast","type":"yeti","level":[57,59],"hp":[100,118],"icon":"inv_misc_pet_pandaren_yeti","npcId":null,"traits":[],
+  "moves":[
+   {"id":"pound","name":"Pound","intent":"attack","effects":[{"op":"damage","amount":19}],"weight":2},
+   {"id":"matriarch-roar","name":"Matriarch Roar","intent":"heal","effects":[{"op":"heal","amount":16,"target":"self"}],"weight":2,"cooldown":4},
+   {"id":"claw-swipe","name":"Claw Swipe","intent":"attack_multi","effects":[{"op":"damage","amount":10,"times":2}],"weight":2}
+  ]},
+ {"id":"rogue-ice-thistle","name":"Rogue Ice Thistle","tier":"normal","family":"beast","type":"yeti","level":[56,58],"hp":[78,91],"icon":"inv_misc_pet_pandaren_yeti","npcId":null,"traits":[],
+  "moves":[
+   {"id":"ambush","name":"Ambush","intent":"attack","effects":[{"op":"damage","amount":18}],"weight":2},
+   {"id":"claw-swipe","name":"Claw Swipe","intent":"attack_multi","effects":[{"op":"damage","amount":8,"times":2}],"weight":2},
+   {"id":"frost-howl","name":"Frost Howl","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":2,"cooldown":3}
+  ]},
+ {"id":"suffering-highborne","name":"Suffering Highborne","tier":"normal","family":"undead","type":"ghost","level":[54,56],"hp":[66,77],"icon":"inv_misc_head_elf_02","npcId":null,"traits":["incorporeal"],
+  "moves":[
+   {"id":"shadow-word-pain","name":"Shadow Word Pain","intent":"cast","effects":[{"op":"damage","amount":9,"school":"shadow"},{"op":"apply","status":"curse","stacks":1,"target":"player"}],"cast":true,"weight":2},
+   {"id":"drain-mana","name":"Drain Mana","intent":"attack","effects":[{"op":"damage","amount":8,"school":"arcane"},{"op":"heal","amount":6,"target":"self"}],"weight":2,"cooldown":3},
+   {"id":"spectral-touch","name":"Spectral Touch","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":2}
+  ]},
+ {"id":"anguished-highborne","name":"Anguished Highborne","tier":"normal","family":"undead","type":"ghost","level":[55,57],"hp":[79,93],"icon":"inv_misc_head_elf_02","npcId":null,"traits":["incorporeal"],
+  "moves":[
+   {"id":"shadow-word-pain","name":"Shadow Word Pain","intent":"cast","effects":[{"op":"damage","amount":10,"school":"shadow"},{"op":"apply","status":"curse","stacks":1,"target":"player"}],"cast":true,"weight":2},
+   {"id":"drain-mana","name":"Drain Mana","intent":"attack","effects":[{"op":"damage","amount":9,"school":"arcane"},{"op":"heal","amount":7,"target":"self"}],"weight":2,"cooldown":3},
+   {"id":"spectral-touch","name":"Spectral Touch","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2}
+  ]},
+ {"id":"frostmaul-preserver","name":"Frostmaul Preserver","tier":"elite","family":"giant","type":"giant","level":[58,59],"hp":[221,260],"icon":"achievement_reputation_ogre","npcId":null,"traits":["slow","huge-hits","resist:frost"],
+  "moves":[
+   {"id":"frost-boulder","name":"Frost Boulder","intent":"attack","effects":[{"op":"damage","amount":36}],"weight":2,"cooldown":2},
+   {"id":"stomp","name":"Stomp","intent":"attack","effects":[{"op":"damage","amount":24}],"weight":2},
+   {"id":"frost-armor","name":"Frost Armor","intent":"buff","effects":[{"op":"apply","status":"armor","stacks":12,"target":"self"}],"weight":2,"cooldown":4},
+   {"id":"frost-nova","name":"Frost Nova","intent":"attack","effects":[{"op":"damage","amount":12,"school":"frost","target":"all_enemies"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"ice-thistle-patriarch","name":"Ice Thistle Patriarch","tier":"elite","family":"beast","type":"yeti","level":[58,59],"hp":[221,260],"icon":"inv_misc_pet_pandaren_yeti","npcId":null,"traits":[],
+  "moves":[
+   {"id":"pound","name":"Pound","intent":"attack","effects":[{"op":"damage","amount":30}],"weight":2},
+   {"id":"claw-swipe","name":"Claw Swipe","intent":"attack_multi","effects":[{"op":"damage","amount":13,"times":3}],"weight":2},
+   {"id":"ice-thistle-fury","name":"Ice Thistle Fury","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":3,"target":"self"}],"weight":2,"cooldown":4},
+   {"id":"frost-howl","name":"Frost Howl","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":1,"cooldown":3}
+  ]},
+ {"id":"high-chief-winterfall","name":"High Chief Winterfall","tier":"elite","family":"humanoid","type":"furbolg","level":[59,60],"hp":[233,274],"icon":"ability_hunter_pet_bear","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"maul","name":"Maul","intent":"attack","effects":[{"op":"damage","amount":32}],"weight":2},
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":28,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"chain-heal","name":"Chain Heal","intent":"heal","effects":[{"op":"heal","amount":26,"target":"self"}],"weight":2,"cooldown":4},
+   {"id":"winterfall-ritual","name":"Winterfall Ritual","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":5}
+  ]},
+ {"id":"grizzle-snowpaw","name":"Grizzle Snowpaw","tier":"elite","family":"beast","type":"bear","level":[58,59],"hp":[221,260],"icon":"ability_hunter_pet_bear","npcId":null,"traits":[],
+  "moves":[
+   {"id":"maul","name":"Maul","intent":"attack","effects":[{"op":"damage","amount":30}],"weight":2},
+   {"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":16},{"op":"apply","status":"bleed","stacks":5,"target":"player"}],"weight":2},
+   {"id":"swipe","name":"Swipe","intent":"attack_multi","effects":[{"op":"damage","amount":12,"times":3}],"weight":2},
+   {"id":"enrage","name":"Enrage","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":3,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"lord-lakmaeran","name":"Lord Lakmaeran","tier":"boss","family":"demon","type":"hederine","level":[60,60],"hp":[502,590],"icon":"spell_shadow_summonsuccubus","npcId":null,"traits":["demon","caster"],"pattern":["mana-burn","shadow-bolt","soul-rend","hederine-nova","mana-burn"],"role":"zone-boss",
+  "moves":[
+   {"id":"mana-burn","name":"Mana Burn","intent":"attack","effects":[{"op":"damage","amount":22,"school":"arcane"},{"op":"heal","amount":18,"target":"self"}],"weight":2},
+   {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":28,"school":"shadow"}],"cast":true,"weight":2},
+   {"id":"curse-of-tongues","name":"Curse of Tongues","intent":"cast","effects":[{"op":"apply","status":"silence","stacks":1,"target":"player"}],"cast":true,"weight":2,"cooldown":4},
+   {"id":"hederine-nova","name":"Hederine Nova","intent":"attack","effects":[{"op":"damage","amount":14,"school":"shadow","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"soul-rend","name":"Soul Rend","intent":"attack","effects":[{"op":"damage","amount":34}],"weight":2},
+   {"id":"summon-hederine-initiate","name":"Summon Hederine Initiate","intent":"summon","effects":[{"op":"summon","unit":"hederine-acolyte","count":2}],"weight":1,"cooldown":6}
+  ],
+  "phases":[
+   {"hpBelowPct":60,"pattern":["mana-burn","curse-of-tongues","hederine-nova","soul-rend"],"onEnter":[{"op":"apply","status":"armor","stacks":12,"target":"self"}]},
+   {"hpBelowPct":30,"pattern":["soul-rend","mana-burn","hederine-nova","soul-rend"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+  ]},
+ {"id":"hederine-slayer","name":"Hederine Slayer","tier":"boss","family":"demon","type":"hederine","level":[59,60],"hp":[492,578],"icon":"spell_shadow_summonsuccubus","npcId":null,"traits":["demon"],"pattern":["soul-slash","twin-blades","shadow-cripple","mana-burn"],"role":"zone-boss-alternate",
+  "moves":[
+   {"id":"soul-slash","name":"Soul Slash","intent":"attack","effects":[{"op":"damage","amount":34}],"weight":2},
+   {"id":"twin-blades","name":"Twin Blades","intent":"attack_multi","effects":[{"op":"damage","amount":13,"times":3}],"weight":2},
+   {"id":"mana-burn","name":"Mana Burn","intent":"attack","effects":[{"op":"damage","amount":20,"school":"arcane"},{"op":"heal","amount":16,"target":"self"}],"weight":2,"cooldown":3},
+   {"id":"slayer-focus","name":"Slayer Focus","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":5},
+   {"id":"shadow-cripple","name":"Shadow Cripple","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":4}
+  ],
+  "phases":[
+   {"hpBelowPct":50,"pattern":["soul-slash","twin-blades","soul-slash"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+  ]}
+]

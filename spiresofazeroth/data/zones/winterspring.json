@@ -1,0 +1,33 @@
+{
+ "id":"winterspring",
+ "name":"Winterspring",
+ "start": {"name": "Everlook Inn", "icon": "inv_misc_beer_01"},
+ "continent":"kal",
+ "act":6,
+ "levelBand":[53,60],
+ "isHub":false,
+ "units":{"hederine-acolyte":{"name":"Hederine Initiate","icon":"spell_shadow_summonsuccubus","hp":20,"moves":[{"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","cast":true,"effects":[{"op":"damage","amount":7,"school":"shadow"}],"weight":2}]}},
+ "spire":{"name":"Darkwhisper Gorge / Mazthoril","lore":"A frozen ravine where the Hederine demons plot under Lord Lakmaeran, beside the cobalt dragon caverns of Mazthoril and the ice-locked ruins of Winterspring."},
+ "theme":{"primary":"#6fa8d8","secondary":"#15202e","accent":"#e8f6ff","background":"winterspring"},
+ "zoneMechanic":{"id":"chill","name":"Chill","icon":"spell_frost_frostarmor02","text":"At the start of your turn 1 random card in hand becomes Frozen and cannot be played this turn.","hooks":{"on_turn_start":[{"op":"apply","status":"frozen","stacks":1,"target":"hand_random","count":1}]}},
+ "rest":{"id":"everlook-inn","name":"Everlook Inn","icon":"inv_drink_05","text":"Warm up at Everlook, the goblin town in the snow.","effects":[{"op":"heal","amount":26,"target":"self"},{"op":"remove","status":"frozen","target":"self"}]},
+ "encounters":{
+  "normal":[["frostsaber-cub","frostsaber-cub","frostsaber"],["ice-thistle-yeti","ice-thistle-yeti"],["shardtooth-bear","winterfall-runner"],["suffering-highborne","anguished-highborne"],["cobalt-broodling","cobalt-broodling","cobalt-mageweaver"],["winterfall-ursa","winterfall-shaman"],["frostsaber-stalker","frostsaber-huntress"],["chillwind-chimaera","chillwind-ravager"],["rogue-ice-thistle","ice-thistle-matriarch","ice-thistle-yeti"],["winterfall-pathfinder","winterfall-totemic","winterfall-den-watcher"],["hederine-initiate","hederine-manastalker"],["cobalt-scalebane","cobalt-wyrmkin"],["shardtooth-mauler","shardtooth-elder"],["frostmaul-giant"],["frostsaber-pride-watcher","frostsaber-huntress"],["hederine-manastalker","hederine-initiate","hederine-initiate"],["frostmaul-giant","winterfall-shaman"]],
+  "elite":[["grizzle-snowpaw","shardtooth-bear"],["high-chief-winterfall","winterfall-den-watcher","winterfall-totemic"],["frostmaul-preserver","frostmaul-giant"],["ice-thistle-patriarch","ice-thistle-matriarch"]],
+  "boss":[["lord-lakmaeran","hederine-initiate"],["hederine-slayer"]]
+ },
+ "events":[
+  {"id":"everlook","name":"Everlook","icon":"inv_misc_coin_01","text":"The Steamwheedle goblins of Everlook trade in the cold with prices to match.","options":[{"label":"Buy cold-weather gear (-45 gold, +5 max HP)","effects":[{"op":"gold","amount":-45},{"op":"max_hp","amount":5}],"requires":{"gold":45}},{"label":"Sell pelts (+45 gold)","effects":[{"op":"gold","amount":45}]},{"label":"Leave","effects":[]}]},
+  {"id":"frostsaber-rock","name":"Frostsaber Rock","icon":"ability_hunter_pet_cat","text":"Rivern Frostwind tends the Frostsaber Rock and asks for fresh meat for the cats.","options":[{"label":"Feed the cats (-20 gold): relic","effects":[{"op":"gold","amount":-20},{"op":"gain_relic","relic":"frostsaber-boots"}],"requires":{"gold":20}},{"label":"Learn from Rivern (+1 Dexterity)","effects":[{"op":"apply","status":"dexterity","stacks":1,"target":"self"}]},{"label":"Leave","effects":[]}]},
+  {"id":"donova-snowden","npc":{"name":"Donova Snowden","npcId":9298,"displayId":8949},"name":"Donova Snowden","icon":"inv_misc_note_01","text":"Donova Snowden pleads for help gathering supplies for the people of Winterspring.","options":[{"label":"Help (-6 HP, +70 gold)","effects":[{"op":"damage","amount":6,"target":"self"},{"op":"gold","amount":70}]},{"label":"Hear her story (heal 12)","effects":[{"op":"heal","amount":12,"target":"self"}]},{"label":"Pass","effects":[]}]},
+  {"id":"winterfall-ritual","name":"The Winterfall Ritual","icon":"spell_nature_lightning","text":"Winterfall shamans chant around a fire totem, empowering their warband.","options":[{"label":"Break the ritual (-10 HP, relic)","effects":[{"op":"damage","amount":10,"target":"self"},{"op":"gain_relic","relic":"winterfall-spirit-beads"}]},{"label":"Steal ritual offerings (+75 gold)","effects":[{"op":"gold","amount":75}]},{"label":"Avoid","effects":[]}]},
+  {"id":"mazthoril","name":"Mazthoril","icon":"inv_misc_head_dragon_blue","text":"Frozen caverns of cobalt wyrmkin and ancient Highborne ruins. Something hums in the ice.","options":[{"label":"Study the Highborne runes (add a free upgrade)","effects":[{"op":"upgrade_card","pick":"random","count":1}]},{"label":"Take the frost crystals (+55 gold, -5 HP)","effects":[{"op":"gold","amount":55},{"op":"damage","amount":5,"target":"self"}]},{"label":"Leave","effects":[]}]},
+  {"id":"darkwhisper-gorge","name":"Darkwhisper Gorge","icon":"spell_shadow_summonsuccubus","text":"Hederine demons whisper from the gorge, promising power.","options":[{"label":"Listen (+4 max HP, add Madness)","effects":[{"op":"max_hp","amount":4},{"op":"add_card","card":"madness","to":"deck_permanent","count":1}]},{"label":"Burn the shrine (-8 HP, +65 gold)","effects":[{"op":"damage","amount":8,"target":"self"},{"op":"gold","amount":65}]},{"label":"Cover your ears","effects":[]}]}
+ ],
+ "relics":[
+  {"id":"winterfall-spirit-beads","name":"Winterfall Spirit Beads","icon":"inv_jewelry_necklace_01","rarity":"uncommon","itemId":null,"itemIdSource":"unverified","zone":"winterspring","class":null,"text":"Start combat with 7 Block.","triggers":{"on_combat_start":[{"op":"block","amount":7,"target":"self"}]}},
+  {"id":"frostsaber-boots","name":"Frostsaber Boots","icon":"inv_boots_01","rarity":"rare","itemId":null,"itemIdSource":"unverified","zone":"winterspring","class":null,"text":"At the start of each turn gain 1 Dexterity until end of turn.","triggers":{"on_turn_start":[{"op":"apply","status":"dexterity","stacks":1,"target":"self","duration":1}]}},
+  {"id":"frostsaber-gloves","name":"Frostsaber Gloves","icon":"inv_gauntlets_01","rarity":"rare","itemId":null,"itemIdSource":"unverified","zone":"winterspring","class":null,"text":"Your Attacks apply 1 Bleed at 30% chance.","triggers":{"on_attack":[{"op":"conditional","if":{"type":"chance","p":0.3},"then":[{"op":"apply","status":"bleed","stacks":1,"target":"enemy"}]}]}}
+ ],
+ "enemiesFile":"winterspring.enemies.json"
+}

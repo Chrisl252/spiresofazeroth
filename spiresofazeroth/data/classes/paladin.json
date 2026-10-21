@@ -1,0 +1,1240 @@
+{
+  "id": "paladin",
+  "name": "Paladin",
+  "icon": "classicon_paladin",
+  "color": "#F58CBA",
+  "lore": "Holy champions of the Light: protect yourself with sacred Auras, infuse attacks with Seals, and unleash Judgement upon your foes.",
+  "startingHp": 80,
+  "startingGold": 99,
+  "defaultContinent": "ek",
+  "spellIdSource": "memory",
+  "resource": {
+    "id": "seal",
+    "name": "Seals & Judgement",
+    "tip": "Only one Seal is active at a time. A new Seal replaces it; Judgement releases the Seal for an explosive secondary effect.",
+    "icon": "spell_holy_sealofmight",
+    "max": 1,
+    "rules": "Playing a Seal grants continuous combat bonuses. Unleashing Judgement consumes your active Seal to deliver burst damage and sacred utility.",
+    "energyPerTurn": 3,
+    "startOfCombat": 0,
+    "gainOnDamageDealt": 0,
+    "gainOnDamageTaken": 0,
+    "decayPerTurn": 0
+  },
+  "archetypes": [
+    {"id": "holy", "name": "Holy", "icon": "spell_holy_searinglight", "text": "Healing, Seals of Light and Wisdom, and Blessings that refill your hand."},
+    {"id": "protection", "name": "Protection", "icon": "spell_holy_devotionaura", "text": "Block, Thorns, stuns and invulnerability while you out-last the enemy."},
+    {"id": "retribution", "name": "Retribution", "icon": "spell_holy_auraoflight", "text": "Seal-and-Judgement damage, Strength and holy finishers."}
+  ],
+  "relics": [
+    {
+      "id": "truesilver-champion",
+      "name": "Truesilver Champion",
+      "icon": "inv_sword_48",
+      "rarity": "rare",
+      "itemId": null,
+      "zone": null,
+      "class": "paladin",
+      "text": "At the start of your turn, heal 1.",
+      "triggers": {
+        "on_turn_start": [
+          {"op": "heal", "amount": 1}
+        ]
+      }
+    },
+    {
+      "id": "lightforge-gauntlets",
+      "name": "Lightforge Gauntlets",
+      "icon": "inv_gauntlets_04",
+      "rarity": "uncommon",
+      "itemId": null,
+      "zone": null,
+      "class": "paladin",
+      "text": "Start each combat with 6 Block and Seal of Righteousness active.",
+      "triggers": {
+        "on_combat_start": [
+          {"op": "block", "amount": 6},
+          {"op": "set_seal", "value": "righteousness"}
+        ]
+      }
+    }
+  ],
+  "starterDeck": [
+    "seal-of-righteousness",
+    "seal-of-righteousness",
+    "seal-of-righteousness",
+    "judgement",
+    "judgement",
+    "judgement",
+    "holy-light",
+    "holy-light",
+    "devotion-aura",
+    "devotion-aura"
+  ],
+  "units": {},
+  "cards": [
+    {
+      "id": "seal-of-righteousness",
+      "name": "Seal of Righteousness",
+      "icon": "spell_holy_sealofrighteousness",
+      "spellId": 21084,
+      "rank": 1,
+      "type": "seal",
+      "rarity": "basic",
+      "archetype": "retribution",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 holy damage. Seal: Judgement deals 9 holy damage.",
+      "effects": [
+        {"op": "damage", "amount": 6, "school": "holy"},
+        {"op": "set_seal", "value": "righteousness"}
+      ],
+      "onJudge": [
+        {"op": "damage", "amount": 9, "school": "holy"}
+      ],
+      "upgrade": {
+        "name": "Seal of Righteousness (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 holy damage. Seal: Judgement deals 11 holy damage.",
+        "effects": [
+          {"op": "damage", "amount": 9, "school": "holy"},
+          {"op": "set_seal", "value": "righteousness"}
+        ],
+        "onJudge": [
+          {"op": "damage", "amount": 11, "school": "holy"}
+        ]
+      }
+    },
+    {
+      "id": "judgement",
+      "name": "Judgement",
+      "icon": "spell_holy_righteousfury",
+      "spellId": 20271,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "retribution",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Consume your Seal and trigger its Judgement. Deal 6 holy damage.",
+      "effects": [
+        {"op": "judgement"},
+        {"op": "damage", "amount": 6, "school": "holy"}
+      ],
+      "upgrade": {
+        "name": "Judgement (Rank 2)",
+        "cost": 1,
+        "text": "Consume your Seal and trigger its Judgement. Deal 9 holy damage.",
+        "effects": [
+          {"op": "judgement"},
+          {"op": "damage", "amount": 9, "school": "holy"}
+        ]
+      }
+    },
+    {
+      "id": "holy-light",
+      "name": "Holy Light",
+      "icon": "spell_holy_holybolt",
+      "spellId": 635,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "basic",
+      "archetype": "holy",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 5 Block. Heal 3 HP.",
+      "effects": [
+        {"op": "block", "amount": 5},
+        {"op": "heal", "amount": 3}
+      ],
+      "upgrade": {
+        "name": "Holy Light (Rank 2)",
+        "cost": 1,
+        "text": "Gain 8 Block. Heal 5 HP.",
+        "effects": [
+          {"op": "block", "amount": 8},
+          {"op": "heal", "amount": 5}
+        ]
+      }
+    },
+    {
+      "id": "devotion-aura",
+      "name": "Devotion Aura",
+      "icon": "spell_holy_devotionaura",
+      "spellId": 465,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "basic",
+      "archetype": "protection",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 5 Block. Gain 1 Armor.",
+      "effects": [
+        {"op": "block", "amount": 5},
+        {"op": "apply", "status": "armor", "stacks": 1, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Devotion Aura (Rank 2)",
+        "cost": 1,
+        "text": "Gain 8 Block. Gain 2 Armor.",
+        "effects": [
+          {"op": "block", "amount": 8},
+          {"op": "apply", "status": "armor", "stacks": 2, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "flash-of-light",
+      "name": "Flash of Light",
+      "icon": "spell_holy_flashheal",
+      "spellId": 19750,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "holy",
+      "cost": 0,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 4 Block. Heal 2 HP.",
+      "effects": [
+        {"op": "block", "amount": 4},
+        {"op": "heal", "amount": 2}
+      ],
+      "upgrade": {
+        "name": "Flash of Light (Rank 2)",
+        "cost": 0,
+        "text": "Gain 6 Block. Heal 3 HP.",
+        "effects": [
+          {"op": "block", "amount": 6},
+          {"op": "heal", "amount": 3}
+        ]
+      }
+    },
+    {
+      "id": "seal-of-the-crusader",
+      "name": "Seal of the Crusader",
+      "icon": "spell_holy_holysmite",
+      "spellId": 21082,
+      "rank": 1,
+      "type": "seal",
+      "rarity": "common",
+      "archetype": "retribution",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 5 holy damage. Seal: Judgement deals 8 holy damage, applies 2 Vulnerable.",
+      "effects": [
+        {"op": "damage", "amount": 5, "school": "holy"},
+        {"op": "set_seal", "value": "crusader"}
+      ],
+      "onJudge": [
+        {"op": "damage", "amount": 8, "school": "holy"},
+        {"op": "apply", "status": "vulnerable", "stacks": 2, "target": "enemy"}
+      ],
+      "upgrade": {
+        "name": "Seal of the Crusader (Rank 2)",
+        "cost": 1,
+        "text": "Deal 8 holy damage. Seal: Judgement deals 11 holy damage, applies 3 Vulnerable.",
+        "effects": [
+          {"op": "damage", "amount": 8, "school": "holy"},
+          {"op": "set_seal", "value": "crusader"}
+        ],
+        "onJudge": [
+          {"op": "damage", "amount": 11, "school": "holy"},
+          {"op": "apply", "status": "vulnerable", "stacks": 3, "target": "enemy"}
+        ]
+      }
+    },
+    {
+      "id": "seal-of-justice",
+      "name": "Seal of Justice",
+      "icon": "spell_holy_sealofwrath",
+      "spellId": 20164,
+      "rank": 1,
+      "type": "seal",
+      "rarity": "common",
+      "archetype": "protection",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Gain 6 Block. Seal: Judgement deals 6 holy damage, applies 2 Weak.",
+      "effects": [
+        {"op": "block", "amount": 6},
+        {"op": "set_seal", "value": "justice"}
+      ],
+      "onJudge": [
+        {"op": "damage", "amount": 6, "school": "holy"},
+        {"op": "apply", "status": "weak", "stacks": 2, "target": "enemy"}
+      ],
+      "upgrade": {
+        "name": "Seal of Justice (Rank 2)",
+        "cost": 1,
+        "text": "Gain 9 Block. Seal: Judgement deals 9 holy damage, applies 3 Weak.",
+        "effects": [
+          {"op": "block", "amount": 9},
+          {"op": "set_seal", "value": "justice"}
+        ],
+        "onJudge": [
+          {"op": "damage", "amount": 9, "school": "holy"},
+          {"op": "apply", "status": "weak", "stacks": 3, "target": "enemy"}
+        ]
+      }
+    },
+    {
+      "id": "blessing-of-might",
+      "name": "Blessing of Might",
+      "icon": "spell_holy_fistofjustice",
+      "spellId": 19740,
+      "rank": 1,
+      "type": "power",
+      "rarity": "common",
+      "archetype": "retribution",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 2 Strength.",
+      "effects": [
+        {"op": "apply", "status": "strength", "stacks": 2, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Blessing of Might (Rank 2)",
+        "cost": 1,
+        "text": "Gain 3 Strength.",
+        "effects": [
+          {"op": "apply", "status": "strength", "stacks": 3, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "blessing-of-wisdom",
+      "name": "Blessing of Wisdom",
+      "icon": "spell_holy_greaterblessingofwisdom",
+      "spellId": 19742,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "holy",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Draw 2 cards. Gain 1 Energy next turn.",
+      "effects": [
+        {"op": "draw", "count": 2},
+        {"op": "energy_next_turn", "amount": 1}
+      ],
+      "upgrade": {
+        "name": "Blessing of Wisdom (Rank 2)",
+        "cost": 0,
+        "text": "Draw 2 cards. Gain 1 Energy next turn. Costs 0.",
+        "effects": [
+          {"op": "draw", "count": 2},
+          {"op": "energy_next_turn", "amount": 1}
+        ]
+      }
+    },
+    {
+      "id": "blessing-of-light",
+      "name": "Blessing of Light",
+      "icon": "spell_holy_greaterblessingoflight",
+      "spellId": 19977,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "holy",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 7 Block. Heal 3 HP.",
+      "effects": [
+        {"op": "block", "amount": 7},
+        {"op": "heal", "amount": 3}
+      ],
+      "upgrade": {
+        "name": "Blessing of Light (Rank 2)",
+        "cost": 1,
+        "text": "Gain 10 Block. Heal 5 HP.",
+        "effects": [
+          {"op": "block", "amount": 10},
+          {"op": "heal", "amount": 5}
+        ]
+      }
+    },
+    {
+      "id": "blessing-of-freedom",
+      "name": "Blessing of Freedom",
+      "icon": "spell_holy_sealofvalor",
+      "spellId": 1044,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "holy",
+      "cost": 0,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Remove Weak, Stun and Fear from you. Draw 2 cards. Exhaust.",
+      "effects": [
+        {"op": "remove", "status": "weak", "target": "self"},
+        {"op": "remove", "status": "stun", "target": "self"},
+        {"op": "remove", "status": "fear", "target": "self"},
+        {"op": "draw", "count": 2}
+      ],
+      "upgrade": {
+        "name": "Blessing of Freedom (Rank 2)",
+        "cost": 0,
+        "text": "Remove Weak, Stun and Fear from you. Draw 3 cards. Exhaust.",
+        "effects": [
+          {"op": "remove", "status": "weak", "target": "self"},
+          {"op": "remove", "status": "stun", "target": "self"},
+          {"op": "remove", "status": "fear", "target": "self"},
+          {"op": "draw", "count": 3}
+        ]
+      }
+    },
+    {
+      "id": "blessing-of-protection",
+      "name": "Blessing of Protection",
+      "icon": "spell_holy_sealofprotection",
+      "spellId": 1022,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "protection",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 14 Block.",
+      "effects": [
+        {"op": "block", "amount": 14}
+      ],
+      "upgrade": {
+        "name": "Blessing of Protection (Rank 2)",
+        "cost": 1,
+        "text": "Gain 18 Block.",
+        "effects": [
+          {"op": "block", "amount": 18}
+        ]
+      }
+    },
+    {
+      "id": "blessing-of-salvation",
+      "name": "Blessing of Salvation",
+      "icon": "spell_holy_greaterblessingofsalvation",
+      "spellId": 1038,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "protection",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 8 Block. Remove Taunted from you. Draw 1 card.",
+      "effects": [
+        {"op": "block", "amount": 8},
+        {"op": "remove", "status": "taunted", "target": "self"},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Blessing of Salvation (Rank 2)",
+        "cost": 1,
+        "text": "Gain 11 Block. Remove Taunted from you. Draw 1 card.",
+        "effects": [
+          {"op": "block", "amount": 11},
+          {"op": "remove", "status": "taunted", "target": "self"},
+          {"op": "draw", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "divine-protection",
+      "name": "Divine Protection",
+      "icon": "spell_holy_restoration",
+      "spellId": 498,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "protection",
+      "cost": 0,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Gain 10 Block. Exhaust.",
+      "effects": [
+        {"op": "block", "amount": 10}
+      ],
+      "upgrade": {
+        "name": "Divine Protection (Rank 2)",
+        "cost": 0,
+        "text": "Gain 14 Block. Exhaust.",
+        "effects": [
+          {"op": "block", "amount": 14}
+        ]
+      }
+    },
+    {
+      "id": "hammer-of-justice",
+      "name": "Hammer of Justice",
+      "icon": "spell_holy_sealofmight",
+      "spellId": 853,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "protection",
+      "cost": 1,
+      "target": "enemy",
+      "flags": ["exhaust"],
+      "text": "Deal 8 holy damage. Apply 1 Stun. Exhaust.",
+      "effects": [
+        {"op": "damage", "amount": 8, "school": "holy"},
+        {"op": "apply", "status": "stun", "stacks": 1, "target": "enemy"}
+      ],
+      "upgrade": {
+        "name": "Hammer of Justice (Rank 2)",
+        "cost": 1,
+        "text": "Deal 12 holy damage. Apply 1 Stun. Exhaust.",
+        "effects": [
+          {"op": "damage", "amount": 12, "school": "holy"},
+          {"op": "apply", "status": "stun", "stacks": 1, "target": "enemy"}
+        ]
+      }
+    },
+    {
+      "id": "turn-undead",
+      "name": "Turn Undead",
+      "icon": "spell_holy_turnundead",
+      "spellId": 2878,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "protection",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Apply 2 Fear to an Undead; otherwise deal 6 holy damage.",
+      "effects": [
+        {
+          "op": "conditional",
+          "if": {"type": "target_is_family", "family": "undead"},
+          "then": [{"op": "apply", "status": "fear", "stacks": 2, "target": "enemy"}],
+          "else": [{"op": "damage", "amount": 6, "school": "holy"}]
+        }
+      ],
+      "upgrade": {
+        "name": "Turn Undead (Rank 2)",
+        "cost": 1,
+        "text": "Apply 3 Fear to an Undead; otherwise deal 9 holy damage.",
+        "effects": [
+          {
+            "op": "conditional",
+            "if": {"type": "target_is_family", "family": "undead"},
+            "then": [{"op": "apply", "status": "fear", "stacks": 3, "target": "enemy"}],
+            "else": [{"op": "damage", "amount": 9, "school": "holy"}]
+          }
+        ]
+      }
+    },
+    {
+      "id": "retribution-aura",
+      "name": "Retribution Aura",
+      "icon": "spell_holy_auraoflight",
+      "spellId": 7294,
+      "rank": 1,
+      "type": "power",
+      "rarity": "common",
+      "archetype": "retribution",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 4 Thorns.",
+      "effects": [
+        {"op": "apply", "status": "thorns", "stacks": 4, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Retribution Aura (Rank 2)",
+        "cost": 1,
+        "text": "Gain 6 Thorns.",
+        "effects": [
+          {"op": "apply", "status": "thorns", "stacks": 6, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "sanctity-aura",
+      "name": "Sanctity Aura",
+      "icon": "spell_holy_mindvision",
+      "spellId": 20218,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "retribution",
+      "cost": 1,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Gain 2 Strength. Draw 1 card. Exhaust.",
+      "effects": [
+        {"op": "apply", "status": "strength", "stacks": 2, "target": "self"},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Sanctity Aura (Rank 2)",
+        "cost": 1,
+        "text": "Gain 3 Strength. Draw 1 card. Exhaust.",
+        "effects": [
+          {"op": "apply", "status": "strength", "stacks": 3, "target": "self"},
+          {"op": "draw", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "concentration-aura",
+      "name": "Concentration Aura",
+      "icon": "spell_holy_mindsooth",
+      "spellId": 19746,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "holy",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 7 Block. Remove Silence and Weak from you.",
+      "effects": [
+        {"op": "block", "amount": 7},
+        {"op": "remove", "status": "silence", "target": "self"},
+        {"op": "remove", "status": "weak", "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Concentration Aura (Rank 2)",
+        "cost": 1,
+        "text": "Gain 10 Block. Remove Silence and Weak from you.",
+        "effects": [
+          {"op": "block", "amount": 10},
+          {"op": "remove", "status": "silence", "target": "self"},
+          {"op": "remove", "status": "weak", "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "redemption",
+      "name": "Redemption",
+      "icon": "spell_holy_resurrection",
+      "spellId": 7328,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "holy",
+      "cost": 1,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Heal 10 HP. Gain 6 Block. Exhaust.",
+      "effects": [
+        {"op": "heal", "amount": 10},
+        {"op": "block", "amount": 6}
+      ],
+      "upgrade": {
+        "name": "Redemption (Rank 2)",
+        "cost": 1,
+        "text": "Heal 14 HP. Gain 8 Block. Exhaust.",
+        "effects": [
+          {"op": "heal", "amount": 14},
+          {"op": "block", "amount": 8}
+        ]
+      }
+    },
+    {
+      "id": "divine-intervention",
+      "name": "Divine Intervention",
+      "icon": "spell_nature_timestop",
+      "spellId": 19752,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "holy",
+      "cost": 0,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Lose 4 HP. Gain 16 Block. Exhaust.",
+      "effects": [
+        {"op": "damage", "amount": 4, "target": "self"},
+        {"op": "block", "amount": 16}
+      ],
+      "upgrade": {
+        "name": "Divine Intervention (Rank 2)",
+        "cost": 0,
+        "text": "Lose 4 HP. Gain 22 Block. Exhaust.",
+        "effects": [
+          {"op": "damage", "amount": 4, "target": "self"},
+          {"op": "block", "amount": 22}
+        ]
+      }
+    },
+    {
+      "id": "seal-of-command",
+      "name": "Seal of Command",
+      "icon": "ability_warrior_innerrage",
+      "spellId": 20375,
+      "rank": 1,
+      "type": "seal",
+      "rarity": "uncommon",
+      "archetype": "retribution",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 holy damage. Seal: Judgement deals 8 holy damage twice.",
+      "effects": [
+        {"op": "damage", "amount": 6, "school": "holy"},
+        {"op": "set_seal", "value": "command"}
+      ],
+      "onJudge": [
+        {"op": "damage", "amount": 8, "school": "holy", "times": 2}
+      ],
+      "upgrade": {
+        "name": "Seal of Command (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 holy damage. Seal: Judgement deals 11 holy damage twice.",
+        "effects": [
+          {"op": "damage", "amount": 9, "school": "holy"},
+          {"op": "set_seal", "value": "command"}
+        ],
+        "onJudge": [
+          {"op": "damage", "amount": 11, "school": "holy", "times": 2}
+        ]
+      }
+    },
+    {
+      "id": "seal-of-light",
+      "name": "Seal of Light",
+      "icon": "spell_holy_healingaura",
+      "spellId": 20165,
+      "rank": 1,
+      "type": "seal",
+      "rarity": "uncommon",
+      "archetype": "holy",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 6 Block. Heal 3 HP. Seal: Judgement heals 10 HP.",
+      "effects": [
+        {"op": "block", "amount": 6},
+        {"op": "heal", "amount": 3},
+        {"op": "set_seal", "value": "light"}
+      ],
+      "onJudge": [
+        {"op": "heal", "amount": 10}
+      ],
+      "upgrade": {
+        "name": "Seal of Light (Rank 2)",
+        "cost": 1,
+        "text": "Gain 8 Block. Heal 5 HP. Seal: Judgement heals 14 HP.",
+        "effects": [
+          {"op": "block", "amount": 8},
+          {"op": "heal", "amount": 5},
+          {"op": "set_seal", "value": "light"}
+        ],
+        "onJudge": [
+          {"op": "heal", "amount": 14}
+        ]
+      }
+    },
+    {
+      "id": "seal-of-wisdom",
+      "name": "Seal of Wisdom",
+      "icon": "spell_holy_righteousnessaura",
+      "spellId": 20166,
+      "rank": 1,
+      "type": "seal",
+      "rarity": "uncommon",
+      "archetype": "holy",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Draw 1 card. Gain 1 Energy next turn. Seal: Judgement gains 2 Energy and draws 2 cards.",
+      "effects": [
+        {"op": "draw", "count": 1},
+        {"op": "energy_next_turn", "amount": 1},
+        {"op": "set_seal", "value": "wisdom"}
+      ],
+      "onJudge": [
+        {"op": "gain_energy", "amount": 2},
+        {"op": "draw", "count": 2}
+      ],
+      "upgrade": {
+        "name": "Seal of Wisdom (Rank 2)",
+        "cost": 1,
+        "text": "Draw 2 cards. Gain 1 Energy next turn. Seal: Judgement gains 2 Energy and draws 3 cards.",
+        "effects": [
+          {"op": "draw", "count": 2},
+          {"op": "energy_next_turn", "amount": 1},
+          {"op": "set_seal", "value": "wisdom"}
+        ],
+        "onJudge": [
+          {"op": "gain_energy", "amount": 2},
+          {"op": "draw", "count": 3}
+        ]
+      }
+    },
+    {
+      "id": "blessing-of-sanctuary",
+      "name": "Blessing of Sanctuary",
+      "icon": "spell_nature_lightningshield",
+      "spellId": 20911,
+      "rank": 1,
+      "type": "power",
+      "rarity": "uncommon",
+      "archetype": "protection",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 3 Thorns. Gain 6 Block.",
+      "effects": [
+        {"op": "apply", "status": "thorns", "stacks": 3, "target": "self"},
+        {"op": "block", "amount": 6}
+      ],
+      "upgrade": {
+        "name": "Blessing of Sanctuary (Rank 2)",
+        "cost": 1,
+        "text": "Gain 4 Thorns. Gain 9 Block.",
+        "effects": [
+          {"op": "apply", "status": "thorns", "stacks": 4, "target": "self"},
+          {"op": "block", "amount": 9}
+        ]
+      }
+    },
+    {
+      "id": "consecration",
+      "name": "Consecration",
+      "icon": "spell_holy_innerfire",
+      "spellId": 26573,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "protection",
+      "cost": 2,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Deal 12 holy damage to ALL enemies. Gain 6 Block.",
+      "effects": [
+        {"op": "damage", "amount": 12, "school": "holy", "target": "all_enemies"},
+        {"op": "block", "amount": 6}
+      ],
+      "upgrade": {
+        "name": "Consecration (Rank 2)",
+        "cost": 2,
+        "text": "Deal 16 holy damage to ALL enemies. Gain 9 Block.",
+        "effects": [
+          {"op": "damage", "amount": 16, "school": "holy", "target": "all_enemies"},
+          {"op": "block", "amount": 9}
+        ]
+      }
+    },
+    {
+      "id": "holy-wrath",
+      "name": "Holy Wrath",
+      "icon": "spell_holy_excorcism",
+      "spellId": 2812,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "retribution",
+      "cost": 2,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Deal 14 holy damage to ALL enemies.",
+      "effects": [
+        {"op": "damage", "amount": 14, "school": "holy", "target": "all_enemies"}
+      ],
+      "upgrade": {
+        "name": "Holy Wrath (Rank 2)",
+        "cost": 2,
+        "text": "Deal 18 holy damage to ALL enemies.",
+        "effects": [
+          {"op": "damage", "amount": 18, "school": "holy", "target": "all_enemies"}
+        ]
+      }
+    },
+    {
+      "id": "exorcism",
+      "name": "Exorcism",
+      "icon": "spell_holy_excorcism_02",
+      "spellId": 879,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "retribution",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 9 holy damage. Deal 10 more to an Undead.",
+      "effects": [
+        {"op": "damage", "amount": 9, "school": "holy"},
+        {"op": "conditional", "if": {"type": "target_is_family", "family": "undead"}, "then": [{"op": "damage", "amount": 10, "school": "holy"}]}
+      ],
+      "upgrade": {
+        "name": "Exorcism (Rank 2)",
+        "cost": 1,
+        "text": "Deal 12 holy damage. Deal 14 more to an Undead.",
+        "effects": [
+          {"op": "damage", "amount": 12, "school": "holy"},
+          {"op": "conditional", "if": {"type": "target_is_family", "family": "undead"}, "then": [{"op": "damage", "amount": 14, "school": "holy"}]}
+        ]
+      }
+    },
+    {
+      "id": "cleanse",
+      "name": "Cleanse",
+      "icon": "spell_holy_renew",
+      "spellId": 4987,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "holy",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Remove Poison, Disease and Curse from you. Gain 6 Block. Draw 1 card.",
+      "effects": [
+        {"op": "remove", "status": "poison", "target": "self"},
+        {"op": "remove", "status": "disease", "target": "self"},
+        {"op": "remove", "status": "curse", "target": "self"},
+        {"op": "block", "amount": 6},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Cleanse (Rank 2)",
+        "cost": 0,
+        "text": "Remove Poison, Disease and Curse from you. Gain 8 Block. Draw 1 card. Costs 0.",
+        "effects": [
+          {"op": "remove", "status": "poison", "target": "self"},
+          {"op": "remove", "status": "disease", "target": "self"},
+          {"op": "remove", "status": "curse", "target": "self"},
+          {"op": "block", "amount": 8},
+          {"op": "draw", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "righteous-fury",
+      "name": "Righteous Fury",
+      "icon": "spell_holy_sealoffury",
+      "spellId": 25780,
+      "rank": 1,
+      "type": "power",
+      "rarity": "uncommon",
+      "archetype": "protection",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 8 Block. Gain 2 Thorns.",
+      "effects": [
+        {"op": "block", "amount": 8},
+        {"op": "apply", "status": "thorns", "stacks": 2, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Righteous Fury (Rank 2)",
+        "cost": 1,
+        "text": "Gain 11 Block. Gain 3 Thorns.",
+        "effects": [
+          {"op": "block", "amount": 11},
+          {"op": "apply", "status": "thorns", "stacks": 3, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "reckoning",
+      "name": "Reckoning",
+      "icon": "spell_holy_unyieldingfaith",
+      "spellId": 20177,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "protection",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 8 Block. Gain 1 Energy next turn.",
+      "effects": [
+        {"op": "block", "amount": 8},
+        {"op": "energy_next_turn", "amount": 1}
+      ],
+      "upgrade": {
+        "name": "Reckoning (Rank 2)",
+        "cost": 1,
+        "text": "Gain 11 Block. Gain 1 Energy next turn.",
+        "effects": [
+          {"op": "block", "amount": 11},
+          {"op": "energy_next_turn", "amount": 1}
+        ]
+      }
+    },
+    {
+      "id": "vengeance",
+      "name": "Vengeance",
+      "icon": "spell_holy_vindication",
+      "spellId": 20049,
+      "rank": 1,
+      "type": "power",
+      "rarity": "uncommon",
+      "archetype": "retribution",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 2 Enrage: when you are hit, gain Strength.",
+      "effects": [
+        {"op": "apply", "status": "enrage", "stacks": 2, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Vengeance (Rank 2)",
+        "cost": 1,
+        "text": "Gain 3 Enrage: when you are hit, gain Strength.",
+        "effects": [
+          {"op": "apply", "status": "enrage", "stacks": 3, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "eye-for-an-eye",
+      "name": "Eye for an Eye",
+      "icon": "spell_holy_eyeforaneye",
+      "spellId": 9799,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "retribution",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 8 Block. Gain 3 Thorns.",
+      "effects": [
+        {"op": "block", "amount": 8},
+        {"op": "apply", "status": "thorns", "stacks": 3, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Eye for an Eye (Rank 2)",
+        "cost": 1,
+        "text": "Gain 11 Block. Gain 4 Thorns.",
+        "effects": [
+          {"op": "block", "amount": 11},
+          {"op": "apply", "status": "thorns", "stacks": 4, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "holy-shock",
+      "name": "Holy Shock",
+      "icon": "spell_holy_searinglight",
+      "spellId": 20473,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "rare",
+      "archetype": "holy",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 12 holy damage. Heal 6 HP.",
+      "effects": [
+        {"op": "damage", "amount": 12, "school": "holy"},
+        {"op": "heal", "amount": 6}
+      ],
+      "upgrade": {
+        "name": "Holy Shock (Rank 2)",
+        "cost": 1,
+        "text": "Deal 16 holy damage. Heal 8 HP.",
+        "effects": [
+          {"op": "damage", "amount": 16, "school": "holy"},
+          {"op": "heal", "amount": 8}
+        ]
+      }
+    },
+    {
+      "id": "divine-favor",
+      "name": "Divine Favor",
+      "icon": "spell_holy_heal",
+      "spellId": 20216,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "holy",
+      "cost": 1,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Your next attack deals double damage. Draw 2 cards. Exhaust.",
+      "effects": [
+        {"op": "double_damage_next"},
+        {"op": "draw", "count": 2}
+      ],
+      "upgrade": {
+        "name": "Divine Favor (Rank 2)",
+        "cost": 0,
+        "text": "Your next attack deals double damage. Draw 2 cards. Exhaust. Costs 0.",
+        "effects": [
+          {"op": "double_damage_next"},
+          {"op": "draw", "count": 2}
+        ]
+      }
+    },
+    {
+      "id": "divine-shield",
+      "name": "Divine Shield",
+      "icon": "spell_holy_divineintervention",
+      "spellId": 642,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "protection",
+      "cost": 2,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Gain 1 Intangible. Gain 10 Block. Exhaust.",
+      "effects": [
+        {"op": "apply", "status": "intangible", "stacks": 1, "target": "self"},
+        {"op": "block", "amount": 10}
+      ],
+      "upgrade": {
+        "name": "Divine Shield (Rank 2)",
+        "cost": 1,
+        "text": "Gain 1 Intangible. Gain 14 Block. Exhaust. Costs 1.",
+        "effects": [
+          {"op": "apply", "status": "intangible", "stacks": 1, "target": "self"},
+          {"op": "block", "amount": 14}
+        ]
+      }
+    },
+    {
+      "id": "holy-shield",
+      "name": "Holy Shield",
+      "icon": "spell_holy_blessingofprotection",
+      "spellId": 20925,
+      "rank": 1,
+      "type": "power",
+      "rarity": "rare",
+      "archetype": "protection",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 8 Block. Gain 3 Metallicize (Block each turn end).",
+      "effects": [
+        {"op": "block", "amount": 8},
+        {"op": "apply", "status": "metallicize", "stacks": 3, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Holy Shield (Rank 2)",
+        "cost": 1,
+        "text": "Gain 11 Block. Gain 4 Metallicize (Block each turn end).",
+        "effects": [
+          {"op": "block", "amount": 11},
+          {"op": "apply", "status": "metallicize", "stacks": 4, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "repentance",
+      "name": "Repentance",
+      "icon": "spell_holy_prayerofhealing",
+      "spellId": 20066,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "retribution",
+      "cost": 1,
+      "target": "enemy",
+      "flags": ["exhaust"],
+      "text": "Apply 2 Sleep. Gain 6 Block. Draw 1 card. Exhaust.",
+      "effects": [
+        {"op": "apply", "status": "sleep", "stacks": 2, "target": "enemy"},
+        {"op": "block", "amount": 6},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Repentance (Rank 2)",
+        "cost": 1,
+        "text": "Apply 3 Sleep. Gain 9 Block. Draw 2 cards. Exhaust.",
+        "effects": [
+          {"op": "apply", "status": "sleep", "stacks": 3, "target": "enemy"},
+          {"op": "block", "amount": 9},
+          {"op": "draw", "count": 2}
+        ]
+      }
+    },
+    {
+      "id": "blessing-of-kings",
+      "name": "Blessing of Kings",
+      "icon": "spell_magic_magearmor",
+      "spellId": 20217,
+      "rank": 1,
+      "type": "power",
+      "rarity": "rare",
+      "archetype": "holy",
+      "cost": 2,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 2 Strength. Gain 2 Dexterity.",
+      "effects": [
+        {"op": "apply", "status": "strength", "stacks": 2, "target": "self"},
+        {"op": "apply", "status": "dexterity", "stacks": 2, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Blessing of Kings (Rank 2)",
+        "cost": 1,
+        "text": "Gain 2 Strength. Gain 2 Dexterity. Costs 1.",
+        "effects": [
+          {"op": "apply", "status": "strength", "stacks": 2, "target": "self"},
+          {"op": "apply", "status": "dexterity", "stacks": 2, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "hammer-of-wrath",
+      "name": "Hammer of Wrath",
+      "icon": "ability_thunderclap",
+      "spellId": 24275,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "rare",
+      "archetype": "retribution",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 12 holy damage. If the enemy is below 50% HP, deal 14 more.",
+      "effects": [
+        {"op": "damage", "amount": 12, "school": "holy"},
+        {"op": "conditional", "if": {"type": "hp_below_pct", "pct": 50, "target": "enemy"}, "then": [{"op": "damage", "amount": 14, "school": "holy"}]}
+      ],
+      "upgrade": {
+        "name": "Hammer of Wrath (Rank 2)",
+        "cost": 1,
+        "text": "Deal 16 holy damage. If the enemy is below 50% HP, deal 18 more.",
+        "effects": [
+          {"op": "damage", "amount": 16, "school": "holy"},
+          {"op": "conditional", "if": {"type": "hp_below_pct", "pct": 50, "target": "enemy"}, "then": [{"op": "damage", "amount": 18, "school": "holy"}]}
+        ]
+      }
+    },
+    {
+      "id": "lay-on-hands",
+      "name": "Lay on Hands",
+      "icon": "spell_holy_layonhands",
+      "spellId": 633,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "epic",
+      "archetype": "holy",
+      "cost": 2,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Heal to full HP. Exhaust.",
+      "effects": [
+        {"op": "heal", "amount": 999}
+      ],
+      "upgrade": {
+        "name": "Lay on Hands (Rank 2)",
+        "cost": 1,
+        "text": "Heal to full HP. Exhaust. Costs 1.",
+        "effects": [
+          {"op": "heal", "amount": 999}
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,513 @@
+{
+ "_note": "built by tools/spires/build-backdrops.py; crop = [y0,y1] fraction of the jpg that is real art",
+ "zones": {
+  "elwynn-forest": {
+   "fdid": 7377860,
+   "crop": [
+    0.018,
+    0.99
+   ],
+   "theme": {
+    "primary": "#3f6b2a",
+    "secondary": "#1d2a16",
+    "accent": "#d9b25c"
+   }
+  },
+  "dun-morogh": {
+   "fdid": 407226,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#a9c7e8",
+    "secondary": "#1c2a3a",
+    "accent": "#f2f6fb"
+   }
+  },
+  "tirisfal-glades": {
+   "fdid": 131849,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#5c6b4a",
+    "secondary": "#1a1f18",
+    "accent": "#a5d17a"
+   }
+  },
+  "loch-modan": {
+   "fdid": 427941,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#4a7fa0",
+    "secondary": "#1c2c36",
+    "accent": "#e7cf8c"
+   }
+  },
+  "silverpine-forest": {
+   "fdid": 427941,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#6a5a8a",
+    "secondary": "#1d1830",
+    "accent": "#c9a0dc"
+   }
+  },
+  "westfall": {
+   "fdid": 2820825,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#c8a24a",
+    "secondary": "#3a2c14",
+    "accent": "#f2d98a"
+   }
+  },
+  "redridge-mountains": {
+   "fdid": 411684,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#a24a2a",
+    "secondary": "#2a1410",
+    "accent": "#e9a56a"
+   }
+  },
+  "duskwood": {
+   "fdid": 405445,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#4a3a6a",
+    "secondary": "#12101c",
+    "accent": "#8f7fb8"
+   }
+  },
+  "wetlands": {
+   "fdid": 411683,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#4c7a5a",
+    "secondary": "#15251c",
+    "accent": "#c6d98a"
+   }
+  },
+  "hillsbrad-foothills": {
+   "fdid": 411684,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#7a8a3c",
+    "secondary": "#1f2610",
+    "accent": "#e0c970"
+   }
+  },
+  "alterac-mountains": {
+   "fdid": 236065,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#7a6aa8",
+    "secondary": "#1c1830",
+    "accent": "#d8c8ff"
+   }
+  },
+  "arathi-highlands": {
+   "fdid": 4731628,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#7a8a4a",
+    "secondary": "#2a2f1c",
+    "accent": "#d9b25c"
+   }
+  },
+  "stranglethorn-vale": {
+   "fdid": 131882,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#2f7a3a",
+    "secondary": "#12281a",
+    "accent": "#e0b64a"
+   }
+  },
+  "badlands": {
+   "fdid": 535280,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#a8542a",
+    "secondary": "#33170c",
+    "accent": "#e2a85a"
+   }
+  },
+  "swamp-of-sorrows": {
+   "fdid": 131885,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#4a6a3a",
+    "secondary": "#14201a",
+    "accent": "#8fd36a"
+   }
+  },
+  "the-hinterlands": {
+   "fdid": 574578,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#5a7f3e",
+    "secondary": "#1f2b17",
+    "accent": "#d5c15a"
+   }
+  },
+  "searing-gorge": {
+   "fdid": 418218,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#b23a1a",
+    "secondary": "#2a0d08",
+    "accent": "#ffb347"
+   }
+  },
+  "burning-steppes": {
+   "fdid": 514085,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#7a2a14",
+    "secondary": "#1c0b08",
+    "accent": "#ff9a3c"
+   }
+  },
+  "blasted-lands": {
+   "fdid": 514270,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#8a2a5a",
+    "secondary": "#240d2a",
+    "accent": "#a6e03c"
+   }
+  },
+  "western-plaguelands": {
+   "fdid": 535281,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#6a7a3a",
+    "secondary": "#1c2210",
+    "accent": "#cfe36a"
+   }
+  },
+  "eastern-plaguelands": {
+   "fdid": 131867,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#8a9a4a",
+    "secondary": "#20240f",
+    "accent": "#e8e08a"
+   }
+  },
+  "deadwind-pass": {
+   "fdid": 131869,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#4a3a6a",
+    "secondary": "#120d1c",
+    "accent": "#b78cf0"
+   }
+  },
+  "durotar": {
+   "fdid": 7490877,
+   "crop": [
+    0.166,
+    0.834
+   ],
+   "theme": {
+    "primary": "#b5532b",
+    "secondary": "#3a1d10",
+    "accent": "#e8b54a"
+   }
+  },
+  "mulgore": {
+   "fdid": 4684456,
+   "crop": [
+    0.08,
+    0.99
+   ],
+   "theme": {
+    "primary": "#c98a3d",
+    "secondary": "#4a3318",
+    "accent": "#9fd14a"
+   }
+  },
+  "teldrassil": {
+   "fdid": 1417745,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#6a3f9c",
+    "secondary": "#1b1230",
+    "accent": "#7fe0c2"
+   }
+  },
+  "darkshore": {
+   "fdid": 4697004,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#3d6f8f",
+    "secondary": "#10202b",
+    "accent": "#c9b6ff"
+   }
+  },
+  "the-barrens": {
+   "fdid": 7354407,
+   "crop": [
+    0.08,
+    0.857
+   ],
+   "theme": {
+    "primary": "#c8a24a",
+    "secondary": "#4a3a18",
+    "accent": "#e86a3c"
+   }
+  },
+  "stonetalon-mountains": {
+   "fdid": 236060,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#8a7a6a",
+    "secondary": "#2b251f",
+    "accent": "#e0a040"
+   }
+  },
+  "ashenvale": {
+   "fdid": 514758,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#2f7a4a",
+    "secondary": "#0f2a1a",
+    "accent": "#9fb8ff"
+   }
+  },
+  "thousand-needles": {
+   "fdid": 4731628,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#c98a5a",
+    "secondary": "#3a2418",
+    "accent": "#7fd0e0"
+   }
+  },
+  "desolace": {
+   "fdid": 1017727,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#a05a3c",
+    "secondary": "#2b1a14",
+    "accent": "#d8c27a"
+   }
+  },
+  "dustwallow-marsh": {
+   "fdid": 131840,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#5a7a4a",
+    "secondary": "#1a2318",
+    "accent": "#e0a040"
+   }
+  },
+  "feralas": {
+   "fdid": 131886,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#3f7a3a",
+    "secondary": "#14261a",
+    "accent": "#e0b84a"
+   }
+  },
+  "tanaris": {
+   "fdid": 236063,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#c99a4a",
+    "secondary": "#3a2a14",
+    "accent": "#ffd978"
+   }
+  },
+  "azshara": {
+   "fdid": 2125650,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#4a7fbf",
+    "secondary": "#14233a",
+    "accent": "#9fe6ff"
+   }
+  },
+  "felwood": {
+   "fdid": 131850,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#4a8a3a",
+    "secondary": "#1a2412",
+    "accent": "#9cff5a"
+   }
+  },
+  "un-goro-crater": {
+   "fdid": 1864572,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#d97a2b",
+    "secondary": "#2f1a0f",
+    "accent": "#ffd24a"
+   }
+  },
+  "winterspring": {
+   "fdid": 535413,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#6fa8d8",
+    "secondary": "#15202e",
+    "accent": "#e8f6ff"
+   }
+  },
+  "silithus": {
+   "fdid": 131866,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#b8964a",
+    "secondary": "#2a1f33",
+    "accent": "#c58bff"
+   }
+  },
+  "moonglade": {
+   "fdid": 1417745,
+   "crop": [
+    0.25,
+    0.8
+   ],
+   "theme": {
+    "primary": "#7a8fd8",
+    "secondary": "#141a33",
+    "accent": "#cfe0ff"
+   }
+  },
+  "title": {
+   "src": "assets/azeroth-title.jpg",
+   "crop": [
+    0,
+    1
+   ]
+  },
+  "classSelect": {
+   "fdid": 1498775,
+   "crop": [
+    0.25,
+    0.8
+   ]
+  },
+  "map": {
+   "fdid": 650622,
+   "crop": [
+    0.25,
+    0.8
+   ]
+  },
+  "default": {
+   "fdid": 427941,
+   "crop": [
+    0.25,
+    0.8
+   ]
+  }
+ }
+}

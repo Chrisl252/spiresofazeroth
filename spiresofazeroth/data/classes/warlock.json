@@ -1,0 +1,1419 @@
+{
+  "id": "warlock",
+  "name": "Warlock",
+  "icon": "classicon_warlock",
+  "color": "#9482C9",
+  "lore": "Dark summoner of the Twisting Nether: sacrifice your own vitality for endless power, harvest Soul Shards, and command demonic minions.",
+  "startingHp": 75,
+  "startingGold": 99,
+  "defaultContinent": "ek",
+  "resource": {
+    "id": "soul_shards",
+    "name": "Soul Shards",
+    "tip": "Harvest Soul Shards from dying foes and Drain Soul. Spend Shards on demonic summons, healthstones, and catastrophic curses.",
+    "icon": "inv_misc_gem_amethyst_02",
+    "max": 10,
+    "rules": "Harvest Soul Shards from fallen enemies to summon demonic guardians and unleash high-cost curses. Use Life Tap to convert your health directly into Energy.",
+    "energyPerTurn": 3,
+    "startOfCombat": 0,
+    "gainOnKill": 1,
+    "gainOnDamageDealt": 0,
+    "gainOnDamageTaken": 0,
+    "decayPerTurn": 0
+  },
+  "archetypes": [
+    {"id": "affliction", "name": "Affliction", "icon": "spell_shadow_deathcoil", "text": "Stack Poison, Curses and drains; Curse of Doom ends long fights."},
+    {"id": "demonology", "name": "Demonology", "icon": "spell_shadow_metamorphosis", "text": "Summon and feed your demon, link damage to it, and ritual-summon Infernals and Doomguards."},
+    {"id": "destruction", "name": "Destruction", "icon": "spell_shadow_rainoffire", "text": "Burn damage: Immolate into Conflagrate, Shadowburn finishers and AoE fire."}
+  ],
+  "relics": [
+    {
+      "id": "nemesis-skullcap",
+      "name": "Nemesis Skullcap",
+      "icon": "inv_helmet_08",
+      "rarity": "rare",
+      "itemId": 16929,
+      "zone": null,
+      "class": "warlock",
+      "text": "Start each combat with 2 Soul Shards. Gain 1 energy next turn whenever you summon.",
+      "triggers": {
+        "on_combat_start": [
+          {"op": "gain_resource", "resource": "soul_shards", "amount": 2}
+        ],
+        "on_card_played": [
+          {"op": "conditional", "if": {"type": "chance", "pct": 15}, "then": [{"op": "energy_next_turn", "amount": 1}]}
+        ]
+      }
+    },
+    {
+      "id": "robes-of-volatile-power",
+      "name": "Robes of Volatile Power",
+      "icon": "inv_chest_cloth_17",
+      "rarity": "rare",
+      "itemId": null,
+      "zone": null,
+      "class": "warlock",
+      "text": "Start each combat with 1 Strength. Whenever you lose HP to your own cards, gain 3 Block.",
+      "triggers": {
+        "on_combat_start": [
+          {"op": "apply", "status": "strength", "stacks": 1, "target": "self"}
+        ],
+        "on_hp_loss": [
+          {"op": "block", "amount": 3}
+        ]
+      }
+    }
+  ],
+  "starterDeck": [
+    "shadow-bolt",
+    "shadow-bolt",
+    "shadow-bolt",
+    "corruption",
+    "life-tap",
+    "demon-skin",
+    "demon-skin",
+    "demon-skin",
+    "demon-skin",
+    "summon-imp"
+  ],
+  "units": {
+    "imp": {
+      "guardian": true,
+      "name": "Imp",
+      "icon": "spell_shadow_summonimp",
+      "hp": 20,
+      "pattern": ["firebolt", "firebolt", "blood-pact", "phase-shift"],
+      "moves": [
+        {"id": "firebolt", "name": "Firebolt", "intent": "attack", "effects": [{"op": "damage", "amount": 5, "school": "fire"}], "weight": 3},
+        {"id": "blood-pact", "name": "Blood Pact", "intent": "buff", "effects": [{"op": "apply", "status": "strength", "stacks": 1, "target": "self"}], "weight": 1},
+        {"id": "phase-shift", "name": "Phase Shift", "intent": "block", "effects": [{"op": "block", "amount": 6, "target": "self"}], "weight": 1}
+      ]
+    },
+    "voidwalker": {
+      "guardian": true,
+      "name": "Voidwalker",
+      "icon": "spell_shadow_summonvoidwalker",
+      "hp": 34,
+      "pattern": ["torment", "consume-shadows", "sacrifice"],
+      "moves": [
+        {"id": "torment", "name": "Torment", "intent": "attack", "effects": [{"op": "damage", "amount": 4, "school": "shadow"}, {"op": "taunt"}], "weight": 2},
+        {"id": "consume-shadows", "name": "Consume Shadows", "intent": "heal", "effects": [{"op": "heal", "amount": 6, "target": "self"}], "weight": 1},
+        {"id": "sacrifice", "name": "Sacrifice", "intent": "block", "effects": [{"op": "block", "amount": 10, "target": "pet"}], "weight": 1}
+      ]
+    },
+    "succubus": {
+      "guardian": true,
+      "name": "Succubus",
+      "icon": "spell_shadow_summonsuccubus",
+      "hp": 26,
+      "pattern": ["lash-of-pain", "seduction", "lash-of-pain", "soothing-kiss"],
+      "moves": [
+        {"id": "lash-of-pain", "name": "Lash of Pain", "intent": "attack", "effects": [{"op": "damage", "amount": 7, "school": "shadow"}], "weight": 3},
+        {"id": "seduction", "name": "Seduction", "intent": "debuff", "effects": [{"op": "apply", "status": "fear", "stacks": 1, "target": "enemy", "duration": 1}], "weight": 1},
+        {"id": "soothing-kiss", "name": "Soothing Kiss", "intent": "debuff", "effects": [{"op": "apply", "status": "weak", "stacks": 1, "target": "enemy"}], "weight": 1}
+      ]
+    },
+    "felhunter": {
+      "guardian": true,
+      "name": "Felhunter",
+      "icon": "spell_shadow_summonfelhunter",
+      "hp": 28,
+      "pattern": ["shadow-bite", "spell-lock", "devour-magic"],
+      "moves": [
+        {"id": "shadow-bite", "name": "Shadow Bite", "intent": "attack", "effects": [{"op": "damage", "amount": 6, "school": "shadow"}], "weight": 2},
+        {"id": "spell-lock", "name": "Spell Lock", "intent": "debuff", "effects": [{"op": "cast_interrupt"}], "weight": 1},
+        {"id": "devour-magic", "name": "Devour Magic", "intent": "heal", "effects": [{"op": "remove", "status": "strength", "target": "enemy"}, {"op": "heal", "amount": 4, "target": "self"}], "weight": 1}
+      ]
+    },
+    "infernal": {
+      "guardian": true,
+      "name": "Infernal",
+      "icon": "spell_shadow_summoninfernal",
+      "hp": 45,
+      "pattern": ["immolation", "fire-bolt", "immolation"],
+      "moves": [
+        {"id": "immolation", "name": "Immolation", "intent": "attack_multi", "effects": [{"op": "damage", "amount": 5, "school": "fire", "target": "all_enemies"}], "weight": 2},
+        {"id": "fire-bolt", "name": "Fire Bolt", "intent": "attack", "effects": [{"op": "damage", "amount": 9, "school": "fire"}], "weight": 2},
+        {"id": "infernal-stand", "name": "Stand Fast", "intent": "block", "effects": [{"op": "block", "amount": 8, "target": "pet"}], "weight": 1}
+      ]
+    },
+    "doomguard": {
+      "guardian": true,
+      "name": "Doomguard",
+      "icon": "spell_shadow_antimagicshell",
+      "hp": 50,
+      "pattern": ["rain-of-fire", "war-stomp", "cripple", "rain-of-fire"],
+      "moves": [
+        {"id": "rain-of-fire", "name": "Rain of Fire", "intent": "attack_multi", "effects": [{"op": "damage", "amount": 6, "school": "fire", "target": "all_enemies"}], "weight": 2},
+        {"id": "war-stomp", "name": "War Stomp", "intent": "debuff", "effects": [{"op": "apply", "status": "stun", "stacks": 1, "target": "enemy", "duration": 1}], "weight": 1},
+        {"id": "cripple", "name": "Cripple", "intent": "debuff", "effects": [{"op": "apply", "status": "weak", "stacks": 2, "target": "enemy"}], "weight": 1}
+      ]
+    }
+  },
+  "spellIdSource": "Classic rank-1 ids from memory (unverified; DB confirmed only Fireball 133 and Shadow Bolt rank ids existed). Tokens (Healthstone, Soulstone) have null.",
+  "tokens": [
+    {
+      "id": "healthstone",
+      "name": "Healthstone",
+      "icon": "inv_stone_04",
+      "spellId": null,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "basic",
+      "archetype": null,
+      "cost": 0,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Heal 10 HP. Exhaust.",
+      "token": true,
+      "effects": [
+        {"op": "heal", "amount": 10, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Healthstone (Rank 2)",
+        "cost": 0,
+        "text": "Heal 14 HP. Exhaust.",
+        "effects": [
+          {"op": "heal", "amount": 14, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "soulstone",
+      "name": "Soulstone",
+      "icon": "spell_shadow_soulgem",
+      "spellId": null,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "basic",
+      "archetype": null,
+      "cost": 0,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Revive at 30% HP if you die this combat (once). Exhaust.",
+      "token": true,
+      "effects": [
+        {"op": "revive", "pct": 30}
+      ],
+      "upgrade": {
+        "name": "Soulstone (Rank 2)",
+        "cost": 0,
+        "text": "Revive at 50% HP if you die this combat (once). Exhaust.",
+        "effects": [
+          {"op": "revive", "pct": 50}
+        ]
+      }
+    }
+  ],
+  "cards": [
+    {
+      "id": "shadow-bolt",
+      "name": "Shadow Bolt",
+      "icon": "spell_shadow_shadowbolt",
+      "spellId": 686,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "destruction",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 shadow damage.",
+      "effects": [
+        {"op": "damage", "amount": 6, "school": "shadow"}
+      ],
+      "upgrade": {
+        "name": "Shadow Bolt (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 shadow damage.",
+        "effects": [
+          {"op": "damage", "amount": 9, "school": "shadow"}
+        ]
+      }
+    },
+    {
+      "id": "corruption",
+      "name": "Corruption",
+      "icon": "spell_shadow_abominationexplosion",
+      "spellId": 172,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "affliction",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 4 shadow damage. Apply 5 Poison.",
+      "effects": [
+        {"op": "damage", "amount": 4, "school": "shadow"},
+        {"op": "apply", "status": "poison", "stacks": 5, "target": "enemy"}
+      ],
+      "upgrade": {
+        "name": "Corruption (Rank 2)",
+        "cost": 1,
+        "text": "Deal 6 shadow damage. Apply 8 Poison.",
+        "effects": [
+          {"op": "damage", "amount": 6, "school": "shadow"},
+          {"op": "apply", "status": "poison", "stacks": 8, "target": "enemy"}
+        ]
+      }
+    },
+    {
+      "id": "life-tap",
+      "name": "Life Tap",
+      "icon": "spell_shadow_burningspirit",
+      "spellId": 1454,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "basic",
+      "archetype": "destruction",
+      "cost": 0,
+      "target": "self",
+      "flags": [],
+      "text": "Lose 2 HP. Gain 1 energy. Draw 1 card.",
+      "effects": [
+        {"op": "damage", "amount": 2, "school": "shadow", "target": "self"},
+        {"op": "gain_energy", "amount": 1},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Life Tap (Rank 2)",
+        "cost": 0,
+        "text": "Lose 2 HP. Gain 1 energy. Draw 2 cards.",
+        "effects": [
+          {"op": "damage", "amount": 2, "school": "shadow", "target": "self"},
+          {"op": "gain_energy", "amount": 1},
+          {"op": "draw", "count": 2}
+        ]
+      }
+    },
+    {
+      "id": "demon-skin",
+      "name": "Demon Skin",
+      "icon": "spell_shadow_ragingscream",
+      "spellId": 687,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "basic",
+      "archetype": "demonology",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 5 Block and 1 Regen.",
+      "effects": [
+        {"op": "block", "amount": 5},
+        {"op": "apply", "status": "regen", "stacks": 1, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Demon Skin (Rank 2)",
+        "cost": 1,
+        "text": "Gain 8 Block and 1 Regen.",
+        "effects": [
+          {"op": "block", "amount": 8},
+          {"op": "apply", "status": "regen", "stacks": 1, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "summon-imp",
+      "name": "Summon Imp",
+      "icon": "spell_shadow_summonimp",
+      "spellId": 688,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "basic",
+      "archetype": "demonology",
+      "cost": 1,
+      "target": "none",
+      "flags": [],
+      "text": "Summon an Imp (Firebolt 5 fire, Blood Pact, Phase Shift).",
+      "effects": [
+        {"op": "summon", "unit": "imp", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Summon Imp (Rank 2)",
+        "cost": 0,
+        "text": "Summon an Imp (Firebolt 5 fire, Blood Pact, Phase Shift). Costs 0.",
+        "effects": [
+          {"op": "summon", "unit": "imp", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "immolate",
+      "name": "Immolate",
+      "icon": "spell_fire_immolation",
+      "spellId": 348,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "destruction",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 fire damage. Apply 4 Burn.",
+      "effects": [
+        {"op": "damage", "amount": 6, "school": "fire"},
+        {"op": "apply", "status": "burn", "stacks": 4, "target": "enemy"}
+      ],
+      "upgrade": {
+        "name": "Immolate (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 fire damage. Apply 6 Burn.",
+        "effects": [
+          {"op": "damage", "amount": 9, "school": "fire"},
+          {"op": "apply", "status": "burn", "stacks": 6, "target": "enemy"}
+        ]
+      }
+    },
+    {
+      "id": "curse-of-agony",
+      "name": "Curse of Agony",
+      "icon": "spell_shadow_curseofsargeras",
+      "spellId": 980,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "affliction",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Apply 8 Curse (ticks shadow damage each turn).",
+      "effects": [
+        {"op": "apply", "status": "curse", "stacks": 8, "target": "enemy"}
+      ],
+      "upgrade": {
+        "name": "Curse of Agony (Rank 2)",
+        "cost": 1,
+        "text": "Apply 12 Curse (ticks shadow damage each turn).",
+        "effects": [
+          {"op": "apply", "status": "curse", "stacks": 12, "target": "enemy"}
+        ]
+      }
+    },
+    {
+      "id": "curse-of-weakness",
+      "name": "Curse of Weakness",
+      "icon": "spell_shadow_curseofmannoroth",
+      "spellId": 702,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "affliction",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Apply 3 Weak. Draw 1 card.",
+      "effects": [
+        {"op": "apply", "status": "weak", "stacks": 3, "target": "enemy"},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Curse of Weakness (Rank 2)",
+        "cost": 1,
+        "text": "Apply 4 Weak. Draw 1 card.",
+        "effects": [
+          {"op": "apply", "status": "weak", "stacks": 4, "target": "enemy"},
+          {"op": "draw", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "drain-life",
+      "name": "Drain Life",
+      "icon": "spell_shadow_lifedrain02",
+      "spellId": 689,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "affliction",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 7 shadow damage. Heal 4 HP.",
+      "effects": [
+        {"op": "damage", "amount": 7, "school": "shadow"},
+        {"op": "heal", "amount": 4, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Drain Life (Rank 2)",
+        "cost": 1,
+        "text": "Deal 10 shadow damage. Heal 6 HP.",
+        "effects": [
+          {"op": "damage", "amount": 10, "school": "shadow"},
+          {"op": "heal", "amount": 6, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "drain-soul",
+      "name": "Drain Soul",
+      "icon": "spell_shadow_haunting",
+      "spellId": 1120,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "affliction",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 7 shadow damage. Gain 1 Soul Shard.",
+      "effects": [
+        {"op": "damage", "amount": 7, "school": "shadow"},
+        {"op": "gain_resource", "resource": "soul_shards", "amount": 1}
+      ],
+      "upgrade": {
+        "name": "Drain Soul (Rank 2)",
+        "cost": 1,
+        "text": "Deal 10 shadow damage. Gain 2 Soul Shards.",
+        "effects": [
+          {"op": "damage", "amount": 10, "school": "shadow"},
+          {"op": "gain_resource", "resource": "soul_shards", "amount": 2}
+        ]
+      }
+    },
+    {
+      "id": "searing-pain",
+      "name": "Searing Pain",
+      "icon": "spell_fire_soulburn",
+      "spellId": 5676,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "destruction",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 7 fire damage. +5 if the enemy is Burning.",
+      "effects": [
+        {"op": "damage", "amount": 7, "school": "fire"},
+        {"op": "conditional", "if": {"type": "status_on_target", "status": "burn"}, "then": [{"op": "damage", "amount": 5, "school": "fire"}]}
+      ],
+      "upgrade": {
+        "name": "Searing Pain (Rank 2)",
+        "cost": 1,
+        "text": "Deal 10 fire damage. +7 if the enemy is Burning.",
+        "effects": [
+          {"op": "damage", "amount": 10, "school": "fire"},
+          {"op": "conditional", "if": {"type": "status_on_target", "status": "burn"}, "then": [{"op": "damage", "amount": 7, "school": "fire"}]}
+        ]
+      }
+    },
+    {
+      "id": "fear",
+      "name": "Fear",
+      "icon": "spell_shadow_possession",
+      "spellId": 5782,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "destruction",
+      "cost": 1,
+      "target": "enemy",
+      "flags": ["exhaust"],
+      "text": "Apply 1 Fear for 2 turns. Exhaust.",
+      "effects": [
+        {"op": "apply", "status": "fear", "stacks": 1, "target": "enemy", "duration": 2}
+      ],
+      "upgrade": {
+        "name": "Fear (Rank 2)",
+        "cost": 1,
+        "text": "Apply 1 Fear for 3 turns. Exhaust.",
+        "effects": [
+          {"op": "apply", "status": "fear", "stacks": 1, "target": "enemy", "duration": 3}
+        ]
+      }
+    },
+    {
+      "id": "summon-voidwalker",
+      "name": "Summon Voidwalker",
+      "icon": "spell_shadow_summonvoidwalker",
+      "spellId": 697,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "demonology",
+      "cost": 1,
+      "target": "none",
+      "flags": [],
+      "text": "Summon a Voidwalker (taunts, soaks damage).",
+      "effects": [
+        {"op": "summon", "unit": "voidwalker", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Summon Voidwalker (Rank 2)",
+        "cost": 0,
+        "text": "Summon a Voidwalker (taunts, soaks damage). Costs 0.",
+        "effects": [
+          {"op": "summon", "unit": "voidwalker", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "health-funnel",
+      "name": "Health Funnel",
+      "icon": "spell_shadow_lifedrain",
+      "spellId": 755,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "demonology",
+      "cost": 0,
+      "target": "none",
+      "flags": [],
+      "text": "Lose 2 HP. Heal your demon 12 HP. Gain 6 Block.",
+      "effects": [
+        {"op": "damage", "amount": 2, "school": "shadow", "target": "self"},
+        {"op": "heal", "amount": 12, "target": "pet"},
+        {"op": "block", "amount": 6}
+      ],
+      "upgrade": {
+        "name": "Health Funnel (Rank 2)",
+        "cost": 0,
+        "text": "Lose 2 HP. Heal your demon 18 HP. Gain 9 Block.",
+        "effects": [
+          {"op": "damage", "amount": 2, "school": "shadow", "target": "self"},
+          {"op": "heal", "amount": 18, "target": "pet"},
+          {"op": "block", "amount": 9}
+        ]
+      }
+    },
+    {
+      "id": "curse-of-recklessness",
+      "name": "Curse of Recklessness",
+      "icon": "spell_shadow_unholystrength",
+      "spellId": 704,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "affliction",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Apply 2 Vulnerable. Gain 1 Soul Shard.",
+      "effects": [
+        {"op": "apply", "status": "vulnerable", "stacks": 2, "target": "enemy"},
+        {"op": "gain_resource", "resource": "soul_shards", "amount": 1}
+      ],
+      "upgrade": {
+        "name": "Curse of Recklessness (Rank 2)",
+        "cost": 1,
+        "text": "Apply 3 Vulnerable. Gain 1 Soul Shard.",
+        "effects": [
+          {"op": "apply", "status": "vulnerable", "stacks": 3, "target": "enemy"},
+          {"op": "gain_resource", "resource": "soul_shards", "amount": 1}
+        ]
+      }
+    },
+    {
+      "id": "curse-of-tongues",
+      "name": "Curse of Tongues",
+      "icon": "spell_shadow_curseoftounges",
+      "spellId": 1714,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "affliction",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Apply 2 Weak. Interrupt the enemy cast.",
+      "effects": [
+        {"op": "apply", "status": "weak", "stacks": 2, "target": "enemy"},
+        {"op": "cast_interrupt"}
+      ],
+      "upgrade": {
+        "name": "Curse of Tongues (Rank 2)",
+        "cost": 1,
+        "text": "Apply 3 Weak. Interrupt the enemy cast. Draw 1 card.",
+        "effects": [
+          {"op": "apply", "status": "weak", "stacks": 3, "target": "enemy"},
+          {"op": "cast_interrupt"},
+          {"op": "draw", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "shadow-ward",
+      "name": "Shadow Ward",
+      "icon": "spell_shadow_antishadow",
+      "spellId": 6229,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "destruction",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 8 Block. Gain 1 Soul Shard.",
+      "effects": [
+        {"op": "block", "amount": 8},
+        {"op": "gain_resource", "resource": "soul_shards", "amount": 1}
+      ],
+      "upgrade": {
+        "name": "Shadow Ward (Rank 2)",
+        "cost": 1,
+        "text": "Gain 11 Block. Gain 1 Soul Shard.",
+        "effects": [
+          {"op": "block", "amount": 11},
+          {"op": "gain_resource", "resource": "soul_shards", "amount": 1}
+        ]
+      }
+    },
+    {
+      "id": "create-healthstone",
+      "name": "Create Healthstone",
+      "icon": "inv_stone_04",
+      "spellId": 6201,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "demonology",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Add 1 Healthstone to your hand.",
+      "effects": [
+        {"op": "add_card", "card": "healthstone", "to": "hand", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Create Healthstone (Rank 2)",
+        "cost": 1,
+        "text": "Add 2 Healthstones to your hand.",
+        "effects": [
+          {"op": "add_card", "card": "healthstone", "to": "hand", "count": 2}
+        ]
+      }
+    },
+    {
+      "id": "create-soulstone",
+      "name": "Create Soulstone",
+      "icon": "spell_shadow_soulgem",
+      "spellId": 693,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "demonology",
+      "cost": 1,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Add 1 Soulstone to your hand. Exhaust.",
+      "effects": [
+        {"op": "add_card", "card": "soulstone", "to": "hand", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Create Soulstone (Rank 2)",
+        "cost": 0,
+        "text": "Add 1 Soulstone to your hand. Exhaust. Costs 0.",
+        "effects": [
+          {"op": "add_card", "card": "soulstone", "to": "hand", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "curse-of-exhaustion",
+      "name": "Curse of Exhaustion",
+      "icon": "spell_shadow_grimward",
+      "spellId": 18223,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "affliction",
+      "cost": 0,
+      "target": "enemy",
+      "flags": [],
+      "text": "Apply 1 Weak. Draw 1 card.",
+      "effects": [
+        {"op": "apply", "status": "weak", "stacks": 1, "target": "enemy"},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Curse of Exhaustion (Rank 2)",
+        "cost": 0,
+        "text": "Apply 2 Weak. Draw 1 card.",
+        "effects": [
+          {"op": "apply", "status": "weak", "stacks": 2, "target": "enemy"},
+          {"op": "draw", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "curse-of-the-elements",
+      "name": "Curse of the Elements",
+      "icon": "spell_shadow_chilltouch",
+      "spellId": 1490,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "affliction",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Apply 2 Vulnerable. Apply 2 Weak.",
+      "effects": [
+        {"op": "apply", "status": "vulnerable", "stacks": 2, "target": "enemy"},
+        {"op": "apply", "status": "weak", "stacks": 2, "target": "enemy"}
+      ],
+      "upgrade": {
+        "name": "Curse of the Elements (Rank 2)",
+        "cost": 1,
+        "text": "Apply 3 Vulnerable. Apply 3 Weak.",
+        "effects": [
+          {"op": "apply", "status": "vulnerable", "stacks": 3, "target": "enemy"},
+          {"op": "apply", "status": "weak", "stacks": 3, "target": "enemy"}
+        ]
+      }
+    },
+    {
+      "id": "summon-succubus",
+      "name": "Summon Succubus",
+      "icon": "spell_shadow_summonsuccubus",
+      "spellId": 712,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "demonology",
+      "cost": 1,
+      "target": "none",
+      "flags": [],
+      "text": "Summon a Succubus (Lash of Pain, Seduction, Soothing Kiss).",
+      "effects": [
+        {"op": "summon", "unit": "succubus", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Summon Succubus (Rank 2)",
+        "cost": 0,
+        "text": "Summon a Succubus (Lash of Pain, Seduction, Soothing Kiss). Costs 0.",
+        "effects": [
+          {"op": "summon", "unit": "succubus", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "summon-felhunter",
+      "name": "Summon Felhunter",
+      "icon": "spell_shadow_summonfelhunter",
+      "spellId": 691,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "demonology",
+      "cost": 1,
+      "target": "none",
+      "flags": [],
+      "text": "Summon a Felhunter (Spell Lock, Devour Magic).",
+      "effects": [
+        {"op": "summon", "unit": "felhunter", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Summon Felhunter (Rank 2)",
+        "cost": 0,
+        "text": "Summon a Felhunter (Spell Lock, Devour Magic). Costs 0.",
+        "effects": [
+          {"op": "summon", "unit": "felhunter", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "howl-of-terror",
+      "name": "Howl of Terror",
+      "icon": "spell_shadow_deathscream",
+      "spellId": 5484,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "destruction",
+      "cost": 1,
+      "target": "all_enemies",
+      "flags": ["exhaust"],
+      "text": "Apply 1 Fear to ALL enemies for 2 turns. Exhaust.",
+      "effects": [
+        {"op": "apply", "status": "fear", "stacks": 1, "target": "all_enemies", "duration": 2}
+      ],
+      "upgrade": {
+        "name": "Howl of Terror (Rank 2)",
+        "cost": 1,
+        "text": "Apply 1 Fear to ALL enemies for 3 turns. Exhaust.",
+        "effects": [
+          {"op": "apply", "status": "fear", "stacks": 1, "target": "all_enemies", "duration": 3}
+        ]
+      }
+    },
+    {
+      "id": "soul-fire",
+      "name": "Soul Fire",
+      "icon": "spell_fire_fireball02",
+      "spellId": 6353,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "destruction",
+      "cost": 2,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 18 fire damage. Gain 1 Soul Shard.",
+      "effects": [
+        {"op": "damage", "amount": 18, "school": "fire"},
+        {"op": "gain_resource", "resource": "soul_shards", "amount": 1}
+      ],
+      "upgrade": {
+        "name": "Soul Fire (Rank 2)",
+        "cost": 2,
+        "text": "Deal 24 fire damage. Gain 2 Soul Shards.",
+        "effects": [
+          {"op": "damage", "amount": 24, "school": "fire"},
+          {"op": "gain_resource", "resource": "soul_shards", "amount": 2}
+        ]
+      }
+    },
+    {
+      "id": "siphon-life",
+      "name": "Siphon Life",
+      "icon": "spell_shadow_requiem",
+      "spellId": 18265,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "affliction",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Apply 5 Curse. Heal 4 HP.",
+      "effects": [
+        {"op": "apply", "status": "curse", "stacks": 5, "target": "enemy"},
+        {"op": "heal", "amount": 4, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Siphon Life (Rank 2)",
+        "cost": 1,
+        "text": "Apply 7 Curse. Heal 6 HP.",
+        "effects": [
+          {"op": "apply", "status": "curse", "stacks": 7, "target": "enemy"},
+          {"op": "heal", "amount": 6, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "drain-mana",
+      "name": "Drain Mana",
+      "icon": "spell_shadow_siphonmana",
+      "spellId": 5138,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "affliction",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 shadow damage. Gain 1 Energy. Draw 1 card.",
+      "effects": [
+        {"op": "damage", "amount": 6, "school": "shadow"},
+        {"op": "gain_energy", "amount": 1},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Drain Mana (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 shadow damage. Gain 1 Energy. Draw 2 cards.",
+        "effects": [
+          {"op": "damage", "amount": 9, "school": "shadow"},
+          {"op": "gain_energy", "amount": 1},
+          {"op": "draw", "count": 2}
+        ]
+      }
+    },
+    {
+      "id": "rain-of-fire",
+      "name": "Rain of Fire",
+      "icon": "spell_shadow_rainoffire",
+      "spellId": 5740,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "destruction",
+      "cost": 2,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Deal 10 fire damage to ALL enemies. Apply 3 Burn to ALL.",
+      "effects": [
+        {"op": "damage", "amount": 10, "school": "fire", "target": "all_enemies"},
+        {"op": "apply", "status": "burn", "stacks": 3, "target": "all_enemies"}
+      ],
+      "upgrade": {
+        "name": "Rain of Fire (Rank 2)",
+        "cost": 2,
+        "text": "Deal 14 fire damage to ALL enemies. Apply 4 Burn to ALL.",
+        "effects": [
+          {"op": "damage", "amount": 14, "school": "fire", "target": "all_enemies"},
+          {"op": "apply", "status": "burn", "stacks": 4, "target": "all_enemies"}
+        ]
+      }
+    },
+    {
+      "id": "hellfire",
+      "name": "Hellfire",
+      "icon": "spell_fire_incinerate",
+      "spellId": 1949,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "destruction",
+      "cost": 2,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Lose 3 HP. Deal 14 fire damage to ALL enemies.",
+      "effects": [
+        {"op": "damage", "amount": 3, "school": "fire", "target": "self"},
+        {"op": "damage", "amount": 14, "school": "fire", "target": "all_enemies"}
+      ],
+      "upgrade": {
+        "name": "Hellfire (Rank 2)",
+        "cost": 2,
+        "text": "Lose 3 HP. Deal 18 fire damage to ALL enemies.",
+        "effects": [
+          {"op": "damage", "amount": 3, "school": "fire", "target": "self"},
+          {"op": "damage", "amount": 18, "school": "fire", "target": "all_enemies"}
+        ]
+      }
+    },
+    {
+      "id": "death-coil",
+      "name": "Death Coil",
+      "icon": "spell_shadow_deathcoil",
+      "spellId": 6789,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "destruction",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 9 shadow damage. Heal 6 HP. Apply 1 Fear.",
+      "effects": [
+        {"op": "damage", "amount": 9, "school": "shadow"},
+        {"op": "heal", "amount": 6, "target": "self"},
+        {"op": "apply", "status": "fear", "stacks": 1, "target": "enemy"}
+      ],
+      "upgrade": {
+        "name": "Death Coil (Rank 2)",
+        "cost": 1,
+        "text": "Deal 12 shadow damage. Heal 8 HP. Apply 1 Fear.",
+        "effects": [
+          {"op": "damage", "amount": 12, "school": "shadow"},
+          {"op": "heal", "amount": 8, "target": "self"},
+          {"op": "apply", "status": "fear", "stacks": 1, "target": "enemy"}
+        ]
+      }
+    },
+    {
+      "id": "dark-pact",
+      "name": "Dark Pact",
+      "icon": "spell_shadow_darkritual",
+      "spellId": 18220,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "affliction",
+      "cost": 0,
+      "target": "self",
+      "flags": [],
+      "text": "Your demon loses 3 HP. Gain 2 energy. Draw 1 card.",
+      "effects": [
+        {"op": "damage", "amount": 3, "school": "shadow", "target": "pet"},
+        {"op": "gain_energy", "amount": 2},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Dark Pact (Rank 2)",
+        "cost": 0,
+        "text": "Your demon loses 3 HP. Gain 2 energy. Draw 2 cards.",
+        "effects": [
+          {"op": "damage", "amount": 3, "school": "shadow", "target": "pet"},
+          {"op": "gain_energy", "amount": 2},
+          {"op": "draw", "count": 2}
+        ]
+      }
+    },
+    {
+      "id": "demon-armor",
+      "name": "Demon Armor",
+      "icon": "spell_shadow_demonicfortitude",
+      "spellId": 706,
+      "rank": 1,
+      "type": "power",
+      "rarity": "uncommon",
+      "archetype": "demonology",
+      "cost": 2,
+      "target": "self",
+      "flags": [],
+      "text": "Power. Gain 4 Armor and 2 Regen for the rest of combat.",
+      "effects": [
+        {"op": "apply", "status": "armor", "stacks": 4, "target": "self"},
+        {"op": "apply", "status": "regen", "stacks": 2, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Demon Armor (Rank 2)",
+        "cost": 1,
+        "text": "Power. Gain 5 Armor and 2 Regen for the rest of combat. Costs 1.",
+        "effects": [
+          {"op": "apply", "status": "armor", "stacks": 5, "target": "self"},
+          {"op": "apply", "status": "regen", "stacks": 2, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "banish",
+      "name": "Banish",
+      "icon": "spell_shadow_cripple",
+      "spellId": 710,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "demonology",
+      "cost": 1,
+      "target": "enemy",
+      "flags": ["exhaust"],
+      "text": "Demon or Elemental: Stun for 3 turns. Others: Apply 2 Weak. Exhaust.",
+      "effects": [
+        {
+          "op": "conditional",
+          "if": {"type": "target_is_family", "family": ["demon", "elemental"]},
+          "then": [{"op": "apply", "status": "stun", "stacks": 1, "target": "enemy", "duration": 3}],
+          "else": [{"op": "apply", "status": "weak", "stacks": 2, "target": "enemy"}]
+        }
+      ],
+      "upgrade": {
+        "name": "Banish (Rank 2)",
+        "cost": 1,
+        "text": "Demon or Elemental: Stun for 3 turns. Others: Apply 3 Weak. Exhaust.",
+        "effects": [
+          {
+            "op": "conditional",
+            "if": {"type": "target_is_family", "family": ["demon", "elemental"]},
+            "then": [{"op": "apply", "status": "stun", "stacks": 1, "target": "enemy", "duration": 3}],
+            "else": [{"op": "apply", "status": "weak", "stacks": 3, "target": "enemy"}]
+          }
+        ]
+      }
+    },
+    {
+      "id": "curse-of-shadow",
+      "name": "Curse of Shadow",
+      "icon": "spell_shadow_curseofachimonde",
+      "spellId": 17862,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "affliction",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Apply 3 Marked. Apply 1 Vulnerable.",
+      "effects": [
+        {"op": "apply", "status": "marked", "stacks": 3, "target": "enemy"},
+        {"op": "apply", "status": "vulnerable", "stacks": 1, "target": "enemy"}
+      ],
+      "upgrade": {
+        "name": "Curse of Shadow (Rank 2)",
+        "cost": 1,
+        "text": "Apply 4 Marked. Apply 2 Vulnerable.",
+        "effects": [
+          {"op": "apply", "status": "marked", "stacks": 4, "target": "enemy"},
+          {"op": "apply", "status": "vulnerable", "stacks": 2, "target": "enemy"}
+        ]
+      }
+    },
+    {
+      "id": "shadowburn",
+      "name": "Shadowburn",
+      "icon": "spell_shadow_scourgebuild",
+      "spellId": 17877,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "rare",
+      "archetype": "destruction",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 18 shadow damage. Gain 1 Soul Shard.",
+      "effects": [
+        {"op": "damage", "amount": 18, "school": "shadow"},
+        {"op": "gain_resource", "resource": "soul_shards", "amount": 1}
+      ],
+      "upgrade": {
+        "name": "Shadowburn (Rank 2)",
+        "cost": 1,
+        "text": "Deal 24 shadow damage. Gain 2 Soul Shards.",
+        "effects": [
+          {"op": "damage", "amount": 24, "school": "shadow"},
+          {"op": "gain_resource", "resource": "soul_shards", "amount": 2}
+        ]
+      }
+    },
+    {
+      "id": "conflagrate",
+      "name": "Conflagrate",
+      "icon": "spell_fire_fireball",
+      "spellId": 17962,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "rare",
+      "archetype": "destruction",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "If the enemy is Burning: deal 22 fire damage and remove Burn. Else deal 8.",
+      "effects": [
+        {
+          "op": "conditional",
+          "if": {"type": "status_on_target", "status": "burn"},
+          "then": [
+            {"op": "damage", "amount": 22, "school": "fire"},
+            {"op": "remove", "status": "burn", "target": "enemy"}
+          ],
+          "else": [
+            {"op": "damage", "amount": 8, "school": "fire"}
+          ]
+        }
+      ],
+      "upgrade": {
+        "name": "Conflagrate (Rank 2)",
+        "cost": 1,
+        "text": "If the enemy is Burning: deal 28 fire damage and remove Burn. Else deal 11.",
+        "effects": [
+          {
+            "op": "conditional",
+            "if": {"type": "status_on_target", "status": "burn"},
+            "then": [
+              {"op": "damage", "amount": 28, "school": "fire"},
+              {"op": "remove", "status": "burn", "target": "enemy"}
+            ],
+            "else": [
+              {"op": "damage", "amount": 11, "school": "fire"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "soul-link",
+      "name": "Soul Link",
+      "icon": "spell_shadow_gathershadows",
+      "spellId": 19028,
+      "rank": 1,
+      "type": "power",
+      "rarity": "rare",
+      "archetype": "demonology",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Power. 30% of damage you take is redirected to your demon.",
+      "effects": [
+        {"op": "apply", "status": "soul_link", "stacks": 1, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Soul Link (Rank 2)",
+        "cost": 1,
+        "text": "Power. 60% of damage you take is redirected to your demon.",
+        "effects": [
+          {"op": "apply", "status": "soul_link", "stacks": 2, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "demonic-sacrifice",
+      "name": "Demonic Sacrifice",
+      "icon": "spell_shadow_ritualofsacrifice",
+      "spellId": 18788,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "demonology",
+      "cost": 1,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Sacrifice your demon: gain 2 Strength and 2 Soul Shards. Exhaust.",
+      "effects": [
+        {"op": "pet_action", "action": "sacrifice"},
+        {"op": "apply", "status": "strength", "stacks": 2, "target": "self"},
+        {"op": "gain_resource", "resource": "soul_shards", "amount": 2}
+      ],
+      "upgrade": {
+        "name": "Demonic Sacrifice (Rank 2)",
+        "cost": 0,
+        "text": "Sacrifice your demon: gain 3 Strength and 2 Soul Shards. Exhaust. Costs 0.",
+        "effects": [
+          {"op": "pet_action", "action": "sacrifice"},
+          {"op": "apply", "status": "strength", "stacks": 3, "target": "self"},
+          {"op": "gain_resource", "resource": "soul_shards", "amount": 2}
+        ]
+      }
+    },
+    {
+      "id": "fel-domination",
+      "name": "Fel Domination",
+      "icon": "spell_nature_removecurse",
+      "spellId": 18708,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "demonology",
+      "cost": 0,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Gain 2 Soul Shards. Draw 2 cards. Exhaust.",
+      "effects": [
+        {"op": "gain_resource", "resource": "soul_shards", "amount": 2},
+        {"op": "draw", "count": 2}
+      ],
+      "upgrade": {
+        "name": "Fel Domination (Rank 2)",
+        "cost": 0,
+        "text": "Gain 3 Soul Shards. Draw 2 cards. Exhaust.",
+        "effects": [
+          {"op": "gain_resource", "resource": "soul_shards", "amount": 3},
+          {"op": "draw", "count": 2}
+        ]
+      }
+    },
+    {
+      "id": "enslave-demon",
+      "name": "Enslave Demon",
+      "icon": "spell_shadow_enslavedemon",
+      "spellId": 1098,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "demonology",
+      "cost": 1,
+      "target": "enemy",
+      "flags": ["exhaust"],
+      "text": "Demon only: it attacks other enemies for 3 turns. Exhaust.",
+      "effects": [
+        {
+          "op": "conditional",
+          "if": {"type": "target_is_family", "family": "demon"},
+          "then": [{"op": "apply", "status": "taunted", "stacks": 1, "target": "enemy", "duration": 3}]
+        }
+      ],
+      "upgrade": {
+        "name": "Enslave Demon (Rank 2)",
+        "cost": 0,
+        "text": "Demon only: it attacks other enemies for 3 turns. Exhaust. Costs 0.",
+        "effects": [
+          {
+            "op": "conditional",
+            "if": {"type": "target_is_family", "family": "demon"},
+            "then": [{"op": "apply", "status": "taunted", "stacks": 1, "target": "enemy", "duration": 3}]
+          }
+        ]
+      }
+    },
+    {
+      "id": "amplify-curse",
+      "name": "Amplify Curse",
+      "icon": "spell_shadow_contagion",
+      "spellId": 18288,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "affliction",
+      "cost": 0,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Your next Curse applies double stacks. Draw 1 card. Exhaust.",
+      "effects": [
+        {"op": "apply", "status": "amplify_curse", "stacks": 1, "target": "self"},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Amplify Curse (Rank 2)",
+        "cost": 0,
+        "text": "Your next Curse applies double stacks. Draw 2 cards. Exhaust.",
+        "effects": [
+          {"op": "apply", "status": "amplify_curse", "stacks": 1, "target": "self"},
+          {"op": "draw", "count": 2}
+        ]
+      }
+    },
+    {
+      "id": "inferno",
+      "name": "Inferno",
+      "icon": "spell_shadow_summoninfernal",
+      "spellId": 1122,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "demonology",
+      "cost": 2,
+      "target": "none",
+      "flags": ["exhaust"],
+      "text": "Summon an Infernal: Stun ALL enemies 1 turn, deal 8 fire to ALL.",
+      "effects": [
+        {"op": "summon", "unit": "infernal", "count": 1},
+        {"op": "damage", "amount": 8, "school": "fire", "target": "all_enemies"},
+        {"op": "apply", "status": "stun", "stacks": 1, "target": "all_enemies", "duration": 1}
+      ],
+      "upgrade": {
+        "name": "Inferno (Rank 2)",
+        "cost": 1,
+        "text": "Summon an Infernal: Stun ALL enemies 1 turn, deal 12 fire to ALL. Costs 1.",
+        "effects": [
+          {"op": "summon", "unit": "infernal", "count": 1},
+          {"op": "damage", "amount": 12, "school": "fire", "target": "all_enemies"},
+          {"op": "apply", "status": "stun", "stacks": 1, "target": "all_enemies", "duration": 1}
+        ]
+      }
+    },
+    {
+      "id": "curse-of-doom",
+      "name": "Curse of Doom",
+      "icon": "spell_shadow_auraofdarkness",
+      "spellId": 603,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "epic",
+      "archetype": "affliction",
+      "cost": 2,
+      "target": "enemy",
+      "flags": ["exhaust"],
+      "text": "After 3 turns the enemy takes 60 shadow damage (delayed). Exhaust.",
+      "effects": [
+        {"op": "apply", "status": "delayed", "stacks": 1, "target": "enemy", "duration": 3, "payload": [{"op": "damage", "amount": 60, "school": "shadow"}]}
+      ],
+      "upgrade": {
+        "name": "Curse of Doom (Rank 2)",
+        "cost": 1,
+        "text": "After 2 turns the enemy takes 60 shadow damage (delayed). Exhaust. Costs 1.",
+        "effects": [
+          {"op": "apply", "status": "delayed", "stacks": 1, "target": "enemy", "duration": 2, "payload": [{"op": "damage", "amount": 60, "school": "shadow"}]}
+        ]
+      }
+    },
+    {
+      "id": "ritual-of-doom",
+      "name": "Ritual of Doom",
+      "icon": "spell_shadow_antimagicshell",
+      "spellId": 18540,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "epic",
+      "archetype": "demonology",
+      "cost": 2,
+      "target": "none",
+      "flags": ["exhaust"],
+      "text": "Summon a Doomguard (Rain of Fire, War Stomp, Cripple). Exhaust.",
+      "effects": [
+        {"op": "summon", "unit": "doomguard", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Ritual of Doom (Rank 2)",
+        "cost": 1,
+        "text": "Summon a Doomguard (Rain of Fire, War Stomp, Cripple). Exhaust. Costs 1.",
+        "effects": [
+          {"op": "summon", "unit": "doomguard", "count": 1}
+        ]
+      }
+    }
+  ]
+}

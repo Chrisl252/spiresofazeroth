@@ -1,0 +1,267 @@
+[
+ {"id":"dire-maul-east","name":"Dire Maul East (Warpwood Quarter)","unlock":"act_complete","encounters":{"normal":[["wildspawn-betrayer","wildspawn-rogue"],["warpwood-moss-flayer","warpwood-tangler"],["wildspawn-felsworn","wildspawn-hellcaller"],["wildspawn-shadowstalker","wildspawn-trickster","warpwood-tangler"]],"elite":[["pusillin"],["zevrim-thornhoof"],["hydrospawn"],["lethtendris"]],"boss":[["alzzin-the-wildshaper"]]},"relics":[{"id":"felhide-cap","name":"Felhide Cap","icon":"inv_helmet_01","rarity":"uncommon","itemId":null,"itemIdSource":"unverified","zone":"feralas","class":null,"text":"At the start of combat gain 5 Block. Fel enemies deal 1 less damage per hit.","triggers":{"on_combat_start":[{"op":"block","amount":5,"target":"self"}]}}],
+  "enemies":[
+   {"id":"wildspawn-felsworn","name":"Wildspawn Felsworn","tier":"normal","family":"demon","type":"satyr","level":[57,59],"hp":[74,86],"icon":"spell_shadow_summonfelhunter","npcId":null,"traits":["caster"],
+    "moves":[
+     {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":13,"school":"shadow"}],"cast":true,"weight":2},
+     {"id":"immolate","name":"Immolate","intent":"cast","effects":[{"op":"damage","amount":10,"school":"fire"},{"op":"apply","status":"burn","stacks":2,"target":"player"}],"cast":true,"weight":2},
+     {"id":"curse-of-weakness","name":"Curse of Weakness","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"cast":true,"weight":2,"cooldown":3}
+    ]},
+   {"id":"wildspawn-betrayer","name":"Wildspawn Betrayer","tier":"normal","family":"demon","type":"satyr","level":[57,59],"hp":[74,86],"icon":"spell_shadow_summonfelhunter","npcId":null,"traits":[],
+    "moves":[
+     {"id":"rake","name":"Rake","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2},
+     {"id":"dual-strike","name":"Dual Strike","intent":"attack_multi","effects":[{"op":"damage","amount":7,"times":2}],"weight":2},
+     {"id":"sap","name":"Sap","intent":"debuff","effects":[{"op":"apply","status":"stun","stacks":1,"target":"player"}],"weight":1,"cooldown":4}
+    ]},
+   {"id":"wildspawn-hellcaller","name":"Wildspawn Hellcaller","tier":"normal","family":"demon","type":"satyr","level":[58,60],"hp":[74,86],"icon":"spell_fire_felflamebolt","npcId":null,"traits":["caster"],
+    "moves":[
+     {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":13,"school":"shadow"}],"cast":true,"weight":2},
+     {"id":"immolate","name":"Immolate","intent":"cast","effects":[{"op":"damage","amount":10,"school":"fire"},{"op":"apply","status":"burn","stacks":2,"target":"player"}],"cast":true,"weight":2},
+     {"id":"curse-of-weakness","name":"Curse of Weakness","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"cast":true,"weight":2,"cooldown":3}
+    ]},
+   {"id":"wildspawn-rogue","name":"Wildspawn Rogue","tier":"normal","family":"demon","type":"satyr","level":[57,59],"hp":[74,86],"icon":"spell_shadow_summonfelhunter","npcId":null,"traits":[],
+    "moves":[
+     {"id":"rake","name":"Rake","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2},
+     {"id":"dual-strike","name":"Dual Strike","intent":"attack_multi","effects":[{"op":"damage","amount":7,"times":2}],"weight":2},
+     {"id":"sap","name":"Sap","intent":"debuff","effects":[{"op":"apply","status":"stun","stacks":1,"target":"player"}],"weight":1,"cooldown":4}
+    ]},
+   {"id":"wildspawn-trickster","name":"Wildspawn Trickster","tier":"normal","family":"demon","type":"satyr","level":[57,59],"hp":[74,86],"icon":"spell_shadow_summonfelhunter","npcId":null,"traits":["caster"],
+    "moves":[
+     {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":13,"school":"shadow"}],"cast":true,"weight":2},
+     {"id":"immolate","name":"Immolate","intent":"cast","effects":[{"op":"damage","amount":10,"school":"fire"},{"op":"apply","status":"burn","stacks":2,"target":"player"}],"cast":true,"weight":2},
+     {"id":"curse-of-weakness","name":"Curse of Weakness","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"cast":true,"weight":2,"cooldown":3}
+    ]},
+   {"id":"wildspawn-shadowstalker","name":"Wildspawn Shadowstalker","tier":"normal","family":"demon","type":"satyr","level":[58,60],"hp":[74,86],"icon":"spell_shadow_summonfelhunter","npcId":null,"traits":[],
+    "moves":[
+     {"id":"rake","name":"Rake","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2},
+     {"id":"dual-strike","name":"Dual Strike","intent":"attack_multi","effects":[{"op":"damage","amount":7,"times":2}],"weight":2},
+     {"id":"sap","name":"Sap","intent":"debuff","effects":[{"op":"apply","status":"stun","stacks":1,"target":"player"}],"weight":1,"cooldown":4}
+    ]},
+   {"id":"warpwood-moss-flayer","name":"Warpwood Moss Flayer","tier":"normal","family":"elemental","type":"treant","level":[57,59],"hp":[74,86],"icon":"10_2_raidability_treant","npcId":null,"traits":["resist:nature"],
+    "moves":[
+     {"id":"entangling-strike","name":"Entangling Strike","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2},
+     {"id":"entangling-roots","name":"Entangling Roots","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":4},
+     {"id":"bark-skin","name":"Bark Skin","intent":"block","effects":[{"op":"block","amount":14,"target":"self"}],"weight":1}
+    ]},
+   {"id":"warpwood-tangler","name":"Warpwood Tangler","tier":"normal","family":"elemental","type":"treant","level":[57,59],"hp":[74,86],"icon":"10_2_raidability_treant","npcId":null,"traits":["resist:nature"],
+    "moves":[
+     {"id":"entangling-strike","name":"Entangling Strike","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2},
+     {"id":"entangling-roots","name":"Entangling Roots","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":4},
+     {"id":"bark-skin","name":"Bark Skin","intent":"block","effects":[{"op":"block","amount":14,"target":"self"}],"weight":1}
+    ]},
+   {"id":"pusillin","name":"Pusillin","tier":"elite","family":"demon","type":"imp","level":[58,59],"hp":[140,160],"icon":"spell_shadow_summonimp","npcId":14354,"traits":["demon","flee"],
+    "moves":[
+     {"id":"fire-blast","name":"Fire Blast","intent":"cast","effects":[{"op":"damage","amount":9,"school":"fire"}],"cast":true,"weight":2},
+     {"id":"stinking-breath","name":"Stinking Breath","intent":"attack","effects":[{"op":"damage","amount":8,"school":"nature"},{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":2},
+     {"id":"firebolt","name":"Firebolt","intent":"attack","effects":[{"op":"damage","amount":12,"school":"fire"}],"weight":2},
+     {"id":"run-away","name":"Run Away","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":1,"cooldown":4}
+    ],
+    "phases":[
+     {"hpBelowPct":50,"onEnter":[{"op":"apply","status":"strength","stacks":2,"target":"self"}]}
+    ]},
+   {"id":"zevrim-thornhoof","name":"Zevrim Thornhoof","tier":"elite","family":"demon","type":"satyr","level":[58,59],"hp":[150,175],"icon":"spell_shadow_summonfelhunter","npcId":11490,"traits":["caster"],
+    "moves":[
+     {"id":"intense-pain","name":"Intense Pain","intent":"attack","effects":[{"op":"damage","amount":16}],"weight":2},
+     {"id":"sacrifice","name":"Sacrifice","intent":"cast","effects":[{"op":"damage","amount":20,"school":"shadow"},{"op":"apply","status":"curse","stacks":2,"target":"player"}],"cast":true,"weight":2,"cooldown":4},
+     {"id":"thornhoof-slash","name":"Thornhoof Slash","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2}
+    ]},
+   {"id":"hydrospawn","name":"Hydrospawn","tier":"elite","family":"elemental","type":"hydrospawn","level":[58,60],"hp":[165,190],"icon":"inv_elemental_primal_water","npcId":13280,"traits":["resist:frost","summoner"],
+    "moves":[
+     {"id":"hydrospawn-tidal-crash","name":"Hydrospawn Tidal Crash","intent":"attack","effects":[{"op":"damage","amount":10,"school":"frost","target":"all_enemies"}],"weight":2},
+     {"id":"wave-slam","name":"Wave Slam","intent":"attack","effects":[{"op":"damage","amount":17}],"weight":2},
+     {"id":"massive-geyser","name":"Massive Geyser","intent":"attack","effects":[{"op":"damage","amount":9,"school":"frost","target":"all_enemies"}],"weight":2,"cooldown":4},
+     {"id":"water-shield","name":"Water Shield","intent":"block","effects":[{"op":"block","amount":12,"target":"self"}],"weight":1}
+    ]},
+   {"id":"lethtendris","name":"Lethtendris","tier":"elite","family":"humanoid","type":"satyr","level":[58,60],"hp":[150,175],"icon":"spell_shadow_shadowbolt","npcId":14327,"traits":["caster","summoner"],
+    "moves":[
+     {"id":"shadow-bolt-volley","name":"Shadow Bolt Volley","intent":"cast","effects":[{"op":"damage","amount":14,"school":"shadow"}],"cast":true,"weight":2},
+     {"id":"curse-of-tongues","name":"Curse of Tongues","intent":"cast","effects":[{"op":"damage","amount":6,"school":"shadow"},{"op":"apply","status":"silence","stacks":1,"target":"player"}],"cast":true,"weight":2,"cooldown":4},
+     {"id":"summon-pimgib","name":"Summon Pimgib","intent":"summon","effects":[{"op":"summon","unit":"pimgib","count":1}],"weight":2,"cooldown":5},
+     {"id":"whip-lash","name":"Whip Lash","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2}
+    ]},
+   {"id":"alzzin-the-wildshaper","name":"Alzzin the Wildshaper","tier":"boss","family":"demon","type":"satyr","level":[60,60],"hp":[340,380],"icon":"spell_shadow_demonform","npcId":11492,"traits":["demon","shapeshifter"],"pattern":["thorn-lash","wither","enervate","thorn-lash"],
+    "moves":[
+     {"id":"thorn-lash","name":"Thorn Lash","intent":"attack","effects":[{"op":"damage","amount":17},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+     {"id":"wither","name":"Wither","intent":"cast","effects":[{"op":"damage","amount":12,"school":"nature"},{"op":"apply","status":"curse","stacks":2,"target":"player"}],"cast":true,"weight":2},
+     {"id":"enervate","name":"Enervate","intent":"attack","effects":[{"op":"damage","amount":13,"school":"shadow","target":"all_enemies"}],"weight":2,"cooldown":4},
+     {"id":"mangle","name":"Mangle","intent":"attack","effects":[{"op":"damage","amount":24}],"weight":2},
+     {"id":"rend-flesh","name":"Rend Flesh","intent":"attack","effects":[{"op":"damage","amount":26}],"weight":2},
+     {"id":"disarm","name":"Disarm","intent":"attack","effects":[{"op":"damage","amount":16},{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":4}
+    ],
+    "phases":[
+     {"hpBelowPct":66,"pattern":["mangle","rend-flesh","disarm","mangle"],"onEnter":[{"op":"apply","status":"strength","stacks":2,"target":"self"}]},
+     {"hpBelowPct":33,"pattern":["rend-flesh","mangle","enervate","rend-flesh"],"onEnter":[{"op":"apply","status":"strength","stacks":2,"target":"self"}]}
+    ]}
+  ]},
+ {"id":"dire-maul-west","name":"Dire Maul West (Capital Gardens)","unlock":"act_complete","encounters":{"normal":[["eldreth-spectre","eldreth-phantasm"],["ironbark-protector","eldreth-seether"],["skeletal-highborne","skeletal-highborne","eldreth-apparition"],["ironbark-protector","ironbark-protector"]],"elite":[["tendris-warpwood"],["magister-kalendris"],["illyanna-ravenoak"]],"boss":[["prince-tortheldrin"],["immolthar"]]},"relics":[{"id":"barbarous-blade","name":"Barbarous Blade","icon":"inv_sword_01","rarity":"rare","itemId":null,"itemIdSource":"unverified","zone":"feralas","class":null,"text":"Your first Attack each turn deals 3 extra damage.","triggers":{"on_attack":[{"op":"conditional","if":{"type":"turn_number","firstAttack":true},"then":[{"op":"damage","amount":3}]}]}}],
+  "enemies":[
+   {"id":"eldreth-spectre","name":"Eldreth Spectre","tier":"normal","family":"undead","type":"ghost","level":[58,60],"hp":[74,86],"icon":"spell_shadow_raisedead","npcId":null,"traits":["incorporeal"],
+    "moves":[
+     {"id":"shadow-word-pain","name":"Shadow Word Pain","intent":"cast","effects":[{"op":"damage","amount":10,"school":"shadow"},{"op":"apply","status":"curse","stacks":1,"target":"player"}],"cast":true,"weight":2},
+     {"id":"drain-mana","name":"Drain Mana","intent":"attack","effects":[{"op":"damage","amount":8,"school":"arcane"},{"op":"heal","amount":6,"target":"self"}],"weight":2,"cooldown":3},
+     {"id":"spectral-touch","name":"Spectral Touch","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2}
+    ]},
+   {"id":"eldreth-phantasm","name":"Eldreth Phantasm","tier":"normal","family":"undead","type":"ghost","level":[58,60],"hp":[74,86],"icon":"spell_shadow_raisedead","npcId":null,"traits":["incorporeal"],
+    "moves":[
+     {"id":"shadow-word-pain","name":"Shadow Word Pain","intent":"cast","effects":[{"op":"damage","amount":10,"school":"shadow"},{"op":"apply","status":"curse","stacks":1,"target":"player"}],"cast":true,"weight":2},
+     {"id":"drain-mana","name":"Drain Mana","intent":"attack","effects":[{"op":"damage","amount":8,"school":"arcane"},{"op":"heal","amount":6,"target":"self"}],"weight":2,"cooldown":3},
+     {"id":"spectral-touch","name":"Spectral Touch","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2}
+    ]},
+   {"id":"eldreth-apparition","name":"Eldreth Apparition","tier":"normal","family":"undead","type":"ghost","level":[58,60],"hp":[74,86],"icon":"spell_shadow_raisedead","npcId":null,"traits":["incorporeal"],
+    "moves":[
+     {"id":"shadow-word-pain","name":"Shadow Word Pain","intent":"cast","effects":[{"op":"damage","amount":10,"school":"shadow"},{"op":"apply","status":"curse","stacks":1,"target":"player"}],"cast":true,"weight":2},
+     {"id":"drain-mana","name":"Drain Mana","intent":"attack","effects":[{"op":"damage","amount":8,"school":"arcane"},{"op":"heal","amount":6,"target":"self"}],"weight":2,"cooldown":3},
+     {"id":"spectral-touch","name":"Spectral Touch","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2}
+    ]},
+   {"id":"eldreth-seether","name":"Eldreth Seether","tier":"normal","family":"undead","type":"ghost","level":[58,60],"hp":[74,86],"icon":"spell_shadow_raisedead","npcId":null,"traits":["incorporeal"],
+    "moves":[
+     {"id":"shadow-word-pain","name":"Shadow Word Pain","intent":"cast","effects":[{"op":"damage","amount":10,"school":"shadow"},{"op":"apply","status":"curse","stacks":1,"target":"player"}],"cast":true,"weight":2},
+     {"id":"drain-mana","name":"Drain Mana","intent":"attack","effects":[{"op":"damage","amount":8,"school":"arcane"},{"op":"heal","amount":6,"target":"self"}],"weight":2,"cooldown":3},
+     {"id":"spectral-touch","name":"Spectral Touch","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2}
+    ]},
+   {"id":"ironbark-protector","name":"Ironbark Protector","tier":"normal","family":"elemental","type":"treant","level":[57,59],"hp":[88,104],"icon":"10_2_raidability_treant","npcId":null,"traits":["resist:nature"],
+    "moves":[
+     {"id":"entangling-strike","name":"Entangling Strike","intent":"attack","effects":[{"op":"damage","amount":17}],"weight":2},
+     {"id":"entangling-roots","name":"Entangling Roots","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":4},
+     {"id":"bark-skin","name":"Bark Skin","intent":"block","effects":[{"op":"block","amount":17,"target":"self"}],"weight":1}
+    ]},
+   {"id":"skeletal-highborne","name":"Skeletal Highborne","tier":"normal","family":"undead","type":"skeleton","level":[58,60],"hp":[74,86],"icon":"inv_misc_bone_humanskull_01","npcId":null,"traits":["incorporeal"],
+    "moves":[
+     {"id":"rusted-blade","name":"Rusted Blade","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2},
+     {"id":"frost-shock","name":"Frost Shock","intent":"cast","effects":[{"op":"damage","amount":10,"school":"frost"},{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":2},
+     {"id":"bone-guard","name":"Bone Guard","intent":"block","effects":[{"op":"block","amount":12,"target":"self"}],"weight":1}
+    ]},
+   {"id":"tendris-warpwood","name":"Tendris Warpwood","tier":"elite","family":"elemental","type":"treant","level":[58,60],"hp":[165,190],"icon":"10_2_raidability_treant","npcId":11489,"traits":["resist:nature"],
+    "moves":[
+     {"id":"entangling-roots","name":"Entangling Roots","intent":"attack","effects":[{"op":"damage","amount":14,"school":"nature"},{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2},
+     {"id":"trample","name":"Trample","intent":"attack","effects":[{"op":"damage","amount":18}],"weight":2},
+     {"id":"uproot","name":"Uproot","intent":"attack","effects":[{"op":"damage","amount":11,"school":"nature","target":"all_enemies"}],"weight":2,"cooldown":4},
+     {"id":"bark-mend","name":"Bark Mend","intent":"heal","effects":[{"op":"heal","amount":10,"target":"self"}],"weight":1,"cooldown":5}
+    ]},
+   {"id":"magister-kalendris","name":"Magister Kalendris","tier":"elite","family":"humanoid","type":"highborne","level":[58,60],"hp":[155,180],"icon":"inv_misc_head_elf_02","npcId":11487,"traits":["caster"],
+    "moves":[
+     {"id":"shadow-word-pain","name":"Shadow Word Pain","intent":"cast","effects":[{"op":"damage","amount":12,"school":"shadow"},{"op":"apply","status":"curse","stacks":2,"target":"player"}],"cast":true,"weight":2},
+     {"id":"mind-flay","name":"Mind Flay","intent":"cast","effects":[{"op":"damage","amount":10,"school":"shadow"},{"op":"apply","status":"silence","stacks":1,"target":"player"}],"cast":true,"weight":2,"cooldown":4},
+     {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":16,"school":"shadow"}],"cast":true,"weight":2},
+     {"id":"dominate-mind","name":"Dominate Mind","intent":"debuff","effects":[{"op":"apply","status":"fear","stacks":1,"target":"player"}],"weight":1,"cooldown":5}
+    ]},
+   {"id":"illyanna-ravenoak","name":"Illyanna Ravenoak","tier":"elite","family":"humanoid","type":"highborne","level":[58,60],"hp":[160,185],"icon":"inv_misc_head_elf_01","npcId":11488,"traits":["hunter"],
+    "moves":[
+     {"id":"multi-shot","name":"Multi-Shot","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2},
+     {"id":"immolation-trap","name":"Immolation Trap","intent":"attack","effects":[{"op":"damage","amount":10,"school":"fire"},{"op":"apply","status":"burn","stacks":3,"target":"player"}],"weight":2,"cooldown":4},
+     {"id":"concussive-shot","name":"Concussive Shot","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2},
+     {"id":"aimed-shot","name":"Aimed Shot","intent":"attack","effects":[{"op":"damage","amount":20}],"weight":1,"cooldown":5}
+    ]},
+   {"id":"immolthar","name":"Immol'thar","tier":"boss","family":"demon","type":"immolthar","level":[60,60],"hp":[340,380],"icon":"spell_shadow_demonform","npcId":11496,"traits":["demon"],"pattern":["eye-of-immolthar","trample","infected-bite"],
+    "moves":[
+     {"id":"eye-of-immolthar","name":"Eye of Immolthar","intent":"attack","effects":[{"op":"damage","amount":24}],"weight":2},
+     {"id":"trample","name":"Trample","intent":"attack","effects":[{"op":"damage","amount":12,"target":"all_enemies"}],"weight":2,"cooldown":3},
+     {"id":"portal-of-immolthar","name":"Portal of Immolthar","intent":"attack","effects":[{"op":"damage","amount":18}],"weight":2},
+     {"id":"infected-bite","name":"Infected Bite","intent":"attack","effects":[{"op":"damage","amount":15},{"op":"apply","status":"disease","stacks":2,"target":"player"}],"weight":2,"cooldown":3}
+    ],
+    "phases":[
+     {"hpBelowPct":50,"pattern":["portal-of-immolthar","eye-of-immolthar","trample"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+    ]},
+   {"id":"prince-tortheldrin","name":"Prince Tortheldrin","tier":"boss","family":"undead","type":"highborne","level":[60,60],"hp":[330,370],"icon":"inv_misc_head_elf_02","npcId":11486,"traits":["caster"],"pattern":["whirlwind","blade-flurry","arcane-missiles","mortal-strike"],
+    "moves":[
+     {"id":"whirlwind","name":"Whirlwind","intent":"attack_multi","effects":[{"op":"damage","amount":11,"times":3}],"weight":2},
+     {"id":"arcane-missiles","name":"Arcane Missiles","intent":"cast","effects":[{"op":"damage","amount":9,"school":"arcane"}],"cast":true,"weight":2},
+     {"id":"blade-flurry","name":"Blade Flurry","intent":"attack","effects":[{"op":"damage","amount":20}],"weight":2},
+     {"id":"summon-ancient-highborne","name":"Summon Ancient Highborne","intent":"cast","effects":[{"op":"damage","amount":12,"school":"shadow"}],"cast":true,"weight":2},
+     {"id":"blink-guard","name":"Blink Guard","intent":"block","effects":[{"op":"block","amount":15,"target":"self"}],"weight":2,"cooldown":4},
+     {"id":"mortal-strike","name":"Mortal Strike","intent":"attack","effects":[{"op":"damage","amount":23}],"weight":2}
+    ],
+    "phases":[
+     {"hpBelowPct":50,"pattern":["whirlwind","mortal-strike","blade-flurry","whirlwind"],"onEnter":[{"op":"apply","status":"strength","stacks":2,"target":"self"}]}
+    ]}
+  ]},
+ {"id":"dire-maul-north","name":"Dire Maul North (Gordok Commons)","unlock":"act_complete","encounters":{"normal":[["gordok-mastiff","gordok-mastiff"],["gordok-brute","gordok-ogre-mage"],["gordok-mauler","gordok-warlock"],["gordok-bushwacker","gordok-reaver","gordok-mastiff"],["gordok-mage-lord","gordok-brute"]],"elite":[["guard-moldar"],["stomper-kreeg"],["guard-fengus"],["guard-slipkik"],["captain-kromcrush"],["chorush-the-observer"]],"boss":[["king-gordok"]]},"mechanicNote":"Tribute: each guard has spareable:true. Sparing (engine on_spare) at <=25% HP ends the fight, grants no loot but adds 1 Tribute; 3+ Tribute opens the Knot Thimblejack tribute chest event.","relics":[{"id":"bonecrusher","name":"Bonecrusher","icon":"inv_hammer_01","rarity":"rare","itemId":null,"itemIdSource":"unverified","zone":"feralas","class":null,"text":"Whenever you kill an enemy, deal 4 damage to a random enemy.","triggers":{"on_kill":[{"op":"damage","amount":4,"target":"random_enemy"}]}}],
+  "enemies":[
+   {"id":"gordok-ogre-mage","name":"Gordok Ogre-Mage","tier":"normal","family":"giant","type":"ogre","level":[58,60],"hp":[74,86],"icon":"spell_frost_frostbolt02","npcId":null,"traits":["caster"],
+    "moves":[
+     {"id":"frostbolt","name":"Frostbolt","intent":"cast","effects":[{"op":"damage","amount":13,"school":"frost"},{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":2},
+     {"id":"frost-armor","name":"Frost Armor","intent":"block","effects":[{"op":"block","amount":16,"target":"self"}],"weight":2,"cooldown":4},
+     {"id":"arcane-missiles","name":"Arcane Missiles","intent":"cast","effects":[{"op":"damage","amount":6,"school":"arcane"}],"cast":true,"weight":1}
+    ]},
+   {"id":"gordok-brute","name":"Gordok Brute","tier":"normal","family":"giant","type":"ogre","level":[58,60],"hp":[81,95],"icon":"achievement_reputation_ogre","npcId":null,"traits":["slow"],
+    "moves":[
+     {"id":"smash","name":"Smash","intent":"attack","effects":[{"op":"damage","amount":20}],"weight":2},
+     {"id":"fist-of-stone","name":"Fist of Stone","intent":"buff","effects":[{"op":"apply","status":"armor","stacks":6,"target":"self"}],"weight":1,"cooldown":4},
+     {"id":"backhand","name":"Backhand","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2}
+    ]},
+   {"id":"gordok-mauler","name":"Gordok Mauler","tier":"normal","family":"giant","type":"ogre","level":[58,60],"hp":[85,99],"icon":"achievement_reputation_ogre","npcId":null,"traits":["slow"],
+    "moves":[
+     {"id":"smash","name":"Smash","intent":"attack","effects":[{"op":"damage","amount":21}],"weight":2},
+     {"id":"fist-of-stone","name":"Fist of Stone","intent":"buff","effects":[{"op":"apply","status":"armor","stacks":6,"target":"self"}],"weight":1,"cooldown":4},
+     {"id":"backhand","name":"Backhand","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2}
+    ]},
+   {"id":"gordok-warlock","name":"Gordok Warlock","tier":"normal","family":"giant","type":"ogre","level":[58,60],"hp":[74,86],"icon":"spell_shadow_shadowbolt","npcId":null,"traits":["caster"],
+    "moves":[
+     {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":14,"school":"shadow"}],"cast":true,"weight":2},
+     {"id":"curse-of-agony","name":"Curse of Agony","intent":"cast","effects":[{"op":"apply","status":"curse","stacks":2,"target":"player"}],"cast":true,"weight":2,"cooldown":3},
+     {"id":"immolate","name":"Immolate","intent":"cast","effects":[{"op":"damage","amount":10,"school":"fire"},{"op":"apply","status":"burn","stacks":2,"target":"player"}],"cast":true,"weight":2}
+    ]},
+   {"id":"gordok-bushwacker","name":"Gordok Bushwacker","tier":"normal","family":"giant","type":"ogre","level":[58,60],"hp":[74,86],"icon":"achievement_reputation_ogre","npcId":null,"traits":["slow"],
+    "moves":[
+     {"id":"smash","name":"Smash","intent":"attack","effects":[{"op":"damage","amount":18}],"weight":2},
+     {"id":"fist-of-stone","name":"Fist of Stone","intent":"buff","effects":[{"op":"apply","status":"armor","stacks":6,"target":"self"}],"weight":1,"cooldown":4},
+     {"id":"backhand","name":"Backhand","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2}
+    ]},
+   {"id":"gordok-reaver","name":"Gordok Reaver","tier":"normal","family":"giant","type":"ogre","level":[58,60],"hp":[81,95],"icon":"achievement_reputation_ogre","npcId":null,"traits":["slow"],
+    "moves":[
+     {"id":"smash","name":"Smash","intent":"attack","effects":[{"op":"damage","amount":20}],"weight":2},
+     {"id":"fist-of-stone","name":"Fist of Stone","intent":"buff","effects":[{"op":"apply","status":"armor","stacks":6,"target":"self"}],"weight":1,"cooldown":4},
+     {"id":"backhand","name":"Backhand","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2}
+    ]},
+   {"id":"gordok-mage-lord","name":"Gordok Mage-Lord","tier":"normal","family":"giant","type":"ogre","level":[59,60],"hp":[88,104],"icon":"spell_arcane_blast","npcId":null,"traits":["caster"],
+    "moves":[
+     {"id":"frostbolt","name":"Frostbolt","intent":"cast","effects":[{"op":"damage","amount":15,"school":"frost"},{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":2},
+     {"id":"frost-armor","name":"Frost Armor","intent":"block","effects":[{"op":"block","amount":18,"target":"self"}],"weight":2,"cooldown":4},
+     {"id":"arcane-missiles","name":"Arcane Missiles","intent":"cast","effects":[{"op":"damage","amount":7,"school":"arcane"}],"cast":true,"weight":1}
+    ]},
+   {"id":"gordok-mastiff","name":"Gordok Mastiff","tier":"normal","family":"beast","type":"dog","level":[57,59],"hp":[74,86],"icon":"ability_hunter_pet_wolf","npcId":null,"traits":["pack"],
+    "moves":[
+     {"id":"bite","name":"Bite","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2},
+     {"id":"howl","name":"Howl","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":2,"cooldown":3},
+     {"id":"rending-bites","name":"Rending Bites","intent":"attack_multi","effects":[{"op":"damage","amount":7,"times":2}],"weight":2}
+    ]},
+   {"id":"guard-moldar","name":"Guard Mol'dar","tier":"elite","family":"giant","type":"ogre","level":[58,60],"hp":[170,200],"icon":"achievement_reputation_ogre","npcId":14326,"traits":["slow","spareable"],"spareable":true,
+    "moves":[
+     {"id":"knock-away","name":"Knock Away","intent":"attack","effects":[{"op":"damage","amount":20}],"weight":2},
+     {"id":"cleave","name":"Cleave","intent":"attack","effects":[{"op":"damage","amount":16}],"weight":2},
+     {"id":"fist-of-stone","name":"Fist of Stone","intent":"buff","effects":[{"op":"apply","status":"armor","stacks":8,"target":"self"}],"weight":1,"cooldown":4}
+    ]},
+   {"id":"stomper-kreeg","name":"Stomper Kreeg","tier":"elite","family":"giant","type":"ogre","level":[58,60],"hp":[175,200],"icon":"achievement_reputation_ogre","npcId":14322,"traits":["slow","spareable"],"spareable":true,
+    "moves":[
+     {"id":"stomp","name":"Stomp","intent":"attack","effects":[{"op":"damage","amount":22}],"weight":2},
+     {"id":"drunken-stupor","name":"Drunken Stupor","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":3},
+     {"id":"fist","name":"Fist","intent":"attack","effects":[{"op":"damage","amount":15}],"weight":2}
+    ]},
+   {"id":"guard-fengus","name":"Guard Fengus","tier":"elite","family":"giant","type":"ogre","level":[58,60],"hp":[170,195],"icon":"achievement_reputation_ogre","npcId":14321,"traits":["slow","spareable"],"spareable":true,
+    "moves":[
+     {"id":"smash","name":"Smash","intent":"attack","effects":[{"op":"damage","amount":21}],"weight":2},
+     {"id":"cleave","name":"Cleave","intent":"attack_multi","effects":[{"op":"damage","amount":11,"times":2}],"weight":2},
+     {"id":"shield-wall","name":"Shield Wall","intent":"block","effects":[{"op":"block","amount":14,"target":"self"}],"weight":1,"cooldown":4}
+    ]},
+   {"id":"guard-slipkik","name":"Guard Slip'kik","tier":"elite","family":"giant","type":"ogre","level":[58,60],"hp":[170,195],"icon":"achievement_reputation_ogre","npcId":14323,"traits":["slow","spareable"],"spareable":true,
+    "moves":[
+     {"id":"smash","name":"Smash","intent":"attack","effects":[{"op":"damage","amount":20}],"weight":2},
+     {"id":"hamstring","name":"Hamstring","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":3},
+     {"id":"backhand","name":"Backhand","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2}
+    ]},
+   {"id":"captain-kromcrush","name":"Captain Kromcrush","tier":"elite","family":"humanoid","type":"ogre","level":[59,60],"hp":[180,210],"icon":"achievement_reputation_ogre","npcId":14325,"traits":["slow","spareable"],"spareable":true,
+    "moves":[
+     {"id":"mortal-strike","name":"Mortal Strike","intent":"attack","effects":[{"op":"damage","amount":22}],"weight":2},
+     {"id":"intimidating-shout","name":"Intimidating Shout","intent":"debuff","effects":[{"op":"apply","status":"fear","stacks":1,"target":"player"}],"weight":2,"cooldown":4},
+     {"id":"cleave","name":"Cleave","intent":"attack_multi","effects":[{"op":"damage","amount":12,"times":2}],"weight":2},
+     {"id":"retaliation","name":"Retaliation","intent":"buff","effects":[{"op":"apply","status":"thorns","stacks":3,"target":"self"}],"weight":1,"cooldown":5}
+    ]},
+   {"id":"chorush-the-observer","name":"Cho'Rush the Observer","tier":"elite","family":"giant","type":"ogre","level":[59,60],"hp":[175,200],"icon":"spell_arcane_arcane01","npcId":14324,"traits":["caster","spareable"],"spareable":true,
+    "moves":[
+     {"id":"arcane-blast","name":"Arcane Blast","intent":"cast","effects":[{"op":"damage","amount":19,"school":"arcane"}],"cast":true,"weight":2},
+     {"id":"mind-control","name":"Mind Control","intent":"cast","effects":[{"op":"apply","status":"fear","stacks":1,"target":"player"}],"cast":true,"weight":2,"cooldown":5},
+     {"id":"frostbolt","name":"Frostbolt","intent":"cast","effects":[{"op":"damage","amount":15,"school":"frost"},{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":2},
+     {"id":"mana-shield","name":"Mana Shield","intent":"block","effects":[{"op":"block","amount":16,"target":"self"}],"weight":1,"cooldown":4}
+    ]}
+  ]}
+]

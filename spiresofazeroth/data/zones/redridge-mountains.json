@@ -1,0 +1,428 @@
+{
+ "id": "redridge-mountains",
+ "name": "Redridge Mountains",
+ "start": {"name": "Lakeshire Inn", "icon": "inv_misc_beer_01"},
+ "continent": "ek",
+ "act": 2,
+ "levelBand": [
+  15,
+  25
+ ],
+ "spire": {
+  "name": "Tower of Ilgalar",
+  "lore": "The old watch tower above Lakeshire. Blackrock orcs press from Stonewatch Keep and the Redridge gnolls raid the Lake Everstill shore."
+ },
+ "theme": {
+  "primary": "#a24a2a",
+  "secondary": "#2a1410",
+  "accent": "#e9a56a",
+  "background": "redridge"
+ },
+ "zoneMechanic": {
+  "id": "blackrock-siege",
+  "name": "Blackrock Siege",
+  "icon": "inv_misc_head_orc_01",
+  "text": "On turn 3 of any fight against orcs, Blackrock reinforcements arrive: a Blackrock Grunt joins the enemy side.",
+  "hooks": {
+   "on_turn_start": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "turn_number",
+      "value": 3,
+      "enemyType": "orc"
+     },
+     "then": [
+      {
+       "op": "summon",
+       "unit": "blackrock-grunt",
+       "count": 1,
+       "side": "enemy"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "lakeshire-inn",
+  "name": "Lakeshire Inn",
+  "icon": "inv_drink_03",
+  "text": "Rest at the Lakeshire Inn: heal 25% of max HP and gain 1 Strength next fight.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 25,
+    "target": "self"
+   },
+   {
+    "op": "apply",
+    "status": "strength",
+    "stacks": 1,
+    "target": "self"
+   }
+  ]
+ },
+ "enemiesFile": "redridge-mountains.enemies.json",
+ "encounters": {
+  "normal": [
+   [
+    "redridge-mongrel",
+    "redridge-mongrel"
+   ],
+   [
+    "condor",
+    "tarantula"
+   ],
+   [
+    "murloc-tidehunter",
+    "murloc-tidehunter",
+    "murloc-oracle"
+   ],
+   [
+    "redridge-poacher",
+    "redridge-drudger"
+   ],
+   [
+    "blackrock-grunt",
+    "blackrock-grunt"
+   ],
+   [
+    "black-broodling",
+    "black-broodling"
+   ],
+   [
+    "redridge-brute",
+    "redridge-mongrel"
+   ],
+   [
+    "tarantula",
+    "tarantula",
+    "condor"
+   ],
+   [
+    "blackrock-renegade",
+    "blackrock-outrunner"
+   ],
+   [
+    "redridge-alpha",
+    "redridge-outrunner",
+    "redridge-outrunner"
+   ],
+   [
+    "great-goretusk",
+    "redridge-basher"
+   ],
+   [
+    "murloc-oracle",
+    "murloc-oracle",
+    "murloc-tidehunter"
+   ],
+   [
+    "black-dragon-whelp",
+    "black-broodling"
+   ],
+   [
+    "blackrock-tracker",
+    "blackrock-worg",
+    "blackrock-worg"
+   ],
+   [
+    "blackrock-shadowcaster",
+    "blackrock-grunt",
+    "blackrock-grunt"
+   ],
+   [
+    "redridge-mystic",
+    "redridge-brute",
+    "redridge-poacher"
+   ],
+   [
+    "blackrock-champion",
+    "blackrock-renegade"
+   ],
+   [
+    "blackrock-summoner",
+    "blackrock-outrunner",
+    "blackrock-grunt"
+   ],
+   [
+    "black-dragon-whelp",
+    "black-dragon-whelp",
+    "redridge-alpha"
+   ],
+   [
+    "blackrock-battlemaster",
+    "blackrock-shadowcaster"
+   ]
+  ],
+  "elite": [
+   [
+    "bellygrub",
+    "great-goretusk"
+   ],
+   [
+    "lieutenant-fangore",
+    "blackrock-worg"
+   ],
+   [
+    "gathilzogg",
+    "blackrock-grunt",
+    "blackrock-grunt"
+   ]
+  ],
+  "boss": [
+   [
+    "morganth",
+    "blackrock-shadowcaster",
+    "blackrock-shadowcaster"
+   ],
+   [
+    "morganth",
+    "blackrock-champion",
+    "blackrock-summoner"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "lakeshire-bridge",
+   "name": "Lakeshire Bridge",
+   "icon": "inv_misc_head_human_01",
+   "text": "Lakeshire's militia hold the bridge and need blades on the east bank.",
+   "options": [
+    {
+     "label": "Hold the bridge (take 5 damage, +45 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 5,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 45
+      }
+     ]
+    },
+    {
+     "label": "Drink with the militia (heal 8)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 8,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Cross at night",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "lake-everstill",
+   "name": "Lake Everstill",
+   "icon": "inv_misc_head_murloc_01",
+   "text": "Murlocs have drowned the Lake Everstill docks. The boatmen pay for every oracle you silence.",
+   "options": [
+    {
+     "label": "Clear the docks (take 6 damage, +40 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 40
+      }
+     ]
+    },
+    {
+     "label": "Fish the shallows (+15 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 15
+      }
+     ]
+    },
+    {
+     "label": "Leave the docks",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "stonewatch-keep",
+   "name": "Stonewatch Keep",
+   "icon": "inv_misc_gem_ruby_01",
+   "text": "Stonewatch Keep, once a dwarven garrison, now flies Blackrock banners. Its armory lies open.",
+   "options": [
+    {
+     "label": "Raid the armory (take 8 damage, gain a card reward)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 8,
+       "target": "self"
+      },
+      {
+       "op": "random_card",
+       "pool": "class",
+       "rarity": "rare",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Scout from the tree line (+20 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 20
+      }
+     ]
+    },
+    {
+     "label": "Report back",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "render-valley",
+   "name": "Render's Valley",
+   "icon": "inv_misc_bone_humanskull_01",
+   "text": "Render's Valley cuts under the Redridge peaks, and the dead there still guard a hoard.",
+   "options": [
+    {
+     "label": "Dig the hoard (take 5 damage, +35 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 5,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 35
+      }
+     ]
+    },
+    {
+     "label": "Rest at the cairn (heal 6)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 6,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Skip it",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "three-corners",
+   "name": "Three Corners",
+   "icon": "inv_misc_note_01",
+   "text": "The Three Corners crossroads is littered with burned wagons, a trader still alive beneath one.",
+   "options": [
+    {
+     "label": "Pull him out (take 3 damage, +30 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 3,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 30
+      }
+     ]
+    },
+    {
+     "label": "Loot the wagons (+20 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 20
+      }
+     ]
+    },
+    {
+     "label": "Move on",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "redridge-machete",
+   "name": "Redridge Machete",
+   "icon": "inv_sword_01",
+   "rarity": "common",
+   "itemId": 1219,
+   "zone": "redridge-mountains",
+   "class": null,
+   "text": "Dropped by Redridge gnolls. Start each combat with 1 Strength.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "blackrock-champions-axe",
+   "name": "Blackrock Champion's Axe",
+   "icon": "inv_axe_04",
+   "rarity": "uncommon",
+   "itemId": 1455,
+   "zone": "redridge-mountains",
+   "class": null,
+   "text": "Taken from a Blackrock champion. Your attacks deal 2 damage to all enemies.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "damage",
+      "amount": 2,
+      "target": "all_enemies"
+     }
+    ]
+   }
+  },
+  {
+   "id": "blackrock-pauldrons",
+   "name": "Blackrock Pauldrons",
+   "icon": "inv_shoulder_09",
+   "rarity": "common",
+   "itemId": 1445,
+   "zone": "redridge-mountains",
+   "class": null,
+   "text": "Blackrock plate. Gain 2 Block at the start of each turn.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "block",
+      "amount": 2,
+      "target": "self"
+     }
+    ]
+   }
+  }
+ ]
+}

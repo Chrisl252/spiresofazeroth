@@ -1,0 +1,335 @@
+{
+ "class": "warlock",
+ "set": {
+  "id": "felheart-raiment",
+  "name": "Felheart Raiment",
+  "icon": "inv_helmet_08",
+  "bonuses": [
+   {
+    "pieces": 2,
+    "name": "Shadow Ward",
+    "text": "Start each combat: gain 2 Soul Shards.",
+    "triggers": {
+     "on_combat_start": [
+      {
+       "op": "gain_resource",
+       "resource": "soul_shards",
+       "amount": 2
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 4,
+    "name": "Fel Energy",
+    "text": "Whenever you play a card: 15% chance to gain 1 Energy next turn.",
+    "triggers": {
+     "on_card_played": [
+      {
+       "op": "conditional",
+       "if": {
+        "type": "chance",
+        "pct": 15
+       },
+       "then": [
+        {
+         "op": "energy_next_turn",
+         "amount": 1
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 6,
+    "name": "Corruption",
+    "text": "When you attack: 25% chance to apply 1 Poison.",
+    "triggers": {
+     "on_attack": [
+      {
+       "op": "conditional",
+       "if": {
+        "type": "chance",
+        "pct": 25
+       },
+       "then": [
+        {
+         "op": "apply",
+         "status": "poison",
+         "stacks": 1,
+         "target": "enemy"
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 8,
+    "name": "Demonic Pact",
+    "text": "Start each combat: gain 1 Strength and gain 2 Soul Shards.",
+    "triggers": {
+     "on_combat_start": [
+      {
+       "op": "apply",
+       "status": "strength",
+       "stacks": 1,
+       "target": "self"
+      },
+      {
+       "op": "gain_resource",
+       "resource": "soul_shards",
+       "amount": 2
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "pieces": [
+  {
+   "id": "felheart-horns",
+   "name": "Felheart Horns",
+   "slot": "head",
+   "set": "felheart-raiment",
+   "setPiece": 1,
+   "item": 16808,
+   "icon": "inv_helmet_08",
+   "displayId": 31987,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 2 Soul Shards.",
+   "class": "warlock",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "gain_resource",
+      "resource": "soul_shards",
+      "amount": 2
+     }
+    ]
+   }
+  },
+  {
+   "id": "felheart-shoulder-pads",
+   "name": "Felheart Shoulder Pads",
+   "slot": "shoulder",
+   "set": "felheart-raiment",
+   "setPiece": 2,
+   "item": 16807,
+   "icon": "inv_shoulder_23",
+   "displayId": 31974,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: gain 2 Block.",
+   "class": "warlock",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "block",
+      "amount": 2,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "felheart-robes",
+   "name": "Felheart Robes",
+   "slot": "chest",
+   "set": "felheart-raiment",
+   "setPiece": 3,
+   "item": 16809,
+   "icon": "inv_chest_cloth_09",
+   "displayId": 31973,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 1 Strength.",
+   "class": "warlock",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "felheart-bracers",
+   "name": "Felheart Bracers",
+   "slot": "wrist",
+   "set": "felheart-raiment",
+   "setPiece": 4,
+   "item": 16804,
+   "icon": "inv_bracer_07",
+   "displayId": 31970,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Whenever you lose HP: gain 3 Block.",
+   "class": "warlock",
+   "triggers": {
+    "on_hp_loss": [
+     {
+      "op": "block",
+      "amount": 3,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "felheart-gloves",
+   "name": "Felheart Gloves",
+   "slot": "hands",
+   "set": "felheart-raiment",
+   "setPiece": 5,
+   "item": 16805,
+   "icon": "inv_gauntlets_19",
+   "displayId": 31971,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "When you attack: 15% chance to gain 2 Block.",
+   "class": "warlock",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 15
+      },
+      "then": [
+       {
+        "op": "block",
+        "amount": 2,
+        "target": "self"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "felheart-belt",
+   "name": "Felheart Belt",
+   "slot": "waist",
+   "set": "felheart-raiment",
+   "setPiece": 6,
+   "item": 16806,
+   "icon": "inv_belt_13",
+   "displayId": 31969,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "When you kill an enemy: gain 1 Soul Shards.",
+   "class": "warlock",
+   "triggers": {
+    "on_kill": [
+     {
+      "op": "gain_resource",
+      "resource": "soul_shards",
+      "amount": 1
+     }
+    ]
+   }
+  },
+  {
+   "id": "felheart-pants",
+   "name": "Felheart Pants",
+   "slot": "legs",
+   "set": "felheart-raiment",
+   "setPiece": 7,
+   "item": 16810,
+   "icon": "inv_pants_cloth_14",
+   "displayId": 31972,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: 15% chance to gain 1 Energy.",
+   "class": "warlock",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 15
+      },
+      "then": [
+       {
+        "op": "gain_energy",
+        "amount": 1
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "felheart-slippers",
+   "name": "Felheart Slippers",
+   "slot": "feet",
+   "set": "felheart-raiment",
+   "setPiece": 8,
+   "item": 16803,
+   "icon": "inv_boots_cloth_05",
+   "displayId": 31975,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 3 Block.",
+   "class": "warlock",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 3,
+      "target": "self"
+     }
+    ]
+   }
+  }
+ ],
+ "weapon": {
+  "id": "staff-of-the-shadow-flame",
+  "name": "Staff of the Shadow Flame",
+  "slot": "mainHand",
+  "setPiece": 0,
+  "item": 19356,
+  "icon": "inv_staff_06",
+  "displayId": 31960,
+  "tier": 1,
+  "rarity": "epic",
+  "stats": "Tier 1 weapon",
+  "text": "When you attack: 20% chance to apply 2 Poison.",
+  "class": "warlock",
+  "triggers": {
+   "on_attack": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "chance",
+      "pct": 20
+     },
+     "then": [
+      {
+       "op": "apply",
+       "status": "poison",
+       "stacks": 2,
+       "target": "enemy"
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

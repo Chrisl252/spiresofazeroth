@@ -1,0 +1,51 @@
+{
+  "id": "arathi-highlands",
+  "name": "Arathi Highlands",
+  "start": {"name": "Refuge Pointe Inn", "icon": "inv_misc_beer_01"},
+  "continent": "ek",
+  "act": 4,
+  "levelBand": [30,40],
+  "spire": {
+    "name": "Stromgarde Keep",
+    "lore": "The shattered capital of Arathor, torn between Syndicate usurpers, Boulderfist ogres and the Horde at Hammerfall."
+  },
+  "theme": {
+    "primary": "#7a8a4a",
+    "secondary": "#2a2f1c",
+    "accent": "#d9b25c",
+    "background": "highlands"
+  },
+  "zoneMechanic": {
+    "id": "battleground",
+    "name": "Battleground",
+    "icon": "inv_bannerpvp_01",
+    "text": "The highlands trade hands. Odd turns the Alliance holds the line (+4 Block); even turns the Horde charges (3 damage to all enemies).",
+    "hooks": {"on_turn_start":[{"op":"conditional","if":{"type":"turn_number","parity":"odd"},"then":[{"op":"block","amount":4,"target":"self"}],"else":[{"op":"damage","amount":3,"target":"all_enemies"}]}]}
+  },
+  "rest": {
+    "id": "refuge-pointe",
+    "name": "Refuge Pointe Garrison",
+    "icon": "spell_holy_prayerofhealing",
+    "text": "Rest at the garrison. Heal 30% of max HP and gain 1 Strength next combat.",
+    "effects": [
+      {"op":"heal","amount":15,"target":"self"},
+      {"op":"apply","status":"strength","stacks":1,"target":"self"}
+    ]
+  },
+  "enemiesFile": "arathi-highlands.enemies.json",
+  "encounters": {
+    "normal": [["highland-strider","highland-thrasher"],["highland-strider","highland-raptor","highland-lashtail","highland-fleshstalker"],["syndicate-footpad","syndicate-thief","syndicate-highwayman","syndicate-rogue"],["witherbark-axe-thrower","witherbark-headhunter","witherbark-berserker"],["syndicate-rogue","syndicate-sentry","syndicate-conjuror"],["boulderfist-brute","boulderfist-ogre","boulderfist-enforcer","boulderfist-mauler"],["witherbark-berserker","witherbark-shadow-hunter"],["syndicate-mercenary","syndicate-shadowmage"],["boulderfist-mauler","boulderfist-magus","boulderfist-lord"]],
+    "elite": [["foulbelly"],["korgresh-coldrage"],["fozruk"]],
+    "boss": [["prince-nazjak"],["prince-nazjak","witherbark-axe-thrower","witherbark-axe-thrower"],["korgresh-coldrage","syndicate-conjuror"]]
+  },
+  "events": [
+    {"id":"trelanes-keys","name":"Trelane's Keys","icon":"inv_misc_key_03","text":"Marshal Trelane's strongbox lies half-buried in the Stromgarde ruins, a Syndicate sentry dozing atop it.","options":[{"label":"Pick the lock quietly","effects":[{"op":"gold","amount":60},{"op":"damage","amount":5,"target":"self"}]},{"label":"Smash it open","effects":[{"op":"gold","amount":90},{"op":"apply","status":"weak","stacks":1,"target":"self"}]},{"label":"Leave it","effects":[]}]},
+    {"id":"troll-legends","name":"Troll Legends","icon":"inv_misc_book_09","text":"A Witherbark totem is carved with the legends of the Zandalari. A dying troll offers to explain them for a price.","options":[{"label":"Study the legends","effects":[{"op":"gold","amount":-40},{"op":"random_card","pool":"any","rarity":"rare","to":"hand"}],"requires":{"gold":40}},{"label":"Take his charms","effects":[{"op":"max_hp","amount":3},{"op":"damage","amount":6,"target":"self"}]},{"label":"Move on","effects":[]}]},
+    {"id":"hammerfall-supply","name":"Hammerfall Supply Run","icon":"inv_misc_bag_10","text":"Hammerfall is starved for provisions. The garrison commander will pay for escorts and rations.","options":[{"label":"Escort the wagon","effects":[{"op":"damage","amount":8,"target":"self"},{"op":"gold","amount":75}]},{"label":"Donate rations","effects":[{"op":"gold","amount":-30},{"op":"max_hp","amount":4}],"requires":{"gold":30}},{"label":"Rest in the tent","effects":[{"op":"heal","amount":12,"target":"self"}]}]},
+    {"id":"thandol-span","name":"Thandol Span","icon":"inv_misc_map_01","text":"The great bridge's gap is guarded by Boulderfist scouts. A Dwarven ghost whispers of a hidden path.","options":[{"label":"Take the hidden path","effects":[{"op":"heal","amount":8,"target":"self"},{"op":"draw","count":1}]},{"label":"Charge the span","effects":[{"op":"damage","amount":10,"target":"self"},{"op":"gold","amount":70}]},{"label":"Turn back","effects":[]}]}
+  ],
+  "relics": [
+    {"id":"force-of-will","name":"Force of Will","icon":"inv_jewelry_talisman_06","rarity":"rare","itemId":11810,"zone":"arathi-highlands","class":null,"text":"Gain 1 Block at the start of each of your turns, doubled on the first turn.","triggers":{"on_turn_start":[{"op":"block","amount":2,"target":"self"}]}},
+    {"id":"felstriker","name":"Felstriker","icon":"inv_sword_04","rarity":"rare","itemId":17071,"zone":"arathi-highlands","class":null,"text":"At the start of combat, deal 6 damage to a random enemy.","triggers":{"on_combat_start":[{"op":"damage","amount":6,"target":"enemy"}]}}
+  ]
+}

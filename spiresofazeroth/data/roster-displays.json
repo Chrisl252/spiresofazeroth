@@ -1,0 +1,2185 @@
+{
+"_progress": {
+"names_total": 1149,
+"processed": 363,
+"note": "stopped at 2x HTTP 403 (Frostsaber Pride Watcher); resume by re-running the runner, which skips cached names"
+},
+"Abyssal Templar": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Adult Plainstrider": {
+"npcId": 2956,
+"displayId": 1220,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Aged Kodo": {
+"npcId": 4700,
+"displayId": 1308,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Aku'mai": {
+"npcId": 4829,
+"displayId": 2837,
+"source": "data+wowhead-classic-npc-page",
+"candidates": null
+},
+"Aman'zasi Guard": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Amnennar the Coldbringer": {
+"npcId": 7358,
+"displayId": 7971,
+"source": "data+wowhead-classic-npc-page",
+"candidates": null
+},
+"Ancient Kodo": {
+"npcId": 4702,
+"displayId": 2767,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Anguished Highborne": {
+"npcId": 7524,
+"displayId": 10702,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Araj the Summoner": {
+"npcId": 1852,
+"displayId": 7919,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Archaedas": {
+"npcId": 2748,
+"displayId": 5988,
+"source": "data+wowhead-classic-npc-page",
+"candidates": null
+},
+"Archmage Ansirem Runeweaver": {
+"npcId": 2543,
+"displayId": 1595,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Archmage Arugal": {
+"npcId": 4275,
+"displayId": 2353,
+"source": "data+wowhead-classic-npc-page",
+"candidates": null
+},
+"Ashmane Boar": {
+"npcId": 5992,
+"displayId": 3026,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Atal'ai Corpse Eater": {
+"npcId": 5270,
+"displayId": 4778,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Atal'ai High Priest": {
+"npcId": 5273,
+"displayId": 6675,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Atal'ai Priest": {
+"npcId": 5269,
+"displayId": 4776,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Atal'ai Skeleton": {
+"npcId": 8324,
+"displayId": 119783,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Atal'ai Slave": {
+"npcId": 8318,
+"displayId": 7554,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Atal'ai Warrior": {
+"npcId": 5256,
+"displayId": 7709,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Atal'ai Witch Doctor": {
+"npcId": 5259,
+"displayId": 6670,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Athrikus Narassin": {
+"npcId": 3660,
+"displayId": 4413,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Azuregos": {
+"npcId": 6109,
+"displayId": 11460,
+"source": "data+wowhead-classic-npc-page",
+"candidates": null
+},
+"Azuregos' Lair (Azshara World Boss)": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Baron Kazum": {
+"npcId": 15205,
+"displayId": 12814,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Baron Rivendare": {
+"npcId": 10440,
+"displayId": 10729,
+"source": "data+wowhead-classic-npc-page",
+"candidates": null
+},
+"Bellygrub": {
+"npcId": 345,
+"displayId": 703,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Besseleth": {
+"npcId": 11921,
+"displayId": 11348,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bhag'thera": {
+"npcId": 728,
+"displayId": 613,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Black Bear": {
+"npcId": 1129,
+"displayId": 719,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Black Broodling": {
+"npcId": 7047,
+"displayId": 397,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Black Dragon Whelp": {
+"npcId": 441,
+"displayId": 387,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Black Dragonspawn": {
+"npcId": 7040,
+"displayId": 143,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Black Drake": {
+"npcId": 7044,
+"displayId": 6374,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Black Widow": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Black Wyrmkin": {
+"npcId": 7041,
+"displayId": 8249,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackfathom Deeps": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackrock Battlemaster": {
+"npcId": 7029,
+"displayId": 6049,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackrock Champion": {
+"npcId": 435,
+"displayId": 6044,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackrock Depths": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackrock Grunt": {
+"npcId": 440,
+"displayId": 6033,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackrock Hunter": {
+"npcId": 4462,
+"displayId": 6031,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackrock Outrunner": {
+"npcId": 485,
+"displayId": 6034,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackrock Renegade": {
+"npcId": 437,
+"displayId": 6037,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackrock Shadowcaster": {
+"npcId": 436,
+"displayId": 6039,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackrock Slayer": {
+"npcId": 7027,
+"displayId": 6047,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackrock Soldier": {
+"npcId": 7025,
+"displayId": 6045,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackrock Sorcerer": {
+"npcId": 7026,
+"displayId": 6046,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackrock Summoner": {
+"npcId": 4463,
+"displayId": 6030,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackrock Tracker": {
+"npcId": 615,
+"displayId": 6040,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackrock Warlock": {
+"npcId": 7028,
+"displayId": 6048,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackrock Worg": {
+"npcId": 7055,
+"displayId": 741,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackwing Lair": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackwood Pathfinder": {
+"npcId": 2167,
+"displayId": 1010,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackwood Totemic": {
+"npcId": 2169,
+"displayId": 6821,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackwood Tracker": {
+"npcId": 11713,
+"displayId": 1010,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackwood Ursa": {
+"npcId": 2170,
+"displayId": 5773,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackwood Warrior": {
+"npcId": 2168,
+"displayId": 1011,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blackwood Windtalker": {
+"npcId": 2324,
+"displayId": 6820,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blazing Elemental": {
+"npcId": 5850,
+"displayId": 1070,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodbarb Boar": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodfen Lashtail": {
+"npcId": 4357,
+"displayId": 2573,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodfen Raptor": {
+"npcId": 4351,
+"displayId": 2571,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodfen Razormaw": {
+"npcId": 4356,
+"displayId": 11315,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodfen Screecher": {
+"npcId": 4352,
+"displayId": 1962,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodfen Scytheclaw": {
+"npcId": 4355,
+"displayId": 2574,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodfury Ambusher": {
+"npcId": 4025,
+"displayId": 10869,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodfury Harpy": {
+"npcId": 4022,
+"displayId": 3022,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodfury Roguefeather": {
+"npcId": 4023,
+"displayId": 6813,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodfury Slayer": {
+"npcId": 4024,
+"displayId": 10870,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodfury Windcaller": {
+"npcId": 4026,
+"displayId": 10282,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodpetal Flayer": {
+"npcId": 6510,
+"displayId": 11635,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodpetal Lasher": {
+"npcId": 6509,
+"displayId": 11634,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodpetal Pest": {
+"npcId": 9157,
+"displayId": 8391,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodpetal Trapper": {
+"npcId": 6512,
+"displayId": 11636,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodsail Deckhand": {
+"npcId": 4505,
+"displayId": 2557,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodsail Mage": {
+"npcId": 1562,
+"displayId": 2561,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodsail Raider": {
+"npcId": 1561,
+"displayId": 793,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodsail Sea Dog": {
+"npcId": 1565,
+"displayId": 796,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodsail Swashbuckler": {
+"npcId": 1563,
+"displayId": 796,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodsail Warlock": {
+"npcId": 1564,
+"displayId": 4461,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodscalp Axe Thrower": {
+"npcId": 694,
+"displayId": 4572,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodscalp Berserker": {
+"npcId": 597,
+"displayId": 4579,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodscalp Headhunter": {
+"npcId": 671,
+"displayId": 4580,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodscalp Mystic": {
+"npcId": 701,
+"displayId": 4577,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodscalp Scout": {
+"npcId": 588,
+"displayId": 4575,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodscalp Shaman": {
+"npcId": 697,
+"displayId": 4573,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodscalp Warrior": {
+"npcId": 587,
+"displayId": 4570,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodscalp Witch Doctor": {
+"npcId": 660,
+"displayId": 4581,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodtalon Scythemaw": {
+"npcId": 3123,
+"displayId": 1959,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bloodtalon Taillasher": {
+"npcId": 3122,
+"displayId": 1960,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Blue Dragonspawn": {
+"npcId": 193,
+"displayId": 196,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bluegill Forager": {
+"npcId": 1026,
+"displayId": 1305,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bluegill Muckdweller": {
+"npcId": 1028,
+"displayId": 1079,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bluegill Puddlejumper": {
+"npcId": 1025,
+"displayId": 983,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bluegill Raider": {
+"npcId": 1418,
+"displayId": 391,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bluegill Warrior": {
+"npcId": 1027,
+"displayId": 506,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bone Chewer": {
+"npcId": 210,
+"displayId": 570,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Boulderfist Brute": {
+"npcId": 2566,
+"displayId": 3193,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Boulderfist Enforcer": {
+"npcId": 2564,
+"displayId": 1054,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Boulderfist Lord": {
+"npcId": 2571,
+"displayId": 448,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Boulderfist Magus": {
+"npcId": 2567,
+"displayId": 6170,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Boulderfist Mauler": {
+"npcId": 2569,
+"displayId": 1051,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Boulderfist Ogre": {
+"npcId": 2562,
+"displayId": 1052,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bristleback Battleboar": {
+"npcId": 2954,
+"displayId": 6807,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bristleback Geomancer": {
+"npcId": 3263,
+"displayId": 6091,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bristleback Hunter": {
+"npcId": 3258,
+"displayId": 4745,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bristleback Interloper": {
+"npcId": 3232,
+"displayId": 1274,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bristleback Invader": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bristleback Quilboar": {
+"npcId": 2952,
+"displayId": 1967,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bristleback Shaman": {
+"npcId": 2953,
+"displayId": 6090,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bristleback Thornweaver": {
+"npcId": 3261,
+"displayId": 6077,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Bristleback Water Seeker": {
+"npcId": 3260,
+"displayId": 1274,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Brontus": {
+"npcId": 5827,
+"displayId": 1308,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Burly Rockjaw Trogg": {
+"npcId": 724,
+"displayId": 611,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Burning Blade Acolyte": {
+"npcId": 3380,
+"displayId": 4196,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Burning Blade Apprentice": {
+"npcId": 3198,
+"displayId": 4190,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Burning Blade Cultist": {
+"npcId": 3199,
+"displayId": 4194,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Burning Blade Neophyte": {
+"npcId": 3196,
+"displayId": 4186,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Burning Blade Thug": {
+"npcId": 3195,
+"displayId": 4188,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Buzzard": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"C'Thun": {
+"npcId": 15727,
+"displayId": 15787,
+"source": "data+wowhead-classic-npc-page",
+"candidates": null
+},
+"Caliph Scorpidsting": {
+"npcId": 7847,
+"displayId": 9169,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Cannibal Ghoul": {
+"npcId": 8530,
+"displayId": 10626,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Captain Perrine": {
+"npcId": 1662,
+"displayId": 1738,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Carrion Devourer": {
+"npcId": 8605,
+"displayId": 7900,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Carrion Grub": {
+"npcId": 8603,
+"displayId": 7898,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Cauldron Lord Bilemaw": {
+"npcId": 11075,
+"displayId": 569,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Cauldron Lord Malvinious": {
+"npcId": 11077,
+"displayId": 7848,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Cauldron Lord Razarch": {
+"npcId": 11076,
+"displayId": 2606,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Cauldron Lord Soulwrath": {
+"npcId": 11078,
+"displayId": 11649,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Celebras the Cursed": {
+"npcId": 12225,
+"displayId": 12350,
+"source": "data+wowhead-classic-npc-page",
+"candidates": null
+},
+"Centipaar Sandreaver": {
+"npcId": 5460,
+"displayId": 11079,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Centipaar Swarmer": {
+"npcId": 5457,
+"displayId": 11107,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Centipaar Tunneler": {
+"npcId": 5459,
+"displayId": 11108,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Centipaar Wasp": {
+"npcId": 5455,
+"displayId": 92,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Centipaar Worker": {
+"npcId": 5458,
+"displayId": 157,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Charred Ancient": {
+"npcId": 4028,
+"displayId": 2079,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Chief Sharptusk Thornmantle": {
+"npcId": 8554,
+"displayId": 1346,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Chief Ukorz Sandscalp": {
+"npcId": 7267,
+"displayId": 6439,
+"source": "data+wowhead-classic-npc-page",
+"candidates": null
+},
+"Chillwind Chimaera": {
+"npcId": 7448,
+"displayId": 10810,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Chillwind Ravager": {
+"npcId": 7449,
+"displayId": 10809,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Chok'sul": {
+"npcId": 1210,
+"displayId": 1054,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Clattering Scorpid": {
+"npcId": 3125,
+"displayId": 2486,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Cliff Giant": {
+"npcId": 5358,
+"displayId": 12813,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Clutchmother Zavas": {
+"npcId": 6582,
+"displayId": 11084,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Cobalt Broodling": {
+"npcId": 10660,
+"displayId": 10584,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Cobalt Mageweaver": {
+"npcId": 7437,
+"displayId": 8316,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Cobalt Scalebane": {
+"npcId": 7436,
+"displayId": 6760,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Cobalt Wyrmkin": {
+"npcId": 7435,
+"displayId": 6761,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Colonel Kurzen": {
+"npcId": 813,
+"displayId": 637,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Condor": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Coyote": {
+"npcId": 834,
+"displayId": 643,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Coyote Packleader": {
+"npcId": 833,
+"displayId": 161,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Crag Boar": {
+"npcId": 1125,
+"displayId": 607,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Crag Coyote": {
+"npcId": 2727,
+"displayId": 161,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Crag Stalker": {
+"npcId": 4126,
+"displayId": 1043,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Crushridge Brute": {
+"npcId": 2253,
+"displayId": 610,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Crushridge Enforcer": {
+"npcId": 2256,
+"displayId": 416,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Crushridge Mage": {
+"npcId": 2255,
+"displayId": 6705,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Crushridge Mauler": {
+"npcId": 2254,
+"displayId": 655,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Crushridge Ogre": {
+"npcId": 2252,
+"displayId": 11567,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Crushridge Plunderer": {
+"npcId": 2416,
+"displayId": 415,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Crushridge Warmonger": {
+"npcId": 2287,
+"displayId": 536,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Crypt Fiend": {
+"npcId": 8555,
+"displayId": 3004,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Cursed Darkhound": {
+"npcId": 1548,
+"displayId": 9020,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Cursed Highborne": {
+"npcId": 2176,
+"displayId": 985,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Cursed Mage": {
+"npcId": 8524,
+"displayId": 11397,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Cursed Ooze": {
+"npcId": 7086,
+"displayId": 11137,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Cyclone Warrior": {
+"npcId": 11745,
+"displayId": 8716,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Daggerspine Screamer": {
+"npcId": 2370,
+"displayId": 4976,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Daggerspine Shorestalker": {
+"npcId": 2368,
+"displayId": 4763,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Daggerspine Siren": {
+"npcId": 2371,
+"displayId": 4982,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Daggerspine Sorceress": {
+"npcId": 2596,
+"displayId": 5765,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dalaran Apprentice": {
+"npcId": 1867,
+"displayId": 3767,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dalaran Protector": {
+"npcId": 1912,
+"displayId": 3602,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dalaran Spellscribe": {
+"npcId": 1920,
+"displayId": 3589,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dalaran Summoner": {
+"npcId": 2358,
+"displayId": 3718,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dalaran Warder": {
+"npcId": 1913,
+"displayId": 3592,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dalaran Watcher": {
+"npcId": 1888,
+"displayId": 3566,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dalaran Wizard": {
+"npcId": 1889,
+"displayId": 3585,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dark Iron Dwarf": {
+"npcId": 1051,
+"displayId": 825,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dark Iron Lookout": {
+"npcId": 8566,
+"displayId": 7865,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dark Iron Marksman": {
+"npcId": 8338,
+"displayId": 7765,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dark Iron Raider": {
+"npcId": 2149,
+"displayId": 3451,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dark Iron Saboteur": {
+"npcId": 1052,
+"displayId": 3490,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dark Iron Sentry": {
+"npcId": 8504,
+"displayId": 7814,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dark Iron Slaver": {
+"npcId": 5844,
+"displayId": 7789,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dark Iron Spy": {
+"npcId": 6123,
+"displayId": 4956,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dark Iron Steelshifter": {
+"npcId": 8337,
+"displayId": 7761,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dark Iron Taskmaster": {
+"npcId": 5846,
+"displayId": 7798,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dark Reaver of Karazhan": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dark Strand Adept": {
+"npcId": 3728,
+"displayId": 4220,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dark Strand Cultist": {
+"npcId": 3725,
+"displayId": 4255,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dark Strand Excavator": {
+"npcId": 3730,
+"displayId": 9751,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dark Strand Fanatic": {
+"npcId": 2336,
+"displayId": 4217,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dark Strand Voidcaller": {
+"npcId": 2337,
+"displayId": 4230,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dark Summoner": {
+"npcId": 8551,
+"displayId": 10417,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Darkfang Creeper": {
+"npcId": 4412,
+"displayId": 2546,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Darkfang Lurker": {
+"npcId": 4411,
+"displayId": 2424,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Darkhound": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Darkmaster Gandling": {
+"npcId": 1853,
+"displayId": 11070,
+"source": "data+wowhead-classic-npc-page",
+"candidates": null
+},
+"Darkshore Thresher": {
+"npcId": 2185,
+"displayId": 992,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Deadwind Brute": {
+"npcId": 7369,
+"displayId": 11533,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Deadwind Mauler": {
+"npcId": 7371,
+"displayId": 11536,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Deadwind Ogre Mage": {
+"npcId": 7379,
+"displayId": 11537,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Deadwind Warlock": {
+"npcId": 7372,
+"displayId": 11538,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Deadwood Avenger": {
+"npcId": 7157,
+"displayId": 2003,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Deadwood Den Watcher": {
+"npcId": 7156,
+"displayId": 6825,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Deadwood Gardener": {
+"npcId": 7154,
+"displayId": 3028,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Deadwood Pathfinder": {
+"npcId": 7155,
+"displayId": 2000,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Deadwood Shaman": {
+"npcId": 7158,
+"displayId": 6746,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Deadwood Warrior": {
+"npcId": 7153,
+"displayId": 2000,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Deepmoss Creeper": {
+"npcId": 4005,
+"displayId": 760,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Deepmoss Matriarch": {
+"npcId": 4264,
+"displayId": 336,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Deepmoss Spider": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Deepmoss Venomspitter": {
+"npcId": 4007,
+"displayId": 759,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Defias Bandit": {
+"npcId": 116,
+"displayId": 2357,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Defias Blackguard": {
+"npcId": 636,
+"displayId": 2314,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Defias Cutpurse": {
+"npcId": 94,
+"displayId": 2361,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Defias Enchanter": {
+"npcId": 910,
+"displayId": 4281,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Defias Evoker": {
+"npcId": 1729,
+"displayId": 2318,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Defias Footpad": {
+"npcId": 481,
+"displayId": 2333,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Defias Highwayman": {
+"npcId": 122,
+"displayId": 2342,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Defias Knuckleduster": {
+"npcId": 449,
+"displayId": 2344,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Defias Looter": {
+"npcId": 590,
+"displayId": 2340,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Defias Night Blade": {
+"npcId": 909,
+"displayId": 4279,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Defias Night Runner": {
+"npcId": 215,
+"displayId": 4276,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Defias Overseer": {
+"npcId": 634,
+"displayId": 2316,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Defias Pathstalker": {
+"npcId": 121,
+"displayId": 2336,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Defias Pillager": {
+"npcId": 589,
+"displayId": 2338,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Defias Renegade Mage": {
+"npcId": 450,
+"displayId": 4420,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Defias Rogue Wizard": {
+"npcId": 474,
+"displayId": 2359,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Defias Smuggler": {
+"npcId": 95,
+"displayId": 4418,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Defias Thug": {
+"npcId": 38,
+"displayId": 5035,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Defias Trapper": {
+"npcId": 504,
+"displayId": 2331,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Desert Rumbler": {
+"npcId": 11746,
+"displayId": 8550,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Devilsaur": {
+"npcId": 6498,
+"displayId": 5239,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Devlin Agamand": {
+"npcId": 1657,
+"displayId": 11399,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Diemetradon": {
+"npcId": 9163,
+"displayId": 8511,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dire Maul East (Warpwood Quarter)": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dire Maul North (Gordok Commons)": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dire Maul West (Capital Gardens)": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dire Mottled Boar": {
+"npcId": 3099,
+"displayId": 381,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dire Wolf": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Diseased Timber Wolf": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Diseased Wolf": {
+"npcId": 1817,
+"displayId": 4124,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Doomguard": {
+"npcId": 11859,
+"displayId": 1912,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Draconic Mageweaver": {
+"npcId": 6131,
+"displayId": 6761,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dragonmaw Battlemaster": {
+"npcId": 1037,
+"displayId": 4912,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dragonmaw Bonewarder": {
+"npcId": 1057,
+"displayId": 4918,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dragonmaw Centurion": {
+"npcId": 1036,
+"displayId": 4919,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dragonmaw Grunt": {
+"npcId": 2102,
+"displayId": 4927,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dragonmaw Raider": {
+"npcId": 1034,
+"displayId": 4916,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dragonmaw Scout": {
+"npcId": 2103,
+"displayId": 4925,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dragonmaw Shadowwarder": {
+"npcId": 1038,
+"displayId": 4924,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dragonmaw Shaman": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dragonmaw Swamprunner": {
+"npcId": 1035,
+"displayId": 4917,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dread Flyer": {
+"npcId": 4693,
+"displayId": 10273,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dread Wolf": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dreadmaul Brute": {
+"npcId": 5976,
+"displayId": 11584,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dreadmaul Mauler": {
+"npcId": 5977,
+"displayId": 14401,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dreadmaul Ogre": {
+"npcId": 5974,
+"displayId": 14402,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dreadmaul Warlock": {
+"npcId": 5978,
+"displayId": 11543,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dredge Crusher": {
+"npcId": 11741,
+"displayId": 14524,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dredge Striker": {
+"npcId": 11740,
+"displayId": 15386,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Drogoth the Roamer": {
+"npcId": 14231,
+"displayId": 631,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Drywhisker Digger": {
+"npcId": 2574,
+"displayId": 511,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Drywhisker Surveyor": {
+"npcId": 2573,
+"displayId": 371,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Duke of Cynders": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Duke of Fathoms": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Duke of Shards": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Duke of Zephyrs": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dunemaul Brute": {
+"npcId": 5474,
+"displayId": 11545,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dunemaul Enforcer": {
+"npcId": 5472,
+"displayId": 11544,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dunemaul Warlock": {
+"npcId": 5475,
+"displayId": 11542,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Durotar Tiger": {
+"npcId": 3121,
+"displayId": 598,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Duskbat": {
+"npcId": 1512,
+"displayId": 4732,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dust Stormer": {
+"npcId": 11744,
+"displayId": 8715,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dustbelcher Brute": {
+"npcId": 2715,
+"displayId": 10714,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dustbelcher Mauler": {
+"npcId": 2717,
+"displayId": 1120,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dustbelcher Mystic": {
+"npcId": 2907,
+"displayId": 1122,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dustbelcher Ogre": {
+"npcId": 2701,
+"displayId": 10704,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dustbelcher Shaman": {
+"npcId": 2718,
+"displayId": 11545,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dustbelcher Warrior": {
+"npcId": 2906,
+"displayId": 5782,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dustbelcher Wyrmhunter": {
+"npcId": 2716,
+"displayId": 11548,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dustwind Harpy": {
+"npcId": 3115,
+"displayId": 3012,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dustwind Pillager": {
+"npcId": 3116,
+"displayId": 6814,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dustwind Savage": {
+"npcId": 3117,
+"displayId": 2166,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dustwind Storm Witch": {
+"npcId": 3118,
+"displayId": 6815,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Dying Kodo": {
+"npcId": 4701,
+"displayId": 1453,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Earthen Guardian": {
+"npcId": 7076,
+"displayId": 6026,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Edwin VanCleef": {
+"npcId": 639,
+"displayId": 2029,
+"source": "data+wowhead-classic-npc-page",
+"candidates": null
+},
+"Elder Black Bear": {
+"npcId": 1186,
+"displayId": 707,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Elder Crag Boar": {
+"npcId": 1127,
+"displayId": 744,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Elder Diemetradon": {
+"npcId": 9164,
+"displayId": 8512,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Elder Mistvale Gorilla": {
+"npcId": 1557,
+"displayId": 838,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Elder Mottled Boar": {
+"npcId": 3100,
+"displayId": 193,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Elder Mountain Yeti": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Elder Plainstrider": {
+"npcId": 2957,
+"displayId": 1221,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Elder Stranglethorn Tiger": {
+"npcId": 1085,
+"displayId": 698,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Eldrak": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Eliza": {
+"npcId": 314,
+"displayId": 10487,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Encrusted Tide Crawler": {
+"npcId": 2233,
+"displayId": 9566,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Entropic Beast": {
+"npcId": 9878,
+"displayId": 9449,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Entropic Horror": {
+"npcId": 9879,
+"displayId": 9449,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Executor Arren": {
+"npcId": 1570,
+"displayId": 1583,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Felguard Sentry": {
+"npcId": 6011,
+"displayId": 9017,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Felhound": {
+"npcId": 6010,
+"displayId": 1913,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Felhunter": {
+"npcId": 417,
+"displayId": 850,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Felmusk Felsworn": {
+"npcId": 3762,
+"displayId": 2011,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Felmusk Rogue": {
+"npcId": 3759,
+"displayId": 2875,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Felmusk Satyr": {
+"npcId": 3758,
+"displayId": 2010,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Felmusk Shadowstalker": {
+"npcId": 3763,
+"displayId": 6741,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Felpaw Ravager": {
+"npcId": 8961,
+"displayId": 9280,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Felpaw Scavenger": {
+"npcId": 8960,
+"displayId": 9278,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Felpaw Wolf": {
+"npcId": 8959,
+"displayId": 4124,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Fen Creeper": {
+"npcId": 1040,
+"displayId": 2023,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Feral Scar Yeti": {
+"npcId": 5292,
+"displayId": 3207,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Fire Elemental": {
+"npcId": 575,
+"displayId": 1405,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Fire Plume Ridge": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Fire Roc": {
+"npcId": 5429,
+"displayId": 7348,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Firegut Brute": {
+"npcId": 7035,
+"displayId": 10707,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Firegut Ogre": {
+"npcId": 7033,
+"displayId": 11549,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Firegut Ogre Mage": {
+"npcId": 7034,
+"displayId": 11550,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Firemane Ash Tail": {
+"npcId": 4331,
+"displayId": 8249,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Firemane Flamecaller": {
+"npcId": 4334,
+"displayId": 8309,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Firemane Scalebane": {
+"npcId": 4328,
+"displayId": 8310,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Firemane Scout": {
+"npcId": 4329,
+"displayId": 143,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Fizzle Darkstorm": {
+"npcId": 3203,
+"displayId": 7128,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Flatland Prowler": {
+"npcId": 3566,
+"displayId": 1056,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Flesh Eater": {
+"npcId": 3,
+"displayId": 987,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Flesh Eating Worm": {
+"npcId": 2462,
+"displayId": 10996,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Fleshripper": {
+"npcId": 1109,
+"displayId": 2305,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Foe Reaper 4000": {
+"npcId": 573,
+"displayId": 548,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Forest Spider": {
+"npcId": 30,
+"displayId": 382,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Foreststrider": {
+"npcId": 2322,
+"displayId": 178,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Foreststrider Fledgling": {
+"npcId": 2321,
+"displayId": 1042,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Foulbelly": {
+"npcId": 2601,
+"displayId": 11551,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Foulweald Den Watcher": {
+"npcId": 3746,
+"displayId": 6819,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Foulweald Pathfinder": {
+"npcId": 3745,
+"displayId": 937,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Foulweald Shaman": {
+"npcId": 3748,
+"displayId": 6822,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Foulweald Totemic": {
+"npcId": 3750,
+"displayId": 6821,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Foulweald Ursa": {
+"npcId": 3749,
+"displayId": 1996,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Foulweald Warrior": {
+"npcId": 3743,
+"displayId": 6824,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Fozruk": {
+"npcId": 2611,
+"displayId": 1918,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Frayfeather Hippogryph": {
+"npcId": 5300,
+"displayId": 3210,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Frayfeather Patriarch": {
+"npcId": 5306,
+"displayId": 6756,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Frayfeather Skystormer": {
+"npcId": 5305,
+"displayId": 3211,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Frayfeather Stagwing": {
+"npcId": 5304,
+"displayId": 10890,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Frenzied Pterrordax": {
+"npcId": 9167,
+"displayId": 8412,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Frost Spectre": {
+"npcId": 8585,
+"displayId": 146,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Frostbite Wendigo": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Frostmane Headhunter": {
+"npcId": 1123,
+"displayId": 5626,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Frostmane Hideskinner": {
+"npcId": 1122,
+"displayId": 5612,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Frostmane Scout": {
+"npcId": null,
+"displayId": null,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Frostmane Seer": {
+"npcId": 1397,
+"displayId": 5610,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Frostmane Snowstrider": {
+"npcId": 1121,
+"displayId": 5607,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Frostmane Troll Whelp": {
+"npcId": 706,
+"displayId": 5606,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Frostmaul Giant": {
+"npcId": 7428,
+"displayId": 6209,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Frostmaul Preserver": {
+"npcId": 7429,
+"displayId": 12815,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Frostsaber": {
+"npcId": 7431,
+"displayId": 9953,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Frostsaber Cub": {
+"npcId": 7430,
+"displayId": 9958,
+"source": "wowhead-classic-search",
+"candidates": null
+},
+"Frostsaber Huntress": {
+"npcId": 7433,
+"displayId": 11444,
+"source": "wowhead-classic-search",
+"candidates": null
+}
+}

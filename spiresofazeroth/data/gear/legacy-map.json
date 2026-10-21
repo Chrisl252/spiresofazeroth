@@ -1,0 +1,23 @@
+{
+ "map": {
+  "ironfoe": "vis-kag-the-bloodletter",
+  "bonereavers-edge": "vis-kag-the-bloodletter",
+  "truesilver-champion": "truesilver-champion",
+  "lightforge-gauntlets": "lawbringer-gauntlets",
+  "rhokdelar-longbow": "rhok-delar-longbow-of-the-ancient-keepers",
+  "giantstalker-helm": "giantstalker-s-helmet",
+  "perditions-blade": "perdition-s-blade",
+  "ravenholdt-slicer": "nightslayer-cover",
+  "benediction": "benediction",
+  "eye-of-the-dead": "vambraces-of-prophecy",
+  "ankh": "earthfury-belt",
+  "earthfury-helmet": "earthfury-helmet",
+  "talisman-of-ephemeral-power": "azuresong-mageblade",
+  "robes-of-the-archmage": "arcanist-robes",
+  "nemesis-skullcap": "felheart-horns",
+  "robes-of-volatile-power": "felheart-robes",
+  "stormrage-cover": "cenarion-helm",
+  "idol-of-ferocity": "cenarion-bracers"
+ },
+ "note": "class inline relic id -> gear id; global/zone relic ids are unchanged"
+}

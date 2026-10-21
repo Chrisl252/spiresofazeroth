@@ -1,0 +1,9 @@
+# Blizzard-derived art and audio never enter this repository; the dev server fetches them from thewowdb.com
+spiresofazeroth/assets/**
+!spiresofazeroth/assets/**/
+!spiresofazeroth/assets/**/*.json
+__pycache__/
+.pytest_cache/
+node_modules/
+shots/
+*.tar

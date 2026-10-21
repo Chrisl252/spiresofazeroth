@@ -1,0 +1,53 @@
+{
+  "id": "badlands",
+  "name": "Badlands",
+  "start": {"name": "Kargath Inn", "icon": "inv_misc_beer_01"},
+  "continent": "ek",
+  "act": 4,
+  "levelBand": [35,47],
+  "spire": {
+    "name": "Uldaman Gate",
+    "lore": "The red canyons of Badlands hide the Titan vault of Uldaman, where stone watchers sleep until disturbed."
+  },
+  "theme": {
+    "primary": "#a8542a",
+    "secondary": "#33170c",
+    "accent": "#e2a85a",
+    "background": "canyon"
+  },
+  "zoneMechanic": {
+    "id": "stone-watchers",
+    "name": "Stone Watchers",
+    "icon": "inv_stone_15",
+    "text": "On turn 5 the statues awaken: every enemy gains 4 Block and 2 Strength; once awake, the watchers strike again every 3rd turn.",
+    "hooks": {"on_turn_start":[{"op":"conditional","if":{"type":"turn_number","equals":5},"then":[{"op":"apply","status":"strength","stacks":2,"target":"all_enemies"}]},{"op":"conditional","if":{"type":"turn_number","every":3,"gte":6},"then":[{"op":"damage","amount":4,"target":"self"}]}]}
+  },
+  "rest": {
+    "id": "kargath-camp",
+    "name": "Kargath Rest",
+    "icon": "spell_fire_fire",
+    "text": "Camp at Kargath. Heal 25% of max HP and remove all debuffs.",
+    "effects": [
+      {"op":"heal","amount":14,"target":"self"},
+      {"op":"remove","status":"poison","target":"self"},
+      {"op":"remove","status":"burn","target":"self"}
+    ]
+  },
+  "enemiesFile": "badlands.enemies.json",
+  "encounters": {
+    "normal": [["buzzard","buzzard"],["crag-coyote","crag-stalker"],["ridge-huntress","ridge-huntress","ridge-stalker"],["lesser-rock-elemental","rock-elemental"],["dustbelcher-ogre","dustbelcher-brute","dustbelcher-warrior"],["scorpid-reaver","scorpid-reaver","scorpid-terror","scorpid-terror"],["dustbelcher-warrior","dustbelcher-shaman"],["shadowforge-ambusher","shadowforge-surveyor","shadowforge-darkweaver"],["dustbelcher-ogre","dustbelcher-mauler","dustbelcher-mystic","dustbelcher-wyrmhunter"],["earthen-guardian","earthen-guardian"],["stonevault-rockchewer","stonevault-rockchewer","stonevault-cave-hunter","stonevault-oracle"]],
+    "elite": [["zaricotl"],["marez-cowl"],["otto"],["mangeclaw"]],
+    "boss": [["archaedas"],["archaedas","earthen-guardian","earthen-guardian"]]
+  },
+  "events": [
+    {"id":"rheas-eggs","name":"Rhea's Dragon Eggs","icon":"inv_egg_04","text":"Black dragonkin eggs lie in a Badlands cave. Rhea needs them brought to Kargath intact.","options":[{"label":"Carry the eggs gently","effects":[{"op":"damage","amount":4,"target":"self"},{"op":"gold","amount":70}]},{"label":"Smash them for the shells","effects":[{"op":"gold","amount":100},{"op":"apply","status":"vulnerable","stacks":1,"target":"self"}]},{"label":"Leave the cave","effects":[]}]},
+    {"id":"lethlor-mirages","name":"Lethlor Mirages","icon":"spell_arcane_arcane04","text":"Heat shimmers over the Lethlor ravine; the mirages lead travelers toward Boulderfist dust devils.","options":[{"label":"Follow the mirage","effects":[{"op":"damage","amount":8,"target":"self"},{"op":"max_hp","amount":4}]},{"label":"Hold your ground","effects":[{"op":"heal","amount":6,"target":"self"}]},{"label":"Study the shimmer","effects":[{"op":"scry","count":3}]}]},
+    {"id":"uldaman-dig","name":"Uldaman Dig Site","icon":"inv_misc_shovel_01","text":"Explorers excavate beyond Uldaman's gate. They offer a share of Titan artifacts if you guard the dig.","options":[{"label":"Guard the dig","effects":[{"op":"damage","amount":8,"target":"self"},{"op":"random_card","pool":"any","rarity":"rare","to":"hand"}]},{"label":"Dig for yourself","effects":[{"op":"gold","amount":80},{"op":"apply","status":"weak","stacks":1,"target":"self"}]},{"label":"Move on","effects":[]}]},
+    {"id":"agmonds-fortress","name":"Agmond's Fortress","icon":"inv_shield_05","text":"Agmond's Fortress is surrounded by Dustbelcher raiders. A dwarf scout beckons from the walls.","options":[{"label":"Fight your way in","effects":[{"op":"damage","amount":10,"target":"self"},{"op":"heal","amount":14,"target":"self"}]},{"label":"Sneak in the back","effects":[{"op":"apply","status":"weak","stacks":1,"target":"self"},{"op":"max_hp","amount":3}]},{"label":"Skirt the fort","effects":[]}]}
+  ],
+  "relics": [
+    {"id":"ironayas-bracers","name":"Ironaya's Bracers","icon":"inv_bracer_02","rarity":"rare","itemId":null,"zone":"badlands","class":null,"text":"Gain 3 Block at the start of each combat.","triggers":{"on_combat_start":[{"op":"block","amount":3,"target":"self"}]}},
+    {"id":"titanic-leggings","name":"Titanic Leggings","icon":"inv_pants_04","rarity":"rare","itemId":null,"zone":"badlands","class":null,"text":"Gain 1 Strength at the start of each combat.","triggers":{"on_combat_start":[{"op":"apply","status":"strength","stacks":1,"target":"self"}]}}
+  ],
+  "raidFloorsFile": "badlands.raids.json"
+}

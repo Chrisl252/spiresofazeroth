@@ -1,0 +1,458 @@
+{
+ "classId": "hunter",
+ "trees": [
+  {
+   "id": "beast-mastery",
+   "name": "Beast Mastery",
+   "icon": "ability_hunter_beasttaming",
+   "talents": [
+    {
+     "id": "hunter:beast-mastery:0",
+     "name": "Improved Aspect of the Hawk",
+     "icon": "spell_nature_ravenform",
+     "tier": 1,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:beast-mastery:1",
+     "name": "Endurance Training",
+     "icon": "spell_nature_reincarnation",
+     "tier": 1,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "hp",
+      "per": 3
+     }
+    },
+    {
+     "id": "hunter:beast-mastery:2",
+     "name": "Improved Eyes of the Beast",
+     "icon": "ability_eyeoftheowl",
+     "tier": 2,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "draw1",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:beast-mastery:3",
+     "name": "Improved Aspect of the Monkey",
+     "icon": "ability_hunter_aspectofthemonkey",
+     "tier": 2,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "dex",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:beast-mastery:4",
+     "name": "Thick Hide",
+     "icon": "inv_misc_pelt_bear_03",
+     "tier": 3,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "block",
+      "per": 2
+     }
+    },
+    {
+     "id": "hunter:beast-mastery:5",
+     "name": "Improved Revive Pet",
+     "icon": "ability_hunter_beastsoothe",
+     "tier": 3,
+     "col": 1,
+     "max": 2,
+     "effect": {
+      "key": "heal",
+      "per": 10
+     }
+    },
+    {
+     "id": "hunter:beast-mastery:6",
+     "name": "Pathfinding",
+     "icon": "ability_mount_jungletiger",
+     "tier": 4,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "goldpct",
+      "per": 5
+     }
+    },
+    {
+     "id": "hunter:beast-mastery:7",
+     "name": "Bestial Swiftness",
+     "icon": "ability_druid_dash",
+     "tier": 4,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "energy1",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:beast-mastery:8",
+     "name": "Unleashed Fury",
+     "icon": "ability_bullrush",
+     "tier": 5,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:beast-mastery:9",
+     "name": "Ferocity",
+     "icon": "inv_misc_monsterclaw_04",
+     "tier": 5,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "thorns",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:beast-mastery:10",
+     "name": "Spirit Bond",
+     "icon": "ability_druid_demoralizingroar",
+     "tier": 6,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "regen",
+      "per": 2
+     }
+    },
+    {
+     "id": "hunter:beast-mastery:11",
+     "name": "Bestial Wrath",
+     "icon": "ability_druid_ferociousbite",
+     "tier": 6,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "str",
+      "per": 3
+     }
+    }
+   ]
+  },
+  {
+   "id": "marksmanship",
+   "name": "Marksmanship",
+   "icon": "ability_marksmanship",
+   "talents": [
+    {
+     "id": "hunter:marksmanship:0",
+     "name": "Improved Concussive Shot",
+     "icon": "spell_frost_stun",
+     "tier": 1,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "dex",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:marksmanship:1",
+     "name": "Efficiency",
+     "icon": "spell_frost_wizardmark",
+     "tier": 1,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "goldpct",
+      "per": 3
+     }
+    },
+    {
+     "id": "hunter:marksmanship:2",
+     "name": "Improved Hunter's Mark",
+     "icon": "ability_hunter_snipershot",
+     "tier": 2,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:marksmanship:3",
+     "name": "Lethal Shots",
+     "icon": "ability_searingarrow",
+     "tier": 2,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:marksmanship:4",
+     "name": "Aimed Shot",
+     "icon": "inv_spear_07",
+     "tier": 3,
+     "col": 0,
+     "max": 1,
+     "effect": {
+      "key": "draw1",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:marksmanship:5",
+     "name": "Improved Arcane Shot",
+     "icon": "ability_impalingbolt",
+     "tier": 3,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "res",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:marksmanship:6",
+     "name": "Hawk Eye",
+     "icon": "ability_townwatch",
+     "tier": 4,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "hp",
+      "per": 3
+     }
+    },
+    {
+     "id": "hunter:marksmanship:7",
+     "name": "Improved Serpent Sting",
+     "icon": "ability_hunter_quickshot",
+     "tier": 4,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "thorns",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:marksmanship:8",
+     "name": "Mortal Shots",
+     "icon": "ability_piercedamage",
+     "tier": 5,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:marksmanship:9",
+     "name": "Scatter Shot",
+     "icon": "ability_golemstormbolt",
+     "tier": 5,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "energy1",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:marksmanship:10",
+     "name": "Barrage",
+     "icon": "ability_upgrademoonglaive",
+     "tier": 6,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "gold",
+      "per": 10
+     }
+    },
+    {
+     "id": "hunter:marksmanship:11",
+     "name": "Trueshot Aura",
+     "icon": "ability_trueshot",
+     "tier": 6,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "str",
+      "per": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "survival",
+   "name": "Survival",
+   "icon": "ability_hunter_swiftstrike",
+   "talents": [
+    {
+     "id": "hunter:survival:0",
+     "name": "Monster Slaying",
+     "icon": "inv_misc_head_dragon_black",
+     "tier": 1,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:survival:1",
+     "name": "Humanoid Slaying",
+     "icon": "spell_holy_prayerofhealing",
+     "tier": 1,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:survival:2",
+     "name": "Deflection",
+     "icon": "ability_parry",
+     "tier": 2,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "dex",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:survival:3",
+     "name": "Entrapment",
+     "icon": "spell_nature_stranglevines",
+     "tier": 2,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "thorns",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:survival:4",
+     "name": "Savage Strikes",
+     "icon": "ability_racial_bloodrage",
+     "tier": 3,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "energy1",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:survival:5",
+     "name": "Improved Wing Clip",
+     "icon": "ability_rogue_trip",
+     "tier": 3,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "block",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:survival:6",
+     "name": "Clever Traps",
+     "icon": "spell_nature_timestop",
+     "tier": 4,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "draw1",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:survival:7",
+     "name": "Survivalist",
+     "icon": "spell_shadow_twilight",
+     "tier": 4,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "hp",
+      "per": 4
+     }
+    },
+    {
+     "id": "hunter:survival:8",
+     "name": "Deterrence",
+     "icon": "ability_whirlwind",
+     "tier": 5,
+     "col": 0,
+     "max": 1,
+     "effect": {
+      "key": "block",
+      "per": 6
+     }
+    },
+    {
+     "id": "hunter:survival:9",
+     "name": "Trap Mastery",
+     "icon": "ability_ensnare",
+     "tier": 5,
+     "col": 1,
+     "max": 2,
+     "effect": {
+      "key": "regen",
+      "per": 2
+     }
+    },
+    {
+     "id": "hunter:survival:10",
+     "name": "Killer Instinct",
+     "icon": "spell_holy_blessingofstamina",
+     "tier": 6,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "hunter:survival:11",
+     "name": "Wyvern Sting",
+     "icon": "inv_spear_02",
+     "tier": 6,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "heal",
+      "per": 15
+     }
+    }
+   ]
+  }
+ ]
+}

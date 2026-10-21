@@ -1,0 +1,434 @@
+{
+ "id": "durotar",
+ "name": "Durotar",
+ "start": {
+  "name": "Razor Hill Inn",
+  "icon": "inv_misc_beer_01"
+ },
+ "continent": "kal",
+ "act": 1,
+ "levelBand": [
+  1,
+  12
+ ],
+ "spire": {
+  "name": "Razor Hill Watchtower",
+  "lore": "The Horde watchtower above Razor Hill, with the Burning Blade coven festering in Skull Rock below and the Echo Isles trolls under Zalazane across the water."
+ },
+ "theme": {
+  "primary": "#b5532b",
+  "secondary": "#3a1d10",
+  "accent": "#e8b54a",
+  "background": "durotar"
+ },
+ "zoneMechanic": {
+  "id": "scorpid-sting",
+  "name": "Scorpid Sting",
+  "icon": "ability_hunter_pet_scorpid",
+  "text": "Killing a Scorpid adds a Scorpid Sting (neutral card) to your discard pile. Scorpids poison you more often the longer a fight runs.",
+  "hooks": {
+   "on_kill": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "target_is_family",
+      "family": "scorpid"
+     },
+     "then": [
+      {
+       "op": "add_card",
+       "card": "scorpid-sting",
+       "to": "discard",
+       "count": 1
+      }
+     ]
+    }
+   ],
+   "on_turn_start": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "turn_number",
+      "min": 4
+     },
+     "then": [
+      {
+       "op": "apply",
+       "status": "poison",
+       "stacks": 1,
+       "target": "enemy"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "razor-hill-inn",
+  "name": "Razor Hill Inn",
+  "icon": "inv_misc_food_15",
+  "text": "Sleep in a real bed at the Razor Hill Inn: heal 20% of max HP and gain 3 Max HP.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 20,
+    "target": "self"
+   },
+   {
+    "op": "max_hp",
+    "amount": 3,
+    "target": "self"
+   }
+  ]
+ },
+ "enemiesFile": "durotar.enemies.json",
+ "encounters": {
+  "normal": [
+   [
+    "mottled-boar",
+    "mottled-boar"
+   ],
+   [
+    "scorpid-worker",
+    "scorpid-worker"
+   ],
+   [
+    "scorpid-worker",
+    "mottled-boar",
+    "scorpid-reaver"
+   ],
+   [
+    "burning-blade-neophyte",
+    "vile-familiar"
+   ],
+   [
+    "mottled-boar",
+    "dire-mottled-boar"
+   ],
+   [
+    "razormane-scout",
+    "razormane-quilboar"
+   ],
+   [
+    "burning-blade-acolyte",
+    "vile-familiar",
+    "burning-blade-cultist"
+   ],
+   [
+    "voodoo-troll",
+    "voodoo-troll"
+   ],
+   [
+    "kul-tiras-sailor",
+    "kul-tiras-marine"
+   ],
+   [
+    "razormane-scout",
+    "razormane-dustrunner",
+    "razormane-geomancer"
+   ],
+   [
+    "durotar-tiger",
+    "thunder-lizard"
+   ],
+   [
+    "dire-mottled-boar",
+    "elder-mottled-boar"
+   ],
+   [
+    "razormane-quilboar",
+    "razormane-battleguard",
+    "razormane-defender",
+    "razormane-geomancer"
+   ],
+   [
+    "scorpid-dunestalker",
+    "venomtail-scorpid"
+   ],
+   [
+    "burning-blade-thug",
+    "burning-blade-cultist",
+    "burning-blade-apprentice"
+   ],
+   [
+    "bloodtalon-scythemaw",
+    "bloodtalon-scythemaw"
+   ]
+  ],
+  "elite": [
+   [
+    "scorpid-dunestalker",
+    "sarkoth"
+   ],
+   [
+    "vile-familiar",
+    "vile-familiar",
+    "gazzuz"
+   ],
+   [
+    "burning-blade-thug",
+    "fizzle-darkstorm"
+   ]
+  ],
+  "boss": [
+   [
+    "voodoo-troll",
+    "voodoo-troll",
+    "zalazane"
+   ],
+   [
+    "zalazane"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "thunder-ridge",
+   "name": "Thunder Ridge",
+   "icon": "spell_nature_lightning",
+   "text": "Lightning lizards crackle across Thunder Ridge. Razor Hill wants their charged hides.",
+   "options": [
+    {
+     "label": "Harvest a charged hide (take 5 damage, gain 30 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 5,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 30
+      }
+     ]
+    },
+    {
+     "label": "Draw the lightning into your gear (apply Thorns 2)",
+     "effects": [
+      {
+       "op": "apply",
+       "status": "thorns",
+       "stacks": 2,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Walk on",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "echo-isles",
+   "name": "The Echo Isles",
+   "icon": "inv_misc_head_troll_01",
+   "text": "Darkspear trolls shelter on the Echo Isles while Zalazane's hexes prowl the beach.",
+   "options": [
+    {
+     "label": "Free a hexed Darkspear (heal 12)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 12,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Loot the voodoo cache (gold +40, take 6 damage)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 40
+      },
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Leave the isles",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "skull-rock",
+   "name": "Skull Rock",
+   "icon": "spell_shadow_summonimp",
+   "text": "The Burning Blade coven chants in Skull Rock. Fel energy seeps from the walls.",
+   "options": [
+    {
+     "label": "Desecrate the altar (gain a card, gain Curse 1)",
+     "effects": [
+      {
+       "op": "random_card",
+       "pool": "neutral",
+       "rarity": "common",
+       "to": "deck_permanent"
+      },
+      {
+       "op": "apply",
+       "status": "curse",
+       "stacks": 1,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Take the cultist's coin (gold +35)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 35
+      }
+     ]
+    },
+    {
+     "label": "Slip past",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "lazy-peons",
+   "name": "Lazy Peons",
+   "icon": "inv_hammer_01",
+   "text": "Peons sleep at their posts by the lumber. Work work.",
+   "options": [
+    {
+     "label": "Wake them with the whip (gold +25)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 25
+      }
+     ]
+    },
+    {
+     "label": "Share your rations (heal 8, max HP +1)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 8,
+       "target": "self"
+      },
+      {
+       "op": "max_hp",
+       "amount": 1
+      }
+     ]
+    },
+    {
+     "label": "Let them sleep",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "tiragarde-keep",
+   "name": "Tiragarde Keep",
+   "icon": "inv_misc_head_human_01",
+   "text": "Kul Tiras marines hold a cracked keep on the Durotar coast. Their strongbox is unguarded.",
+   "options": [
+    {
+     "label": "Pick the strongbox (gold +45, take 7 damage)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 45
+      },
+      {
+       "op": "damage",
+       "amount": 7,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Parley with the sailors (heal 10)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 10,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Skirt the walls",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "burning-blade-medallion",
+   "name": "Burning Blade Medallion",
+   "icon": "inv_jewelry_necklace_07",
+   "rarity": "common",
+   "itemId": null,
+   "zone": "durotar",
+   "class": null,
+   "text": "At the start of each combat, gain 4 Block.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 4,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "sarkoths-mangled-claw",
+   "name": "Sarkoth's Mangled Claw",
+   "icon": "inv_misc_monsterclaw_04",
+   "rarity": "uncommon",
+   "itemId": null,
+   "zone": "durotar",
+   "class": null,
+   "text": "Your first attack each turn applies 1 Poison.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "apply",
+      "status": "poison",
+      "stacks": 1,
+      "target": "enemy"
+     }
+    ]
+   }
+  },
+  {
+   "id": "zalazanes-head",
+   "name": "Zalazane's Head",
+   "icon": "inv_misc_head_troll_01",
+   "rarity": "rare",
+   "itemId": null,
+   "zone": "durotar",
+   "class": null,
+   "text": "When you kill an enemy, gain 3 Block and heal 1.",
+   "triggers": {
+    "on_kill": [
+     {
+      "op": "block",
+      "amount": 3,
+      "target": "self"
+     },
+     {
+      "op": "heal",
+      "amount": 1,
+      "target": "self"
+     }
+    ]
+   }
+  }
+ ],
+ "raidFloorsFile": "durotar.raids.json"
+}

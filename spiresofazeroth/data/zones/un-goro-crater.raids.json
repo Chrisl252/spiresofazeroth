@@ -1,0 +1,6 @@
+[
+ {"id":"fire-plume-ridge","name":"Fire Plume Ridge","unlock":"act_complete","enemyRefs":["scorching-elemental","blazing-elemental","living-blaze","king-mosh"],"encounters":{"normal":[["scorching-elemental","living-blaze"],["blazing-elemental","blazing-elemental"],["scorching-elemental","blazing-elemental","living-blaze"]],"elite":[["ironhide-devilsaur"],["tyrant-devilsaur"]],"boss":[["king-mosh"]]},"note":"The volcano interior of Fire Plume Ridge; fire elementals resist Fire and take +50% from Frost.","relics":[],
+  "enemies":[
+  
+  ]}
+]

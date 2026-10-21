@@ -1,0 +1,159 @@
+[
+ {"id":"wailing-caverns","name":"Wailing Caverns","unlock":"act_complete","levelBand":[17,24],"lore":"A Deviate cavern network where Naralex's dream has curdled into a nightmare of serpents and twisted druids.","encounters":{"normal":[["deviate-adder","deviate-viper"],["deviate-python","deviate-moccasin"],["deviate-crocolisk","deviate-raptor"],["deviate-stinglash","deviate-dreadfang","deviate-venomwing"],["deviate-coiler","deviate-lurker"],["druid-of-the-fang","deviate-guardian"],["deviate-ravager","druid-of-the-fang","deviate-slayer"]],"elite":[["kresh"],["lady-anacondra"],["lord-cobrahn"],["lord-pythas"],["skum"],["lord-serpentis"],["verdan-the-everliving"]],"boss":[["mutanus-the-devourer"]]},"finalBoss":"mutanus-the-devourer",
+  "enemies":[
+   {"id":"deviate-adder","name":"Deviate Adder","tier":"raid","family":"beast","type":"snake","level":[17,18],"hp":[20,27],"icon":"ability_hunter_pet_windserpent","npcId":null,"traits":[],"moves":[{"id":"poison-bite","name":"Poison Bite","intent":"attack","effects":[{"op":"damage","amount":4},{"op":"apply","status":"poison","stacks":3,"target":"enemy"}],"weight":3},{"id":"slither","name":"Slither","intent":"block","effects":[{"op":"block","amount":5,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"deviate-viper","name":"Deviate Viper","tier":"raid","family":"beast","type":"snake","level":[17,18],"hp":[20,27],"icon":"ability_hunter_pet_windserpent","npcId":null,"traits":[],"moves":[{"id":"poison-bite","name":"Poison Bite","intent":"attack","effects":[{"op":"damage","amount":4},{"op":"apply","status":"poison","stacks":3,"target":"enemy"}],"weight":3},{"id":"slither","name":"Slither","intent":"block","effects":[{"op":"block","amount":5,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"deviate-python","name":"Deviate Python","tier":"raid","family":"beast","type":"snake","level":[18,19],"hp":[21,29],"icon":"ability_hunter_pet_windserpent","npcId":null,"traits":[],"moves":[{"id":"poison-bite","name":"Poison Bite","intent":"attack","effects":[{"op":"damage","amount":4},{"op":"apply","status":"poison","stacks":3,"target":"enemy"}],"weight":3},{"id":"slither","name":"Slither","intent":"block","effects":[{"op":"block","amount":5,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"deviate-crocolisk","name":"Deviate Crocolisk","tier":"raid","family":"beast","type":"crocolisk","level":[18,19],"hp":[21,29],"icon":"ability_hunter_pet_crocolisk","npcId":null,"traits":[],"moves":[{"id":"bite","name":"Bite","intent":"attack","effects":[{"op":"damage","amount":6}],"weight":3},{"id":"thick-hide","name":"Thick Hide","intent":"block","effects":[{"op":"block","amount":8,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"deviate-raptor","name":"Deviate Raptor","tier":"raid","family":"beast","type":"raptor","level":[18,19],"hp":[21,29],"icon":"ability_hunter_pet_raptor","npcId":null,"traits":[],"moves":[{"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":5}],"weight":3},{"id":"rushing-charge","name":"Rushing Charge","intent":"attack","effects":[{"op":"damage","amount":6},{"op":"apply","status":"vulnerable","stacks":1,"target":"enemy"}],"weight":2,"cooldown":3},{"id":"savage-bite","name":"Savage Bite","intent":"attack","effects":[{"op":"damage","amount":8},{"op":"apply","status":"bleed","stacks":1,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"deviate-moccasin","name":"Deviate Moccasin","tier":"raid","family":"beast","type":"snake","level":[18,19],"hp":[21,29],"icon":"ability_hunter_pet_windserpent","npcId":null,"traits":[],"moves":[{"id":"poison-bite","name":"Poison Bite","intent":"attack","effects":[{"op":"damage","amount":4},{"op":"apply","status":"poison","stacks":3,"target":"enemy"}],"weight":3},{"id":"slither","name":"Slither","intent":"block","effects":[{"op":"block","amount":5,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"deviate-stinglash","name":"Deviate Stinglash","tier":"raid","family":"beast","type":"snake","level":[19,20],"hp":[23,31],"icon":"ability_hunter_pet_windserpent","npcId":null,"traits":[],"moves":[{"id":"poison-bite","name":"Poison Bite","intent":"attack","effects":[{"op":"damage","amount":4},{"op":"apply","status":"poison","stacks":3,"target":"enemy"}],"weight":3},{"id":"slither","name":"Slither","intent":"block","effects":[{"op":"block","amount":5,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"deviate-venomwing","name":"Deviate Venomwing","tier":"raid","family":"beast","type":"wyvern","level":[19,20],"hp":[23,31],"icon":"ability_hunter_pet_wasp","npcId":null,"traits":[],"moves":[{"id":"sting","name":"Sting","intent":"attack","effects":[{"op":"damage","amount":5},{"op":"apply","status":"poison","stacks":3,"target":"enemy"}],"weight":2},{"id":"wing-buffet","name":"Wing Buffet","intent":"attack","effects":[{"op":"damage","amount":4},{"op":"apply","status":"weak","stacks":1,"target":"enemy"}],"weight":2,"cooldown":2},{"id":"wyvern-sting","name":"Wyvern Sting","intent":"debuff","effects":[{"op":"apply","status":"sleep","stacks":1,"target":"enemy"}],"weight":1,"cooldown":5}]},
+   {"id":"deviate-dreadfang","name":"Deviate Dreadfang","tier":"raid","family":"beast","type":"snake","level":[19,20],"hp":[23,31],"icon":"ability_hunter_pet_windserpent","npcId":null,"traits":[],"moves":[{"id":"poison-bite","name":"Poison Bite","intent":"attack","effects":[{"op":"damage","amount":4},{"op":"apply","status":"poison","stacks":3,"target":"enemy"}],"weight":3},{"id":"slither","name":"Slither","intent":"block","effects":[{"op":"block","amount":5,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"deviate-coiler","name":"Deviate Coiler","tier":"raid","family":"beast","type":"snake","level":[20,21],"hp":[24,34],"icon":"ability_hunter_pet_windserpent","npcId":null,"traits":[],"moves":[{"id":"poison-bite","name":"Poison Bite","intent":"attack","effects":[{"op":"damage","amount":4},{"op":"apply","status":"poison","stacks":3,"target":"enemy"}],"weight":3},{"id":"slither","name":"Slither","intent":"block","effects":[{"op":"block","amount":5,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"deviate-guardian","name":"Deviate Guardian","tier":"raid","family":"elemental","type":"plant","level":[20,21],"hp":[24,34],"icon":"ability_druid_treeoflife","npcId":null,"traits":["nature_absorb"],"moves":[{"id":"slam","name":"Slam","intent":"attack","effects":[{"op":"damage","amount":6}],"weight":3},{"id":"thorns","name":"Thorns","intent":"buff","effects":[{"op":"apply","status":"thorns","stacks":2,"target":"self"}],"weight":1,"cooldown":4}]},
+   {"id":"deviate-lurker","name":"Deviate Lurker","tier":"raid","family":"beast","type":"snake","level":[20,21],"hp":[24,34],"icon":"ability_hunter_pet_windserpent","npcId":null,"traits":[],"moves":[{"id":"poison-bite","name":"Poison Bite","intent":"attack","effects":[{"op":"damage","amount":4},{"op":"apply","status":"poison","stacks":3,"target":"enemy"}],"weight":3},{"id":"slither","name":"Slither","intent":"block","effects":[{"op":"block","amount":5,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"deviate-ravager","name":"Deviate Ravager","tier":"raid","family":"beast","type":"raptor","level":[20,21],"hp":[24,34],"icon":"ability_hunter_pet_raptor","npcId":null,"traits":[],"moves":[{"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":5}],"weight":3},{"id":"rushing-charge","name":"Rushing Charge","intent":"attack","effects":[{"op":"damage","amount":6},{"op":"apply","status":"vulnerable","stacks":1,"target":"enemy"}],"weight":2,"cooldown":3},{"id":"savage-bite","name":"Savage Bite","intent":"attack","effects":[{"op":"damage","amount":8},{"op":"apply","status":"bleed","stacks":1,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"deviate-slayer","name":"Deviate Slayer","tier":"raid","family":"beast","type":"raptor","level":[21,22],"hp":[25,36],"icon":"ability_hunter_pet_raptor","npcId":null,"traits":[],"moves":[{"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":5}],"weight":3},{"id":"rushing-charge","name":"Rushing Charge","intent":"attack","effects":[{"op":"damage","amount":6},{"op":"apply","status":"vulnerable","stacks":1,"target":"enemy"}],"weight":2,"cooldown":3},{"id":"savage-bite","name":"Savage Bite","intent":"attack","effects":[{"op":"damage","amount":8},{"op":"apply","status":"bleed","stacks":1,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"druid-of-the-fang","name":"Druid of the Fang","tier":"raid","family":"humanoid","type":"druid","level":[20,21],"hp":[24,34],"icon":"spell_nature_protectionformnature","npcId":null,"traits":["caster"],"moves":[{"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":6,"school":"nature"}],"weight":2},{"id":"sleep","name":"Sleep","intent":"cast","effects":[{"op":"apply","status":"sleep","stacks":1,"target":"enemy"}],"weight":1,"cooldown":4},{"id":"serpent-form","name":"Serpent Form","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":5}]},
+   {"id":"kresh","name":"Kresh","tier":"elite","family":"beast","type":"turtle","level":[18,19],"hp":[59,77],"icon":"ability_hunter_pet_turtle","npcId":3653,"traits":["armor"],
+    "moves":[
+     {"id":"trample","name":"Trample","intent":"attack","effects":[{"op":"damage","amount":8,"target":"all_enemies"}],"weight":2,"cooldown":3},
+     {"id":"shell-shield","name":"Shell Shield","intent":"block","effects":[{"op":"block","amount":18,"target":"self"}],"weight":2,"cooldown":3},
+     {"id":"snap","name":"Snap","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":3}
+    ],
+    "pattern":["snap","trample","shell-shield","snap","trample"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Shell Slam","pattern":["trample","snap","trample","shell-shield"],"onEnter":[{"op":"apply","status":"armor","stacks":4,"target":"self"}]}
+    ]
+   },
+   {"id":"lord-pythas","name":"Lord Pythas","tier":"elite","family":"humanoid","type":"druid","level":[20,21],"hp":[64,84],"icon":"spell_nature_protectionformnature","npcId":3670,"traits":["caster"],
+    "moves":[
+     {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":10,"school":"nature"}],"weight":3},
+     {"id":"sleep","name":"Sleep","intent":"cast","effects":[{"op":"apply","status":"sleep","stacks":1,"target":"enemy"}],"weight":2,"cooldown":4},
+     {"id":"healing-touch","name":"Healing Touch","intent":"heal","effects":[{"op":"heal","amount":15,"target":"self"}],"weight":1,"cooldown":4},
+     {"id":"thunderclap","name":"Thunderclap","intent":"attack","effects":[{"op":"damage","amount":6,"target":"all_enemies"},{"op":"apply","status":"weak","stacks":1,"target":"enemy"}],"weight":1,"cooldown":4}
+    ],
+    "pattern":["lightning-bolt","sleep","thunderclap","lightning-bolt","healing-touch"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Pythas Enraged","pattern":["thunderclap","lightning-bolt","sleep"],"onEnter":[{"op":"apply","status":"strength","stacks":2,"target":"self"}]}
+    ]
+   },
+   {"id":"skum","name":"Skum","tier":"elite","family":"beast","type":"crocolisk","level":[20,21],"hp":[64,84],"icon":"ability_hunter_pet_crocolisk","npcId":3674,"traits":["caster"],
+    "moves":[
+     {"id":"chained-bolt","name":"Chained Bolt","intent":"cast","effects":[{"op":"damage","amount":8,"target":"all_enemies","school":"nature"}],"weight":3},
+     {"id":"bite","name":"Bite","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":3},
+     {"id":"thick-hide","name":"Thick Hide","intent":"block","effects":[{"op":"block","amount":13,"target":"self"}],"weight":1,"cooldown":3}
+    ],
+    "pattern":["chained-bolt","bite","chained-bolt","thick-hide"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Chained Fury","pattern":["chained-bolt","bite","chained-bolt"],"onEnter":[{"op":"apply","status":"strength","stacks":2,"target":"self"}]}
+    ]
+   },
+   {"id":"lord-serpentis","name":"Lord Serpentis","tier":"elite","family":"humanoid","type":"druid","level":[21,22],"hp":[66,87],"icon":"spell_nature_protectionformnature","npcId":3673,"traits":["caster"],
+    "moves":[
+     {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":11,"school":"nature"}],"weight":3},
+     {"id":"slowing-poison","name":"Slowing Poison","intent":"debuff","effects":[{"op":"damage","amount":4},{"op":"apply","status":"weak","stacks":2,"target":"enemy"},{"op":"apply","status":"poison","stacks":3,"target":"enemy"}],"weight":2,"cooldown":3},
+     {"id":"healing-touch","name":"Healing Touch","intent":"heal","effects":[{"op":"heal","amount":15,"target":"self"}],"weight":1,"cooldown":4},
+     {"id":"sleep","name":"Sleep","intent":"cast","effects":[{"op":"apply","status":"sleep","stacks":1,"target":"enemy"}],"weight":1,"cooldown":5}
+    ],
+    "pattern":["lightning-bolt","slowing-poison","sleep","lightning-bolt","healing-touch"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Serpent Lord","pattern":["slowing-poison","lightning-bolt","slowing-poison","sleep"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+    ]
+   }
+  ]
+ },
+ {"id":"razorfen-kraul","name":"Razorfen Kraul","unlock":"act_complete","levelBand":[29,37],"lore":"The thorned warren of the Razorfen quilboar, where Charlga Razorflank binds the tribe with Agamaggan's stolen blood.","encounters":{"normal":[["razorfen-spearhide","razorfen-quilguard"],["razorfen-warden","razorfen-defender"],["razorfen-handler","razorfen-beastmaster","raging-agamar"],["razorfen-dustweaver","razorfen-geomancer"],["deaths-head-cultist","deaths-head-acolyte"],["deaths-head-adept","deaths-head-necrolyte"],["razorfen-groundshaker","deaths-head-ward-keeper","deaths-head-geomancer"],["raging-agamar","agamar"]],"elite":[["roogug"],["aggem-thorncurse"],["death-speaker-jargba"],["overlord-ramtusk"],["agathelos-the-raging"]],"boss":[["charlga-razorflank"]]},"finalBoss":"charlga-razorflank",
+  "enemies":[
+   {"id":"razorfen-spearhide","name":"Razorfen Spearhide","tier":"raid","family":"humanoid","type":"quilboar","level":[29,31],"hp":[20,28],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":[],"moves":[{"id":"slash","name":"Slash","intent":"attack","effects":[{"op":"damage","amount":5}],"weight":3},{"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":4},{"op":"apply","status":"bleed","stacks":2,"target":"enemy"}],"weight":2,"cooldown":2},{"id":"enrage","name":"Enrage","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}]},
+   {"id":"razorfen-quilguard","name":"Razorfen Quilguard","tier":"raid","family":"humanoid","type":"quilboar","level":[29,31],"hp":[20,28],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":[],"moves":[{"id":"strike","name":"Strike","intent":"attack","effects":[{"op":"damage","amount":5}],"weight":3},{"id":"defensive-stance","name":"Defensive Stance","intent":"block","effects":[{"op":"block","amount":8,"target":"self"}],"weight":2,"cooldown":2}]},
+   {"id":"razorfen-warden","name":"Razorfen Warden","tier":"raid","family":"humanoid","type":"quilboar","level":[30,32],"hp":[22,30],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":[],"moves":[{"id":"strike","name":"Strike","intent":"attack","effects":[{"op":"damage","amount":5}],"weight":3},{"id":"defensive-stance","name":"Defensive Stance","intent":"block","effects":[{"op":"block","amount":8,"target":"self"}],"weight":2,"cooldown":2}]},
+   {"id":"razorfen-defender","name":"Razorfen Defender","tier":"raid","family":"humanoid","type":"quilboar","level":[30,32],"hp":[22,30],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":[],"moves":[{"id":"strike","name":"Strike","intent":"attack","effects":[{"op":"damage","amount":5}],"weight":3},{"id":"defensive-stance","name":"Defensive Stance","intent":"block","effects":[{"op":"block","amount":8,"target":"self"}],"weight":2,"cooldown":2}]},
+   {"id":"razorfen-handler","name":"Razorfen Handler","tier":"raid","family":"humanoid","type":"quilboar","level":[30,32],"hp":[22,30],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":[],"moves":[{"id":"slash","name":"Slash","intent":"attack","effects":[{"op":"damage","amount":5}],"weight":3},{"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":4},{"op":"apply","status":"bleed","stacks":2,"target":"enemy"}],"weight":2,"cooldown":2},{"id":"enrage","name":"Enrage","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}]},
+   {"id":"razorfen-beastmaster","name":"Razorfen Beastmaster","tier":"raid","family":"humanoid","type":"quilboar","level":[31,33],"hp":[23,32],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":[],"moves":[{"id":"slash","name":"Slash","intent":"attack","effects":[{"op":"damage","amount":5}],"weight":3},{"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":4},{"op":"apply","status":"bleed","stacks":2,"target":"enemy"}],"weight":2,"cooldown":2},{"id":"enrage","name":"Enrage","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}]},
+   {"id":"razorfen-dustweaver","name":"Razorfen Dustweaver","tier":"raid","family":"humanoid","type":"quilboar","level":[31,33],"hp":[23,32],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":["caster"],"moves":[{"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":6,"school":"nature"}],"weight":2},{"id":"healing-wave","name":"Healing Wave","intent":"heal","effects":[{"op":"heal","amount":8,"target":"ally"}],"weight":1,"cooldown":3},{"id":"earth-shock","name":"Earth Shock","intent":"cast","effects":[{"op":"damage","amount":4,"school":"nature"},{"op":"apply","status":"weak","stacks":1,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"razorfen-geomancer","name":"Razorfen Geomancer","tier":"raid","family":"humanoid","type":"quilboar","level":[31,33],"hp":[23,32],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":["caster"],"moves":[{"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":6,"school":"nature"}],"weight":2},{"id":"healing-wave","name":"Healing Wave","intent":"heal","effects":[{"op":"heal","amount":8,"target":"ally"}],"weight":1,"cooldown":3},{"id":"earth-shock","name":"Earth Shock","intent":"cast","effects":[{"op":"damage","amount":4,"school":"nature"},{"op":"apply","status":"weak","stacks":1,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"razorfen-groundshaker","name":"Razorfen Groundshaker","tier":"raid","family":"humanoid","type":"quilboar","level":[32,34],"hp":[24,34],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":[],"moves":[{"id":"slash","name":"Slash","intent":"attack","effects":[{"op":"damage","amount":5}],"weight":3},{"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":4},{"op":"apply","status":"bleed","stacks":2,"target":"enemy"}],"weight":2,"cooldown":2},{"id":"enrage","name":"Enrage","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}]},
+   {"id":"deaths-head-cultist","name":"Death's Head Cultist","tier":"raid","family":"humanoid","type":"quilboar","level":[31,33],"hp":[23,32],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":["caster"],"moves":[{"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":6,"school":"shadow"}],"weight":2},{"id":"curse-of-weakness","name":"Curse of Weakness","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"deaths-head-acolyte","name":"Death's Head Acolyte","tier":"raid","family":"humanoid","type":"quilboar","level":[32,34],"hp":[24,34],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":["caster"],"moves":[{"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":6,"school":"nature"}],"weight":2},{"id":"healing-wave","name":"Healing Wave","intent":"heal","effects":[{"op":"heal","amount":8,"target":"ally"}],"weight":1,"cooldown":3},{"id":"shield-of-earth","name":"Shield of Earth","intent":"block","effects":[{"op":"block","amount":8,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"deaths-head-adept","name":"Death's Head Adept","tier":"raid","family":"humanoid","type":"quilboar","level":[32,34],"hp":[24,34],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":["caster"],"moves":[{"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":6,"school":"shadow"}],"weight":2},{"id":"corruption","name":"Corruption","intent":"debuff","effects":[{"op":"damage","amount":3,"school":"shadow"},{"op":"apply","status":"poison","stacks":3,"target":"enemy"}],"weight":1,"cooldown":3},{"id":"curse-of-agony","name":"Curse of Agony","intent":"debuff","effects":[{"op":"apply","status":"curse","stacks":2,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"deaths-head-necrolyte","name":"Death's Head Necrolyte","tier":"raid","family":"humanoid","type":"quilboar","level":[33,35],"hp":[25,36],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":["caster"],"moves":[{"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":6,"school":"shadow"}],"weight":2},{"id":"corruption","name":"Corruption","intent":"debuff","effects":[{"op":"damage","amount":3,"school":"shadow"},{"op":"apply","status":"poison","stacks":3,"target":"enemy"}],"weight":1,"cooldown":3},{"id":"curse-of-agony","name":"Curse of Agony","intent":"debuff","effects":[{"op":"apply","status":"curse","stacks":2,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"deaths-head-geomancer","name":"Death's Head Geomancer","tier":"raid","family":"humanoid","type":"quilboar","level":[33,35],"hp":[25,36],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":["caster"],"moves":[{"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":6,"school":"nature"}],"weight":2},{"id":"healing-wave","name":"Healing Wave","intent":"heal","effects":[{"op":"heal","amount":8,"target":"ally"}],"weight":1,"cooldown":3},{"id":"earth-shock","name":"Earth Shock","intent":"cast","effects":[{"op":"damage","amount":4,"school":"nature"},{"op":"apply","status":"weak","stacks":1,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"deaths-head-ward-keeper","name":"Death's Head Ward Keeper","tier":"raid","family":"humanoid","type":"quilboar","level":[33,35],"hp":[25,36],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":[],"moves":[{"id":"strike","name":"Strike","intent":"attack","effects":[{"op":"damage","amount":5}],"weight":3},{"id":"defensive-stance","name":"Defensive Stance","intent":"block","effects":[{"op":"block","amount":8,"target":"self"}],"weight":2,"cooldown":2}]},
+   {"id":"raging-agamar","name":"Raging Agam'ar","tier":"raid","family":"beast","type":"boar","level":[31,33],"hp":[23,32],"icon":"ability_hunter_pet_boar","npcId":null,"traits":[],"moves":[{"id":"gore","name":"Gore","intent":"attack","effects":[{"op":"damage","amount":6}],"weight":3},{"id":"rushing-charge","name":"Rushing Charge","intent":"attack","effects":[{"op":"damage","amount":5},{"op":"apply","status":"vulnerable","stacks":1,"target":"enemy"}],"weight":2,"cooldown":3},{"id":"thick-hide","name":"Thick Hide","intent":"block","effects":[{"op":"block","amount":6,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"agamar","name":"Agam'ar","tier":"raid","family":"beast","type":"boar","level":[33,35],"hp":[25,36],"icon":"ability_hunter_pet_boar","npcId":null,"traits":[],"moves":[{"id":"gore","name":"Gore","intent":"attack","effects":[{"op":"damage","amount":6}],"weight":3},{"id":"rushing-charge","name":"Rushing Charge","intent":"attack","effects":[{"op":"damage","amount":5},{"op":"apply","status":"vulnerable","stacks":1,"target":"enemy"}],"weight":2,"cooldown":3},{"id":"thick-hide","name":"Thick Hide","intent":"block","effects":[{"op":"block","amount":6,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"roogug","name":"Roogug","tier":"elite","family":"humanoid","type":"quilboar","level":[29,30],"hp":[57,74],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":[],
+    "moves":[
+     {"id":"strike","name":"Strike","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":3},
+     {"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":6},{"op":"apply","status":"bleed","stacks":3,"target":"enemy"}],"weight":2,"cooldown":2},
+     {"id":"shield-bash","name":"Shield Bash","intent":"attack","effects":[{"op":"damage","amount":8},{"op":"apply","status":"stun","stacks":1,"target":"enemy"}],"weight":1,"cooldown":4}
+    ],
+    "pattern":["strike","rend","shield-bash","strike"],
+    "phases":[
+     {"hpBelowPct":40,"name":"Roogug Enraged","pattern":["rend","strike","strike"],"onEnter":[{"op":"apply","status":"strength","stacks":2,"target":"self"}]}
+    ]
+   },
+   {"id":"aggem-thorncurse","name":"Aggem Thorncurse","tier":"elite","family":"humanoid","type":"quilboar","level":[31,32],"hp":[61,80],"icon":"inv_misc_head_quillboar_01","npcId":4424,"traits":["caster"],
+    "moves":[
+     {"id":"thorn-volley","name":"Thorn Volley","intent":"attack","effects":[{"op":"damage","amount":8,"target":"all_enemies","school":"nature"}],"weight":2},
+     {"id":"curse-of-thorns","name":"Curse of Thorns","intent":"debuff","effects":[{"op":"apply","status":"curse","stacks":3,"target":"enemy"},{"op":"apply","status":"thorns","stacks":3,"target":"self"}],"weight":2,"cooldown":3},
+     {"id":"strike","name":"Strike","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":3}
+    ],
+    "pattern":["strike","curse-of-thorns","thorn-volley","strike","thorn-volley"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Thorncurse","pattern":["thorn-volley","curse-of-thorns","thorn-volley"],"onEnter":[{"op":"apply","status":"thorns","stacks":4,"target":"self"}]}
+    ]
+   },
+   {"id":"death-speaker-jargba","name":"Death Speaker Jargba","tier":"elite","family":"humanoid","type":"quilboar","level":[32,33],"hp":[63,83],"icon":"inv_misc_head_quillboar_01","npcId":4428,"traits":["caster"],
+    "moves":[
+     {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":11,"school":"shadow"}],"weight":3},
+     {"id":"dominate-mind","name":"Dominate Mind","intent":"debuff","effects":[{"op":"apply","status":"fear","stacks":2,"target":"enemy"},{"op":"apply","status":"weak","stacks":2,"target":"enemy"}],"weight":1,"cooldown":4},
+     {"id":"healing-wave","name":"Healing Wave","intent":"heal","effects":[{"op":"heal","amount":14,"target":"ally"}],"weight":1,"cooldown":4},
+     {"id":"curse-of-weakness","name":"Curse of Weakness","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":3,"target":"enemy"}],"weight":1,"cooldown":3}
+    ],
+    "pattern":["shadow-bolt","dominate-mind","shadow-bolt","curse-of-weakness","healing-wave"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Death Speaker","pattern":["dominate-mind","shadow-bolt","curse-of-weakness"],"onEnter":[{"op":"apply","status":"strength","stacks":2,"target":"self"}]}
+    ]
+   },
+   {"id":"overlord-ramtusk","name":"Overlord Ramtusk","tier":"elite","family":"humanoid","type":"quilboar","level":[33,34],"hp":[65,86],"icon":"inv_misc_head_quillboar_01","npcId":4420,"traits":[],
+    "moves":[
+     {"id":"cleave","name":"Cleave","intent":"attack","effects":[{"op":"damage","amount":10,"target":"all_enemies"}],"weight":2},
+     {"id":"war-stomp","name":"War Stomp","intent":"attack","effects":[{"op":"damage","amount":8},{"op":"apply","status":"stun","stacks":1,"target":"enemy"}],"weight":1,"cooldown":4},
+     {"id":"overlord-slam","name":"Overlord Slam","intent":"attack","effects":[{"op":"damage","amount":15}],"weight":3},
+     {"id":"summon-razorfen","name":"Summon Razorfen","intent":"summon","effects":[{"op":"summon","unit":"razorfen-spearhide","count":1}],"weight":1,"cooldown":6}
+    ],
+    "pattern":["overlord-slam","cleave","war-stomp","overlord-slam","summon-razorfen"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Ramtusk Roars","pattern":["cleave","overlord-slam","war-stomp","cleave"],"onEnter":[{"op":"summon","unit":"razorfen-spearhide","count":1}]}
+    ]
+   },
+   {"id":"agathelos-the-raging","name":"Agathelos the Raging","tier":"elite","family":"beast","type":"boar","level":[33,34],"hp":[65,86],"icon":"ability_hunter_pet_boar","npcId":4422,"traits":[],
+    "moves":[
+     {"id":"charge","name":"Charge","intent":"attack","effects":[{"op":"damage","amount":15},{"op":"apply","status":"vulnerable","stacks":2,"target":"enemy"}],"weight":2,"cooldown":3},
+     {"id":"gore","name":"Gore","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":3},
+     {"id":"agathelos-rage","name":"Agathelos Rage","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":3,"target":"self"}],"weight":1,"cooldown":4}
+    ],
+    "pattern":["gore","charge","gore","agathelos-rage","charge"],
+    "phases":[
+     {"hpBelowPct":60,"name":"Raging Boar","pattern":["charge","gore","charge"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+    ]
+   },
+   {"id":"charlga-razorflank","name":"Charlga Razorflank","tier":"boss","family":"humanoid","type":"quilboar","level":[35,36],"hp":[141,186],"icon":"inv_misc_head_quillboar_01","npcId":4421,"traits":["caster"],
+    "moves":[
+     {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":15,"school":"nature"}],"weight":3},
+     {"id":"lightning-shield","name":"Lightning Shield","intent":"buff","effects":[{"op":"apply","status":"thorns","stacks":4,"target":"self"}],"weight":1,"cooldown":5},
+     {"id":"earthbind-totem","name":"Earthbind Totem","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":3,"target":"enemy"}],"weight":1,"cooldown":4},
+     {"id":"renew","name":"Renew","intent":"heal","effects":[{"op":"heal","amount":18,"target":"self"}],"weight":1,"cooldown":4},
+     {"id":"sleep","name":"Sleep","intent":"cast","effects":[{"op":"apply","status":"sleep","stacks":1,"target":"enemy"}],"weight":1,"cooldown":5}
+    ],
+    "pattern":["lightning-bolt","lightning-shield","earthbind-totem","lightning-bolt","renew"],
+    "phases":[
+     {"hpBelowPct":70,"name":"Matriarch's Rite","pattern":["earthbind-totem","lightning-bolt","renew","lightning-bolt"],"onEnter":[{"op":"apply","status":"thorns","stacks":4,"target":"self"}]},
+     {"hpBelowPct":35,"name":"Blood of Agamaggan","pattern":["lightning-bolt","sleep","lightning-bolt","renew"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"},{"op":"apply","status":"regen","stacks":4,"target":"self"}]}
+    ]
+   }
+  ]
+ }
+]

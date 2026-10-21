@@ -1,0 +1,457 @@
+{
+ "id": "duskwood",
+ "name": "Duskwood",
+ "start": {"name": "Scarlet Raven Tavern", "icon": "inv_misc_beer_01"},
+ "continent": "ek",
+ "act": 3,
+ "levelBand": [
+  18,
+  30
+ ],
+ "spire": {
+  "name": "Raven Hill Crypt Spire",
+  "lore": "A spire of black stone rising from the Raven Hill Cemetery. The Night Watch of Darkshire no longer patrols past the gates; Morbent Fel waits at the top."
+ },
+ "theme": {
+  "primary": "#4a3a6a",
+  "secondary": "#12101c",
+  "accent": "#8f7fb8",
+  "background": "dusk"
+ },
+ "zoneMechanic": {
+  "id": "eternal-night",
+  "name": "Eternal Night",
+  "icon": "spell_shadow_shadowform",
+  "text": "You start every combat Veiled: enemy intents beyond the current one are hidden. Light cards and holy damage lift the veil.",
+  "hooks": {
+   "on_combat_start": [
+    {
+     "op": "apply",
+     "status": "veiled",
+     "stacks": 1,
+     "target": "self"
+    }
+   ],
+   "on_card_played": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "school_last",
+      "school": "holy"
+     },
+     "then": [
+      {
+       "op": "remove",
+       "status": "veiled",
+       "target": "self"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "darkshire-inn",
+  "name": "Scarlet Raven Tavern",
+  "icon": "inv_drink_03",
+  "text": "The Night Watch lets you rest at the Scarlet Raven Tavern: heal 25% of max HP and clear all Curse.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 25,
+    "target": "self"
+   },
+   {
+    "op": "remove",
+    "status": "curse",
+    "target": "self"
+   }
+  ]
+ },
+ "enemiesFile": "duskwood.enemies.json",
+ "encounters": {
+  "normal": [
+   [
+    "pygmy-venom-web-spider",
+    "pygmy-venom-web-spider",
+    "pygmy-venom-web-spider"
+   ],
+   [
+    "black-widow",
+    "pygmy-venom-web-spider"
+   ],
+   [
+    "skeletal-warrior",
+    "skeletal-warrior"
+   ],
+   [
+    "flesh-eating-worm",
+    "flesh-eating-worm",
+    "bone-chewer"
+   ],
+   [
+    "dire-wolf",
+    "dire-wolf"
+   ],
+   [
+    "defias-night-runner",
+    "defias-enchanter"
+   ],
+   [
+    "rotted-one",
+    "rotted-one"
+   ],
+   [
+    "skeletal-mage",
+    "skeletal-warrior",
+    "skeletal-healer"
+   ],
+   [
+    "nightbane-worgen",
+    "nightbane-worgen"
+   ],
+   [
+    "venom-web-spider",
+    "black-widow"
+   ],
+   [
+    "skeletal-fiend",
+    "bone-chewer",
+    "bone-chewer"
+   ],
+   [
+    "plague-spreader",
+    "rotted-one"
+   ],
+   [
+    "defias-night-blade",
+    "defias-night-blade",
+    "defias-enchanter"
+   ],
+   [
+    "nightbane-dark-runner",
+    "nightbane-worgen"
+   ],
+   [
+    "skeletal-horror",
+    "skeletal-mage"
+   ],
+   [
+    "nightbane-vile-fang",
+    "nightbane-shadow-weaver"
+   ],
+   [
+    "plague-spreader",
+    "plague-spreader",
+    "rotted-one"
+   ],
+   [
+    "skeletal-horror",
+    "skeletal-healer",
+    "skeletal-fiend"
+   ],
+   [
+    "nightbane-tainted-one",
+    "nightbane-vile-fang"
+   ],
+   [
+    "nightbane-shadow-weaver",
+    "nightbane-dark-runner",
+    "nightbane-dark-runner"
+   ]
+  ],
+  "elite": [
+   [
+    "eliza",
+    "skeletal-warrior"
+   ],
+   [
+    "stalvan-mistmantle",
+    "nightbane-worgen",
+    "nightbane-worgen"
+   ],
+   [
+    "stitches"
+   ],
+   [
+    "morladim",
+    "skeletal-fiend"
+   ]
+  ],
+  "boss": [
+   [
+    "morbent-fel",
+    "skeletal-horror",
+    "skeletal-horror"
+   ],
+   [
+    "morbent-fel",
+    "skeletal-healer",
+    "skeletal-mage"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "darkshire-night-watch",
+   "name": "Darkshire Night Watch",
+   "icon": "inv_misc_head_human_01",
+   "text": "The Darkshire Night Watch is down to six men. They need hands on the Raven Hill road.",
+   "options": [
+    {
+     "label": "Walk the watch (take 6 damage, +50 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 50
+      }
+     ]
+    },
+    {
+     "label": "Rest at the watch post (heal 10)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 10,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Refuse",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "raven-hill",
+   "name": "Raven Hill Cemetery",
+   "icon": "inv_misc_bone_humanskull_01",
+   "text": "Raven Hill Cemetery is full of the Ravenwood dead, and the gate-keeper Abercrombie's experiments are still there.",
+   "options": [
+    {
+     "label": "Search the crypts (take 8 damage, gain a card reward)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 8,
+       "target": "self"
+      },
+      {
+       "op": "random_card",
+       "pool": "class",
+       "rarity": "rare",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Ask the gravedigger for coin (+25 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 25
+      }
+     ]
+    },
+    {
+     "label": "Leave the dead alone",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "rotting-orchard",
+   "name": "The Rotting Orchard",
+   "icon": "ability_ghoulfrenzy",
+   "text": "Plague Spreaders shamble through the Rotting Orchard, where the Night Watch lost three men last week.",
+   "options": [
+    {
+     "label": "Burn the orchard (take 7 damage, +45 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 7,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 45
+      }
+     ]
+    },
+    {
+     "label": "Gather unspoiled fruit (heal 6)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 6,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Avoid the orchard",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "stalvan-mistmantle",
+   "npc": {"name":"Stalvan Mistmantle","npcId":315,"displayId":1562},
+   "name": "Stalvan Mistmantle",
+   "icon": "inv_misc_head_human_02",
+   "text": "Stalvan Mistmantle's old manor is empty tonight. His ledger lies open on the desk.",
+   "options": [
+    {
+     "label": "Take the ledger (take 6 damage, gain a card reward)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "random_card",
+       "pool": "class",
+       "rarity": "uncommon",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Sell the furniture (+30 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 30
+      }
+     ]
+    },
+    {
+     "label": "Stay out",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "twilight-grove",
+   "name": "Twilight Grove",
+   "icon": "spell_nature_protectionformnature",
+   "text": "A dreamy glade, quiet in a wood that screams. Something old watches you sleep.",
+   "options": [
+    {
+     "label": "Sleep in the grove (heal 12, take 3 damage)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 12,
+       "target": "self"
+      },
+      {
+       "op": "damage",
+       "amount": 3,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Pray for protection (+6 max HP)",
+     "effects": [
+      {
+       "op": "max_hp",
+       "amount": 6
+      }
+     ]
+    },
+    {
+     "label": "Keep moving",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "morbents-bane",
+   "name": "Morbent's Bane",
+   "icon": "inv_sword_04",
+   "rarity": "rare",
+   "itemId": 7297,
+   "zone": "duskwood",
+   "class": null,
+   "text": "Forged to kill Morbent Fel. Start each combat with 1 Strength.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "stalvans-reaper",
+   "name": "Stalvan's Reaper",
+   "icon": "inv_axe_06",
+   "rarity": "rare",
+   "itemId": 934,
+   "zone": "duskwood",
+   "class": null,
+   "text": "Stalvan's polearm. Your attacks deal 2 damage to all enemies.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "damage",
+      "amount": 2,
+      "target": "all_enemies"
+     }
+    ]
+   }
+  },
+  {
+   "id": "crest-of-darkshire",
+   "name": "Crest of Darkshire",
+   "icon": "inv_shield_06",
+   "rarity": "uncommon",
+   "itemId": 6223,
+   "zone": "duskwood",
+   "class": null,
+   "text": "The Night Watch crest. Gain 3 Block at the start of each turn.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "block",
+      "amount": 3,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "nightbane-staff",
+   "name": "Nightbane Staff",
+   "icon": "inv_staff_08",
+   "rarity": "uncommon",
+   "itemId": 3227,
+   "zone": "duskwood",
+   "class": null,
+   "text": "Dropped by a Nightbane worgen. Draw 1 extra card at the start of each combat.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "draw",
+      "count": 1
+     }
+    ]
+   }
+  }
+ ]
+}

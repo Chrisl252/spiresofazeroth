@@ -1,0 +1,325 @@
+{
+ "class": "hunter",
+ "set": {
+  "id": "giantstalker-armor",
+  "name": "Giantstalker Armor",
+  "icon": "inv_helmet_05",
+  "bonuses": [
+   {
+    "pieces": 2,
+    "name": "Aspect of the Hawk",
+    "text": "Start each combat: gain 4 Block.",
+    "triggers": {
+     "on_combat_start": [
+      {
+       "op": "block",
+       "amount": 4,
+       "target": "self"
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 4,
+    "name": "Hunter's Mark",
+    "text": "When you attack: 20% chance to apply 1 Marked.",
+    "triggers": {
+     "on_attack": [
+      {
+       "op": "conditional",
+       "if": {
+        "type": "chance",
+        "pct": 20
+       },
+       "then": [
+        {
+         "op": "apply",
+         "status": "marked",
+         "stacks": 1,
+         "target": "enemy"
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 6,
+    "name": "Rapid Killing",
+    "text": "When you kill an enemy: gain 1 Energy next turn.",
+    "triggers": {
+     "on_kill": [
+      {
+       "op": "energy_next_turn",
+       "amount": 1
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 8,
+    "name": "Master of the Wild",
+    "text": "Start each combat: gain 1 Strength and apply 2 Marked.",
+    "triggers": {
+     "on_combat_start": [
+      {
+       "op": "apply",
+       "status": "strength",
+       "stacks": 1,
+       "target": "self"
+      },
+      {
+       "op": "apply",
+       "status": "marked",
+       "stacks": 2,
+       "target": "enemy"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "pieces": [
+  {
+   "id": "giantstalker-s-helmet",
+   "name": "Giantstalker's Helmet",
+   "slot": "head",
+   "set": "giantstalker-armor",
+   "setPiece": 1,
+   "item": 16846,
+   "icon": "inv_helmet_05",
+   "displayId": 32028,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: your pet attacks once more.",
+   "class": "hunter",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "pet_action",
+      "action": "attack"
+     }
+    ]
+   }
+  },
+  {
+   "id": "giantstalker-s-epaulets",
+   "name": "Giantstalker's Epaulets",
+   "slot": "shoulder",
+   "set": "giantstalker-armor",
+   "setPiece": 2,
+   "item": 16848,
+   "icon": "inv_shoulder_10",
+   "displayId": 32030,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: gain 2 Block.",
+   "class": "hunter",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "block",
+      "amount": 2,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "giantstalker-s-breastplate",
+   "name": "Giantstalker's Breastplate",
+   "slot": "chest",
+   "set": "giantstalker-armor",
+   "setPiece": 3,
+   "item": 16845,
+   "icon": "inv_chest_chain_03",
+   "displayId": 32022,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 5 Block.",
+   "class": "hunter",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 5,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "giantstalker-s-bracers",
+   "name": "Giantstalker's Bracers",
+   "slot": "wrist",
+   "set": "giantstalker-armor",
+   "setPiece": 4,
+   "item": 16850,
+   "icon": "inv_bracer_17",
+   "displayId": 32018,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Whenever you play a card: 12% chance to draw 1 card.",
+   "class": "hunter",
+   "triggers": {
+    "on_card_played": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 12
+      },
+      "then": [
+       {
+        "op": "draw",
+        "count": 1
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "giantstalker-s-gloves",
+   "name": "Giantstalker's Gloves",
+   "slot": "hands",
+   "set": "giantstalker-armor",
+   "setPiece": 5,
+   "item": 16852,
+   "icon": "inv_gauntlets_10",
+   "displayId": 32024,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "When you attack: 20% chance to apply 1 Marked.",
+   "class": "hunter",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 20
+      },
+      "then": [
+       {
+        "op": "apply",
+        "status": "marked",
+        "stacks": 1,
+        "target": "enemy"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "giantstalker-s-belt",
+   "name": "Giantstalker's Belt",
+   "slot": "waist",
+   "set": "giantstalker-armor",
+   "setPiece": 6,
+   "item": 16851,
+   "icon": "inv_belt_28",
+   "displayId": 32019,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "When you kill an enemy: heal 3.",
+   "class": "hunter",
+   "triggers": {
+    "on_kill": [
+     {
+      "op": "heal",
+      "amount": 3
+     }
+    ]
+   }
+  },
+  {
+   "id": "giantstalker-s-leggings",
+   "name": "Giantstalker's Leggings",
+   "slot": "legs",
+   "set": "giantstalker-armor",
+   "setPiece": 7,
+   "item": 16847,
+   "icon": "inv_pants_mail_03",
+   "displayId": 32023,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: 15% chance to gain 1 Energy.",
+   "class": "hunter",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 15
+      },
+      "then": [
+       {
+        "op": "gain_energy",
+        "amount": 1
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "giantstalker-s-boots",
+   "name": "Giantstalker's Boots",
+   "slot": "feet",
+   "set": "giantstalker-armor",
+   "setPiece": 8,
+   "item": 16849,
+   "icon": "inv_boots_chain_13",
+   "displayId": 32040,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 1 Dexterity.",
+   "class": "hunter",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "dexterity",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  }
+ ],
+ "weapon": {
+  "id": "rhok-delar-longbow-of-the-ancient-keepers",
+  "name": "Rhok'delar, Longbow of the Ancient Keepers",
+  "slot": "mainHand",
+  "setPiece": 0,
+  "item": 18713,
+  "icon": "inv_weapon_bow_01",
+  "displayId": 31338,
+  "tier": 1,
+  "rarity": "epic",
+  "stats": "Tier 1 weapon",
+  "text": "Start each combat: apply 3 Marked.",
+  "class": "hunter",
+  "triggers": {
+   "on_combat_start": [
+    {
+     "op": "apply",
+     "status": "marked",
+     "stacks": 3,
+     "target": "enemy"
+    }
+   ]
+  }
+ }
+}

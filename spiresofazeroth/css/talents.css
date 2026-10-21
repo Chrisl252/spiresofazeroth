@@ -1,0 +1,61 @@
+/* Spires of Azeroth: talent sheet (js/ui/talents.js). Stage px (1920x1080). Three dark-wood trees + a parchment account panel. */
+.sx-tal { padding-bottom: 14px; }
+.sx-tal__tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 10px; padding: 8px 40px 0; }
+.sx-tal__tabs .sx-tog { min-height: 54px; padding: 4px 18px 4px 12px; font-size: 25px; display: inline-flex; align-items: center; gap: 8px; }
+.sx-tal__tabs .sx-tog .sx-tog__i { width: 36px; height: 36px; border: 2px solid var(--cc, #c9a24b); border-radius: 6px; }
+.sx-tal__badge { display: inline-grid; place-items: center; min-width: 32px; height: 32px; margin-left: 6px; padding: 0 6px; border-radius: 16px; background: #1fa33a; color: #fff; font-family: var(--f-num); font-size: 24px; line-height: 1; box-shadow: 0 0 8px rgba(40,220,70,.7), inset 0 0 0 2px rgba(0,0,0,.4); }
+.sx-tal__body { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: 1fr 520px; gap: 20px; padding: 10px 40px 0; align-items: stretch; }
+.sx-tal__trees { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; min-height: 0; }
+.sx-tal__tree { --wc: 48px; padding: 30px 26px 26px; display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+.sx-tal__th { display: flex; align-items: center; gap: 12px; padding: 0 4px 8px; border-bottom: 2px solid rgba(201,162,75,.35); }
+.sx-tal__th h3 { margin: 0; flex: 1 1 auto; font-family: var(--f-title); font-weight: 400; font-size: 38px; color: #f6d879; text-shadow: 0 2px 4px #000; }
+.sx-tal__th span { font-family: var(--f-num); font-size: 26px; color: var(--gold-soft); }
+.sx-tal__grid { display: grid; grid-template-columns: 44px repeat(2, 1fr); grid-auto-rows: minmax(92px, 1fr); gap: 6px 10px; align-items: center; justify-items: center; flex: 1 1 auto; min-height: 0; }
+.sx-tal__tier { justify-self: start; width: 44px; text-align: center; font-family: var(--f-num); font-size: 24px; color: rgba(244,233,204,.35); }
+.sx-tal__tier.on { color: var(--gold); text-shadow: 0 0 8px rgba(255,209,0,.6); }
+.sx-tal__t { position: relative; width: 92px; height: 92px; padding: 0; border: 0; background: none; cursor: pointer; color: var(--ink); transition: transform .12s, filter .12s; }
+.sx-tal__t .sx-ico { --s: 84px; }
+.sx-tal__t.locked { filter: grayscale(1) brightness(.5); cursor: not-allowed; }
+.sx-tal__t.part { filter: none; }
+.sx-tal__t.open .sx-ico::after, .sx-tal__t.part .sx-ico::after { filter: drop-shadow(0 0 6px #43d94a) drop-shadow(0 0 2px #43d94a); }
+.sx-tal__t.max .sx-ico::after { filter: drop-shadow(0 0 6px #ffd100) drop-shadow(0 0 2px #ffd100); }
+.sx-tal__t:hover:not(.locked), .sx-tal__t:focus-visible { transform: scale(1.08); outline: none; }
+.sx-tal__t.locked:hover { transform: none; }
+.sx-tal__rank { position: absolute; right: -2px; bottom: -2px; padding: 1px 7px; border: 2px solid #6b5220; border-radius: 6px; background: #120d08; font-family: var(--f-num); font-weight: 400; font-size: 22px; line-height: 1.1; color: #9d9d9d; }
+.sx-tal__t.open .sx-tal__rank, .sx-tal__t.part .sx-tal__rank { color: #43d94a; border-color: #2d8a33; }
+.sx-tal__t.max .sx-tal__rank { color: var(--gold); border-color: #a07f2a; }
+.sx-tal__side { --wc: 48px; padding: 36px 34px; min-height: 0; overflow: hidden; }
+.sx-tal__inner { height: 100%; overflow-y: auto; padding-right: 6px; font-size: 24px; }
+.sx-tal__who { display: flex; align-items: center; gap: 14px; }
+.sx-tal__who h2 { margin: 0; font-family: var(--f-title); font-weight: 400; font-size: 44px; color: var(--cc, var(--parch-red)); text-shadow: 0 1px 0 rgba(255,235,190,.5); }
+.sx-tal__who p { margin: 2px 0 0; font-size: 22px; color: var(--ink2); }
+.sx-tal__xp { position: relative; height: 30px; margin: 14px 0 10px; border: 2px solid #5a3f14; border-radius: 6px; background: #2a1c0c; overflow: hidden; }
+.sx-tal__xp i { position: absolute; left: 0; top: 0; bottom: 0; background: linear-gradient(180deg, #a58cff, #6a3fd6); box-shadow: 0 0 10px rgba(140,100,255,.7); }
+.sx-tal__xp span { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--f-num); font-size: 22px; color: #fff; text-shadow: 0 1px 2px #000; }
+.sx-tal__pts { display: flex; align-items: baseline; gap: 12px; margin: 6px 0; }
+.sx-tal__pts b { font-family: var(--f-num); font-weight: 400; font-size: 56px; line-height: 1; color: var(--parch-red); }
+.sx-tal__pts span { font-size: 22px; color: var(--ink2); }
+.sx-tal__sum { margin: 6px 0 14px; font-size: 22px; line-height: 1.3; color: #1f4d12; }
+.sx-tal__side h4 { margin: 10px 0 6px; font-size: 26px; letter-spacing: .06em; text-transform: uppercase; }
+.sx-tal__ul { padding: 8px 0 10px; border-top: 1px solid rgba(90,31,10,.25); }
+.sx-tal__ul b { font-size: 24px; color: var(--parch-red); }
+.sx-tal__ul > span { float: right; font-family: var(--f-num); font-size: 22px; color: #6b4a1c; }
+.sx-tal__ul.on > span { color: #1f6b1a; }
+.sx-tal__cards { display: flex; gap: 10px; margin-top: 6px; }
+.sx-tal__cards .sx-chip { width: 100px; }
+.sx-tal__cards .sx-chip.locked { filter: grayscale(1) opacity(.55); }
+.sx-tal__how { margin: 14px 0 0; font-size: 20px; line-height: 1.3; color: #5b4322; }
+.sx-tal__foot { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 10px 52px 6px; }
+.sx-tal__hint { font-size: 23px; color: var(--ink); text-shadow: 0 2px 4px #000; }
+.sp-tip .sx-tal__next { color: #43d94a; } .sp-tip .sx-tal__why { color: #ff6b5b; }
+.sx-end__unlock .sx-end__cards { display: flex; flex-wrap: wrap; gap: 6px 12px; margin: 2px 0 6px 52px; font-size: 24px; color: #1f4d12; }
+.sx-cls__acct { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-size: 24px; }
+.sx-cls__acct b { color: var(--parch-red); }
+.sx-cls__acct .sx-tal__xp { flex: 0 0 220px; height: 24px; margin: 0; }
+.sx-cls__acct .sx-tal__xp span { font-size: 18px; }
+.sx-cls__acct .sx-tal__badge { min-width: 28px; height: 28px; font-size: 20px; margin: 0; }
+.sx-cls__acct .sp-wowbtn { --h: 56px; min-width: 0; }
+.sx-cls__acct .sp-wowbtn { font-size: 22px; }
+.sx-cls__talents { margin: 4px 0 0; font-size: 22px; color: #1f4d12; line-height: 1.3; }
+.sp-stage.sp-portrait .sx-tal__body { grid-template-columns: 1fr; }
+.sp-stage.sp-portrait .sx-tal__trees { grid-template-columns: 1fr; }

@@ -1,0 +1,51 @@
+{
+  "id": "the-hinterlands",
+  "name": "The Hinterlands",
+  "start": {"name": "Aerie Peak Inn", "icon": "inv_misc_beer_01"},
+  "continent": "ek",
+  "act": 5,
+  "levelBand": [41,51],
+  "spire": {
+    "name": "Jintha'Alor",
+    "lore": "The Vilebranch capital hangs on the cliffs above Aerie Peak, where Wildhammer gryphon riders and Witherbark and Vilebranch trolls have warred for generations."
+  },
+  "theme": {
+    "primary": "#5a7f3e",
+    "secondary": "#1f2b17",
+    "accent": "#d5c15a",
+    "background": "highlands-green"
+  },
+  "zoneMechanic": {
+    "id": "loa-blessing",
+    "name": "Loa Blessing",
+    "icon": "spell_shadow_charm",
+    "text": "Each kill grants one of three Loa blessings at random: Bwonsamdi (+1 Strength), Hir'eek (+4 Block) or Shirvallah (heal 3).",
+    "hooks": {"on_kill":[{"op":"conditional","if":{"type":"chance","pct":34},"then":[{"op":"apply","status":"strength","stacks":1,"target":"self"}],"else":[{"op":"conditional","if":{"type":"chance","pct":50},"then":[{"op":"block","amount":4,"target":"self"}],"else":[{"op":"heal","amount":3,"target":"self"}]}]}]}
+  },
+  "rest": {
+    "id": "aerie-peak",
+    "name": "Aerie Peak",
+    "icon": "ability_mount_goldengryphon",
+    "text": "Rest at Aerie Peak among the Wildhammer. Heal 25% of max HP and draw 1 extra card next combat.",
+    "effects": [
+      {"op":"heal","amount":20,"target":"self"},
+      {"op":"draw","count":1}
+    ]
+  },
+  "enemiesFile": "the-hinterlands.enemies.json",
+  "encounters": {
+    "normal": [["silvermane-wolf","silvermane-stalker"],["mangy-silvermane","highvale-owl","saltwater-snapjaw"],["green-sludge","green-sludge"],["vilebranch-warrior","vilebranch-raider"],["saltwater-snapjaw","vale-screecher"],["witherbark-broodguard","witherbark-hideskinner"],["vilebranch-headhunter","vilebranch-scalper","vilebranch-hideskinner","vilebranch-shadow-hunter"],["witherbark-broodguard","witherbark-shadowcaster","witherbark-venomblood","witherbark-zealot"],["vilebranch-shadow-hunter","vilebranch-witch-doctor","vilebranch-soothsayer"]],
+    "elite": [["amanzasi-guard"],["vile-priest-hexx"],["gammerita"],["grimungous"]],
+    "boss": [["shadra"],["vile-priest-hexx","vilebranch-shadow-hunter","vilebranch-witch-doctor"]]
+  },
+  "events": [
+    {"id":"jintha-altar","name":"Jintha'Alor Altar","icon":"spell_shadow_ritualofsacrifice","text":"A Vilebranch altar drips with offerings to the Loa. Vile Priest Hexx is mid-ritual.","options":[{"label":"Disrupt the ritual","effects":[{"op":"damage","amount":10,"target":"self"},{"op":"gold","amount":90}]},{"label":"Take the offering","effects":[{"op":"gold","amount":60},{"op":"apply","status":"curse","stacks":1,"target":"self"}]},{"label":"Honor the Loa","effects":[{"op":"max_hp","amount":5},{"op":"damage","amount":5,"target":"self"}]}]},
+    {"id":"wildhammer-gryphons","name":"Wildhammer Gryphons","icon":"ability_mount_goldengryphon","text":"A Wildhammer gryphon master offers a ride over the Vilebranch to the cliffs of Aerie Peak.","options":[{"label":"Ride the gryphon","effects":[{"op":"heal","amount":12,"target":"self"},{"op":"draw","count":1}]},{"label":"Help feed the roost","effects":[{"op":"gold","amount":-35},{"op":"max_hp","amount":4}],"requires":{"gold":35}},{"label":"Walk on","effects":[]}]},
+    {"id":"shadras-egg","name":"Shadra's Egg","icon":"inv_egg_06","text":"A glistening spider egg rests in Shadra's nest. Something inside moves.","options":[{"label":"Crack it open","effects":[{"op":"damage","amount":8,"target":"self"},{"op":"random_card","pool":"any","rarity":"rare","to":"hand"}]},{"label":"Steal the egg whole","effects":[{"op":"apply","status":"poison","stacks":2,"target":"self"},{"op":"gold","amount":100}]},{"label":"Burn the nest","effects":[{"op":"damage","amount":4,"target":"self"},{"op":"gold","amount":40}]}]},
+    {"id":"hinterlands-patrol","name":"Revantusk Village Rescue","icon":"inv_misc_head_troll_02","text":"Friendly Revantusk trolls are besieged by the Witherbark. Their chieftain begs for aid.","options":[{"label":"Break the siege","effects":[{"op":"damage","amount":10,"target":"self"},{"op":"heal","amount":10,"target":"self"},{"op":"gold","amount":50}]},{"label":"Trade blessings","effects":[{"op":"max_hp","amount":3},{"op":"heal","amount":6,"target":"self"}]},{"label":"Decline","effects":[]}]}
+  ],
+  "relics": [
+    {"id":"jindos-judgement","name":"Jin'do's Judgement","icon":"inv_mace_01","rarity":"epic","itemId":null,"zone":"the-hinterlands","class":null,"text":"Whenever you play an attack, deal 1 extra shadow damage.","triggers":{"on_attack":[{"op":"damage","amount":1,"target":"enemy","school":"shadow"}]}},
+    {"id":"renatakis-charm-of-beasts","name":"Renataki's Charm of Beasts","icon":"inv_jewelry_talisman_01","rarity":"epic","itemId":null,"zone":"the-hinterlands","class":null,"text":"Gain 4 Block whenever you kill an enemy.","triggers":{"on_kill":[{"op":"block","amount":4,"target":"self"}]}}
+  ]
+}

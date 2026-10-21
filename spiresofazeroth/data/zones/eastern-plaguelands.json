@@ -1,0 +1,53 @@
+{
+  "id": "eastern-plaguelands",
+  "name": "Eastern Plaguelands",
+  "start": {"name": "Light's Hope Chapel Inn", "icon": "inv_misc_beer_01"},
+  "continent": "ek",
+  "act": 6,
+  "levelBand": [53,60],
+  "spire": {
+    "name": "Stratholme",
+    "lore": "The ruined Stratholme, where Baron Rivendare's Scourge and the Scarlet Crusade fight over Lordaeron's corpse, while Naxxramas hovers over the Plaguewood."
+  },
+  "theme": {
+    "primary": "#8a9a4a",
+    "secondary": "#20240f",
+    "accent": "#e8e08a",
+    "background": "blighted-fields"
+  },
+  "zoneMechanic": {
+    "id": "plague",
+    "name": "Plague",
+    "icon": "spell_shadow_plaguecloud",
+    "text": "If you end your turn with Disease you take 2 damage, and your Disease carries over into your next combat.",
+    "hooks": {"on_turn_end":[{"op":"conditional","if":{"type":"status_on_target","status":"disease","target":"self"},"then":[{"op":"damage","amount":2,"target":"self"}]}],"on_combat_end":[{"op":"conditional","if":{"type":"status_on_target","status":"disease","target":"self"},"then":[{"op":"apply","status":"disease","stacks":1,"target":"self"}]}]}
+  },
+  "rest": {
+    "id": "lights-hope-chapel",
+    "name": "Light's Hope Chapel",
+    "icon": "spell_holy_prayerofhealing",
+    "text": "Rest at Light's Hope Chapel. Heal 30% of max HP and remove Disease and Curse.",
+    "effects": [
+      {"op":"heal","amount":30,"target":"self"},
+      {"op":"remove","status":"disease","target":"self"},
+      {"op":"remove","status":"curse","target":"self"}
+    ]
+  },
+  "enemiesFile": "eastern-plaguelands.enemies.json",
+  "encounters": {
+    "normal": [["infected-squirrel","infected-mossflayer","infected-deer"],["plaguehound-runt","plaguehound"],["carrion-devourer","carrion-devourer","crypt-fiend","crypt-fiend"],["cannibal-ghoul","ghoul-ravener"],["skeletal-terror","skeletal-horror"],["scarlet-zealot","scarlet-cavalier","scarlet-archmage"],["gargoyle","plague-monstrosity","rotting-behemoth","flesh-eater"],["rotting-behemoth","flesh-eater","dread-flyer"],["scarlet-archmage","scarlet-champion"]],
+    "elite": [["lord-maldazzar"],["zaeldarr-the-outcast"],["mercutio-filthgorger"]],
+    "boss": [["baron-rivendare"],["baron-rivendare","skeletal-terror","skeletal-terror"]]
+  },
+  "events": [
+    {"id":"lights-hope","name":"Light's Hope Chapel","icon":"spell_holy_holybolt","text":"The Argent Dawn holds Light's Hope Chapel. Tirion Fordring's lieutenants offer supplies for Scourgestones.","options":[{"label":"Turn in Scourgestones","effects":[{"op":"gold","amount":70},{"op":"max_hp","amount":4}]},{"label":"Pray for the dead","effects":[{"op":"heal","amount":25,"target":"self"},{"op":"remove","status":"disease","target":"self"}]},{"label":"Move on","effects":[]}]},
+    {"id":"tyrs-hand","name":"Tyr's Hand","icon":"inv_shield_05","text":"Tyr's Hand is overrun with Scarlet zealots. A wounded crusader begs you to save the paladins within.","options":[{"label":"Rescue the paladins","effects":[{"op":"damage","amount":12,"target":"self"},{"op":"random_card","pool":"any","rarity":"rare","to":"hand"}]},{"label":"Loot the dead zealots","effects":[{"op":"gold","amount":100},{"op":"apply","status":"curse","stacks":1,"target":"self"}]},{"label":"Sneak past","effects":[]}]},
+    {"id":"darrowshire","name":"Darrowshire (Pamela's Doll)","icon":"inv_misc_toy_01","text":"The ghosts of Darrowshire linger. Pamela Redpath's ghost asks you to find her doll and her father.","options":[{"label":"Find the doll","effects":[{"op":"damage","amount":6,"target":"self"},{"op":"max_hp","amount":6}]},{"label":"Fight the Scourge besieging the ghosts","effects":[{"op":"damage","amount":12,"target":"self"},{"op":"gold","amount":90}]},{"label":"Leave the ghosts","effects":[]}]},
+    {"id":"plaguewood","name":"Plaguewood","icon":"spell_shadow_plaguecloud","text":"The dead trees of Plaguewood weep a viscous plague. Naxxramas looms above in the green mist.","options":[{"label":"Collect the sap","effects":[{"op":"apply","status":"disease","stacks":3,"target":"self"},{"op":"gold","amount":110}]},{"label":"Burn the nests","effects":[{"op":"damage","amount":9,"target":"self"},{"op":"random_card","pool":"any","rarity":"uncommon","to":"hand"}]},{"label":"Hold your breath and run","effects":[{"op":"apply","status":"weak","stacks":1,"target":"self"}]}]}
+  ],
+  "relics": [
+    {"id":"argent-dawn-valor-token","name":"Argent Dawn Valor Token","icon":"inv_misc_coin_01","rarity":"rare","itemId":12844,"zone":"eastern-plaguelands","class":null,"text":"Whenever you gain Block from a card, gain 1 additional Block.","triggers":{"on_block_gained":[{"op":"block","amount":1,"target":"self"}]}},
+    {"id":"deathchargers-reins","name":"Deathcharger's Reins","icon":"inv_misc_bone_01","rarity":"epic","itemId":13335,"zone":"eastern-plaguelands","class":null,"text":"At the start of your first turn each combat, gain 1 energy.","triggers":{"on_combat_start":[{"op":"gain_energy","amount":1}]}}
+  ],
+  "raidFloorsFile": "eastern-plaguelands.raids.json"
+}

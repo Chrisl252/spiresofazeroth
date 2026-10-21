@@ -1,0 +1,8 @@
+{
+  "cards": [
+    { "id": "corrupted", "name": "Corrupted Blood", "icon": "spell_shadow_corpseexplode", "spellId": null, "spellIdSource": "engine-defined", "rank": 1, "type": "curse", "rarity": "basic", "archetype": null, "class": null, "cost": -1, "target": "none", "flags": ["unplayable"], "text": "Unplayable. Rotting corruption clogs your hand.", "effects": [] },
+    { "id": "madness", "name": "Madness", "icon": "spell_shadow_mindtwisting", "spellId": null, "spellIdSource": "engine-defined", "rank": 1, "type": "curse", "rarity": "basic", "archetype": null, "class": null, "cost": -1, "target": "none", "flags": ["unplayable", "ethereal"], "text": "Unplayable. Ethereal. Whispers of the Old Gods cloud your thoughts.", "effects": [] },
+    { "id": "twilight-curse", "name": "Twilight Curse", "icon": "spell_shadow_curseofsargeras", "spellId": null, "spellIdSource": "engine-defined", "rank": 1, "type": "curse", "rarity": "basic", "archetype": null, "class": null, "cost": -1, "target": "none", "flags": ["unplayable"], "text": "Unplayable. The Twilight's Hammer has marked you.", "effects": [] },
+    { "id": "mojache-insight", "name": "Mojache Insight", "icon": "spell_nature_enchantarmor", "spellId": null, "spellIdSource": "engine-defined", "rank": 1, "type": "skill", "rarity": "basic", "archetype": null, "class": null, "cost": 0, "target": "none", "flags": ["exhaust"], "text": "Draw 2 cards. Exhaust.", "effects": [ { "op": "draw", "count": 2 } ] }
+  ]
+}

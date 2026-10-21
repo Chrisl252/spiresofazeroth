@@ -1,0 +1,595 @@
+{
+ "warrior": {
+  "race": "human",
+  "sex": "m",
+  "outfit": [
+   38,
+   39,
+   40,
+   25,
+   2362,
+   117,
+   6948
+  ],
+  "items": [
+   {
+    "id": "starter-warrior-38",
+    "name": "Recruit's Shirt",
+    "slot": "chest",
+    "wear": "shirt",
+    "item": 38,
+    "displayId": 6048,
+    "icon": "inv_shirt_05",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-warrior-39",
+    "name": "Recruit's Pants",
+    "slot": "legs",
+    "wear": "legs",
+    "item": 39,
+    "displayId": 6050,
+    "icon": "inv_pants_02",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-warrior-40",
+    "name": "Recruit's Boots",
+    "slot": "feet",
+    "wear": "feet",
+    "item": 40,
+    "displayId": 6051,
+    "icon": "inv_boots_06",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-warrior-25",
+    "name": "Worn Shortsword",
+    "slot": "mainHand",
+    "wear": "mainHand",
+    "item": 25,
+    "displayId": 1542,
+    "icon": "inv_sword_04",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-warrior-2362",
+    "name": "Worn Wooden Shield",
+    "slot": "offHand",
+    "wear": "offHand",
+    "item": 2362,
+    "displayId": 18730,
+    "icon": "inv_shield_09",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   }
+  ]
+ },
+ "paladin": {
+  "race": "dwarf",
+  "sex": "m",
+  "outfit": [
+   6117,
+   6118,
+   43,
+   2361,
+   4540,
+   159,
+   6948
+  ],
+  "items": [
+   {
+    "id": "starter-paladin-6117",
+    "name": "Squire's Shirt",
+    "slot": "chest",
+    "wear": "shirt",
+    "item": 6117,
+    "displayId": 5857,
+    "icon": "inv_shirt_01",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-paladin-6118",
+    "name": "Squire's Pants",
+    "slot": "legs",
+    "wear": "legs",
+    "item": 6118,
+    "displayId": 2201,
+    "icon": "inv_pants_02",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-paladin-43",
+    "name": "Squire's Boots",
+    "slot": "feet",
+    "wear": "feet",
+    "item": 43,
+    "displayId": 6077,
+    "icon": "inv_boots_01",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-paladin-2361",
+    "name": "Battleworn Bludgeon",
+    "slot": "mainHand",
+    "wear": "mainHand",
+    "item": 2361,
+    "displayId": 2776,
+    "icon": "inv_hammer_15",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   }
+  ]
+ },
+ "hunter": {
+  "race": "nightelf",
+  "sex": "f",
+  "outfit": [
+   2092,
+   148,
+   147,
+   129,
+   159,
+   2504,
+   2101,
+   2512,
+   117,
+   6948
+  ],
+  "items": [
+   {
+    "id": "starter-hunter-148",
+    "name": "Rugged Trapper's Shirt",
+    "slot": "chest",
+    "wear": "shirt",
+    "item": 148,
+    "displayId": 5447,
+    "icon": "inv_shirt_01",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-hunter-147",
+    "name": "Rugged Trapper's Pants",
+    "slot": "legs",
+    "wear": "legs",
+    "item": 147,
+    "displayId": 5632,
+    "icon": "inv_pants_02",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-hunter-129",
+    "name": "Rugged Trapper's Boots",
+    "slot": "feet",
+    "wear": "feet",
+    "item": 129,
+    "displayId": 5633,
+    "icon": "inv_boots_06",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-hunter-2504",
+    "name": "Worn Shortbow",
+    "slot": "mainHand",
+    "wear": "mainHand",
+    "item": 2504,
+    "displayId": 8104,
+    "icon": "inv_weapon_bow_05",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   }
+  ]
+ },
+ "rogue": {
+  "race": "human",
+  "sex": "f",
+  "outfit": [
+   49,
+   47,
+   48,
+   2947,
+   2092,
+   2070,
+   6948
+  ],
+  "items": [
+   {
+    "id": "starter-rogue-49",
+    "name": "Footpad's Shirt",
+    "slot": "chest",
+    "wear": "shirt",
+    "item": 49,
+    "displayId": 9906,
+    "icon": "inv_shirt_05",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-rogue-48",
+    "name": "Footpad's Pants",
+    "slot": "legs",
+    "wear": "legs",
+    "item": 48,
+    "displayId": 5341,
+    "icon": "inv_pants_02",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-rogue-47",
+    "name": "Footpad's Shoes",
+    "slot": "feet",
+    "wear": "feet",
+    "item": 47,
+    "displayId": 9767,
+    "icon": "inv_boots_05",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-rogue-2092",
+    "name": "Worn Dagger",
+    "slot": "mainHand",
+    "wear": "mainHand",
+    "item": 2092,
+    "displayId": 2704,
+    "icon": "inv_weapon_shortblade_05",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   }
+  ]
+ },
+ "priest": {
+  "race": "undead",
+  "sex": "f",
+  "outfit": [
+   6144,
+   53,
+   52,
+   36,
+   4604,
+   159,
+   51,
+   6948
+  ],
+  "items": [
+   {
+    "id": "starter-priest-6144",
+    "name": "Neophyte's Robe",
+    "slot": "chest",
+    "wear": "chest",
+    "item": 6144,
+    "displayId": 9933,
+    "icon": "inv_chest_cloth_13",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-priest-52",
+    "name": "Neophyte's Pants",
+    "slot": "legs",
+    "wear": "legs",
+    "item": 52,
+    "displayId": 5848,
+    "icon": "inv_pants_02",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-priest-51",
+    "name": "Neophyte's Boots",
+    "slot": "feet",
+    "wear": "feet",
+    "item": 51,
+    "displayId": 7081,
+    "icon": "inv_boots_04",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-priest-36",
+    "name": "Worn Mace",
+    "slot": "mainHand",
+    "wear": "mainHand",
+    "item": 36,
+    "displayId": 5194,
+    "icon": "inv_mace_03",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   }
+  ]
+ },
+ "shaman": {
+  "race": "orc",
+  "sex": "m",
+  "outfit": [
+   154,
+   153,
+   6948,
+   36,
+   117,
+   159
+  ],
+  "items": [
+   {
+    "id": "starter-shaman-154",
+    "name": "Primitive Mantle",
+    "slot": "chest",
+    "wear": "shirt",
+    "item": 154,
+    "displayId": 8738,
+    "icon": "inv_misc_cape_14",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-shaman-153",
+    "name": "Primitive Kilt",
+    "slot": "legs",
+    "wear": "legs",
+    "item": 153,
+    "displayId": 8740,
+    "icon": "inv_pants_02",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-shaman-36",
+    "name": "Worn Mace",
+    "slot": "mainHand",
+    "wear": "mainHand",
+    "item": 36,
+    "displayId": 5194,
+    "icon": "inv_mace_03",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   }
+  ]
+ },
+ "mage": {
+  "race": "gnome",
+  "sex": "f",
+  "outfit": [
+   56,
+   1395,
+   6096,
+   55,
+   35,
+   4536,
+   159,
+   6948
+  ],
+  "items": [
+   {
+    "id": "starter-mage-56",
+    "name": "Apprentice's Robe",
+    "slot": "chest",
+    "wear": "chest",
+    "item": 56,
+    "displayId": 10455,
+    "icon": "inv_chest_cloth_23",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-mage-1395",
+    "name": "Apprentice's Pants",
+    "slot": "legs",
+    "wear": "legs",
+    "item": 1395,
+    "displayId": 1882,
+    "icon": "inv_pants_01",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-mage-55",
+    "name": "Apprentice's Boots",
+    "slot": "feet",
+    "wear": "feet",
+    "item": 55,
+    "displayId": 6077,
+    "icon": "inv_boots_09",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-mage-35",
+    "name": "Bent Staff",
+    "slot": "mainHand",
+    "wear": "mainHand",
+    "item": 35,
+    "displayId": 472,
+    "icon": "inv_staff_08",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   }
+  ]
+ },
+ "warlock": {
+  "race": "undead",
+  "sex": "m",
+  "outfit": [
+   6129,
+   1396,
+   59,
+   2092,
+   4604,
+   159,
+   6948
+  ],
+  "items": [
+   {
+    "id": "starter-warlock-6129",
+    "name": "Acolyte's Robe",
+    "slot": "chest",
+    "wear": "chest",
+    "item": 6129,
+    "displayId": 10073,
+    "icon": "inv_chest_cloth_16",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-warlock-1396",
+    "name": "Acolyte's Pants",
+    "slot": "legs",
+    "wear": "legs",
+    "item": 1396,
+    "displayId": 2201,
+    "icon": "inv_pants_01",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-warlock-59",
+    "name": "Acolyte's Shoes",
+    "slot": "feet",
+    "wear": "feet",
+    "item": 59,
+    "displayId": 3261,
+    "icon": "inv_boots_01",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-warlock-2092",
+    "name": "Worn Dagger",
+    "slot": "mainHand",
+    "wear": "mainHand",
+    "item": 2092,
+    "displayId": 2704,
+    "icon": "inv_weapon_shortblade_05",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   }
+  ]
+ },
+ "druid": {
+  "race": "tauren",
+  "sex": "m",
+  "outfit": [
+   35,
+   6139,
+   6124,
+   159,
+   4536,
+   6948
+  ],
+  "items": [
+   {
+    "id": "starter-druid-6139",
+    "name": "Novice's Robe",
+    "slot": "chest",
+    "wear": "chest",
+    "item": 6139,
+    "displayId": 10119,
+    "icon": "inv_chest_cloth_13",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-druid-6124",
+    "name": "Novice's Pants",
+    "slot": "legs",
+    "wear": "legs",
+    "item": 6124,
+    "displayId": 5236,
+    "icon": "inv_pants_01",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   },
+   {
+    "id": "starter-druid-35",
+    "name": "Bent Staff",
+    "slot": "mainHand",
+    "wear": "mainHand",
+    "item": 35,
+    "displayId": 472,
+    "icon": "inv_staff_08",
+    "tier": 0,
+    "rarity": "common",
+    "text": "Starter",
+    "stats": "Starter gear"
+   }
+  ]
+ }
+}

@@ -1,0 +1,335 @@
+{
+ "class": "priest",
+ "set": {
+  "id": "vestments-of-prophecy",
+  "name": "Vestments of Prophecy",
+  "icon": "inv_helmet_34",
+  "bonuses": [
+   {
+    "pieces": 2,
+    "name": "Power Word: Shield",
+    "text": "Start each combat: gain 4 Block.",
+    "triggers": {
+     "on_combat_start": [
+      {
+       "op": "block",
+       "amount": 4,
+       "target": "self"
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 4,
+    "name": "Renew",
+    "text": "At the start of each turn: heal 1.",
+    "triggers": {
+     "on_turn_start": [
+      {
+       "op": "heal",
+       "amount": 1
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 6,
+    "name": "Inspiration",
+    "text": "At the start of each turn: gain 1 Regen.",
+    "triggers": {
+     "on_turn_start": [
+      {
+       "op": "apply",
+       "status": "regen",
+       "stacks": 1,
+       "target": "self",
+       "duration": 3
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 8,
+    "name": "Prophet's Mantle",
+    "text": "Start each combat: gain 1 Strength and gain 1 Energy.",
+    "triggers": {
+     "on_combat_start": [
+      {
+       "op": "apply",
+       "status": "strength",
+       "stacks": 1,
+       "target": "self"
+      },
+      {
+       "op": "gain_energy",
+       "amount": 1
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "pieces": [
+  {
+   "id": "circlet-of-prophecy",
+   "name": "Circlet of Prophecy",
+   "slot": "head",
+   "set": "vestments-of-prophecy",
+   "setPiece": 1,
+   "item": 16813,
+   "icon": "inv_helmet_34",
+   "displayId": 31371,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 2 Regen.",
+   "class": "priest",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "regen",
+      "stacks": 2,
+      "target": "self",
+      "duration": 5
+     }
+    ]
+   }
+  },
+  {
+   "id": "mantle-of-prophecy",
+   "name": "Mantle of Prophecy",
+   "slot": "shoulder",
+   "set": "vestments-of-prophecy",
+   "setPiece": 2,
+   "item": 16816,
+   "icon": "inv_shoulder_02",
+   "displayId": 30623,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: gain 2 Block.",
+   "class": "priest",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "block",
+      "amount": 2,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "robes-of-prophecy",
+   "name": "Robes of Prophecy",
+   "slot": "chest",
+   "set": "vestments-of-prophecy",
+   "setPiece": 3,
+   "item": 16815,
+   "icon": "inv_chest_cloth_03",
+   "displayId": 31490,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 6 Block.",
+   "class": "priest",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 6,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "vambraces-of-prophecy",
+   "name": "Vambraces of Prophecy",
+   "slot": "wrist",
+   "set": "vestments-of-prophecy",
+   "setPiece": 4,
+   "item": 16819,
+   "icon": "inv_bracer_09",
+   "displayId": 30617,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Whenever you play a card: if it is a shadow card, gain 2 Block.",
+   "class": "priest",
+   "triggers": {
+    "on_card_played": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "school_last",
+       "school": "shadow"
+      },
+      "then": [
+       {
+        "op": "block",
+        "amount": 2,
+        "target": "self"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "gloves-of-prophecy",
+   "name": "Gloves of Prophecy",
+   "slot": "hands",
+   "set": "vestments-of-prophecy",
+   "setPiece": 5,
+   "item": 16812,
+   "icon": "inv_gauntlets_14",
+   "displayId": 30620,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "When you attack: 15% chance to gain 2 Block.",
+   "class": "priest",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 15
+      },
+      "then": [
+       {
+        "op": "block",
+        "amount": 2,
+        "target": "self"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "girdle-of-prophecy",
+   "name": "Girdle of Prophecy",
+   "slot": "waist",
+   "set": "vestments-of-prophecy",
+   "setPiece": 6,
+   "item": 16817,
+   "icon": "inv_belt_22",
+   "displayId": 30621,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "When you kill an enemy: heal 3.",
+   "class": "priest",
+   "triggers": {
+    "on_kill": [
+     {
+      "op": "heal",
+      "amount": 3
+     }
+    ]
+   }
+  },
+  {
+   "id": "pants-of-prophecy",
+   "name": "Pants of Prophecy",
+   "slot": "legs",
+   "set": "vestments-of-prophecy",
+   "setPiece": 7,
+   "item": 16814,
+   "icon": "inv_pants_08",
+   "displayId": 27598,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: 15% chance to gain 1 Energy.",
+   "class": "priest",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 15
+      },
+      "then": [
+       {
+        "op": "gain_energy",
+        "amount": 1
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "boots-of-prophecy",
+   "name": "Boots of Prophecy",
+   "slot": "feet",
+   "set": "vestments-of-prophecy",
+   "setPiece": 8,
+   "item": 16811,
+   "icon": "inv_boots_07",
+   "displayId": 31718,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 3 Block.",
+   "class": "priest",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 3,
+      "target": "self"
+     }
+    ]
+   }
+  }
+ ],
+ "weapon": {
+  "id": "benediction",
+  "name": "Benediction",
+  "slot": "mainHand",
+  "setPiece": 0,
+  "item": 18608,
+  "icon": "inv_staff_30",
+  "displayId": 31347,
+  "tier": 1,
+  "rarity": "epic",
+  "stats": "Tier 1 weapon",
+  "text": "Start each combat: gain 2 Regen. Whenever you play a card: if it is a holy card, deal 2 Holy damage.",
+  "class": "priest",
+  "triggers": {
+   "on_combat_start": [
+    {
+     "op": "apply",
+     "status": "regen",
+     "stacks": 2,
+     "target": "self",
+     "duration": 5
+    }
+   ],
+   "on_card_played": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "school_last",
+      "school": "holy"
+     },
+     "then": [
+      {
+       "op": "damage",
+       "amount": 2,
+       "target": "enemy",
+       "school": "holy"
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

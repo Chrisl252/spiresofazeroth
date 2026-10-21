@@ -1,0 +1,53 @@
+{
+  "id": "swamp-of-sorrows",
+  "name": "Swamp of Sorrows",
+  "start": {"name": "Stonard Inn", "icon": "inv_misc_beer_01"},
+  "continent": "ek",
+  "act": 5,
+  "levelBand": [35,45],
+  "spire": {
+    "name": "Temple of Atal'Hakkar",
+    "lore": "The drowned ruin of the Atal'ai sits in a green lagoon; beneath it lies the Sunken Temple, where the dragon Eranikus sleeps in nightmare."
+  },
+  "theme": {
+    "primary": "#4a6a3a",
+    "secondary": "#14201a",
+    "accent": "#8fd36a",
+    "background": "swamp"
+  },
+  "zoneMechanic": {
+    "id": "nightmare-mist",
+    "name": "Nightmare Mist",
+    "icon": "spell_nature_sleep",
+    "text": "A sleeping mist drifts over the swamp. Each turn there is a 60% chance a random card in your hand falls asleep and is discarded.",
+    "hooks": {"on_turn_start":[{"op":"conditional","if":{"type":"chance","pct":60},"then":[{"op":"discard","count":1,"random":true}]}]}
+  },
+  "rest": {
+    "id": "stonard-rest",
+    "name": "Stonard Inn",
+    "icon": "inv_drink_03",
+    "text": "Rest in Stonard. Heal 25% of max HP and clear Sleep and Madness.",
+    "effects": [
+      {"op":"heal","amount":16,"target":"self"},
+      {"op":"remove","status":"sleep","target":"self"},
+      {"op":"remove","status":"madness","target":"self"}
+    ]
+  },
+  "enemiesFile": "swamp-of-sorrows.enemies.json",
+  "encounters": {
+    "normal": [["sawtooth-crocolisk","swamp-jaguar"],["lost-one-fighter","lost-one-hunter","lost-one-mudlurker","lost-one-cook"],["swampwalker","swampwalker","swampwalker-elder"],["lost-one-cook","lost-one-muckdweller","lost-one-seer"],["atalai-warrior","atalai-witch-doctor","atalai-slave"],["mire-lord","mire-lord"],["atalai-priest","atalai-corpse-eater"],["hakkari-bloodkeeper","hakkari-frostwing"],["nightmare-whelp","nightmare-whelp","nightmare-scalebane"],["draconic-mageweaver","draconic-mageweaver"]],
+    "elite": [["stagalbog"],["lost-one-chieftain"],["atalai-high-priest"],["itharius"]],
+    "boss": [["shade-of-eranikus"],["atalai-high-priest","atalai-witch-doctor","atalai-priest"],["lost-one-chieftain","lost-one-fighter","lost-one-hunter"]]
+  },
+  "events": [
+    {"id":"lost-ones","name":"Lost Ones of Fallow Sanctuary","icon":"inv_misc_head_murloc_01","text":"Lost One murlocs have gone feral in the bog. Their fishing village has stolen food and something that glitters.","options":[{"label":"Clear the village","effects":[{"op":"damage","amount":10,"target":"self"},{"op":"gold","amount":90}]},{"label":"Trade for the glitter","effects":[{"op":"gold","amount":-40},{"op":"random_card","pool":"any","rarity":"uncommon","to":"hand"}],"requires":{"gold":40}},{"label":"Avoid the bog","effects":[]}]},
+    {"id":"itharius","name":"Itharius","icon":"inv_misc_head_dragon_green","text":"The dying green dragon Itharius rests at the edge of the Temple. He asks you to carry a fragment of the Nightmare away.","options":[{"label":"Carry the fragment","effects":[{"op":"max_hp","amount":5},{"op":"apply","status":"madness","stacks":1,"target":"self"}]},{"label":"Take his blessing","effects":[{"op":"heal","amount":18,"target":"self"}]},{"label":"Slay the wounded dragon","effects":[{"op":"damage","amount":12,"target":"self"},{"op":"gold","amount":110}]}]},
+    {"id":"stonard-bounties","name":"Stonard Bounties","icon":"inv_misc_note_01","text":"The Horde at Stonard post bounties on Atal'ai witch doctors and a hulking swamp beast.","options":[{"label":"Hunt the witch doctors","effects":[{"op":"damage","amount":8,"target":"self"},{"op":"gold","amount":75}]},{"label":"Take the swamp beast contract","effects":[{"op":"damage","amount":12,"target":"self"},{"op":"random_card","pool":"any","rarity":"rare","to":"hand"}]},{"label":"Drink at the inn","effects":[{"op":"heal","amount":8,"target":"self"}]}]},
+    {"id":"altar-of-hakkar","name":"Altar of Hakkar","icon":"spell_shadow_summonvoidwalker","text":"A bloodstained altar hums with the Blood God's whisper. Hakkar offers power, for a price.","options":[{"label":"Offer your blood","effects":[{"op":"damage","amount":10,"target":"self"},{"op":"max_hp","amount":6}]},{"label":"Smash the altar","effects":[{"op":"apply","status":"vulnerable","stacks":1,"target":"self"},{"op":"gold","amount":60}]},{"label":"Back away","effects":[]}]}
+  ],
+  "relics": [
+    {"id":"wand-of-eranikus","name":"Wand of Eranikus","icon":"inv_wand_01","rarity":"epic","itemId":null,"zone":"swamp-of-sorrows","class":null,"text":"At the start of each turn, deal 2 shadow damage to a random enemy.","triggers":{"on_turn_start":[{"op":"damage","amount":2,"target":"enemy","school":"shadow"}]}},
+    {"id":"gauntlets-of-the-sea","name":"Gauntlets of the Sea","icon":"inv_gauntlets_04","rarity":"rare","itemId":null,"zone":"swamp-of-sorrows","class":null,"text":"Gain 2 Block whenever you play an attack card.","triggers":{"on_attack":[{"op":"block","amount":2,"target":"self"}]}}
+  ],
+  "raidFloorsFile": "swamp-of-sorrows.raids.json"
+}

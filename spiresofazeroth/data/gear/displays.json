@@ -1,0 +1,650 @@
+{
+ "16865": {
+  "displayId": 31021,
+  "name": "Breastplate of Might",
+  "slot": "chest",
+  "invType": 5,
+  "class": "warrior",
+  "set": "Battlegear of Might"
+ },
+ "16867": {
+  "displayId": 31023,
+  "name": "Legplates of Might",
+  "slot": "legs",
+  "invType": 7,
+  "class": "warrior",
+  "set": "Battlegear of Might"
+ },
+ "16866": {
+  "displayId": 31260,
+  "name": "Helm of Might",
+  "slot": "head",
+  "invType": 1,
+  "class": "warrior",
+  "set": "Battlegear of Might"
+ },
+ "16868": {
+  "displayId": 31024,
+  "name": "Pauldrons of Might",
+  "slot": "shoulder",
+  "invType": 3,
+  "class": "warrior",
+  "set": "Battlegear of Might"
+ },
+ "16863": {
+  "displayId": 31022,
+  "name": "Gauntlets of Might",
+  "slot": "hands",
+  "invType": 10,
+  "class": "warrior",
+  "set": "Battlegear of Might"
+ },
+ "16862": {
+  "displayId": 31025,
+  "name": "Sabatons of Might",
+  "slot": "feet",
+  "invType": 8,
+  "class": "warrior",
+  "set": "Battlegear of Might"
+ },
+ "16864": {
+  "displayId": 31019,
+  "name": "Belt of Might",
+  "slot": "waist",
+  "invType": 6,
+  "class": "warrior",
+  "set": "Battlegear of Might"
+ },
+ "16861": {
+  "displayId": 31020,
+  "name": "Bracers of Might",
+  "slot": "wrist",
+  "invType": 9,
+  "class": "warrior",
+  "set": "Battlegear of Might"
+ },
+ "17075": {
+  "displayId": 32197,
+  "name": "Vis'kag the Bloodletter",
+  "slot": "mainHand",
+  "invType": 13,
+  "class": "warrior",
+  "set": null
+ },
+ "16853": {
+  "displayId": 31505,
+  "name": "Lawbringer Chestguard",
+  "slot": "chest",
+  "invType": 5,
+  "class": "paladin",
+  "set": "Lawbringer Armor"
+ },
+ "16855": {
+  "displayId": 31352,
+  "name": "Lawbringer Legplates",
+  "slot": "legs",
+  "invType": 7,
+  "class": "paladin",
+  "set": "Lawbringer Armor"
+ },
+ "16854": {
+  "displayId": 31506,
+  "name": "Lawbringer Helm",
+  "slot": "head",
+  "invType": 1,
+  "class": "paladin",
+  "set": "Lawbringer Armor"
+ },
+ "16856": {
+  "displayId": 31510,
+  "name": "Lawbringer Spaulders",
+  "slot": "shoulder",
+  "invType": 3,
+  "class": "paladin",
+  "set": "Lawbringer Armor"
+ },
+ "16860": {
+  "displayId": 31507,
+  "name": "Lawbringer Gauntlets",
+  "slot": "hands",
+  "invType": 10,
+  "class": "paladin",
+  "set": "Lawbringer Armor"
+ },
+ "16859": {
+  "displayId": 31354,
+  "name": "Lawbringer Boots",
+  "slot": "feet",
+  "invType": 8,
+  "class": "paladin",
+  "set": "Lawbringer Armor"
+ },
+ "16858": {
+  "displayId": 31353,
+  "name": "Lawbringer Belt",
+  "slot": "waist",
+  "invType": 6,
+  "class": "paladin",
+  "set": "Lawbringer Armor"
+ },
+ "16857": {
+  "displayId": 31509,
+  "name": "Lawbringer Bracers",
+  "slot": "wrist",
+  "invType": 9,
+  "class": "paladin",
+  "set": "Lawbringer Armor"
+ },
+ "11684": {
+  "displayId": 21751,
+  "name": "Ironfoe",
+  "slot": "mainHand",
+  "invType": 21,
+  "class": "paladin",
+  "set": null
+ },
+ "16845": {
+  "displayId": 32022,
+  "name": "Giantstalker's Breastplate",
+  "slot": "chest",
+  "invType": 5,
+  "class": "hunter",
+  "set": "Giantstalker Armor"
+ },
+ "16847": {
+  "displayId": 32023,
+  "name": "Giantstalker's Leggings",
+  "slot": "legs",
+  "invType": 7,
+  "class": "hunter",
+  "set": "Giantstalker Armor"
+ },
+ "16846": {
+  "displayId": 32028,
+  "name": "Giantstalker's Helmet",
+  "slot": "head",
+  "invType": 1,
+  "class": "hunter",
+  "set": "Giantstalker Armor"
+ },
+ "16848": {
+  "displayId": 32030,
+  "name": "Giantstalker's Epaulets",
+  "slot": "shoulder",
+  "invType": 3,
+  "class": "hunter",
+  "set": "Giantstalker Armor"
+ },
+ "16852": {
+  "displayId": 32024,
+  "name": "Giantstalker's Gloves",
+  "slot": "hands",
+  "invType": 10,
+  "class": "hunter",
+  "set": "Giantstalker Armor"
+ },
+ "16849": {
+  "displayId": 32040,
+  "name": "Giantstalker's Boots",
+  "slot": "feet",
+  "invType": 8,
+  "class": "hunter",
+  "set": "Giantstalker Armor"
+ },
+ "16851": {
+  "displayId": 32019,
+  "name": "Giantstalker's Belt",
+  "slot": "waist",
+  "invType": 6,
+  "class": "hunter",
+  "set": "Giantstalker Armor"
+ },
+ "16850": {
+  "displayId": 32018,
+  "name": "Giantstalker's Bracers",
+  "slot": "wrist",
+  "invType": 9,
+  "class": "hunter",
+  "set": "Giantstalker Armor"
+ },
+ "18713": {
+  "displayId": 31338,
+  "name": "Rhok'delar, Longbow of the Ancient Keepers",
+  "slot": "mainHand",
+  "invType": 15,
+  "class": "hunter",
+  "set": null
+ },
+ "16820": {
+  "displayId": 31105,
+  "name": "Nightslayer Chestpiece",
+  "slot": "chest",
+  "invType": 5,
+  "class": "rogue",
+  "set": "Nightslayer Armor"
+ },
+ "16822": {
+  "displayId": 31340,
+  "name": "Nightslayer Pants",
+  "slot": "legs",
+  "invType": 7,
+  "class": "rogue",
+  "set": "Nightslayer Armor"
+ },
+ "16821": {
+  "displayId": 31514,
+  "name": "Nightslayer Cover",
+  "slot": "head",
+  "invType": 1,
+  "class": "rogue",
+  "set": "Nightslayer Armor"
+ },
+ "16823": {
+  "displayId": 31343,
+  "name": "Nightslayer Shoulder Pads",
+  "slot": "shoulder",
+  "invType": 3,
+  "class": "rogue",
+  "set": "Nightslayer Armor"
+ },
+ "16826": {
+  "displayId": 31503,
+  "name": "Nightslayer Gloves",
+  "slot": "hands",
+  "invType": 10,
+  "class": "rogue",
+  "set": "Nightslayer Armor"
+ },
+ "16824": {
+  "displayId": 31109,
+  "name": "Nightslayer Boots",
+  "slot": "feet",
+  "invType": 8,
+  "class": "rogue",
+  "set": "Nightslayer Armor"
+ },
+ "16827": {
+  "displayId": 31339,
+  "name": "Nightslayer Belt",
+  "slot": "waist",
+  "invType": 6,
+  "class": "rogue",
+  "set": "Nightslayer Armor"
+ },
+ "16825": {
+  "displayId": 31106,
+  "name": "Nightslayer Bracelets",
+  "slot": "wrist",
+  "invType": 9,
+  "class": "rogue",
+  "set": "Nightslayer Armor"
+ },
+ "18816": {
+  "displayId": 33615,
+  "name": "Perdition's Blade",
+  "slot": "mainHand",
+  "invType": 13,
+  "class": "rogue",
+  "set": null
+ },
+ "16815": {
+  "displayId": 31490,
+  "name": "Robes of Prophecy",
+  "slot": "chest",
+  "invType": 20,
+  "class": "priest",
+  "set": "Vestments of Prophecy"
+ },
+ "16814": {
+  "displayId": 27598,
+  "name": "Pants of Prophecy",
+  "slot": "legs",
+  "invType": 7,
+  "class": "priest",
+  "set": "Vestments of Prophecy"
+ },
+ "16813": {
+  "displayId": 31371,
+  "name": "Circlet of Prophecy",
+  "slot": "head",
+  "invType": 1,
+  "class": "priest",
+  "set": "Vestments of Prophecy"
+ },
+ "16816": {
+  "displayId": 30623,
+  "name": "Mantle of Prophecy",
+  "slot": "shoulder",
+  "invType": 3,
+  "class": "priest",
+  "set": "Vestments of Prophecy"
+ },
+ "16812": {
+  "displayId": 30620,
+  "name": "Gloves of Prophecy",
+  "slot": "hands",
+  "invType": 10,
+  "class": "priest",
+  "set": "Vestments of Prophecy"
+ },
+ "16811": {
+  "displayId": 31718,
+  "name": "Boots of Prophecy",
+  "slot": "feet",
+  "invType": 8,
+  "class": "priest",
+  "set": "Vestments of Prophecy"
+ },
+ "16817": {
+  "displayId": 30621,
+  "name": "Girdle of Prophecy",
+  "slot": "waist",
+  "invType": 6,
+  "class": "priest",
+  "set": "Vestments of Prophecy"
+ },
+ "16819": {
+  "displayId": 30617,
+  "name": "Vambraces of Prophecy",
+  "slot": "wrist",
+  "invType": 9,
+  "class": "priest",
+  "set": "Vestments of Prophecy"
+ },
+ "18608": {
+  "displayId": 31347,
+  "name": "Benediction",
+  "slot": "mainHand",
+  "invType": 17,
+  "class": "priest",
+  "set": null
+ },
+ "16841": {
+  "displayId": 31832,
+  "name": "Earthfury Vestments",
+  "slot": "chest",
+  "invType": 20,
+  "class": "shaman",
+  "set": "The Earthfury"
+ },
+ "16843": {
+  "displayId": 31836,
+  "name": "Earthfury Legguards",
+  "slot": "legs",
+  "invType": 7,
+  "class": "shaman",
+  "set": "The Earthfury"
+ },
+ "16842": {
+  "displayId": 31835,
+  "name": "Earthfury Helmet",
+  "slot": "head",
+  "invType": 1,
+  "class": "shaman",
+  "set": "The Earthfury"
+ },
+ "16844": {
+  "displayId": 31833,
+  "name": "Earthfury Epaulets",
+  "slot": "shoulder",
+  "invType": 3,
+  "class": "shaman",
+  "set": "The Earthfury"
+ },
+ "16839": {
+  "displayId": 31834,
+  "name": "Earthfury Gauntlets",
+  "slot": "hands",
+  "invType": 10,
+  "class": "shaman",
+  "set": "The Earthfury"
+ },
+ "16837": {
+  "displayId": 31830,
+  "name": "Earthfury Boots",
+  "slot": "feet",
+  "invType": 8,
+  "class": "shaman",
+  "set": "The Earthfury"
+ },
+ "16838": {
+  "displayId": 31829,
+  "name": "Earthfury Belt",
+  "slot": "waist",
+  "invType": 6,
+  "class": "shaman",
+  "set": "The Earthfury"
+ },
+ "16840": {
+  "displayId": 31831,
+  "name": "Earthfury Bracers",
+  "slot": "wrist",
+  "invType": 9,
+  "class": "shaman",
+  "set": "The Earthfury"
+ },
+ "17073": {
+  "displayId": 32162,
+  "name": "Earthshaker",
+  "slot": "mainHand",
+  "invType": 17,
+  "class": "shaman",
+  "set": null
+ },
+ "16798": {
+  "displayId": 30581,
+  "name": "Arcanist Robes",
+  "slot": "chest",
+  "invType": 20,
+  "class": "mage",
+  "set": "Arcanist Regalia"
+ },
+ "16796": {
+  "displayId": 30582,
+  "name": "Arcanist Leggings",
+  "slot": "legs",
+  "invType": 7,
+  "class": "mage",
+  "set": "Arcanist Regalia"
+ },
+ "16795": {
+  "displayId": 31517,
+  "name": "Arcanist Crown",
+  "slot": "head",
+  "invType": 1,
+  "class": "mage",
+  "set": "Arcanist Regalia"
+ },
+ "16797": {
+  "displayId": 30586,
+  "name": "Arcanist Mantle",
+  "slot": "shoulder",
+  "invType": 3,
+  "class": "mage",
+  "set": "Arcanist Regalia"
+ },
+ "16801": {
+  "displayId": 30585,
+  "name": "Arcanist Gloves",
+  "slot": "hands",
+  "invType": 10,
+  "class": "mage",
+  "set": "Arcanist Regalia"
+ },
+ "16800": {
+  "displayId": 30587,
+  "name": "Arcanist Boots",
+  "slot": "feet",
+  "invType": 8,
+  "class": "mage",
+  "set": "Arcanist Regalia"
+ },
+ "16802": {
+  "displayId": 30583,
+  "name": "Arcanist Belt",
+  "slot": "waist",
+  "invType": 6,
+  "class": "mage",
+  "set": "Arcanist Regalia"
+ },
+ "16799": {
+  "displayId": 30584,
+  "name": "Arcanist Bindings",
+  "slot": "wrist",
+  "invType": 9,
+  "class": "mage",
+  "set": "Arcanist Regalia"
+ },
+ "17103": {
+  "displayId": 29677,
+  "name": "Azuresong Mageblade",
+  "slot": "mainHand",
+  "invType": 21,
+  "class": "mage",
+  "set": null
+ },
+ "16809": {
+  "displayId": 31973,
+  "name": "Felheart Robes",
+  "slot": "chest",
+  "invType": 20,
+  "class": "warlock",
+  "set": "Felheart Raiment"
+ },
+ "16810": {
+  "displayId": 31972,
+  "name": "Felheart Pants",
+  "slot": "legs",
+  "invType": 7,
+  "class": "warlock",
+  "set": "Felheart Raiment"
+ },
+ "16808": {
+  "displayId": 31987,
+  "name": "Felheart Horns",
+  "slot": "head",
+  "invType": 1,
+  "class": "warlock",
+  "set": "Felheart Raiment"
+ },
+ "16807": {
+  "displayId": 31974,
+  "name": "Felheart Shoulder Pads",
+  "slot": "shoulder",
+  "invType": 3,
+  "class": "warlock",
+  "set": "Felheart Raiment"
+ },
+ "16805": {
+  "displayId": 31971,
+  "name": "Felheart Gloves",
+  "slot": "hands",
+  "invType": 10,
+  "class": "warlock",
+  "set": "Felheart Raiment"
+ },
+ "16803": {
+  "displayId": 31975,
+  "name": "Felheart Slippers",
+  "slot": "feet",
+  "invType": 8,
+  "class": "warlock",
+  "set": "Felheart Raiment"
+ },
+ "16806": {
+  "displayId": 31969,
+  "name": "Felheart Belt",
+  "slot": "waist",
+  "invType": 6,
+  "class": "warlock",
+  "set": "Felheart Raiment"
+ },
+ "16804": {
+  "displayId": 31970,
+  "name": "Felheart Bracers",
+  "slot": "wrist",
+  "invType": 9,
+  "class": "warlock",
+  "set": "Felheart Raiment"
+ },
+ "19356": {
+  "displayId": 31960,
+  "name": "Staff of the Shadow Flame",
+  "slot": "mainHand",
+  "invType": 17,
+  "class": "warlock",
+  "set": null
+ },
+ "16833": {
+  "displayId": 31797,
+  "name": "Cenarion Vestments",
+  "slot": "chest",
+  "invType": 20,
+  "class": "druid",
+  "set": "Cenarion Raiment"
+ },
+ "16835": {
+  "displayId": 31729,
+  "name": "Cenarion Leggings",
+  "slot": "legs",
+  "invType": 7,
+  "class": "druid",
+  "set": "Cenarion Raiment"
+ },
+ "16834": {
+  "displayId": 32790,
+  "name": "Cenarion Helm",
+  "slot": "head",
+  "invType": 1,
+  "class": "druid",
+  "set": "Cenarion Raiment"
+ },
+ "16836": {
+  "displayId": 32016,
+  "name": "Cenarion Spaulders",
+  "slot": "shoulder",
+  "invType": 3,
+  "class": "druid",
+  "set": "Cenarion Raiment"
+ },
+ "16831": {
+  "displayId": 31726,
+  "name": "Cenarion Gloves",
+  "slot": "hands",
+  "invType": 10,
+  "class": "druid",
+  "set": "Cenarion Raiment"
+ },
+ "16829": {
+  "displayId": 31724,
+  "name": "Cenarion Boots",
+  "slot": "feet",
+  "invType": 8,
+  "class": "druid",
+  "set": "Cenarion Raiment"
+ },
+ "16828": {
+  "displayId": 31722,
+  "name": "Cenarion Belt",
+  "slot": "waist",
+  "invType": 6,
+  "class": "druid",
+  "set": "Cenarion Raiment"
+ },
+ "16830": {
+  "displayId": 31725,
+  "name": "Cenarion Bracers",
+  "slot": "wrist",
+  "invType": 9,
+  "class": "druid",
+  "set": "Cenarion Raiment"
+ },
+ "18842": {
+  "displayId": 34114,
+  "name": "Staff of Dominance",
+  "slot": "mainHand",
+  "invType": 17,
+  "class": "druid",
+  "set": null
+ }
+}

@@ -1,0 +1,604 @@
+{
+ "id": "un-goro-crater",
+ "name": "Un'Goro Crater",
+ "start": {
+  "name": "Marshal's Refuge",
+  "icon": "spell_fire_fire"
+ },
+ "continent": "kal",
+ "act": 5,
+ "levelBand": [
+  48,
+  55
+ ],
+ "isHub": false,
+ "units": {
+  "gorishi-grub": {
+   "name": "Gorishi Grub",
+   "icon": "ability_hunter_pet_silithid",
+   "hp": 8,
+   "moves": [
+    {
+     "id": "nibble",
+     "name": "Nibble",
+     "intent": "attack",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 3
+      }
+     ],
+     "weight": 2
+    }
+   ]
+  }
+ },
+ "spire": {
+  "name": "Fire Plume Ridge",
+  "lore": "The volcano at the heart of Un'Goro Crater, where fire elementals and a devilsaur king roam above the Crystal Pylons and the Marshal's Refuge."
+ },
+ "theme": {
+  "primary": "#d97a2b",
+  "secondary": "#2f1a0f",
+  "accent": "#ffd24a",
+  "background": "ungoro"
+ },
+ "zoneMechanic": {
+  "id": "elemental-pylons",
+  "name": "Elemental Pylons",
+  "icon": "spell_nature_stoneclawtotem",
+  "text": "At the start of the spire power ONE of three Crystal Pylons. Its effect applies every combat of this spire.",
+  "hooks": {
+   "on_spire_start": [
+    {
+     "op": "choose_one",
+     "choices": "pylons"
+    }
+   ]
+  },
+  "choices": [
+   {
+    "id": "northern-crystal-pylon",
+    "name": "Northern Crystal Pylon",
+    "icon": "spell_frost_frost",
+    "text": "Frost: start each combat with 6 Block and draw 1 extra card.",
+    "hooks": {
+     "on_combat_start": [
+      {
+       "op": "block",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "draw",
+       "count": 1
+      }
+     ]
+    }
+   },
+   {
+    "id": "eastern-crystal-pylon",
+    "name": "Eastern Crystal Pylon",
+    "icon": "spell_fire_fire",
+    "text": "Fire: start each combat with 1 Strength and deal 3 damage to all enemies.",
+    "hooks": {
+     "on_combat_start": [
+      {
+       "op": "apply",
+       "status": "strength",
+       "stacks": 1,
+       "target": "self"
+      },
+      {
+       "op": "damage",
+       "amount": 3,
+       "target": "all_enemies",
+       "school": "fire"
+      }
+     ]
+    }
+   },
+   {
+    "id": "western-crystal-pylon",
+    "name": "Western Crystal Pylon",
+    "icon": "spell_nature_naturetouchgrow",
+    "text": "Nature: start each combat with 2 Regen and +1 energy on turn 1.",
+    "hooks": {
+     "on_combat_start": [
+      {
+       "op": "apply",
+       "status": "regen",
+       "stacks": 2,
+       "target": "self"
+      },
+      {
+       "op": "gain_energy",
+       "amount": 1
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "rest": {
+  "id": "marshals-refuge",
+  "name": "Marshal's Refuge",
+  "icon": "inv_misc_food_15",
+  "text": "Share a meal at Marshal's Refuge: heal 20% of max HP and gain 3 Max HP.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 20,
+    "target": "self"
+   },
+   {
+    "op": "max_hp",
+    "amount": 3,
+    "target": "self"
+   }
+  ]
+ },
+ "encounters": {
+  "normal": [
+   [
+    "bloodpetal-pest",
+    "bloodpetal-pest",
+    "bloodpetal-lasher"
+   ],
+   [
+    "diemetradon",
+    "diemetradon",
+    "ravasaur-runner"
+   ],
+   [
+    "living-blaze",
+    "scorching-elemental"
+   ],
+   [
+    "ungoro-gorilla",
+    "ungoro-gorilla"
+   ],
+   [
+    "tar-creeper",
+    "tar-beast",
+    "tar-creeper"
+   ],
+   [
+    "pterrordax",
+    "pterrordax"
+   ],
+   [
+    "stegodon",
+    "ravasaur"
+   ],
+   [
+    "gorishi-worker",
+    "gorishi-wasp",
+    "gorishi-worker"
+   ],
+   [
+    "blazing-elemental",
+    "living-blaze"
+   ],
+   [
+    "tar-lurker",
+    "tar-lord"
+   ],
+   [
+    "bloodpetal-trapper",
+    "bloodpetal-flayer"
+   ],
+   [
+    "gorishi-reaver",
+    "gorishi-stinger"
+   ],
+   [
+    "ungoro-thunderer",
+    "ungoro-stomper"
+   ],
+   [
+    "spiked-stegodon",
+    "plated-stegodon"
+   ],
+   [
+    "frenzied-pterrordax",
+    "elder-diemetradon"
+   ],
+   [
+    "venomhide-ravasaur",
+    "ravasaur-hunter"
+   ],
+   [
+    "devilsaur",
+    "gorishi-tunneler"
+   ],
+   [
+    "thunderstomp-stegodon",
+    "ravasaur-hunter"
+   ]
+  ],
+  "elite": [
+   [
+    "gorishi-hive-queen",
+    "gorishi-worker",
+    "gorishi-wasp"
+   ],
+   [
+    "clutchmother-zavas",
+    "elder-diemetradon"
+   ],
+   [
+    "uhkloc",
+    "ungoro-gorilla"
+   ],
+   [
+    "ironhide-devilsaur"
+   ],
+   [
+    "tyrant-devilsaur"
+   ]
+  ],
+  "boss": [
+   [
+    "king-mosh"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "marshals-refuge-event",
+   "name": "Marshal's Refuge",
+   "icon": "inv_misc_food_15",
+   "text": "Gryphon masters and Argent Dawn scouts hold the camp. A cook offers a hot meal.",
+   "options": [
+    {
+     "label": "Eat (heal 15, +2 max HP)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 15,
+       "target": "self"
+      },
+      {
+       "op": "max_hp",
+       "amount": 2
+      }
+     ]
+    },
+    {
+     "label": "Trade fossils (+40 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 40
+      }
+     ]
+    },
+    {
+     "label": "Move on",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "linken",
+   "npc": {
+    "name": "Linken",
+    "npcId": 8737,
+    "displayId": 8012
+   },
+   "name": "Linken",
+   "icon": "inv_misc_gem_01",
+   "text": "Linken, a scout clinging to a ridge, tests anyone who can catch his boomerang.",
+   "options": [
+    {
+     "label": "Catch the boomerang (-7 HP, relic)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 7,
+       "target": "self"
+      },
+      {
+       "op": "gain_relic",
+       "relic": "linkens-boomerang"
+      }
+     ]
+    },
+    {
+     "label": "Duel him for the sword (-12 HP, relic)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 12,
+       "target": "self"
+      },
+      {
+       "op": "gain_relic",
+       "relic": "linkens-sword-of-mastery"
+      }
+     ]
+    },
+    {
+     "label": "Leave",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "crystal-pylons",
+   "name": "The Crystal Pylons",
+   "icon": "spell_nature_stoneclawtotem",
+   "text": "Three ancient pylons hum with stored elemental power. Powering one will pull its aura into the whole spire.",
+   "options": [
+    {
+     "label": "Power the Northern Pylon",
+     "effects": [
+      {
+       "op": "apply",
+       "status": "dexterity",
+       "stacks": 1,
+       "target": "self"
+      },
+      {
+       "op": "block",
+       "amount": 6,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Power the Eastern Pylon",
+     "effects": [
+      {
+       "op": "apply",
+       "status": "strength",
+       "stacks": 1,
+       "target": "self"
+      },
+      {
+       "op": "damage",
+       "amount": 4,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Power the Western Pylon",
+     "effects": [
+      {
+       "op": "apply",
+       "status": "regen",
+       "stacks": 3,
+       "target": "self"
+      },
+      {
+       "op": "heal",
+       "amount": 8,
+       "target": "self"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ringo",
+   "npc": {
+    "name": "Ringo",
+    "npcId": 9999,
+    "displayId": 9340
+   },
+   "name": "Ringo",
+   "icon": "inv_misc_pet_pandaren_yeti",
+   "text": "Ringo lies exhausted by the trail, mumbling about water.",
+   "options": [
+    {
+     "label": "Revive him (-20 gold, +80 gold reward)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 60
+      }
+     ],
+     "requires": {
+      "gold": 20
+     }
+    },
+    {
+     "label": "Give him water (heal him: +4 max HP)",
+     "effects": [
+      {
+       "op": "max_hp",
+       "amount": 4
+      }
+     ]
+    },
+    {
+     "label": "Leave",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "aida",
+   "name": "A.I.D.A.",
+   "icon": "inv_misc_gear_01",
+   "text": "A damaged gnomish automaton, A.I.D.A., offers repairs for scrap.",
+   "options": [
+    {
+     "label": "Scrap parts (+55 gold, -4 HP)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 55
+      },
+      {
+       "op": "damage",
+       "amount": 4,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Let it repair your gear (add a free upgrade)",
+     "effects": [
+      {
+       "op": "upgrade_card",
+       "pick": "random",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "label": "Leave",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "williden-marshal",
+   "name": "Williden Marshal",
+   "icon": "inv_misc_note_01",
+   "text": "Williden Marshal needs an escort through raptor country.",
+   "options": [
+    {
+     "label": "Escort him (-6 HP, +65 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 65
+      }
+     ]
+    },
+    {
+     "label": "Share rations (heal 10)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 10,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Refuse",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "linkens-boomerang",
+   "name": "Linken's Boomerang",
+   "icon": "inv_weapon_shortblade_05",
+   "rarity": "rare",
+   "itemId": null,
+   "itemIdSource": "unverified",
+   "zone": "un-goro-crater",
+   "class": null,
+   "text": "Your first Attack each turn hits all enemies for 4 extra damage.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "turn_number",
+       "firstAttack": true
+      },
+      "then": [
+       {
+        "op": "damage",
+        "amount": 4,
+        "target": "all_enemies"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "linkens-sword-of-mastery",
+   "name": "Linken's Sword of Mastery",
+   "icon": "inv_sword_01",
+   "rarity": "rare",
+   "itemId": null,
+   "itemIdSource": "unverified",
+   "zone": "un-goro-crater",
+   "class": null,
+   "text": "Gain 1 Strength at the start of each combat and 1 Energy every 3rd turn.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 1,
+      "target": "self"
+     }
+    ],
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "turn_number",
+       "every": 3
+      },
+      "then": [
+       {
+        "op": "gain_energy",
+        "amount": 1
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "devilsaur-leggings",
+   "name": "Devilsaur Leggings",
+   "icon": "inv_pants_leather_01",
+   "rarity": "rare",
+   "itemId": null,
+   "itemIdSource": "unverified",
+   "zone": "un-goro-crater",
+   "class": null,
+   "text": "Gain 8 Block at the start of each combat; Beasts deal 1 less damage to you.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 8,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "ungoro-soil",
+   "name": "Un'Goro Soil",
+   "icon": "inv_misc_food_15",
+   "rarity": "common",
+   "itemId": null,
+   "itemIdSource": "unverified",
+   "zone": "un-goro-crater",
+   "class": null,
+   "text": "Heal 6 HP whenever you rest.",
+   "triggers": {
+    "on_rest": [
+     {
+      "op": "heal",
+      "amount": 6,
+      "target": "self"
+     }
+    ]
+   }
+  }
+ ],
+ "enemiesFile": "un-goro-crater.enemies.json",
+ "raidFloorsFile": "un-goro-crater.raids.json"
+}

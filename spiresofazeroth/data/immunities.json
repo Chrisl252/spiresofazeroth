@@ -1,0 +1,112 @@
+{
+ "_doc": "Classic WoW immunities by creature family/type. immune: statuses and/or schools (physical fire frost arcane nature shadow holy); resist: {school: damage multiplier}. Resolved family -> family/type (type may set inherit:false to drop the family row). Per-enemy `immune`/`resist` arrays/objects in the enemy JSON add to this; `noImmunity:true` clears it. Status immunity only blocks a status when the applying card's school is one the status can come from (data/schools.json statusSchools): Shadow Word: Pain is shadow, so undead still rot.",
+ "families": {
+  "undead": {
+   "immune": [
+    "bleed",
+    "poison",
+    "fear"
+   ]
+  },
+  "mechanical": {
+   "immune": [
+    "bleed",
+    "poison",
+    "disease",
+    "fear",
+    "sleep"
+   ]
+  },
+  "elemental": {
+   "immune": [
+    "bleed",
+    "poison"
+   ]
+  },
+  "demon": {
+   "resist": {
+    "shadow": 0.5
+   }
+  },
+  "dragonkin": {},
+  "beast": {},
+  "humanoid": {},
+  "giant": {},
+  "critter": {}
+ },
+ "types": {
+  "humanoid/undead": {
+   "same": "undead"
+  },
+  "elemental/fire": {
+   "immune": [
+    "fire",
+    "burn"
+   ],
+   "resist": {
+    "frost": 1.5
+   }
+  },
+  "elemental/magma": {
+   "immune": [
+    "fire",
+    "burn"
+   ]
+  },
+  "elemental/water": {
+   "immune": [
+    "frost",
+    "frozen",
+    "frostbite"
+   ]
+  },
+  "elemental/earth": {
+   "immune": [
+    "nature"
+   ]
+  },
+  "elemental/rock": {
+   "immune": [
+    "nature"
+   ]
+  },
+  "elemental/air": {
+   "immune": [
+    "nature"
+   ]
+  },
+  "elemental/plant": {
+   "inherit": false,
+   "resist": {
+    "nature": 0.5
+   }
+  },
+  "elemental/treant": {
+   "inherit": false,
+   "resist": {
+    "nature": 0.5
+   }
+  },
+  "elemental/timberling": {
+   "inherit": false,
+   "resist": {
+    "nature": 0.5
+   }
+  },
+  "dragonkin/black dragonkin": {
+   "resist": {
+    "fire": 0.5
+   }
+  },
+  "dragonkin/blue dragonkin": {
+   "resist": {
+    "arcane": 0.5
+   }
+  },
+  "dragonkin/green dragonkin": {
+   "resist": {
+    "nature": 0.5
+   }
+  }
+ }
+}

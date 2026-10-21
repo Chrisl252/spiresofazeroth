@@ -1,0 +1,52 @@
+{
+  "id": "western-plaguelands",
+  "name": "Western Plaguelands",
+  "start": {"name": "Chillwind Camp", "icon": "spell_fire_fire"},
+  "continent": "ek",
+  "act": 6,
+  "levelBand": [51,60],
+  "spire": {
+    "name": "Scholomance",
+    "lore": "Caer Darrow's Scholomance, once the Barov family school, now the Lich King's academy of necromancy; Scarlet crusaders hold Hearthglen against the Scourge at the plague's edge."
+  },
+  "theme": {
+    "primary": "#6a7a3a",
+    "secondary": "#1c2210",
+    "accent": "#cfe36a",
+    "background": "plaguelands"
+  },
+  "zoneMechanic": {
+    "id": "necromancy",
+    "name": "Necromancy",
+    "icon": "spell_shadow_animatedead",
+    "text": "Each time an enemy dies there is a 40% chance a Skeletal Flayer rises in its place.",
+    "hooks": {"on_kill":[{"op":"conditional","if":{"type":"chance","pct":40},"then":[{"op":"summon","unit":"skeletal-flayer","count":1}]}]}
+  },
+  "rest": {
+    "id": "chillwind-camp",
+    "name": "Chillwind Camp",
+    "icon": "spell_holy_prayerofhealing",
+    "text": "Rest at Chillwind Camp. Heal 25% of max HP and remove Disease.",
+    "effects": [
+      {"op":"heal","amount":26,"target":"self"},
+      {"op":"remove","status":"disease","target":"self"}
+    ]
+  },
+  "enemiesFile": "western-plaguelands.enemies.json",
+  "encounters": {
+    "normal": [["diseased-wolf","carrion-grub"],["plague-lurker","plague-lurker","plague-ghoul"],["skeletal-flayer","skeletal-horror"],["slavering-ghoul","wretched-zombie","slavering-ghoul","rotting-behemoth"],["cursed-mage","dark-summoner","cursed-mage"],["scarlet-defender","scarlet-enchanter","scarlet-oracle","scarlet-avenger"],["scarlet-oracle","scarlet-avenger","scarlet-champion"],["scarlet-champion","scarlet-lancer"]],
+    "elite": [["cauldron-lord-soulwrath"],["cauldron-lord-malvinious"],["araj-the-summoner"],["cauldron-lord-razarch"],["cauldron-lord-bilemaw"]],
+    "boss": [["darkmaster-gandling"],["darkmaster-gandling","dark-summoner","cursed-mage"]]
+  },
+  "events": [
+    {"id":"the-cauldrons","name":"The Cauldrons","icon":"inv_potion_54","text":"Plague cauldrons bubble at the edge of Felstone Field, tended by Cauldron Lords. A Scarlet sapper wants them gone.","options":[{"label":"Smash the cauldrons","effects":[{"op":"damage","amount":12,"target":"self"},{"op":"gold","amount":120}]},{"label":"Steal a vial of the plague","effects":[{"op":"apply","status":"disease","stacks":2,"target":"self"},{"op":"random_card","pool":"any","rarity":"rare","to":"hand"}]},{"label":"Leave","effects":[]}]},
+    {"id":"andorhal","name":"Andorhal","icon":"inv_misc_bone_humanskull_01","text":"The ruined city of Andorhal swarms with Scourge. A Dwarf archaeologist has hidden something in the old inn.","options":[{"label":"Search the inn","effects":[{"op":"damage","amount":10,"target":"self"},{"op":"gold","amount":90},{"op":"draw","count":1}]},{"label":"Burn the ruins","effects":[{"op":"damage","amount":6,"target":"self"},{"op":"max_hp","amount":4}]},{"label":"Avoid the city","effects":[]}]},
+    {"id":"uthers-tomb","name":"Uther's Tomb","icon":"spell_holy_holybolt","text":"Uther Lightbringer's tomb stands in an open field. A faint Light still lingers over the coffin.","options":[{"label":"Pray at the tomb","effects":[{"op":"heal","amount":25,"target":"self"},{"op":"remove","status":"curse","target":"self"}]},{"label":"Take an offering","effects":[{"op":"gold","amount":70},{"op":"apply","status":"weak","stacks":1,"target":"self"}]},{"label":"Leave in peace","effects":[]}]},
+    {"id":"hearthglen","name":"Hearthglen","icon":"inv_shield_05","text":"The Scarlet Crusade holds Hearthglen. Their zealots demand proof that you are free of the plague.","options":[{"label":"Submit to inspection","effects":[{"op":"gold","amount":-40},{"op":"max_hp","amount":5}],"requires":{"gold":40}},{"label":"Fight your way through","effects":[{"op":"damage","amount":12,"target":"self"},{"op":"gold","amount":100}]},{"label":"Turn back","effects":[]}]}
+  ],
+  "relics": [
+    {"id":"skeleton-key","name":"Skeleton Key","icon":"inv_misc_key_03","rarity":"rare","itemId":13704,"zone":"western-plaguelands","class":null,"text":"The first time you would be stunned each combat, ignore it.","triggers":{"on_combat_start":[{"op":"apply","status":"intangible","stacks":1,"target":"self"}]}},
+    {"id":"argent-dawn-commission","name":"Argent Dawn Commission","icon":"inv_jewelry_talisman_06","rarity":"rare","itemId":12846,"zone":"western-plaguelands","class":null,"text":"Heal 3 HP at the start of each turn.","triggers":{"on_turn_start":[{"op":"heal","amount":3,"target":"self"}]}}
+  ],
+  "raidFloorsFile": "western-plaguelands.raids.json"
+}

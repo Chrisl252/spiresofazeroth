@@ -1,0 +1,450 @@
+{
+ "id": "elwynn-forest",
+ "name": "Elwynn Forest",
+ "start": {
+  "name": "The Lion's Pride Inn",
+  "icon": "inv_misc_beer_01"
+ },
+ "continent": "ek",
+ "act": 1,
+ "levelBand": [
+  1,
+  10
+ ],
+ "spire": {
+  "name": "Tower of Azora",
+  "lore": "The old watchtower above the Abbey road. Every wanted poster in Goldshire points to the pig-farmers and miners it overlooks, and Hogger waits at the top."
+ },
+ "theme": {
+  "primary": "#3f6b2a",
+  "secondary": "#1d2a16",
+  "accent": "#d9b25c",
+  "background": "forest"
+ },
+ "zoneMechanic": {
+  "id": "wanted-poster",
+  "name": "Wanted Poster",
+  "icon": "inv_scroll_03",
+  "text": "At the start of the spire one random elite is Marked. Killing a Marked enemy pays a 40 gold bounty.",
+  "hooks": {
+   "on_spire_start": [
+    {
+     "op": "apply",
+     "status": "marked",
+     "stacks": 1,
+     "target": "random_elite"
+    }
+   ],
+   "on_kill": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "status_on_target",
+      "status": "marked"
+     },
+     "then": [
+      {
+       "op": "gold",
+       "amount": 40
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "goldshire-inn",
+  "name": "Lion's Pride Inn",
+  "icon": "inv_misc_food_14",
+  "text": "Sleep in a real bed at the Lion's Pride Inn: heal 20% of max HP and gain 3 Max HP.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 20,
+    "target": "self"
+   },
+   {
+    "op": "max_hp",
+    "amount": 3,
+    "target": "self"
+   }
+  ]
+ },
+ "enemiesFile": "elwynn-forest.enemies.json",
+ "raidFloorsFile": "elwynn-forest.raids.json",
+ "encounters": {
+  "normal": [
+   [
+    "young-wolf",
+    "young-wolf"
+   ],
+   [
+    "kobold-vermin",
+    "kobold-vermin",
+    "kobold-vermin"
+   ],
+   [
+    "stonetusk-boar",
+    "young-wolf"
+   ],
+   [
+    "forest-spider",
+    "kobold-laborer",
+    "kobold-laborer"
+   ],
+   [
+    "murloc-forager",
+    "murloc-forager",
+    "murloc"
+   ],
+   [
+    "timber-wolf",
+    "timber-wolf",
+    "mangy-wolf"
+   ],
+   [
+    "kobold-worker",
+    "kobold-worker",
+    "kobold-tunneler"
+   ],
+   [
+    "mine-spider",
+    "mine-spider",
+    "kobold-geomancer"
+   ],
+   [
+    "rockhide-boar",
+    "young-forest-bear"
+   ],
+   [
+    "defias-thug",
+    "defias-cutpurse"
+   ],
+   [
+    "riverpaw-runt",
+    "riverpaw-runt",
+    "riverpaw-outrunner"
+   ],
+   [
+    "defias-bandit",
+    "defias-rogue-wizard",
+    "defias-footpad"
+   ],
+   [
+    "murloc-streamrunner",
+    "murloc-streamrunner",
+    "murloc-tidehunter"
+   ],
+   [
+    "riverpaw-gnoll",
+    "riverpaw-gnoll",
+    "riverpaw-mystic"
+   ],
+   [
+    "prowler",
+    "diseased-timber-wolf",
+    "mangy-wolf"
+   ],
+   [
+    "defias-pathstalker",
+    "defias-trapper",
+    "defias-cutpurse"
+   ],
+   [
+    "riverpaw-brute",
+    "riverpaw-scout",
+    "riverpaw-herbalist"
+   ],
+   [
+    "kobold-miner",
+    "kobold-miner",
+    "kobold-geomancer",
+    "kobold-tunneler"
+   ]
+  ],
+  "elite": [
+   [
+    "goldtooth",
+    "kobold-miner"
+   ],
+   [
+    "garrick-padfoot",
+    "defias-cutpurse"
+   ],
+   [
+    "thuros-lightfingers",
+    "defias-footpad"
+   ],
+   [
+    "gruff-swiftbite",
+    "prowler"
+   ],
+   [
+    "princess"
+   ]
+  ],
+  "boss": [
+   [
+    "hogger",
+    "riverpaw-runt",
+    "riverpaw-runt"
+   ],
+   [
+    "hogger",
+    "riverpaw-overseer"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "westbrook-wanted-poster",
+   "name": "Westbrook Garrison Wanted Poster",
+   "icon": "inv_scroll_03",
+   "text": "A fresh poster outside Westbrook Garrison offers coin for Defias heads.",
+   "options": [
+    {
+     "label": "Accept the contract (take 6 damage, +45 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 45
+      }
+     ]
+    },
+    {
+     "label": "Tear down the poster and sell the paper (+15 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 15
+      }
+     ]
+    },
+    {
+     "label": "Walk on",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "princess-the-pig",
+   "name": "Princess the Pig",
+   "icon": "ability_hunter_pet_boar",
+   "text": "Princess has wandered off again. The farmer begs you to find her.",
+   "options": [
+    {
+     "label": "Round her up (take 4 damage, +30 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 4,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 30
+      }
+     ]
+    },
+    {
+     "label": "Let the guards handle it (heal 4)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 4,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Ignore the farmer",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "marshal-dughan",
+   "npc": {
+    "name": "Marshal Dughan",
+    "npcId": 240,
+    "displayId": 1985
+   },
+   "name": "Marshal Dughan",
+   "icon": "inv_misc_head_human_01",
+   "text": "Marshal Dughan pays for every Defias scout you have put down and offers a bed in the Goldshire barracks.",
+   "options": [
+    {
+     "label": "Report in (+25 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 25
+      }
+     ]
+    },
+    {
+     "label": "Take the barracks bed (heal 12)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 12,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Ask about the Brotherhood (lose 3 HP, gain a card reward)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 3,
+       "target": "self"
+      },
+      {
+       "op": "random_card",
+       "pool": "class",
+       "rarity": "uncommon",
+       "to": "deck_permanent"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "maybells-necklace",
+   "name": "Maybell's Necklace",
+   "icon": "inv_jewelry_necklace_01",
+   "text": "Maybell Maclure lost her necklace to the Stonefield farm gnolls and begs for its return.",
+   "options": [
+    {
+     "label": "Search the farm (take 5 damage, gain a card reward)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 5,
+       "target": "self"
+      },
+      {
+       "op": "random_card",
+       "pool": "class",
+       "rarity": "common",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Ask Maybell for a reward (+20 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 20
+      }
+     ]
+    },
+    {
+     "label": "Leave her to her tears",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "fargodeep-mine",
+   "name": "Fargodeep Mine",
+   "icon": "inv_pick_02",
+   "text": "Kobold candlelight flickers deep in Fargodeep Mine. Miners say the veins still run rich.",
+   "options": [
+    {
+     "label": "Delve deep (take 8 damage, +60 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 8,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 60
+      }
+     ]
+    },
+    {
+     "label": "Mine near the entrance (+25 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 25
+      }
+     ]
+    },
+    {
+     "label": "Leave it to the kobolds",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "gnoll-punisher",
+   "name": "Gnoll Punisher",
+   "icon": "inv_mace_03",
+   "rarity": "uncommon",
+   "itemId": 1214,
+   "zone": "elwynn-forest",
+   "class": null,
+   "text": "Riverpaw gnoll club. Start each combat with 1 Strength.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "red-defias-mask",
+   "name": "Red Defias Mask",
+   "icon": "inv_misc_bandana_03",
+   "rarity": "common",
+   "itemId": 7997,
+   "zone": "elwynn-forest",
+   "class": null,
+   "text": "Worn by the Brotherhood. Gain 3 Block at the start of each combat.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 3,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "goldtooths-pouch",
+   "name": "Goldtooth's Pouch",
+   "icon": "inv_misc_bag_10",
+   "rarity": "common",
+   "itemId": null,
+   "zone": "elwynn-forest",
+   "class": null,
+   "text": "Kobold gold. Gain 10 gold when you pick this up.",
+   "triggers": {
+    "on_pickup": [
+     {
+      "op": "gold",
+      "amount": 10
+     }
+    ]
+   }
+  }
+ ]
+}

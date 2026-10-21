@@ -1,0 +1,469 @@
+{
+ "id": "dun-morogh",
+ "name": "Dun Morogh",
+ "start": {"name": "Thunderbrew Distillery", "icon": "inv_misc_beer_01"},
+ "continent": "ek",
+ "act": 1,
+ "levelBand": [
+  1,
+  10
+ ],
+ "spire": {
+  "name": "Gnomeregan Exterior Tower",
+  "lore": "A snow-buried watchtower above Gnomeregan's irradiated gates. Frostmane trolls hold the pass and the leper gnomes wander the slag below."
+ },
+ "theme": {
+  "primary": "#a9c7e8",
+  "secondary": "#1c2a3a",
+  "accent": "#f2f6fb",
+  "background": "snow"
+ },
+ "zoneMechanic": {
+  "id": "frostbite",
+  "name": "Frostbite",
+  "icon": "spell_frost_frostbolt02",
+  "text": "You gain 1 Frostbite at the end of each turn. At 5 stacks the cold drains 1 energy next turn and the stacks clear.",
+  "hooks": {
+   "on_turn_end": [
+    {
+     "op": "apply",
+     "status": "frostbite",
+     "stacks": 1,
+     "target": "self"
+    }
+   ],
+   "on_turn_start": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "status_on_target",
+      "status": "frostbite",
+      "target": "self",
+      "min": 5
+     },
+     "then": [
+      {
+       "op": "gain_energy",
+       "amount": -1
+      },
+      {
+       "op": "remove",
+       "status": "frostbite",
+       "target": "self"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "thunderbrew",
+  "name": "Thunderbrew Distillery",
+  "icon": "inv_drink_05",
+  "text": "Share a mug at the Thunderbrew Distillery: heal 25% of max HP and gain 1 Strength next fight.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 25,
+    "target": "self"
+   },
+   {
+    "op": "apply",
+    "status": "strength",
+    "stacks": 1,
+    "target": "self"
+   }
+  ]
+ },
+ "enemiesFile": "dun-morogh.enemies.json",
+ "raidFloorsFile": "dun-morogh.raids.json",
+ "encounters": {
+  "normal": [
+   [
+    "rockjaw-skullthumper",
+    "rockjaw-skullthumper"
+   ],
+   [
+    "crag-boar",
+    "rockjaw-skullthumper"
+   ],
+   [
+    "frostmane-troll-whelp",
+    "frostmane-troll-whelp",
+    "frostmane-troll-whelp"
+   ],
+   [
+    "snow-tracker-wolf",
+    "snow-tracker-wolf"
+   ],
+   [
+    "ragged-scavenger",
+    "ragged-scavenger",
+    "crag-boar"
+   ],
+   [
+    "ice-claw-bear",
+    "snow-tracker-wolf"
+   ],
+   [
+    "frostmane-snowstrider",
+    "frostmane-scout"
+   ],
+   [
+    "burly-rockjaw-trogg",
+    "rockjaw-ambusher"
+   ],
+   [
+    "winter-wolf",
+    "winter-wolf",
+    "mangy-mountain-boar"
+   ],
+   [
+    "leper-gnome",
+    "leper-gnome",
+    "leper-scavenger"
+   ],
+   [
+    "frostmane-seer",
+    "frostmane-troll-whelp",
+    "frostmane-troll-whelp"
+   ],
+   [
+    "rockjaw-bonesnapper",
+    "rockjaw-backbreaker"
+   ],
+   [
+    "snow-leopard",
+    "elder-crag-boar"
+   ],
+   [
+    "frostmane-headhunter",
+    "frostmane-seer",
+    "frostmane-scout"
+   ],
+   [
+    "wendigo",
+    "starving-winter-wolf"
+   ],
+   [
+    "irradiated-pillager",
+    "leper-gnome",
+    "leper-gnome"
+   ],
+   [
+    "mountaineer-trapper",
+    "dark-iron-spy"
+   ],
+   [
+    "frostbite-wendigo",
+    "winter-wolf"
+   ],
+   [
+    "frostmane-hideskinner",
+    "frostmane-headhunter",
+    "frostmane-seer"
+   ],
+   [
+    "irradiated-slime",
+    "irradiated-pillager"
+   ]
+  ],
+  "elite": [
+   [
+    "mangeclaw",
+    "ice-claw-bear"
+   ],
+   [
+    "eldrak",
+    "wendigo"
+   ],
+   [
+    "mangeclaw",
+    "eldrak"
+   ]
+  ],
+  "boss": [
+   [
+    "griknir-the-cold",
+    "frostmane-headhunter",
+    "frostmane-headhunter"
+   ],
+   [
+    "griknir-the-cold",
+    "frostmane-seer",
+    "frostmane-snowstrider"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "grelin-whitebeard",
+   "npc": {"name":"Grelin Whitebeard","npcId":786,"displayId":1354},
+   "name": "Grelin Whitebeard",
+   "icon": "inv_misc_head_dwarf_01",
+   "text": "Grelin Whitebeard, hunter of Kharanos, asks you to cull the Frostmane before the snows close.",
+   "options": [
+    {
+     "label": "Hunt with Grelin (take 4 damage, +30 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 4,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 30
+      }
+     ]
+    },
+    {
+     "label": "Take his trapping advice (heal 6)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 6,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Decline",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "tundra-macgrann-stash",
+   "name": "Tundra MacGrann's Stash",
+   "icon": "inv_box_01",
+   "text": "Tundra MacGrann's stolen stash lies in a Frostmane cave, guarded by one sleeping troll.",
+   "options": [
+    {
+     "label": "Sneak in (take 5 damage, +50 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 5,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 50
+      }
+     ]
+    },
+    {
+     "label": "Pry the lock and run (gain a card reward, take 7 damage)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 7,
+       "target": "self"
+      },
+      {
+       "op": "random_card",
+       "pool": "class",
+       "rarity": "uncommon",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Leave it",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "grizzled-den",
+   "name": "The Grizzled Den",
+   "icon": "ability_hunter_pet_bear",
+   "text": "Ice Claw bears have claimed the Grizzled Den. Hunters pay well for the pelts.",
+   "options": [
+    {
+     "label": "Fight for the pelts (take 8 damage, +45 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 8,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 45
+      }
+     ]
+    },
+    {
+     "label": "Gather scraps outside (+15 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 15
+      }
+     ]
+    },
+    {
+     "label": "Back away",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "frostmane-hold",
+   "name": "Frostmane Hold",
+   "icon": "inv_misc_head_troll_01",
+   "text": "Smoke rises from the Frostmane Hold. Troll drums echo through the tunnels.",
+   "options": [
+    {
+     "label": "Raid the hold (take 6 damage, +40 gold, gain a card reward)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 40
+      },
+      {
+       "op": "random_card",
+       "pool": "class",
+       "rarity": "common",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Torch their supplies (+20 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 20
+      }
+     ]
+    },
+    {
+     "label": "Slip past",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "kharanos-forge",
+   "name": "Kharanos Forge",
+   "icon": "inv_hammer_05",
+   "text": "The smiths of Kharanos will temper your arms for a fee.",
+   "options": [
+    {
+     "label": "Pay 40 gold: gain 8 max HP",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": -40
+      },
+      {
+       "op": "max_hp",
+       "amount": 8
+      }
+     ],
+     "requires": {
+      "gold": 40
+     }
+    },
+    {
+     "label": "Warm yourself at the forge (heal 8)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 8,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Move on",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "frostmane-scepter",
+   "name": "Frostmane Scepter",
+   "icon": "inv_wand_02",
+   "rarity": "uncommon",
+   "itemId": 3223,
+   "zone": "dun-morogh",
+   "class": null,
+   "text": "Frostmane troll scepter. Gain 1 energy at the start of each combat.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "gain_energy",
+      "amount": 1
+     }
+    ]
+   }
+  },
+  {
+   "id": "manual-crowd-pummeler",
+   "name": "Manual Crowd Pummeler",
+   "icon": "inv_mace_14",
+   "rarity": "rare",
+   "itemId": 9449,
+   "zone": "dun-morogh",
+   "class": null,
+   "text": "Strike a crowd. Your attacks deal 2 damage to all enemies.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "damage",
+      "amount": 2,
+      "target": "all_enemies"
+     }
+    ]
+   }
+  },
+  {
+   "id": "electrocutioner-leg",
+   "name": "Electrocutioner Leg",
+   "icon": "inv_misc_gear_02",
+   "rarity": "uncommon",
+   "itemId": 9446,
+   "zone": "dun-morogh",
+   "class": null,
+   "text": "Crackling mechanical limb. Gain 2 Block at the start of each turn.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "block",
+      "amount": 2,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "thermapluggs-left-arm",
+   "name": "Thermaplugg's Left Arm",
+   "icon": "inv_misc_gear_04",
+   "rarity": "rare",
+   "itemId": 9459,
+   "zone": "dun-morogh",
+   "class": null,
+   "text": "The Mekgineer's own limb. Draw 1 card at the start of each combat.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "draw",
+      "count": 1
+     }
+    ]
+   }
+  }
+ ]
+}

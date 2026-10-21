@@ -1,0 +1,52 @@
+{
+  "id": "blasted-lands",
+  "name": "Blasted Lands",
+  "start": {"name": "Nethergarde Keep", "icon": "inv_misc_beer_01"},
+  "continent": "ek",
+  "act": 5,
+  "levelBand": [45,58],
+  "spire": {
+    "name": "Nethergarde Keep",
+    "lore": "The scarred wasteland south of the Swamp of Sorrows, where Nethergarde Keep holds the line against the Dark Portal and the fel energies leaking through it."
+  },
+  "theme": {
+    "primary": "#8a2a5a",
+    "secondary": "#240d2a",
+    "accent": "#a6e03c",
+    "background": "fel-wasteland"
+  },
+  "zoneMechanic": {
+    "id": "fel-rift",
+    "name": "Fel Rift",
+    "icon": "spell_shadow_summonimp",
+    "text": "When a demon dies, a rift spawns an Imp that joins the fight next turn.",
+    "hooks": {"on_kill":[{"op":"conditional","if":{"type":"target_is_family","family":"demon"},"then":[{"op":"summon","unit":"imp","count":1}]}]}
+  },
+  "rest": {
+    "id": "nethergarde-camp",
+    "name": "Nethergarde Keep Barracks",
+    "icon": "spell_holy_prayerofhealing",
+    "text": "Rest within Nethergarde. Heal 25% of max HP and shed all curses.",
+    "effects": [
+      {"op":"heal","amount":22,"target":"self"},
+      {"op":"remove","status":"curse","target":"self"},
+      {"op":"remove","status":"corrupted","target":"self"}
+    ]
+  },
+  "enemiesFile": "blasted-lands.enemies.json",
+  "encounters": {
+    "normal": [["ashmane-boar","snickerfang-hyena"],["redstone-basilisk","redstone-basilisk","redstone-crystalhide"],["dreadmaul-ogre","dreadmaul-brute","dreadmaul-mauler","dreadmaul-warlock"],["dreadmaul-ogre","dreadmaul-mauler","dreadmaul-warlock"],["shadowsworn-thug","shadowsworn-cultist"],["imp","felguard-sentry","rift-spawn"],["servant-of-grol","servant-of-grol","servant-of-allistarj"],["rift-spawn","felhound"]],
+    "elite": [["servant-of-sevine"],["servant-of-razelikh"],["magronos-the-unyielding"],["gruff-swiftbite"]],
+    "boss": [["lord-kazzak"],["lord-kazzak","doomguard","imp"]]
+  },
+  "events": [
+    {"id":"nethergarde-supplies","name":"Nethergarde Supplies","icon":"inv_misc_bag_10","text":"Nethergarde Keep is short on rations after a Dreadmaul raid. Dispatcher Elgorin offers coin for escort.","options":[{"label":"Escort the supplies","effects":[{"op":"damage","amount":10,"target":"self"},{"op":"gold","amount":95}]},{"label":"Donate your rations","effects":[{"op":"gold","amount":-30},{"op":"max_hp","amount":5}],"requires":{"gold":30}},{"label":"Leave","effects":[]}]},
+    {"id":"dark-portal","name":"The Dark Portal","icon":"spell_arcane_portaldarnassus","text":"The Dark Portal pulses on the horizon. A burning legion scout watches from its shadow.","options":[{"label":"Charge the scout","effects":[{"op":"damage","amount":12,"target":"self"},{"op":"random_card","pool":"any","rarity":"rare","to":"hand"}]},{"label":"Study the portal","effects":[{"op":"scry","count":4},{"op":"apply","status":"madness","stacks":1,"target":"self"}]},{"label":"Back away","effects":[]}]},
+    {"id":"razelikhs-servants","name":"Razelikh's Servants","icon":"spell_shadow_summonfelguard","text":"Servants of Razelikh guard a scorched altar. A weapon of fel iron lies at its base.","options":[{"label":"Slay the servants","effects":[{"op":"damage","amount":12,"target":"self"},{"op":"gold","amount":110}]},{"label":"Sneak the weapon","effects":[{"op":"apply","status":"vulnerable","stacks":1,"target":"self"},{"op":"random_card","pool":"any","rarity":"uncommon","to":"hand"}]},{"label":"Pray at the altar","effects":[{"op":"apply","status":"curse","stacks":1,"target":"self"},{"op":"max_hp","amount":6}]}]},
+    {"id":"the-tainted-scar","name":"The Tainted Scar","icon":"spell_shadow_gathershadows","text":"The corrupted earth is cracked by a glowing chasm. Fel crystals line the rim.","options":[{"label":"Gather crystals","effects":[{"op":"damage","amount":7,"target":"self"},{"op":"gold","amount":75}]},{"label":"Cleanse the chasm","effects":[{"op":"gold","amount":-40},{"op":"heal","amount":15,"target":"self"}],"requires":{"gold":40}},{"label":"Walk away","effects":[]}]}
+  ],
+  "relics": [
+    {"id":"perditions-blade","name":"Perdition's Blade","icon":"inv_sword_04","rarity":"epic","itemId":18816,"zone":"blasted-lands","class":null,"text":"Whenever you play an attack, 15% chance to deal 6 additional fire damage.","triggers":{"on_attack":[{"op":"conditional","if":{"type":"chance","pct":15},"then":[{"op":"damage","amount":6,"target":"enemy","school":"fire"}]}]}},
+    {"id":"eye-of-sulfuras","name":"Eye of Sulfuras","icon":"inv_misc_gem_ruby_01","rarity":"epic","itemId":17204,"zone":"blasted-lands","class":null,"text":"At the start of combat, gain 1 Strength.","triggers":{"on_combat_start":[{"op":"apply","status":"strength","stacks":1,"target":"self"}]}}
+  ]
+}

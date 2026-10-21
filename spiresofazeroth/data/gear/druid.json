@@ -1,0 +1,336 @@
+{
+ "class": "druid",
+ "set": {
+  "id": "cenarion-raiment",
+  "name": "Cenarion Raiment",
+  "icon": "inv_helmet_09",
+  "bonuses": [
+   {
+    "pieces": 2,
+    "name": "Mark of the Wild",
+    "text": "Start each combat: gain 4 Block.",
+    "triggers": {
+     "on_combat_start": [
+      {
+       "op": "block",
+       "amount": 4,
+       "target": "self"
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 4,
+    "name": "Rejuvenation",
+    "text": "At the start of each turn: heal 1.",
+    "triggers": {
+     "on_turn_start": [
+      {
+       "op": "heal",
+       "amount": 1
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 6,
+    "name": "Rake and Rip",
+    "text": "When you attack: 20% chance to apply 2 Bleed.",
+    "triggers": {
+     "on_attack": [
+      {
+       "op": "conditional",
+       "if": {
+        "type": "chance",
+        "pct": 20
+       },
+       "then": [
+        {
+         "op": "apply",
+         "status": "bleed",
+         "stacks": 2,
+         "target": "enemy"
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 8,
+    "name": "Heart of the Wild",
+    "text": "Start each combat: gain 1 Strength and gain 1 Energy.",
+    "triggers": {
+     "on_combat_start": [
+      {
+       "op": "apply",
+       "status": "strength",
+       "stacks": 1,
+       "target": "self"
+      },
+      {
+       "op": "gain_energy",
+       "amount": 1
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "pieces": [
+  {
+   "id": "cenarion-helm",
+   "name": "Cenarion Helm",
+   "slot": "head",
+   "set": "cenarion-raiment",
+   "setPiece": 1,
+   "item": 16834,
+   "icon": "inv_helmet_09",
+   "displayId": 32790,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: while in Cat Form, gain 1 Combo Point.",
+   "class": "druid",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "form_is",
+       "value": "cat"
+      },
+      "then": [
+       {
+        "op": "gain_resource",
+        "resource": "combo",
+        "amount": 1
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "cenarion-spaulders",
+   "name": "Cenarion Spaulders",
+   "slot": "shoulder",
+   "set": "cenarion-raiment",
+   "setPiece": 2,
+   "item": 16836,
+   "icon": "inv_shoulder_07",
+   "displayId": 32016,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: gain 2 Block.",
+   "class": "druid",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "block",
+      "amount": 2,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "cenarion-vestments",
+   "name": "Cenarion Vestments",
+   "slot": "chest",
+   "set": "cenarion-raiment",
+   "setPiece": 3,
+   "item": 16833,
+   "icon": "inv_chest_cloth_06",
+   "displayId": 31797,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 6 Block.",
+   "class": "druid",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 6,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "cenarion-bracers",
+   "name": "Cenarion Bracers",
+   "slot": "wrist",
+   "set": "cenarion-raiment",
+   "setPiece": 4,
+   "item": 16830,
+   "icon": "inv_bracer_03",
+   "displayId": 31725,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Whenever you play a card: while in Bear Form, gain 2 Block.",
+   "class": "druid",
+   "triggers": {
+    "on_card_played": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "form_is",
+       "value": "bear"
+      },
+      "then": [
+       {
+        "op": "block",
+        "amount": 2,
+        "target": "self"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "cenarion-gloves",
+   "name": "Cenarion Gloves",
+   "slot": "hands",
+   "set": "cenarion-raiment",
+   "setPiece": 5,
+   "item": 16831,
+   "icon": "inv_gauntlets_07",
+   "displayId": 31726,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "When you attack: 20% chance to apply 1 Bleed.",
+   "class": "druid",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 20
+      },
+      "then": [
+       {
+        "op": "apply",
+        "status": "bleed",
+        "stacks": 1,
+        "target": "enemy"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "cenarion-belt",
+   "name": "Cenarion Belt",
+   "slot": "waist",
+   "set": "cenarion-raiment",
+   "setPiece": 6,
+   "item": 16828,
+   "icon": "inv_belt_06",
+   "displayId": 31722,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "When you kill an enemy: heal 3.",
+   "class": "druid",
+   "triggers": {
+    "on_kill": [
+     {
+      "op": "heal",
+      "amount": 3
+     }
+    ]
+   }
+  },
+  {
+   "id": "cenarion-leggings",
+   "name": "Cenarion Leggings",
+   "slot": "legs",
+   "set": "cenarion-raiment",
+   "setPiece": 7,
+   "item": 16835,
+   "icon": "inv_pants_06",
+   "displayId": 31729,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: 15% chance to gain 1 Energy.",
+   "class": "druid",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 15
+      },
+      "then": [
+       {
+        "op": "gain_energy",
+        "amount": 1
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "cenarion-boots",
+   "name": "Cenarion Boots",
+   "slot": "feet",
+   "set": "cenarion-raiment",
+   "setPiece": 8,
+   "item": 16829,
+   "icon": "inv_boots_08",
+   "displayId": 31724,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 2 Regen.",
+   "class": "druid",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "regen",
+      "stacks": 2,
+      "target": "self",
+      "duration": 4
+     }
+    ]
+   }
+  }
+ ],
+ "weapon": {
+  "id": "staff-of-dominance",
+  "name": "Staff of Dominance",
+  "slot": "mainHand",
+  "setPiece": 0,
+  "item": 18842,
+  "icon": "inv_staff_13",
+  "displayId": 34114,
+  "tier": 1,
+  "rarity": "epic",
+  "stats": "Tier 1 weapon",
+  "text": "At the start of each turn: gain 1 Regen.",
+  "class": "druid",
+  "triggers": {
+   "on_turn_start": [
+    {
+     "op": "apply",
+     "status": "regen",
+     "stacks": 1,
+     "target": "self",
+     "duration": 3
+    }
+   ]
+  }
+ }
+}

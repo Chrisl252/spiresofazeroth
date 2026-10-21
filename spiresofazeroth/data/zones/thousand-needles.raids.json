@@ -1,0 +1,69 @@
+[
+ {"id":"razorfen-downs","name":"Razorfen Downs","unlock":"act_complete","levelBand":[37,46],"lore":"The frozen, undead-ridden warren where Amnennar the Coldbringer bound the Razorfen quilboar into servitude.","encounters":{"normal":[["razorfen-servitor","withered-quilguard"],["withered-spearhide","withered-battleguard"],["frozen-soul","frost-spectre"],["withered-quilguard","withered-battleguard","frozen-soul"],["razorfen-servitor","withered-spearhide","frost-spectre"]],"elite":[["tutenkash"],["mordresh-fire-eye"],["glutton"],["ragglesnout"],["plaguemaw-the-rotting"]],"boss":[["amnennar-the-coldbringer"]]},"finalBoss":"amnennar-the-coldbringer",
+  "enemies":[
+   {"id":"razorfen-servitor","name":"Razorfen Servitor","tier":"raid","family":"undead","type":"quilboar","level":[37,39],"hp":[32,44],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":["revive"],"moves":[{"id":"bone-strike","name":"Bone Strike","intent":"attack","effects":[{"op":"damage","amount":8}],"weight":3},{"id":"disease-touch","name":"Disease Touch","intent":"debuff","effects":[{"op":"damage","amount":3},{"op":"apply","status":"disease","stacks":2,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"withered-quilguard","name":"Withered Quilguard","tier":"raid","family":"undead","type":"quilboar","level":[38,40],"hp":[34,47],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":["revive"],"moves":[{"id":"rusty-blade","name":"Rusty Blade","intent":"attack","effects":[{"op":"damage","amount":8}],"weight":3},{"id":"bone-armor","name":"Bone Armor","intent":"block","effects":[{"op":"block","amount":9,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"withered-spearhide","name":"Withered Spearhide","tier":"raid","family":"undead","type":"quilboar","level":[38,40],"hp":[34,47],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":["revive"],"moves":[{"id":"rusty-blade","name":"Rusty Blade","intent":"attack","effects":[{"op":"damage","amount":8}],"weight":3},{"id":"bone-armor","name":"Bone Armor","intent":"block","effects":[{"op":"block","amount":9,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"withered-battleguard","name":"Withered Battleguard","tier":"raid","family":"undead","type":"quilboar","level":[39,41],"hp":[36,49],"icon":"inv_misc_head_quillboar_01","npcId":null,"traits":["revive"],"moves":[{"id":"rusty-blade","name":"Rusty Blade","intent":"attack","effects":[{"op":"damage","amount":8}],"weight":3},{"id":"bone-armor","name":"Bone Armor","intent":"block","effects":[{"op":"block","amount":9,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"frozen-soul","name":"Frozen Soul","tier":"raid","family":"undead","type":"ghost","level":[39,41],"hp":[36,49],"icon":"inv_misc_head_undead_01","npcId":null,"traits":["caster","revive"],"moves":[{"id":"ghostly-touch","name":"Ghostly Touch","intent":"attack","effects":[{"op":"damage","amount":6},{"op":"apply","status":"weak","stacks":1,"target":"enemy"}],"weight":3},{"id":"wail-of-sorrow","name":"Wail of Sorrow","intent":"debuff","effects":[{"op":"apply","status":"fear","stacks":1,"target":"enemy"}],"weight":1,"cooldown":4}]},
+   {"id":"tutenkash","name":"Tuten'kash","tier":"elite","family":"beast","type":"spider","level":[37,38],"hp":[91,117],"icon":"ability_hunter_pet_spider","npcId":7355,"traits":[],
+    "moves":[
+     {"id":"web-spray","name":"Web Spray","intent":"debuff","effects":[{"op":"damage","amount":9,"target":"all_enemies"},{"op":"apply","status":"weak","stacks":2,"target":"enemy"}],"weight":2,"cooldown":3},
+     {"id":"poison-bite","name":"Poison Bite","intent":"attack","effects":[{"op":"damage","amount":18},{"op":"apply","status":"poison","stacks":5,"target":"enemy"}],"weight":3},
+     {"id":"virulent-poison","name":"Virulent Poison","intent":"debuff","effects":[{"op":"damage","amount":8},{"op":"apply","status":"poison","stacks":6,"target":"enemy"}],"weight":1,"cooldown":4},
+     {"id":"hardened-carapace","name":"Hardened Carapace","intent":"block","effects":[{"op":"block","amount":27,"target":"self"}],"weight":1,"cooldown":3}
+    ],
+    "pattern":["poison-bite","web-spray","virulent-poison","poison-bite","hardened-carapace"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Tuten'kash Enraged","pattern":["virulent-poison","poison-bite","web-spray","poison-bite"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+    ]
+   },
+   {"id":"mordresh-fire-eye","name":"Mordresh Fire Eye","tier":"elite","family":"humanoid","type":"quilboar","level":[39,40],"hp":[97,126],"icon":"inv_misc_head_quillboar_01","npcId":7357,"traits":["caster","resist:fire"],
+    "moves":[
+     {"id":"fire-nova","name":"Fire Nova","intent":"cast","effects":[{"op":"damage","amount":14,"target":"all_enemies","school":"fire"},{"op":"apply","status":"burn","stacks":3,"target":"enemy"}],"weight":2,"cooldown":3},
+     {"id":"fireball","name":"Fireball","intent":"cast","effects":[{"op":"damage","amount":18,"school":"fire"}],"weight":3},
+     {"id":"fire-shield","name":"Fire Shield","intent":"block","effects":[{"op":"block","amount":24,"target":"self"}],"weight":1,"cooldown":4}
+    ],
+    "pattern":["fireball","fire-nova","fireball","fire-shield","fire-nova"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Fire Eye","pattern":["fire-nova","fireball","fire-nova"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+    ]
+   },
+   {"id":"glutton","name":"Glutton","tier":"elite","family":"undead","type":"abomination","level":[40,41],"hp":[100,130],"icon":"inv_misc_head_scourge_01","npcId":8567,"traits":["revive"],
+    "moves":[
+     {"id":"disease-cloud","name":"Disease Cloud","intent":"attack","effects":[{"op":"damage","amount":9,"target":"all_enemies"},{"op":"apply","status":"disease","stacks":3,"target":"enemy"}],"weight":2,"cooldown":3},
+     {"id":"devour","name":"Devour","intent":"attack","effects":[{"op":"damage","amount":21},{"op":"heal","amount":9,"target":"self"}],"weight":3},
+     {"id":"rotting-flesh","name":"Rotting Flesh","intent":"buff","effects":[{"op":"apply","status":"regen","stacks":3,"target":"self"}],"weight":1,"cooldown":4}
+    ],
+    "pattern":["devour","disease-cloud","devour","rotting-flesh","disease-cloud"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Gorged","pattern":["disease-cloud","devour","devour"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+    ]
+   },
+   {"id":"ragglesnout","name":"Ragglesnout","tier":"elite","family":"undead","type":"quilboar","level":[40,41],"hp":[100,130],"icon":"inv_misc_head_quillboar_01","npcId":7354,"traits":["revive"],
+    "moves":[
+     {"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":11},{"op":"apply","status":"bleed","stacks":4,"target":"enemy"}],"weight":2,"cooldown":2},
+     {"id":"strike","name":"Strike","intent":"attack","effects":[{"op":"damage","amount":18}],"weight":3},
+     {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":17,"school":"shadow"}],"weight":2},
+     {"id":"curse-of-weakness","name":"Curse of Weakness","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":3,"target":"enemy"}],"weight":1,"cooldown":3}
+    ],
+    "pattern":["strike","rend","shadow-bolt","curse-of-weakness","strike"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Ragglesnout Raging","pattern":["rend","strike","shadow-bolt"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+    ]
+   },
+   {"id":"plaguemaw-the-rotting","name":"Plaguemaw the Rotting","tier":"elite","family":"undead","type":"abomination","level":[41,42],"hp":[102,134],"icon":"inv_misc_head_scourge_01","npcId":7356,"traits":["revive"],
+    "moves":[
+     {"id":"putrid-cloud","name":"Putrid Cloud","intent":"attack","effects":[{"op":"damage","amount":11,"target":"all_enemies"},{"op":"apply","status":"disease","stacks":4,"target":"enemy"}],"weight":2,"cooldown":3},
+     {"id":"smash","name":"Smash","intent":"attack","effects":[{"op":"damage","amount":21}],"weight":3},
+     {"id":"plague-spore","name":"Plague Spore","intent":"debuff","effects":[{"op":"damage","amount":8},{"op":"apply","status":"poison","stacks":5,"target":"enemy"}],"weight":1,"cooldown":4},
+     {"id":"rotting-skin","name":"Rotting Skin","intent":"block","effects":[{"op":"block","amount":24,"target":"self"}],"weight":1,"cooldown":3}
+    ],
+    "pattern":["smash","putrid-cloud","plague-spore","smash","rotting-skin"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Plague Spreads","pattern":["putrid-cloud","smash","plague-spore","putrid-cloud"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+    ]
+   }
+  ]
+ }
+]

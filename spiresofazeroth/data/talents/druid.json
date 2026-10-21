@@ -1,0 +1,458 @@
+{
+ "classId": "druid",
+ "trees": [
+  {
+   "id": "balance",
+   "name": "Balance",
+   "icon": "spell_nature_starfall",
+   "talents": [
+    {
+     "id": "druid:balance:0",
+     "name": "Improved Wrath",
+     "icon": "spell_nature_abolishmagic",
+     "tier": 1,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:balance:1",
+     "name": "Nature's Grasp",
+     "icon": "spell_nature_natureswrath",
+     "tier": 1,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "thorns",
+      "per": 2
+     }
+    },
+    {
+     "id": "druid:balance:2",
+     "name": "Improved Nature's Grasp",
+     "icon": "spell_nature_natureswrath",
+     "tier": 2,
+     "col": 0,
+     "max": 4,
+     "effect": {
+      "key": "thorns",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:balance:3",
+     "name": "Improved Entangling Roots",
+     "icon": "spell_nature_stranglevines",
+     "tier": 2,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "block",
+      "per": 2
+     }
+    },
+    {
+     "id": "druid:balance:4",
+     "name": "Improved Moonfire",
+     "icon": "spell_nature_starfall",
+     "tier": 3,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:balance:5",
+     "name": "Natural Weapons",
+     "icon": "inv_staff_01",
+     "tier": 3,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:balance:6",
+     "name": "Natural Shapeshifter",
+     "icon": "spell_nature_wispsplode",
+     "tier": 4,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "energy1",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:balance:7",
+     "name": "Improved Thorns",
+     "icon": "spell_nature_thorns",
+     "tier": 4,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "thorns",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:balance:8",
+     "name": "Omen of Clarity",
+     "icon": "spell_nature_crystalball",
+     "tier": 5,
+     "col": 0,
+     "max": 1,
+     "effect": {
+      "key": "draw1",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:balance:9",
+     "name": "Nature's Reach",
+     "icon": "spell_nature_naturetouchgrow",
+     "tier": 5,
+     "col": 1,
+     "max": 2,
+     "effect": {
+      "key": "goldpct",
+      "per": 5
+     }
+    },
+    {
+     "id": "druid:balance:10",
+     "name": "Vengeance",
+     "icon": "spell_nature_purge",
+     "tier": 6,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "dex",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:balance:11",
+     "name": "Moonkin Form",
+     "icon": "spell_nature_forceofnature",
+     "tier": 6,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "hp",
+      "per": 10
+     }
+    }
+   ]
+  },
+  {
+   "id": "feral",
+   "name": "Feral Combat",
+   "icon": "ability_racial_bearform",
+   "talents": [
+    {
+     "id": "druid:feral:0",
+     "name": "Ferocity",
+     "icon": "ability_hunter_pet_hyena",
+     "tier": 1,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:feral:1",
+     "name": "Feral Aggression",
+     "icon": "ability_druid_demoralizingroar",
+     "tier": 1,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "res",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:feral:2",
+     "name": "Feral Instinct",
+     "icon": "ability_ambush",
+     "tier": 2,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "dex",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:feral:3",
+     "name": "Brutal Impact",
+     "icon": "ability_druid_bash",
+     "tier": 2,
+     "col": 1,
+     "max": 2,
+     "effect": {
+      "key": "energy1",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:feral:4",
+     "name": "Thick Hide",
+     "icon": "inv_misc_pelt_bear_03",
+     "tier": 3,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "block",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:feral:5",
+     "name": "Feline Swiftness",
+     "icon": "spell_nature_spiritwolf",
+     "tier": 3,
+     "col": 1,
+     "max": 2,
+     "effect": {
+      "key": "draw1",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:feral:6",
+     "name": "Feral Charge",
+     "icon": "ability_hunter_pet_bear",
+     "tier": 4,
+     "col": 0,
+     "max": 1,
+     "effect": {
+      "key": "res",
+      "per": 2
+     }
+    },
+    {
+     "id": "druid:feral:7",
+     "name": "Sharpened Claws",
+     "icon": "inv_misc_monsterclaw_04",
+     "tier": 4,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:feral:8",
+     "name": "Improved Shred",
+     "icon": "spell_shadow_vampiricaura",
+     "tier": 5,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "res",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:feral:9",
+     "name": "Predatory Strikes",
+     "icon": "ability_hunter_pet_cat",
+     "tier": 5,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:feral:10",
+     "name": "Blood Frenzy",
+     "icon": "ability_ghoulfrenzy",
+     "tier": 6,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "regen",
+      "per": 2
+     }
+    },
+    {
+     "id": "druid:feral:11",
+     "name": "Heart of the Wild",
+     "icon": "spell_holy_blessingofagility",
+     "tier": 6,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "hp",
+      "per": 4
+     }
+    }
+   ]
+  },
+  {
+   "id": "restoration",
+   "name": "Restoration",
+   "icon": "spell_nature_healingtouch",
+   "talents": [
+    {
+     "id": "druid:restoration:0",
+     "name": "Improved Mark of the Wild",
+     "icon": "spell_nature_regeneration",
+     "tier": 1,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "dex",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:restoration:1",
+     "name": "Furor",
+     "icon": "spell_holy_blessingofstamina",
+     "tier": 1,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "res",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:restoration:2",
+     "name": "Improved Healing Touch",
+     "icon": "spell_nature_healingtouch",
+     "tier": 2,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "heal",
+      "per": 6
+     }
+    },
+    {
+     "id": "druid:restoration:3",
+     "name": "Nature's Focus",
+     "icon": "spell_nature_healingwavegreater",
+     "tier": 2,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "block",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:restoration:4",
+     "name": "Improved Enrage",
+     "icon": "ability_druid_enrage",
+     "tier": 3,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "energy1",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:restoration:5",
+     "name": "Reflection",
+     "icon": "spell_frost_windwalkon",
+     "tier": 3,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "goldpct",
+      "per": 4
+     }
+    },
+    {
+     "id": "druid:restoration:6",
+     "name": "Insect Swarm",
+     "icon": "spell_nature_insectswarm",
+     "tier": 4,
+     "col": 0,
+     "max": 1,
+     "effect": {
+      "key": "thorns",
+      "per": 3
+     }
+    },
+    {
+     "id": "druid:restoration:7",
+     "name": "Subtlety",
+     "icon": "ability_eyeoftheowl",
+     "tier": 4,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "hp",
+      "per": 3
+     }
+    },
+    {
+     "id": "druid:restoration:8",
+     "name": "Tranquil Spirit",
+     "icon": "spell_holy_elunesgrace",
+     "tier": 5,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "regen",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:restoration:9",
+     "name": "Improved Rejuvenation",
+     "icon": "spell_nature_rejuvenation",
+     "tier": 5,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "regen",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:restoration:10",
+     "name": "Gift of Nature",
+     "icon": "spell_nature_protectionformnature",
+     "tier": 6,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "heal",
+      "per": 6
+     }
+    },
+    {
+     "id": "druid:restoration:11",
+     "name": "Swiftmend",
+     "icon": "inv_relics_idolofrejuvenation",
+     "tier": 6,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "draw1",
+      "per": 1
+     }
+    }
+   ]
+  }
+ ]
+}

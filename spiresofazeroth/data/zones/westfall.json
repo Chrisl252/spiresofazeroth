@@ -1,0 +1,443 @@
+{
+ "id": "westfall",
+ "name": "Westfall",
+ "start": {"name": "Sentinel Hill Inn", "icon": "inv_misc_beer_01"},
+ "continent": "ek",
+ "act": 2,
+ "levelBand": [
+  10,
+  20
+ ],
+ "spire": {
+  "name": "Moonbrook Lighthouse",
+  "lore": "The Westfall Lighthouse looks over Moonbrook and the cliffs above the Deadmines. The Defias Brotherhood has stripped the farms, and the harvest golems no longer have a master."
+ },
+ "theme": {
+  "primary": "#c8a24a",
+  "secondary": "#3a2c14",
+  "accent": "#f2d98a",
+  "background": "farmland"
+ },
+ "zoneMechanic": {
+  "id": "harvest-golems",
+  "name": "Harvest Golems",
+  "icon": "inv_gizmo_02",
+  "text": "At the start of each turn every mechanical enemy gains 2 Armor.",
+  "hooks": {
+   "on_turn_start": [
+    {
+     "op": "apply",
+     "status": "armor",
+     "stacks": 2,
+     "target": "all_enemies",
+     "filter": {
+      "family": "mechanical"
+     }
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "sentinel-hill",
+  "name": "Sentinel Hill Inn",
+  "icon": "inv_misc_food_14",
+  "text": "Rest at Sentinel Hill: heal 25% of max HP and gain 5 Block.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 25,
+    "target": "self"
+   },
+   {
+    "op": "block",
+    "amount": 5,
+    "target": "self"
+   }
+  ]
+ },
+ "enemiesFile": "westfall.enemies.json",
+ "raidFloorsFile": "westfall.raids.json",
+ "encounters": {
+  "normal": [
+   [
+    "coyote",
+    "coyote"
+   ],
+   [
+    "young-goretusk",
+    "coyote"
+   ],
+   [
+    "defias-trapper",
+    "defias-looter"
+   ],
+   [
+    "murloc-coastrunner",
+    "murloc-coastrunner"
+   ],
+   [
+    "fleshripper",
+    "mine-spider"
+   ],
+   [
+    "harvest-watcher"
+   ],
+   [
+    "goretusk",
+    "young-goretusk"
+   ],
+   [
+    "defias-pillager",
+    "defias-knuckleduster"
+   ],
+   [
+    "coyote-packleader",
+    "coyote",
+    "coyote"
+   ],
+   [
+    "harvest-watcher",
+    "harvest-golem"
+   ],
+   [
+    "murloc-tidehunter",
+    "murloc-coastrunner",
+    "murloc-coastrunner"
+   ],
+   [
+    "defias-highwayman",
+    "defias-smuggler"
+   ],
+   [
+    "vulture",
+    "fleshripper"
+   ],
+   [
+    "defias-renegade-mage",
+    "defias-trapper"
+   ],
+   [
+    "harvest-golem",
+    "harvest-reaper"
+   ],
+   [
+    "greater-goretusk",
+    "goretusk"
+   ],
+   [
+    "defias-enchanter",
+    "defias-pillager",
+    "defias-looter"
+   ],
+   [
+    "coyote-packleader",
+    "vulture",
+    "coyote"
+   ],
+   [
+    "harvest-reaper",
+    "harvest-watcher",
+    "harvest-watcher"
+   ]
+  ],
+  "elite": [
+   [
+    "defias-overseer",
+    "defias-looter",
+    "defias-looter"
+   ],
+   [
+    "defias-evoker",
+    "defias-pillager"
+   ],
+   [
+    "foe-reaper-4000",
+    "harvest-watcher"
+   ],
+   [
+    "sergeant-brashclaw",
+    "coyote",
+    "coyote"
+   ]
+  ],
+  "boss": [
+   [
+    "edwin-vancleef",
+    "defias-blackguard",
+    "defias-blackguard"
+   ],
+   [
+    "edwin-vancleef",
+    "defias-highwayman",
+    "defias-enchanter"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "sentinel-hill",
+   "name": "Sentinel Hill",
+   "icon": "inv_misc_head_human_01",
+   "text": "Sentinel Hill's Gryphon Master and Captain Danuvin want Defias heads on the wall.",
+   "options": [
+    {
+     "label": "Take the contract (take 5 damage, +45 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 5,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 45
+      }
+     ]
+    },
+    {
+     "label": "Share the watchfire (heal 8)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 8,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Move on",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "saldeans-farm",
+   "name": "Saldean's Farm",
+   "icon": "inv_misc_food_14",
+   "text": "Farmer Saldean is plagued by Harvest Golems who no longer obey anyone.",
+   "options": [
+    {
+     "label": "Smash the golems (take 6 damage, +40 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 40
+      }
+     ]
+    },
+    {
+     "label": "Help with the crops (+20 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 20
+      }
+     ]
+    },
+    {
+     "label": "Leave him to it",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "dead-acre",
+   "name": "The Dead Acre",
+   "icon": "spell_shadow_raisedead",
+   "text": "The Dead Acre stirs after dark; the Sentinel Hill farmers pay a bounty for what walks there.",
+   "options": [
+    {
+     "label": "Clear the acre (take 7 damage, gain a card reward)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 7,
+       "target": "self"
+      },
+      {
+       "op": "random_card",
+       "pool": "class",
+       "rarity": "common",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Pray at the graves (heal 6)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 6,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Avoid it",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "moonbrook",
+   "name": "Moonbrook",
+   "icon": "inv_misc_book_11",
+   "text": "Moonbrook's Defias held the village hostage. Stolen goods are heaped in the burned inn.",
+   "options": [
+    {
+     "label": "Raid the stash (take 5 damage, +50 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 5,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 50
+      }
+     ]
+    },
+    {
+     "label": "Search the ruins (+20 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 20
+      }
+     ]
+    },
+    {
+     "label": "Move on",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "gold-dust-exchange",
+   "name": "Gold Dust Exchange",
+   "icon": "inv_misc_coin_01",
+   "text": "The Gold Dust Exchange crew offers to forge a deal with Kam's Brotherhood on your behalf.",
+   "options": [
+    {
+     "label": "Take the deal (-25 gold, +8 max HP)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": -25
+      },
+      {
+       "op": "max_hp",
+       "amount": 8
+      }
+     ],
+     "requires": {
+      "gold": 25
+     }
+    },
+    {
+     "label": "Pick a pocket (take 3 damage, +30 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 3,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 30
+      }
+     ]
+    },
+    {
+     "label": "Decline",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "cruel-barb",
+   "name": "Cruel Barb",
+   "icon": "inv_sword_14",
+   "rarity": "rare",
+   "itemId": 5191,
+   "zone": "westfall",
+   "class": null,
+   "text": "Deadmines dagger. Start each combat with 1 Strength.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "smites-mighty-hammer",
+   "name": "Smite's Mighty Hammer",
+   "icon": "inv_hammer_05",
+   "rarity": "rare",
+   "itemId": 7230,
+   "zone": "westfall",
+   "class": null,
+   "text": "Mr. Smite's hammer. Your attacks deal 2 damage to all enemies.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "damage",
+      "amount": 2,
+      "target": "all_enemies"
+     }
+    ]
+   }
+  },
+  {
+   "id": "cookies-tenderizer",
+   "name": "Cookie's Tenderizer",
+   "icon": "inv_hammer_02",
+   "rarity": "uncommon",
+   "itemId": 5197,
+   "zone": "westfall",
+   "class": null,
+   "text": "Cookie's mallet. Gain 2 Block at the start of each turn.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "block",
+      "amount": 2,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "emberstone-staff",
+   "name": "Emberstone Staff",
+   "icon": "inv_staff_13",
+   "rarity": "rare",
+   "itemId": 5201,
+   "zone": "westfall",
+   "class": null,
+   "text": "Greenskin's staff. Deal 3 damage to a random enemy at the start of each turn.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "damage",
+      "amount": 3,
+      "target": "enemy"
+     }
+    ]
+   }
+  }
+ ]
+}

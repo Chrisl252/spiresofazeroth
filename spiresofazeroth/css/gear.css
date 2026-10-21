@@ -1,0 +1,122 @@
+/* Spires of Azeroth - gear: the HUD gear strip, tooltips, the loot screen (chest burst + item plate), codex gear tab. Stage px (1920x1080 design space).
+   Fonts/tokens come from stage.css + screens.css (--f-ui frizqt, --gold, --ink). Quality colours: wow-ui.css (.q-epic ...). */
+
+/* ---------- gear strip (16 paper-doll sockets + set badge) ---------- */
+.gs-strip { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.gs-row { display: grid; grid-template-columns: repeat(8, 44px); gap: 5px; }
+.gs-sock { position: relative; display: block; width: 44px; height: 44px; border: 2px solid var(--q, #6b5220); border-radius: 6px; overflow: hidden; background: #0c0905; box-shadow: 0 0 8px var(--q, transparent); }
+.gs-sock img { width: 100%; height: 100%; display: block; object-fit: cover; margin: 0; }
+.gs-sock--off { border-color: #3a2f1c; box-shadow: none; } .gs-sock--off img { filter: grayscale(1) brightness(.55); opacity: .32; }
+.gs-sock--on:focus-visible { outline: 2px solid var(--gold, #ffd100); outline-offset: 2px; }
+.gs-sock--up::after { content: "+"; position: absolute; right: 2px; bottom: -2px; font: 22px/1 var(--f-ui, serif); color: var(--q-uncommon); text-shadow: 0 1px 2px #000, 0 0 4px #000; }
+.gs-sock--flash { animation: gs-pulse 1.4s ease-out 1; }
+@keyframes gs-pulse { 0% { box-shadow: 0 0 0 0 #ffe27a, 0 0 22px 8px #ffd34d; transform: scale(1.35); } 60% { box-shadow: 0 0 0 6px rgba(255,226,122,0), 0 0 16px 4px #ffd34d; transform: scale(1); } 100% { box-shadow: 0 0 8px var(--q, transparent); } }
+.gs-badge { display: inline-flex; align-items: baseline; gap: 10px; padding: 5px 14px 4px; border: 2px solid #6b5220; border-radius: 6px; background: #1a130b; font-family: var(--f-ui, serif); color: var(--q-epic); }
+.gs-badge b { font-weight: 400; font-size: 24px; letter-spacing: .02em; } .gs-badge span { font-family: var(--f-num, monospace); font-size: 26px; color: #ffe27a; }
+.gs-badge--full { border-color: #ffd34d; box-shadow: 0 0 14px rgba(255,211,77,.55); }
+.sp-portrait .gs-row { grid-template-columns: repeat(8, 54px); } .sp-portrait .gs-sock { width: 54px; height: 54px; } .sp-portrait .gs-badge b { font-size: 30px; }
+.sx-bar .gs-strip { flex: 1 1 auto; min-width: 0; }
+.gs-tip__slot { color: #b8a77f; } .gs-tip__set { display: block; margin-top: 6px; color: #ffd45a; } .gs-on { color: #1eff00; } .gs-off { color: #8c8c8c; }
+
+/* compact: 2 rows of 8 for the combat top bar */
+.gs-strip--bar { flex-wrap: nowrap; gap: 8px; min-width: 0; } .gs-strip--bar .gs-row { flex: 0 0 auto; grid-template-columns: repeat(8, 24px); gap: 3px; } .gs-strip--bar .gs-sock { width: 24px; height: 24px; border-width: 1px; border-radius: 4px; }
+.gs-strip--bar .gs-badge { flex: 0 0 auto; padding: 1px 8px; white-space: nowrap; } .gs-strip--bar .gs-badge b { display: none; } .gs-strip--bar .gs-badge span { font-size: 20px; }
+.sp-portrait .gs-strip--bar .gs-row { grid-template-columns: repeat(8, 44px); } .sp-portrait .gs-strip--bar .gs-sock { width: 44px; height: 44px; }
+
+/* ---------- loot screen ---------- */
+.lt { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; cursor: pointer; overflow: hidden; }
+.lt .sx-banner { margin-top: 26px; position: relative; z-index: 5; } .lt .sx-banner h2 { font-size: 72px; }
+.lt-gold { position: absolute; right: 90px; top: 40px; z-index: 6; display: flex; align-items: center; gap: 12px; opacity: 0; font-size: 56px; color: #ffe27a; text-shadow: 0 3px 4px #000; }
+.lt-gold img { width: 58px; height: 58px; margin: 0; border-radius: 50%; } .lt-gold b { font-weight: 400; font-family: var(--f-num, monospace); }
+.lt-gold.on { opacity: 1; transition: opacity .2s; } .lt-gold.punch { animation: lt-punch .7s cubic-bezier(.2,1.6,.3,1) 1; }
+@keyframes lt-punch { 0% { transform: scale(.2); } 55% { transform: scale(1.7); filter: drop-shadow(0 0 18px #ffd34d); } 100% { transform: scale(1); } }
+.lt-shaft { position: absolute; z-index: 2; width: 380px; height: 980px; transform: translate(-50%, -100%); opacity: 0; pointer-events: none; mix-blend-mode: screen; transform-origin: 50% 100%;
+  background: linear-gradient(0deg, rgba(255,226,140,.95), rgba(255,200,80,.45) 30%, rgba(255,200,80,0) 100%); clip-path: polygon(40% 100%, 60% 100%, 100% 0, 0 0); }
+.lt-shaft.on { animation: lt-shaft 1.9s ease-out 1 forwards; }
+@keyframes lt-shaft { 0% { opacity: 0; transform: translate(-50%, -100%) scaleX(.2); } 14% { opacity: 1; transform: translate(-50%, -100%) scaleX(1); } 100% { opacity: 0; transform: translate(-50%, -100%) scaleX(1.5); } }
+.lt-plate { position: absolute; z-index: 4; left: 0; right: 0; top: 190px; display: flex; justify-content: center; opacity: 0; pointer-events: none; }
+.lt-plate.on { opacity: 1; pointer-events: auto; } .lt-plate .lt-item { flex: 0 0 auto; }
+.lt-item { position: relative; display: flex; align-items: center; gap: 36px; width: 1020px; padding: 26px 40px 26px 26px; border: 4px solid var(--q, #a335ee); border-radius: 12px;
+  background: url("/assets/ui/classhall-stone-tile.png") 0 0 / 256px, #17120c; box-shadow: inset 0 0 0 2px rgba(0,0,0,.7), inset 0 0 50px rgba(0,0,0,.6), 0 0 44px color-mix(in srgb, var(--q, #a335ee) 55%, transparent), 0 16px 34px rgba(0,0,0,.7); }
+.lt-item::before { content: ""; position: absolute; inset: 6px; border: 1px solid rgba(201,162,75,.3); border-radius: 7px; pointer-events: none; }
+.lt-item__frame { flex: 0 0 320px; width: 320px; height: 320px; border: 6px solid var(--q, #a335ee); border-radius: 14px; overflow: hidden; background: #000; box-shadow: 0 0 30px var(--q, #a335ee), inset 0 0 20px #000; }
+.lt-item__frame img { width: 100%; height: 100%; display: block; object-fit: cover; margin: 0; image-rendering: auto; }
+.lt-item__body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.lt-item__name { margin: 0; font-family: var(--f-ui, "frizqt", serif); font-weight: 400; font-size: 52px; line-height: 1.05; color: var(--q, #a335ee); text-shadow: 0 3px 3px #000, 0 0 12px color-mix(in srgb, var(--q, #a335ee) 50%, transparent); }
+.lt-item.q-uncommon .lt-item__name { color: var(--q-uncommon); } .lt-up { color: var(--q-uncommon); }
+.lt-item__slot { font-size: 26px; color: #b8a77f; } .lt-item__slot b { color: #ffe27a; font-weight: 400; }
+.lt-item__text { margin: 0; font-size: 31px; line-height: 1.22; color: #fff4d6; text-shadow: 0 2px 4px #000; }
+.lt-item__was { margin: 0; font-size: 24px; color: #8c8c8c; }
+.lt-set { margin-top: 6px; padding-top: 10px; border-top: 1px solid rgba(201,162,75,.35); }
+.lt-set__row { display: flex; justify-content: space-between; align-items: baseline; font-size: 30px; } .lt-set__row b { font-weight: 400; color: var(--q-epic); } .lt-set__row span { font-family: var(--f-num, monospace); color: #ffe27a; font-size: 34px; }
+.lt-pips { display: flex; gap: 8px; margin: 8px 0 6px; } .lt-pips i { flex: 1; height: 16px; border: 2px solid #4a3a1c; border-radius: 4px; background: #120d07; }
+.lt-pips i.on { background: linear-gradient(180deg, #d9a6ff, #8a2fd0); border-color: #c78bff; } .lt-pips i.new { animation: lt-pip 1.1s ease-out 1; box-shadow: 0 0 14px 3px #e7b8ff; }
+@keyframes lt-pip { 0% { transform: scaleY(2.4); filter: brightness(2.4); } 100% { transform: none; filter: none; } }
+.lt-set__next { font-size: 23px; color: #9d9d9d; line-height: 1.25; } .lt-set__next--full { color: #ffd34d; }
+.lt-bonus { margin-top: 4px; font-size: 25px; color: #1eff00; text-shadow: 0 2px 3px #000; } .lt-bonus b { color: #ffe27a; font-weight: 400; }
+.lt-strip { position: absolute; z-index: 4; left: 50%; bottom: 150px; transform: translateX(-50%); display: flex; justify-content: center; }
+.lt-strip .gs-sock { width: 52px; height: 52px; } .lt-strip .gs-row { grid-template-columns: repeat(8, 52px); }
+.lt-go { position: absolute; z-index: 5; left: 0; right: 0; bottom: 56px; display: flex; justify-content: center; pointer-events: none; }
+.lt-hint { opacity: 0; font: 34px var(--f-ui, serif); color: #ffe27a; letter-spacing: .1em; text-transform: uppercase; text-shadow: 0 3px 4px #000; background: none; border: 0; cursor: pointer; pointer-events: auto; }
+.lt-hint.on { opacity: 1; animation: lt-blink 1.6s ease-in-out infinite; } @keyframes lt-blink { 50% { opacity: .45; } }
+.lt-flatchest { position: absolute; z-index: 3; transform: translate(-50%, -100%); } .lt-flatchest img { width: 220px; height: 220px; margin: 0; filter: drop-shadow(0 12px 12px #000); }
+
+.sp-portrait .lt-plate { top: 300px; }
+.sp-portrait .lt-item { flex-direction: column; width: 980px; gap: 26px; padding: 30px; text-align: center; }
+.sp-portrait .lt-item__name { font-size: 64px; } .sp-portrait .lt-item__text { font-size: 38px; } .sp-portrait .lt-item__slot { font-size: 32px; } .sp-portrait .lt-set__row { font-size: 36px; } .sp-portrait .lt-set__next, .sp-portrait .lt-bonus { font-size: 30px; }
+.sp-portrait .lt-gold { right: 40px; top: 30px; font-size: 64px; } .sp-portrait .lt .sx-banner h2 { font-size: 100px; }
+.sp-portrait .lt-strip { bottom: 360px; } .sp-portrait .lt-strip .gs-sock { width: 100px; height: 100px; } .sp-portrait .lt-strip .gs-row { grid-template-columns: repeat(8, 100px); } .sp-portrait .lt-hint { font-size: 56px; } .sp-portrait .lt-go { bottom: 90px; }
+
+/* reward-step extras */
+.sx-plate__slot { display: block; margin-top: 4px; font-size: var(--ss); color: #b8a77f; }
+.sx-codex__set { grid-column: 1 / -1; padding: 12px 18px; border: 1px solid rgba(201,162,75,.4); border-radius: 6px; background: rgba(0,0,0,.18); } .sx-codex__set h3 { margin: 0 0 6px; font-weight: 400; color: #5a1f8a; } .sx-codex__set p { margin: 4px 0; }
+
+@media (prefers-reduced-motion: reduce) { .gs-sock--flash, .lt-gold.punch, .lt-shaft.on, .lt-pips i.new, .lt-hint.on { animation: none; } .lt-shaft { display: none; } }
+.sp-reduce .gs-sock--flash, .sp-reduce .lt-gold.punch, .sp-reduce .lt-shaft.on, .sp-reduce .lt-pips i.new { animation: none; } .sp-reduce .lt-shaft { display: none; }
+
+/* ---- LootFrame (classic WoW loot window): dark grey panel, portrait ring top-left, gold "Items" tab, red X, quality-coloured rows ---- */
+.lf { position: absolute; z-index: 6; box-sizing: border-box; padding: 92px 26px 26px; border: 4px solid #4b4b50; border-radius: 14px; background: linear-gradient(180deg, #2a2a2e, #17171a 70%); box-shadow: 0 0 0 3px #0a0a0b, 0 18px 46px rgba(0,0,0,.65), inset 0 0 0 2px rgba(255,255,255,.05); animation: lf-in .45s cubic-bezier(.2,1.3,.3,1) 1; transform-origin: 20% 0; }
+.lf.out { opacity: 0; transform: translateY(-14px) scale(.96); transition: opacity .3s, transform .3s; }
+.lf--still, .sp-reduce .lf { animation: none; }
+@keyframes lf-in { from { opacity: 0; transform: translateX(60px) scale(.92); } }
+.lf-portrait { position: absolute; left: -30px; top: -38px; width: 130px; height: 130px; border-radius: 50%; box-sizing: border-box; border: 7px solid #8d6e2b; background: radial-gradient(circle at 50% 40%, #3b3b40, #0c0c0e 78%); box-shadow: 0 0 0 3px #0a0a0b, 0 6px 14px #000; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.lf-portrait img { width: 88px; height: 88px; margin: 0; border-radius: 50%; }
+.lf-tab { position: absolute; left: 118px; right: 82px; top: 14px; height: 54px; line-height: 50px; text-align: center; font-family: var(--f-ui, "frizqt", serif); font-size: 34px; color: #ffd34d; text-shadow: 0 2px 2px #000; border: 3px solid #5a5a60; border-radius: 8px; background: linear-gradient(180deg, #1c1c20, #0e0e10); }
+.lf-x { position: absolute; right: 18px; top: 12px; width: 58px; height: 58px; padding: 0; border: 3px solid #5a1010; border-radius: 8px; background: linear-gradient(180deg, #c33, #7a0f0f); color: #ffe4a0; font: 700 32px/1 var(--f-ui, serif); cursor: pointer; box-shadow: inset 0 0 0 2px rgba(255,255,255,.15); }
+.lf-x:hover { filter: brightness(1.25); }
+.lf-list { display: flex; flex-direction: column; gap: 8px; }
+.lf-row { display: flex; align-items: center; gap: 22px; width: 100%; min-height: 92px; padding: 10px 16px; box-sizing: border-box; border: 2px solid rgba(255,255,255,.07); border-radius: 8px; background: linear-gradient(90deg, rgba(255,255,255,.07), rgba(0,0,0,.35)); cursor: pointer; text-align: left; transition: transform .38s ease-in, opacity .38s ease-in, max-height .38s ease-in .1s, min-height .38s ease-in .1s, padding .38s ease-in .1s, margin .38s ease-in .1s; max-height: 120px; }
+.lf-row:hover { background: linear-gradient(90deg, rgba(255,226,122,.22), rgba(0,0,0,.3)); border-color: rgba(255,226,122,.5); }
+.lf-row.gone { transform: translateX(120%); opacity: 0; max-height: 0; min-height: 0; padding-top: 0; padding-bottom: 0; margin: -4px 0; pointer-events: none; overflow: hidden; }
+.lf-ico { position: relative; flex: 0 0 72px; width: 72px; height: 72px; box-sizing: border-box; border: 3px solid var(--q, #fff); border-radius: 8px; background: #000; }
+.lf-ico img { width: 100%; height: 100%; display: block; margin: 0; border-radius: 4px; object-fit: cover; }
+.lf-row--coin .lf-ico { border-color: #8a6a22; }
+.lf-qty { position: absolute; right: 2px; bottom: -2px; font: normal 26px/1 var(--f-ui, serif); color: #fff; text-shadow: 0 0 3px #000, 0 2px 2px #000, 2px 2px 0 #000; }
+.lf-name { font-family: var(--f-ui, "frizqt", serif); font-size: 36px; line-height: 1.1; color: var(--q, #fff); text-shadow: 0 2px 3px #000; }
+.lf-name.q-common { color: #fff; } .lf-row--coin .lf-name { color: #ffd34d; }
+.lf-foot { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 18px; }
+.lf-hint { font-size: 22px; color: #8c8c92; }
+.lf--portrait { padding-top: 96px; } .lf--portrait .lf-name { font-size: 46px; } .lf--portrait .lf-row { min-height: 110px; max-height: 140px; } .lf--portrait .lf-ico { flex-basis: 86px; width: 86px; height: 86px; } .lf--portrait .lf-hint { font-size: 28px; }
+.lf--portrait .lf-portrait { width: 150px; height: 150px; } .lf--portrait .lf-portrait img { width: 100px; height: 100px; } .lf--portrait .lf-tab { left: 140px; font-size: 40px; }
+
+/* ===== victory loot frame (inline LootFrame) + potion belt slots [victory-merge] ===== */
+.lf--inline { position: relative; z-index: 2; width: 100%; max-width: 760px; margin: 18px 0 0 36px; padding: 74px 22px 18px; animation: none; flex: 0 1 auto; min-height: 0; }
+.lf--inline .lf-tab { top: 10px; height: 48px; line-height: 44px; font-size: 30px; left: 112px; right: 22px; }
+.lf--inline .lf-portrait { width: 112px; height: 112px; top: -34px; left: -34px; } .lf--inline .lf-portrait img { width: 76px; height: 76px; }
+.lf--inline .lf-list { gap: 6px; }
+.lf--inline .lf-row { min-height: 78px; max-height: 96px; padding: 7px 14px; gap: 18px; }
+.lf--inline .lf-ico { flex-basis: 60px; width: 60px; height: 60px; } .lf--inline .lf-name { font-size: 31px; }
+.lf--tight .lf-row { min-height: 66px; max-height: 80px; padding: 5px 12px; } .lf--tight .lf-ico { flex-basis: 52px; width: 52px; height: 52px; } .lf--tight .lf-name { font-size: 28px; }
+.lf--inline .lf-foot { margin-top: 12px; }
+.lf-row--choose::after { content: "choose one"; margin-left: auto; font: 20px var(--f-ui, serif); color: #b8a77f; text-transform: uppercase; letter-spacing: .08em; }
+.lf-row--potion .lf-ico { border-radius: 8px; }
+.lf-hint { font-size: 20px; }
+/* potion belt: 3 fixed slots, empty = the classic empty item slot */
+.sp-potions2 .sp-pot2 { display: inline-block; width: 56px; height: 56px; border-radius: 8px; background: #0c0905; box-shadow: 0 0 0 2px #7a6230, 0 0 0 4px #050302; }
+.sp-potions2 .sp-pot2.is-empty { opacity: 1; background: url("/assets/ui/blizzard/emptyslot.png") center / 100% 100% no-repeat, #0c0905; }
+.sp-potions2 .sp-pot2 img { width: 100%; height: 100%; border-radius: 6px; object-fit: cover; margin: 0; display: block; }
+.sp-potions2 .sp-pot2.is-sel { box-shadow: 0 0 0 3px #ffe07a, 0 0 18px #ffd45a, 0 0 0 6px #050302; }
+.sp-belt { padding: 6px 10px; gap: 8px; display: flex; border-radius: 12px; }
+.pot-flash { animation: pot-flash 1.2s ease-out 1; }
+@keyframes pot-flash { 0% { transform: scale(1.7); box-shadow: 0 0 0 4px #ffe27a, 0 0 30px 10px #ffd34d; } 50% { transform: scale(1); box-shadow: 0 0 0 4px #ffe27a, 0 0 22px 6px #ffd34d; } 100% { box-shadow: 0 0 0 2px #7a6230, 0 0 0 4px #050302; } }
+/* ===== /victory loot ===== */

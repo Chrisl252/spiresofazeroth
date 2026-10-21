@@ -1,0 +1,2189 @@
+{
+  "id": "priest",
+  "name": "Priest",
+  "icon": "classicon_priest",
+  "color": "#FFFFFF",
+  "lore": "Master of Holy Light and Shadow madness: protect yourself with sacred Power Word shields, or enter Shadowform to siphon life from enemies.",
+  "startingHp": 75,
+  "startingGold": 99,
+  "defaultContinent": "ek",
+  "resource": {
+    "id": "form",
+    "name": "Shadowform",
+    "tip": "Toggle between Holy and Shadow. In Shadowform, Shadow spells cost less and hit harder, while Holy spells cost more.",
+    "icon": "spell_shadow_shadowform",
+    "max": 1,
+    "rules": "Toggle into Shadowform to reduce dark spell costs and siphon health from enemies. Drop out of Shadowform when you need pure Holy protection and restorative healing.",
+    "energyPerTurn": 3,
+    "startOfCombat": 0,
+    "gainOnDamageDealt": 0,
+    "gainOnDamageTaken": 0,
+    "decayPerTurn": 0
+  },
+  "archetypes": [
+    {
+      "id": "discipline",
+      "name": "Discipline",
+      "icon": "spell_holy_wordfortitude",
+      "text": "Shields, wards and energy tricks; Power Infusion and Mana Burn keep you ahead of the curve."
+    },
+    {
+      "id": "holy",
+      "name": "Holy",
+      "icon": "spell_holy_flashheal",
+      "text": "Big heals, Renew and Lightwell regen, with Smite and Holy Nova to close fights."
+    },
+    {
+      "id": "shadow",
+      "name": "Shadow",
+      "icon": "spell_shadow_shadowwordpain",
+      "text": "Enter Shadowform, stack DoTs and drain life with Vampiric Embrace."
+    }
+  ],
+  "relics": [
+    {
+      "id": "benediction",
+      "name": "Benediction",
+      "icon": "inv_staff_30",
+      "rarity": "rare",
+      "itemId": 18608,
+      "zone": null,
+      "class": "priest",
+      "text": "Start each combat with 2 Regen for 5 turns. Holy cards deal 2 extra damage.",
+      "triggers": {
+        "on_combat_start": [
+          {
+            "op": "apply",
+            "status": "regen",
+            "stacks": 2,
+            "target": "self",
+            "duration": 5
+          }
+        ],
+        "on_card_played": [
+          {
+            "op": "conditional",
+            "if": {
+              "type": "school_last",
+              "school": "holy"
+            },
+            "then": [
+              {
+                "op": "damage",
+                "amount": 2,
+                "school": "holy"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "eye-of-the-dead",
+      "name": "Eye of the Dead",
+      "icon": "inv_misc_eye_01",
+      "rarity": "uncommon",
+      "itemId": null,
+      "zone": null,
+      "class": "priest",
+      "text": "Whenever you play a shadow card, gain 2 Block.",
+      "triggers": {
+        "on_card_played": [
+          {
+            "op": "conditional",
+            "if": {
+              "type": "school_last",
+              "school": "shadow"
+            },
+            "then": [
+              {
+                "op": "block",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "starterDeck": [
+    "smite",
+    "smite",
+    "smite",
+    "shadow-word-pain",
+    "power-word-shield",
+    "power-word-shield",
+    "power-word-shield",
+    "power-word-shield",
+    "lesser-heal",
+    "mind-blast"
+  ],
+  "units": {},
+  "spellIdSource": "Classic rank-1 ids from memory (unverified; DB confirmed only Fireball 133 in datamine). Spirit of Redemption has null (racial passive).",
+  "notes": [
+    "formCost: card-level {\"shadowform\": n}. Engine adds n to the card's energy cost while form == shadowform (min 0). Shadow cards -1, holy cards +1.",
+    "Shadowform card toggles: set_form shadowform when not active, set_form none when active.",
+    "NEW status vampiric_embrace (kind buff, intensity): after you deal shadow damage, heal 25% of it per stack (rounded down, min 1). Hook in status.js.",
+    "Mind Control: `taunted` applied to an ENEMY means its attacks target another enemy instead of the player for the duration (alone: the attack is wasted).",
+    "revive pct on a power card arms a once-per-combat revive; the heal after it is applied on revive.",
+    "target_is_family takes `family` (string or array). enemy_intent takes `intent` (e.g. cast). chance uses `pct`. hp_below_pct uses `pct` on the actor (add \"target\":\"enemy\" for the foe).",
+    "school_last: true when the last card played this combat had the given school (relic triggers).",
+    "Statuses used: regen poison burn slow weak curse stealth fear silence stun disease taunted armor thorns dexterity frail vulnerable strength."
+  ],
+  "tokens": [],
+  "cards": [
+    {
+      "id": "smite",
+      "name": "Smite",
+      "icon": "spell_holy_holysmite",
+      "spellId": 585,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "holy",
+      "cost": 1,
+      "formCost": {
+        "shadowform": 1
+      },
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 holy damage.",
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 6,
+          "school": "holy"
+        }
+      ],
+      "upgrade": {
+        "name": "Smite (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 holy damage.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 9,
+            "school": "holy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shadow-word-pain",
+      "name": "Shadow Word: Pain",
+      "icon": "spell_shadow_shadowwordpain",
+      "spellId": 589,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "shadow",
+      "cost": 1,
+      "formCost": {
+        "shadowform": -1
+      },
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 4 shadow damage. Apply 6 Poison.",
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 4,
+          "school": "shadow"
+        },
+        {
+          "op": "apply",
+          "status": "poison",
+          "stacks": 6,
+          "target": "enemy"
+        }
+      ],
+      "upgrade": {
+        "name": "Shadow Word: Pain (Rank 2)",
+        "cost": 1,
+        "text": "Deal 6 shadow damage. Apply 9 Poison.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 6,
+            "school": "shadow"
+          },
+          {
+            "op": "apply",
+            "status": "poison",
+            "stacks": 9,
+            "target": "enemy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "power-word-shield",
+      "name": "Power Word: Shield",
+      "icon": "spell_holy_powerwordshield",
+      "spellId": 17,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "basic",
+      "archetype": "discipline",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 5 Block.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 5
+        }
+      ],
+      "upgrade": {
+        "name": "Power Word: Shield (Rank 2)",
+        "cost": 1,
+        "text": "Gain 8 Block.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 8
+          }
+        ]
+      }
+    },
+    {
+      "id": "lesser-heal",
+      "name": "Lesser Heal",
+      "icon": "spell_holy_lesserheal",
+      "spellId": 2050,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "basic",
+      "archetype": "holy",
+      "cost": 1,
+      "formCost": {
+        "shadowform": 1
+      },
+      "target": "self",
+      "flags": [],
+      "text": "Gain 5 Block. Heal 4 HP.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 5
+        },
+        {
+          "op": "heal",
+          "amount": 4,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Lesser Heal (Rank 2)",
+        "cost": 1,
+        "text": "Gain 8 Block. Heal 6 HP.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 8
+          },
+          {
+            "op": "heal",
+            "amount": 6,
+            "target": "self"
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "id": "mind-blast",
+      "name": "Mind Blast",
+      "icon": "spell_shadow_unholyfrenzy",
+      "spellId": 8092,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "shadow",
+      "cost": 2,
+      "formCost": {
+        "shadowform": -1
+      },
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 14 shadow damage.",
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 14,
+          "school": "shadow"
+        }
+      ],
+      "upgrade": {
+        "name": "Mind Blast (Rank 2)",
+        "cost": 2,
+        "text": "Deal 18 shadow damage.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 18,
+            "school": "shadow"
+          }
+        ]
+      }
+    },
+    {
+      "id": "heal",
+      "name": "Heal",
+      "icon": "spell_holy_heal",
+      "spellId": 2054,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "holy",
+      "cost": 2,
+      "formCost": {
+        "shadowform": 1
+      },
+      "target": "self",
+      "flags": [],
+      "text": "Gain 8 Block. Heal 14 HP.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 8
+        },
+        {
+          "op": "heal",
+          "amount": 14,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Heal (Rank 2)",
+        "cost": 2,
+        "text": "Gain 11 Block. Heal 19 HP.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 11
+          },
+          {
+            "op": "heal",
+            "amount": 19,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "flash-heal",
+      "name": "Flash Heal",
+      "icon": "spell_holy_flashheal",
+      "spellId": 2061,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "holy",
+      "cost": 1,
+      "formCost": {
+        "shadowform": 1
+      },
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Gain 6 Block. Heal 9 HP. Exhaust.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 6
+        },
+        {
+          "op": "heal",
+          "amount": 9,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Flash Heal (Rank 2)",
+        "cost": 1,
+        "text": "Gain 9 Block. Heal 12 HP. Exhaust.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 9
+          },
+          {
+            "op": "heal",
+            "amount": 12,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "renew",
+      "name": "Renew",
+      "icon": "spell_holy_renew",
+      "spellId": 139,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "holy",
+      "cost": 1,
+      "formCost": {
+        "shadowform": 1
+      },
+      "target": "self",
+      "flags": [],
+      "text": "Gain 6 Block. Apply 3 Regen for 4 turns.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 6
+        },
+        {
+          "op": "apply",
+          "status": "regen",
+          "stacks": 3,
+          "target": "self",
+          "duration": 4
+        }
+      ],
+      "upgrade": {
+        "name": "Renew (Rank 2)",
+        "cost": 1,
+        "text": "Gain 9 Block. Apply 4 Regen for 4 turns.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 9
+          },
+          {
+            "op": "apply",
+            "status": "regen",
+            "stacks": 4,
+            "target": "self",
+            "duration": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "holy-fire",
+      "name": "Holy Fire",
+      "icon": "spell_holy_searinglight",
+      "spellId": 14914,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "holy",
+      "cost": 2,
+      "formCost": {
+        "shadowform": 1
+      },
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 12 holy damage. Apply 4 Burn.",
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 12,
+          "school": "holy"
+        },
+        {
+          "op": "apply",
+          "status": "burn",
+          "stacks": 4,
+          "target": "enemy"
+        }
+      ],
+      "upgrade": {
+        "name": "Holy Fire (Rank 2)",
+        "cost": 2,
+        "text": "Deal 16 holy damage. Apply 6 Burn.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 16,
+            "school": "holy"
+          },
+          {
+            "op": "apply",
+            "status": "burn",
+            "stacks": 6,
+            "target": "enemy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mind-flay",
+      "name": "Mind Flay",
+      "icon": "spell_shadow_siphonmana",
+      "spellId": 15407,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "shadow",
+      "cost": 1,
+      "formCost": {
+        "shadowform": -1
+      },
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 7 shadow damage. Apply 2 Weak.",
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 7,
+          "school": "shadow"
+        },
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 2,
+          "target": "enemy"
+        }
+      ],
+      "upgrade": {
+        "name": "Mind Flay (Rank 2)",
+        "cost": 1,
+        "text": "Deal 10 shadow damage. Apply 2 Weak.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 10,
+            "school": "shadow"
+          },
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 2,
+            "target": "enemy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "inner-fire",
+      "name": "Inner Fire",
+      "icon": "spell_holy_innerfire",
+      "spellId": 588,
+      "rank": 1,
+      "type": "power",
+      "rarity": "common",
+      "archetype": "discipline",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Power. Gain 8 Block and 3 Armor for the rest of combat.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 8
+        },
+        {
+          "op": "apply",
+          "status": "armor",
+          "stacks": 3,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Inner Fire (Rank 2)",
+        "cost": 1,
+        "text": "Power. Gain 11 Block and 4 Armor for the rest of combat.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 11
+          },
+          {
+            "op": "apply",
+            "status": "armor",
+            "stacks": 4,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "power-word-fortitude",
+      "name": "Power Word: Fortitude",
+      "icon": "spell_holy_wordfortitude",
+      "spellId": 1243,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "discipline",
+      "cost": 1,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Gain 6 Block, 3 max HP and heal 6. Exhaust.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 6
+        },
+        {
+          "op": "max_hp",
+          "amount": 3
+        },
+        {
+          "op": "heal",
+          "amount": 6,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Power Word: Fortitude (Rank 2)",
+        "cost": 1,
+        "text": "Gain 9 Block, 4 max HP and heal 8. Exhaust.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 9
+          },
+          {
+            "op": "max_hp",
+            "amount": 4
+          },
+          {
+            "op": "heal",
+            "amount": 8,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dispel-magic",
+      "name": "Dispel Magic",
+      "icon": "spell_holy_dispelmagic",
+      "spellId": 527,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "discipline",
+      "cost": 0,
+      "target": "enemy",
+      "flags": [],
+      "text": "Remove Weak and Frail from yourself and Strength from the enemy. Draw 1.",
+      "effects": [
+        {
+          "op": "remove",
+          "status": "weak",
+          "target": "self"
+        },
+        {
+          "op": "remove",
+          "status": "frail",
+          "target": "self"
+        },
+        {
+          "op": "remove",
+          "status": "strength",
+          "target": "enemy"
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Dispel Magic (Rank 2)",
+        "cost": 0,
+        "text": "Remove Weak, Frail from you; Strength, Armor from the enemy. Draw 1.",
+        "effects": [
+          {
+            "op": "remove",
+            "status": "weak",
+            "target": "self"
+          },
+          {
+            "op": "remove",
+            "status": "frail",
+            "target": "self"
+          },
+          {
+            "op": "remove",
+            "status": "strength",
+            "target": "enemy"
+          },
+          {
+            "op": "remove",
+            "status": "armor",
+            "target": "enemy"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "abolish-disease",
+      "name": "Abolish Disease",
+      "icon": "spell_nature_nullifydisease",
+      "spellId": 552,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "discipline",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Remove Disease and Poison from yourself. Heal 3.",
+      "effects": [
+        {
+          "op": "remove",
+          "status": "disease",
+          "target": "self"
+        },
+        {
+          "op": "remove",
+          "status": "poison",
+          "target": "self"
+        },
+        {
+          "op": "heal",
+          "amount": 3,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Abolish Disease (Rank 2)",
+        "cost": 1,
+        "text": "Remove Disease and Poison from yourself. Heal 4.",
+        "effects": [
+          {
+            "op": "remove",
+            "status": "disease",
+            "target": "self"
+          },
+          {
+            "op": "remove",
+            "status": "poison",
+            "target": "self"
+          },
+          {
+            "op": "heal",
+            "amount": 4,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cure-disease",
+      "name": "Cure Disease",
+      "icon": "spell_holy_nullifydisease",
+      "spellId": 528,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "holy",
+      "cost": 0,
+      "formCost": {
+        "shadowform": 1
+      },
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Remove Disease from yourself. Draw 1 card. Exhaust.",
+      "effects": [
+        {
+          "op": "remove",
+          "status": "disease",
+          "target": "self"
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Cure Disease (Rank 2)",
+        "cost": 0,
+        "text": "Remove Disease and Poison from yourself. Draw 1 card. Exhaust.",
+        "effects": [
+          {
+            "op": "remove",
+            "status": "disease",
+            "target": "self"
+          },
+          {
+            "op": "remove",
+            "status": "poison",
+            "target": "self"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "fade",
+      "name": "Fade",
+      "icon": "spell_magic_lesserinvisibilty",
+      "spellId": 586,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "shadow",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 1 Stealth and 8 Block.",
+      "effects": [
+        {
+          "op": "apply",
+          "status": "stealth",
+          "stacks": 1,
+          "target": "self"
+        },
+        {
+          "op": "block",
+          "amount": 8
+        }
+      ],
+      "upgrade": {
+        "name": "Fade (Rank 2)",
+        "cost": 1,
+        "text": "Gain 1 Stealth and 11 Block.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "stealth",
+            "stacks": 1,
+            "target": "self"
+          },
+          {
+            "op": "block",
+            "amount": 11
+          }
+        ]
+      }
+    },
+    {
+      "id": "touch-of-weakness",
+      "name": "Touch of Weakness",
+      "icon": "spell_shadow_deadofnight",
+      "spellId": 2652,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "shadow",
+      "cost": 1,
+      "formCost": {
+        "shadowform": -1
+      },
+      "target": "enemy",
+      "flags": [],
+      "text": "Apply 2 Weak to the enemy. Gain 6 Block.",
+      "effects": [
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 2,
+          "target": "enemy"
+        },
+        {
+          "op": "block",
+          "amount": 6
+        }
+      ],
+      "upgrade": {
+        "name": "Touch of Weakness (Rank 2)",
+        "cost": 1,
+        "text": "Apply 3 Weak to the enemy. Gain 9 Block.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 3,
+            "target": "enemy"
+          },
+          {
+            "op": "block",
+            "amount": 9
+          }
+        ]
+      }
+    },
+    {
+      "id": "starshards",
+      "name": "Starshards",
+      "icon": "spell_arcane_starfire",
+      "spellId": 10797,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "shadow",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 4 arcane damage 2 times.",
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 4,
+          "school": "arcane",
+          "times": 2
+        }
+      ],
+      "upgrade": {
+        "name": "Starshards (Rank 2)",
+        "cost": 1,
+        "text": "Deal 6 arcane damage 2 times.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 6,
+            "school": "arcane",
+            "times": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "hex-of-weakness",
+      "name": "Hex of Weakness",
+      "icon": "spell_shadow_fingerofdeath",
+      "spellId": 9035,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "shadow",
+      "cost": 1,
+      "formCost": {
+        "shadowform": -1
+      },
+      "target": "enemy",
+      "flags": [],
+      "text": "Apply 2 Weak and 1 Curse to the enemy.",
+      "effects": [
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 2,
+          "target": "enemy"
+        },
+        {
+          "op": "apply",
+          "status": "curse",
+          "stacks": 1,
+          "target": "enemy"
+        }
+      ],
+      "upgrade": {
+        "name": "Hex of Weakness (Rank 2)",
+        "cost": 1,
+        "text": "Apply 3 Weak and 2 Curse to the enemy.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 3,
+            "target": "enemy"
+          },
+          {
+            "op": "apply",
+            "status": "curse",
+            "stacks": 2,
+            "target": "enemy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "levitate",
+      "name": "Levitate",
+      "icon": "spell_holy_layonhands",
+      "spellId": 1706,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": null,
+      "cost": 0,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Gain 3 Block. Draw 1 card. Exhaust.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 3
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Levitate (Rank 2)",
+        "cost": 0,
+        "text": "Gain 4 Block. Draw 1 card. Exhaust.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 4
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "mind-vision",
+      "name": "Mind Vision",
+      "icon": "spell_holy_mindvision",
+      "spellId": 2096,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": null,
+      "cost": 0,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Look at the top 4 cards of your draw pile; discard any. Exhaust.",
+      "effects": [
+        {
+          "op": "scry",
+          "count": 4
+        }
+      ],
+      "upgrade": {
+        "name": "Mind Vision (Rank 2)",
+        "cost": 0,
+        "text": "Look at the top 6 cards of your draw pile; discard any. Draw 1. Exhaust.",
+        "effects": [
+          {
+            "op": "scry",
+            "count": 6
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "psychic-scream",
+      "name": "Psychic Scream",
+      "icon": "spell_shadow_psychicscream",
+      "spellId": 8122,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "shadow",
+      "cost": 2,
+      "formCost": {
+        "shadowform": -1
+      },
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Apply 1 Fear to ALL enemies.",
+      "effects": [
+        {
+          "op": "apply",
+          "status": "fear",
+          "stacks": 1,
+          "target": "all_enemies"
+        }
+      ],
+      "upgrade": {
+        "name": "Psychic Scream (Rank 2)",
+        "cost": 1,
+        "text": "Apply 1 Fear to ALL enemies.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "fear",
+            "stacks": 1,
+            "target": "all_enemies"
+          }
+        ]
+      }
+    },
+    {
+      "id": "silence",
+      "name": "Silence",
+      "icon": "spell_shadow_impphaseshift",
+      "spellId": 15487,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "shadow",
+      "cost": 1,
+      "formCost": {
+        "shadowform": -1
+      },
+      "target": "enemy",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Interrupt the enemy cast and Silence it for 2 turns. Exhaust.",
+      "effects": [
+        {
+          "op": "cast_interrupt"
+        },
+        {
+          "op": "apply",
+          "status": "silence",
+          "stacks": 1,
+          "target": "enemy",
+          "duration": 2
+        }
+      ],
+      "upgrade": {
+        "name": "Silence (Rank 2)",
+        "cost": 0,
+        "text": "Interrupt the enemy cast and Silence it for 2 turns. Exhaust.",
+        "effects": [
+          {
+            "op": "cast_interrupt"
+          },
+          {
+            "op": "apply",
+            "status": "silence",
+            "stacks": 1,
+            "target": "enemy",
+            "duration": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "fear-ward",
+      "name": "Fear Ward",
+      "icon": "spell_holy_excorcism",
+      "spellId": 6346,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "discipline",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Remove Fear from yourself. Gain 7 Block.",
+      "effects": [
+        {
+          "op": "remove",
+          "status": "fear",
+          "target": "self"
+        },
+        {
+          "op": "block",
+          "amount": 7
+        }
+      ],
+      "upgrade": {
+        "name": "Fear Ward (Rank 2)",
+        "cost": 1,
+        "text": "Remove Fear from yourself. Gain 10 Block.",
+        "effects": [
+          {
+            "op": "remove",
+            "status": "fear",
+            "target": "self"
+          },
+          {
+            "op": "block",
+            "amount": 10
+          }
+        ]
+      }
+    },
+    {
+      "id": "feedback",
+      "name": "Feedback",
+      "icon": "spell_shadow_ritualofsacrifice",
+      "spellId": 13896,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "discipline",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 6 Block and 4 Thorns until your next turn.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 6
+        },
+        {
+          "op": "apply",
+          "status": "thorns",
+          "stacks": 4,
+          "target": "self",
+          "duration": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Feedback (Rank 2)",
+        "cost": 1,
+        "text": "Gain 9 Block and 6 Thorns until your next turn.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 9
+          },
+          {
+            "op": "apply",
+            "status": "thorns",
+            "stacks": 6,
+            "target": "self",
+            "duration": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "elunes-grace",
+      "name": "Elune's Grace",
+      "icon": "spell_holy_elunesgrace",
+      "spellId": 2651,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "discipline",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 6 Block and 1 Dexterity this turn.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 6
+        },
+        {
+          "op": "apply",
+          "status": "dexterity",
+          "stacks": 1,
+          "target": "self",
+          "duration": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Elune's Grace (Rank 2)",
+        "cost": 1,
+        "text": "Gain 8 Block and 1 Dexterity this turn.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 8
+          },
+          {
+            "op": "apply",
+            "status": "dexterity",
+            "stacks": 1,
+            "target": "self",
+            "duration": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "shackle-undead",
+      "name": "Shackle Undead",
+      "icon": "spell_nature_slow",
+      "spellId": 9484,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "discipline",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Undead: Stun 2 turns. Others: Weak 1. Exhaust.",
+      "effects": [
+        {
+          "op": "conditional",
+          "if": {
+            "type": "target_is_family",
+            "family": "undead"
+          },
+          "then": [
+            {
+              "op": "apply",
+              "status": "stun",
+              "stacks": 1,
+              "target": "enemy",
+              "duration": 2
+            }
+          ],
+          "else": [
+            {
+              "op": "apply",
+              "status": "weak",
+              "stacks": 1,
+              "target": "enemy"
+            }
+          ]
+        }
+      ],
+      "upgrade": {
+        "name": "Shackle Undead (Rank 2)",
+        "cost": 0,
+        "text": "Undead: Stun 2 turns. Others: Weak 1. Exhaust.",
+        "effects": [
+          {
+            "op": "conditional",
+            "if": {
+              "type": "target_is_family",
+              "family": "undead"
+            },
+            "then": [
+              {
+                "op": "apply",
+                "status": "stun",
+                "stacks": 1,
+                "target": "enemy",
+                "duration": 2
+              }
+            ],
+            "else": [
+              {
+                "op": "apply",
+                "status": "weak",
+                "stacks": 1,
+                "target": "enemy"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "inner-focus",
+      "name": "Inner Focus",
+      "icon": "spell_frost_windwalkon",
+      "spellId": 14751,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "discipline",
+      "cost": 0,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Gain 2 energy. Exhaust.",
+      "effects": [
+        {
+          "op": "gain_energy",
+          "amount": 2
+        }
+      ],
+      "upgrade": {
+        "name": "Inner Focus (Rank 2)",
+        "cost": 0,
+        "text": "Gain 2 energy. Draw 1 card. Exhaust.",
+        "effects": [
+          {
+            "op": "gain_energy",
+            "amount": 2
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "divine-spirit",
+      "name": "Divine Spirit",
+      "icon": "spell_holy_divinespirit",
+      "spellId": 14752,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "discipline",
+      "cost": 1,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Draw 1 card. Gain 1 energy next turn. Exhaust.",
+      "effects": [
+        {
+          "op": "draw",
+          "count": 1
+        },
+        {
+          "op": "energy_next_turn",
+          "amount": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Divine Spirit (Rank 2)",
+        "cost": 1,
+        "text": "Draw 2 cards. Gain 1 energy next turn. Exhaust.",
+        "effects": [
+          {
+            "op": "draw",
+            "count": 2
+          },
+          {
+            "op": "energy_next_turn",
+            "amount": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "prayer-of-fortitude",
+      "name": "Prayer of Fortitude",
+      "icon": "spell_holy_prayeroffortitude",
+      "spellId": 21562,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "discipline",
+      "cost": 2,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Gain 4 max HP and 2 Armor. Exhaust.",
+      "effects": [
+        {
+          "op": "max_hp",
+          "amount": 4
+        },
+        {
+          "op": "apply",
+          "status": "armor",
+          "stacks": 2,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Prayer of Fortitude (Rank 2)",
+        "cost": 1,
+        "text": "Gain 4 max HP and 2 Armor. Exhaust.",
+        "effects": [
+          {
+            "op": "max_hp",
+            "amount": 4
+          },
+          {
+            "op": "apply",
+            "status": "armor",
+            "stacks": 2,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "desperate-prayer",
+      "name": "Desperate Prayer",
+      "icon": "spell_holy_restoration",
+      "spellId": 13908,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "holy",
+      "cost": 1,
+      "formCost": {
+        "shadowform": 1
+      },
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Heal 18 HP if below 50% HP, else heal 8. Exhaust.",
+      "effects": [
+        {
+          "op": "conditional",
+          "if": {
+            "type": "hp_below_pct",
+            "pct": 50
+          },
+          "then": [
+            {
+              "op": "heal",
+              "amount": 18,
+              "target": "self"
+            }
+          ],
+          "else": [
+            {
+              "op": "heal",
+              "amount": 8,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "upgrade": {
+        "name": "Desperate Prayer (Rank 2)",
+        "cost": 1,
+        "text": "Heal 24 HP if below 50% HP, else heal 11. Exhaust.",
+        "effects": [
+          {
+            "op": "conditional",
+            "if": {
+              "type": "hp_below_pct",
+              "pct": 50
+            },
+            "then": [
+              {
+                "op": "heal",
+                "amount": 24,
+                "target": "self"
+              }
+            ],
+            "else": [
+              {
+                "op": "heal",
+                "amount": 11,
+                "target": "self"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "shadowguard",
+      "name": "Shadowguard",
+      "icon": "spell_shadow_antishadow",
+      "spellId": 18137,
+      "rank": 1,
+      "type": "power",
+      "rarity": "uncommon",
+      "archetype": "shadow",
+      "cost": 1,
+      "formCost": {
+        "shadowform": -1
+      },
+      "target": "self",
+      "flags": [],
+      "text": "Power. Gain 2 Thorns for the rest of combat.",
+      "effects": [
+        {
+          "op": "apply",
+          "status": "thorns",
+          "stacks": 2,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Shadowguard (Rank 2)",
+        "cost": 1,
+        "text": "Power. Gain 3 Thorns for the rest of combat.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "thorns",
+            "stacks": 3,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "resurrection",
+      "name": "Resurrection",
+      "icon": "spell_holy_resurrection",
+      "spellId": 2006,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "holy",
+      "cost": 2,
+      "formCost": {
+        "shadowform": 1
+      },
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Heal 16 HP and remove all debuffs. Exhaust.",
+      "effects": [
+        {
+          "op": "heal",
+          "amount": 16,
+          "target": "self"
+        },
+        {
+          "op": "remove",
+          "status": "weak",
+          "target": "self"
+        },
+        {
+          "op": "remove",
+          "status": "frail",
+          "target": "self"
+        },
+        {
+          "op": "remove",
+          "status": "vulnerable",
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Resurrection (Rank 2)",
+        "cost": 2,
+        "text": "Heal 21 HP and remove all debuffs. Exhaust.",
+        "effects": [
+          {
+            "op": "heal",
+            "amount": 21,
+            "target": "self"
+          },
+          {
+            "op": "remove",
+            "status": "weak",
+            "target": "self"
+          },
+          {
+            "op": "remove",
+            "status": "frail",
+            "target": "self"
+          },
+          {
+            "op": "remove",
+            "status": "vulnerable",
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lightwell",
+      "name": "Lightwell",
+      "icon": "spell_holy_summonlightwell",
+      "spellId": 724,
+      "rank": 1,
+      "type": "power",
+      "rarity": "uncommon",
+      "archetype": "holy",
+      "cost": 2,
+      "formCost": {
+        "shadowform": 1
+      },
+      "target": "self",
+      "flags": [],
+      "text": "Power. Gain 2 Regen for the rest of combat.",
+      "effects": [
+        {
+          "op": "apply",
+          "status": "regen",
+          "stacks": 2,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Lightwell (Rank 2)",
+        "cost": 2,
+        "text": "Power. Gain 3 Regen for the rest of combat.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "regen",
+            "stacks": 3,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shadowform",
+      "name": "Shadowform",
+      "icon": "spell_shadow_shadowform",
+      "spellId": 15473,
+      "rank": 1,
+      "type": "form",
+      "rarity": "rare",
+      "archetype": "shadow",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Enter Shadowform: shadow cards cost 1 less, holy cards cost 1 more. Play again to leave.",
+      "effects": [
+        {
+          "op": "set_form",
+          "value": "shadowform"
+        }
+      ],
+      "upgrade": {
+        "name": "Shadowform (Rank 2)",
+        "cost": 0,
+        "text": "Enter Shadowform: shadow cards cost 1 less, holy cards cost 1 more. Play again to leave.",
+        "effects": [
+          {
+            "op": "set_form",
+            "value": "shadowform"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vampiric-embrace",
+      "name": "Vampiric Embrace",
+      "icon": "spell_shadow_unsummonbuilding",
+      "spellId": 15286,
+      "rank": 1,
+      "type": "power",
+      "rarity": "rare",
+      "archetype": "shadow",
+      "cost": 1,
+      "formCost": {
+        "shadowform": -1
+      },
+      "target": "self",
+      "flags": [],
+      "text": "Power. Heal for 25% of shadow damage you deal.",
+      "effects": [
+        {
+          "op": "apply",
+          "status": "vampiric_embrace",
+          "stacks": 1,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Vampiric Embrace (Rank 2)",
+        "cost": 1,
+        "text": "Power. Heal for 50% of shadow damage you deal.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "vampiric_embrace",
+            "stacks": 2,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "devouring-plague",
+      "name": "Devouring Plague",
+      "icon": "spell_shadow_blackplague",
+      "spellId": 2944,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "rare",
+      "archetype": "shadow",
+      "cost": 2,
+      "formCost": {
+        "shadowform": -1
+      },
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 10 shadow damage. Apply 6 Disease and 2 Weak. Heal 6.",
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 10,
+          "school": "shadow"
+        },
+        {
+          "op": "apply",
+          "status": "disease",
+          "stacks": 6,
+          "target": "enemy"
+        },
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 2,
+          "target": "enemy"
+        },
+        {
+          "op": "heal",
+          "amount": 6,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Devouring Plague (Rank 2)",
+        "cost": 2,
+        "text": "Deal 14 shadow damage. Apply 8 Disease and 2 Weak. Heal 8.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 14,
+            "school": "shadow"
+          },
+          {
+            "op": "apply",
+            "status": "disease",
+            "stacks": 8,
+            "target": "enemy"
+          },
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 2,
+            "target": "enemy"
+          },
+          {
+            "op": "heal",
+            "amount": 8,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "prayer-of-healing",
+      "name": "Prayer of Healing",
+      "icon": "spell_holy_prayerofhealing02",
+      "spellId": 596,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "holy",
+      "cost": 2,
+      "formCost": {
+        "shadowform": 1
+      },
+      "target": "self",
+      "flags": [],
+      "text": "Gain 10 Block. Heal 14 HP.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 10
+        },
+        {
+          "op": "heal",
+          "amount": 14,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Prayer of Healing (Rank 2)",
+        "cost": 2,
+        "text": "Gain 14 Block. Heal 18 HP.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 14
+          },
+          {
+            "op": "heal",
+            "amount": 18,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "greater-heal",
+      "name": "Greater Heal",
+      "icon": "spell_holy_greaterheal",
+      "spellId": 2060,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "holy",
+      "cost": 3,
+      "formCost": {
+        "shadowform": 1
+      },
+      "target": "self",
+      "flags": [],
+      "text": "Gain 14 Block. Heal 26 HP.",
+      "effects": [
+        {
+          "op": "block",
+          "amount": 14
+        },
+        {
+          "op": "heal",
+          "amount": 26,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Greater Heal (Rank 2)",
+        "cost": 3,
+        "text": "Gain 18 Block. Heal 34 HP.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 18
+          },
+          {
+            "op": "heal",
+            "amount": 34,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "power-infusion",
+      "name": "Power Infusion",
+      "icon": "spell_holy_powerinfusion",
+      "spellId": 10060,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "discipline",
+      "cost": 0,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Gain 2 energy and draw 1 card. Exhaust.",
+      "effects": [
+        {
+          "op": "gain_energy",
+          "amount": 2
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Power Infusion (Rank 2)",
+        "cost": 0,
+        "text": "Gain 2 energy and draw 2 cards. Exhaust.",
+        "effects": [
+          {
+            "op": "gain_energy",
+            "amount": 2
+          },
+          {
+            "op": "draw",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "mana-burn",
+      "name": "Mana Burn",
+      "icon": "spell_shadow_manaburn",
+      "spellId": 8129,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "rare",
+      "archetype": "discipline",
+      "cost": 1,
+      "formCost": {
+        "shadowform": -1
+      },
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 10 shadow damage. If the enemy is casting, interrupt it and gain 1 energy.",
+      "effects": [
+        {
+          "op": "conditional",
+          "if": {
+            "type": "enemy_intent",
+            "intent": "cast"
+          },
+          "then": [
+            {
+              "op": "cast_interrupt"
+            },
+            {
+              "op": "gain_energy",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "op": "damage",
+          "amount": 10,
+          "school": "shadow"
+        }
+      ],
+      "upgrade": {
+        "name": "Mana Burn (Rank 2)",
+        "cost": 1,
+        "text": "Deal 14 shadow damage. If the enemy is casting, interrupt it and gain 1 energy.",
+        "effects": [
+          {
+            "op": "conditional",
+            "if": {
+              "type": "enemy_intent",
+              "intent": "cast"
+            },
+            "then": [
+              {
+                "op": "cast_interrupt"
+              },
+              {
+                "op": "gain_energy",
+                "amount": 1
+              }
+            ]
+          },
+          {
+            "op": "damage",
+            "amount": 14,
+            "school": "shadow"
+          }
+        ]
+      }
+    },
+    {
+      "id": "holy-nova",
+      "name": "Holy Nova",
+      "icon": "spell_holy_holynova",
+      "spellId": 15237,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "rare",
+      "archetype": "holy",
+      "cost": 2,
+      "formCost": {
+        "shadowform": 1
+      },
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Deal 12 holy damage to ALL enemies. Heal 6 HP.",
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 12,
+          "school": "holy",
+          "target": "all_enemies"
+        },
+        {
+          "op": "heal",
+          "amount": 6,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Holy Nova (Rank 2)",
+        "cost": 2,
+        "text": "Deal 16 holy damage to ALL enemies. Heal 8 HP.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 16,
+            "school": "holy",
+            "target": "all_enemies"
+          },
+          {
+            "op": "heal",
+            "amount": 8,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mind-control",
+      "name": "Mind Control",
+      "icon": "spell_shadow_shadowworddominate",
+      "spellId": 605,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "epic",
+      "archetype": "shadow",
+      "cost": 3,
+      "formCost": {
+        "shadowform": -1
+      },
+      "target": "enemy",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Taunt-like: the enemy attacks other enemies for 2 turns. Deal 6 shadow damage. Exhaust.",
+      "effects": [
+        {
+          "op": "apply",
+          "status": "taunted",
+          "stacks": 1,
+          "target": "enemy",
+          "duration": 2
+        },
+        {
+          "op": "damage",
+          "amount": 6,
+          "school": "shadow"
+        }
+      ],
+      "upgrade": {
+        "name": "Mind Control (Rank 2)",
+        "cost": 2,
+        "text": "Taunt-like: the enemy attacks other enemies for 2 turns. Deal 6 shadow damage. Exhaust.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "taunted",
+            "stacks": 1,
+            "target": "enemy",
+            "duration": 2
+          },
+          {
+            "op": "damage",
+            "amount": 6,
+            "school": "shadow"
+          }
+        ]
+      }
+    },
+    {
+      "id": "spirit-of-redemption",
+      "name": "Spirit of Redemption",
+      "icon": "spell_holy_guardianspirit",
+      "spellId": null,
+      "rank": 1,
+      "type": "power",
+      "rarity": "epic",
+      "archetype": "holy",
+      "cost": 2,
+      "formCost": {
+        "shadowform": 1
+      },
+      "target": "self",
+      "flags": [],
+      "text": "Power. When you would die, revive at 50% HP and heal 10 (once per combat).",
+      "effects": [
+        {
+          "op": "revive",
+          "pct": 50
+        },
+        {
+          "op": "heal",
+          "amount": 10,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Spirit of Redemption (Rank 2)",
+        "cost": 1,
+        "text": "Power. When you would die, revive at 50% HP and heal 10 (once per combat).",
+        "effects": [
+          {
+            "op": "revive",
+            "pct": 50
+          },
+          {
+            "op": "heal",
+            "amount": 10,
+            "target": "self"
+          }
+        ]
+      }
+    }
+  ]
+}

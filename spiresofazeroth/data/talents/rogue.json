@@ -1,0 +1,458 @@
+{
+ "classId": "rogue",
+ "trees": [
+  {
+   "id": "assassination",
+   "name": "Assassination",
+   "icon": "ability_rogue_eviscerate",
+   "talents": [
+    {
+     "id": "rogue:assassination:0",
+     "name": "Improved Eviscerate",
+     "icon": "ability_rogue_eviscerate",
+     "tier": 1,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:assassination:1",
+     "name": "Remorseless Attacks",
+     "icon": "ability_fiegndead",
+     "tier": 1,
+     "col": 1,
+     "max": 2,
+     "effect": {
+      "key": "energy1",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:assassination:2",
+     "name": "Malice",
+     "icon": "ability_racial_bloodrage",
+     "tier": 2,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:assassination:3",
+     "name": "Ruthlessness",
+     "icon": "ability_druid_disembowel",
+     "tier": 2,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "res",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:assassination:4",
+     "name": "Murder",
+     "icon": "spell_shadow_deathscream",
+     "tier": 3,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "goldpct",
+      "per": 5
+     }
+    },
+    {
+     "id": "rogue:assassination:5",
+     "name": "Improved Slice and Dice",
+     "icon": "ability_rogue_slicedice",
+     "tier": 3,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "dex",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:assassination:6",
+     "name": "Relentless Strikes",
+     "icon": "ability_warrior_decisivestrike",
+     "tier": 4,
+     "col": 0,
+     "max": 1,
+     "effect": {
+      "key": "res",
+      "per": 2
+     }
+    },
+    {
+     "id": "rogue:assassination:7",
+     "name": "Improved Expose Armor",
+     "icon": "ability_warrior_riposte",
+     "tier": 4,
+     "col": 1,
+     "max": 2,
+     "effect": {
+      "key": "thorns",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:assassination:8",
+     "name": "Lethality",
+     "icon": "ability_criticalstrike",
+     "tier": 5,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:assassination:9",
+     "name": "Vile Poisons",
+     "icon": "ability_rogue_feigndeath",
+     "tier": 5,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "thorns",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:assassination:10",
+     "name": "Improved Kidney Shot",
+     "icon": "ability_rogue_kidneyshot",
+     "tier": 6,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "draw1",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:assassination:11",
+     "name": "Cold Blood",
+     "icon": "spell_ice_lament",
+     "tier": 6,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "str",
+      "per": 3
+     }
+    }
+   ]
+  },
+  {
+   "id": "combat",
+   "name": "Combat",
+   "icon": "ability_backstab",
+   "talents": [
+    {
+     "id": "rogue:combat:0",
+     "name": "Improved Gouge",
+     "icon": "ability_gouge",
+     "tier": 1,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "dex",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:combat:1",
+     "name": "Improved Sinister Strike",
+     "icon": "spell_shadow_ritualofsacrifice",
+     "tier": 1,
+     "col": 1,
+     "max": 2,
+     "effect": {
+      "key": "res",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:combat:2",
+     "name": "Lightning Reflexes",
+     "icon": "spell_nature_invisibilty",
+     "tier": 2,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "dex",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:combat:3",
+     "name": "Improved Backstab",
+     "icon": "ability_backstab",
+     "tier": 2,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:combat:4",
+     "name": "Deflection",
+     "icon": "ability_parry",
+     "tier": 3,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "block",
+      "per": 2
+     }
+    },
+    {
+     "id": "rogue:combat:5",
+     "name": "Precision",
+     "icon": "ability_marksmanship",
+     "tier": 3,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:combat:6",
+     "name": "Endurance",
+     "icon": "spell_shadow_shadowward",
+     "tier": 4,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "hp",
+      "per": 6
+     }
+    },
+    {
+     "id": "rogue:combat:7",
+     "name": "Riposte",
+     "icon": "ability_warrior_challange",
+     "tier": 4,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "thorns",
+      "per": 3
+     }
+    },
+    {
+     "id": "rogue:combat:8",
+     "name": "Improved Sprint",
+     "icon": "ability_rogue_sprint",
+     "tier": 5,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "energy1",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:combat:9",
+     "name": "Dagger Specialization",
+     "icon": "inv_weapon_shortblade_05",
+     "tier": 5,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:combat:10",
+     "name": "Blade Flurry",
+     "icon": "ability_warrior_punishingblow",
+     "tier": 6,
+     "col": 0,
+     "max": 1,
+     "effect": {
+      "key": "draw1",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:combat:11",
+     "name": "Adrenaline Rush",
+     "icon": "spell_shadow_shadowworddominate",
+     "tier": 6,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "energy1",
+      "per": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "subtlety",
+   "name": "Subtlety",
+   "icon": "ability_stealth",
+   "talents": [
+    {
+     "id": "rogue:subtlety:0",
+     "name": "Master of Deception",
+     "icon": "spell_shadow_charm",
+     "tier": 1,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "dex",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:subtlety:1",
+     "name": "Opportunity",
+     "icon": "ability_warrior_warcry",
+     "tier": 1,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:subtlety:2",
+     "name": "Sleight of Hand",
+     "icon": "ability_rogue_feint",
+     "tier": 2,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "gold",
+      "per": 15
+     }
+    },
+    {
+     "id": "rogue:subtlety:3",
+     "name": "Elusiveness",
+     "icon": "spell_magic_lesserinvisibilty",
+     "tier": 2,
+     "col": 1,
+     "max": 2,
+     "effect": {
+      "key": "block",
+      "per": 3
+     }
+    },
+    {
+     "id": "rogue:subtlety:4",
+     "name": "Camouflage",
+     "icon": "ability_stealth",
+     "tier": 3,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "regen",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:subtlety:5",
+     "name": "Initiative",
+     "icon": "spell_shadow_fumble",
+     "tier": 3,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "res",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:subtlety:6",
+     "name": "Ghostly Strike",
+     "icon": "spell_shadow_curse",
+     "tier": 4,
+     "col": 0,
+     "max": 1,
+     "effect": {
+      "key": "block",
+      "per": 5
+     }
+    },
+    {
+     "id": "rogue:subtlety:7",
+     "name": "Improved Ambush",
+     "icon": "ability_rogue_ambush",
+     "tier": 4,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:subtlety:8",
+     "name": "Setup",
+     "icon": "spell_nature_mirrorimage",
+     "tier": 5,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "res",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:subtlety:9",
+     "name": "Serrated Blades",
+     "icon": "inv_sword_17",
+     "tier": 5,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "thorns",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:subtlety:10",
+     "name": "Heightened Senses",
+     "icon": "ability_ambush",
+     "tier": 6,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "draw1",
+      "per": 1
+     }
+    },
+    {
+     "id": "rogue:subtlety:11",
+     "name": "Preparation",
+     "icon": "spell_shadow_antishadow",
+     "tier": 6,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "energy1",
+      "per": 1
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,464 @@
+{
+ "id": "azshara",
+ "name": "Azshara",
+ "start": {
+  "name": "Valormok Camp",
+  "icon": "spell_fire_fire"
+ },
+ "continent": "kal",
+ "act": 5,
+ "levelBand": [
+  45,
+  55
+ ],
+ "isHub": false,
+ "bossFloor": "azuregos-lair",
+ "units": {
+  "imp": {
+   "name": "Imp",
+   "icon": "spell_shadow_summonimp",
+   "hp": 10,
+   "moves": [
+    {
+     "id": "firebolt",
+     "name": "Firebolt",
+     "intent": "attack",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 4,
+       "school": "fire"
+      }
+     ],
+     "weight": 2
+    }
+   ]
+  }
+ },
+ "spire": {
+  "name": "Temple of Arkkoran",
+  "lore": "A drowned Highborne temple on the Bay of Storms; above the Ruins of Eldarath and the Tower of Eldara, Azuregos the Blue Dragonflight guards the Southern Lake."
+ },
+ "theme": {
+  "primary": "#4a7fbf",
+  "secondary": "#14233a",
+  "accent": "#9fe6ff",
+  "background": "azshara"
+ },
+ "zoneMechanic": {
+  "id": "arcane-vortex",
+  "name": "Arcane Vortex",
+  "icon": "spell_arcane_arcane01",
+  "text": "At the start of each turn the energy cost of every card in your hand is randomized between 0 and 2.",
+  "hooks": {
+   "on_turn_start": [
+    {
+     "op": "randomize_costs",
+     "min": 0,
+     "max": 2,
+     "scope": "hand"
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "thalassian-base-camp",
+  "name": "Thalassian Base Camp",
+  "icon": "inv_misc_note_01",
+  "text": "Share a meal at Thalassian Base Camp: heal 20% of max HP and gain 3 Max HP.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 20,
+    "target": "self"
+   },
+   {
+    "op": "max_hp",
+    "amount": 3,
+    "target": "self"
+   }
+  ]
+ },
+ "encounters": {
+  "normal": [
+   [
+    "salt-flats-scavenger",
+    "salt-flats-scavenger"
+   ],
+   [
+    "spitelash-warrior",
+    "spitelash-siren"
+   ],
+   [
+    "legashi-satyr",
+    "legashi-rogue"
+   ],
+   [
+    "thunderhead-hippogryph",
+    "thunderhead-stagwing"
+   ],
+   [
+    "haldarr-satyr",
+    "haldarr-trickster"
+   ],
+   [
+    "spitelash-screamer",
+    "spitelash-witch",
+    "spitelash-warrior"
+   ],
+   [
+    "salt-flats-vulture",
+    "salt-flats-scavenger",
+    "thunderhead-hippogryph"
+   ],
+   [
+    "legashi-hellcaller",
+    "legashi-satyr",
+    "legashi-rogue"
+   ],
+   [
+    "spitelash-raider",
+    "spitelash-enchantress"
+   ],
+   [
+    "haldarr-felsworn",
+    "haldarr-trickster"
+   ],
+   [
+    "thunderhead-skystormer",
+    "thunderhead-consort"
+   ],
+   [
+    "blue-dragonspawn",
+    "blue-dragonspawn"
+   ],
+   [
+    "cliff-giant"
+   ],
+   [
+    "spitelash-battlemaster",
+    "spitelash-raider",
+    "spitelash-siren"
+   ],
+   [
+    "cliff-giant",
+    "blue-dragonspawn"
+   ]
+  ],
+  "elite": [
+   [
+    "lady-sesspira",
+    "spitelash-siren"
+   ],
+   [
+    "soriata",
+    "spitelash-warrior"
+   ],
+   [
+    "thunderhead-patriarch",
+    "thunderhead-skystormer"
+   ]
+  ],
+  "boss": [
+   [
+    "azuregos"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "loramus-ritual",
+   "name": "Loramus Thalipedes' Demon Ritual",
+   "icon": "spell_shadow_summonvoidwalker",
+   "text": "Loramus Thalipedes, a Burning Legion defector in the cave, asks for help finishing a binding ritual against the demons of Azshara.",
+   "options": [
+    {
+     "label": "Help with the ritual (-8 HP, relic)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 8,
+       "target": "self"
+      },
+      {
+       "op": "gain_relic",
+       "relic": "crystal-adorned-crown"
+      }
+     ]
+    },
+    {
+     "label": "Take his gold (+60 gold, add Corrupted)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 60
+      },
+      {
+       "op": "add_card",
+       "card": "corrupted",
+       "to": "deck_permanent",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "label": "Refuse",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "haldarr-encampment",
+   "name": "Haldarr Encampment",
+   "icon": "spell_shadow_summonfelhunter",
+   "text": "Haldarr satyrs guard a looted war chest at their encampment.",
+   "options": [
+    {
+     "label": "Sneak in (50%: +80 gold, else -9 HP)",
+     "effects": [
+      {
+       "op": "conditional",
+       "if": {
+        "type": "chance",
+        "p": 0.5
+       },
+       "then": [
+        {
+         "op": "gold",
+         "amount": 80
+        }
+       ],
+       "else": [
+        {
+         "op": "damage",
+         "amount": 9,
+         "target": "self"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "label": "Burn the camp (-6 HP, +40 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 40
+      }
+     ]
+    },
+    {
+     "label": "Avoid",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "bay-of-storms",
+   "name": "Bay of Storms",
+   "icon": "spell_frost_summonwaterelemental",
+   "text": "Wreckage and elemental storms churn the Bay of Storms. Something glints under the foam.",
+   "options": [
+    {
+     "label": "Dive for salvage (-5 HP, +55 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 5,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 55
+      }
+     ]
+    },
+    {
+     "label": "Gather storm-water (heal 12)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 12,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Sail on",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "ravencrest-monument",
+   "name": "Ravencrest Monument",
+   "icon": "inv_misc_head_elf_01",
+   "text": "The Ravencrest Monument honors a Highborne hero; its aura mends the weary.",
+   "options": [
+    {
+     "label": "Pray (heal 16, +2 max HP)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 16,
+       "target": "self"
+      },
+      {
+       "op": "max_hp",
+       "amount": 2
+      }
+     ]
+    },
+    {
+     "label": "Study the inscription (add a free upgrade)",
+     "effects": [
+      {
+       "op": "upgrade_card",
+       "pick": "random",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "label": "Leave",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "thalassian-base-camp",
+   "name": "Thalassian Base Camp",
+   "icon": "inv_misc_coin_01",
+   "text": "Thalassian refugees trade supplies and rumors of the dragon beyond.",
+   "options": [
+    {
+     "label": "Buy supplies (-35 gold, +4 max HP)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": -35
+      },
+      {
+       "op": "max_hp",
+       "amount": 4
+      }
+     ],
+     "requires": {
+      "gold": 35
+     }
+    },
+    {
+     "label": "Share rumors (+30 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 30
+      }
+     ]
+    },
+    {
+     "label": "Leave",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "puissant-cape",
+   "name": "Puissant Cape",
+   "icon": "inv_misc_cape_01",
+   "rarity": "rare",
+   "itemId": null,
+   "itemIdSource": "unverified",
+   "zone": "azshara",
+   "class": null,
+   "text": "Gain 1 Strength at the start of each combat.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "snowblind-shoes",
+   "name": "Snowblind Shoes",
+   "icon": "inv_boots_01",
+   "rarity": "rare",
+   "itemId": null,
+   "itemIdSource": "unverified",
+   "zone": "azshara",
+   "class": null,
+   "text": "Frozen and Weak have no effect on you; draw 1 extra card on turn 1.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "draw",
+      "count": 1
+     }
+    ]
+   }
+  },
+  {
+   "id": "typhoon",
+   "name": "Typhoon",
+   "icon": "inv_staff_01",
+   "rarity": "epic",
+   "itemId": null,
+   "itemIdSource": "unverified",
+   "zone": "azshara",
+   "class": null,
+   "text": "Whenever you play 3 cards in a turn, deal 6 Frost damage to all enemies.",
+   "triggers": {
+    "on_card_played": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "cards_played_this_turn",
+       "atLeast": 3
+      },
+      "then": [
+       {
+        "op": "damage",
+        "amount": 6,
+        "target": "all_enemies",
+        "school": "frost"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "crystal-adorned-crown",
+   "name": "Crystal Adorned Crown",
+   "icon": "inv_helmet_01",
+   "rarity": "epic",
+   "itemId": null,
+   "itemIdSource": "unverified",
+   "zone": "azshara",
+   "class": null,
+   "text": "Gain 1 Energy at the start of each turn. Arcane Vortex cannot raise costs above 1.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "gain_energy",
+      "amount": 1
+     }
+    ]
+   }
+  }
+ ],
+ "enemiesFile": "azshara.enemies.json",
+ "raidFloorsFile": "azshara.raids.json"
+}

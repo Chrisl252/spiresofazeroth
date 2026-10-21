@@ -1,0 +1,53 @@
+{
+  "id": "burning-steppes",
+  "name": "Burning Steppes",
+  "start": {"name": "Morgan's Vigil", "icon": "spell_fire_fire"},
+  "continent": "ek",
+  "act": 6,
+  "levelBand": [50,60],
+  "spire": {
+    "name": "Blackrock Spire",
+    "lore": "The ash plains below Blackrock Mountain, where the Blackrock orcs and black dragonflight nest in the tallest spire of Azeroth."
+  },
+  "theme": {
+    "primary": "#7a2a14",
+    "secondary": "#1c0b08",
+    "accent": "#ff9a3c",
+    "background": "ash-plain"
+  },
+  "zoneMechanic": {
+    "id": "dragon-spawn",
+    "name": "Dragon Spawn",
+    "icon": "inv_egg_04",
+    "text": "Black dragon eggs line the field. On turn 4 the clutch hatches and a Searing Whelp joins the fight, unless the eggs were destroyed.",
+    "hooks": {"on_turn_start":[{"op":"conditional","if":{"type":"turn_number","equals":4},"then":[{"op":"summon","unit":"searing-whelp","count":1}]}]}
+  },
+  "rest": {
+    "id": "flame-crest-camp",
+    "name": "Flame Crest Camp",
+    "icon": "spell_fire_fire",
+    "text": "Rest at the Flame Crest camp. Heal 25% of max HP and gain 4 Block next combat.",
+    "effects": [
+      {"op":"heal","amount":24,"target":"self"},
+      {"op":"block","amount":4,"target":"self"}
+    ]
+  },
+  "enemiesFile": "burning-steppes.enemies.json",
+  "encounters": {
+    "normal": [["blackrock-outrunner","blackrock-soldier"],["scorpid-terror","scorpid-terror"],["thaurissan-firewalker","thaurissan-firewalker","thaurissan-agent"],["fire-roc","fire-roc","fire-elemental"],["firegut-ogre","firegut-brute"],["blackrock-slayer","blackrock-warlock","blackrock-hunter","blackrock-sorcerer"],["black-broodling","searing-whelp","black-dragonspawn","black-drake"],["felhunter","felhunter"],["blackrock-sorcerer","blackrock-champion","blackrock-summoner"],["black-dragonspawn","black-drake","black-wyrmkin"]],
+    "elite": [["warchief-rend-blackhand"],["the-beast"],["hematos"],["ghok-bashguud"]],
+    "boss": [["general-drakkisath"],["warchief-rend-blackhand","blackrock-champion","blackrock-battlemaster"],["the-beast","blackrock-worg","blackrock-worg"]]
+  },
+  "events": [
+    {"id":"flame-crest","name":"Flame Crest","icon":"spell_fire_flameshock","text":"Flame Crest's Blackrock raiders have trapped a Dwarf expedition. Their leader shouts for help from behind a barricade.","options":[{"label":"Rescue the expedition","effects":[{"op":"damage","amount":12,"target":"self"},{"op":"max_hp","amount":5}]},{"label":"Loot the raiders","effects":[{"op":"gold","amount":110},{"op":"apply","status":"burn","stacks":2,"target":"self"}]},{"label":"Hold position","effects":[]}]},
+    {"id":"thaurissan-ruins","name":"Thaurissan Ruins","icon":"inv_misc_key_03","text":"The old Thaurissan ruins hold a Dark Iron cache. Thaurissan agents patrol the cellars.","options":[{"label":"Raid the cache","effects":[{"op":"damage","amount":10,"target":"self"},{"op":"random_card","pool":"any","rarity":"rare","to":"hand"},{"op":"gold","amount":60}]},{"label":"Bribe an agent","effects":[{"op":"gold","amount":-60},{"op":"heal","amount":20,"target":"self"}],"requires":{"gold":60}},{"label":"Ignore it","effects":[]}]},
+    {"id":"dragonkin-menace","name":"Dragonkin Menace","icon":"inv_misc_head_dragon_black","text":"Black Dragonspawn mass at the Dragonkin camp. The Dwarf warbands pay well for every nest burned.","options":[{"label":"Burn the nests","effects":[{"op":"damage","amount":14,"target":"self"},{"op":"gold","amount":130}]},{"label":"Steal an egg","effects":[{"op":"apply","status":"vulnerable","stacks":1,"target":"self"},{"op":"random_card","pool":"any","rarity":"rare","to":"hand"}]},{"label":"Retreat","effects":[]}]},
+    {"id":"morgans-vigil","name":"Morgan's Vigil","icon":"inv_shield_05","text":"Dwarf soldiers at Morgan's Vigil are pinned down by Blackrock worgs. Their commander needs a hand.","options":[{"label":"Defend the vigil","effects":[{"op":"damage","amount":8,"target":"self"},{"op":"heal","amount":12,"target":"self"},{"op":"gold","amount":50}]},{"label":"Scout the ridge","effects":[{"op":"scry","count":3},{"op":"draw","count":1}]},{"label":"Move on","effects":[]}]}
+  ],
+  "relics": [
+    {"id":"blackhands-breadth","name":"Blackhand's Breadth","icon":"inv_jewelry_talisman_06","rarity":"epic","itemId":13965,"zone":"burning-steppes","class":null,"text":"Gain 2 Block at the start of each turn.","triggers":{"on_turn_start":[{"op":"block","amount":2,"target":"self"}]}},
+    {"id":"dalrends-sacred-charge","name":"Dal'Rend's Sacred Charge","icon":"inv_sword_01","rarity":"epic","itemId":12940,"zone":"burning-steppes","class":null,"text":"Whenever you play an attack, deal 1 extra damage.","triggers":{"on_attack":[{"op":"damage","amount":1,"target":"enemy"}]}},
+    {"id":"mark-of-the-dragon-lord","name":"Mark of the Dragon Lord","icon":"inv_jewelry_talisman_01","rarity":"epic","itemId":13143,"zone":"burning-steppes","class":null,"text":"At the start of combat, gain 1 Strength and 2 Block.","triggers":{"on_combat_start":[{"op":"apply","status":"strength","stacks":1,"target":"self"},{"op":"block","amount":2,"target":"self"}]}}
+  ],
+  "raidFloorsFile": "burning-steppes.raids.json"
+}

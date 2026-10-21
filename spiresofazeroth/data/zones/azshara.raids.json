@@ -1,0 +1,42 @@
+[
+ {"id":"azuregos-lair","name":"Azuregos' Lair (Azshara World Boss)","unlock":"act_complete","enemyRefs":["azuregos"],"encounters":{"normal":[],"elite":[],"boss":[["azuregos"]]},"relics":[],
+  "enemies":[
+  
+  ]},
+ {"id":"temple-of-arkkoran","name":"Temple of Arkkoran","unlock":"act_complete","encounters":{"normal":[["arkkoran-pincer","arkkoran-clacker"],["arkkoran-clacker","arkkoran-clacker","arkkoran-pincer"]],"elite":[["arkkoran-oracle"],["arkkoran-muckdweller","arkkoran-pincer"],["arkkoran-squid"],["arkkoran-oracle","arkkoran-squid"]],"boss":[["arkkoran-oracle","arkkoran-muckdweller","arkkoran-squid"]]},"relics":[],
+  "enemies":[
+   {"id":"arkkoran-pincer","name":"Arkkoran Pincer","tier":"normal","family":"beast","type":"crab","level":[51,53],"hp":[64,75],"icon":"ability_hunter_pet_crab","npcId":null,"traits":["burrow"],
+    "moves":[
+     {"id":"pincer","name":"Pincer","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2},
+     {"id":"hard-shell","name":"Hard Shell","intent":"block","effects":[{"op":"block","amount":14,"target":"self"}],"weight":2,"cooldown":3},
+     {"id":"crushing-grip","name":"Crushing Grip","intent":"attack","effects":[{"op":"damage","amount":7},{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":2}
+    ]},
+   {"id":"arkkoran-clacker","name":"Arkkoran Clacker","tier":"normal","family":"beast","type":"crab","level":[52,54],"hp":[67,79],"icon":"ability_hunter_pet_crab","npcId":null,"traits":["burrow"],
+    "moves":[
+     {"id":"clack","name":"Clack","intent":"attack_multi","effects":[{"op":"damage","amount":7,"times":2}],"weight":2},
+     {"id":"pincer-snap","name":"Pincer Snap","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2},
+     {"id":"hard-shell","name":"Hard Shell","intent":"block","effects":[{"op":"block","amount":15,"target":"self"}],"weight":1,"cooldown":3}
+    ]},
+   {"id":"arkkoran-oracle","name":"Arkkoran Oracle","tier":"elite","family":"humanoid","type":"naga","level":[53,55],"hp":[178,208],"icon":"spell_frost_frozenorb","npcId":null,"traits":["caster"],
+    "moves":[
+     {"id":"frostbolt","name":"Frostbolt","intent":"cast","effects":[{"op":"damage","amount":20,"school":"frost"},{"op":"apply","status":"weak","stacks":2,"target":"player"}],"cast":true,"weight":2},
+     {"id":"arcane-explosion","name":"Arcane Explosion","intent":"cast","effects":[{"op":"damage","amount":12,"school":"arcane"}],"cast":true,"weight":2,"cooldown":3},
+     {"id":"oracle-mend","name":"Oracle Mend","intent":"heal","effects":[{"op":"heal","amount":16,"target":"self"}],"weight":2,"cooldown":4},
+     {"id":"mind-flay","name":"Mind Flay","intent":"cast","effects":[{"op":"apply","status":"silence","stacks":1,"target":"player"}],"cast":true,"weight":1,"cooldown":4}
+    ]},
+   {"id":"arkkoran-muckdweller","name":"Arkkoran Muckdweller","tier":"elite","family":"beast","type":"crab","level":[52,54],"hp":[171,201],"icon":"ability_hunter_pet_crab","npcId":null,"traits":["acid"],
+    "moves":[
+     {"id":"muck-spray","name":"Muck Spray","intent":"attack","effects":[{"op":"damage","amount":14,"school":"nature"},{"op":"apply","status":"vulnerable","stacks":2,"target":"player"}],"weight":2},
+     {"id":"claw-crush","name":"Claw Crush","intent":"attack","effects":[{"op":"damage","amount":22}],"weight":2},
+     {"id":"burrow-mend","name":"Burrow Mend","intent":"heal","effects":[{"op":"heal","amount":12,"target":"self"}],"weight":1,"cooldown":4},
+     {"id":"mire-wave","name":"Mire Wave","intent":"attack","effects":[{"op":"damage","amount":10,"school":"nature","target":"all_enemies"}],"weight":2,"cooldown":4}
+    ]},
+   {"id":"arkkoran-squid","name":"Arkkoran Squid","tier":"elite","family":"beast","type":"squid","level":[53,55],"hp":[178,208],"icon":"spell_frost_summonwaterelemental","npcId":null,"traits":["acid"],
+    "moves":[
+     {"id":"ink-cloud","name":"Ink Cloud","intent":"attack","effects":[{"op":"damage","amount":12},{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2},
+     {"id":"tentacle-lash","name":"Tentacle Lash","intent":"attack_multi","effects":[{"op":"damage","amount":9,"times":3}],"weight":2},
+     {"id":"crush","name":"Crush","intent":"attack","effects":[{"op":"damage","amount":20}],"weight":2},
+     {"id":"constrict","name":"Constrict","intent":"attack","effects":[{"op":"damage","amount":10},{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":3}
+    ]}
+  ]}
+]

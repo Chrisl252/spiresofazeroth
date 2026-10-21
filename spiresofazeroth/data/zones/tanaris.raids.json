@@ -1,0 +1,177 @@
+[
+ {"id":"zulfarrak","name":"Zul'Farrak","unlock":"act_complete","encounters":{"normal":[["sandfury-cretin","sandfury-drudge"],["sandfury-axe-thrower","sandfury-guardian"],["sandfury-witch-doctor","sandfury-acolyte","sandfury-zealot"],["sandfury-hideskinner","sandfury-blood-drinker"],["sullithuz-sandcrawler","sullithuz-sandcrawler"],["zulfarrak-zombie","zulfarrak-dead-hero"],["sandfury-shadowhunter","sandfury-firecaller","sandfury-soul-eater"],["sullithuz-abomination","sandfury-executioner"]],"elite":[["antusul"],["theka-the-martyr"],["witch-doctor-zumrah"],["nekrum-gutchewer","sergeant-bly"],["shadowpriest-sezzziz","hydromancer-velratha"],["ruuzlu"]],"boss":[["gahzrilla"]]},"relics":[{"id":"sulthraze-the-lasher","name":"Sul'thraze the Lasher","icon":"inv_sword_01","rarity":"rare","itemId":null,"itemIdSource":"unverified","zone":"tanaris","class":null,"text":"Your Attacks deal 2 extra damage and apply 1 Bleed at 20% chance.","triggers":{"on_attack":[{"op":"damage","amount":2},{"op":"conditional","if":{"type":"chance","p":0.2},"then":[{"op":"apply","status":"bleed","stacks":1,"target":"enemy"}]}]}},{"id":"gahzrilla-scale-cloak","name":"Gahz'rilla Scale Cloak","icon":"inv_misc_cape_01","rarity":"uncommon","itemId":null,"itemIdSource":"unverified","zone":"tanaris","class":null,"text":"Gain 1 Thorns at the start of each combat and resist Frost: first Frost debuff each combat is negated.","triggers":{"on_combat_start":[{"op":"apply","status":"thorns","stacks":1,"target":"self"}]}},{"id":"carapace-of-sun-and-shadow","name":"Carapace of Sun and Shadow","icon":"inv_chest_cloth_01","rarity":"rare","itemId":null,"itemIdSource":"unverified","zone":"tanaris","class":null,"text":"Gain 10 Block at combat start. Shadow and Fire damage taken is reduced by 1.","triggers":{"on_combat_start":[{"op":"block","amount":10,"target":"self"}]}}],
+  "enemies":[
+   {"id":"sandfury-axe-thrower","name":"Sandfury Axe Thrower","tier":"normal","family":"humanoid","type":"troll","level":[44,46],"hp":[58,68],"icon":"inv_misc_head_troll_01","npcId":null,"traits":[],
+    "moves":[
+     {"id":"axe-throw","name":"Axe Throw","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":2},
+     {"id":"rapid-throw","name":"Rapid Throw","intent":"attack_multi","effects":[{"op":"damage","amount":5,"times":2}],"weight":2},
+     {"id":"viper-sting","name":"Viper Sting","intent":"attack","effects":[{"op":"damage","amount":5,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2,"cooldown":3}
+    ]},
+   {"id":"sandfury-blood-drinker","name":"Sandfury Blood Drinker","tier":"normal","family":"humanoid","type":"troll","level":[45,47],"hp":[61,71],"icon":"inv_misc_head_troll_01","npcId":null,"traits":["regen"],
+    "moves":[
+     {"id":"blood-drain","name":"Blood Drain","intent":"attack","effects":[{"op":"damage","amount":10},{"op":"heal","amount":8,"target":"self"}],"weight":2},
+     {"id":"cleave","name":"Cleave","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":2},
+     {"id":"troll-regeneration","name":"Troll Regeneration","intent":"buff","effects":[{"op":"apply","status":"regen","stacks":3,"target":"self"}],"weight":1,"cooldown":4}
+    ]},
+   {"id":"sandfury-guardian","name":"Sandfury Guardian","tier":"normal","family":"humanoid","type":"troll","level":[45,47],"hp":[70,82],"icon":"inv_misc_head_troll_01","npcId":null,"traits":["regen"],
+    "moves":[
+     {"id":"shield-slam","name":"Shield Slam","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2},
+     {"id":"shield-wall","name":"Shield Wall","intent":"block","effects":[{"op":"block","amount":17,"target":"self"}],"weight":2,"cooldown":3},
+     {"id":"cleave","name":"Cleave","intent":"attack_multi","effects":[{"op":"damage","amount":7,"times":2}],"weight":2}
+    ]},
+   {"id":"sandfury-shadowhunter","name":"Sandfury Shadowhunter","tier":"normal","family":"humanoid","type":"troll","level":[45,47],"hp":[61,71],"icon":"inv_misc_head_troll_01","npcId":null,"traits":[],
+    "moves":[
+     {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":11,"school":"shadow"}],"cast":true,"weight":2},
+     {"id":"poison-dart","name":"Poison Dart","intent":"attack","effects":[{"op":"damage","amount":7,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+     {"id":"shoot","name":"Shoot","intent":"attack","effects":[{"op":"damage","amount":10}],"weight":2}
+    ]},
+   {"id":"sandfury-witch-doctor","name":"Sandfury Witch Doctor","tier":"normal","family":"humanoid","type":"troll","level":[44,46],"hp":[58,68],"icon":"inv_misc_head_troll_02","npcId":null,"traits":["caster"],
+    "moves":[
+     {"id":"hex","name":"Hex","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"cast":true,"weight":2},
+     {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":10,"school":"shadow"}],"cast":true,"weight":2},
+     {"id":"healing-ward","name":"Healing Ward","intent":"heal","effects":[{"op":"heal","amount":11,"target":"self"}],"weight":2,"cooldown":3}
+    ]},
+   {"id":"sandfury-executioner","name":"Sandfury Executioner","tier":"normal","family":"humanoid","type":"troll","level":[46,48],"hp":[74,86],"icon":"inv_misc_head_troll_01","npcId":null,"traits":["regen"],
+    "moves":[
+     {"id":"execute","name":"Execute","intent":"attack","effects":[{"op":"damage","amount":20}],"weight":2,"cooldown":3},
+     {"id":"cleave","name":"Cleave","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2},
+     {"id":"mortal-strike","name":"Mortal Strike","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":1}
+    ]},
+   {"id":"sandfury-drudge","name":"Sandfury Drudge","tier":"normal","family":"humanoid","type":"troll","level":[44,46],"hp":[52,61],"icon":"inv_misc_head_troll_01","npcId":null,"traits":["regen"],
+    "moves":[
+     {"id":"axe-throw","name":"Axe Throw","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":2},
+     {"id":"cleave","name":"Cleave","intent":"attack_multi","effects":[{"op":"damage","amount":5,"times":2}],"weight":2},
+     {"id":"troll-regeneration","name":"Troll Regeneration","intent":"buff","effects":[{"op":"apply","status":"regen","stacks":3,"target":"self"}],"weight":1,"cooldown":4}
+    ]},
+   {"id":"sandfury-zealot","name":"Sandfury Zealot","tier":"normal","family":"humanoid","type":"troll","level":[45,47],"hp":[61,71],"icon":"inv_misc_head_troll_01","npcId":null,"traits":["regen"],
+    "moves":[
+     {"id":"smite","name":"Smite","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":2},
+     {"id":"heal","name":"Heal","intent":"heal","effects":[{"op":"heal","amount":12,"target":"self"}],"weight":2,"cooldown":3},
+     {"id":"zeal","name":"Zeal","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":1,"target":"self"}],"weight":1,"cooldown":4}
+    ]},
+   {"id":"sandfury-hideskinner","name":"Sandfury Hideskinner","tier":"normal","family":"humanoid","type":"troll","level":[45,47],"hp":[61,71],"icon":"inv_misc_head_troll_01","npcId":null,"traits":["regen"],
+    "moves":[
+     {"id":"axe-throw","name":"Axe Throw","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":2},
+     {"id":"cleave","name":"Cleave","intent":"attack_multi","effects":[{"op":"damage","amount":7,"times":2}],"weight":2},
+     {"id":"troll-regeneration","name":"Troll Regeneration","intent":"buff","effects":[{"op":"apply","status":"regen","stacks":3,"target":"self"}],"weight":1,"cooldown":4}
+    ]},
+   {"id":"sandfury-acolyte","name":"Sandfury Acolyte","tier":"normal","family":"humanoid","type":"troll","level":[44,46],"hp":[58,68],"icon":"inv_misc_head_troll_02","npcId":null,"traits":["caster"],
+    "moves":[
+     {"id":"hex","name":"Hex","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"cast":true,"weight":2},
+     {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":10,"school":"shadow"}],"cast":true,"weight":2},
+     {"id":"healing-ward","name":"Healing Ward","intent":"heal","effects":[{"op":"heal","amount":11,"target":"self"}],"weight":2,"cooldown":3}
+    ]},
+   {"id":"sandfury-firecaller","name":"Sandfury Firecaller","tier":"normal","family":"humanoid","type":"troll","level":[45,47],"hp":[61,71],"icon":"spell_fire_flamebolt","npcId":null,"traits":["caster"],
+    "moves":[
+     {"id":"fireball","name":"Fireball","intent":"cast","effects":[{"op":"damage","amount":12,"school":"fire"},{"op":"apply","status":"burn","stacks":2,"target":"player"}],"cast":true,"weight":2},
+     {"id":"flame-shock","name":"Flame Shock","intent":"cast","effects":[{"op":"damage","amount":8,"school":"fire"}],"cast":true,"weight":2},
+     {"id":"staff-strike","name":"Staff Strike","intent":"attack","effects":[{"op":"damage","amount":7}],"weight":2}
+    ]},
+   {"id":"sandfury-soul-eater","name":"Sandfury Soul Eater","tier":"normal","family":"humanoid","type":"troll","level":[45,47],"hp":[61,71],"icon":"inv_misc_head_troll_02","npcId":null,"traits":["regen"],
+    "moves":[
+     {"id":"soul-drain","name":"Soul Drain","intent":"attack","effects":[{"op":"damage","amount":10,"school":"shadow"},{"op":"heal","amount":8,"target":"self"}],"weight":2},
+     {"id":"curse-of-weakness","name":"Curse of Weakness","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"cast":true,"weight":2,"cooldown":3},
+     {"id":"strike","name":"Strike","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":2}
+    ]},
+   {"id":"sandfury-cretin","name":"Sandfury Cretin","tier":"normal","family":"humanoid","type":"troll","level":[44,46],"hp":[46,54],"icon":"inv_misc_head_troll_01","npcId":null,"traits":["regen"],
+    "moves":[
+     {"id":"axe-throw","name":"Axe Throw","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":2},
+     {"id":"cleave","name":"Cleave","intent":"attack_multi","effects":[{"op":"damage","amount":5,"times":2}],"weight":2},
+     {"id":"troll-regeneration","name":"Troll Regeneration","intent":"buff","effects":[{"op":"apply","status":"regen","stacks":3,"target":"self"}],"weight":1,"cooldown":4}
+    ]},
+   {"id":"zulfarrak-dead-hero","name":"Zul'Farrak Dead Hero","tier":"normal","family":"undead","type":"zombie","level":[45,47],"hp":[61,71],"icon":"inv_misc_head_undead_01","npcId":null,"traits":["regen","revive"],
+    "moves":[
+     {"id":"rusty-blade","name":"Rusty Blade","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2},
+     {"id":"undying-will","name":"Undying Will","intent":"buff","effects":[{"op":"apply","status":"regen","stacks":2,"target":"self"}],"weight":1,"cooldown":4},
+     {"id":"shield-bash","name":"Shield Bash","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":2}
+    ]},
+   {"id":"zulfarrak-zombie","name":"Zul'Farrak Zombie","tier":"normal","family":"undead","type":"zombie","level":[44,46],"hp":[58,68],"icon":"inv_misc_head_undead_01","npcId":null,"traits":["disease"],
+    "moves":[
+     {"id":"rotting-touch","name":"Rotting Touch","intent":"attack","effects":[{"op":"damage","amount":9},{"op":"apply","status":"disease","stacks":2,"target":"player"}],"weight":2},
+     {"id":"slam","name":"Slam","intent":"attack","effects":[{"op":"damage","amount":10}],"weight":2}
+    ]},
+   {"id":"sullithuz-sandcrawler","name":"Sul'lithuz Sandcrawler","tier":"normal","family":"beast","type":"silithid","level":[45,47],"hp":[61,71],"icon":"ability_hunter_pet_silithid","npcId":null,"traits":["burrow"],
+    "moves":[
+     {"id":"acid-spit","name":"Acid Spit","intent":"attack","effects":[{"op":"damage","amount":8,"school":"nature"},{"op":"apply","status":"vulnerable","stacks":1,"target":"player"}],"weight":2},
+     {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":10}],"weight":2},
+     {"id":"burrow","name":"Burrow","intent":"block","effects":[{"op":"block","amount":12,"target":"self"}],"weight":1,"cooldown":4}
+    ]},
+   {"id":"sullithuz-abomination","name":"Sul'lithuz Abomination","tier":"normal","family":"beast","type":"silithid","level":[47,48],"hp":[92,108],"icon":"ability_hunter_pet_silithid","npcId":null,"traits":[],
+    "moves":[
+     {"id":"crushing-slam","name":"Crushing Slam","intent":"attack","effects":[{"op":"damage","amount":23}],"weight":2},
+     {"id":"acid-burst","name":"Acid Burst","intent":"attack","effects":[{"op":"damage","amount":12,"school":"nature"},{"op":"apply","status":"vulnerable","stacks":2,"target":"player"}],"weight":2},
+     {"id":"shell-plate","name":"Shell Plate","intent":"block","effects":[{"op":"block","amount":20,"target":"self"}],"weight":1,"cooldown":4}
+    ]},
+   {"id":"antusul","name":"Antu'sul","tier":"elite","family":"humanoid","type":"troll","level":[46,47],"hp":[170,200],"icon":"inv_misc_head_troll_02","npcId":8127,"traits":["summoner","caster"],
+    "moves":[
+     {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":16,"school":"shadow"}],"cast":true,"weight":2},
+     {"id":"summon-sullithuz","name":"Summon Sul'lithuz","intent":"summon","effects":[{"op":"summon","unit":"sullithuz-hatchling","count":2}],"weight":2,"cooldown":5},
+     {"id":"healing-ward","name":"Healing Ward","intent":"heal","effects":[{"op":"heal","amount":14,"target":"self"}],"weight":2,"cooldown":4},
+     {"id":"troll-smash","name":"Troll Smash","intent":"attack","effects":[{"op":"damage","amount":19}],"weight":2}
+    ],
+    "phases":[
+     {"hpBelowPct":50,"onEnter":[{"op":"apply","status":"strength","stacks":2,"target":"self"}]}
+    ]},
+   {"id":"theka-the-martyr","name":"Theka the Martyr","tier":"elite","family":"humanoid","type":"troll","level":[46,47],"hp":[150,175],"icon":"inv_misc_head_troll_01","npcId":7272,"traits":["revive"],
+    "moves":[
+     {"id":"fevered-plague-strike","name":"Fevered Plague Strike","intent":"attack","effects":[{"op":"damage","amount":15}],"weight":2},
+     {"id":"fevered-plague","name":"Fevered Plague","intent":"attack","effects":[{"op":"damage","amount":10},{"op":"apply","status":"disease","stacks":3,"target":"player"}],"weight":2},
+     {"id":"martyrs-fury","name":"Martyr's Fury","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":5}
+    ],
+    "phases":[
+     {"hpBelowPct":25,"onEnter":[{"op":"apply","status":"thorns","stacks":3,"target":"self"},{"op":"heal","amount":14,"target":"self"}]}
+    ]},
+   {"id":"witch-doctor-zumrah","name":"Witch Doctor Zum'rah","tier":"elite","family":"humanoid","type":"troll","level":[46,47],"hp":[150,175],"icon":"inv_misc_head_troll_02","npcId":7271,"traits":["caster","summoner"],
+    "moves":[
+     {"id":"shadow-bolt-volley","name":"Shadow Bolt Volley","intent":"cast","effects":[{"op":"damage","amount":15,"school":"shadow"}],"cast":true,"weight":2},
+     {"id":"hex","name":"Hex","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"cast":true,"weight":2,"cooldown":3},
+     {"id":"healing-ward","name":"Healing Ward","intent":"heal","effects":[{"op":"heal","amount":14,"target":"self"}],"weight":2,"cooldown":4},
+     {"id":"raise-dead","name":"Raise Dead","intent":"summon","effects":[{"op":"summon","unit":"zulfarrak-dead-hero","count":1}],"weight":1,"cooldown":5}
+    ]},
+   {"id":"nekrum-gutchewer","name":"Nekrum Gutchewer","tier":"elite","family":"humanoid","type":"troll","level":[46,47],"hp":[155,180],"icon":"inv_misc_head_troll_01","npcId":7796,"traits":[],
+    "moves":[
+     {"id":"shield-bash","name":"Shield Bash","intent":"attack","effects":[{"op":"damage","amount":17}],"weight":2},
+     {"id":"hamstring","name":"Hamstring","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":3},
+     {"id":"cleave","name":"Cleave","intent":"attack","effects":[{"op":"damage","amount":18}],"weight":2},
+     {"id":"gut-guard","name":"Gut Guard","intent":"block","effects":[{"op":"block","amount":12,"target":"self"}],"weight":1,"cooldown":4}
+    ]},
+   {"id":"shadowpriest-sezzziz","name":"Shadowpriest Sezz'ziz","tier":"elite","family":"humanoid","type":"troll","level":[46,47],"hp":[150,175],"icon":"inv_misc_head_troll_02","npcId":7275,"traits":["caster"],
+    "moves":[
+     {"id":"shadow-word-pain","name":"Shadow Word Pain","intent":"cast","effects":[{"op":"damage","amount":12,"school":"shadow"},{"op":"apply","status":"curse","stacks":2,"target":"player"}],"cast":true,"weight":2},
+     {"id":"mind-blast","name":"Mind Blast","intent":"cast","effects":[{"op":"damage","amount":20,"school":"shadow"}],"cast":true,"weight":2},
+     {"id":"psychic-scream","name":"Psychic Scream","intent":"cast","effects":[{"op":"apply","status":"fear","stacks":1,"target":"player"}],"cast":true,"weight":2,"cooldown":4},
+     {"id":"shadow-mend","name":"Shadow Mend","intent":"heal","effects":[{"op":"heal","amount":12,"target":"self"}],"weight":1,"cooldown":5}
+    ]},
+   {"id":"sergeant-bly","name":"Sergeant Bly","tier":"elite","family":"humanoid","type":"human","level":[46,47],"hp":[155,180],"icon":"inv_misc_head_human_01","npcId":7604,"traits":["pack"],"note":"Rescued by Sergeant Bly's gang; fights as a hostile elite in this spire.",
+    "moves":[
+     {"id":"shield-bash","name":"Shield Bash","intent":"attack","effects":[{"op":"damage","amount":16}],"weight":2},
+     {"id":"revenge","name":"Revenge","intent":"attack","effects":[{"op":"damage","amount":22}],"weight":2},
+     {"id":"pistol-volley","name":"Pistol Volley","intent":"attack_multi","effects":[{"op":"damage","amount":10,"times":2}],"weight":2},
+     {"id":"bly-rallying-cry","name":"Bly Rallying Cry","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":5}
+    ]},
+   {"id":"hydromancer-velratha","name":"Hydromancer Velratha","tier":"elite","family":"humanoid","type":"troll","level":[46,47],"hp":[155,180],"icon":"inv_misc_head_troll_02","npcId":7795,"traits":["caster","resist:frost"],
+    "moves":[
+     {"id":"chain-lightning","name":"Chain Lightning","intent":"cast","effects":[{"op":"damage","amount":18,"school":"nature"}],"cast":true,"weight":2},
+     {"id":"healing-wave","name":"Healing Wave","intent":"heal","effects":[{"op":"heal","amount":16,"target":"self"}],"weight":2,"cooldown":3},
+     {"id":"earthgrab-totem","name":"Earthgrab Totem","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"cast":true,"weight":2,"cooldown":4},
+     {"id":"frost-shock","name":"Frost Shock","intent":"cast","effects":[{"op":"damage","amount":12,"school":"frost"},{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":1}
+    ]},
+   {"id":"gahzrilla","name":"Gahz'rilla","tier":"boss","family":"beast","type":"hydra","level":[46,47],"hp":[330,370],"icon":"ability_hunter_pet_crocolisk","npcId":7273,"traits":["huge-hits","resist:frost"],"pattern":["gahzrilla-slam","ice-blast","thrash","freeze-solid"],
+    "moves":[
+     {"id":"gahzrilla-slam","name":"Gahz'rilla Slam","intent":"attack","effects":[{"op":"damage","amount":24}],"weight":2},
+     {"id":"freeze-solid","name":"Freeze Solid","intent":"attack","effects":[{"op":"damage","amount":10,"school":"frost"},{"op":"apply","status":"frozen","stacks":1,"target":"player"}],"weight":2,"cooldown":4},
+     {"id":"ice-blast","name":"Ice Blast","intent":"attack","effects":[{"op":"damage","amount":13,"school":"frost","target":"all_enemies"}],"weight":2,"cooldown":4},
+     {"id":"thrash","name":"Thrash","intent":"attack_multi","effects":[{"op":"damage","amount":13,"times":2}],"weight":2}
+    ],
+    "phases":[
+     {"hpBelowPct":50,"pattern":["gahzrilla-slam","freeze-solid","ice-blast","thrash"],"onEnter":[{"op":"apply","status":"strength","stacks":2,"target":"self"}]}
+    ]},
+   {"id":"ruuzlu","name":"Ruuzlu","tier":"elite","family":"humanoid","type":"troll","level":[46,47],"hp":[155,180],"icon":"inv_misc_head_troll_01","npcId":7797,"traits":["caster"],
+    "moves":[
+     {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":17,"school":"nature"}],"cast":true,"weight":2},
+     {"id":"strike","name":"Strike","intent":"attack","effects":[{"op":"damage","amount":17}],"weight":2},
+     {"id":"terrify","name":"Terrify","intent":"cast","effects":[{"op":"apply","status":"fear","stacks":1,"target":"player"}],"cast":true,"weight":2,"cooldown":4},
+     {"id":"totem-shield","name":"Totem Shield","intent":"block","effects":[{"op":"block","amount":12,"target":"self"}],"weight":1,"cooldown":4}
+    ]}
+  ]}
+]

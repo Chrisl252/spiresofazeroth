@@ -1,0 +1,1195 @@
+{
+  "id": "warrior",
+  "name": "Warrior",
+  "icon": "classicon_warrior",
+  "color": "#C79C6E",
+  "lore": "Master of martial combat, shields, and battle stances: turns every blow dealt and received into devastating momentum.",
+  "startingHp": 80,
+  "startingGold": 99,
+  "defaultContinent": "ek",
+  "spellIdSource": "memory",
+  "resource": {
+    "id": "rage",
+    "name": "Rage & Stances",
+    "tip": "Generate 5 Rage whenever you deal or take damage. Heavy strikes and stance abilities spend Rage.",
+    "icon": "ability_racial_bloodrage",
+    "max": 100,
+    "rules": "Gain Rage through combat violence. Spend Rage on devastating attacks, and shift between Battle, Defensive, and Berserker Stances to unlock tactical card bonuses.",
+    "energyPerTurn": 3,
+    "startOfCombat": 0,
+    "gainOnDamageDealt": 5,
+    "gainOnDamageTaken": 5,
+    "decayPerTurn": 0
+  },
+  "archetypes": [
+    {"id": "arms", "name": "Arms", "icon": "ability_warrior_savageblow", "text": "Big single hits, bleeds and Battle Stance finishers."},
+    {"id": "fury", "name": "Fury", "icon": "spell_nature_bloodlust", "text": "Rage generation, Strength and sweeping area damage in Berserker Stance."},
+    {"id": "protection", "name": "Protection", "icon": "inv_shield_05", "text": "Block, taunts and counter-strikes from Defensive Stance."}
+  ],
+  "relics": [
+    {"id": "ironfoe", "name": "Ironfoe", "icon": "inv_hammer_04", "rarity": "rare", "itemId": 11684, "zone": null, "class": "warrior", "text": "20% chance on attack: gain 1 Energy.", "triggers": {"on_attack": [{"op": "conditional", "if": {"type": "chance", "pct": 20}, "then": [{"op": "gain_energy", "amount": 1}]}]}},
+    {"id": "bonereavers-edge", "name": "Bonereaver's Edge", "icon": "inv_sword_48", "rarity": "epic", "itemId": 17076, "zone": null, "class": "warrior", "text": "Start each combat with 20 Rage. 15% chance on attack: apply 1 Vulnerable.", "triggers": {"on_combat_start": [{"op": "gain_resource", "resource": "rage", "amount": 20}], "on_attack": [{"op": "conditional", "if": {"type": "chance", "pct": 15}, "then": [{"op": "apply", "status": "vulnerable", "stacks": 1, "target": "enemy"}]}]}}
+  ],
+  "starterDeck": [
+    "heroic-strike",
+    "heroic-strike",
+    "heroic-strike",
+    "heroic-strike",
+    "shield-block",
+    "shield-block",
+    "shield-block",
+    "shield-block",
+    "charge",
+    "inner-rage"
+  ],
+  "units": {},
+  "cards": [
+    {
+      "id": "heroic-strike",
+      "name": "Heroic Strike",
+      "icon": "ability_rogue_ambush",
+      "spellId": 78,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "arms",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 damage. Gain 5 Rage.",
+      "effects": [
+        {"op": "damage", "amount": 6},
+        {"op": "gain_resource", "resource": "rage", "amount": 5}
+      ],
+      "upgrade": {
+        "name": "Heroic Strike (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 damage. Gain 5 Rage.",
+        "effects": [
+          {"op": "damage", "amount": 9},
+          {"op": "gain_resource", "resource": "rage", "amount": 5}
+        ]
+      }
+    },
+    {
+      "id": "inner-rage",
+      "name": "Inner Rage",
+      "icon": "ability_warrior_innerrage",
+      "spellId": 1224,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "fury",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 damage. Spend all Rage: +1 damage per Rage spent (max 20).",
+      "effects": [
+        {"op": "damage", "amount": 6},
+        {"op": "spend_resource", "resource": "rage", "all": true},
+        {"op": "damage", "amount": {"base": 0, "scale": "rage", "per": 1, "max": 20}}
+      ],
+      "upgrade": {
+        "name": "Inner Rage (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 damage. Spend all Rage: +1 damage per Rage spent (max 30).",
+        "effects": [
+          {"op": "damage", "amount": 9},
+          {"op": "spend_resource", "resource": "rage", "all": true},
+          {"op": "damage", "amount": {"base": 0, "scale": "rage", "per": 1, "max": 30}}
+        ]
+      }
+    },
+    {
+      "id": "shield-block",
+      "name": "Shield Block",
+      "icon": "ability_defend",
+      "spellId": 2565,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "basic",
+      "archetype": "protection",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 5 Block. Gain 5 Rage.",
+      "effects": [
+        {"op": "block", "amount": 5},
+        {"op": "gain_resource", "resource": "rage", "amount": 5}
+      ],
+      "upgrade": {
+        "name": "Shield Block (Rank 2)",
+        "cost": 1,
+        "text": "Gain 8 Block. Gain 5 Rage.",
+        "effects": [
+          {"op": "block", "amount": 8},
+          {"op": "gain_resource", "resource": "rage", "amount": 5}
+        ]
+      }
+    },
+    {
+      "id": "charge",
+      "name": "Charge",
+      "icon": "ability_warrior_charge",
+      "spellId": 100,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "arms",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 8 damage. Apply Vulnerable 2. Gain 10 Rage.",
+      "effects": [
+        {"op": "damage", "amount": 8},
+        {"op": "apply", "status": "vulnerable", "stacks": 2, "target": "enemy"},
+        {"op": "gain_resource", "resource": "rage", "amount": 10}
+      ],
+      "upgrade": {
+        "name": "Charge (Rank 2)",
+        "cost": 1,
+        "text": "Deal 11 damage. Apply Vulnerable 3. Gain 15 Rage.",
+        "effects": [
+          {"op": "damage", "amount": 11},
+          {"op": "apply", "status": "vulnerable", "stacks": 3, "target": "enemy"},
+          {"op": "gain_resource", "resource": "rage", "amount": 15}
+        ]
+      }
+    },
+    {
+      "id": "rend",
+      "name": "Rend",
+      "icon": "ability_gouge",
+      "spellId": 772,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "arms",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 4 damage. Apply 4 Bleed.",
+      "effects": [
+        {"op": "damage", "amount": 4},
+        {"op": "apply", "status": "bleed", "stacks": 4, "target": "enemy"}
+      ],
+      "upgrade": {
+        "name": "Rend (Rank 2)",
+        "cost": 1,
+        "text": "Deal 6 damage. Apply 6 Bleed.",
+        "effects": [
+          {"op": "damage", "amount": 6},
+          {"op": "apply", "status": "bleed", "stacks": 6, "target": "enemy"}
+        ]
+      }
+    },
+    {
+      "id": "thunder-clap",
+      "name": "Thunder Clap",
+      "icon": "spell_nature_thunderclap",
+      "spellId": 6343,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "arms",
+      "cost": 1,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Deal 6 damage to ALL enemies. Apply 1 Weak to ALL.",
+      "effects": [
+        {"op": "damage", "amount": 6, "target": "all_enemies"},
+        {"op": "apply", "status": "weak", "stacks": 1, "target": "all_enemies"}
+      ],
+      "upgrade": {
+        "name": "Thunder Clap (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 damage to ALL enemies. Apply 2 Weak to ALL.",
+        "effects": [
+          {"op": "damage", "amount": 9, "target": "all_enemies"},
+          {"op": "apply", "status": "weak", "stacks": 2, "target": "all_enemies"}
+        ]
+      }
+    },
+    {
+      "id": "hamstring",
+      "name": "Hamstring",
+      "icon": "ability_shockwave",
+      "spellId": 1715,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "arms",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 8 damage. Apply 2 Weak.",
+      "effects": [
+        {"op": "damage", "amount": 8},
+        {"op": "apply", "status": "weak", "stacks": 2, "target": "enemy"}
+      ],
+      "upgrade": {
+        "name": "Hamstring (Rank 2)",
+        "cost": 1,
+        "text": "Deal 11 damage. Apply 3 Weak.",
+        "effects": [
+          {"op": "damage", "amount": 11},
+          {"op": "apply", "status": "weak", "stacks": 3, "target": "enemy"}
+        ]
+      }
+    },
+    {
+      "id": "cleave",
+      "name": "Cleave",
+      "icon": "ability_warrior_cleave",
+      "spellId": 845,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "arms",
+      "cost": 1,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Deal 8 damage to ALL enemies.",
+      "effects": [
+        {"op": "damage", "amount": 8, "target": "all_enemies"}
+      ],
+      "upgrade": {
+        "name": "Cleave (Rank 2)",
+        "cost": 1,
+        "text": "Deal 11 damage to ALL enemies.",
+        "effects": [
+          {"op": "damage", "amount": 11, "target": "all_enemies"}
+        ]
+      }
+    },
+    {
+      "id": "sunder-armor",
+      "name": "Sunder Armor",
+      "icon": "ability_warrior_sunder",
+      "spellId": 7386,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "protection",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 7 damage. Apply 2 Vulnerable. Gain 5 Rage.",
+      "effects": [
+        {"op": "damage", "amount": 7},
+        {"op": "apply", "status": "vulnerable", "stacks": 2, "target": "enemy"},
+        {"op": "gain_resource", "resource": "rage", "amount": 5}
+      ],
+      "upgrade": {
+        "name": "Sunder Armor (Rank 2)",
+        "cost": 1,
+        "text": "Deal 10 damage. Apply 3 Vulnerable. Gain 5 Rage.",
+        "effects": [
+          {"op": "damage", "amount": 10},
+          {"op": "apply", "status": "vulnerable", "stacks": 3, "target": "enemy"},
+          {"op": "gain_resource", "resource": "rage", "amount": 5}
+        ]
+      }
+    },
+    {
+      "id": "battle-shout",
+      "name": "Battle Shout",
+      "icon": "ability_warrior_battleshout",
+      "spellId": 6673,
+      "rank": 1,
+      "type": "power",
+      "rarity": "common",
+      "archetype": "fury",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 2 Strength.",
+      "effects": [
+        {"op": "apply", "status": "strength", "stacks": 2, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Battle Shout (Rank 2)",
+        "cost": 1,
+        "text": "Gain 3 Strength.",
+        "effects": [
+          {"op": "apply", "status": "strength", "stacks": 3, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "demoralizing-shout",
+      "name": "Demoralizing Shout",
+      "icon": "ability_warrior_warcry",
+      "spellId": 1160,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "fury",
+      "cost": 0,
+      "target": "all_enemies",
+      "flags": ["exhaust"],
+      "text": "Apply 1 Weak to ALL enemies. Gain 5 Rage. Exhaust.",
+      "effects": [
+        {"op": "apply", "status": "weak", "stacks": 1, "target": "all_enemies"},
+        {"op": "gain_resource", "resource": "rage", "amount": 5}
+      ],
+      "upgrade": {
+        "name": "Demoralizing Shout (Rank 2)",
+        "cost": 0,
+        "text": "Apply 2 Weak to ALL enemies. Gain 5 Rage. Exhaust.",
+        "effects": [
+          {"op": "apply", "status": "weak", "stacks": 2, "target": "all_enemies"},
+          {"op": "gain_resource", "resource": "rage", "amount": 5}
+        ]
+      }
+    },
+    {
+      "id": "bloodrage",
+      "name": "Bloodrage",
+      "icon": "ability_racial_bloodrage",
+      "spellId": 2687,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "fury",
+      "cost": 0,
+      "target": "self",
+      "flags": [],
+      "text": "Lose 3 HP. Gain 2 Energy. Gain 15 Rage.",
+      "effects": [
+        {"op": "damage", "amount": 3, "target": "self"},
+        {"op": "gain_energy", "amount": 2},
+        {"op": "gain_resource", "resource": "rage", "amount": 15}
+      ],
+      "upgrade": {
+        "name": "Bloodrage (Rank 2)",
+        "cost": 0,
+        "text": "Lose 3 HP. Gain 3 Energy. Gain 20 Rage.",
+        "effects": [
+          {"op": "damage", "amount": 3, "target": "self"},
+          {"op": "gain_energy", "amount": 3},
+          {"op": "gain_resource", "resource": "rage", "amount": 20}
+        ]
+      }
+    },
+    {
+      "id": "pummel",
+      "name": "Pummel",
+      "icon": "inv_gauntlets_04",
+      "spellId": 6552,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "fury",
+      "cost": 1,
+      "target": "enemy",
+      "flags": ["exhaust"],
+      "text": "Deal 2 damage 4 times. Interrupt the enemy cast. Exhaust.",
+      "effects": [
+        {"op": "damage", "amount": 2, "times": 4},
+        {"op": "cast_interrupt"}
+      ],
+      "upgrade": {
+        "name": "Pummel (Rank 2)",
+        "cost": 1,
+        "text": "Deal 2 damage 5 times. Interrupt the enemy cast. Exhaust.",
+        "effects": [
+          {"op": "damage", "amount": 2, "times": 5},
+          {"op": "cast_interrupt"}
+        ]
+      }
+    },
+    {
+      "id": "shield-bash",
+      "name": "Shield Bash",
+      "icon": "ability_warrior_shieldbash",
+      "spellId": 72,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "protection",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 5 damage. Gain 5 Block. Interrupt the enemy cast.",
+      "effects": [
+        {"op": "damage", "amount": 5},
+        {"op": "block", "amount": 5},
+        {"op": "cast_interrupt"}
+      ],
+      "upgrade": {
+        "name": "Shield Bash (Rank 2)",
+        "cost": 1,
+        "text": "Deal 7 damage. Gain 7 Block. Interrupt the enemy cast.",
+        "effects": [
+          {"op": "damage", "amount": 7},
+          {"op": "block", "amount": 7},
+          {"op": "cast_interrupt"}
+        ]
+      }
+    },
+    {
+      "id": "revenge",
+      "name": "Revenge",
+      "icon": "ability_warrior_revenge",
+      "spellId": 6572,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "protection",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 8 damage. In Defensive Stance, deal 6 more.",
+      "effects": [
+        {"op": "damage", "amount": 8},
+        {"op": "conditional", "if": {"type": "stance_is", "value": "defensive"}, "then": [{"op": "damage", "amount": 6}]}
+      ],
+      "upgrade": {
+        "name": "Revenge (Rank 2)",
+        "cost": 1,
+        "text": "Deal 11 damage. In Defensive Stance, deal 8 more.",
+        "effects": [
+          {"op": "damage", "amount": 11},
+          {"op": "conditional", "if": {"type": "stance_is", "value": "defensive"}, "then": [{"op": "damage", "amount": 8}]}
+        ]
+      }
+    },
+    {
+      "id": "taunt",
+      "name": "Taunt",
+      "icon": "spell_nature_reincarnation",
+      "spellId": 355,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "protection",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "If the enemy intends to attack, gain 3 Strength and 6 Block.",
+      "effects": [
+        {"op": "conditional", "if": {"type": "enemy_intent", "intent": "attack"}, "then": [
+          {"op": "apply", "status": "strength", "stacks": 3, "target": "self"},
+          {"op": "block", "amount": 6}
+        ]}
+      ],
+      "upgrade": {
+        "name": "Taunt (Rank 2)",
+        "cost": 1,
+        "text": "If the enemy intends to attack, gain 4 Strength and 9 Block.",
+        "effects": [
+          {"op": "conditional", "if": {"type": "enemy_intent", "intent": "attack"}, "then": [
+            {"op": "apply", "status": "strength", "stacks": 4, "target": "self"},
+            {"op": "block", "amount": 9}
+          ]}
+        ]
+      }
+    },
+    {
+      "id": "mocking-blow",
+      "name": "Mocking Blow",
+      "icon": "ability_warrior_punishingblow",
+      "spellId": 694,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "arms",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 9 damage. Gain 5 Rage.",
+      "effects": [
+        {"op": "damage", "amount": 9},
+        {"op": "gain_resource", "resource": "rage", "amount": 5}
+      ],
+      "upgrade": {
+        "name": "Mocking Blow (Rank 2)",
+        "cost": 1,
+        "text": "Deal 12 damage. Gain 5 Rage.",
+        "effects": [
+          {"op": "damage", "amount": 12},
+          {"op": "gain_resource", "resource": "rage", "amount": 5}
+        ]
+      }
+    },
+    {
+      "id": "piercing-howl",
+      "name": "Piercing Howl",
+      "icon": "spell_shadow_deathscream",
+      "spellId": 12323,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "fury",
+      "cost": 1,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Gain 8 Block. Apply 1 Weak to ALL enemies. Draw 1 card.",
+      "effects": [
+        {"op": "block", "amount": 8},
+        {"op": "apply", "status": "weak", "stacks": 1, "target": "all_enemies"},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Piercing Howl (Rank 2)",
+        "cost": 1,
+        "text": "Gain 11 Block. Apply 1 Weak to ALL enemies. Draw 1 card.",
+        "effects": [
+          {"op": "block", "amount": 11},
+          {"op": "apply", "status": "weak", "stacks": 1, "target": "all_enemies"},
+          {"op": "draw", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "disarm",
+      "name": "Disarm",
+      "icon": "ability_warrior_disarm",
+      "spellId": 676,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "protection",
+      "cost": 1,
+      "target": "enemy",
+      "flags": ["exhaust"],
+      "text": "Enemy loses 2 Strength. Exhaust.",
+      "effects": [
+        {"op": "apply", "status": "strength", "stacks": -2, "target": "enemy"}
+      ],
+      "upgrade": {
+        "name": "Disarm (Rank 2)",
+        "cost": 1,
+        "text": "Enemy loses 3 Strength. Exhaust.",
+        "effects": [
+          {"op": "apply", "status": "strength", "stacks": -3, "target": "enemy"}
+        ]
+      }
+    },
+    {
+      "id": "intercept",
+      "name": "Intercept",
+      "icon": "ability_rogue_sprint",
+      "spellId": 20252,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "fury",
+      "cost": 1,
+      "target": "enemy",
+      "flags": ["exhaust"],
+      "text": "Deal 8 damage. Apply 1 Stun. Gain 10 Rage. Exhaust.",
+      "effects": [
+        {"op": "damage", "amount": 8},
+        {"op": "apply", "status": "stun", "stacks": 1, "target": "enemy"},
+        {"op": "gain_resource", "resource": "rage", "amount": 10}
+      ],
+      "upgrade": {
+        "name": "Intercept (Rank 2)",
+        "cost": 1,
+        "text": "Deal 11 damage. Apply 1 Stun. Gain 15 Rage. Exhaust.",
+        "effects": [
+          {"op": "damage", "amount": 11},
+          {"op": "apply", "status": "stun", "stacks": 1, "target": "enemy"},
+          {"op": "gain_resource", "resource": "rage", "amount": 15}
+        ]
+      }
+    },
+    {
+      "id": "slam",
+      "name": "Slam",
+      "icon": "ability_warrior_decisivestrike",
+      "spellId": 1464,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "arms",
+      "cost": 2,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 20 damage.",
+      "effects": [
+        {"op": "damage", "amount": 20}
+      ],
+      "upgrade": {
+        "name": "Slam (Rank 2)",
+        "cost": 2,
+        "text": "Deal 26 damage.",
+        "effects": [
+          {"op": "damage", "amount": 26}
+        ]
+      }
+    },
+    {
+      "id": "overpower",
+      "name": "Overpower",
+      "icon": "ability_meleedamage",
+      "spellId": 7384,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "arms",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 5 damage 2 times. In Battle Stance, deal 5 more.",
+      "effects": [
+        {"op": "damage", "amount": 5, "times": 2},
+        {"op": "conditional", "if": {"type": "stance_is", "value": "battle"}, "then": [{"op": "damage", "amount": 5}]}
+      ],
+      "upgrade": {
+        "name": "Overpower (Rank 2)",
+        "cost": 1,
+        "text": "Deal 7 damage 2 times. In Battle Stance, deal 7 more.",
+        "effects": [
+          {"op": "damage", "amount": 7, "times": 2},
+          {"op": "conditional", "if": {"type": "stance_is", "value": "battle"}, "then": [{"op": "damage", "amount": 7}]}
+        ]
+      }
+    },
+    {
+      "id": "execute",
+      "name": "Execute",
+      "icon": "inv_sword_48",
+      "spellId": 5308,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "arms",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 10 damage. If the enemy is below 50% HP, deal 18 more.",
+      "effects": [
+        {"op": "damage", "amount": 10},
+        {"op": "conditional", "if": {"type": "hp_below_pct", "pct": 50, "target": "enemy"}, "then": [{"op": "damage", "amount": 18}]}
+      ],
+      "upgrade": {
+        "name": "Execute (Rank 2)",
+        "cost": 1,
+        "text": "Deal 14 damage. If the enemy is below 50% HP, deal 24 more.",
+        "effects": [
+          {"op": "damage", "amount": 14},
+          {"op": "conditional", "if": {"type": "hp_below_pct", "pct": 50, "target": "enemy"}, "then": [{"op": "damage", "amount": 24}]}
+        ]
+      }
+    },
+    {
+      "id": "berserker-rage",
+      "name": "Berserker Rage",
+      "icon": "spell_nature_ancestralguardian",
+      "spellId": 18499,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "fury",
+      "cost": 0,
+      "target": "self",
+      "flags": [],
+      "text": "Remove Fear and Stun from you. Gain 15 Rage. Draw 1 card.",
+      "effects": [
+        {"op": "remove", "status": "fear", "target": "self"},
+        {"op": "remove", "status": "stun", "target": "self"},
+        {"op": "gain_resource", "resource": "rage", "amount": 15},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Berserker Rage (Rank 2)",
+        "cost": 0,
+        "text": "Remove Fear and Stun from you. Gain 20 Rage. Draw 2 cards.",
+        "effects": [
+          {"op": "remove", "status": "fear", "target": "self"},
+          {"op": "remove", "status": "stun", "target": "self"},
+          {"op": "gain_resource", "resource": "rage", "amount": 20},
+          {"op": "draw", "count": 2}
+        ]
+      }
+    },
+    {
+      "id": "intimidating-shout",
+      "name": "Intimidating Shout",
+      "icon": "ability_golemthunderclap",
+      "spellId": 5246,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "fury",
+      "cost": 2,
+      "target": "all_enemies",
+      "flags": ["exhaust"],
+      "text": "Apply 3 Weak and 3 Vulnerable to ALL enemies. Exhaust.",
+      "effects": [
+        {"op": "apply", "status": "weak", "stacks": 3, "target": "all_enemies"},
+        {"op": "apply", "status": "vulnerable", "stacks": 3, "target": "all_enemies"}
+      ],
+      "upgrade": {
+        "name": "Intimidating Shout (Rank 2)",
+        "cost": 2,
+        "text": "Apply 5 Weak and 5 Vulnerable to ALL enemies. Exhaust.",
+        "effects": [
+          {"op": "apply", "status": "weak", "stacks": 5, "target": "all_enemies"},
+          {"op": "apply", "status": "vulnerable", "stacks": 5, "target": "all_enemies"}
+        ]
+      }
+    },
+    {
+      "id": "challenging-shout",
+      "name": "Challenging Shout",
+      "icon": "ability_bullrush",
+      "spellId": 1161,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "protection",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Double your current Block.",
+      "effects": [
+        {"op": "double_block"}
+      ],
+      "upgrade": {
+        "name": "Challenging Shout (Rank 2)",
+        "cost": 0,
+        "text": "Double your current Block. Costs 0.",
+        "effects": [
+          {"op": "double_block"}
+        ]
+      }
+    },
+    {
+      "id": "retaliation",
+      "name": "Retaliation",
+      "icon": "ability_warrior_challange",
+      "spellId": 20230,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "arms",
+      "cost": 2,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 12 Block. Gain 4 Thorns.",
+      "effects": [
+        {"op": "block", "amount": 12},
+        {"op": "apply", "status": "thorns", "stacks": 4, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Retaliation (Rank 2)",
+        "cost": 2,
+        "text": "Gain 16 Block. Gain 6 Thorns.",
+        "effects": [
+          {"op": "block", "amount": 16},
+          {"op": "apply", "status": "thorns", "stacks": 6, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "sweeping-strikes",
+      "name": "Sweeping Strikes",
+      "icon": "ability_rogue_slicedice",
+      "spellId": 12328,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "arms",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Your next attack deals double damage. Gain 5 Rage.",
+      "effects": [
+        {"op": "double_damage_next"},
+        {"op": "gain_resource", "resource": "rage", "amount": 5}
+      ],
+      "upgrade": {
+        "name": "Sweeping Strikes (Rank 2)",
+        "cost": 0,
+        "text": "Your next attack deals double damage. Gain 5 Rage. Costs 0.",
+        "effects": [
+          {"op": "double_damage_next"},
+          {"op": "gain_resource", "resource": "rage", "amount": 5}
+        ]
+      }
+    },
+    {
+      "id": "whirlwind",
+      "name": "Whirlwind",
+      "icon": "ability_whirlwind",
+      "spellId": 1680,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "fury",
+      "cost": 2,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Deal 7 damage to ALL enemies 2 times.",
+      "effects": [
+        {"op": "damage", "amount": 7, "target": "all_enemies", "times": 2}
+      ],
+      "upgrade": {
+        "name": "Whirlwind (Rank 2)",
+        "cost": 2,
+        "text": "Deal 10 damage to ALL enemies 2 times.",
+        "effects": [
+          {"op": "damage", "amount": 10, "target": "all_enemies", "times": 2}
+        ]
+      }
+    },
+    {
+      "id": "concussion-blow",
+      "name": "Concussion Blow",
+      "icon": "ability_thunderbolt",
+      "spellId": 12809,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "protection",
+      "cost": 2,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 16 damage. Apply 1 Stun. Apply 2 Vulnerable.",
+      "effects": [
+        {"op": "damage", "amount": 16},
+        {"op": "apply", "status": "stun", "stacks": 1, "target": "enemy"},
+        {"op": "apply", "status": "vulnerable", "stacks": 2, "target": "enemy"}
+      ],
+      "upgrade": {
+        "name": "Concussion Blow (Rank 2)",
+        "cost": 2,
+        "text": "Deal 22 damage. Apply 1 Stun. Apply 3 Vulnerable.",
+        "effects": [
+          {"op": "damage", "amount": 22},
+          {"op": "apply", "status": "stun", "stacks": 1, "target": "enemy"},
+          {"op": "apply", "status": "vulnerable", "stacks": 3, "target": "enemy"}
+        ]
+      }
+    },
+    {
+      "id": "battle-stance",
+      "name": "Battle Stance",
+      "icon": "ability_warrior_offensivestance",
+      "spellId": 2457,
+      "rank": 1,
+      "type": "stance",
+      "rarity": "uncommon",
+      "archetype": "arms",
+      "cost": 0,
+      "target": "self",
+      "flags": [],
+      "text": "Enter Battle Stance. Draw 3 cards. Gain 5 Rage.",
+      "effects": [
+        {"op": "set_stance", "value": "battle"},
+        {"op": "draw", "count": 3},
+        {"op": "gain_resource", "resource": "rage", "amount": 5}
+      ],
+      "upgrade": {
+        "name": "Battle Stance (Rank 2)",
+        "cost": 0,
+        "text": "Enter Battle Stance. Draw 4 cards. Gain 10 Rage.",
+        "effects": [
+          {"op": "set_stance", "value": "battle"},
+          {"op": "draw", "count": 4},
+          {"op": "gain_resource", "resource": "rage", "amount": 10}
+        ]
+      }
+    },
+    {
+      "id": "defensive-stance",
+      "name": "Defensive Stance",
+      "icon": "ability_warrior_defensivestance",
+      "spellId": 71,
+      "rank": 1,
+      "type": "power",
+      "rarity": "uncommon",
+      "archetype": "protection",
+      "cost": 2,
+      "target": "self",
+      "flags": [],
+      "text": "Enter Defensive Stance. Gain 10 Block. Block is not removed at the start of your turns.",
+      "effects": [
+        {"op": "set_stance", "value": "defensive"},
+        {"op": "block", "amount": 10},
+        {"op": "apply", "status": "retain_block", "stacks": 99, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Defensive Stance (Rank 2)",
+        "cost": 1,
+        "text": "Enter Defensive Stance. Gain 15 Block. Block is not removed at the start of your turns. Costs 1.",
+        "effects": [
+          {"op": "set_stance", "value": "defensive"},
+          {"op": "block", "amount": 15},
+          {"op": "apply", "status": "retain_block", "stacks": 99, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "berserker-stance",
+      "name": "Berserker Stance",
+      "icon": "ability_racial_avatar",
+      "spellId": 2458,
+      "rank": 1,
+      "type": "stance",
+      "rarity": "uncommon",
+      "archetype": "fury",
+      "cost": 0,
+      "target": "self",
+      "flags": [],
+      "text": "Enter Berserker Stance. Gain 1 Energy. Draw 1 card.",
+      "effects": [
+        {"op": "set_stance", "value": "berserker"},
+        {"op": "gain_energy", "amount": 1},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Berserker Stance (Rank 2)",
+        "cost": 0,
+        "text": "Enter Berserker Stance. Gain 1 Energy. Draw 2 cards.",
+        "effects": [
+          {"op": "set_stance", "value": "berserker"},
+          {"op": "gain_energy", "amount": 1},
+          {"op": "draw", "count": 2}
+        ]
+      }
+    },
+    {
+      "id": "enrage",
+      "name": "Enrage",
+      "icon": "spell_shadow_unholyfrenzy",
+      "spellId": 12317,
+      "rank": 1,
+      "type": "power",
+      "rarity": "uncommon",
+      "archetype": "fury",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 2 Enrage: when you are hit, gain Strength.",
+      "effects": [
+        {"op": "apply", "status": "enrage", "stacks": 2, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Enrage (Rank 2)",
+        "cost": 1,
+        "text": "Gain 3 Enrage: when you are hit, gain Strength.",
+        "effects": [
+          {"op": "apply", "status": "enrage", "stacks": 3, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "mortal-strike",
+      "name": "Mortal Strike",
+      "icon": "ability_warrior_savageblow",
+      "spellId": 12294,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "rare",
+      "archetype": "arms",
+      "cost": 2,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 20 damage. Apply 2 Vulnerable.",
+      "effects": [
+        {"op": "damage", "amount": 20},
+        {"op": "apply", "status": "vulnerable", "stacks": 2, "target": "enemy"}
+      ],
+      "upgrade": {
+        "name": "Mortal Strike (Rank 2)",
+        "cost": 2,
+        "text": "Deal 28 damage. Apply 3 Vulnerable.",
+        "effects": [
+          {"op": "damage", "amount": 28},
+          {"op": "apply", "status": "vulnerable", "stacks": 3, "target": "enemy"}
+        ]
+      }
+    },
+    {
+      "id": "bloodthirst",
+      "name": "Bloodthirst",
+      "icon": "spell_nature_bloodlust",
+      "spellId": 23881,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "rare",
+      "archetype": "fury",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 12 damage. Heal 4 HP.",
+      "effects": [
+        {"op": "damage", "amount": 12},
+        {"op": "heal", "amount": 4}
+      ],
+      "upgrade": {
+        "name": "Bloodthirst (Rank 2)",
+        "cost": 1,
+        "text": "Deal 16 damage. Heal 6 HP.",
+        "effects": [
+          {"op": "damage", "amount": 16},
+          {"op": "heal", "amount": 6}
+        ]
+      }
+    },
+    {
+      "id": "shield-slam",
+      "name": "Shield Slam",
+      "icon": "inv_shield_05",
+      "spellId": 23922,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "rare",
+      "archetype": "protection",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal damage equal to your Block.",
+      "effects": [
+        {"op": "damage", "amount": {"scale": "block"}}
+      ],
+      "upgrade": {
+        "name": "Shield Slam (Rank 2)",
+        "cost": 0,
+        "text": "Deal damage equal to your Block. Costs 0.",
+        "effects": [
+          {"op": "damage", "amount": {"scale": "block"}}
+        ]
+      }
+    },
+    {
+      "id": "shield-wall",
+      "name": "Shield Wall",
+      "icon": "ability_warrior_shieldwall",
+      "spellId": 871,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "protection",
+      "cost": 2,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Gain 30 Block. Exhaust.",
+      "effects": [
+        {"op": "block", "amount": 30}
+      ],
+      "upgrade": {
+        "name": "Shield Wall (Rank 2)",
+        "cost": 2,
+        "text": "Gain 40 Block. Exhaust.",
+        "effects": [
+          {"op": "block", "amount": 40}
+        ]
+      }
+    },
+    {
+      "id": "last-stand",
+      "name": "Last Stand",
+      "icon": "spell_holy_ashestoashes",
+      "spellId": 12975,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "protection",
+      "cost": 0,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Lose 6 HP. Gain 2 Energy. Draw 3 cards. Exhaust.",
+      "effects": [
+        {"op": "damage", "amount": 6, "target": "self"},
+        {"op": "gain_energy", "amount": 2},
+        {"op": "draw", "count": 3}
+      ],
+      "upgrade": {
+        "name": "Last Stand (Rank 2)",
+        "cost": 0,
+        "text": "Lose 6 HP. Gain 2 Energy. Draw 5 cards. Exhaust.",
+        "effects": [
+          {"op": "damage", "amount": 6, "target": "self"},
+          {"op": "gain_energy", "amount": 2},
+          {"op": "draw", "count": 5}
+        ]
+      }
+    },
+    {
+      "id": "death-wish",
+      "name": "Death Wish",
+      "icon": "spell_shadow_deathpact",
+      "spellId": 12292,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "fury",
+      "cost": 1,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Double your Strength. Exhaust.",
+      "effects": [
+        {"op": "apply", "status": "strength", "stacks": {"scale": "strength"}, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Death Wish (Rank 2)",
+        "cost": 1,
+        "flags": [],
+        "text": "Double your Strength.",
+        "effects": [
+          {"op": "apply", "status": "strength", "stacks": {"scale": "strength"}, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "flurry",
+      "name": "Flurry",
+      "icon": "ability_ghoulfrenzy",
+      "spellId": 12319,
+      "rank": 1,
+      "type": "power",
+      "rarity": "rare",
+      "archetype": "fury",
+      "cost": 3,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 2 Ritual: at the start of each turn, gain 2 Strength.",
+      "effects": [
+        {"op": "apply", "status": "ritual", "stacks": 2, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Flurry (Rank 2)",
+        "cost": 3,
+        "text": "Gain 3 Ritual: at the start of each turn, gain 3 Strength.",
+        "effects": [
+          {"op": "apply", "status": "ritual", "stacks": 3, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "recklessness",
+      "name": "Recklessness",
+      "icon": "ability_criticalstrike",
+      "spellId": 1719,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "epic",
+      "archetype": "fury",
+      "cost": 0,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Gain 2 Energy. Your next attack deals double damage. Draw 2 cards. Exhaust.",
+      "effects": [
+        {"op": "gain_energy", "amount": 2},
+        {"op": "double_damage_next"},
+        {"op": "draw", "count": 2}
+      ],
+      "upgrade": {
+        "name": "Recklessness (Rank 2)",
+        "cost": 0,
+        "text": "Gain 3 Energy. Your next attack deals double damage. Draw 3 cards. Exhaust.",
+        "effects": [
+          {"op": "gain_energy", "amount": 3},
+          {"op": "double_damage_next"},
+          {"op": "draw", "count": 3}
+        ]
+      }
+    }
+  ]
+}

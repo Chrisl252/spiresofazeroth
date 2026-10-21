@@ -1,0 +1,387 @@
+{
+ "id": "stonetalon-mountains",
+ "name": "Stonetalon Mountains",
+ "start": {
+  "name": "Sun Rock Retreat Inn",
+  "icon": "inv_misc_beer_01"
+ },
+ "continent": "kal",
+ "act": 2,
+ "levelBand": [
+  15,
+  27
+ ],
+ "spire": {
+  "name": "Windshear Crag Tower",
+  "lore": "A scarred spire above Windshear Crag, where Venture Co. logging rigs gouge the slopes, harpies nest on the cliffs and the Grimtotem plot above Sun Rock Retreat."
+ },
+ "theme": {
+  "primary": "#8a7a6a",
+  "secondary": "#2b251f",
+  "accent": "#e0a040",
+  "background": "stonetalon"
+ },
+ "zoneMechanic": {
+  "id": "shredders",
+  "name": "Shredders",
+  "icon": "inv_misc_gear_08",
+  "text": "Mechanical enemies grind your hand: their Gear Grind exhausts a random card. Salvage: killing a mechanical enemy draws 1 card.",
+  "hooks": {
+   "on_kill": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "target_is_family",
+      "family": "mechanical"
+     },
+     "then": [
+      {
+       "op": "draw",
+       "count": 1
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "sun-rock-retreat",
+  "name": "Sun Rock Retreat",
+  "icon": "inv_misc_food_15",
+  "text": "Sleep in a real bed at the Sun Rock Retreat: heal 20% of max HP and gain 3 Max HP.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 20,
+    "target": "self"
+   },
+   {
+    "op": "max_hp",
+    "amount": 3,
+    "target": "self"
+   }
+  ]
+ },
+ "enemiesFile": "stonetalon-mountains.enemies.json",
+ "encounters": {
+  "normal": [
+   [
+    "deepmoss-spider",
+    "deepmoss-spider"
+   ],
+   [
+    "bloodfury-harpy",
+    "bloodfury-slayer"
+   ],
+   [
+    "windshear-digger",
+    "windshear-tunnel-rat"
+   ],
+   [
+    "pridewing-wyvern",
+    "deepmoss-creeper"
+   ],
+   [
+    "grimtotem-ruffian",
+    "venture-co-logger"
+   ],
+   [
+    "windshear-tunnel-rat",
+    "windshear-stonecutter",
+    "windshear-geomancer"
+   ],
+   [
+    "bloodfury-slayer",
+    "bloodfury-roguefeather",
+    "bloodfury-ambusher"
+   ],
+   [
+    "deepmoss-creeper",
+    "deepmoss-venomspitter"
+   ],
+   [
+    "grimtotem-ruffian",
+    "grimtotem-brute"
+   ],
+   [
+    "venture-co-logger",
+    "venture-co-logger",
+    "windshear-underlord"
+   ],
+   [
+    "bloodfury-harpy",
+    "pridewing-soarer",
+    "bloodfury-windcaller"
+   ],
+   [
+    "charred-ancient",
+    "charred-ancient"
+   ],
+   [
+    "grimtotem-ruffian",
+    "grimtotem-brute",
+    "grimtotem-naturalist"
+   ],
+   [
+    "pridewing-soarer",
+    "pridewing-consort"
+   ],
+   [
+    "grimtotem-naturalist",
+    "grimtotem-stomper"
+   ],
+   [
+    "grimtotem-naturalist",
+    "grimtotem-stomper",
+    "grimtotem-reaver"
+   ],
+   [
+    "deepmoss-spider",
+    "deepmoss-venomspitter",
+    "deepmoss-matriarch"
+   ]
+  ],
+  "elite": [
+   [
+    "deepmoss-spider",
+    "besseleth"
+   ],
+   [
+    "pridewing-wyvern",
+    "pridewing-patriarch"
+   ],
+   [
+    "venture-co-logger",
+    "venture-co-deforester"
+   ],
+   [
+    "windshear-underlord",
+    "windshear-overlord"
+   ]
+  ],
+  "boss": [
+   [
+    "grimtotem-naturalist",
+    "grimtotem-reaver",
+    "grundig-darkcloud"
+   ],
+   [
+    "grimtotem-stomper",
+    "grundig-darkcloud"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "gaxim-rustfizzle",
+   "npc": {
+    "name": "Gaxim Rustfizzle",
+    "npcId": 4077,
+    "displayId": 2180,
+    "scale": 0.78
+   },
+   "name": "Gaxim Rustfizzle",
+   "icon": "inv_misc_gear_01",
+   "text": "The goblin Gaxim Rustfizzle needs spare parts for his stalled drilling rig, and pays in coin and advice.",
+   "options": [
+    {
+     "label": "Fetch the parts (take 5 damage, gold +40)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 5,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 40
+      }
+     ]
+    },
+    {
+     "label": "Barter for a repair kit (lose 20 gold, gain a card)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": -20
+      },
+      {
+       "op": "random_card",
+       "pool": "neutral",
+       "rarity": "common",
+       "to": "deck_permanent"
+      }
+     ],
+     "requires": {
+      "gold": 20
+     }
+    },
+    {
+     "label": "Move along",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "the-charred-vale",
+   "name": "The Charred Vale",
+   "icon": "spell_fire_fire",
+   "text": "Burning ancients stalk the Charred Vale, their embers drifting on the wind.",
+   "options": [
+    {
+     "label": "Quench an ember (take 6 damage, max HP +2)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "max_hp",
+       "amount": 2
+      }
+     ]
+    },
+    {
+     "label": "Gather cinders (gold +30, Burn 1)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 30
+      },
+      {
+       "op": "apply",
+       "status": "burn",
+       "stacks": 1,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Detour around",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "grundig-darkcloud",
+   "name": "Grundig Darkcloud",
+   "icon": "spell_nature_lightning",
+   "text": "Grundig Darkcloud's Grimtotem war party camps by the Sun Rock Retreat road.",
+   "options": [
+    {
+     "label": "Spy on the war party (draw 2, take 4 damage)",
+     "effects": [
+      {
+       "op": "draw",
+       "count": 2
+      },
+      {
+       "op": "damage",
+       "amount": 4,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Steal a supply cart (gold +45, Weak 1)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 45
+      },
+      {
+       "op": "apply",
+       "status": "weak",
+       "stacks": 1,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Avoid them",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "covert-ops",
+   "name": "Covert Ops",
+   "icon": "inv_scroll_03",
+   "text": "Sun Rock scouts hand you a Covert Ops writ: sabotage Venture Co. shipments in the night.",
+   "options": [
+    {
+     "label": "Sabotage the shipment (gold +35, take 5 damage)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 35
+      },
+      {
+       "op": "damage",
+       "amount": 5,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Lift the foreman's ledger (gain a card)",
+     "effects": [
+      {
+       "op": "random_card",
+       "pool": "neutral",
+       "rarity": "common",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Decline the writ",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "deepmoss-venom-sac",
+   "name": "Deepmoss Venom Sac",
+   "icon": "inv_misc_organ_03",
+   "rarity": "uncommon",
+   "itemId": null,
+   "zone": "stonetalon-mountains",
+   "class": null,
+   "text": "Your first attack each turn applies 2 Poison.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "apply",
+      "status": "poison",
+      "stacks": 2,
+      "target": "enemy"
+     }
+    ]
+   }
+  },
+  {
+   "id": "harpy-talon",
+   "name": "Harpy Talon",
+   "icon": "inv_misc_monsterclaw_04",
+   "rarity": "common",
+   "itemId": null,
+   "zone": "stonetalon-mountains",
+   "class": null,
+   "text": "Gain 1 Dexterity at the start of each combat.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "dexterity",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  }
+ ]
+}

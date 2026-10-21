@@ -1,0 +1,419 @@
+{
+ "id": "loch-modan",
+ "name": "Loch Modan",
+ "start": {"name": "Thelsamar Stoutlager Inn", "icon": "inv_misc_beer_01"},
+ "continent": "ek",
+ "act": 2,
+ "levelBand": [
+  10,
+  20
+ ],
+ "spire": {
+  "name": "Stonewrought Dam Tower",
+  "lore": "The great dam of Loch Modan holds back the lake and the Mo'grosh ogres of the east, and its signal tower can see both Thelsamar and the troggs of Stonesplinter Valley."
+ },
+ "theme": {
+  "primary": "#4a7fa0",
+  "secondary": "#1c2c36",
+  "accent": "#e7cf8c",
+  "background": "lake"
+ },
+ "zoneMechanic": {
+  "id": "dam-breach",
+  "name": "Dam Breach",
+  "icon": "spell_frost_summonwaterelemental",
+  "text": "Every 3rd turn a flood wave hits everyone for 4 damage, you and every enemy.",
+  "hooks": {
+   "on_turn_start": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "turn_number",
+      "every": 3
+     },
+     "then": [
+      {
+       "op": "damage",
+       "amount": 4,
+       "target": "self",
+       "school": "frost"
+      },
+      {
+       "op": "damage",
+       "amount": 4,
+       "target": "all_enemies",
+       "school": "frost"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "thelsamar-inn",
+  "name": "Stoutlager Inn",
+  "icon": "inv_drink_03",
+  "text": "Raise a mug at the Stoutlager Inn in Thelsamar: heal 25% of max HP and gain 4 Block.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 25,
+    "target": "self"
+   },
+   {
+    "op": "block",
+    "amount": 4,
+    "target": "self"
+   }
+  ]
+ },
+ "enemiesFile": "loch-modan.enemies.json",
+ "encounters": {
+  "normal": [
+   [
+    "stonesplinter-trogg",
+    "stonesplinter-trogg"
+   ],
+   [
+    "tunnel-rat-forager",
+    "tunnel-rat-forager",
+    "tunnel-rat-forager"
+   ],
+   [
+    "black-bear",
+    "mountain-buzzard"
+   ],
+   [
+    "stonesplinter-scout",
+    "stonesplinter-digger"
+   ],
+   [
+    "loch-crocolisk",
+    "loch-crocolisk"
+   ],
+   [
+    "bloodbarb-boar",
+    "mangy-mountain-boar"
+   ],
+   [
+    "stonesplinter-skullthumper",
+    "stonesplinter-seer"
+   ],
+   [
+    "dark-iron-dwarf",
+    "dark-iron-dwarf"
+   ],
+   [
+    "tunnel-rat-digger",
+    "tunnel-rat-surveyor",
+    "tunnel-rat-geomancer"
+   ],
+   [
+    "mogrosh-ogre",
+    "mogrosh-shaman"
+   ],
+   [
+    "elder-black-bear",
+    "mountain-cougar"
+   ],
+   [
+    "stonesplinter-bonesnapper",
+    "stonesplinter-bonesnapper",
+    "stonesplinter-shaman"
+   ],
+   [
+    "dark-iron-raider",
+    "dark-iron-spy"
+   ],
+   [
+    "mogrosh-brute",
+    "mogrosh-mystic"
+   ],
+   [
+    "large-loch-crocolisk",
+    "loch-crocolisk"
+   ],
+   [
+    "dark-iron-dwarf",
+    "dark-iron-saboteur"
+   ],
+   [
+    "mogrosh-enforcer",
+    "mogrosh-ogre"
+   ],
+   [
+    "stonesplinter-geomancer",
+    "stonesplinter-digger",
+    "stonesplinter-digger"
+   ]
+  ],
+  "elite": [
+   [
+    "ol-sooty"
+   ],
+   [
+    "grizlak",
+    "black-bear"
+   ],
+   [
+    "choksul",
+    "mogrosh-shaman"
+   ]
+  ],
+  "boss": [
+   [
+    "grawmug",
+    "mogrosh-ogre",
+    "mogrosh-ogre"
+   ],
+   [
+    "grawmug",
+    "mogrosh-shaman",
+    "mogrosh-mystic"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "thelsamar",
+   "name": "Thelsamar",
+   "icon": "inv_misc_food_14",
+   "text": "Thelsamar's innkeeper trades gossip for bounties on trogg ears.",
+   "options": [
+    {
+     "label": "Hand in ears (+40 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 40
+      }
+     ]
+    },
+    {
+     "label": "Drink with the Ironband miners (heal 8)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 8,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Move on",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "stonewrought-dam",
+   "name": "Stonewrought Dam",
+   "icon": "inv_pick_01",
+   "text": "A crack runs through the Stonewrought Dam. The gnome engineer asks for hands on the sluice gates.",
+   "options": [
+    {
+     "label": "Hold the sluice (take 6 damage, +50 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 50
+      }
+     ]
+    },
+    {
+     "label": "Plug the leak yourself (take 4 damage, gain a card reward)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 4,
+       "target": "self"
+      },
+      {
+       "op": "random_card",
+       "pool": "class",
+       "rarity": "common",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Let the lake find its own way",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "mogrosh-stronghold",
+   "name": "Mo'grosh Stronghold",
+   "icon": "inv_misc_head_orc1_brn",
+   "text": "The Mo'grosh ogres bellow from their stronghold above the lake. A stolen crystal glints on the path.",
+   "options": [
+    {
+     "label": "Steal the crystal (take 8 damage, gain a card reward)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 8,
+       "target": "self"
+      },
+      {
+       "op": "random_card",
+       "pool": "class",
+       "rarity": "uncommon",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Pick the camp's pockets (+30 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 30
+      }
+     ]
+    },
+    {
+     "label": "Keep to the road",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "miners-union",
+   "name": "Ironband's Excavation",
+   "icon": "inv_pick_02",
+   "text": "Dwarven prospectors beg for escorts through the Silver Stream Mine.",
+   "options": [
+    {
+     "label": "Escort them (take 5 damage, +45 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 5,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 45
+      }
+     ]
+    },
+    {
+     "label": "Prospect alone (+20 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 20
+      }
+     ]
+    },
+    {
+     "label": "Decline",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "crocolisk-hunt",
+   "name": "Crocolisk Hunt",
+   "icon": "ability_hunter_pet_crocolisk",
+   "text": "Thelsamar pays handsomely for Loch Crocolisk hides.",
+   "options": [
+    {
+     "label": "Hunt along the shore (take 6 damage, +35 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 35
+      }
+     ]
+    },
+    {
+     "label": "Fish from the bank (heal 5)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 5,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Skip it",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "mogrosh-masher",
+   "name": "Mo'grosh Masher",
+   "icon": "inv_hammer_13",
+   "rarity": "uncommon",
+   "itemId": 2821,
+   "zone": "loch-modan",
+   "class": null,
+   "text": "Ogre club. Start each combat with 1 Strength.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "thelsamar-axe",
+   "name": "Thelsamar Axe",
+   "icon": "inv_axe_01",
+   "rarity": "common",
+   "itemId": 3154,
+   "zone": "loch-modan",
+   "class": null,
+   "text": "Dwarven axe of the Thelsamar militia. Gain 2 Block at the start of each turn.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "block",
+      "amount": 2,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "stonesplinter-dagger",
+   "name": "Stonesplinter Dagger",
+   "icon": "inv_weapon_shortblade_05",
+   "rarity": "common",
+   "itemId": 2266,
+   "zone": "loch-modan",
+   "class": null,
+   "text": "Trogg shiv. Deal 2 damage to a random enemy at the start of each combat.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "damage",
+      "amount": 2,
+      "target": "enemy"
+     }
+    ]
+   }
+  }
+ ]
+}

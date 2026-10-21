@@ -1,0 +1,334 @@
+{
+ "class": "warrior",
+ "set": {
+  "id": "battlegear-of-might",
+  "name": "Battlegear of Might",
+  "icon": "inv_helmet_09",
+  "bonuses": [
+   {
+    "pieces": 2,
+    "name": "Battle Hardened",
+    "text": "Start each combat: gain 1 Strength.",
+    "triggers": {
+     "on_combat_start": [
+      {
+       "op": "apply",
+       "status": "strength",
+       "stacks": 1,
+       "target": "self"
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 4,
+    "name": "Rend and Tear",
+    "text": "At the start of each turn: gain 3 Rage.",
+    "triggers": {
+     "on_turn_start": [
+      {
+       "op": "gain_resource",
+       "resource": "rage",
+       "amount": 3
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 6,
+    "name": "Executioner's Edge",
+    "text": "When you attack: 20% chance to apply 1 Vulnerable.",
+    "triggers": {
+     "on_attack": [
+      {
+       "op": "conditional",
+       "if": {
+        "type": "chance",
+        "pct": 20
+       },
+       "then": [
+        {
+         "op": "apply",
+         "status": "vulnerable",
+         "stacks": 1,
+         "target": "enemy"
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 8,
+    "name": "Fury of the Battlegear",
+    "text": "Start each combat: gain 2 Strength and gain 1 Energy.",
+    "triggers": {
+     "on_combat_start": [
+      {
+       "op": "apply",
+       "status": "strength",
+       "stacks": 2,
+       "target": "self"
+      },
+      {
+       "op": "gain_energy",
+       "amount": 1
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "pieces": [
+  {
+   "id": "helm-of-might",
+   "name": "Helm of Might",
+   "slot": "head",
+   "set": "battlegear-of-might",
+   "setPiece": 1,
+   "item": 16866,
+   "icon": "inv_helmet_09",
+   "displayId": 31260,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 10 Rage.",
+   "class": "warrior",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "gain_resource",
+      "resource": "rage",
+      "amount": 10
+     }
+    ]
+   }
+  },
+  {
+   "id": "pauldrons-of-might",
+   "name": "Pauldrons of Might",
+   "slot": "shoulder",
+   "set": "battlegear-of-might",
+   "setPiece": 2,
+   "item": 16868,
+   "icon": "inv_shoulder_15",
+   "displayId": 31024,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: gain 2 Block.",
+   "class": "warrior",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "block",
+      "amount": 2,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "breastplate-of-might",
+   "name": "Breastplate of Might",
+   "slot": "chest",
+   "set": "battlegear-of-might",
+   "setPiece": 3,
+   "item": 16865,
+   "icon": "inv_chest_plate16",
+   "displayId": 31021,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 6 Block.",
+   "class": "warrior",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 6,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "bracers-of-might",
+   "name": "Bracers of Might",
+   "slot": "wrist",
+   "set": "battlegear-of-might",
+   "setPiece": 4,
+   "item": 16861,
+   "icon": "inv_bracer_19",
+   "displayId": 31020,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Whenever you play a card: 12% chance to draw 1 card.",
+   "class": "warrior",
+   "triggers": {
+    "on_card_played": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 12
+      },
+      "then": [
+       {
+        "op": "draw",
+        "count": 1
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "gauntlets-of-might",
+   "name": "Gauntlets of Might",
+   "slot": "hands",
+   "set": "battlegear-of-might",
+   "setPiece": 5,
+   "item": 16863,
+   "icon": "inv_gauntlets_10",
+   "displayId": 31022,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "When you attack: 20% chance to gain 5 Rage.",
+   "class": "warrior",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 20
+      },
+      "then": [
+       {
+        "op": "gain_resource",
+        "resource": "rage",
+        "amount": 5
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "belt-of-might",
+   "name": "Belt of Might",
+   "slot": "waist",
+   "set": "battlegear-of-might",
+   "setPiece": 6,
+   "item": 16864,
+   "icon": "inv_belt_09",
+   "displayId": 31019,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "When you kill an enemy: heal 3.",
+   "class": "warrior",
+   "triggers": {
+    "on_kill": [
+     {
+      "op": "heal",
+      "amount": 3
+     }
+    ]
+   }
+  },
+  {
+   "id": "legplates-of-might",
+   "name": "Legplates of Might",
+   "slot": "legs",
+   "set": "battlegear-of-might",
+   "setPiece": 7,
+   "item": 16867,
+   "icon": "inv_pants_04",
+   "displayId": 31023,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: 15% chance to gain 1 Energy.",
+   "class": "warrior",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 15
+      },
+      "then": [
+       {
+        "op": "gain_energy",
+        "amount": 1
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "sabatons-of-might",
+   "name": "Sabatons of Might",
+   "slot": "feet",
+   "set": "battlegear-of-might",
+   "setPiece": 8,
+   "item": 16862,
+   "icon": "inv_boots_plate_04",
+   "displayId": 31025,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 2 Thorns.",
+   "class": "warrior",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "thorns",
+      "stacks": 2,
+      "target": "self"
+     }
+    ]
+   }
+  }
+ ],
+ "weapon": {
+  "id": "vis-kag-the-bloodletter",
+  "name": "Vis'kag the Bloodletter",
+  "slot": "mainHand",
+  "setPiece": 0,
+  "item": 17075,
+  "icon": "inv_sword_18",
+  "displayId": 32197,
+  "tier": 1,
+  "rarity": "epic",
+  "stats": "Tier 1 weapon",
+  "text": "When you attack: 15% chance to apply 2 Bleed.",
+  "class": "warrior",
+  "triggers": {
+   "on_attack": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "chance",
+      "pct": 15
+     },
+     "then": [
+      {
+       "op": "apply",
+       "status": "bleed",
+       "stacks": 2,
+       "target": "enemy"
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

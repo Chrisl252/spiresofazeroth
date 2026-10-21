@@ -1,0 +1,442 @@
+{
+ "id": "ashenvale",
+ "name": "Ashenvale",
+ "start": {
+  "name": "Astranaar Inn",
+  "icon": "inv_misc_beer_01"
+ },
+ "continent": "kal",
+ "act": 3,
+ "levelBand": [
+  18,
+  30
+ ],
+ "spire": {
+  "name": "Blackfathom Deeps Shrine",
+  "lore": "The drowned Temple of Elune on the Ashenvale coast, where the Twilight's Hammer feeds the Old God shadow that is Aku'mai."
+ },
+ "theme": {
+  "primary": "#2f7a4a",
+  "secondary": "#0f2a1a",
+  "accent": "#9fb8ff",
+  "background": "ashenvale"
+ },
+ "zoneMechanic": {
+  "id": "forest-wrath",
+  "name": "Forest Wrath",
+  "icon": "spell_nature_protectionformnature",
+  "text": "The Sentinels watch every fight in Ashenvale. At the start of each combat a sentinel either aids you (heal 4) or mistakes you for a raider (take 4 damage), 50 percent each.",
+  "hooks": {
+   "on_combat_start": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "chance",
+      "pct": 50
+     },
+     "then": [
+      {
+       "op": "heal",
+       "amount": 4,
+       "target": "self"
+      }
+     ],
+     "else": [
+      {
+       "op": "damage",
+       "amount": 4,
+       "target": "self"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "astranaar-inn",
+  "name": "Astranaar Inn",
+  "icon": "inv_misc_food_15",
+  "text": "Sleep in a real bed at the Astranaar Inn: heal 20% of max HP and gain 3 Max HP.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 20,
+    "target": "self"
+   },
+   {
+    "op": "max_hp",
+    "amount": 3,
+    "target": "self"
+   }
+  ]
+ },
+ "enemiesFile": "ashenvale.enemies.json",
+ "encounters": {
+  "normal": [
+   [
+    "ghostpaw-runner",
+    "wildthorn-lurker"
+   ],
+   [
+    "foulweald-ursa",
+    "thistlefur-ursa"
+   ],
+   [
+    "felmusk-satyr",
+    "warsong-grunt"
+   ],
+   [
+    "wildthorn-lurker",
+    "wildthorn-stalker",
+    "ghostpaw-howler"
+   ],
+   [
+    "foulweald-warrior",
+    "thistlefur-pathfinder"
+   ],
+   [
+    "warsong-grunt",
+    "warsong-axe-thrower",
+    "felmusk-rogue"
+   ],
+   [
+    "thistlefur-ursa",
+    "foulweald-pathfinder",
+    "thistlefur-totemic"
+   ],
+   [
+    "warsong-shaman",
+    "warsong-shredder"
+   ],
+   [
+    "wildthorn-stalker",
+    "wildthorn-venomspitter"
+   ],
+   [
+    "felmusk-felsworn",
+    "felmusk-shadowstalker"
+   ],
+   [
+    "foulweald-warrior",
+    "foulweald-shaman",
+    "foulweald-totemic"
+   ],
+   [
+    "ghostpaw-runner",
+    "ghostpaw-howler",
+    "ghostpaw-alpha"
+   ],
+   [
+    "wrathtail-wave-rider",
+    "wrathtail-razortail"
+   ],
+   [
+    "thistlefur-pathfinder",
+    "thistlefur-shaman",
+    "thistlefur-arctomancer"
+   ],
+   [
+    "warsong-grunt",
+    "warsong-shaman",
+    "warsong-shredder"
+   ],
+   [
+    "wrathtail-myrmidon",
+    "wrathtail-sea-witch"
+   ],
+   [
+    "foulweald-ursa",
+    "foulweald-shaman",
+    "foulweald-den-watcher"
+   ],
+   [
+    "wrathtail-myrmidon",
+    "wrathtail-sea-witch",
+    "wrathtail-sorceress"
+   ]
+  ],
+  "elite": [
+   [
+    "wildthorn-lurker",
+    "wildthorn-lurker",
+    "lady-sathrah"
+   ],
+   [
+    "wrathtail-wave-rider",
+    "mastok-wrilehiss"
+   ],
+   [
+    "thistlefur-shaman",
+    "thistlefur-avenger"
+   ]
+  ],
+  "boss": [
+   [
+    "akumai"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "astranaar",
+   "name": "Astranaar",
+   "icon": "inv_misc_coin_01",
+   "text": "The Night Elf outpost of Astranaar needs a hand with raiders on the road.",
+   "options": [
+    {
+     "label": "Take a sentinel's contract (gold +50, take 7 damage)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 50
+      },
+      {
+       "op": "damage",
+       "amount": 7,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Trade for supplies (lose 25 gold, heal 15)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": -25
+      },
+      {
+       "op": "heal",
+       "amount": 15,
+       "target": "self"
+      }
+     ],
+     "requires": {
+      "gold": 25
+     }
+    },
+    {
+     "label": "Move on",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "zoram-strand",
+   "name": "Zoram Strand",
+   "icon": "achievement_boss_elitenagamale",
+   "text": "Wrathtail naga overrun the Zoram Strand docks. Rescue the shipwrecked crew or scavenge the wreck.",
+   "options": [
+    {
+     "label": "Rescue the crew (heal 12, max HP +2)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 12,
+       "target": "self"
+      },
+      {
+       "op": "max_hp",
+       "amount": 2
+      }
+     ]
+    },
+    {
+     "label": "Scavenge the wreck (gold +45, Curse 1)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 45
+      },
+      {
+       "op": "apply",
+       "status": "curse",
+       "stacks": 1,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Leave the strand",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "warsong-lumber-camp",
+   "name": "Warsong Lumber Camp",
+   "icon": "inv_axe_02",
+   "text": "The Warsong Lumber Camp hums with shredders and hacked trunks. An unguarded cart sits by the road.",
+   "options": [
+    {
+     "label": "Sabotage the shredders (take 6 damage, gain a card)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "random_card",
+       "pool": "neutral",
+       "rarity": "common",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Raid the cart (gold +40)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 40
+      }
+     ]
+    },
+    {
+     "label": "Avoid the camp",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "raenes-cleansing",
+   "name": "Raene's Cleansing",
+   "icon": "spell_nature_healingtouch",
+   "text": "Raene Wolfrunner asks you to carry cleansing water to the corrupted Ashenvale glades.",
+   "options": [
+    {
+     "label": "Carry the water (heal 8, max HP +2)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 8,
+       "target": "self"
+      },
+      {
+       "op": "max_hp",
+       "amount": 2
+      }
+     ]
+    },
+    {
+     "label": "Drink it yourself (heal 14, lose 10 gold)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 14,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": -10
+      }
+     ],
+     "requires": {
+      "gold": 10
+     }
+    },
+    {
+     "label": "Refuse",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "mystral-lake",
+   "name": "Mystral Lake",
+   "icon": "spell_frost_summonwaterelemental",
+   "text": "Still waters at Mystral Lake hide a lost Highborne basin.",
+   "options": [
+    {
+     "label": "Dive for artifacts (take 6 damage, gold +40)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 40
+      }
+     ]
+    },
+    {
+     "label": "Rest on the shore (heal 10)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 10,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Skirt the lake",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "rod-of-the-sleepwalker",
+   "name": "Rod of the Sleepwalker",
+   "icon": "inv_staff_01",
+   "rarity": "rare",
+   "itemId": null,
+   "zone": "ashenvale",
+   "class": null,
+   "text": "Enemies you attack on the first turn of each combat are Weakened for 1 turn.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "weak",
+      "stacks": 1,
+      "target": "enemy"
+     }
+    ]
+   }
+  },
+  {
+   "id": "strike-of-the-hydra",
+   "name": "Strike of the Hydra",
+   "icon": "inv_axe_02",
+   "rarity": "rare",
+   "itemId": null,
+   "zone": "ashenvale",
+   "class": null,
+   "text": "At the start of each turn, deal 2 damage to all enemies.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "damage",
+      "amount": 2,
+      "target": "all_enemies"
+     }
+    ]
+   }
+  },
+  {
+   "id": "reef-axe",
+   "name": "Reef Axe",
+   "icon": "inv_axe_02",
+   "rarity": "uncommon",
+   "itemId": null,
+   "zone": "ashenvale",
+   "class": null,
+   "text": "Gain 4 Block at the start of each combat.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 4,
+      "target": "self"
+     }
+    ]
+   }
+  }
+ ],
+ "raidFloorsFile": "ashenvale.raids.json"
+}

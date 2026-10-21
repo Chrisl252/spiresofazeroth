@@ -1,0 +1,245 @@
+{
+ "zones": [
+  {
+   "id": "elwynn-forest",
+   "name": "Elwynn Forest",
+   "act": 1,
+   "continent": "ek"
+  },
+  {
+   "id": "dun-morogh",
+   "name": "Dun Morogh",
+   "act": 1,
+   "continent": "ek"
+  },
+  {
+   "id": "tirisfal-glades",
+   "name": "Tirisfal Glades",
+   "act": 1,
+   "continent": "ek"
+  },
+  {
+   "id": "loch-modan",
+   "name": "Loch Modan",
+   "act": 2,
+   "continent": "ek"
+  },
+  {
+   "id": "silverpine-forest",
+   "name": "Silverpine Forest",
+   "act": 2,
+   "continent": "ek"
+  },
+  {
+   "id": "westfall",
+   "name": "Westfall",
+   "act": 2,
+   "continent": "ek"
+  },
+  {
+   "id": "redridge-mountains",
+   "name": "Redridge Mountains",
+   "act": 2,
+   "continent": "ek"
+  },
+  {
+   "id": "duskwood",
+   "name": "Duskwood",
+   "act": 3,
+   "continent": "ek"
+  },
+  {
+   "id": "wetlands",
+   "name": "Wetlands",
+   "act": 3,
+   "continent": "ek"
+  },
+  {
+   "id": "hillsbrad-foothills",
+   "name": "Hillsbrad Foothills",
+   "act": 3,
+   "continent": "ek"
+  },
+  {
+   "id": "alterac-mountains",
+   "name": "Alterac Mountains",
+   "act": 4,
+   "continent": "ek"
+  },
+  {
+   "id": "arathi-highlands",
+   "name": "Arathi Highlands",
+   "act": 4,
+   "continent": "ek"
+  },
+  {
+   "id": "stranglethorn-vale",
+   "name": "Stranglethorn Vale",
+   "act": 4,
+   "continent": "ek"
+  },
+  {
+   "id": "badlands",
+   "name": "Badlands",
+   "act": 4,
+   "continent": "ek"
+  },
+  {
+   "id": "swamp-of-sorrows",
+   "name": "Swamp of Sorrows",
+   "act": 5,
+   "continent": "ek"
+  },
+  {
+   "id": "the-hinterlands",
+   "name": "The Hinterlands",
+   "act": 5,
+   "continent": "ek"
+  },
+  {
+   "id": "searing-gorge",
+   "name": "Searing Gorge",
+   "act": 5,
+   "continent": "ek"
+  },
+  {
+   "id": "burning-steppes",
+   "name": "Burning Steppes",
+   "act": 6,
+   "continent": "ek"
+  },
+  {
+   "id": "blasted-lands",
+   "name": "Blasted Lands",
+   "act": 5,
+   "continent": "ek"
+  },
+  {
+   "id": "western-plaguelands",
+   "name": "Western Plaguelands",
+   "act": 6,
+   "continent": "ek"
+  },
+  {
+   "id": "eastern-plaguelands",
+   "name": "Eastern Plaguelands",
+   "act": 6,
+   "continent": "ek"
+  },
+  {
+   "id": "deadwind-pass",
+   "name": "Deadwind Pass",
+   "act": 6,
+   "continent": "ek"
+  },
+  {
+   "id": "durotar",
+   "name": "Durotar",
+   "act": 1,
+   "continent": "kal"
+  },
+  {
+   "id": "mulgore",
+   "name": "Mulgore",
+   "act": 1,
+   "continent": "kal"
+  },
+  {
+   "id": "teldrassil",
+   "name": "Teldrassil",
+   "act": 1,
+   "continent": "kal"
+  },
+  {
+   "id": "darkshore",
+   "name": "Darkshore",
+   "act": 2,
+   "continent": "kal"
+  },
+  {
+   "id": "the-barrens",
+   "name": "The Barrens",
+   "act": 2,
+   "continent": "kal"
+  },
+  {
+   "id": "stonetalon-mountains",
+   "name": "Stonetalon Mountains",
+   "act": 2,
+   "continent": "kal"
+  },
+  {
+   "id": "ashenvale",
+   "name": "Ashenvale",
+   "act": 3,
+   "continent": "kal"
+  },
+  {
+   "id": "thousand-needles",
+   "name": "Thousand Needles",
+   "act": 3,
+   "continent": "kal"
+  },
+  {
+   "id": "desolace",
+   "name": "Desolace",
+   "act": 4,
+   "continent": "kal"
+  },
+  {
+   "id": "dustwallow-marsh",
+   "name": "Dustwallow Marsh",
+   "act": 4,
+   "continent": "kal"
+  },
+  {
+   "id": "feralas",
+   "name": "Feralas",
+   "act": 5,
+   "continent": "kal"
+  },
+  {
+   "id": "tanaris",
+   "name": "Tanaris",
+   "act": 5,
+   "continent": "kal"
+  },
+  {
+   "id": "azshara",
+   "name": "Azshara",
+   "act": 5,
+   "continent": "kal"
+  },
+  {
+   "id": "felwood",
+   "name": "Felwood",
+   "act": 6,
+   "continent": "kal"
+  },
+  {
+   "id": "un-goro-crater",
+   "name": "Un'Goro Crater",
+   "act": 5,
+   "continent": "kal"
+  },
+  {
+   "id": "winterspring",
+   "name": "Winterspring",
+   "act": 6,
+   "continent": "kal"
+  },
+  {
+   "id": "silithus",
+   "name": "Silithus",
+   "act": 6,
+   "continent": "kal"
+  },
+  {
+   "id": "moonglade",
+   "name": "Moonglade",
+   "act": null,
+   "continent": "kal",
+   "isHub": true
+  }
+ ]
+}

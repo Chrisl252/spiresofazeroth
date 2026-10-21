@@ -1,0 +1,361 @@
+{
+ "class": "shaman",
+ "set": {
+  "id": "the-earthfury",
+  "name": "The Earthfury",
+  "icon": "inv_helmet_09",
+  "bonuses": [
+   {
+    "pieces": 2,
+    "name": "Ancestral Guidance",
+    "text": "Start each combat: gain 4 Block.",
+    "triggers": {
+     "on_combat_start": [
+      {
+       "op": "block",
+       "amount": 4,
+       "target": "self"
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 4,
+    "name": "Elemental Mastery",
+    "text": "Whenever you play a card: 10% chance to gain 1 Energy.",
+    "triggers": {
+     "on_card_played": [
+      {
+       "op": "conditional",
+       "if": {
+        "type": "chance",
+        "pct": 10
+       },
+       "then": [
+        {
+         "op": "gain_energy",
+         "amount": 1
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 6,
+    "name": "Windfury",
+    "text": "When you attack: 20% chance to apply 1 Vulnerable.",
+    "triggers": {
+     "on_attack": [
+      {
+       "op": "conditional",
+       "if": {
+        "type": "chance",
+        "pct": 20
+       },
+       "then": [
+        {
+         "op": "apply",
+         "status": "vulnerable",
+         "stacks": 1,
+         "target": "enemy"
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 8,
+    "name": "Spirit of the Earthfury",
+    "text": "Start each combat: gain 1 Strength and gain 2 Regen.",
+    "triggers": {
+     "on_combat_start": [
+      {
+       "op": "apply",
+       "status": "strength",
+       "stacks": 1,
+       "target": "self"
+      },
+      {
+       "op": "apply",
+       "status": "regen",
+       "stacks": 2,
+       "target": "self",
+       "duration": 4
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "pieces": [
+  {
+   "id": "earthfury-helmet",
+   "name": "Earthfury Helmet",
+   "slot": "head",
+   "set": "the-earthfury",
+   "setPiece": 1,
+   "item": 16842,
+   "icon": "inv_helmet_09",
+   "displayId": 31835,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: 30% chance to gain 1 Energy.",
+   "class": "shaman",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 30
+      },
+      "then": [
+       {
+        "op": "gain_energy",
+        "amount": 1
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "earthfury-epaulets",
+   "name": "Earthfury Epaulets",
+   "slot": "shoulder",
+   "set": "the-earthfury",
+   "setPiece": 2,
+   "item": 16844,
+   "icon": "inv_shoulder_29",
+   "displayId": 31833,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: gain 2 Block.",
+   "class": "shaman",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "block",
+      "amount": 2,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "earthfury-vestments",
+   "name": "Earthfury Vestments",
+   "slot": "chest",
+   "set": "the-earthfury",
+   "setPiece": 3,
+   "item": 16841,
+   "icon": "inv_chest_chain_11",
+   "displayId": 31832,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 6 Block.",
+   "class": "shaman",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 6,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "earthfury-bracers",
+   "name": "Earthfury Bracers",
+   "slot": "wrist",
+   "set": "the-earthfury",
+   "setPiece": 4,
+   "item": 16840,
+   "icon": "inv_bracer_16",
+   "displayId": 31831,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Whenever you play a card: 12% chance to draw 1 card.",
+   "class": "shaman",
+   "triggers": {
+    "on_card_played": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 12
+      },
+      "then": [
+       {
+        "op": "draw",
+        "count": 1
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "earthfury-gauntlets",
+   "name": "Earthfury Gauntlets",
+   "slot": "hands",
+   "set": "the-earthfury",
+   "setPiece": 5,
+   "item": 16839,
+   "icon": "inv_gauntlets_11",
+   "displayId": 31834,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "When you attack: 20% chance to deal 3 Nature damage.",
+   "class": "shaman",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 20
+      },
+      "then": [
+       {
+        "op": "damage",
+        "amount": 3,
+        "target": "enemy",
+        "school": "nature"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "earthfury-belt",
+   "name": "Earthfury Belt",
+   "slot": "waist",
+   "set": "the-earthfury",
+   "setPiece": 6,
+   "item": 16838,
+   "icon": "inv_belt_14",
+   "displayId": 31829,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Whenever you lose HP: below 25% HP, heal 12 (once per combat).",
+   "class": "shaman",
+   "triggers": {
+    "on_hp_loss": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "hp_below_pct",
+       "value": 25
+      },
+      "then": [
+       {
+        "op": "heal",
+        "amount": 12
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "earthfury-legguards",
+   "name": "Earthfury Legguards",
+   "slot": "legs",
+   "set": "the-earthfury",
+   "setPiece": 7,
+   "item": 16843,
+   "icon": "inv_pants_03",
+   "displayId": 31836,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: 15% chance to gain 1 Energy.",
+   "class": "shaman",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 15
+      },
+      "then": [
+       {
+        "op": "gain_energy",
+        "amount": 1
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "earthfury-boots",
+   "name": "Earthfury Boots",
+   "slot": "feet",
+   "set": "the-earthfury",
+   "setPiece": 8,
+   "item": 16837,
+   "icon": "inv_boots_plate_06",
+   "displayId": 31830,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 2 Thorns.",
+   "class": "shaman",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "thorns",
+      "stacks": 2,
+      "target": "self"
+     }
+    ]
+   }
+  }
+ ],
+ "weapon": {
+  "id": "crul-shorukh-edge-of-chaos",
+  "name": "Crul'shorukh, Edge of Chaos",
+  "slot": "mainHand",
+  "setPiece": 0,
+  "item": 19363,
+  "icon": "inv_axe_12",
+  "displayId": 31870,
+  "tier": 1,
+  "rarity": "epic",
+  "stats": "Tier 1 weapon",
+  "text": "When you attack: 15% chance to deal 3 damage to ALL enemies.",
+  "class": "shaman",
+  "triggers": {
+   "on_attack": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "chance",
+      "pct": 15
+     },
+     "then": [
+      {
+       "op": "damage",
+       "amount": 3,
+       "target": "all_enemies"
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

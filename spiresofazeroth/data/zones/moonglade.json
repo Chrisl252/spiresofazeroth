@@ -1,0 +1,25 @@
+{
+ "id":"moonglade",
+ "name":"Moonglade",
+ "start": {"name": "Nighthaven Inn", "icon": "inv_misc_beer_01"},
+ "continent":"kal",
+ "act":null,
+ "levelBand":[1,60],
+ "isHub":true,
+ "guaranteedRest":true,
+ "spire":{"name":"Nighthaven","lore":"The druid sanctuary of Nighthaven in Moonglade, home of the Cenarion Circle, the Moon Well and Keeper Remulos. No enemy dares the sacred lake."},
+ "theme":{"primary":"#7a8fd8","secondary":"#141a33","accent":"#cfe0ff","background":"moonglade"},
+ "zoneMechanic":{"id":"sanctuary","name":"Sanctuary","icon":"spell_nature_healingtouch","text":"No combat in Moonglade. Entering the hub restores 30% of your missing HP, a rest is guaranteed, and class trainers sell card upgrades.","hooks":{"on_spire_start":[{"op":"heal","amount":15,"target":"self"}]}},
+ "rest":{"id":"moon-well","name":"The Moon Well","icon":"spell_nature_healingtouch","text":"Rest beside the Moon Well of Nighthaven.","effects":[{"op":"heal","amount":30,"target":"self"},{"op":"remove","status":"corrupted","target":"self"},{"op":"remove","status":"madness","target":"self"}]},
+ "enemies":[],
+ "encounters":{"normal":[],"elite":[],"boss":[]},
+ "trainer":{"id":"class-trainer","name":"Class Trainer","text":"Buy a card upgrade (next spell rank) for gold.","upgradeCost":75,"effects":[{"op":"upgrade_card","pick":"choose","count":1}]},
+ "vendor":{"id":"nighthaven-vendor","name":"Nighthaven Vendor","text":"Cenarion Circle supplies.","stock":[{"kind":"potion","count":3},{"kind":"card","count":3},{"kind":"relic","count":1,"rarity":"uncommon"}]},
+ "events":[
+  {"id":"class-trainer","name":"Class Trainer","icon":"inv_misc_book_01","text":"Your class trainer in Nighthaven teaches the next rank of your spells, for a fee.","options":[{"label":"Train: upgrade 1 card (-75 gold)","effects":[{"op":"gold","amount":-75},{"op":"upgrade_card","pick":"choose","count":1}],"requires":{"gold":75}},{"label":"Train: upgrade 2 cards (-140 gold)","effects":[{"op":"gold","amount":-140},{"op":"upgrade_card","pick":"choose","count":2}],"requires":{"gold":140}},{"label":"Not now","effects":[]}]},
+  {"id":"nighthaven-vendor","name":"Nighthaven Vendor","icon":"inv_misc_bag_10","text":"A Cenarion Circle vendor sells potions, spell tomes and trinkets to those who rest in Nighthaven.","options":[{"label":"Browse the wares","effects":[{"op":"open_shop","vendor":"nighthaven-vendor"}]},{"label":"Leave","effects":[]}]},
+  {"id":"timbermaw-passage","name":"Timbermaw Passage","icon":"inv_misc_head_tauren_01","text":"The tunnel from Moonglade leads through Timbermaw Hold to Felwood. The furbolgs here accept those who bring tribute.","options":[{"label":"Pay Timbermaw tribute (-30 gold, heal 12)","effects":[{"op":"gold","amount":-30},{"op":"heal","amount":12,"target":"self"}],"requires":{"gold":30}},{"label":"Bypass the tunnel","effects":[]}]},
+  {"id":"keeper-remulos","name":"Keeper Remulos","icon":"spell_nature_protectionformnature","text":"Keeper Remulos, the demigod of Moonglade, grants a blessing to those who face the end of the war.","options":[{"label":"Receive the blessing (+6 max HP, heal 10)","effects":[{"op":"max_hp","amount":6},{"op":"heal","amount":10,"target":"self"}]},{"label":"Ask about Eranikus (+1 Strength this spire)","effects":[{"op":"apply","status":"strength","stacks":1,"target":"self"}]}]}
+ ],
+ "relics":[]
+}

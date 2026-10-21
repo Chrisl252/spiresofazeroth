@@ -1,0 +1,440 @@
+{
+ "id": "hillsbrad-foothills",
+ "name": "Hillsbrad Foothills",
+ "start": {"name": "Southshore Inn", "icon": "inv_misc_beer_01"},
+ "continent": "ek",
+ "act": 3,
+ "levelBand": [
+  20,
+  30
+ ],
+ "spire": {
+  "name": "Durnholde Keep",
+  "lore": "The Syndicate holds the old Durnholde Keep above Southshore and Tarren Mill. Orcs once toiled here as slaves; now the Alliance and the Forsaken both claim the road."
+ },
+ "theme": {
+  "primary": "#7a8a3c",
+  "secondary": "#1f2610",
+  "accent": "#e0c970",
+  "background": "foothills"
+ },
+ "zoneMechanic": {
+  "id": "turncoats",
+  "name": "Turncoats",
+  "icon": "spell_shadow_charm",
+  "text": "Humanoid enemies that are Feared have a 50% chance to turn coat and fight for you for the rest of the combat.",
+  "hooks": {
+   "on_card_played": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "status_on_target",
+      "status": "fear",
+      "family": "humanoid"
+     },
+     "then": [
+      {
+       "op": "conditional",
+       "if": {
+        "type": "chance",
+        "pct": 50
+       },
+       "then": [
+        {
+         "op": "summon",
+         "count": 1,
+         "side": "ally",
+         "from": "target",
+         "removeTarget": true
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "southshore-inn",
+  "name": "Southshore Inn",
+  "icon": "inv_drink_03",
+  "text": "Rest at the Southshore Inn: heal 25% of max HP and clear Fear.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 25,
+    "target": "self"
+   },
+   {
+    "op": "remove",
+    "status": "fear",
+    "target": "self"
+   }
+  ]
+ },
+ "enemiesFile": "hillsbrad-foothills.enemies.json",
+ "encounters": {
+  "normal": [
+   [
+    "syndicate-footpad",
+    "syndicate-footpad"
+   ],
+   [
+    "torn-fin-muckdweller",
+    "torn-fin-muckdweller",
+    "torn-fin-coastrunner"
+   ],
+   [
+    "mudsnout-gnoll",
+    "mudsnout-gnoll"
+   ],
+   [
+    "gray-bear",
+    "gray-bear"
+   ],
+   [
+    "syndicate-thief",
+    "syndicate-rogue"
+   ],
+   [
+    "mountain-lion",
+    "gray-bear"
+   ],
+   [
+    "syndicate-sentry",
+    "syndicate-watchman"
+   ],
+   [
+    "torn-fin-tidehunter",
+    "torn-fin-oracle",
+    "torn-fin-coastrunner"
+   ],
+   [
+    "mudsnout-shaman",
+    "mudsnout-mystic",
+    "mudsnout-gnoll"
+   ],
+   [
+    "syndicate-conjuror",
+    "syndicate-footpad",
+    "syndicate-footpad"
+   ],
+   [
+    "daggerspine-shorestalker",
+    "daggerspine-screamer"
+   ],
+   [
+    "syndicate-prowler",
+    "syndicate-pathstalker"
+   ],
+   [
+    "syndicate-magus",
+    "syndicate-watchman"
+   ],
+   [
+    "daggerspine-siren",
+    "daggerspine-screamer"
+   ],
+   [
+    "yeti",
+    "mountain-lion"
+   ],
+   [
+    "syndicate-magus",
+    "syndicate-spy",
+    "syndicate-sentry"
+   ],
+   [
+    "elder-mountain-yeti",
+    "yeti"
+   ],
+   [
+    "syndicate-spy",
+    "syndicate-thief"
+   ],
+   [
+    "crushridge-ogre",
+    "yeti"
+   ],
+   [
+    "daggerspine-shorestalker",
+    "daggerspine-shorestalker",
+    "daggerspine-siren"
+   ]
+  ],
+  "elite": [
+   [
+    "syndicate-shadow-mage",
+    "syndicate-footpad",
+    "syndicate-footpad"
+   ],
+   [
+    "daggerspine-sorceress",
+    "daggerspine-screamer"
+   ],
+   [
+    "syndicate-mercenary",
+    "syndicate-sentry"
+   ]
+  ],
+  "boss": [
+   [
+    "syndicate-assassin",
+    "syndicate-sentry",
+    "syndicate-sentry"
+   ],
+   [
+    "syndicate-assassin",
+    "syndicate-magus",
+    "syndicate-watchman"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "southshore",
+   "name": "Southshore",
+   "icon": "inv_misc_head_human_01",
+   "text": "Southshore's mayor posts a bounty on Syndicate agents slipping into the farms.",
+   "options": [
+    {
+     "label": "Take the bounty (take 5 damage, +45 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 5,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 45
+      }
+     ]
+    },
+    {
+     "label": "Rest in Southshore (heal 8)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 8,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Pass through",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "tarren-mill",
+   "name": "Tarren Mill",
+   "icon": "inv_misc_head_undead_01",
+   "text": "The Forsaken at Tarren Mill trade silver for Alliance ledgers and the scalps of Southshore guards.",
+   "options": [
+    {
+     "label": "Trade ledgers (take 4 damage, +40 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 4,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 40
+      }
+     ]
+    },
+    {
+     "label": "Rest in the mill (heal 6)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 6,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Avoid Tarren Mill",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "azurelode-mine",
+   "name": "Azurelode Mine",
+   "icon": "inv_pick_02",
+   "text": "Azurelode Mine is rich in azure ore, claimed by the Alliance and mined by the Syndicate.",
+   "options": [
+    {
+     "label": "Seize the vein (take 7 damage, +55 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 7,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 55
+      }
+     ]
+    },
+    {
+     "label": "Mine the edges (+20 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 20
+      }
+     ]
+    },
+    {
+     "label": "Move on",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "durnholde-slaves",
+   "name": "Durnholde Keep",
+   "icon": "inv_misc_head_orc_01",
+   "text": "Old orc cells beneath Durnholde Keep still hold chained Horde prisoners, and old keys hang by the door.",
+   "options": [
+    {
+     "label": "Free the prisoners (take 6 damage, gain a card reward)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "random_card",
+       "pool": "class",
+       "rarity": "uncommon",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Take the keys (+30 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 30
+      }
+     ]
+    },
+    {
+     "label": "Leave them",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "hammerfall",
+   "name": "Hammerfall",
+   "icon": "inv_misc_note_01",
+   "text": "A Horde scout offers passage by the Arathi road at a price.",
+   "options": [
+    {
+     "label": "Pay the toll (-30 gold, +8 max HP)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": -30
+      },
+      {
+       "op": "max_hp",
+       "amount": 8
+      }
+     ],
+     "requires": {
+      "gold": 30
+     }
+    },
+    {
+     "label": "Bluff the scout (take 4 damage, +25 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 4,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 25
+      }
+     ]
+    },
+    {
+     "label": "Skip it",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "yeti-fur-cloak",
+   "name": "Yeti Fur Cloak",
+   "icon": "inv_misc_cape_09",
+   "rarity": "uncommon",
+   "itemId": 2805,
+   "zone": "hillsbrad-foothills",
+   "class": null,
+   "text": "Warm yeti pelt. Gain 3 Block at the start of each combat.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 3,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "lumbering-ogre-axe",
+   "name": "Lumbering Ogre Axe",
+   "icon": "inv_axe_09",
+   "rarity": "uncommon",
+   "itemId": 1521,
+   "zone": "hillsbrad-foothills",
+   "class": null,
+   "text": "Heavy ogre axe. Start each combat with 1 Strength.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "dalaran-wizards-robe",
+   "name": "Dalaran Wizard's Robe",
+   "icon": "inv_chest_cloth_07",
+   "rarity": "common",
+   "itemId": 5110,
+   "zone": "hillsbrad-foothills",
+   "class": null,
+   "text": "Dalaran mage robe. Draw 1 extra card at the start of each combat.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "draw",
+      "count": 1
+     }
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,62 @@
+{
+"corrupted":{
+"cast":{
+"fdid":2101388,
+"url":"/media/sounds/2101388.mp3",
+"name":"Wl Revamp Corruption Cast 03",
+"via":"school"
+},
+"impact":{
+"fdid":569743,
+"url":"/media/sounds/569743.mp3",
+"name":"Rottenstench Impact 01",
+"via":"school"
+},
+"via":"school"
+},
+"madness":{
+"cast":{
+"fdid":3092214,
+"url":"/media/sounds/3092214.mp3",
+"name":"Nzothraid Xanesh Voidritual Unsoaked Cast 07",
+"via":"name"
+},
+"impact":{
+"fdid":1712531,
+"url":"/media/sounds/1712531.mp3",
+"name":"Pr Revamp Shadow Impact Large 03",
+"via":"school"
+},
+"via":"school"
+},
+"twilight-curse":{
+"cast":{
+"fdid":1684459,
+"url":"/media/sounds/1684459.mp3",
+"name":"Voidmagic Cast Medium Npc 04",
+"via":"school"
+},
+"impact":{
+"fdid":2068298,
+"url":"/media/sounds/2068298.mp3",
+"name":"Wl Revamp Immolate Impact 01",
+"via":"name"
+},
+"via":"school"
+},
+"mojache-insight":{
+"cast":{
+"fdid":1696831,
+"url":"/media/sounds/1696831.mp3",
+"name":"Pr Revamp Holy Cast 03",
+"via":"school"
+},
+"impact":{
+"fdid":1888690,
+"url":"/media/sounds/1888690.mp3",
+"name":"Pa Revamp Holylight Impact 02",
+"via":"school"
+},
+"via":"school"
+}
+}

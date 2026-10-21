@@ -1,0 +1,420 @@
+{
+ "keywords": [
+  {
+   "id": "vulnerable",
+   "name": "Vulnerable",
+   "icon": "ability_gouge",
+   "kind": "debuff",
+   "stackMode": "duration",
+   "text": "Takes 50% more damage."
+  },
+  {
+   "id": "weak",
+   "name": "Weak",
+   "icon": "spell_shadow_curseofmannoroth",
+   "kind": "debuff",
+   "stackMode": "duration",
+   "text": "Deals 25% less attack damage."
+  },
+  {
+   "id": "frail",
+   "name": "Frail",
+   "icon": "spell_shadow_curseofachimonde",
+   "kind": "debuff",
+   "stackMode": "duration",
+   "text": "Gains 25% less Block."
+  },
+  {
+   "id": "poison",
+   "name": "Poison",
+   "icon": "spell_nature_nullifypoison",
+   "kind": "debuff",
+   "stackMode": "intensity",
+   "text": "At turn end lose HP equal to Poison, then Poison falls by 1."
+  },
+  {
+   "id": "bleed",
+   "name": "Bleed",
+   "icon": "ability_warrior_bloodfrenzy",
+   "kind": "debuff",
+   "stackMode": "intensity",
+   "text": "At turn end lose HP equal to Bleed. Ignores Block."
+  },
+  {
+   "id": "burn",
+   "name": "Burn",
+   "icon": "spell_fire_burnout",
+   "kind": "debuff",
+   "stackMode": "intensity",
+   "text": "At turn end take Fire damage equal to Burn, then Burn falls by 1."
+  },
+  {
+   "id": "frozen",
+   "name": "Frozen",
+   "icon": "spell_frost_frozencore",
+   "kind": "debuff",
+   "stackMode": "duration",
+   "text": "Cannot play the first card each turn (enemies skip their next move)."
+  },
+  {
+   "id": "stun",
+   "name": "Stun",
+   "icon": "ability_warrior_punishingblow",
+   "kind": "debuff",
+   "stackMode": "duration",
+   "text": "Skips its next turn."
+  },
+  {
+   "id": "fear",
+   "name": "Fear",
+   "icon": "spell_shadow_possession",
+   "kind": "debuff",
+   "stackMode": "duration",
+   "text": "Cannot attack; moves are lost."
+  },
+  {
+   "id": "silence",
+   "name": "Silence",
+   "icon": "spell_holy_dispelmagic",
+   "kind": "debuff",
+   "stackMode": "duration",
+   "text": "Cannot play Spell cards or cast."
+  },
+  {
+   "id": "strength",
+   "name": "Strength",
+   "icon": "ability_warrior_strengthofarms",
+   "kind": "buff",
+   "stackMode": "intensity",
+   "text": "Attacks deal additional damage per stack."
+  },
+  {
+   "id": "dexterity",
+   "name": "Dexterity",
+   "icon": "ability_rogue_sprint",
+   "kind": "buff",
+   "stackMode": "intensity",
+   "text": "Block gains are increased per stack."
+  },
+  {
+   "id": "thorns",
+   "name": "Thorns",
+   "icon": "spell_nature_thorns",
+   "kind": "buff",
+   "stackMode": "intensity",
+   "text": "Attackers take damage per stack."
+  },
+  {
+   "id": "stealth",
+   "name": "Stealth",
+   "icon": "ability_stealth",
+   "kind": "buff",
+   "stackMode": "duration",
+   "text": "Enemies cannot target you; your next attack deals bonus damage."
+  },
+  {
+   "id": "shield",
+   "name": "Shield",
+   "icon": "spell_holy_powerwordshield",
+   "kind": "buff",
+   "stackMode": "intensity",
+   "text": "Absorbs damage, persists between turns."
+  },
+  {
+   "id": "regen",
+   "name": "Regen",
+   "icon": "spell_nature_rejuvenation",
+   "kind": "buff",
+   "stackMode": "intensity",
+   "text": "At turn end heal HP equal to Regen, then Regen falls by 1."
+  },
+  {
+   "id": "disease",
+   "name": "Disease",
+   "icon": "spell_shadow_unholyfrenzy",
+   "kind": "debuff",
+   "stackMode": "intensity",
+   "text": "At turn end lose HP equal to Disease and max HP is reduced for the combat."
+  },
+  {
+   "id": "curse",
+   "name": "Curse",
+   "icon": "spell_shadow_curseofsargeras",
+   "kind": "debuff",
+   "stackMode": "intensity",
+   "text": "Increases damage taken from your next hits by its stacks; cleared when it triggers."
+  },
+  {
+   "id": "enrage",
+   "name": "Enrage",
+   "icon": "ability_druid_enrage",
+   "kind": "buff",
+   "stackMode": "intensity",
+   "text": "Deals bonus damage per stack; gains stacks when hurt."
+  },
+  {
+   "id": "armor",
+   "name": "Armor",
+   "icon": "inv_shield_06",
+   "kind": "buff",
+   "stackMode": "intensity",
+   "text": "Reduces each hit of damage by the stack count."
+  },
+  {
+   "id": "taunted",
+   "name": "Taunted",
+   "icon": "ability_warrior_sunder",
+   "kind": "debuff",
+   "stackMode": "duration",
+   "text": "Must target the taunter."
+  },
+  {
+   "id": "marked",
+   "name": "Marked",
+   "icon": "ability_hunter_snipershot",
+   "kind": "debuff",
+   "stackMode": "duration",
+   "text": "Takes extra damage from the next attack."
+  },
+  {
+   "id": "frostbite",
+   "name": "Frostbite",
+   "icon": "spell_frost_frostbolt02",
+   "kind": "debuff",
+   "stackMode": "intensity",
+   "text": "Takes Frost damage per stack at turn end; stacks of 5 Freeze."
+  },
+  {
+   "id": "cold",
+   "name": "Cold",
+   "icon": "spell_frost_frostnova",
+   "kind": "debuff",
+   "stackMode": "intensity",
+   "text": "Chills: reduces damage dealt; reaching 3 stacks applies Frozen."
+  },
+  {
+   "id": "corrupted",
+   "name": "Corrupted",
+   "icon": "spell_shadow_shadowward",
+   "kind": "debuff",
+   "stackMode": "intensity",
+   "text": "Healing received is reduced."
+  },
+  {
+   "id": "madness",
+   "name": "Madness",
+   "icon": "spell_shadow_mindsteal",
+   "kind": "debuff",
+   "stackMode": "intensity",
+   "text": "At 5 stacks take shadow damage and discard a card."
+  },
+  {
+   "id": "sleep",
+   "name": "Sleep",
+   "icon": "spell_nature_sleep",
+   "kind": "debuff",
+   "stackMode": "duration",
+   "text": "Cannot act until damaged."
+  },
+  {
+   "id": "feral",
+   "name": "Feral",
+   "icon": "ability_druid_catform",
+   "kind": "buff",
+   "stackMode": "none",
+   "text": "In a feral form: attacks are boosted."
+  },
+  {
+   "id": "intangible",
+   "name": "Intangible",
+   "icon": "spell_shadow_dispersion",
+   "kind": "buff",
+   "stackMode": "duration",
+   "text": "All damage and HP loss is reduced to 1."
+  },
+  {
+   "id": "metallicize",
+   "name": "Metallicize",
+   "icon": "spell_holy_divineintervention",
+   "kind": "buff",
+   "stackMode": "intensity",
+   "text": "At turn end gain Block equal to stacks."
+  },
+  {
+   "id": "ritual",
+   "name": "Ritual",
+   "icon": "spell_shadow_deathpact",
+   "kind": "buff",
+   "stackMode": "intensity",
+   "text": "At turn start gain Strength equal to stacks."
+  },
+  {
+   "id": "rage_gen",
+   "name": "Rage Generation",
+   "icon": "ability_warrior_innerrage",
+   "kind": "buff",
+   "stackMode": "intensity",
+   "text": "Gain extra Rage whenever you deal or take damage."
+  },
+  {
+   "id": "energized",
+   "name": "Energized",
+   "icon": "spell_nature_lightning",
+   "kind": "buff",
+   "stackMode": "duration",
+   "text": "Gain bonus Energy at the next turn start."
+  },
+  {
+   "id": "vampiric_embrace",
+   "name": "Vampiric Embrace",
+   "icon": "spell_shadow_unsummonbuilding",
+   "kind": "buff",
+   "stackMode": "stack",
+   "text": "Heals you for a share of the damage you deal."
+  },
+  {
+   "id": "soul_link",
+   "name": "Soul Link",
+   "icon": "spell_shadow_gathershadows",
+   "kind": "buff",
+   "stackMode": "stack",
+   "text": "Damage you take is shared with your demon."
+  },
+  {
+   "id": "amplify_curse",
+   "name": "Amplify Curse",
+   "icon": "spell_shadow_contagion",
+   "kind": "buff",
+   "stackMode": "stack",
+   "text": "Your next curse has doubled stacks."
+  },
+  {
+   "id": "delayed",
+   "name": "Delayed",
+   "icon": "spell_holy_borrowedtime",
+   "kind": "debuff",
+   "stackMode": "duration",
+   "text": "When this expires, a stored effect triggers."
+  },
+  {
+   "id": "weapon_imbue_rockbiter",
+   "name": "Rockbiter Weapon",
+   "icon": "spell_nature_rockbiter",
+   "kind": "buff",
+   "stackMode": "duration",
+   "text": "Your attacks deal +2 damage."
+  },
+  {
+   "id": "weapon_imbue_flametongue",
+   "name": "Flametongue Weapon",
+   "icon": "spell_fire_flametounge",
+   "kind": "buff",
+   "stackMode": "duration",
+   "text": "Your attacks burn the target."
+  },
+  {
+   "id": "weapon_imbue_flametongue_2",
+   "name": "Flametongue Weapon II",
+   "icon": "spell_fire_flametounge",
+   "kind": "buff",
+   "stackMode": "duration",
+   "text": "Your attacks burn the target harder."
+  },
+  {
+   "id": "weapon_imbue_frostbrand",
+   "name": "Frostbrand Weapon",
+   "icon": "spell_frost_frostbrand",
+   "kind": "buff",
+   "stackMode": "duration",
+   "text": "Your attacks apply Weak."
+  },
+  {
+   "id": "weapon_imbue_frostbrand_2",
+   "name": "Frostbrand Weapon II",
+   "icon": "spell_frost_frostbrand",
+   "kind": "buff",
+   "stackMode": "duration",
+   "text": "Your attacks apply stronger Weak."
+  },
+  {
+   "id": "weapon_imbue_windfury",
+   "name": "Windfury Weapon",
+   "icon": "spell_nature_cyclone",
+   "kind": "buff",
+   "stackMode": "duration",
+   "text": "Your attacks may strike twice."
+  },
+  {
+   "id": "weapon_imbue_windfury_2",
+   "name": "Windfury Weapon II",
+   "icon": "spell_nature_cyclone",
+   "kind": "buff",
+   "stackMode": "duration",
+   "text": "Your attacks often strike twice."
+  },
+  {
+   "id": "spell_power",
+   "name": "Spell Power",
+   "icon": "spell_holy_greaterblessingofwisdom",
+   "kind": "buff",
+   "stackMode": "stack",
+   "text": "Your spells deal bonus damage."
+  },
+  {
+   "id": "reincarnation",
+   "name": "Reincarnation",
+   "icon": "spell_nature_reincarnation",
+   "kind": "buff",
+   "stackMode": "stack",
+   "text": "If you would die, return with a portion of your health."
+  },
+  {
+   "id": "free_cast",
+   "name": "Free Cast",
+   "icon": "spell_arcane_arcane01",
+   "kind": "buff",
+   "stackMode": "stack",
+   "text": "Your next cards cost 0."
+  },
+  {
+   "id": "retain_block",
+   "name": "Retain Block",
+   "icon": "spell_holy_devotionaura",
+   "kind": "buff",
+   "stackMode": "duration",
+   "text": "Your Block does not expire."
+  },
+  {
+   "id": "resist_fire",
+   "name": "Fire Resistance",
+   "icon": "spell_fire_firearmor",
+   "kind": "buff",
+   "stackMode": "stack",
+   "text": "Reduces fire damage taken."
+  },
+  {
+   "id": "resist_frost",
+   "name": "Frost Resistance",
+   "icon": "spell_frost_frostarmor02",
+   "kind": "buff",
+   "stackMode": "stack",
+   "text": "Reduces frost damage taken."
+  },
+  {
+   "id": "resist_nature",
+   "name": "Nature Resistance",
+   "icon": "spell_nature_resistnature",
+   "kind": "buff",
+   "stackMode": "stack",
+   "text": "Reduces nature damage taken."
+  },
+  {
+   "id": "veiled",
+   "name": "Veiled",
+   "icon": "spell_shadow_nethercloak",
+   "kind": "debuff",
+   "stackMode": "duration",
+   "text": "Enemy intents are hidden. Holy cards remove it."
+  }
+ ]
+}

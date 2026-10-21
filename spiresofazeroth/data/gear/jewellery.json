@@ -1,0 +1,1917 @@
+{
+ "relics": [
+  {
+   "id": "hand-of-justice",
+   "name": "Hand of Justice",
+   "icon": "spell_holy_fistofjustice",
+   "rarity": "rare",
+   "itemId": 11815,
+   "zone": null,
+   "class": null,
+   "text": "Each card played has a 10% chance to grant 1 Energy.",
+   "triggers": {
+    "on_card_played": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 10
+      },
+      "then": [
+       {
+        "op": "gain_energy",
+        "amount": 1
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "blackhands-breadth",
+   "name": "Blackhand's Breadth",
+   "icon": "inv_jewelry_talisman_06",
+   "rarity": "rare",
+   "itemId": 13965,
+   "zone": null,
+   "class": null,
+   "text": "Gain 4 Block at combat start. Fear is removed from you at turn start.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 4,
+      "target": "self"
+     }
+    ],
+    "on_turn_start": [
+     {
+      "op": "remove",
+      "status": "fear",
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "diamond-flask",
+   "name": "Diamond Flask",
+   "icon": "inv_potion_83",
+   "rarity": "rare",
+   "itemId": 20130,
+   "zone": null,
+   "class": null,
+   "text": "Start each combat with 3 Strength.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 3,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "insignia-of-the-alliance",
+   "name": "Insignia of the Alliance",
+   "icon": "inv_jewelry_trinketpvp_01",
+   "rarity": "rare",
+   "itemId": 18854,
+   "zone": null,
+   "class": null,
+   "text": "At turn start, remove Stun and Frozen from yourself.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "remove",
+      "status": "stun",
+      "target": "self"
+     },
+     {
+      "op": "remove",
+      "status": "frozen",
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "insignia-of-the-horde",
+   "name": "Insignia of the Horde",
+   "icon": "inv_jewelry_trinketpvp_02",
+   "rarity": "rare",
+   "itemId": 18834,
+   "zone": null,
+   "class": null,
+   "text": "At turn start, remove Fear and Weak from yourself.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "remove",
+      "status": "fear",
+      "target": "self"
+     },
+     {
+      "op": "remove",
+      "status": "weak",
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "royal-seal-of-eldrethalas",
+   "name": "Royal Seal of Eldre'Thalas",
+   "icon": "inv_jewelry_ring_36",
+   "rarity": "epic",
+   "itemId": null,
+   "zone": null,
+   "class": null,
+   "text": "First turn of each combat: gain 1 Energy and draw 1 card.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "turn_number",
+       "eq": 1
+      },
+      "then": [
+       {
+        "op": "gain_energy",
+        "amount": 1
+       },
+       {
+        "op": "draw",
+        "count": 1
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "finger",
+   "tier": 0
+  },
+  {
+   "id": "briarwood-reed",
+   "name": "Briarwood Reed",
+   "icon": "inv_misc_horn_01",
+   "rarity": "uncommon",
+   "itemId": 12930,
+   "zone": null,
+   "class": null,
+   "text": "Heal 8 HP whenever you rest.",
+   "triggers": {
+    "on_rest": [
+     {
+      "op": "heal",
+      "amount": 8,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "zandalarian-hero-charm",
+   "name": "Zandalarian Hero Charm",
+   "icon": "inv_misc_stonetablet_05",
+   "rarity": "epic",
+   "itemId": 19950,
+   "zone": null,
+   "class": null,
+   "text": "Whenever you kill an enemy, heal 4 HP.",
+   "triggers": {
+    "on_kill": [
+     {
+      "op": "heal",
+      "amount": 4,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "earthstrike",
+   "name": "Earthstrike",
+   "icon": "inv_jewelry_talisman_07",
+   "rarity": "epic",
+   "itemId": 21180,
+   "zone": null,
+   "class": null,
+   "text": "Attacks have a 25% chance to deal 6 Nature damage to all enemies.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 25
+      },
+      "then": [
+       {
+        "op": "damage",
+        "amount": 6,
+        "target": "all_enemies",
+        "school": "nature"
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "thunderfury",
+   "name": "Thunderfury, Blessed Blade of the Windseeker",
+   "icon": "inv_sword_39",
+   "rarity": "epic",
+   "itemId": 19019,
+   "zone": null,
+   "class": null,
+   "text": "Attacks have a 20% chance to call lightning (10 Nature damage to a random enemy) and apply 1 Weak.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 20
+      },
+      "then": [
+       {
+        "op": "damage",
+        "amount": 10,
+        "target": "random_enemy",
+        "school": "nature"
+       },
+       {
+        "op": "apply",
+        "status": "weak",
+        "stacks": 1,
+        "target": "enemy"
+       }
+      ]
+     }
+    ]
+   },
+   "ultraRare": true,
+   "slot": "offHand",
+   "tier": 0
+  },
+  {
+   "id": "atiesh",
+   "name": "Atiesh, Greatstaff of the Guardian",
+   "icon": "inv_staff_20",
+   "rarity": "epic",
+   "itemId": 22589,
+   "zone": null,
+   "class": null,
+   "text": "Gain 1 Energy and draw 1 extra card each turn.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "gain_energy",
+      "amount": 1
+     },
+     {
+      "op": "draw",
+      "count": 1
+     }
+    ]
+   },
+   "ultraRare": true,
+   "slot": "offHand",
+   "tier": 0
+  },
+  {
+   "id": "mark-of-the-chosen",
+   "name": "Mark of the Chosen",
+   "icon": "inv_jewelry_talisman_08",
+   "rarity": "rare",
+   "itemId": 17774,
+   "zone": null,
+   "class": null,
+   "text": "Gain 7 max HP and 1 Strength on pickup.",
+   "triggers": {
+    "on_pickup": [
+     {
+      "op": "max_hp",
+      "amount": 7
+     },
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "burst-of-knowledge",
+   "name": "Burst of Knowledge",
+   "icon": "inv_misc_book_09",
+   "rarity": "uncommon",
+   "itemId": 11832,
+   "zone": null,
+   "class": null,
+   "text": "Draw 1 extra card at the start of combat.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "draw",
+      "count": 1
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "second-wind",
+   "name": "Second Wind",
+   "icon": "inv_misc_gem_pearl_05",
+   "rarity": "uncommon",
+   "itemId": 11819,
+   "zone": null,
+   "class": null,
+   "text": "When you lose HP while below 30% health, heal 3.",
+   "triggers": {
+    "on_hp_loss": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "hp_below_pct",
+       "pct": 30
+      },
+      "then": [
+       {
+        "op": "heal",
+        "amount": 3,
+        "target": "self"
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "rune-of-the-guard-captain",
+   "name": "Rune of the Guard Captain",
+   "icon": "inv_misc_rune_06",
+   "rarity": "uncommon",
+   "itemId": null,
+   "zone": null,
+   "class": null,
+   "text": "Gain 6 Block at the start of each combat.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 6,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "eye-of-the-beast",
+   "name": "Eye of the Beast",
+   "icon": "inv_misc_eye_02",
+   "rarity": "rare",
+   "itemId": 13968,
+   "zone": null,
+   "class": null,
+   "text": "Attacks have a 15% chance to grant 1 Strength.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 15
+      },
+      "then": [
+       {
+        "op": "apply",
+        "status": "strength",
+        "stacks": 1,
+        "target": "self"
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "talisman-of-ephemeral-power",
+   "name": "Talisman of Ephemeral Power",
+   "icon": "inv_jewelry_talisman_03",
+   "rarity": "rare",
+   "itemId": 18820,
+   "zone": null,
+   "class": null,
+   "text": "Your first attack each combat deals double damage.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "double_damage_next"
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "drake-fang-talisman",
+   "name": "Drake Fang Talisman",
+   "icon": "inv_misc_monsterfang_01",
+   "rarity": "rare",
+   "itemId": 19406,
+   "zone": null,
+   "class": null,
+   "text": "Each card played has a 12% chance to grant 1 Strength.",
+   "triggers": {
+    "on_card_played": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 12
+      },
+      "then": [
+       {
+        "op": "apply",
+        "status": "strength",
+        "stacks": 1,
+        "target": "self"
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "rejuvenating-gem",
+   "name": "Rejuvenating Gem",
+   "icon": "inv_misc_gem_emerald_02",
+   "rarity": "uncommon",
+   "itemId": 19395,
+   "zone": null,
+   "class": null,
+   "text": "Start each combat with 2 Regen.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "regen",
+      "stacks": 2,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "shard-of-the-scale",
+   "name": "Shard of the Scale",
+   "icon": "inv_misc_gem_ruby_02",
+   "rarity": "rare",
+   "itemId": 17064,
+   "zone": null,
+   "class": null,
+   "text": "At turn start, if below 50% health, heal 3.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "hp_below_pct",
+       "pct": 50
+      },
+      "then": [
+       {
+        "op": "heal",
+        "amount": 3,
+        "target": "self"
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "essence-of-the-pure-flame",
+   "name": "Essence of the Pure Flame",
+   "icon": "spell_fire_selfdestruct",
+   "rarity": "rare",
+   "itemId": 18815,
+   "zone": null,
+   "class": null,
+   "text": "Start each combat with 2 Thorns.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "thorns",
+      "stacks": 2,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "styleens-impeding-scarab",
+   "name": "Styleen's Impeding Scarab",
+   "icon": "inv_misc_ahnqirajtrinket_01",
+   "rarity": "uncommon",
+   "itemId": 19431,
+   "zone": null,
+   "class": null,
+   "text": "Attacks have a 15% chance to apply 1 Weak.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 15
+      },
+      "then": [
+       {
+        "op": "apply",
+        "status": "weak",
+        "stacks": 1,
+        "target": "enemy"
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "mind-quickening-gem",
+   "name": "Mind Quickening Gem",
+   "icon": "inv_misc_gem_variety_01",
+   "rarity": "rare",
+   "itemId": 19339,
+   "zone": null,
+   "class": null,
+   "text": "25% chance at turn start to gain 1 Energy.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 25
+      },
+      "then": [
+       {
+        "op": "gain_energy",
+        "amount": 1
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "natural-alignment-crystal",
+   "name": "Natural Alignment Crystal",
+   "icon": "inv_misc_gem_crystal_02",
+   "rarity": "rare",
+   "itemId": 19344,
+   "zone": null,
+   "class": null,
+   "text": "30% chance at turn start to draw 1 extra card.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 30
+      },
+      "then": [
+       {
+        "op": "draw",
+        "count": 1
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "hazzarahs-charm-of-magic",
+   "name": "Hazza'rah's Charm of Magic",
+   "icon": "inv_jewelry_talisman_10",
+   "rarity": "epic",
+   "itemId": 19959,
+   "zone": null,
+   "class": null,
+   "text": "At combat start add a free random card to your hand.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "random_card",
+      "pool": "class",
+      "to": "hand",
+      "cost": 0
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "carrot-on-a-stick",
+   "name": "Carrot on a Stick",
+   "icon": "inv_misc_food_17",
+   "rarity": "common",
+   "itemId": 11122,
+   "zone": null,
+   "class": null,
+   "text": "Heal 2 HP when you advance to a new floor.",
+   "triggers": {
+    "on_floor": [
+     {
+      "op": "heal",
+      "amount": 2,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "barov-peasant-caller",
+   "name": "Barov Peasant Caller",
+   "icon": "inv_misc_note_05",
+   "rarity": "uncommon",
+   "itemId": 14023,
+   "zone": null,
+   "class": null,
+   "text": "The peasants rally to you: gain 8 Block at combat start.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 8,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "darkmoon-card-blue-dragon",
+   "name": "Darkmoon Card: Blue Dragon",
+   "icon": "inv_misc_ticket_tarot_bluedragon_01",
+   "rarity": "epic",
+   "itemId": 19288,
+   "zone": null,
+   "class": null,
+   "text": "20% chance at turn start to gain 1 Energy.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 20
+      },
+      "then": [
+       {
+        "op": "gain_energy",
+        "amount": 1
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "darkmoon-card-heroism",
+   "name": "Darkmoon Card: Heroism",
+   "icon": "inv_misc_ticket_tarot_heroism_01",
+   "rarity": "epic",
+   "itemId": 19287,
+   "zone": null,
+   "class": null,
+   "text": "Start each combat with 2 Strength.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 2,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "darkmoon-card-maelstrom",
+   "name": "Darkmoon Card: Maelstrom",
+   "icon": "inv_misc_ticket_tarot_maelstrom_01",
+   "rarity": "epic",
+   "itemId": 19289,
+   "zone": null,
+   "class": null,
+   "text": "Attacks have a 15% chance to deal 8 Arcane damage to a random enemy.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 15
+      },
+      "then": [
+       {
+        "op": "damage",
+        "amount": 8,
+        "target": "random_enemy",
+        "school": "arcane"
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "darkmoon-card-twisting-nether",
+   "name": "Darkmoon Card: Twisting Nether",
+   "icon": "inv_misc_ticket_tarot_twistingnether_01",
+   "rarity": "epic",
+   "itemId": 19290,
+   "zone": null,
+   "class": null,
+   "text": "When you take damage, 15% chance to gain 8 Block.",
+   "triggers": {
+    "on_damage_taken": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 15
+      },
+      "then": [
+       {
+        "op": "block",
+        "amount": 8,
+        "target": "self"
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "lifestone",
+   "name": "Lifestone",
+   "icon": "inv_stone_15",
+   "rarity": "common",
+   "itemId": 833,
+   "zone": null,
+   "class": null,
+   "text": "Heal 2 HP after each combat.",
+   "triggers": {
+    "on_combat_end": [
+     {
+      "op": "heal",
+      "amount": 2,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "cold-basilisk-eye",
+   "name": "Cold Basilisk Eye",
+   "icon": "inv_misc_eye_01",
+   "rarity": "common",
+   "itemId": 1490,
+   "zone": null,
+   "class": null,
+   "text": "Apply 1 Weak to the enemy at the start of combat.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "weak",
+      "stacks": 1,
+      "target": "enemy"
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "smolderweb-carrier",
+   "name": "Smolderweb Carrier",
+   "icon": "inv_misc_monsterspidercarapace_01",
+   "rarity": "common",
+   "itemId": 12529,
+   "zone": null,
+   "class": null,
+   "text": "At combat start apply 3 Poison to all enemies.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "poison",
+      "stacks": 3,
+      "target": "all_enemies"
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "arena-grand-master",
+   "name": "Arena Grand Master",
+   "icon": "inv_misc_ticket_tarot_madness",
+   "rarity": "uncommon",
+   "itemId": 19024,
+   "zone": null,
+   "class": null,
+   "text": "Whenever you kill an enemy, gain 1 Strength.",
+   "triggers": {
+    "on_kill": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "onyxia-blood-talisman",
+   "name": "Onyxia Blood Talisman",
+   "icon": "inv_misc_monsterscales_15",
+   "rarity": "epic",
+   "itemId": 18406,
+   "zone": null,
+   "class": null,
+   "text": "At combat start gain 2 Strength and 2 Dexterity.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 2,
+      "target": "self"
+     },
+     {
+      "op": "apply",
+      "status": "dexterity",
+      "stacks": 2,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "onyxia-tooth-pendant",
+   "name": "Onyxia Tooth Pendant",
+   "icon": "inv_jewelry_necklace_21",
+   "rarity": "epic",
+   "itemId": 18404,
+   "zone": null,
+   "class": null,
+   "text": "Gain 5 max HP on pickup. Heal 4 HP at the end of every combat.",
+   "triggers": {
+    "on_pickup": [
+     {
+      "op": "max_hp",
+      "amount": 5
+     }
+    ],
+    "on_combat_end": [
+     {
+      "op": "heal",
+      "amount": 4,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "scarab-brooch",
+   "name": "Scarab Brooch",
+   "icon": "inv_misc_ahnqirajtrinket_03",
+   "rarity": "epic",
+   "itemId": 21625,
+   "zone": null,
+   "class": null,
+   "text": "Gain 1 Block for every card played.",
+   "triggers": {
+    "on_card_played": [
+     {
+      "op": "block",
+      "amount": 1,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "badge-of-the-swarmguard",
+   "name": "Badge of the Swarmguard",
+   "icon": "inv_misc_ahnqirajtrinket_04",
+   "rarity": "epic",
+   "itemId": 21670,
+   "zone": null,
+   "class": null,
+   "text": "Attacks have a 20% chance to apply 2 Vulnerable.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 20
+      },
+      "then": [
+       {
+        "op": "apply",
+        "status": "vulnerable",
+        "stacks": 2,
+        "target": "enemy"
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "kiss-of-the-spider",
+   "name": "Kiss of the Spider",
+   "icon": "inv_trinket_naxxramas04",
+   "rarity": "epic",
+   "itemId": 22954,
+   "zone": null,
+   "class": null,
+   "text": "Gain 2 Dexterity at combat start and 1 Energy on turn 1.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "dexterity",
+      "stacks": 2,
+      "target": "self"
+     }
+    ],
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "turn_number",
+       "eq": 1
+      },
+      "then": [
+       {
+        "op": "gain_energy",
+        "amount": 1
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "slayers-crest",
+   "name": "Slayer's Crest",
+   "icon": "inv_trinket_naxxramas03",
+   "rarity": "epic",
+   "itemId": 23041,
+   "zone": null,
+   "class": null,
+   "text": "Start each combat with 4 Strength.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 4,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "tidal-charm",
+   "name": "Tidal Charm",
+   "icon": "inv_misc_gem_pearl_04",
+   "rarity": "rare",
+   "itemId": 17758,
+   "zone": null,
+   "class": null,
+   "text": "Gain 3 Block at the start of each turn.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "block",
+      "amount": 3,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "gyths-skull",
+   "name": "Gyth's Skull",
+   "icon": "inv_misc_bone_humanskull_01",
+   "rarity": "rare",
+   "itemId": null,
+   "zone": null,
+   "class": null,
+   "text": "Whenever you kill an enemy deal 4 damage to all remaining enemies.",
+   "triggers": {
+    "on_kill": [
+     {
+      "op": "damage",
+      "amount": 4,
+      "target": "all_enemies"
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "venomous-totem",
+   "name": "Venomous Totem",
+   "icon": "inv_misc_idol_03",
+   "rarity": "uncommon",
+   "itemId": null,
+   "zone": null,
+   "class": null,
+   "text": "Attacks have a 20% chance to apply 2 Poison.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 20
+      },
+      "then": [
+       {
+        "op": "apply",
+        "status": "poison",
+        "stacks": 2,
+        "target": "enemy"
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "grileks-charm-of-might",
+   "name": "Gri'lek's Charm of Might",
+   "icon": "inv_misc_idol_01",
+   "rarity": "rare",
+   "itemId": 19939,
+   "zone": null,
+   "class": null,
+   "text": "Gain 1 Strength at the start of every third turn.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "turn_number",
+       "every": 3
+      },
+      "then": [
+       {
+        "op": "apply",
+        "status": "strength",
+        "stacks": 1,
+        "target": "self"
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "renatakis-charm-of-beasts",
+   "name": "Renataki's Charm of Beasts",
+   "icon": "inv_misc_idol_02",
+   "rarity": "rare",
+   "itemId": 19961,
+   "zone": null,
+   "class": null,
+   "text": "Attacks have a 20% chance to grant 1 Energy next turn.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 20
+      },
+      "then": [
+       {
+        "op": "energy_next_turn",
+        "amount": 1
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "wushoolays-charm-of-spirits",
+   "name": "Wushoolay's Charm of Spirits",
+   "icon": "inv_misc_idol_04",
+   "rarity": "rare",
+   "itemId": 19962,
+   "zone": null,
+   "class": null,
+   "text": "At turn start, 25% chance to heal 3 HP and gain 3 Block.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 25
+      },
+      "then": [
+       {
+        "op": "heal",
+        "amount": 3,
+        "target": "self"
+       },
+       {
+        "op": "block",
+        "amount": 3,
+        "target": "self"
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "zandalarian-hero-medallion",
+   "name": "Zandalarian Hero Medallion",
+   "icon": "inv_jewelry_necklace_14",
+   "rarity": "epic",
+   "itemId": 19948,
+   "zone": null,
+   "class": null,
+   "text": "Gain 10 max HP and 1 Strength on pickup.",
+   "triggers": {
+    "on_pickup": [
+     {
+      "op": "max_hp",
+      "amount": 10
+     },
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "argent-dawn-commission",
+   "name": "Argent Dawn Commission",
+   "icon": "inv_jewelry_talisman_12",
+   "rarity": "rare",
+   "itemId": 12846,
+   "zone": null,
+   "class": null,
+   "text": "Attacks against undead and demons deal 4 extra Holy damage.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "target_is_family",
+       "family": [
+        "undead",
+        "demon"
+       ]
+      },
+      "then": [
+       {
+        "op": "damage",
+        "amount": 4,
+        "school": "holy"
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "master-dragonslayers-ring",
+   "name": "Master Dragonslayer's Ring",
+   "icon": "inv_jewelry_ring_41",
+   "rarity": "epic",
+   "itemId": 19384,
+   "zone": null,
+   "class": null,
+   "text": "Attacks against dragonkin deal 8 extra damage.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "target_is_family",
+       "family": [
+        "dragonkin"
+       ]
+      },
+      "then": [
+       {
+        "op": "damage",
+        "amount": 8
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "finger",
+   "tier": 0
+  },
+  {
+   "id": "quick-strike-ring",
+   "name": "Quick Strike Ring",
+   "icon": "inv_jewelry_ring_17",
+   "rarity": "rare",
+   "itemId": null,
+   "zone": null,
+   "class": null,
+   "text": "Attacks have a 15% chance to draw 1 card.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 15
+      },
+      "then": [
+       {
+        "op": "draw",
+        "count": 1
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "finger",
+   "tier": 0
+  },
+  {
+   "id": "band-of-accuria",
+   "name": "Band of Accuria",
+   "icon": "inv_jewelry_ring_14",
+   "rarity": "rare",
+   "itemId": 17063,
+   "zone": null,
+   "class": null,
+   "text": "Each card played has a 10% chance to grant 1 Strength.",
+   "triggers": {
+    "on_card_played": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 10
+      },
+      "then": [
+       {
+        "op": "apply",
+        "status": "strength",
+        "stacks": 1,
+        "target": "self"
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "finger",
+   "tier": 0
+  },
+  {
+   "id": "seal-of-ascension",
+   "name": "Seal of Ascension",
+   "icon": "inv_jewelry_ring_20",
+   "rarity": "rare",
+   "itemId": null,
+   "zone": null,
+   "class": null,
+   "text": "Whenever you gain Block, 30% chance to heal 1 HP.",
+   "triggers": {
+    "on_block_gained": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 30
+      },
+      "then": [
+       {
+        "op": "heal",
+        "amount": 1,
+        "target": "self"
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "finger",
+   "tier": 0
+  },
+  {
+   "id": "don-julios-band",
+   "name": "Don Julio's Band",
+   "icon": "inv_jewelry_ring_26",
+   "rarity": "epic",
+   "itemId": 19324,
+   "zone": null,
+   "class": null,
+   "text": "Gain 2 Energy on turn 1 of each combat.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "turn_number",
+       "eq": 1
+      },
+      "then": [
+       {
+        "op": "gain_energy",
+        "amount": 2
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "finger",
+   "tier": 0
+  },
+  {
+   "id": "gaily-wrapped-present",
+   "name": "Gaily Wrapped Present",
+   "icon": "inv_holiday_christmas_present_01",
+   "rarity": "common",
+   "itemId": 17685,
+   "zone": null,
+   "class": null,
+   "text": "Gain 50 gold on pickup. Surprise.",
+   "triggers": {
+    "on_pickup": [
+     {
+      "op": "gold",
+      "amount": 50
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "elunes-candle",
+   "name": "Elune's Candle",
+   "icon": "inv_misc_candle_02",
+   "rarity": "common",
+   "itemId": 21157,
+   "zone": null,
+   "class": null,
+   "text": "Heal an extra 6 HP at each rest.",
+   "triggers": {
+    "on_rest": [
+     {
+      "op": "heal",
+      "amount": 6,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "satchel-of-cenarius",
+   "name": "Satchel of Cenarius",
+   "icon": "inv_misc_bag_cenarionherbbag",
+   "rarity": "uncommon",
+   "itemId": null,
+   "zone": null,
+   "class": null,
+   "text": "Gain 12 gold per floor climbed.",
+   "triggers": {
+    "on_floor": [
+     {
+      "op": "gold",
+      "amount": 12
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "the-black-book",
+   "name": "The Black Book",
+   "icon": "inv_misc_book_11",
+   "rarity": "rare",
+   "itemId": null,
+   "zone": null,
+   "class": null,
+   "text": "Start each combat with 1 Weak and 1 Vulnerable on the enemy.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "weak",
+      "stacks": 1,
+      "target": "enemy"
+     },
+     {
+      "op": "apply",
+      "status": "vulnerable",
+      "stacks": 1,
+      "target": "enemy"
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "orb-of-deception",
+   "name": "Orb of Deception",
+   "icon": "inv_misc_orb_03",
+   "rarity": "rare",
+   "itemId": null,
+   "zone": null,
+   "class": null,
+   "text": "When you take damage, 20% chance to gain 6 Block.",
+   "triggers": {
+    "on_damage_taken": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 20
+      },
+      "then": [
+       {
+        "op": "block",
+        "amount": 6,
+        "target": "self"
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "ancient-cornerstone-grimoire",
+   "name": "Ancient Cornerstone Grimoire",
+   "icon": "inv_misc_book_07",
+   "rarity": "epic",
+   "itemId": null,
+   "zone": null,
+   "class": null,
+   "text": "Draw 2 extra cards at the start of combat.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "draw",
+      "count": 2
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "core-felcloth-bag",
+   "name": "Core Felcloth Bag",
+   "icon": "inv_misc_bag_felclothbag",
+   "rarity": "rare",
+   "itemId": null,
+   "zone": null,
+   "class": null,
+   "text": "Draw 1 extra card on turn 1 of each combat and gain 4 Block.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "turn_number",
+       "eq": 1
+      },
+      "then": [
+       {
+        "op": "draw",
+        "count": 1
+       },
+       {
+        "op": "block",
+        "amount": 4,
+        "target": "self"
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "ring-of-the-qiraji-fury",
+   "name": "Ring of the Qiraji Fury",
+   "icon": "inv_jewelry_ring_ahnqiraj_04",
+   "rarity": "epic",
+   "itemId": 21677,
+   "zone": null,
+   "class": null,
+   "text": "Every attack deals 2 extra damage.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "damage",
+      "amount": 2
+     }
+    ]
+   },
+   "slot": "finger",
+   "tier": 0
+  },
+  {
+   "id": "bloodvine-lens",
+   "name": "Bloodvine Lens",
+   "icon": "inv_misc_eye_03",
+   "rarity": "rare",
+   "itemId": 19852,
+   "zone": null,
+   "class": null,
+   "text": "Attacks against Vulnerable enemies deal 3 extra damage.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "status_on_target",
+       "status": "vulnerable"
+      },
+      "then": [
+       {
+        "op": "damage",
+        "amount": 3
+       }
+      ]
+     }
+    ]
+   },
+   "slot": "neck",
+   "tier": 0
+  },
+  {
+   "id": "seal-of-the-dawn",
+   "name": "Seal of the Dawn",
+   "icon": "inv_jewelry_ring_28",
+   "rarity": "rare",
+   "itemId": null,
+   "zone": null,
+   "class": null,
+   "text": "Heal 1 HP whenever you kill an enemy.",
+   "triggers": {
+    "on_kill": [
+     {
+      "op": "heal",
+      "amount": 1,
+      "target": "self"
+     }
+    ]
+   },
+   "slot": "finger",
+   "tier": 0
+  },
+  {
+   "id": "moonstone-ring",
+   "name": "Moonstone Ring",
+   "icon": "inv_jewelry_ring_09",
+   "rarity": "common",
+   "itemId": null,
+   "zone": null,
+   "class": null,
+   "text": "Gain 15 gold after every combat.",
+   "triggers": {
+    "on_combat_end": [
+     {
+      "op": "gold",
+      "amount": 15
+     }
+    ]
+   },
+   "slot": "finger",
+   "tier": 0
+  },
+  {
+   "id": "bag-of-jewels",
+   "name": "Bag of Jewels",
+   "icon": "inv_misc_bag_10",
+   "rarity": "uncommon",
+   "itemId": null,
+   "zone": null,
+   "class": null,
+   "text": "Gain 25 gold on pickup and 5 gold per kill.",
+   "triggers": {
+    "on_pickup": [
+     {
+      "op": "gold",
+      "amount": 25
+     }
+    ],
+    "on_kill": [
+     {
+      "op": "gold",
+      "amount": 5
+     }
+    ]
+   },
+   "slot": "trinket",
+   "tier": 0
+  },
+  {
+   "id": "cloak-of-firemaw",
+   "name": "Cloak of Firemaw",
+   "icon": "inv_misc_cape_18",
+   "rarity": "epic",
+   "itemId": 19398,
+   "zone": null,
+   "class": null,
+   "slot": "back",
+   "tier": 0,
+   "text": "Start each combat: gain 3 Thorns and gain 3 Block.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "thorns",
+      "stacks": 3,
+      "target": "self"
+     },
+     {
+      "op": "block",
+      "amount": 3,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "cloak-of-the-shrouded-mists",
+   "name": "Cloak of the Shrouded Mists",
+   "icon": "inv_misc_cape_17",
+   "rarity": "epic",
+   "itemId": 17102,
+   "zone": null,
+   "class": null,
+   "slot": "back",
+   "tier": 0,
+   "text": "Start each combat: gain 1 Dexterity and gain 3 Block.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "dexterity",
+      "stacks": 1,
+      "target": "self"
+     },
+     {
+      "op": "block",
+      "amount": 3,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "cloak-of-draconic-might",
+   "name": "Cloak of Draconic Might",
+   "icon": "inv_misc_cape_11",
+   "rarity": "epic",
+   "itemId": 19436,
+   "zone": null,
+   "class": null,
+   "slot": "back",
+   "tier": 0,
+   "text": "Start each combat: gain 1 Strength.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "cape-of-the-black-baron",
+   "name": "Cape of the Black Baron",
+   "icon": "inv_misc_cape_20",
+   "rarity": "rare",
+   "itemId": 13340,
+   "zone": null,
+   "class": null,
+   "slot": "back",
+   "tier": 0,
+   "text": "At the start of each turn: gain 2 Block.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "block",
+      "amount": 2,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "cloak-of-concentrated-hatred",
+   "name": "Cloak of Concentrated Hatred",
+   "icon": "inv_misc_cape_02",
+   "rarity": "epic",
+   "itemId": 21701,
+   "zone": null,
+   "class": null,
+   "slot": "back",
+   "tier": 0,
+   "text": "When you attack: 20% chance to apply 1 Weak.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 20
+      },
+      "then": [
+       {
+        "op": "apply",
+        "status": "weak",
+        "stacks": 1,
+        "target": "enemy"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "cloak-of-the-fallen-god",
+   "name": "Cloak of the Fallen God",
+   "icon": "inv_misc_cape_10",
+   "rarity": "epic",
+   "itemId": 21710,
+   "zone": null,
+   "class": null,
+   "slot": "back",
+   "tier": 0,
+   "text": "When you kill an enemy: heal 3.",
+   "triggers": {
+    "on_kill": [
+     {
+      "op": "heal",
+      "amount": 3
+     }
+    ]
+   }
+  },
+  {
+   "id": "shroud-of-pure-thought",
+   "name": "Shroud of Pure Thought",
+   "icon": "inv_misc_cape_16",
+   "rarity": "epic",
+   "itemId": 19430,
+   "zone": null,
+   "class": null,
+   "slot": "back",
+   "tier": 0,
+   "text": "Whenever you play a card: 10% chance to draw 1 card.",
+   "triggers": {
+    "on_card_played": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 10
+      },
+      "then": [
+       {
+        "op": "draw",
+        "count": 1
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ]
+}

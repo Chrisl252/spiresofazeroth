@@ -1,0 +1,298 @@
+[
+ {"id":"jaedenar-legionnaire","name":"Jaedenar Legionnaire","tier":"normal","family":"humanoid","type":"cultist","level":[52,54],"hp":[84,98],"icon":"inv_misc_head_orc_01","npcId":null,"traits":["demon"],
+  "moves":[
+   {"id":"fel-strike","name":"Fel Strike","intent":"attack","effects":[{"op":"damage","amount":17}],"weight":2},
+   {"id":"cleave","name":"Cleave","intent":"attack_multi","effects":[{"op":"damage","amount":9,"times":2}],"weight":2},
+   {"id":"fel-rage","name":"Fel Rage","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"jaedenar-cultist","name":"Jaedenar Cultist","tier":"normal","family":"humanoid","type":"cultist","level":[51,53],"hp":[78,91],"icon":"inv_misc_head_human_01","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":14,"school":"shadow"}],"cast":true,"weight":2},
+   {"id":"curse-of-agony","name":"Curse of Agony","intent":"cast","effects":[{"op":"apply","status":"curse","stacks":2,"target":"player"}],"cast":true,"weight":2,"cooldown":3},
+   {"id":"corruption","name":"Corruption","intent":"cast","effects":[{"op":"damage","amount":9,"school":"shadow"},{"op":"apply","status":"poison","stacks":2,"target":"player"}],"cast":true,"weight":2}
+  ]},
+ {"id":"jaedenar-hound","name":"Jaedenar Hound","tier":"normal","family":"demon","type":"felhound","level":[52,54],"hp":[84,98],"icon":"ability_hunter_pet_corehound","npcId":null,"traits":["demon"],
+  "moves":[
+   {"id":"fel-bite","name":"Fel Bite","intent":"attack","effects":[{"op":"damage","amount":15}],"weight":2},
+   {"id":"mana-burn","name":"Mana Burn","intent":"attack","effects":[{"op":"damage","amount":10,"school":"arcane"},{"op":"heal","amount":7,"target":"self"}],"weight":2,"cooldown":3},
+   {"id":"terrifying-howl","name":"Terrifying Howl","intent":"debuff","effects":[{"op":"apply","status":"fear","stacks":1,"target":"player"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"jaedenar-darkweaver","name":"Jaedenar Darkweaver","tier":"normal","family":"humanoid","type":"cultist","level":[53,55],"hp":[90,105],"icon":"inv_misc_head_human_01","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":18,"school":"shadow"}],"cast":true,"weight":2},
+   {"id":"curse-of-tongues","name":"Curse of Tongues","intent":"cast","effects":[{"op":"apply","status":"silence","stacks":1,"target":"player"}],"cast":true,"weight":2,"cooldown":4},
+   {"id":"shadowfury","name":"Shadowfury","intent":"cast","effects":[{"op":"damage","amount":12,"school":"shadow"},{"op":"apply","status":"fear","stacks":1,"target":"player"}],"cast":true,"weight":1,"cooldown":5}
+  ]},
+ {"id":"jaedenar-enforcer","name":"Jaedenar Enforcer","tier":"normal","family":"humanoid","type":"cultist","level":[53,55],"hp":[103,121],"icon":"inv_misc_head_orc_01","npcId":null,"traits":["demon"],
+  "moves":[
+   {"id":"fel-strike","name":"Fel Strike","intent":"attack","effects":[{"op":"damage","amount":20}],"weight":2},
+   {"id":"cleave","name":"Cleave","intent":"attack_multi","effects":[{"op":"damage","amount":11,"times":2}],"weight":2},
+   {"id":"fel-rage","name":"Fel Rage","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"jaedenar-guardian","name":"Jaedenar Guardian","tier":"elite","family":"demon","type":"felguard","level":[54,56],"hp":[239,281],"icon":"spell_shadow_summonvoidwalker","npcId":null,"traits":["demon"],
+  "moves":[
+   {"id":"fel-cleave","name":"Fel Cleave","intent":"attack","effects":[{"op":"damage","amount":26}],"weight":2},
+   {"id":"axe-flurry","name":"Axe Flurry","intent":"attack_multi","effects":[{"op":"damage","amount":13,"times":2}],"weight":2},
+   {"id":"soul-shield","name":"Soul Shield","intent":"block","effects":[{"op":"block","amount":20,"target":"self"}],"weight":2,"cooldown":4},
+   {"id":"fel-rage","name":"Fel Rage","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"jaedenar-warlock","name":"Jaedenar Warlock","tier":"normal","family":"humanoid","type":"cultist","level":[54,56],"hp":[105,124],"icon":"inv_misc_head_human_01","npcId":null,"traits":["demon"],
+  "moves":[
+   {"id":"fel-immolate","name":"Fel Immolate","intent":"cast","effects":[{"op":"damage","amount":17,"school":"fire"},{"op":"apply","status":"burn","stacks":2,"target":"player"}],"cast":true,"weight":2},
+   {"id":"drain-life","name":"Drain Life","intent":"attack","effects":[{"op":"damage","amount":14,"school":"shadow"},{"op":"heal","amount":14,"target":"self"}],"weight":2,"cooldown":3},
+   {"id":"summon-imp","name":"Summon Imp","intent":"summon","effects":[{"op":"summon","unit":"imp","count":1}],"weight":1,"cooldown":5}
+  ]},
+ {"id":"jaedenar-adept","name":"Jaedenar Adept","tier":"normal","family":"humanoid","type":"cultist","level":[52,54],"hp":[84,98],"icon":"inv_misc_head_human_01","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":15,"school":"shadow"}],"cast":true,"weight":2},
+   {"id":"dark-mend","name":"Dark Mend","intent":"heal","effects":[{"op":"heal","amount":17,"target":"self"}],"weight":2,"cooldown":3},
+   {"id":"weakening-curse","name":"Weakening Curse","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"cast":true,"weight":2,"cooldown":4}
+  ]},
+ {"id":"infernal-sentry","name":"Infernal Sentry","tier":"elite","family":"demon","type":"infernal","level":[55,57],"hp":[239,281],"icon":"spell_shadow_summonvoidwalker","npcId":null,"traits":["demon","immune:fire"],
+  "moves":[
+   {"id":"infernal-smash","name":"Infernal Smash","intent":"attack","effects":[{"op":"damage","amount":32}],"weight":2},
+   {"id":"hellfire","name":"Hellfire","intent":"attack","effects":[{"op":"damage","amount":10,"school":"fire","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"fel-plating","name":"Fel Plating","intent":"block","effects":[{"op":"block","amount":22,"target":"self"}],"weight":2,"cooldown":4},
+   {"id":"burning-resolve","name":"Burning Resolve","intent":"buff","effects":[{"op":"apply","status":"thorns","stacks":3,"target":"self"}],"weight":1,"cooldown":5}
+  ]},
+ {"id":"felpaw-scavenger","name":"Felpaw Scavenger","tier":"normal","family":"beast","type":"wolf","level":[51,53],"hp":[78,91],"icon":"ability_hunter_pet_wolf","npcId":null,"traits":[],
+  "moves":[
+   {"id":"gnaw","name":"Gnaw","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2},
+   {"id":"rending-bite","name":"Rending Bite","intent":"attack","effects":[{"op":"damage","amount":10},{"op":"apply","status":"bleed","stacks":2,"target":"player"}],"weight":2},
+   {"id":"snarl","name":"Snarl","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":2,"cooldown":3}
+  ]},
+ {"id":"felpaw-ravager","name":"Felpaw Ravager","tier":"normal","family":"beast","type":"wolf","level":[52,54],"hp":[92,108],"icon":"ability_hunter_pet_wolf","npcId":null,"traits":["pack"],
+  "moves":[
+   {"id":"bite","name":"Bite","intent":"attack","effects":[{"op":"damage","amount":15}],"weight":2},
+   {"id":"howl","name":"Howl","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":2,"cooldown":3},
+   {"id":"rending-bites","name":"Rending Bites","intent":"attack_multi","effects":[{"op":"damage","amount":9,"times":2}],"weight":2}
+  ]},
+ {"id":"felpaw-wolf","name":"Felpaw Wolf","tier":"normal","family":"beast","type":"wolf","level":[50,52],"hp":[72,84],"icon":"ability_hunter_pet_wolf","npcId":null,"traits":["pack"],
+  "moves":[
+   {"id":"bite","name":"Bite","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2},
+   {"id":"howl","name":"Howl","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":2,"cooldown":3},
+   {"id":"rending-bites","name":"Rending Bites","intent":"attack_multi","effects":[{"op":"damage","amount":7,"times":2}],"weight":2}
+  ]},
+ {"id":"deadwood-gardener","name":"Deadwood Gardener","tier":"normal","family":"humanoid","type":"furbolg","level":[51,53],"hp":[78,91],"icon":"ability_hunter_pet_bear","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":14,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"chain-heal","name":"Chain Heal","intent":"heal","effects":[{"op":"heal","amount":17,"target":"self"}],"weight":2,"cooldown":3},
+   {"id":"slowing-poison","name":"Slowing Poison","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":1}
+  ]},
+ {"id":"deadwood-warrior","name":"Deadwood Warrior","tier":"normal","family":"humanoid","type":"furbolg","level":[50,52],"hp":[72,84],"icon":"ability_hunter_pet_bear","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":10},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"maul","name":"Maul","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2},
+   {"id":"chain-heal","name":"Chain Heal","intent":"heal","effects":[{"op":"heal","amount":14,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"deadwood-pathfinder","name":"Deadwood Pathfinder","tier":"normal","family":"humanoid","type":"furbolg","level":[51,53],"hp":[78,91],"icon":"ability_hunter_pet_bear","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"shoot","name":"Shoot","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2},
+   {"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":10},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"chain-heal","name":"Chain Heal","intent":"heal","effects":[{"op":"heal","amount":14,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"deadwood-den-watcher","name":"Deadwood Den Watcher","tier":"normal","family":"humanoid","type":"furbolg","level":[52,54],"hp":[92,108],"icon":"ability_hunter_pet_bear","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":12},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"maul","name":"Maul","intent":"attack","effects":[{"op":"damage","amount":18}],"weight":2},
+   {"id":"chain-heal","name":"Chain Heal","intent":"heal","effects":[{"op":"heal","amount":18,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"deadwood-shaman","name":"Deadwood Shaman","tier":"normal","family":"humanoid","type":"furbolg","level":[51,53],"hp":[78,91],"icon":"ability_hunter_pet_bear","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":14,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"chain-heal","name":"Chain Heal","intent":"heal","effects":[{"op":"heal","amount":17,"target":"self"}],"weight":2,"cooldown":3},
+   {"id":"slowing-poison","name":"Slowing Poison","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":1}
+  ]},
+ {"id":"deadwood-avenger","name":"Deadwood Avenger","tier":"normal","family":"humanoid","type":"furbolg","level":[53,55],"hp":[103,121],"icon":"ability_hunter_pet_bear","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":14},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"maul","name":"Maul","intent":"attack","effects":[{"op":"damage","amount":20}],"weight":2},
+   {"id":"chain-heal","name":"Chain Heal","intent":"heal","effects":[{"op":"heal","amount":20,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"timbermaw-warder","name":"Timbermaw Warder","tier":"normal","family":"humanoid","type":"furbolg","level":[54,56],"hp":[96,112],"icon":"ability_hunter_pet_bear","npcId":null,"traits":["caster"],"note":"Timbermaw Hold: hostile pre-rep in 1.12",
+  "moves":[
+   {"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":13},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"maul","name":"Maul","intent":"attack","effects":[{"op":"damage","amount":19}],"weight":2},
+   {"id":"chain-heal","name":"Chain Heal","intent":"heal","effects":[{"op":"heal","amount":19,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"timbermaw-totemic","name":"Timbermaw Totemic","tier":"normal","family":"humanoid","type":"furbolg","level":[54,56],"hp":[96,112],"icon":"ability_hunter_pet_bear","npcId":null,"traits":["caster"],"note":"Timbermaw Hold: hostile pre-rep in 1.12",
+  "moves":[
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":18,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"chain-heal","name":"Chain Heal","intent":"heal","effects":[{"op":"heal","amount":21,"target":"self"}],"weight":2,"cooldown":3},
+   {"id":"slowing-poison","name":"Slowing Poison","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":1}
+  ]},
+ {"id":"timbermaw-den-watcher","name":"Timbermaw Den Watcher","tier":"normal","family":"humanoid","type":"furbolg","level":[55,57],"hp":[105,124],"icon":"ability_hunter_pet_bear","npcId":null,"traits":["caster"],"note":"Timbermaw Hold: hostile pre-rep in 1.12",
+  "moves":[
+   {"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":14},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"maul","name":"Maul","intent":"attack","effects":[{"op":"damage","amount":20}],"weight":2},
+   {"id":"chain-heal","name":"Chain Heal","intent":"heal","effects":[{"op":"heal","amount":20,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"timbermaw-pathfinder","name":"Timbermaw Pathfinder","tier":"normal","family":"humanoid","type":"furbolg","level":[54,56],"hp":[96,112],"icon":"ability_hunter_pet_bear","npcId":null,"traits":["caster"],"note":"Timbermaw Hold: hostile pre-rep in 1.12",
+  "moves":[
+   {"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":13},{"op":"apply","status":"bleed","stacks":3,"target":"player"}],"weight":2},
+   {"id":"maul","name":"Maul","intent":"attack","effects":[{"op":"damage","amount":19}],"weight":2},
+   {"id":"chain-heal","name":"Chain Heal","intent":"heal","effects":[{"op":"heal","amount":19,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"timbermaw-shaman","name":"Timbermaw Shaman","tier":"normal","family":"humanoid","type":"furbolg","level":[54,56],"hp":[96,112],"icon":"ability_hunter_pet_bear","npcId":null,"traits":["caster"],"note":"Timbermaw Hold: hostile pre-rep in 1.12",
+  "moves":[
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":18,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"chain-heal","name":"Chain Heal","intent":"heal","effects":[{"op":"heal","amount":21,"target":"self"}],"weight":2,"cooldown":3},
+   {"id":"slowing-poison","name":"Slowing Poison","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":1}
+  ]},
+ {"id":"timbermaw-ancestor","name":"Timbermaw Ancestor","tier":"normal","family":"humanoid","type":"furbolg","level":[55,57],"hp":[110,129],"icon":"ability_hunter_pet_bear","npcId":null,"traits":["caster","spirit"],"note":"Timbermaw Hold: hostile pre-rep in 1.12",
+  "moves":[
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":20,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"chain-heal","name":"Chain Heal","intent":"heal","effects":[{"op":"heal","amount":23,"target":"self"}],"weight":2,"cooldown":3},
+   {"id":"slowing-poison","name":"Slowing Poison","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":1}
+  ]},
+ {"id":"ironbeak-owl","name":"Ironbeak Owl","tier":"normal","family":"beast","type":"owlbeast","level":[52,54],"hp":[84,98],"icon":"ability_hunter_pet_owl","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2},
+   {"id":"screech","name":"Screech","intent":"cast","effects":[{"op":"damage","amount":8},{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":2},
+   {"id":"talon-rake","name":"Talon Rake","intent":"attack_multi","effects":[{"op":"damage","amount":8,"times":2}],"weight":2}
+  ]},
+ {"id":"ironbeak-screecher","name":"Ironbeak Screecher","tier":"normal","family":"beast","type":"owlbeast","level":[53,55],"hp":[90,105],"icon":"ability_hunter_pet_owl","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"ironbeak-screech","name":"Ironbeak Screech","intent":"cast","effects":[{"op":"damage","amount":12},{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":2},
+   {"id":"talon-rake","name":"Talon Rake","intent":"attack_multi","effects":[{"op":"damage","amount":8,"times":2}],"weight":2},
+   {"id":"terrify","name":"Terrify","intent":"cast","effects":[{"op":"apply","status":"fear","stacks":1,"target":"player"}],"cast":true,"weight":1,"cooldown":4}
+  ]},
+ {"id":"ironbeak-hunter","name":"Ironbeak Hunter","tier":"normal","family":"beast","type":"owlbeast","level":[54,56],"hp":[105,124],"icon":"ability_hunter_pet_owl","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":17}],"weight":2},
+   {"id":"screech","name":"Screech","intent":"cast","effects":[{"op":"damage","amount":10},{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":2},
+   {"id":"talon-rake","name":"Talon Rake","intent":"attack_multi","effects":[{"op":"damage","amount":9,"times":2}],"weight":2}
+  ]},
+ {"id":"ironbeak-snapper","name":"Ironbeak Snapper","tier":"normal","family":"beast","type":"owlbeast","level":[52,54],"hp":[75,88],"icon":"ability_hunter_pet_owl","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"rend","name":"Rend","intent":"attack","effects":[{"op":"damage","amount":12}],"weight":2},
+   {"id":"screech","name":"Screech","intent":"cast","effects":[{"op":"damage","amount":7},{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":2},
+   {"id":"talon-rake","name":"Talon Rake","intent":"attack_multi","effects":[{"op":"damage","amount":7,"times":2}],"weight":2}
+  ]},
+ {"id":"jadefire-satyr","name":"Jadefire Satyr","tier":"normal","family":"demon","type":"satyr","level":[52,54],"hp":[84,98],"icon":"spell_shadow_summonfelhunter","npcId":null,"traits":[],
+  "moves":[
+   {"id":"rake","name":"Rake","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2},
+   {"id":"dual-strike","name":"Dual Strike","intent":"attack_multi","effects":[{"op":"damage","amount":8,"times":2}],"weight":2},
+   {"id":"sap","name":"Sap","intent":"debuff","effects":[{"op":"apply","status":"stun","stacks":1,"target":"player"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"jadefire-felsworn","name":"Jadefire Felsworn","tier":"normal","family":"demon","type":"satyr","level":[53,55],"hp":[90,105],"icon":"spell_shadow_summonfelhunter","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":17,"school":"shadow"}],"cast":true,"weight":2},
+   {"id":"immolate","name":"Immolate","intent":"cast","effects":[{"op":"damage","amount":12,"school":"fire"},{"op":"apply","status":"burn","stacks":2,"target":"player"}],"cast":true,"weight":2},
+   {"id":"curse-of-weakness","name":"Curse of Weakness","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"cast":true,"weight":2,"cooldown":3}
+  ]},
+ {"id":"jadefire-hellcaller","name":"Jadefire Hellcaller","tier":"normal","family":"demon","type":"satyr","level":[54,56],"hp":[96,112],"icon":"spell_fire_felflamebolt","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":18,"school":"shadow"}],"cast":true,"weight":2},
+   {"id":"immolate","name":"Immolate","intent":"cast","effects":[{"op":"damage","amount":13,"school":"fire"},{"op":"apply","status":"burn","stacks":2,"target":"player"}],"cast":true,"weight":2},
+   {"id":"curse-of-weakness","name":"Curse of Weakness","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"cast":true,"weight":2,"cooldown":3}
+  ]},
+ {"id":"jadefire-betrayer","name":"Jadefire Betrayer","tier":"normal","family":"demon","type":"satyr","level":[53,55],"hp":[90,105],"icon":"spell_shadow_summonfelhunter","npcId":null,"traits":[],
+  "moves":[
+   {"id":"rake","name":"Rake","intent":"attack","effects":[{"op":"damage","amount":15}],"weight":2},
+   {"id":"dual-strike","name":"Dual Strike","intent":"attack_multi","effects":[{"op":"damage","amount":9,"times":2}],"weight":2},
+   {"id":"sap","name":"Sap","intent":"debuff","effects":[{"op":"apply","status":"stun","stacks":1,"target":"player"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"jadefire-rogue","name":"Jadefire Rogue","tier":"normal","family":"demon","type":"satyr","level":[52,54],"hp":[84,98],"icon":"spell_shadow_summonfelhunter","npcId":null,"traits":[],
+  "moves":[
+   {"id":"rake","name":"Rake","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2},
+   {"id":"dual-strike","name":"Dual Strike","intent":"attack_multi","effects":[{"op":"damage","amount":8,"times":2}],"weight":2},
+   {"id":"sap","name":"Sap","intent":"debuff","effects":[{"op":"apply","status":"stun","stacks":1,"target":"player"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"jadefire-shadowstalker","name":"Jadefire Shadowstalker","tier":"normal","family":"demon","type":"satyr","level":[54,56],"hp":[105,124],"icon":"spell_shadow_summonfelhunter","npcId":null,"traits":[],
+  "moves":[
+   {"id":"rake","name":"Rake","intent":"attack","effects":[{"op":"damage","amount":17}],"weight":2},
+   {"id":"dual-strike","name":"Dual Strike","intent":"attack_multi","effects":[{"op":"damage","amount":10,"times":2}],"weight":2},
+   {"id":"sap","name":"Sap","intent":"debuff","effects":[{"op":"apply","status":"stun","stacks":1,"target":"player"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"jadefire-trickster","name":"Jadefire Trickster","tier":"normal","family":"demon","type":"satyr","level":[52,54],"hp":[84,98],"icon":"spell_shadow_summonfelhunter","npcId":null,"traits":[],
+  "moves":[
+   {"id":"backstab","name":"Backstab","intent":"attack","effects":[{"op":"damage","amount":18}],"weight":2},
+   {"id":"cheap-shot","name":"Cheap Shot","intent":"debuff","effects":[{"op":"apply","status":"stun","stacks":1,"target":"player"}],"weight":2,"cooldown":4},
+   {"id":"poison","name":"Poison","intent":"attack","effects":[{"op":"damage","amount":8,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2}
+  ]},
+ {"id":"toxic-horror","name":"Toxic Horror","tier":"normal","family":"elemental","type":"ooze","level":[53,55],"hp":[103,121],"icon":"10_2_raidability_treant","npcId":null,"traits":["poison-aura"],
+  "moves":[
+   {"id":"toxic-spit","name":"Toxic Spit","intent":"attack","effects":[{"op":"damage","amount":14,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"smash","name":"Smash","intent":"attack","effects":[{"op":"damage","amount":20}],"weight":2},
+   {"id":"toxic-cloud","name":"Toxic Cloud","intent":"attack","effects":[{"op":"damage","amount":10,"school":"nature","target":"all_enemies"}],"weight":2,"cooldown":4}
+  ]},
+ {"id":"withered-protector","name":"Withered Protector","tier":"normal","family":"elemental","type":"treant","level":[52,54],"hp":[92,108],"icon":"10_2_raidability_treant","npcId":null,"traits":["resist:nature"],
+  "moves":[
+   {"id":"entangling-strike","name":"Entangling Strike","intent":"attack","effects":[{"op":"damage","amount":18}],"weight":2},
+   {"id":"entangling-roots","name":"Entangling Roots","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":4},
+   {"id":"bark-skin","name":"Bark Skin","intent":"block","effects":[{"op":"block","amount":18,"target":"self"}],"weight":1}
+  ]},
+ {"id":"warpwood-treant","name":"Warpwood Treant","tier":"normal","family":"elemental","type":"treant","level":[51,53],"hp":[78,91],"icon":"10_2_raidability_treant","npcId":null,"traits":["resist:nature"],
+  "moves":[
+   {"id":"entangling-strike","name":"Entangling Strike","intent":"attack","effects":[{"op":"damage","amount":16}],"weight":2},
+   {"id":"entangling-roots","name":"Entangling Roots","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":4},
+   {"id":"bark-skin","name":"Bark Skin","intent":"block","effects":[{"op":"block","amount":16,"target":"self"}],"weight":1}
+  ]},
+ {"id":"irontree-wanderer","name":"Irontree Wanderer","tier":"normal","family":"elemental","type":"treant","level":[54,56],"hp":[120,140],"icon":"10_2_raidability_treant","npcId":null,"traits":["resist:nature"],
+  "moves":[
+   {"id":"entangling-strike","name":"Entangling Strike","intent":"attack","effects":[{"op":"damage","amount":24}],"weight":2},
+   {"id":"entangling-roots","name":"Entangling Roots","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":4},
+   {"id":"bark-skin","name":"Bark Skin","intent":"block","effects":[{"op":"block","amount":24,"target":"self"}],"weight":1}
+  ]},
+ {"id":"irontree-stomper","name":"Irontree Stomper","tier":"elite","family":"elemental","type":"treant","level":[55,57],"hp":[239,281],"icon":"10_2_raidability_treant","npcId":null,"traits":["resist:nature"],
+  "moves":[
+   {"id":"trample","name":"Trample","intent":"attack","effects":[{"op":"damage","amount":30}],"weight":2},
+   {"id":"entangling-roots","name":"Entangling Roots","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":4},
+   {"id":"stomp","name":"Stomp","intent":"attack","effects":[{"op":"damage","amount":10,"school":"nature","target":"all_enemies"}],"weight":2,"cooldown":3},
+   {"id":"ironbark","name":"Ironbark","intent":"block","effects":[{"op":"block","amount":20,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"cursed-ooze","name":"Cursed Ooze","tier":"normal","family":"elemental","type":"ooze","level":[51,53],"hp":[78,91],"icon":"spell_nature_acid_01","npcId":null,"traits":["acid"],
+  "moves":[
+   {"id":"acid-splash","name":"Acid Splash","intent":"attack","effects":[{"op":"damage","amount":10,"school":"nature"},{"op":"apply","status":"vulnerable","stacks":1,"target":"player"}],"weight":2},
+   {"id":"engulf","name":"Engulf","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2},
+   {"id":"absorb","name":"Absorb","intent":"heal","effects":[{"op":"heal","amount":10,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"entropic-beast","name":"Entropic Beast","tier":"normal","family":"beast","type":"corrupted","level":[54,56],"hp":[105,124],"icon":"ability_hunter_pet_ravager","npcId":null,"traits":["poison-aura","corruption"],
+  "moves":[
+   {"id":"toxic-spit","name":"Toxic Spit","intent":"attack","effects":[{"op":"damage","amount":14,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"smash","name":"Smash","intent":"attack","effects":[{"op":"damage","amount":20}],"weight":2},
+   {"id":"toxic-cloud","name":"Toxic Cloud","intent":"attack","effects":[{"op":"damage","amount":10,"school":"nature","target":"all_enemies"}],"weight":2,"cooldown":4}
+  ]},
+ {"id":"entropic-horror","name":"Entropic Horror","tier":"normal","family":"elemental","type":"corrupted","level":[55,57],"hp":[115,135],"icon":"spell_shadow_plaguecloud","npcId":null,"traits":["poison-aura","corruption"],
+  "moves":[
+   {"id":"toxic-spit","name":"Toxic Spit","intent":"attack","effects":[{"op":"damage","amount":15,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2},
+   {"id":"smash","name":"Smash","intent":"attack","effects":[{"op":"damage","amount":23}],"weight":2},
+   {"id":"toxic-cloud","name":"Toxic Cloud","intent":"attack","effects":[{"op":"damage","amount":11,"school":"nature","target":"all_enemies"}],"weight":2,"cooldown":4}
+  ]},
+ {"id":"shadow-lord-feldan","name":"Shadow Lord Fel'dan","tier":"boss","family":"demon","type":"shadow-lord","level":[57,58],"hp":[502,590],"icon":"spell_shadow_demonform","npcId":null,"traits":["demon","caster"],"pattern":["fel-fireball","curse-of-agony","drain-life","shadow-nova","fel-cleave"],"role":"zone-boss",
+  "moves":[
+   {"id":"fel-fireball","name":"Fel Fireball","intent":"cast","effects":[{"op":"damage","amount":26,"school":"fire"},{"op":"apply","status":"burn","stacks":3,"target":"player"}],"cast":true,"weight":2},
+   {"id":"curse-of-agony","name":"Curse of Agony","intent":"cast","effects":[{"op":"apply","status":"curse","stacks":3,"target":"player"}],"cast":true,"weight":2,"cooldown":3},
+   {"id":"drain-life","name":"Drain Life","intent":"attack","effects":[{"op":"damage","amount":20,"school":"shadow"},{"op":"heal","amount":20,"target":"self"}],"weight":2,"cooldown":3},
+   {"id":"summon-imp","name":"Summon Imp","intent":"summon","effects":[{"op":"summon","unit":"imp","count":2}],"weight":2,"cooldown":5},
+   {"id":"shadow-nova","name":"Shadow Nova","intent":"attack","effects":[{"op":"damage","amount":14,"school":"shadow","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"fel-cleave","name":"Fel Cleave","intent":"attack","effects":[{"op":"damage","amount":30}],"weight":2}
+  ],
+  "phases":[
+   {"hpBelowPct":66,"pattern":["fel-fireball","summon-imp","drain-life","fel-cleave"],"onEnter":[{"op":"apply","status":"armor","stacks":10,"target":"self"}]},
+   {"hpBelowPct":33,"pattern":["shadow-nova","fel-fireball","fel-cleave","drain-life"],"onEnter":[{"op":"add_card","card":"corrupted","to":"discard","count":2}]}
+  ]},
+ {"id":"xavathras","name":"Xavathras","tier":"boss","family":"demon","type":"satyr","level":[56,57],"hp":[502,590],"icon":"spell_shadow_summonfelhunter","npcId":null,"traits":["demon","caster"],"pattern":["shadow-bolt","curse-of-weakness","fel-slash","rain-of-fire"],"role":"zone-boss-alternate",
+  "moves":[
+   {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":24,"school":"shadow"}],"cast":true,"weight":2},
+   {"id":"rain-of-fire","name":"Rain of Fire","intent":"cast","effects":[{"op":"damage","amount":12,"school":"fire"},{"op":"apply","status":"burn","stacks":3,"target":"player"}],"cast":true,"weight":2,"cooldown":4},
+   {"id":"curse-of-weakness","name":"Curse of Weakness","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":3,"target":"player"}],"cast":true,"weight":2,"cooldown":3},
+   {"id":"fel-slash","name":"Fel Slash","intent":"attack","effects":[{"op":"damage","amount":28}],"weight":2},
+   {"id":"summon-imp","name":"Summon Imp","intent":"summon","effects":[{"op":"summon","unit":"imp","count":2}],"weight":1,"cooldown":5}
+  ],
+  "phases":[
+   {"hpBelowPct":50,"pattern":["rain-of-fire","fel-slash","shadow-bolt","fel-slash"],"onEnter":[{"op":"apply","status":"strength","stacks":2,"target":"self"}]}
+  ]},
+ {"id":"prince-xavalis","name":"Prince Xavalis","tier":"boss","family":"demon","type":"satyr","level":[56,57],"hp":[502,590],"icon":"spell_shadow_summonfelhunter","npcId":null,"traits":["demon"],"pattern":["fel-strike","whirling-blades","hamstring","shadow-bolt"],"role":"zone-boss-alternate",
+  "moves":[
+   {"id":"fel-strike","name":"Fel Strike","intent":"attack","effects":[{"op":"damage","amount":30}],"weight":2},
+   {"id":"whirling-blades","name":"Whirling Blades","intent":"attack_multi","effects":[{"op":"damage","amount":12,"times":3}],"weight":2},
+   {"id":"hamstring","name":"Hamstring","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2,"cooldown":3},
+   {"id":"princes-command","name":"Prince's Command","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":5},
+   {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":22,"school":"shadow"}],"cast":true,"weight":2}
+  ],
+  "phases":[
+   {"hpBelowPct":50,"pattern":["fel-strike","whirling-blades","fel-strike"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+  ]}
+]

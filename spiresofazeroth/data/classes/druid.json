@@ -1,0 +1,2531 @@
+{
+  "id": "druid",
+  "name": "Druid",
+  "icon": "classicon_druid",
+  "color": "#FF7D0A",
+  "lore": "Versatile shapeshifter of nature: tank heavy hits in Bear Form, bleed foes in Cat Form, or call down stars and mends in Caster Form.",
+  "startingHp": 78,
+  "startingGold": 99,
+  "defaultContinent": "kal",
+  "resource": {
+    "id": "combo",
+    "name": "Forms & Combo",
+    "tip": "Shapeshift between Caster, Bear, Cat, and Moonkin forms. Cat attacks generate Combo Points for finishers.",
+    "icon": "ability_druid_ferociousbite",
+    "max": 5,
+    "rules": "Shift between Bear Form for heavy armor and thorns, Cat Form for combo builders and bleeds, and Caster Form for nature spells and healing touch.",
+    "energyPerTurn": 3,
+    "startOfCombat": 0,
+    "gainOnDamageDealt": 0,
+    "gainOnDamageTaken": 0,
+    "decayPerTurn": 0,
+    "forms": {
+      "caster": "Default form. Heals and Restoration spells.",
+      "bear": "Bear Form: Block, Thorns, taunt, Maul/Swipe/Bash.",
+      "cat": "Cat Form: Combo Points, bleeds, Stealth, Rip and Ferocious Bite.",
+      "moonkin": "Moonkin Form: Balance spells deal +3 damage."
+    }
+  },
+  "archetypes": [
+    {
+      "id": "balance",
+      "name": "Balance",
+      "icon": "spell_nature_abolishmagic",
+      "text": "Wrath, Moonfire and Starfire: ranged nature and arcane damage, bolstered by Moonkin Form."
+    },
+    {
+      "id": "feral",
+      "name": "Feral Combat",
+      "icon": "ability_druid_catform",
+      "text": "Bear for defense, cat for bleeds and Combo Point finishers."
+    },
+    {
+      "id": "restoration",
+      "name": "Restoration",
+      "icon": "spell_nature_healingtouch",
+      "text": "Heals over time, Swiftmend, Innervate and Rebirth: out-sustain the spire."
+    }
+  ],
+  "relics": [
+    {
+      "id": "stormrage-cover",
+      "name": "Stormrage Cover",
+      "icon": "inv_helmet_05",
+      "rarity": "rare",
+      "itemId": 16900,
+      "zone": null,
+      "class": "druid",
+      "text": "While in Cat Form, gain 1 Combo Point at the start of each turn.",
+      "triggers": {
+        "on_turn_start": [
+          {
+            "op": "conditional",
+            "if": {
+              "type": "form_is",
+              "value": "cat"
+            },
+            "then": [
+              {
+                "op": "gain_resource",
+                "resource": "combo",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "idol-of-ferocity",
+      "name": "Idol of Ferocity",
+      "icon": "inv_relics_idolofrejuvenation",
+      "rarity": "rare",
+      "itemId": 22397,
+      "zone": null,
+      "class": "druid",
+      "text": "While in Bear Form, gain 2 Block each time you play a card.",
+      "triggers": {
+        "on_card_played": [
+          {
+            "op": "conditional",
+            "if": {
+              "type": "form_is",
+              "value": "bear"
+            },
+            "then": [
+              {
+                "op": "block",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "starterDeck": [
+    "wrath",
+    "wrath",
+    "wrath",
+    "healing-touch",
+    "healing-touch",
+    "bear-form",
+    "bear-form",
+    "maul",
+    "cat-form",
+    "claw"
+  ],
+  "units": {},
+  "spellIdSource": "rank-1 ids from classic knowledge; DB wow_classic_era name lookup agreed on 104/130 names (rest: DB min(spell_id) hit older ids); not individually class-verified",
+  "cards": [
+    {
+      "id": "wrath",
+      "name": "Wrath",
+      "icon": "spell_nature_abolishmagic",
+      "spellId": 5176,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "balance",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 nature damage.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 6,
+          "school": "nature"
+        }
+      ],
+      "upgrade": {
+        "name": "Wrath (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 nature damage.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 9,
+            "school": "nature"
+          }
+        ]
+      }
+    },
+    {
+      "id": "healing-touch",
+      "name": "Healing Touch",
+      "icon": "spell_nature_healingtouch",
+      "spellId": 5185,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "basic",
+      "archetype": "restoration",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 5 Block. Heal 5 HP.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "block",
+          "amount": 5
+        },
+        {
+          "op": "heal",
+          "amount": 5
+        }
+      ],
+      "upgrade": {
+        "name": "Healing Touch (Rank 2)",
+        "cost": 1,
+        "text": "Gain 8 Block. Heal 7 HP.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 8
+          },
+          {
+            "op": "heal",
+            "amount": 7
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "id": "bear-form",
+      "name": "Bear Form",
+      "icon": "ability_racial_bearform",
+      "spellId": 5487,
+      "rank": 1,
+      "type": "form",
+      "rarity": "basic",
+      "archetype": "feral",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Enter Bear Form. Gain 5 Block and Thorns 2.",
+      "effects": [
+        {
+          "op": "set_form",
+          "value": "bear"
+        },
+        {
+          "op": "block",
+          "amount": 5
+        },
+        {
+          "op": "apply",
+          "status": "thorns",
+          "stacks": 2,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Bear Form (Rank 2)",
+        "cost": 1,
+        "text": "Enter Bear Form. Gain 8 Block and Thorns 3.",
+        "effects": [
+          {
+            "op": "set_form",
+            "value": "bear"
+          },
+          {
+            "op": "block",
+            "amount": 8
+          },
+          {
+            "op": "apply",
+            "status": "thorns",
+            "stacks": 3,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cat-form",
+      "name": "Cat Form",
+      "icon": "ability_druid_catform",
+      "spellId": 768,
+      "rank": 1,
+      "type": "form",
+      "rarity": "basic",
+      "archetype": "feral",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Enter Cat Form. Gain 5 Block, 1 Combo Point and draw 1 card.",
+      "effects": [
+        {
+          "op": "set_form",
+          "value": "cat"
+        },
+        {
+          "op": "block",
+          "amount": 5
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 1
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Cat Form (Rank 2)",
+        "cost": 1,
+        "text": "Enter Cat Form. Gain 8 Block, 2 Combo Points and draw 1 card.",
+        "effects": [
+          {
+            "op": "set_form",
+            "value": "cat"
+          },
+          {
+            "op": "block",
+            "amount": 8
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 2
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "claw",
+      "name": "Claw",
+      "icon": "inv_misc_monsterclaw_03",
+      "spellId": 1082,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "feral",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 damage. In Cat Form, gain 1 Combo Point.",
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 6
+        },
+        {
+          "op": "conditional",
+          "if": {
+            "type": "form_is",
+            "value": "cat"
+          },
+          "then": [
+            {
+              "op": "gain_resource",
+              "resource": "combo",
+              "amount": 1
+            }
+          ]
+        }
+      ],
+      "upgrade": {
+        "name": "Claw (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 damage. In Cat Form, gain 1 Combo Point.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 9
+          },
+          {
+            "op": "conditional",
+            "if": {
+              "type": "form_is",
+              "value": "cat"
+            },
+            "then": [
+              {
+                "op": "gain_resource",
+                "resource": "combo",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "moonfire",
+      "name": "Moonfire",
+      "icon": "spell_nature_starfall",
+      "spellId": 8921,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "balance",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 arcane damage. Apply Burn 5.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 6,
+          "school": "arcane"
+        },
+        {
+          "op": "apply",
+          "status": "burn",
+          "stacks": 5,
+          "target": "enemy"
+        }
+      ],
+      "upgrade": {
+        "name": "Moonfire (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 arcane damage. Apply Burn 8.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 9,
+            "school": "arcane"
+          },
+          {
+            "op": "apply",
+            "status": "burn",
+            "stacks": 8,
+            "target": "enemy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "insect-swarm",
+      "name": "Insect Swarm",
+      "icon": "spell_nature_insectswarm",
+      "spellId": 5570,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "balance",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Apply Poison 6 and Weak 1.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "apply",
+          "status": "poison",
+          "stacks": 6,
+          "target": "enemy"
+        },
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 1,
+          "target": "enemy"
+        }
+      ],
+      "upgrade": {
+        "name": "Insect Swarm (Rank 2)",
+        "cost": 1,
+        "text": "Apply Poison 9 and Weak 2.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "poison",
+            "stacks": 9,
+            "target": "enemy"
+          },
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 2,
+            "target": "enemy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "entangling-roots",
+      "name": "Entangling Roots",
+      "icon": "spell_nature_stranglevines",
+      "spellId": 339,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "balance",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 3 nature damage. Apply Weak 3.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 3,
+          "school": "nature"
+        },
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 3,
+          "target": "enemy"
+        }
+      ],
+      "upgrade": {
+        "name": "Entangling Roots (Rank 2)",
+        "cost": 1,
+        "text": "Deal 6 nature damage. Apply Weak 4.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 6,
+            "school": "nature"
+          },
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 4,
+            "target": "enemy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "faerie-fire",
+      "name": "Faerie Fire",
+      "icon": "spell_nature_faeriefire",
+      "spellId": 770,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "balance",
+      "cost": 0,
+      "target": "enemy",
+      "flags": [],
+      "text": "Apply Vulnerable 2 and remove Stealth.",
+      "effects": [
+        {
+          "op": "apply",
+          "status": "vulnerable",
+          "stacks": 2,
+          "target": "enemy"
+        },
+        {
+          "op": "remove",
+          "status": "stealth",
+          "target": "enemy"
+        }
+      ],
+      "upgrade": {
+        "name": "Faerie Fire (Rank 2)",
+        "cost": 0,
+        "text": "Apply Vulnerable 3, remove Stealth. Draw 1 card.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "vulnerable",
+            "stacks": 3,
+            "target": "enemy"
+          },
+          {
+            "op": "remove",
+            "status": "stealth",
+            "target": "enemy"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "natures-grasp",
+      "name": "Nature's Grasp",
+      "icon": "spell_nature_naturesblessing",
+      "spellId": 16689,
+      "rank": 1,
+      "type": "power",
+      "rarity": "common",
+      "archetype": "balance",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain Thorns 2 this combat. The next enemy to hit you gets Weak 2.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "apply",
+          "status": "thorns",
+          "stacks": 2,
+          "target": "self"
+        },
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 2,
+          "target": "attacker",
+          "trigger": "on_damage_taken",
+          "once": true
+        }
+      ],
+      "upgrade": {
+        "name": "Nature's Grasp (Rank 2)",
+        "cost": 1,
+        "text": "Gain Thorns 3. The next enemy to hit you gets Weak 3.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "thorns",
+            "stacks": 3,
+            "target": "self"
+          },
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 3,
+            "target": "attacker",
+            "trigger": "on_damage_taken",
+            "once": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "maul",
+      "name": "Maul",
+      "icon": "ability_druid_maul",
+      "spellId": 6807,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "feral",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 8 damage. Gain 5 Block.",
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 8
+        },
+        {
+          "op": "block",
+          "amount": 5
+        }
+      ],
+      "upgrade": {
+        "name": "Maul (Rank 2)",
+        "cost": 1,
+        "text": "Deal 11 damage. Gain 8 Block.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 11
+          },
+          {
+            "op": "block",
+            "amount": 8
+          }
+        ]
+      }
+    },
+    {
+      "id": "swipe",
+      "name": "Swipe",
+      "icon": "ability_druid_swipe",
+      "spellId": 779,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "feral",
+      "cost": 1,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Deal 8 damage to ALL enemies.",
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 8,
+          "target": "all_enemies"
+        }
+      ],
+      "upgrade": {
+        "name": "Swipe (Rank 2)",
+        "cost": 1,
+        "text": "Deal 11 damage to ALL enemies.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 11,
+            "target": "all_enemies"
+          }
+        ]
+      }
+    },
+    {
+      "id": "growl",
+      "name": "Growl",
+      "icon": "ability_physical_taunt",
+      "spellId": 6795,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "feral",
+      "cost": 0,
+      "target": "enemy",
+      "flags": [],
+      "text": "Bear Form only. Taunt: the enemy attacks you. Gain 5 Block.",
+      "requires": {
+        "type": "form_is",
+        "value": "bear"
+      },
+      "effects": [
+        {
+          "op": "taunt"
+        },
+        {
+          "op": "block",
+          "amount": 5
+        }
+      ],
+      "upgrade": {
+        "name": "Growl (Rank 2)",
+        "cost": 0,
+        "text": "Bear Form only. Taunt: the enemy attacks you. Gain 8 Block.",
+        "effects": [
+          {
+            "op": "taunt"
+          },
+          {
+            "op": "block",
+            "amount": 8
+          }
+        ]
+      }
+    },
+    {
+      "id": "demoralizing-roar",
+      "name": "Demoralizing Roar",
+      "icon": "ability_druid_demoralizingroar",
+      "spellId": 99,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "feral",
+      "cost": 1,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Bear Form only. Apply Weak 2 to ALL enemies.",
+      "requires": {
+        "type": "form_is",
+        "value": "bear"
+      },
+      "effects": [
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 2,
+          "target": "all_enemies"
+        }
+      ],
+      "upgrade": {
+        "name": "Demoralizing Roar (Rank 2)",
+        "cost": 1,
+        "text": "Bear Form only. Apply Weak 3 to ALL enemies. Gain 4 Block.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 3,
+            "target": "all_enemies"
+          },
+          {
+            "op": "block",
+            "amount": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "rake",
+      "name": "Rake",
+      "icon": "ability_druid_rake",
+      "spellId": 1822,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "feral",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Cat Form only. Deal 3 damage. Apply Bleed 5. Gain 1 Combo Point.",
+      "requires": {
+        "type": "form_is",
+        "value": "cat"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 3
+        },
+        {
+          "op": "apply",
+          "status": "bleed",
+          "stacks": 5,
+          "target": "enemy"
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Rake (Rank 2)",
+        "cost": 1,
+        "text": "Cat Form only. Deal 5 damage. Apply Bleed 8. Gain 1 Combo Point.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 5
+          },
+          {
+            "op": "apply",
+            "status": "bleed",
+            "stacks": 8,
+            "target": "enemy"
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "shred",
+      "name": "Shred",
+      "icon": "spell_shadow_vampiricaura",
+      "spellId": 5221,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "feral",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Cat Form only. Deal 9 damage, +5 if Bleeding. Gain 1 Combo Point.",
+      "requires": {
+        "type": "form_is",
+        "value": "cat"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 9
+        },
+        {
+          "op": "conditional",
+          "if": {
+            "type": "status_on_target",
+            "status": "bleed"
+          },
+          "then": [
+            {
+              "op": "damage",
+              "amount": 5
+            }
+          ]
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Shred (Rank 2)",
+        "cost": 1,
+        "text": "Cat Form only. Deal 12 damage, +7 if Bleeding. Gain 1 Combo Point.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 12
+          },
+          {
+            "op": "conditional",
+            "if": {
+              "type": "status_on_target",
+              "status": "bleed"
+            },
+            "then": [
+              {
+                "op": "damage",
+                "amount": 7
+              }
+            ]
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "mark-of-the-wild",
+      "name": "Mark of the Wild",
+      "icon": "spell_nature_regeneration",
+      "spellId": 1126,
+      "rank": 1,
+      "type": "power",
+      "rarity": "common",
+      "archetype": "restoration",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain Strength 1 and Dexterity 1 this combat.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "apply",
+          "status": "strength",
+          "stacks": 1,
+          "target": "self"
+        },
+        {
+          "op": "apply",
+          "status": "dexterity",
+          "stacks": 1,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Mark of the Wild (Rank 2)",
+        "cost": 1,
+        "text": "Gain Strength 2 and Dexterity 2 this combat.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "strength",
+            "stacks": 2,
+            "target": "self"
+          },
+          {
+            "op": "apply",
+            "status": "dexterity",
+            "stacks": 2,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rejuvenation",
+      "name": "Rejuvenation",
+      "icon": "spell_nature_rejuvenation",
+      "spellId": 774,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "restoration",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain Regen 4: heal 2 HP at the end of each turn for 4 turns.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "apply",
+          "status": "regen",
+          "stacks": 4,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Rejuvenation (Rank 2)",
+        "cost": 1,
+        "text": "Gain Regen 6: heal 2 HP at the end of each turn for 6 turns.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "regen",
+            "stacks": 6,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "regrowth",
+      "name": "Regrowth",
+      "icon": "spell_nature_resistnature",
+      "spellId": 8936,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "restoration",
+      "cost": 2,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Heal 6 HP now and gain Regen 3. Exhaust.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "heal",
+          "amount": 6
+        },
+        {
+          "op": "apply",
+          "status": "regen",
+          "stacks": 3,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Regrowth (Rank 2)",
+        "cost": 2,
+        "text": "Heal 10 HP now and gain Regen 5. Exhaust.",
+        "effects": [
+          {
+            "op": "heal",
+            "amount": 10
+          },
+          {
+            "op": "apply",
+            "status": "regen",
+            "stacks": 5,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "remove-curse",
+      "name": "Remove Curse",
+      "icon": "spell_holy_removecurse",
+      "spellId": 2782,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "restoration",
+      "cost": 0,
+      "target": "self",
+      "flags": [],
+      "text": "Remove Curse and Weak from you. Draw 1 card.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "remove",
+          "status": "curse",
+          "target": "self"
+        },
+        {
+          "op": "remove",
+          "status": "weak",
+          "target": "self"
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Remove Curse (Rank 2)",
+        "cost": 0,
+        "text": "Remove Curse and Weak from you. Heal 3 HP. Draw 1 card.",
+        "effects": [
+          {
+            "op": "remove",
+            "status": "curse",
+            "target": "self"
+          },
+          {
+            "op": "remove",
+            "status": "weak",
+            "target": "self"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          },
+          {
+            "op": "heal",
+            "amount": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "abolish-poison",
+      "name": "Abolish Poison",
+      "icon": "spell_nature_nullifypoison_02",
+      "spellId": 2893,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "restoration",
+      "cost": 0,
+      "target": "self",
+      "flags": [],
+      "text": "Remove Poison from you and gain Regen 2.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "remove",
+          "status": "poison",
+          "target": "self"
+        },
+        {
+          "op": "apply",
+          "status": "regen",
+          "stacks": 2,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Abolish Poison (Rank 2)",
+        "cost": 0,
+        "text": "Remove Poison from you and gain Regen 4.",
+        "effects": [
+          {
+            "op": "remove",
+            "status": "poison",
+            "target": "self"
+          },
+          {
+            "op": "apply",
+            "status": "regen",
+            "stacks": 4,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cure-poison",
+      "name": "Cure Poison",
+      "icon": "spell_nature_nullifypoison",
+      "spellId": 8946,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "restoration",
+      "cost": 0,
+      "target": "self",
+      "flags": [],
+      "text": "Remove Poison from you. Heal 3 HP.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "remove",
+          "status": "poison",
+          "target": "self"
+        },
+        {
+          "op": "heal",
+          "amount": 3
+        }
+      ],
+      "upgrade": {
+        "name": "Cure Poison (Rank 2)",
+        "cost": 0,
+        "text": "Remove Poison from you. Heal 6 HP.",
+        "effects": [
+          {
+            "op": "remove",
+            "status": "poison",
+            "target": "self"
+          },
+          {
+            "op": "heal",
+            "amount": 6
+          }
+        ]
+      }
+    },
+    {
+      "id": "starfire",
+      "name": "Starfire",
+      "icon": "spell_arcane_starfire",
+      "spellId": 2912,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "balance",
+      "cost": 2,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 18 arcane damage.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 18,
+          "school": "arcane"
+        }
+      ],
+      "upgrade": {
+        "name": "Starfire (Rank 2)",
+        "cost": 2,
+        "text": "Deal 24 arcane damage.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 24,
+            "school": "arcane"
+          }
+        ]
+      }
+    },
+    {
+      "id": "thorns",
+      "name": "Thorns",
+      "icon": "spell_nature_thorns",
+      "spellId": 467,
+      "rank": 1,
+      "type": "power",
+      "rarity": "uncommon",
+      "archetype": "balance",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain Thorns 3 this combat.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "apply",
+          "status": "thorns",
+          "stacks": 3,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Thorns (Rank 2)",
+        "cost": 1,
+        "text": "Gain Thorns 5 this combat.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "thorns",
+            "stacks": 5,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hibernate",
+      "name": "Hibernate",
+      "icon": "spell_nature_sleep",
+      "spellId": 2637,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "balance",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Beast or Dragonkin: apply Sleep 3. Other targets: Weak 1.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "conditional",
+          "if": {
+            "type": "target_is_family",
+            "value": [
+              "beast",
+              "dragonkin"
+            ]
+          },
+          "then": [
+            {
+              "op": "apply",
+              "status": "sleep",
+              "stacks": 3,
+              "target": "enemy"
+            }
+          ],
+          "else": [
+            {
+              "op": "apply",
+              "status": "weak",
+              "stacks": 1,
+              "target": "enemy"
+            }
+          ]
+        }
+      ],
+      "upgrade": {
+        "name": "Hibernate (Rank 2)",
+        "cost": 1,
+        "text": "Beast or Dragonkin: Sleep 4. Other targets: Weak 2.",
+        "effects": [
+          {
+            "op": "conditional",
+            "if": {
+              "type": "target_is_family",
+              "value": [
+                "beast",
+                "dragonkin"
+              ]
+            },
+            "then": [
+              {
+                "op": "apply",
+                "status": "sleep",
+                "stacks": 4,
+                "target": "enemy"
+              }
+            ],
+            "else": [
+              {
+                "op": "apply",
+                "status": "weak",
+                "stacks": 2,
+                "target": "enemy"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "soothe-animal",
+      "name": "Soothe Animal",
+      "icon": "ability_hunter_beastsoothe",
+      "spellId": 2908,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "balance",
+      "cost": 0,
+      "target": "enemy",
+      "flags": [],
+      "text": "Remove Enrage and Strength from the enemy. Beast: also Weak 2.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "remove",
+          "status": "enrage",
+          "target": "enemy"
+        },
+        {
+          "op": "remove",
+          "status": "strength",
+          "target": "enemy"
+        },
+        {
+          "op": "conditional",
+          "if": {
+            "type": "target_is_family",
+            "value": "beast"
+          },
+          "then": [
+            {
+              "op": "apply",
+              "status": "weak",
+              "stacks": 2,
+              "target": "enemy"
+            }
+          ]
+        }
+      ],
+      "upgrade": {
+        "name": "Soothe Animal (Rank 2)",
+        "cost": 0,
+        "text": "Remove Enrage and Strength. Beast: Weak 3. Draw 1 card.",
+        "effects": [
+          {
+            "op": "remove",
+            "status": "enrage",
+            "target": "enemy"
+          },
+          {
+            "op": "remove",
+            "status": "strength",
+            "target": "enemy"
+          },
+          {
+            "op": "conditional",
+            "if": {
+              "type": "target_is_family",
+              "value": "beast"
+            },
+            "then": [
+              {
+                "op": "apply",
+                "status": "weak",
+                "stacks": 3,
+                "target": "enemy"
+              }
+            ]
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "bash",
+      "name": "Bash",
+      "icon": "ability_druid_bash",
+      "spellId": 5211,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "feral",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Bear Form only. Deal 5 damage. Apply Stun 1.",
+      "requires": {
+        "type": "form_is",
+        "value": "bear"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 5
+        },
+        {
+          "op": "apply",
+          "status": "stun",
+          "stacks": 1,
+          "target": "enemy"
+        }
+      ],
+      "upgrade": {
+        "name": "Bash (Rank 2)",
+        "cost": 1,
+        "text": "Bear Form only. Deal 8 damage. Apply Stun 1.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 8
+          },
+          {
+            "op": "apply",
+            "status": "stun",
+            "stacks": 1,
+            "target": "enemy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "enrage",
+      "name": "Enrage",
+      "icon": "ability_druid_enrage",
+      "spellId": 5229,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "feral",
+      "cost": 0,
+      "target": "self",
+      "flags": [],
+      "text": "Bear Form only. Lose 2 HP, gain Rage-fuelled Strength 2 and 1 Energy.",
+      "requires": {
+        "type": "form_is",
+        "value": "bear"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 2,
+          "target": "self"
+        },
+        {
+          "op": "apply",
+          "status": "strength",
+          "stacks": 2,
+          "target": "self"
+        },
+        {
+          "op": "gain_energy",
+          "amount": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Enrage (Rank 2)",
+        "cost": 0,
+        "text": "Bear Form only. Lose 2 HP, gain Strength 3 and 2 Energy.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 2,
+            "target": "self"
+          },
+          {
+            "op": "apply",
+            "status": "strength",
+            "stacks": 3,
+            "target": "self"
+          },
+          {
+            "op": "gain_energy",
+            "amount": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "frenzied-regeneration",
+      "name": "Frenzied Regeneration",
+      "icon": "ability_bullrush",
+      "spellId": 22842,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "feral",
+      "cost": 1,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Bear Form only. Heal 10 HP and gain 5 Block. Exhaust.",
+      "requires": {
+        "type": "form_is",
+        "value": "bear"
+      },
+      "effects": [
+        {
+          "op": "heal",
+          "amount": 10
+        },
+        {
+          "op": "block",
+          "amount": 5
+        }
+      ],
+      "upgrade": {
+        "name": "Frenzied Regeneration (Rank 2)",
+        "cost": 1,
+        "text": "Bear Form only. Heal 14 HP and gain 8 Block. Exhaust.",
+        "effects": [
+          {
+            "op": "heal",
+            "amount": 14
+          },
+          {
+            "op": "block",
+            "amount": 8
+          }
+        ]
+      }
+    },
+    {
+      "id": "feral-charge",
+      "name": "Feral Charge",
+      "icon": "ability_hunter_pet_bear",
+      "spellId": 16979,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "feral",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Bear Form only. Deal 7 damage, interrupt the enemy cast, apply Weak 1.",
+      "requires": {
+        "type": "form_is",
+        "value": "bear"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 7
+        },
+        {
+          "op": "cast_interrupt"
+        },
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 1,
+          "target": "enemy"
+        }
+      ],
+      "upgrade": {
+        "name": "Feral Charge (Rank 2)",
+        "cost": 1,
+        "text": "Bear Form only. Deal 10 damage, interrupt the cast, apply Weak 2.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 10
+          },
+          {
+            "op": "cast_interrupt"
+          },
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 2,
+            "target": "enemy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dire-bear-form",
+      "name": "Dire Bear Form",
+      "icon": "ability_racial_bearform",
+      "spellId": 9634,
+      "rank": 1,
+      "type": "form",
+      "rarity": "uncommon",
+      "archetype": "feral",
+      "cost": 2,
+      "target": "self",
+      "flags": [],
+      "text": "Enter Bear Form (Dire): Bear cards usable. Gain 14 Block, Thorns 2 and +10 max HP this combat.",
+      "effects": [
+        {
+          "op": "set_form",
+          "value": "bear"
+        },
+        {
+          "op": "block",
+          "amount": 14
+        },
+        {
+          "op": "apply",
+          "status": "thorns",
+          "stacks": 2,
+          "target": "self"
+        },
+        {
+          "op": "max_hp",
+          "amount": 10
+        }
+      ],
+      "upgrade": {
+        "name": "Dire Bear Form (Rank 2)",
+        "cost": 2,
+        "text": "Enter Bear Form (Dire). Gain 18 Block, Thorns 3, +15 max HP this combat.",
+        "effects": [
+          {
+            "op": "set_form",
+            "value": "bear"
+          },
+          {
+            "op": "block",
+            "amount": 18
+          },
+          {
+            "op": "apply",
+            "status": "thorns",
+            "stacks": 3,
+            "target": "self"
+          },
+          {
+            "op": "max_hp",
+            "amount": 15
+          }
+        ]
+      }
+    },
+    {
+      "id": "ravage",
+      "name": "Ravage",
+      "icon": "ability_druid_ravage",
+      "spellId": 6785,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "feral",
+      "cost": 2,
+      "target": "enemy",
+      "flags": [],
+      "text": "Cat Form only. Needs Stealth. Deal 22 damage, +8 if stunned. Gain 2 Combo Points.",
+      "requires": {
+        "type": "form_is",
+        "value": "cat"
+      },
+      "effects": [
+        {
+          "op": "conditional",
+          "if": {
+            "type": "status_on_target",
+            "status": "stealth",
+            "target": "self"
+          },
+          "then": [
+            {
+              "op": "damage",
+              "amount": 22
+            },
+            {
+              "op": "conditional",
+              "if": {
+                "type": "status_on_target",
+                "status": "stun"
+              },
+              "then": [
+                {
+                  "op": "damage",
+                  "amount": 8
+                }
+              ]
+            },
+            {
+              "op": "gain_resource",
+              "resource": "combo",
+              "amount": 2
+            }
+          ],
+          "else": [
+            {
+              "op": "damage",
+              "amount": 10
+            },
+            {
+              "op": "gain_resource",
+              "resource": "combo",
+              "amount": 1
+            }
+          ]
+        }
+      ],
+      "upgrade": {
+        "name": "Ravage (Rank 2)",
+        "cost": 2,
+        "text": "Cat Form only. From Stealth: 30 damage, +10 if stunned, 2 Combo. Otherwise 14, 1 Combo.",
+        "effects": [
+          {
+            "op": "conditional",
+            "if": {
+              "type": "status_on_target",
+              "status": "stealth",
+              "target": "self"
+            },
+            "then": [
+              {
+                "op": "damage",
+                "amount": 30
+              },
+              {
+                "op": "conditional",
+                "if": {
+                  "type": "status_on_target",
+                  "status": "stun"
+                },
+                "then": [
+                  {
+                    "op": "damage",
+                    "amount": 10
+                  }
+                ]
+              },
+              {
+                "op": "gain_resource",
+                "resource": "combo",
+                "amount": 2
+              }
+            ],
+            "else": [
+              {
+                "op": "damage",
+                "amount": 14
+              },
+              {
+                "op": "gain_resource",
+                "resource": "combo",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "pounce",
+      "name": "Pounce",
+      "icon": "ability_druid_supriseattack",
+      "spellId": 9005,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "feral",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Cat Form only. Deal 6 damage. Apply Stun 1 and Bleed 6. Gain 1 Combo Point.",
+      "requires": {
+        "type": "form_is",
+        "value": "cat"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 6
+        },
+        {
+          "op": "apply",
+          "status": "stun",
+          "stacks": 1,
+          "target": "enemy"
+        },
+        {
+          "op": "apply",
+          "status": "bleed",
+          "stacks": 6,
+          "target": "enemy"
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Pounce (Rank 2)",
+        "cost": 1,
+        "text": "Cat Form only. Deal 9 damage. Stun 1, Bleed 9. Gain 1 Combo Point.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 9
+          },
+          {
+            "op": "apply",
+            "status": "stun",
+            "stacks": 1,
+            "target": "enemy"
+          },
+          {
+            "op": "apply",
+            "status": "bleed",
+            "stacks": 9,
+            "target": "enemy"
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "prowl",
+      "name": "Prowl",
+      "icon": "ability_ambush",
+      "spellId": 5215,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "feral",
+      "cost": 0,
+      "target": "self",
+      "flags": [],
+      "text": "Cat Form only. Gain Stealth 1 and draw 1 card.",
+      "requires": {
+        "type": "form_is",
+        "value": "cat"
+      },
+      "effects": [
+        {
+          "op": "apply",
+          "status": "stealth",
+          "stacks": 1,
+          "target": "self"
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Prowl (Rank 2)",
+        "cost": 0,
+        "text": "Cat Form only. Gain Stealth 1, draw 1 card, gain 1 Combo Point.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "stealth",
+            "stacks": 1,
+            "target": "self"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "dash",
+      "name": "Dash",
+      "icon": "ability_druid_dash",
+      "spellId": 1850,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "feral",
+      "cost": 0,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Cat Form only. Gain 1 Energy and 4 Block. Exhaust.",
+      "requires": {
+        "type": "form_is",
+        "value": "cat"
+      },
+      "effects": [
+        {
+          "op": "gain_energy",
+          "amount": 1
+        },
+        {
+          "op": "block",
+          "amount": 4
+        }
+      ],
+      "upgrade": {
+        "name": "Dash (Rank 2)",
+        "cost": 0,
+        "text": "Cat Form only. Gain 2 Energy and 6 Block. Exhaust.",
+        "effects": [
+          {
+            "op": "gain_energy",
+            "amount": 2
+          },
+          {
+            "op": "block",
+            "amount": 6
+          }
+        ]
+      }
+    },
+    {
+      "id": "gift-of-the-wild",
+      "name": "Gift of the Wild",
+      "icon": "spell_nature_giftofthewild",
+      "spellId": 21849,
+      "rank": 1,
+      "type": "power",
+      "rarity": "uncommon",
+      "archetype": "restoration",
+      "cost": 2,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Gain Strength 2, Dexterity 2 and 10 max HP this combat. Exhaust.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "apply",
+          "status": "strength",
+          "stacks": 2,
+          "target": "self"
+        },
+        {
+          "op": "apply",
+          "status": "dexterity",
+          "stacks": 2,
+          "target": "self"
+        },
+        {
+          "op": "max_hp",
+          "amount": 10
+        }
+      ],
+      "upgrade": {
+        "name": "Gift of the Wild (Rank 2)",
+        "cost": 2,
+        "text": "Gain Strength 3, Dexterity 3 and 15 max HP this combat. Exhaust.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "strength",
+            "stacks": 3,
+            "target": "self"
+          },
+          {
+            "op": "apply",
+            "status": "dexterity",
+            "stacks": 3,
+            "target": "self"
+          },
+          {
+            "op": "max_hp",
+            "amount": 15
+          }
+        ]
+      }
+    },
+    {
+      "id": "moonkin-form",
+      "name": "Moonkin Form",
+      "icon": "spell_nature_forceofnature",
+      "spellId": 24858,
+      "rank": 1,
+      "type": "form",
+      "rarity": "rare",
+      "archetype": "balance",
+      "cost": 2,
+      "target": "self",
+      "flags": [],
+      "text": "Enter Moonkin Form: your Balance spells deal +3 damage. Gain 8 Block and draw 1.",
+      "effects": [
+        {
+          "op": "set_form",
+          "value": "moonkin"
+        },
+        {
+          "op": "block",
+          "amount": 8
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Moonkin Form (Rank 2)",
+        "cost": 2,
+        "text": "Enter Moonkin Form: Balance spells deal +4 damage. Gain 12 Block, draw 2.",
+        "effects": [
+          {
+            "op": "set_form",
+            "value": "moonkin"
+          },
+          {
+            "op": "block",
+            "amount": 12
+          },
+          {
+            "op": "draw",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "hurricane",
+      "name": "Hurricane",
+      "icon": "spell_nature_earthquake",
+      "spellId": 16914,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "rare",
+      "archetype": "balance",
+      "cost": 3,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Deal 7 nature damage to ALL enemies 3 times and apply Weak 1.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 7,
+          "school": "nature",
+          "target": "all_enemies",
+          "times": 3
+        },
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 1,
+          "target": "all_enemies"
+        }
+      ],
+      "upgrade": {
+        "name": "Hurricane (Rank 2)",
+        "cost": 3,
+        "text": "Deal 9 nature damage to ALL enemies 3 times and apply Weak 2.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 9,
+            "school": "nature",
+            "target": "all_enemies",
+            "times": 3
+          },
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 2,
+            "target": "all_enemies"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rip",
+      "name": "Rip",
+      "icon": "ability_ghoulfrenzy",
+      "spellId": 1079,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "rare",
+      "archetype": "feral",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Finisher: spend all Combo; apply Bleed 6 per Combo Point (+6).",
+      "effects": [
+        {
+          "op": "apply",
+          "status": "bleed",
+          "stacks": {
+            "base": 6,
+            "scale": "combo",
+            "per": 6
+          },
+          "target": "enemy"
+        },
+        {
+          "op": "spend_resource",
+          "resource": "combo",
+          "amount": "all"
+        }
+      ],
+      "upgrade": {
+        "name": "Rip (Rank 2)",
+        "cost": 1,
+        "text": "Finisher: spend all Combo; apply Bleed 9 per Combo Point (+9).",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "bleed",
+            "stacks": {
+              "base": 9,
+              "scale": "combo",
+              "per": 9
+            },
+            "target": "enemy"
+          },
+          {
+            "op": "spend_resource",
+            "resource": "combo",
+            "amount": "all"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ferocious-bite",
+      "name": "Ferocious Bite",
+      "icon": "ability_druid_ferociousbite",
+      "spellId": 22568,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "rare",
+      "archetype": "feral",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Finisher: spend all Combo; deal 8 damage per Combo Point (+8).",
+      "effects": [
+        {
+          "op": "damage",
+          "amount": {
+            "base": 8,
+            "scale": "combo",
+            "per": 8
+          }
+        },
+        {
+          "op": "spend_resource",
+          "resource": "combo",
+          "amount": "all"
+        }
+      ],
+      "upgrade": {
+        "name": "Ferocious Bite (Rank 2)",
+        "cost": 1,
+        "text": "Finisher: spend all Combo; deal 11 damage per Combo Point (+11).",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": {
+              "base": 11,
+              "scale": "combo",
+              "per": 11
+            }
+          },
+          {
+            "op": "spend_resource",
+            "resource": "combo",
+            "amount": "all"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tigers-fury",
+      "name": "Tiger's Fury",
+      "icon": "ability_mount_jungletiger",
+      "spellId": 5217,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "feral",
+      "cost": 0,
+      "target": "self",
+      "flags": [],
+      "text": "Cat Form only. Lose 3 HP: your attacks deal +4 damage this turn. Gain 1 Combo Point.",
+      "requires": {
+        "type": "form_is",
+        "value": "cat"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "amount": 3,
+          "target": "self"
+        },
+        {
+          "op": "apply",
+          "status": "strength",
+          "stacks": 4,
+          "target": "self",
+          "duration": 1
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Tiger's Fury (Rank 2)",
+        "cost": 0,
+        "text": "Cat Form only. Lose 3 HP: attacks deal +6 damage this turn. Gain 1 Combo Point.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 3,
+            "target": "self"
+          },
+          {
+            "op": "apply",
+            "status": "strength",
+            "stacks": 6,
+            "target": "self",
+            "duration": 1
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "swiftmend",
+      "name": "Swiftmend",
+      "icon": "inv_relics_idolofrejuvenation",
+      "spellId": 18562,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "restoration",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Consume your Regen: heal 3 HP per stack of Regen at once.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "heal",
+          "amount": {
+            "base": 0,
+            "scale": "regen",
+            "per": 3
+          }
+        },
+        {
+          "op": "remove",
+          "status": "regen",
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Swiftmend (Rank 2)",
+        "cost": 1,
+        "text": "Consume your Regen: heal 4 HP per stack at once, +4.",
+        "effects": [
+          {
+            "op": "heal",
+            "amount": {
+              "base": 4,
+              "scale": "regen",
+              "per": 4
+            }
+          },
+          {
+            "op": "remove",
+            "status": "regen",
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "innervate",
+      "name": "Innervate",
+      "icon": "spell_nature_lightning",
+      "spellId": 29166,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "restoration",
+      "cost": 0,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Gain 2 Energy and draw 1 card. Exhaust.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "gain_energy",
+          "amount": 2
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Innervate (Rank 2)",
+        "cost": 0,
+        "text": "Gain 3 Energy and draw 2 cards. Exhaust.",
+        "effects": [
+          {
+            "op": "gain_energy",
+            "amount": 3
+          },
+          {
+            "op": "draw",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "natures-swiftness",
+      "name": "Nature's Swiftness",
+      "icon": "spell_nature_ravenform",
+      "spellId": 17116,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "restoration",
+      "cost": 0,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Your next spell costs 0. Draw 1 card. Exhaust.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "apply",
+          "status": "free_cast",
+          "stacks": 1,
+          "target": "self"
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
+      ],
+      "upgrade": {
+        "name": "Nature's Swiftness (Rank 2)",
+        "cost": 0,
+        "text": "Your next spell costs 0. Draw 2 cards. Exhaust.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "free_cast",
+            "stacks": 1,
+            "target": "self"
+          },
+          {
+            "op": "draw",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "barkskin",
+      "name": "Barkskin",
+      "icon": "spell_nature_stoneclawtotem",
+      "spellId": 22812,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "restoration",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 14 Block and Thorns 2. Retain Block next turn.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "block",
+          "amount": 14
+        },
+        {
+          "op": "apply",
+          "status": "thorns",
+          "stacks": 2,
+          "target": "self"
+        },
+        {
+          "op": "apply",
+          "status": "retain_block",
+          "stacks": 1,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Barkskin (Rank 2)",
+        "cost": 1,
+        "text": "Gain 18 Block and Thorns 3. Retain Block next turn.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 18
+          },
+          {
+            "op": "apply",
+            "status": "thorns",
+            "stacks": 3,
+            "target": "self"
+          },
+          {
+            "op": "apply",
+            "status": "retain_block",
+            "stacks": 1,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tranquility",
+      "name": "Tranquility",
+      "icon": "spell_nature_tranquility",
+      "spellId": 740,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "epic",
+      "archetype": "restoration",
+      "cost": 3,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Gain Regen 8 and take 25% less damage for 4 turns. Exhaust.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "apply",
+          "status": "regen",
+          "stacks": 8,
+          "target": "self"
+        },
+        {
+          "op": "apply",
+          "status": "armor",
+          "stacks": 4,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Tranquility (Rank 2)",
+        "cost": 2,
+        "text": "Gain Regen 12 and take 25% less damage for 5 turns. Exhaust.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "regen",
+            "stacks": 12,
+            "target": "self"
+          },
+          {
+            "op": "apply",
+            "status": "armor",
+            "stacks": 5,
+            "target": "self"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rebirth",
+      "name": "Rebirth",
+      "icon": "spell_nature_reincarnation",
+      "spellId": 20484,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "epic",
+      "archetype": "restoration",
+      "cost": 2,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Gain Reincarnation: if you fall to 0 HP this combat, return at 30% HP once. Exhaust.",
+      "breaksForm": true,
+      "effects": [
+        {
+          "op": "apply",
+          "status": "reincarnation",
+          "stacks": 1,
+          "target": "self"
+        }
+      ],
+      "upgrade": {
+        "name": "Rebirth (Rank 2)",
+        "cost": 1,
+        "text": "Gain Reincarnation: if you fall to 0 HP, return at 30% HP once. Heal 8 HP now. Exhaust.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "reincarnation",
+            "stacks": 1,
+            "target": "self"
+          },
+          {
+            "op": "heal",
+            "amount": 8
+          }
+        ]
+      }
+    }
+  ]
+}

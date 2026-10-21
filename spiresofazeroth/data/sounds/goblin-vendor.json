@@ -1,0 +1,192 @@
+{
+ "version": 1,
+ "vendor": "goblinvendorm",
+ "source": "kits.sqlite sound/creature/goblinvendorm/vo_goblinvenm_*",
+ "note": "classic goblin male vendor VO (greeting/farewell/pissed); played by js/ui/shopVendor.js",
+ "greeting": [
+  {
+   "fdid": 550889,
+   "url": "/media/sounds/550889.mp3",
+   "name": "vo_goblinvenm_greeting01",
+   "ms": 1255
+  },
+  {
+   "fdid": 550902,
+   "url": "/media/sounds/550902.mp3",
+   "name": "vo_goblinvenm_greeting02",
+   "ms": 1461
+  },
+  {
+   "fdid": 550871,
+   "url": "/media/sounds/550871.mp3",
+   "name": "vo_goblinvenm_greeting03",
+   "ms": 1966
+  },
+  {
+   "fdid": 550908,
+   "url": "/media/sounds/550908.mp3",
+   "name": "vo_goblinvenm_greeting04",
+   "ms": 1426
+  },
+  {
+   "fdid": 550894,
+   "url": "/media/sounds/550894.mp3",
+   "name": "vo_goblinvenm_greeting05",
+   "ms": 2030
+  },
+  {
+   "fdid": 550893,
+   "url": "/media/sounds/550893.mp3",
+   "name": "vo_goblinvenm_greeting06",
+   "ms": 1160
+  },
+  {
+   "fdid": 550898,
+   "url": "/media/sounds/550898.mp3",
+   "name": "vo_goblinvenm_greeting07",
+   "ms": 1900
+  },
+  {
+   "fdid": 550895,
+   "url": "/media/sounds/550895.mp3",
+   "name": "vo_goblinvenm_greeting08",
+   "ms": 1671
+  },
+  {
+   "fdid": 550886,
+   "url": "/media/sounds/550886.mp3",
+   "name": "vo_goblinvenm_greeting09",
+   "ms": 1766
+  },
+  {
+   "fdid": 550882,
+   "url": "/media/sounds/550882.mp3",
+   "name": "vo_goblinvenm_greeting10",
+   "ms": 1368
+  }
+ ],
+ "farewell": [
+  {
+   "fdid": 550881,
+   "url": "/media/sounds/550881.mp3",
+   "name": "vo_goblinvenm_farewell01",
+   "ms": 2784
+  },
+  {
+   "fdid": 550890,
+   "url": "/media/sounds/550890.mp3",
+   "name": "vo_goblinvenm_farewell02",
+   "ms": 2440
+  },
+  {
+   "fdid": 550897,
+   "url": "/media/sounds/550897.mp3",
+   "name": "vo_goblinvenm_farewell03",
+   "ms": 1452
+  },
+  {
+   "fdid": 550875,
+   "url": "/media/sounds/550875.mp3",
+   "name": "vo_goblinvenm_farewell04",
+   "ms": 2874
+  },
+  {
+   "fdid": 550907,
+   "url": "/media/sounds/550907.mp3",
+   "name": "vo_goblinvenm_farewell05",
+   "ms": 1667
+  },
+  {
+   "fdid": 550884,
+   "url": "/media/sounds/550884.mp3",
+   "name": "vo_goblinvenm_farewell06",
+   "ms": 2035
+  },
+  {
+   "fdid": 550876,
+   "url": "/media/sounds/550876.mp3",
+   "name": "vo_goblinvenm_farewell07",
+   "ms": 2143
+  },
+  {
+   "fdid": 550899,
+   "url": "/media/sounds/550899.mp3",
+   "name": "vo_goblinvenm_farewell08",
+   "ms": 951
+  },
+  {
+   "fdid": 550891,
+   "url": "/media/sounds/550891.mp3",
+   "name": "vo_goblinvenm_farewell09",
+   "ms": 1762
+  },
+  {
+   "fdid": 550885,
+   "url": "/media/sounds/550885.mp3",
+   "name": "vo_goblinvenm_farewell10",
+   "ms": 1540
+  }
+ ],
+ "pissed": [
+  {
+   "fdid": 550883,
+   "url": "/media/sounds/550883.mp3",
+   "name": "vo_goblinvenm_pissed01",
+   "ms": 1762
+  },
+  {
+   "fdid": 550896,
+   "url": "/media/sounds/550896.mp3",
+   "name": "vo_goblinvenm_pissed02",
+   "ms": 1324
+  },
+  {
+   "fdid": 550892,
+   "url": "/media/sounds/550892.mp3",
+   "name": "vo_goblinvenm_pissed03",
+   "ms": 2678
+  },
+  {
+   "fdid": 550888,
+   "url": "/media/sounds/550888.mp3",
+   "name": "vo_goblinvenm_pissed04",
+   "ms": 1956
+  },
+  {
+   "fdid": 550887,
+   "url": "/media/sounds/550887.mp3",
+   "name": "vo_goblinvenm_pissed05",
+   "ms": 1135
+  },
+  {
+   "fdid": 550873,
+   "url": "/media/sounds/550873.mp3",
+   "name": "vo_goblinvenm_pissed06",
+   "ms": 1192
+  },
+  {
+   "fdid": 550903,
+   "url": "/media/sounds/550903.mp3",
+   "name": "vo_goblinvenm_pissed07",
+   "ms": 3665
+  },
+  {
+   "fdid": 550905,
+   "url": "/media/sounds/550905.mp3",
+   "name": "vo_goblinvenm_pissed08",
+   "ms": 2510
+  },
+  {
+   "fdid": 550874,
+   "url": "/media/sounds/550874.mp3",
+   "name": "vo_goblinvenm_pissed09",
+   "ms": 2529
+  },
+  {
+   "fdid": 550877,
+   "url": "/media/sounds/550877.mp3",
+   "name": "vo_goblinvenm_pissed10",
+   "ms": 1592
+  }
+ ]
+}

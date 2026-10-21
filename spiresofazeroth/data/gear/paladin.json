@@ -1,0 +1,329 @@
+{
+ "class": "paladin",
+ "set": {
+  "id": "lawbringer-armor",
+  "name": "Lawbringer Armor",
+  "icon": "inv_helmet_05",
+  "bonuses": [
+   {
+    "pieces": 2,
+    "name": "Blessing of Kings",
+    "text": "Start each combat: gain 4 Block.",
+    "triggers": {
+     "on_combat_start": [
+      {
+       "op": "block",
+       "amount": 4,
+       "target": "self"
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 4,
+    "name": "Sanctified Strikes",
+    "text": "When you attack: 20% chance to deal 3 Holy damage.",
+    "triggers": {
+     "on_attack": [
+      {
+       "op": "conditional",
+       "if": {
+        "type": "chance",
+        "pct": 20
+       },
+       "then": [
+        {
+         "op": "damage",
+         "amount": 3,
+         "target": "enemy",
+         "school": "holy"
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 6,
+    "name": "Divine Favor",
+    "text": "At the start of each turn: heal 1 and gain 1 Block.",
+    "triggers": {
+     "on_turn_start": [
+      {
+       "op": "heal",
+       "amount": 1
+      },
+      {
+       "op": "block",
+       "amount": 1,
+       "target": "self"
+      }
+     ]
+    }
+   },
+   {
+    "pieces": 8,
+    "name": "Light's Judgement",
+    "text": "Start each combat: gain 1 Strength and gain 2 Thorns.",
+    "triggers": {
+     "on_combat_start": [
+      {
+       "op": "apply",
+       "status": "strength",
+       "stacks": 1,
+       "target": "self"
+      },
+      {
+       "op": "apply",
+       "status": "thorns",
+       "stacks": 2,
+       "target": "self"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "pieces": [
+  {
+   "id": "lawbringer-helm",
+   "name": "Lawbringer Helm",
+   "slot": "head",
+   "set": "lawbringer-armor",
+   "setPiece": 1,
+   "item": 16854,
+   "icon": "inv_helmet_05",
+   "displayId": 31506,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: Seal of Righteousness becomes active.",
+   "class": "paladin",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "set_seal",
+      "value": "righteousness"
+     }
+    ]
+   }
+  },
+  {
+   "id": "lawbringer-spaulders",
+   "name": "Lawbringer Spaulders",
+   "slot": "shoulder",
+   "set": "lawbringer-armor",
+   "setPiece": 2,
+   "item": 16856,
+   "icon": "inv_shoulder_20",
+   "displayId": 31510,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: heal 1.",
+   "class": "paladin",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "heal",
+      "amount": 1
+     }
+    ]
+   }
+  },
+  {
+   "id": "lawbringer-chestguard",
+   "name": "Lawbringer Chestguard",
+   "slot": "chest",
+   "set": "lawbringer-armor",
+   "setPiece": 3,
+   "item": 16853,
+   "icon": "inv_chest_plate03",
+   "displayId": 31505,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 6 Block.",
+   "class": "paladin",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 6,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "lawbringer-bracers",
+   "name": "Lawbringer Bracers",
+   "slot": "wrist",
+   "set": "lawbringer-armor",
+   "setPiece": 4,
+   "item": 16857,
+   "icon": "inv_bracer_18",
+   "displayId": 31509,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Whenever you play a card: 15% chance to gain 2 Block.",
+   "class": "paladin",
+   "triggers": {
+    "on_card_played": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 15
+      },
+      "then": [
+       {
+        "op": "block",
+        "amount": 2,
+        "target": "self"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "lawbringer-gauntlets",
+   "name": "Lawbringer Gauntlets",
+   "slot": "hands",
+   "set": "lawbringer-armor",
+   "setPiece": 5,
+   "item": 16860,
+   "icon": "inv_gauntlets_29",
+   "displayId": 31507,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "When you attack: 20% chance to deal 3 Holy damage.",
+   "class": "paladin",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 20
+      },
+      "then": [
+       {
+        "op": "damage",
+        "amount": 3,
+        "target": "enemy",
+        "school": "holy"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "lawbringer-belt",
+   "name": "Lawbringer Belt",
+   "slot": "waist",
+   "set": "lawbringer-armor",
+   "setPiece": 6,
+   "item": 16858,
+   "icon": "inv_belt_27",
+   "displayId": 31353,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "When you kill an enemy: heal 3.",
+   "class": "paladin",
+   "triggers": {
+    "on_kill": [
+     {
+      "op": "heal",
+      "amount": 3
+     }
+    ]
+   }
+  },
+  {
+   "id": "lawbringer-legplates",
+   "name": "Lawbringer Legplates",
+   "slot": "legs",
+   "set": "lawbringer-armor",
+   "setPiece": 7,
+   "item": 16855,
+   "icon": "inv_pants_04",
+   "displayId": 31352,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "At the start of each turn: 15% chance to gain 1 Energy.",
+   "class": "paladin",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "pct": 15
+      },
+      "then": [
+       {
+        "op": "gain_energy",
+        "amount": 1
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "lawbringer-boots",
+   "name": "Lawbringer Boots",
+   "slot": "feet",
+   "set": "lawbringer-armor",
+   "setPiece": 8,
+   "item": 16859,
+   "icon": "inv_boots_plate_09",
+   "displayId": 31354,
+   "tier": 1,
+   "rarity": "epic",
+   "stats": "Tier 1",
+   "text": "Start each combat: gain 2 Regen.",
+   "class": "paladin",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "regen",
+      "stacks": 2,
+      "target": "self",
+      "duration": 4
+     }
+    ]
+   }
+  }
+ ],
+ "weapon": {
+  "id": "truesilver-champion",
+  "name": "Truesilver Champion",
+  "slot": "mainHand",
+  "setPiece": 0,
+  "item": 7960,
+  "icon": "inv_sword_19",
+  "displayId": 5105,
+  "tier": 1,
+  "rarity": "rare",
+  "stats": "Tier 1 weapon",
+  "text": "At the start of each turn: heal 2.",
+  "class": "paladin",
+  "triggers": {
+   "on_turn_start": [
+    {
+     "op": "heal",
+     "amount": 2
+    }
+   ]
+  }
+ }
+}

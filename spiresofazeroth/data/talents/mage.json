@@ -1,0 +1,458 @@
+{
+ "classId": "mage",
+ "trees": [
+  {
+   "id": "arcane",
+   "name": "Arcane",
+   "icon": "spell_holy_magicalsentry",
+   "talents": [
+    {
+     "id": "mage:arcane:0",
+     "name": "Arcane Subtlety",
+     "icon": "spell_holy_dispelmagic",
+     "tier": 1,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "dex",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:arcane:1",
+     "name": "Arcane Focus",
+     "icon": "spell_holy_devotion",
+     "tier": 1,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:arcane:2",
+     "name": "Improved Arcane Missiles",
+     "icon": "spell_nature_starfall",
+     "tier": 2,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "res",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:arcane:3",
+     "name": "Wand Specialization",
+     "icon": "inv_wand_01",
+     "tier": 2,
+     "col": 1,
+     "max": 2,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:arcane:4",
+     "name": "Magic Absorption",
+     "icon": "spell_nature_astralrecovery",
+     "tier": 3,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "block",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:arcane:5",
+     "name": "Arcane Concentration",
+     "icon": "spell_shadow_manaburn",
+     "tier": 3,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "goldpct",
+      "per": 3
+     }
+    },
+    {
+     "id": "mage:arcane:6",
+     "name": "Magic Attunement",
+     "icon": "spell_nature_abolishmagic",
+     "tier": 4,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "hp",
+      "per": 5
+     }
+    },
+    {
+     "id": "mage:arcane:7",
+     "name": "Improved Arcane Explosion",
+     "icon": "spell_nature_wispsplode",
+     "tier": 4,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "thorns",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:arcane:8",
+     "name": "Arcane Resilience",
+     "icon": "spell_arcane_arcaneresilience",
+     "tier": 5,
+     "col": 0,
+     "max": 1,
+     "effect": {
+      "key": "hp",
+      "per": 10
+     }
+    },
+    {
+     "id": "mage:arcane:9",
+     "name": "Improved Mana Shield",
+     "icon": "spell_shadow_detectlesserinvisibility",
+     "tier": 5,
+     "col": 1,
+     "max": 2,
+     "effect": {
+      "key": "block",
+      "per": 3
+     }
+    },
+    {
+     "id": "mage:arcane:10",
+     "name": "Presence of Mind",
+     "icon": "spell_nature_enchantarmor",
+     "tier": 6,
+     "col": 0,
+     "max": 1,
+     "effect": {
+      "key": "energy1",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:arcane:11",
+     "name": "Arcane Power",
+     "icon": "spell_nature_lightning",
+     "tier": 6,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "draw1",
+      "per": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "fire",
+   "name": "Fire",
+   "icon": "spell_fire_firebolt02",
+   "talents": [
+    {
+     "id": "mage:fire:0",
+     "name": "Improved Fireball",
+     "icon": "spell_fire_flamebolt",
+     "tier": 1,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:fire:1",
+     "name": "Impact",
+     "icon": "spell_fire_meteorstorm",
+     "tier": 1,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "dex",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:fire:2",
+     "name": "Ignite",
+     "icon": "spell_fire_incinerate",
+     "tier": 2,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "thorns",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:fire:3",
+     "name": "Flame Throwing",
+     "icon": "spell_fire_flare",
+     "tier": 2,
+     "col": 1,
+     "max": 2,
+     "effect": {
+      "key": "draw1",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:fire:4",
+     "name": "Improved Fire Blast",
+     "icon": "spell_fire_fireball",
+     "tier": 3,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "res",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:fire:5",
+     "name": "Incinerate",
+     "icon": "spell_fire_flameshock",
+     "tier": 3,
+     "col": 1,
+     "max": 2,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:fire:6",
+     "name": "Improved Flamestrike",
+     "icon": "spell_fire_selfdestruct",
+     "tier": 4,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "thorns",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:fire:7",
+     "name": "Pyroblast",
+     "icon": "spell_fire_fireball02",
+     "tier": 4,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "str",
+      "per": 3
+     }
+    },
+    {
+     "id": "mage:fire:8",
+     "name": "Burning Soul",
+     "icon": "spell_fire_fire",
+     "tier": 5,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "hp",
+      "per": 5
+     }
+    },
+    {
+     "id": "mage:fire:9",
+     "name": "Improved Scorch",
+     "icon": "spell_fire_soulburn",
+     "tier": 5,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "regen",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:fire:10",
+     "name": "Master of Elements",
+     "icon": "spell_fire_masterofelements",
+     "tier": 6,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "goldpct",
+      "per": 4
+     }
+    },
+    {
+     "id": "mage:fire:11",
+     "name": "Combustion",
+     "icon": "spell_fire_sealoffire",
+     "tier": 6,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "energy1",
+      "per": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "frost",
+   "name": "Frost",
+   "icon": "spell_frost_frostbolt02",
+   "talents": [
+    {
+     "id": "mage:frost:0",
+     "name": "Frost Warding",
+     "icon": "spell_frost_frostward",
+     "tier": 1,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "block",
+      "per": 3
+     }
+    },
+    {
+     "id": "mage:frost:1",
+     "name": "Improved Frostbolt",
+     "icon": "spell_frost_frostbolt02",
+     "tier": 1,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:frost:2",
+     "name": "Elemental Precision",
+     "icon": "spell_ice_magicdamage",
+     "tier": 2,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:frost:3",
+     "name": "Ice Shards",
+     "icon": "spell_frost_iceshard",
+     "tier": 2,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "dex",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:frost:4",
+     "name": "Frostbite",
+     "icon": "spell_frost_frostarmor",
+     "tier": 3,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "thorns",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:frost:5",
+     "name": "Improved Frost Nova",
+     "icon": "spell_frost_freezingbreath",
+     "tier": 3,
+     "col": 1,
+     "max": 2,
+     "effect": {
+      "key": "block",
+      "per": 2
+     }
+    },
+    {
+     "id": "mage:frost:6",
+     "name": "Permafrost",
+     "icon": "spell_frost_wisp",
+     "tier": 4,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "regen",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:frost:7",
+     "name": "Piercing Ice",
+     "icon": "spell_frost_frostbolt",
+     "tier": 4,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:frost:8",
+     "name": "Cold Snap",
+     "icon": "spell_frost_wizardmark",
+     "tier": 5,
+     "col": 0,
+     "max": 1,
+     "effect": {
+      "key": "energy1",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:frost:9",
+     "name": "Improved Blizzard",
+     "icon": "spell_frost_icestorm",
+     "tier": 5,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "hp",
+      "per": 3
+     }
+    },
+    {
+     "id": "mage:frost:10",
+     "name": "Arctic Reach",
+     "icon": "spell_shadow_darkritual",
+     "tier": 6,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "draw1",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:frost:11",
+     "name": "Ice Block",
+     "icon": "spell_frost_frost",
+     "tier": 6,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "block",
+      "per": 8
+     }
+    }
+   ]
+  }
+ ]
+}

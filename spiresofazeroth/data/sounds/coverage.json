@@ -1,0 +1,86 @@
+{
+ "boss": {
+  "exact": 0,
+  "name": 0,
+  "school": 2,
+  "class": 4,
+  "total": 6
+ },
+ "druid": {
+  "exact": 16,
+  "name": 9,
+  "school": 22,
+  "class": 0,
+  "total": 47
+ },
+ "hunter": {
+  "exact": 3,
+  "name": 13,
+  "school": 28,
+  "class": 0,
+  "total": 44
+ },
+ "mage": {
+  "exact": 12,
+  "name": 9,
+  "school": 23,
+  "class": 0,
+  "total": 44
+ },
+ "neutral": {
+  "exact": 0,
+  "name": 2,
+  "school": 21,
+  "class": 4,
+  "total": 27
+ },
+ "paladin": {
+  "exact": 10,
+  "name": 3,
+  "school": 28,
+  "class": 0,
+  "total": 41
+ },
+ "priest": {
+  "exact": 15,
+  "name": 8,
+  "school": 21,
+  "class": 0,
+  "total": 44
+ },
+ "rogue": {
+  "exact": 14,
+  "name": 2,
+  "school": 25,
+  "class": 0,
+  "total": 41
+ },
+ "shaman": {
+  "exact": 5,
+  "name": 9,
+  "school": 29,
+  "class": 0,
+  "total": 43
+ },
+ "status": {
+  "exact": 0,
+  "name": 0,
+  "school": 4,
+  "class": 0,
+  "total": 4
+ },
+ "warlock": {
+  "exact": 13,
+  "name": 8,
+  "school": 25,
+  "class": 0,
+  "total": 46
+ },
+ "warrior": {
+  "exact": 9,
+  "name": 5,
+  "school": 21,
+  "class": 6,
+  "total": 41
+ }
+}

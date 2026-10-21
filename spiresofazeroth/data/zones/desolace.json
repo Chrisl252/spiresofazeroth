@@ -1,0 +1,507 @@
+{
+ "id": "desolace",
+ "name": "Desolace",
+ "start": {
+  "name": "Nijel's Point Inn",
+  "icon": "inv_misc_beer_01"
+ },
+ "continent": "kal",
+ "act": 4,
+ "levelBand": [
+  30,
+  40
+ ],
+ "spire": {
+  "name": "Ethel Rethor Overlook",
+  "lore": "A blasted ridge above the dust plains of Desolace, with centaur war camps ringing the valley, satyrs clawing at Nijel's Point and the deep roots of Maraudon beneath."
+ },
+ "theme": {
+  "primary": "#a05a3c",
+  "secondary": "#2b1a14",
+  "accent": "#d8c27a",
+  "background": "desolace"
+ },
+ "zoneMechanic": {
+  "id": "centaur-clans",
+  "name": "Centaur Clans",
+  "icon": "inv_misc_head_centaur_01",
+  "text": "Helping one clan angers another. Each Gelkis centaur you kill marks Magram as angered, and each Magram you kill marks Gelkis as angered. Angered clans open every fight with +1 Strength.",
+  "hooks": {
+   "on_kill": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "target_is_family",
+      "family": "gelkis"
+     },
+     "then": [
+      {
+       "op": "set_flag",
+       "flag": "magram-angered"
+      }
+     ]
+    },
+    {
+     "op": "conditional",
+     "if": {
+      "type": "target_is_family",
+      "family": "magram"
+     },
+     "then": [
+      {
+       "op": "set_flag",
+       "flag": "gelkis-angered"
+      }
+     ]
+    }
+   ],
+   "on_combat_start": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "flag_set",
+      "flag": "magram-angered"
+     },
+     "then": [
+      {
+       "op": "apply",
+       "status": "strength",
+       "stacks": 1,
+       "target": "all_enemies",
+       "onlyType": "magram"
+      }
+     ]
+    },
+    {
+     "op": "conditional",
+     "if": {
+      "type": "flag_set",
+      "flag": "gelkis-angered"
+     },
+     "then": [
+      {
+       "op": "apply",
+       "status": "strength",
+       "stacks": 1,
+       "target": "all_enemies",
+       "onlyType": "gelkis"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "ghost-walker-post",
+  "name": "Ghost Walker Post",
+  "icon": "inv_misc_food_15",
+  "text": "Share a meal at Ghost Walker Post: heal 20% of max HP and gain 3 Max HP.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 20,
+    "target": "self"
+   },
+   {
+    "op": "max_hp",
+    "amount": 3,
+    "target": "self"
+   }
+  ]
+ },
+ "enemiesFile": "desolace.enemies.json",
+ "encounters": {
+  "normal": [
+   [
+    "crag-coyote",
+    "crag-coyote"
+   ],
+   [
+    "scorpashi-snapper",
+    "aged-kodo"
+   ],
+   [
+    "kolkar-drudge",
+    "kolkar-outrunner"
+   ],
+   [
+    "gelkis-scout",
+    "gelkis-outrunner"
+   ],
+   [
+    "magram-scout",
+    "magram-outrunner"
+   ],
+   [
+    "hatefury-rogue",
+    "hatefury-felsworn"
+   ],
+   [
+    "scorpashi-lasher",
+    "scorpashi-venomlash"
+   ],
+   [
+    "kolkar-drudge",
+    "kolkar-marauder",
+    "kolkar-stormer"
+   ],
+   [
+    "gelkis-mauler",
+    "gelkis-marauder",
+    "gelkis-windchaser"
+   ],
+   [
+    "magram-mauler",
+    "magram-marauder",
+    "magram-windchaser"
+   ],
+   [
+    "hatefury-trickster",
+    "hatefury-shadowstalker",
+    "hatefury-hellcaller"
+   ],
+   [
+    "dying-kodo",
+    "ancient-kodo"
+   ],
+   [
+    "kolkar-marauder",
+    "kolkar-windchaser"
+   ],
+   [
+    "gelkis-outrunner",
+    "gelkis-stampeder",
+    "gelkis-windchaser"
+   ],
+   [
+    "magram-marauder",
+    "magram-stormer",
+    "magram-windchaser"
+   ],
+   [
+    "hatefury-shadowstalker",
+    "hatefury-hellcaller",
+    "hatefury-betrayer"
+   ],
+   [
+    "gelkis-marauder",
+    "magram-marauder"
+   ]
+  ],
+  "elite": [
+   [
+    "noxxious-essence",
+    "noxxion"
+   ],
+   [
+    "hatefury-felsworn",
+    "lord-vyletongue"
+   ],
+   [
+    "celebras-the-cursed"
+   ]
+  ],
+  "boss": [
+   [
+    "princess-theradras"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "kodo-roundup",
+   "name": "Kodo Roundup",
+   "icon": "ability_mount_kodo_01",
+   "text": "Smeed Scrabblescrew's kodo herd has scattered across Desolace. He wants them rounded up with a drum.",
+   "options": [
+    {
+     "label": "Round up the herd (take 6 damage, gold +50)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 50
+      }
+     ]
+    },
+    {
+     "label": "Soothe a dying kodo (heal 10, max HP +2)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 10,
+       "target": "self"
+      },
+      {
+       "op": "max_hp",
+       "amount": 2
+      }
+     ]
+    },
+    {
+     "label": "Ignore Smeed",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "clan-truce",
+   "name": "The Clan Truce",
+   "icon": "inv_misc_head_centaur_01",
+   "text": "Gelkis and Magram scouts both offer you gifts if you will break the other clan's camp.",
+   "options": [
+    {
+     "label": "Side with the Gelkis (gold +45, Magram angered)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 45
+      },
+      {
+       "op": "set_flag",
+       "flag": "magram-angered"
+      }
+     ]
+    },
+    {
+     "label": "Side with the Magram (gold +45, Gelkis angered)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 45
+      },
+      {
+       "op": "set_flag",
+       "flag": "gelkis-angered"
+      }
+     ]
+    },
+    {
+     "label": "Broker a truce (heal 12, max HP +1)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 12,
+       "target": "self"
+      },
+      {
+       "op": "max_hp",
+       "amount": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "shadowprey-village",
+   "name": "Shadowprey Village",
+   "icon": "inv_misc_coin_01",
+   "text": "The ogres of Shadowprey Village trade fish and rumours of satyrs at the cliff.",
+   "options": [
+    {
+     "label": "Trade for fish stew (lose 20 gold, heal 16)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": -20
+      },
+      {
+       "op": "heal",
+       "amount": 16,
+       "target": "self"
+      }
+     ],
+     "requires": {
+      "gold": 20
+     }
+    },
+    {
+     "label": "Work the docks (gold +35)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 35
+      }
+     ]
+    },
+    {
+     "label": "Skip the village",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "nijels-point",
+   "name": "Nijel's Point",
+   "icon": "spell_shadow_summonsuccubus",
+   "text": "Nijel's Point is besieged by Hatefury satyrs. Captain Sinclair asks for sentries.",
+   "options": [
+    {
+     "label": "Man the wall (take 6 damage, max HP +2)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "max_hp",
+       "amount": 2
+      }
+     ]
+    },
+    {
+     "label": "Loot the satyr camp (gold +40, Curse 1)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 40
+      },
+      {
+       "op": "apply",
+       "status": "curse",
+       "stacks": 1,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Press on",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "tethris-aran",
+   "name": "Tethris Aran",
+   "icon": "spell_nature_earthquake",
+   "text": "The ruins of Tethris Aran are riddled with old Mage Guard wards. Some still hold power.",
+   "options": [
+    {
+     "label": "Siphon the wards (gain a card, take 5 damage)",
+     "effects": [
+      {
+       "op": "random_card",
+       "pool": "neutral",
+       "rarity": "common",
+       "to": "deck_permanent"
+      },
+      {
+       "op": "damage",
+       "amount": 5,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Pick through the rubble (gold +30)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 30
+      }
+     ]
+    },
+    {
+     "label": "Leave the ruins",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "blackstone-ring",
+   "name": "Blackstone Ring",
+   "icon": "inv_jewelry_ring_03",
+   "rarity": "uncommon",
+   "itemId": null,
+   "zone": "desolace",
+   "class": null,
+   "text": "Gain 1 Strength at the start of each combat.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "princess-theradras-scepter",
+   "name": "Princess Theradras' Scepter",
+   "icon": "inv_wand_01",
+   "rarity": "epic",
+   "itemId": null,
+   "zone": "desolace",
+   "class": null,
+   "text": "At the start of each turn, deal 3 damage to a random enemy.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "damage",
+      "amount": 3,
+      "target": "random_enemy"
+     }
+    ]
+   }
+  },
+  {
+   "id": "gatorbite-axe",
+   "name": "Gatorbite Axe",
+   "icon": "inv_axe_02",
+   "rarity": "rare",
+   "itemId": null,
+   "zone": "desolace",
+   "class": null,
+   "text": "Your attacks apply 1 Bleed on the first turn of each combat.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "bleed",
+      "stacks": 2,
+      "target": "enemy"
+     }
+    ]
+   }
+  },
+  {
+   "id": "natures-embrace",
+   "name": "Nature's Embrace",
+   "icon": "inv_misc_herb_17",
+   "rarity": "rare",
+   "itemId": null,
+   "zone": "desolace",
+   "class": null,
+   "text": "Heal 3 HP at the end of each turn if you have Block.",
+   "triggers": {
+    "on_turn_end": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "resource_at_least",
+       "resource": "block",
+       "amount": 1
+      },
+      "then": [
+       {
+        "op": "heal",
+        "amount": 3,
+        "target": "self"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "raidFloorsFile": "desolace.raids.json"
+}

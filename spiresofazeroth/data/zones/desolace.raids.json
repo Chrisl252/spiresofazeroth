@@ -1,0 +1,63 @@
+[
+ {"id":"maraudon","name":"Maraudon","unlock":"act_complete","levelBand":[40,48],"lore":"The centaur holy ground of Maraudon, where the earth-princess Theradras' corruption poisons the roots of the world.","encounters":{"normal":[["vile-larva","vile-larva"],["poison-sprite","constrictor-vine"],["creeping-sludge","noxxious-scion"],["irontree-wanderer","irontree-stomper"],["putridus-satyr","putridus-trickster"],["putridus-satyr","putridus-shadowstalker","putridus-trickster"],["theradrim-shardling","theradrim-guardian"],["theradrim-shardling","shadowshard-smasher","theradrim-guardian"]],"elite":[["noxxion"],["razorlash"],["lord-vyletongue"],["celebras-the-cursed"],["landslide"],["tinkerer-gizlock"],["rotgrip"]],"boss":[["princess-theradras"]]},"finalBoss":"princess-theradras",
+  "enemies":[
+   {"id":"vile-larva","name":"Vile Larva","tier":"raid","family":"beast","type":"insect","level":[40,42],"hp":[52,71],"icon":"ability_hunter_pet_wasp","npcId":null,"traits":[],"moves":[{"id":"sting","name":"Sting","intent":"attack","effects":[{"op":"damage","amount":5},{"op":"apply","status":"poison","stacks":2,"target":"enemy"}],"weight":3},{"id":"buzz","name":"Buzz","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":1,"target":"self"}],"weight":1,"cooldown":4}]},
+   {"id":"poison-sprite","name":"Poison Sprite","tier":"raid","family":"elemental","type":"sprite","level":[40,42],"hp":[52,71],"icon":"spell_nature_wispsplode","npcId":null,"traits":["caster"],"moves":[{"id":"lash","name":"Lash","intent":"attack","effects":[{"op":"damage","amount":7}],"weight":3},{"id":"entangling-roots","name":"Entangling Roots","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"enemy"}],"weight":1,"cooldown":3},{"id":"rejuvenation","name":"Rejuvenation","intent":"heal","effects":[{"op":"heal","amount":9,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"constrictor-vine","name":"Constrictor Vine","tier":"raid","family":"elemental","type":"plant","level":[41,43],"hp":[55,76],"icon":"ability_druid_treeoflife","npcId":null,"traits":["nature_absorb"],"moves":[{"id":"slam","name":"Slam","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":3},{"id":"thorns","name":"Thorns","intent":"buff","effects":[{"op":"apply","status":"thorns","stacks":2,"target":"self"}],"weight":1,"cooldown":4}]},
+   {"id":"creeping-sludge","name":"Creeping Sludge","tier":"raid","family":"elemental","type":"ooze","level":[41,43],"hp":[55,76],"icon":"spell_nature_corrosivebreath","npcId":null,"traits":[],"moves":[{"id":"slime","name":"Slime","intent":"attack","effects":[{"op":"damage","amount":7},{"op":"apply","status":"poison","stacks":2,"target":"enemy"}],"weight":3},{"id":"ooze-split","name":"Ooze Split","intent":"block","effects":[{"op":"block","amount":9,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"noxxious-scion","name":"Noxxious Scion","tier":"raid","family":"elemental","type":"plant","level":[42,44],"hp":[58,81],"icon":"ability_druid_treeoflife","npcId":null,"traits":["nature_absorb"],"moves":[{"id":"slam","name":"Slam","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":3},{"id":"thorns","name":"Thorns","intent":"buff","effects":[{"op":"apply","status":"thorns","stacks":2,"target":"self"}],"weight":1,"cooldown":4}]},
+   {"id":"irontree-wanderer","name":"Irontree Wanderer","tier":"raid","family":"elemental","type":"treant","level":[42,44],"hp":[58,81],"icon":"ability_druid_treeoflife","npcId":null,"traits":["nature_absorb"],"moves":[{"id":"slam","name":"Slam","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":3},{"id":"thorns","name":"Thorns","intent":"buff","effects":[{"op":"apply","status":"thorns","stacks":2,"target":"self"}],"weight":1,"cooldown":4}]},
+   {"id":"irontree-stomper","name":"Irontree Stomper","tier":"raid","family":"elemental","type":"treant","level":[43,45],"hp":[61,86],"icon":"ability_druid_treeoflife","npcId":null,"traits":["nature_absorb"],"moves":[{"id":"slam","name":"Slam","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":3},{"id":"thorns","name":"Thorns","intent":"buff","effects":[{"op":"apply","status":"thorns","stacks":2,"target":"self"}],"weight":1,"cooldown":4}]},
+   {"id":"putridus-satyr","name":"Putridus Satyr","tier":"raid","family":"demon","type":"satyr","level":[43,45],"hp":[61,86],"icon":"spell_shadow_summonsuccubus","npcId":null,"traits":["caster"],"moves":[{"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":9,"school":"shadow"}],"weight":2},{"id":"curse-of-weakness","name":"Curse of Weakness","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"enemy"}],"weight":1,"cooldown":3},{"id":"strike","name":"Strike","intent":"attack","effects":[{"op":"damage","amount":7}],"weight":2}]},
+   {"id":"putridus-trickster","name":"Putridus Trickster","tier":"raid","family":"demon","type":"satyr","level":[44,46],"hp":[65,91],"icon":"spell_shadow_summonsuccubus","npcId":null,"traits":[],"moves":[{"id":"backstab","name":"Backstab","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":2},{"id":"sinister-strike","name":"Sinister Strike","intent":"attack","effects":[{"op":"damage","amount":7}],"weight":3},{"id":"garrote","name":"Garrote","intent":"attack","effects":[{"op":"damage","amount":4},{"op":"apply","status":"bleed","stacks":3,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"putridus-shadowstalker","name":"Putridus Shadowstalker","tier":"raid","family":"demon","type":"satyr","level":[44,46],"hp":[65,91],"icon":"spell_shadow_summonsuccubus","npcId":null,"traits":[],"moves":[{"id":"backstab","name":"Backstab","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":2},{"id":"sinister-strike","name":"Sinister Strike","intent":"attack","effects":[{"op":"damage","amount":7}],"weight":3},{"id":"garrote","name":"Garrote","intent":"attack","effects":[{"op":"damage","amount":4},{"op":"apply","status":"bleed","stacks":3,"target":"enemy"}],"weight":1,"cooldown":3}]},
+   {"id":"theradrim-shardling","name":"Theradrim Shardling","tier":"raid","family":"elemental","type":"earth","level":[44,46],"hp":[65,91],"icon":"spell_nature_earthelemental_totem","npcId":null,"traits":["resist:physical"],"moves":[{"id":"boulder","name":"Boulder","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":3},{"id":"stoneskin","name":"Stoneskin","intent":"block","effects":[{"op":"block","amount":14,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"theradrim-guardian","name":"Theradrim Guardian","tier":"raid","family":"elemental","type":"earth","level":[45,47],"hp":[68,96],"icon":"spell_nature_earthelemental_totem","npcId":null,"traits":["resist:physical"],"moves":[{"id":"boulder","name":"Boulder","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":3},{"id":"stoneskin","name":"Stoneskin","intent":"block","effects":[{"op":"block","amount":14,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"shadowshard-smasher","name":"Shadowshard Smasher","tier":"raid","family":"elemental","type":"earth","level":[45,47],"hp":[68,96],"icon":"spell_nature_earthelemental_totem","npcId":null,"traits":["resist:physical"],"moves":[{"id":"boulder","name":"Boulder","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":3},{"id":"stoneskin","name":"Stoneskin","intent":"block","effects":[{"op":"block","amount":14,"target":"self"}],"weight":1,"cooldown":3}]},
+   {"id":"razorlash","name":"Razorlash","tier":"elite","family":"beast","type":"plant","level":[43,44],"hp":[161,211],"icon":"ability_druid_treeoflife","npcId":12258,"traits":["nature_absorb"],
+    "moves":[
+     {"id":"lash","name":"Lash","intent":"attack","effects":[{"op":"damage","amount":23}],"weight":3},
+     {"id":"entangling-roots","name":"Entangling Roots","intent":"debuff","effects":[{"op":"damage","amount":7},{"op":"apply","status":"weak","stacks":3,"target":"enemy"}],"weight":2,"cooldown":3},
+     {"id":"thorn-volley","name":"Thorn Volley","intent":"attack","effects":[{"op":"damage","amount":14,"target":"all_enemies","school":"nature"}],"weight":2,"cooldown":3}
+    ],
+    "pattern":["lash","entangling-roots","thorn-volley","lash"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Razorlash Enraged","pattern":["thorn-volley","lash","lash"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+    ]
+   },
+   {"id":"landslide","name":"Landslide","tier":"elite","family":"elemental","type":"earth","level":[44,45],"hp":[167,219],"icon":"spell_nature_earthelemental_totem","npcId":12203,"traits":["resist:physical"],
+    "moves":[
+     {"id":"knock-away","name":"Knock Away","intent":"attack","effects":[{"op":"damage","amount":25},{"op":"apply","status":"stun","stacks":1,"target":"enemy"}],"weight":2,"cooldown":3},
+     {"id":"landslide","name":"Landslide","intent":"attack","effects":[{"op":"damage","amount":16,"target":"all_enemies"}],"weight":2,"cooldown":3},
+     {"id":"rock-hide","name":"Rock Hide","intent":"block","effects":[{"op":"block","amount":40,"target":"self"}],"weight":1,"cooldown":3}
+    ],
+    "pattern":["knock-away","landslide","rock-hide","knock-away"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Avalanche","pattern":["landslide","knock-away","landslide"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+    ]
+   },
+   {"id":"tinkerer-gizlock","name":"Tinkerer Gizlock","tier":"elite","family":"humanoid","type":"gnome","level":[45,46],"hp":[172,227],"icon":"inv_misc_head_gnome_01","npcId":13601,"traits":[],
+    "moves":[
+     {"id":"machine-gun","name":"Machine Gun","intent":"attack_multi","effects":[{"op":"damage","amount":11,"times":4}],"weight":3},
+     {"id":"bomb","name":"Bomb","intent":"attack","effects":[{"op":"damage","amount":16,"target":"all_enemies","school":"fire"}],"weight":2,"cooldown":3},
+     {"id":"goblin-dragon-gun","name":"Goblin Dragon Gun","intent":"attack","effects":[{"op":"damage","amount":25},{"op":"apply","status":"burn","stacks":3,"target":"enemy"}],"weight":1,"cooldown":4}
+    ],
+    "pattern":["machine-gun","bomb","goblin-dragon-gun","machine-gun"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Gizlock Overloaded","pattern":["bomb","goblin-dragon-gun","machine-gun"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+    ]
+   },
+   {"id":"rotgrip","name":"Rotgrip","tier":"elite","family":"beast","type":"crocolisk","level":[46,47],"hp":[177,234],"icon":"ability_hunter_pet_crocolisk","npcId":13596,"traits":[],
+    "moves":[
+     {"id":"bite","name":"Bite","intent":"attack","effects":[{"op":"damage","amount":25},{"op":"apply","status":"bleed","stacks":3,"target":"enemy"}],"weight":3},
+     {"id":"death-roll","name":"Death Roll","intent":"attack_multi","effects":[{"op":"damage","amount":11,"times":3}],"weight":2,"cooldown":3},
+     {"id":"thick-hide","name":"Thick Hide","intent":"block","effects":[{"op":"block","amount":36,"target":"self"}],"weight":1,"cooldown":3}
+    ],
+    "pattern":["bite","death-roll","thick-hide","bite"],
+    "phases":[
+     {"hpBelowPct":50,"name":"Rotgrip Frenzy","pattern":["death-roll","bite","death-roll"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+    ]
+   }
+  ]
+ }
+]

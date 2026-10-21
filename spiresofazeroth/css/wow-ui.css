@@ -1,0 +1,78 @@
+/* Spires of Azeroth - WoW-style chrome. CSS only: gold-trim frames, quality colours, buttons, bars, tooltips.
+   Layout lives in game.css. No images, no font files (site fonts via the tokens). */
+.spires-app {
+  --sp-gold: #c9a24b; --sp-gold-hi: #f5d77a; --sp-gold-lo: #6b5220;
+  --sp-ink: #f4e9cc; --sp-dim: #b8a77f; --sp-bg: #14100a; --sp-panel: #1d1710; --sp-panel-2: #261d12;
+  --sp-red: #c0392b; --sp-green: #3da35d; --sp-blue: #3b82c4; --sp-purple: #a335ee; --sp-orange: #ff8000;
+  --q-basic: #ffffff; --q-common: #ffffff; --q-uncommon: #1eff00; --q-rare: #0070dd; --q-epic: #a335ee; --q-legendary: #ff8000;
+  --sp-font: var(--font-game, 'FrizQuadrata', 'Cinzel', 'Palatino Linotype', serif);
+  --sp-font-ui: var(--font-ui, Georgia, serif);
+  color: var(--sp-ink);
+  font-family: var(--sp-font-ui);
+}
+.spires-app *, .spires-app *::before, .spires-app *::after { box-sizing: border-box; }
+
+/* gold-trim frame: double border + inner glow, drawn with box-shadow/outline only */
+.sp-frame {
+  background: linear-gradient(180deg, var(--sp-panel-2), var(--sp-panel));
+  border: 2px solid var(--sp-gold);
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 1px #000, inset 0 0 0 3px var(--sp-gold-lo), inset 0 0 18px rgba(0,0,0,.65), 0 2px 8px rgba(0,0,0,.6);
+}
+.sp-frame--thin { border-width: 1px; box-shadow: inset 0 0 0 1px #000, inset 0 0 10px rgba(0,0,0,.6); }
+.sp-title { font-family: var(--sp-font); color: var(--sp-gold-hi); text-shadow: 0 1px 2px #000, 0 0 6px rgba(201,162,75,.35); letter-spacing: .04em; margin: 0; }
+.sp-dim { color: var(--sp-dim); }
+.sp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* buttons */
+.sp-btn {
+  font-family: var(--sp-font); font-size: 1rem; color: var(--sp-ink); cursor: pointer; min-height: 44px; padding: .45rem 1.1rem;
+  background: linear-gradient(180deg, #5a1d14 0%, #3a100b 55%, #2a0b08 100%);
+  border: 2px solid var(--sp-gold); border-radius: 5px;
+  box-shadow: inset 0 0 0 1px #000, inset 0 1px 0 rgba(255,220,140,.35), 0 2px 4px rgba(0,0,0,.6);
+  text-shadow: 0 1px 2px #000; transition: transform .12s, filter .12s;
+}
+.sp-btn:hover:not(:disabled) { filter: brightness(1.25); transform: translateY(-1px); }
+.sp-btn:active:not(:disabled) { transform: translateY(1px); filter: brightness(.9); }
+.sp-btn:disabled { opacity: .45; cursor: not-allowed; filter: grayscale(.6); }
+.sp-btn:focus-visible, .sp-card:focus-visible, .sp-node:focus-visible, .sp-enemy:focus-visible, .sp-opt:focus-visible { outline: 3px solid var(--sp-gold-hi); outline-offset: 2px; }
+.sp-btn--primary { background: linear-gradient(180deg, #8a5a14, #5c3a0a 55%, #3d2506); }
+.sp-btn--ghost { background: transparent; border-color: var(--sp-gold-lo); }
+.sp-btn--small { min-height: 36px; padding: .25rem .7rem; font-size: .85rem; }
+
+/* icons + quality */
+.sp-ico { display: inline-block; width: 40px; height: 40px; border: 2px solid #000; border-radius: 4px; object-fit: cover; background: #000; box-shadow: 0 0 0 1px var(--sp-gold-lo); vertical-align: middle; }
+.sp-ico--sm { width: 24px; height: 24px; border-width: 1px; }
+.sp-ico--lg { width: 56px; height: 56px; }
+.sp-ico--xl { width: 84px; height: 84px; border-width: 3px; }
+.q-basic, .q-common { --q: var(--q-common); } .q-uncommon { --q: var(--q-uncommon); } .q-rare { --q: var(--q-rare); } .q-epic { --q: var(--q-epic); } .q-legendary { --q: var(--q-legendary); }
+[class*="q-"] .sp-qname, .sp-qname[class*="q-"] { color: var(--q, #fff); }
+.sp-ico[class*="q-"] { box-shadow: 0 0 0 2px var(--q, var(--sp-gold-lo)); }
+
+/* bars */
+.sp-bar { position: relative; height: 14px; background: #000; border: 1px solid var(--sp-gold-lo); border-radius: 3px; overflow: hidden; }
+.sp-bar > i { position: absolute; inset: 0 auto 0 0; background: linear-gradient(180deg, #d94a3a, #8f2418); transform-origin: left; transition: width .35s ease; }
+.sp-bar--hero > i { background: linear-gradient(180deg, #4cc46f, #1f7a3d); }
+.sp-bar > span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: .72rem; text-shadow: 0 1px 2px #000; }
+
+/* status chips + tooltip */
+.sp-chip { display: inline-flex; align-items: center; gap: 2px; font-size: .72rem; padding: 0 4px 0 0; border-radius: 3px; background: rgba(0,0,0,.55); border: 1px solid var(--sp-gold-lo); }
+.sp-chip--debuff { border-color: #8f2418; } .sp-chip--buff { border-color: #2f7d4a; }
+.sp-chip .sp-ico { width: 18px; height: 18px; border-width: 1px; }
+.sp-tip {
+  position: fixed; z-index: 9000; max-width: min(280px, 86vw); padding: .5rem .7rem; font-size: .88rem; line-height: 1.3; pointer-events: none;
+  background: rgba(8,6,3,.96); border: 1px solid var(--sp-gold); border-radius: 4px; box-shadow: 0 4px 14px #000;
+}
+.sp-tip b { color: var(--sp-gold-hi); font-family: var(--sp-font); }
+
+/* modal */
+.sp-modal-back { position: fixed; inset: 0; z-index: 8000; background: rgba(0,0,0,.72); display: flex; align-items: center; justify-content: center; padding: 12px; }
+.sp-modal { width: min(720px, 100%); max-height: 88vh; overflow: auto; padding: 1rem; }
+
+/* toast */
+.sp-toast { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 9500; padding: .5rem 1rem; font-family: var(--sp-font); }
+
+@media (prefers-reduced-motion: reduce) {
+  .spires-app *, .spires-app *::before, .spires-app *::after { animation: none !important; transition: none !important; }
+}
+.spires-app.sp-reduce *, .spires-app.sp-reduce *::before, .spires-app.sp-reduce *::after { animation: none !important; transition: none !important; }

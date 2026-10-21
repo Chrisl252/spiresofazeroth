@@ -1,0 +1,1340 @@
+{
+  "id": "mage",
+  "name": "Mage",
+  "icon": "classicon_mage",
+  "color": "#69CCF0",
+  "lore": "Master of Arcane mysteries, Fire burst, and Frost control: chain spell schools together to incinerate or weaken your enemies.",
+  "startingHp": 75,
+  "startingGold": 99,
+  "defaultContinent": "ek",
+  "resource": {
+    "id": "arcane_charges",
+    "name": "Arcane Charges",
+    "tip": "Arcane spells build Arcane Charges to amplify Missiles and Explosions. Fire builds Ignite; Frost chills and shatters.",
+    "icon": "spell_arcane_arcane01",
+    "max": 10,
+    "rules": "Build Arcane Charges to amplify burst spells. Fire spells generate Ignite stacks for explosive finishers, while Frost spells weaken enemy attacks and shatter barriers.",
+    "energyPerTurn": 3,
+    "startOfCombat": 0,
+    "gainOnDamageDealt": 0,
+    "gainOnDamageTaken": 0,
+    "decayPerTurn": 0
+  },
+  "extraResources": [
+    {
+      "id": "ignite",
+      "name": "Ignite",
+      "icon": "spell_fire_flamebolt",
+      "max": 10,
+      "rules": "Built by Fire spells; consumed by Combustion and Pyroblast for massive burst damage. Resets each combat.",
+      "startOfCombat": 0,
+      "decayPerTurn": 0
+    }
+  ],
+  "archetypes": [
+    {"id": "arcane", "name": "Arcane", "icon": "spell_holy_magicalsentry", "text": "Stack Arcane Charges; Missiles and Explosion scale, burst energy with Evocation and Arcane Power."},
+    {"id": "fire", "name": "Fire", "icon": "spell_fire_fireball02", "text": "Build Ignite with every fire spell, then cash it in with Combustion and Pyroblast."},
+    {"id": "frost", "name": "Frost", "icon": "spell_frost_frostbolt02", "text": "Keep enemies Weak and Frozen, shatter them with Cold Snap, and stay safe behind barriers."}
+  ],
+  "relics": [
+    {
+      "id": "talisman-of-ephemeral-power",
+      "name": "Talisman of Ephemeral Power",
+      "icon": "inv_jewelry_talisman_07",
+      "rarity": "uncommon",
+      "itemId": 18820,
+      "zone": null,
+      "class": "mage",
+      "text": "Start each combat with 3 Arcane Charges and 1 Ignite.",
+      "triggers": {
+        "on_combat_start": [
+          {"op": "gain_resource", "resource": "arcane_charges", "amount": 3},
+          {"op": "gain_resource", "resource": "ignite", "amount": 1}
+        ]
+      }
+    },
+    {
+      "id": "robes-of-the-archmage",
+      "name": "Robes of the Archmage",
+      "icon": "inv_chest_cloth_21",
+      "rarity": "rare",
+      "itemId": null,
+      "zone": null,
+      "class": "mage",
+      "text": "Start each combat with 6 Block. 20% chance to draw 1 card whenever you play a card.",
+      "triggers": {
+        "on_combat_start": [
+          {"op": "block", "amount": 6}
+        ],
+        "on_card_played": [
+          {"op": "conditional", "if": {"type": "chance", "pct": 20}, "then": [{"op": "draw", "count": 1}]}
+        ]
+      }
+    }
+  ],
+  "starterDeck": [
+    "fireball",
+    "fireball",
+    "frostbolt",
+    "frostbolt",
+    "arcane-missiles",
+    "arcane-missiles",
+    "mana-shield",
+    "mana-shield",
+    "mana-shield",
+    "blink"
+  ],
+  "units": {},
+  "spellIdSource": "Classic rank-1 ids from memory; Fireball 133 confirmed in datamine.spell (wow_classic_era). Others unverified. Tokens (conjured items) have null.",
+  "tokens": [
+    {
+      "id": "conjured-water",
+      "name": "Conjured Water",
+      "icon": "inv_drink_06",
+      "spellId": null,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "basic",
+      "archetype": null,
+      "cost": 0,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Gain 1 energy. Exhaust.",
+      "token": true,
+      "effects": [
+        {"op": "gain_energy", "amount": 1}
+      ],
+      "upgrade": {
+        "name": "Conjured Water (Rank 2)",
+        "cost": 0,
+        "text": "Gain 1 energy. Draw 1 card. Exhaust.",
+        "effects": [
+          {"op": "gain_energy", "amount": 1},
+          {"op": "draw", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "conjured-food",
+      "name": "Conjured Food",
+      "icon": "inv_misc_food_73cinnamonroll",
+      "spellId": null,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "basic",
+      "archetype": null,
+      "cost": 0,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Heal 6 HP. Exhaust.",
+      "token": true,
+      "effects": [
+        {"op": "heal", "amount": 6, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Conjured Food (Rank 2)",
+        "cost": 0,
+        "text": "Heal 8 HP. Exhaust.",
+        "effects": [
+          {"op": "heal", "amount": 8, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "conjured-mana-gem",
+      "name": "Conjured Mana Gem",
+      "icon": "inv_misc_gem_emerald_01",
+      "spellId": null,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "basic",
+      "archetype": null,
+      "cost": 0,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Gain 2 energy. Exhaust.",
+      "token": true,
+      "effects": [
+        {"op": "gain_energy", "amount": 2}
+      ],
+      "upgrade": {
+        "name": "Conjured Mana Gem (Rank 2)",
+        "cost": 0,
+        "text": "Gain 2 energy. Draw 1 card. Exhaust.",
+        "effects": [
+          {"op": "gain_energy", "amount": 2},
+          {"op": "draw", "count": 1}
+        ]
+      }
+    }
+  ],
+  "cards": [
+    {
+      "id": "fireball",
+      "name": "Fireball",
+      "icon": "spell_fire_flamebolt",
+      "spellId": 133,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "fire",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 fire damage. Gain 1 Ignite.",
+      "effects": [
+        {"op": "damage", "amount": 6, "school": "fire"},
+        {"op": "gain_resource", "resource": "ignite", "amount": 1}
+      ],
+      "upgrade": {
+        "name": "Fireball (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 fire damage. Gain 1 Ignite.",
+        "effects": [
+          {"op": "damage", "amount": 9, "school": "fire"},
+          {"op": "gain_resource", "resource": "ignite", "amount": 1}
+        ]
+      }
+    },
+    {
+      "id": "frostbolt",
+      "name": "Frostbolt",
+      "icon": "spell_frost_frostbolt02",
+      "spellId": 116,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "frost",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 frost damage. Apply 1 Weak.",
+      "effects": [
+        {"op": "damage", "amount": 6, "school": "frost"},
+        {"op": "apply", "status": "weak", "stacks": 1, "target": "enemy"}
+      ],
+      "upgrade": {
+        "name": "Frostbolt (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 frost damage. Apply 1 Weak.",
+        "effects": [
+          {"op": "damage", "amount": 9, "school": "frost"},
+          {"op": "apply", "status": "weak", "stacks": 1, "target": "enemy"}
+        ]
+      }
+    },
+    {
+      "id": "arcane-missiles",
+      "name": "Arcane Missiles",
+      "icon": "spell_nature_starfall",
+      "spellId": 5143,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "arcane",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 3 arcane damage 3 times, +1 hit per 2 Arcane Charges. Gain 1 Charge.",
+      "effects": [
+        {"op": "damage", "amount": 3, "school": "arcane", "times": {"base": 3, "scale": "arcane_charges", "per": 2}},
+        {"op": "gain_resource", "resource": "arcane_charges", "amount": 1}
+      ],
+      "upgrade": {
+        "name": "Arcane Missiles (Rank 2)",
+        "cost": 1,
+        "text": "Deal 4 arcane damage 3 times, +1 hit per 2 Arcane Charges. Gain 1 Charge.",
+        "effects": [
+          {"op": "damage", "amount": 4, "school": "arcane", "times": {"base": 3, "scale": "arcane_charges", "per": 2}},
+          {"op": "gain_resource", "resource": "arcane_charges", "amount": 1}
+        ]
+      }
+    },
+    {
+      "id": "mana-shield",
+      "name": "Mana Shield",
+      "icon": "spell_shadow_detectlesserinvisibility",
+      "spellId": 1463,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "basic",
+      "archetype": "arcane",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 5 Block.",
+      "effects": [
+        {"op": "block", "amount": 5}
+      ],
+      "upgrade": {
+        "name": "Mana Shield (Rank 2)",
+        "cost": 1,
+        "text": "Gain 8 Block.",
+        "effects": [
+          {"op": "block", "amount": 8}
+        ]
+      }
+    },
+    {
+      "id": "blink",
+      "name": "Blink",
+      "icon": "spell_arcane_blink",
+      "spellId": 1953,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "basic",
+      "archetype": "arcane",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 1 Stealth. Draw 1 card.",
+      "effects": [
+        {"op": "apply", "status": "stealth", "stacks": 1, "target": "self"},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Blink (Rank 2)",
+        "cost": 0,
+        "text": "Gain 1 Stealth. Draw 1 card. Costs 0.",
+        "effects": [
+          {"op": "apply", "status": "stealth", "stacks": 1, "target": "self"},
+          {"op": "draw", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "fire-blast",
+      "name": "Fire Blast",
+      "icon": "spell_fire_fireball",
+      "spellId": 2136,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "fire",
+      "cost": 0,
+      "target": "enemy",
+      "flags": ["exhaust"],
+      "text": "Deal 4 fire damage. Gain 1 Ignite. Exhaust.",
+      "effects": [
+        {"op": "damage", "amount": 4, "school": "fire"},
+        {"op": "gain_resource", "resource": "ignite", "amount": 1}
+      ],
+      "upgrade": {
+        "name": "Fire Blast (Rank 2)",
+        "cost": 0,
+        "text": "Deal 6 fire damage. Gain 1 Ignite. Exhaust.",
+        "effects": [
+          {"op": "damage", "amount": 6, "school": "fire"},
+          {"op": "gain_resource", "resource": "ignite", "amount": 1}
+        ]
+      }
+    },
+    {
+      "id": "scorch",
+      "name": "Scorch",
+      "icon": "spell_fire_soulburn",
+      "spellId": 2948,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "fire",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 7 fire damage. Apply 1 Vulnerable. Gain 1 Ignite.",
+      "effects": [
+        {"op": "damage", "amount": 7, "school": "fire"},
+        {"op": "apply", "status": "vulnerable", "stacks": 1, "target": "enemy"},
+        {"op": "gain_resource", "resource": "ignite", "amount": 1}
+      ],
+      "upgrade": {
+        "name": "Scorch (Rank 2)",
+        "cost": 1,
+        "text": "Deal 10 fire damage. Apply 2 Vulnerable. Gain 1 Ignite.",
+        "effects": [
+          {"op": "damage", "amount": 10, "school": "fire"},
+          {"op": "apply", "status": "vulnerable", "stacks": 2, "target": "enemy"},
+          {"op": "gain_resource", "resource": "ignite", "amount": 1}
+        ]
+      }
+    },
+    {
+      "id": "arcane-explosion",
+      "name": "Arcane Explosion",
+      "icon": "spell_nature_wispsplode",
+      "spellId": 1449,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "arcane",
+      "cost": 1,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Deal 5 arcane damage to ALL enemies, +1 per 2 Arcane Charges. Gain 1 Charge.",
+      "effects": [
+        {"op": "damage", "amount": {"base": 5, "scale": "arcane_charges", "per": 2}, "school": "arcane", "target": "all_enemies"},
+        {"op": "gain_resource", "resource": "arcane_charges", "amount": 1}
+      ],
+      "upgrade": {
+        "name": "Arcane Explosion (Rank 2)",
+        "cost": 1,
+        "text": "Deal 8 arcane damage to ALL enemies, +1 per 2 Arcane Charges. Gain 1 Charge.",
+        "effects": [
+          {"op": "damage", "amount": {"base": 8, "scale": "arcane_charges", "per": 2}, "school": "arcane", "target": "all_enemies"},
+          {"op": "gain_resource", "resource": "arcane_charges", "amount": 1}
+        ]
+      }
+    },
+    {
+      "id": "frost-nova",
+      "name": "Frost Nova",
+      "icon": "spell_frost_frostnova",
+      "spellId": 122,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "frost",
+      "cost": 1,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Deal 6 frost damage to ALL enemies. Apply 1 Weak to ALL.",
+      "effects": [
+        {"op": "damage", "amount": 6, "school": "frost", "target": "all_enemies"},
+        {"op": "apply", "status": "weak", "stacks": 1, "target": "all_enemies"}
+      ],
+      "upgrade": {
+        "name": "Frost Nova (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 frost damage to ALL enemies. Apply 2 Weak to ALL.",
+        "effects": [
+          {"op": "damage", "amount": 9, "school": "frost", "target": "all_enemies"},
+          {"op": "apply", "status": "weak", "stacks": 2, "target": "all_enemies"}
+        ]
+      }
+    },
+    {
+      "id": "counterspell",
+      "name": "Counterspell",
+      "icon": "spell_frost_iceshock",
+      "spellId": 2139,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "arcane",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Interrupt the enemy cast and Silence it for 1 turn.",
+      "effects": [
+        {"op": "cast_interrupt"},
+        {"op": "apply", "status": "silence", "stacks": 1, "target": "enemy", "duration": 1}
+      ],
+      "upgrade": {
+        "name": "Counterspell (Rank 2)",
+        "cost": 1,
+        "text": "Interrupt the enemy cast and Silence it for 1 turn. Draw 1 card.",
+        "effects": [
+          {"op": "cast_interrupt"},
+          {"op": "apply", "status": "silence", "stacks": 1, "target": "enemy", "duration": 1},
+          {"op": "draw", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "frost-armor",
+      "name": "Frost Armor",
+      "icon": "spell_frost_frostarmor02",
+      "spellId": 168,
+      "rank": 1,
+      "type": "power",
+      "rarity": "common",
+      "archetype": "frost",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Power. Gain 3 Armor and 1 Thorns for the rest of combat.",
+      "effects": [
+        {"op": "apply", "status": "armor", "stacks": 3, "target": "self"},
+        {"op": "apply", "status": "thorns", "stacks": 1, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Frost Armor (Rank 2)",
+        "cost": 1,
+        "text": "Power. Gain 4 Armor and 2 Thorns for the rest of combat.",
+        "effects": [
+          {"op": "apply", "status": "armor", "stacks": 4, "target": "self"},
+          {"op": "apply", "status": "thorns", "stacks": 2, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "ice-armor",
+      "name": "Ice Armor",
+      "icon": "spell_frost_frostarmor",
+      "spellId": 7302,
+      "rank": 1,
+      "type": "power",
+      "rarity": "common",
+      "archetype": "frost",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Power. Gain 4 Armor. Whenever you play a frost card, gain 1 Block.",
+      "effects": [
+        {"op": "apply", "status": "armor", "stacks": 4, "target": "self"},
+        {"op": "apply", "status": "frostbite", "stacks": 1, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Ice Armor (Rank 2)",
+        "cost": 1,
+        "text": "Power. Gain 6 Armor. Whenever you play a frost card, gain 2 Block.",
+        "effects": [
+          {"op": "apply", "status": "armor", "stacks": 6, "target": "self"},
+          {"op": "apply", "status": "frostbite", "stacks": 2, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "arcane-intellect",
+      "name": "Arcane Intellect",
+      "icon": "spell_holy_magicalsentry",
+      "spellId": 1459,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "arcane",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Draw 2 cards. Gain 1 Arcane Charge.",
+      "effects": [
+        {"op": "draw", "count": 2},
+        {"op": "gain_resource", "resource": "arcane_charges", "amount": 1}
+      ],
+      "upgrade": {
+        "name": "Arcane Intellect (Rank 2)",
+        "cost": 0,
+        "text": "Draw 2 cards. Gain 1 Arcane Charge. Costs 0.",
+        "effects": [
+          {"op": "draw", "count": 2},
+          {"op": "gain_resource", "resource": "arcane_charges", "amount": 1}
+        ]
+      }
+    },
+    {
+      "id": "conjure-water",
+      "name": "Conjure Water",
+      "icon": "inv_drink_06",
+      "spellId": 5504,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "frost",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Add 2 Conjured Water to your hand.",
+      "effects": [
+        {"op": "add_card", "card": "conjured-water", "to": "hand", "count": 2}
+      ],
+      "upgrade": {
+        "name": "Conjure Water (Rank 2)",
+        "cost": 1,
+        "text": "Add 3 Conjured Water to your hand.",
+        "effects": [
+          {"op": "add_card", "card": "conjured-water", "to": "hand", "count": 3}
+        ]
+      }
+    },
+    {
+      "id": "conjure-food",
+      "name": "Conjure Food",
+      "icon": "inv_misc_food_73cinnamonroll",
+      "spellId": 587,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "fire",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Add 1 Conjured Food to your hand.",
+      "effects": [
+        {"op": "add_card", "card": "conjured-food", "to": "hand", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Conjure Food (Rank 2)",
+        "cost": 1,
+        "text": "Add 2 Conjured Food to your hand.",
+        "effects": [
+          {"op": "add_card", "card": "conjured-food", "to": "hand", "count": 2}
+        ]
+      }
+    },
+    {
+      "id": "fire-ward",
+      "name": "Fire Ward",
+      "icon": "spell_fire_firearmor",
+      "spellId": 543,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "fire",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 7 Block and 2 Thorns until your next turn.",
+      "effects": [
+        {"op": "block", "amount": 7},
+        {"op": "apply", "status": "thorns", "stacks": 2, "target": "self", "duration": 1}
+      ],
+      "upgrade": {
+        "name": "Fire Ward (Rank 2)",
+        "cost": 1,
+        "text": "Gain 10 Block and 3 Thorns until your next turn.",
+        "effects": [
+          {"op": "block", "amount": 10},
+          {"op": "apply", "status": "thorns", "stacks": 3, "target": "self", "duration": 1}
+        ]
+      }
+    },
+    {
+      "id": "remove-lesser-curse",
+      "name": "Remove Lesser Curse",
+      "icon": "spell_nature_removecurse",
+      "spellId": 475,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "arcane",
+      "cost": 0,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Remove Curse from yourself. Draw 1 card. Exhaust.",
+      "effects": [
+        {"op": "remove", "status": "curse", "target": "self"},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Remove Lesser Curse (Rank 2)",
+        "cost": 0,
+        "text": "Remove Curse and Weak from yourself. Draw 1 card. Exhaust.",
+        "effects": [
+          {"op": "remove", "status": "curse", "target": "self"},
+          {"op": "remove", "status": "weak", "target": "self"},
+          {"op": "draw", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "dampen-magic",
+      "name": "Dampen Magic",
+      "icon": "spell_nature_abolishmagic",
+      "spellId": 604,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "arcane",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 6 Block and 1 Armor.",
+      "effects": [
+        {"op": "block", "amount": 6},
+        {"op": "apply", "status": "armor", "stacks": 1, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Dampen Magic (Rank 2)",
+        "cost": 1,
+        "text": "Gain 9 Block and 1 Armor.",
+        "effects": [
+          {"op": "block", "amount": 9},
+          {"op": "apply", "status": "armor", "stacks": 1, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "amplify-magic",
+      "name": "Amplify Magic",
+      "icon": "spell_holy_flashheal",
+      "spellId": 1008,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "arcane",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 2 Strength this turn. Draw 1 card.",
+      "effects": [
+        {"op": "apply", "status": "strength", "stacks": 2, "target": "self", "duration": 1},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Amplify Magic (Rank 2)",
+        "cost": 1,
+        "text": "Gain 3 Strength this turn. Draw 1 card.",
+        "effects": [
+          {"op": "apply", "status": "strength", "stacks": 3, "target": "self", "duration": 1},
+          {"op": "draw", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "slow-fall",
+      "name": "Slow Fall",
+      "icon": "spell_magic_featherfall",
+      "spellId": 130,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "frost",
+      "cost": 0,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Gain 5 Block. Draw 1 card. Exhaust.",
+      "effects": [
+        {"op": "block", "amount": 5},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Slow Fall (Rank 2)",
+        "cost": 0,
+        "text": "Gain 8 Block. Draw 1 card. Exhaust.",
+        "effects": [
+          {"op": "block", "amount": 8},
+          {"op": "draw", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "detect-magic",
+      "name": "Detect Magic",
+      "icon": "spell_holy_dizzy",
+      "spellId": 2855,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "arcane",
+      "cost": 0,
+      "target": "self",
+      "flags": [],
+      "text": "Look at the top 3 cards of your draw pile; discard any. Draw 1 card.",
+      "effects": [
+        {"op": "scry", "count": 3},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Detect Magic (Rank 2)",
+        "cost": 0,
+        "text": "Look at the top 5 cards of your draw pile; discard any. Draw 1 card.",
+        "effects": [
+          {"op": "scry", "count": 5},
+          {"op": "draw", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "polymorph",
+      "name": "Polymorph",
+      "icon": "spell_nature_polymorph",
+      "spellId": 118,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "arcane",
+      "cost": 2,
+      "target": "enemy",
+      "flags": ["exhaust"],
+      "text": "Put an enemy to Sleep for 2 turns (damage wakes it). Exhaust.",
+      "effects": [
+        {"op": "apply", "status": "sleep", "stacks": 1, "target": "enemy", "duration": 2}
+      ],
+      "upgrade": {
+        "name": "Polymorph (Rank 2)",
+        "cost": 1,
+        "text": "Put an enemy to Sleep for 2 turns (damage wakes it). Exhaust. Costs 1.",
+        "effects": [
+          {"op": "apply", "status": "sleep", "stacks": 1, "target": "enemy", "duration": 2}
+        ]
+      }
+    },
+    {
+      "id": "blast-wave",
+      "name": "Blast Wave",
+      "icon": "spell_holy_excorcism_02",
+      "spellId": 11113,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "fire",
+      "cost": 2,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Deal 10 fire damage to ALL enemies. Apply 2 Weak to ALL. Gain 1 Ignite.",
+      "effects": [
+        {"op": "damage", "amount": 10, "school": "fire", "target": "all_enemies"},
+        {"op": "apply", "status": "weak", "stacks": 2, "target": "all_enemies"},
+        {"op": "gain_resource", "resource": "ignite", "amount": 1}
+      ],
+      "upgrade": {
+        "name": "Blast Wave (Rank 2)",
+        "cost": 2,
+        "text": "Deal 14 fire damage to ALL enemies. Apply 2 Weak to ALL. Gain 2 Ignite.",
+        "effects": [
+          {"op": "damage", "amount": 14, "school": "fire", "target": "all_enemies"},
+          {"op": "apply", "status": "weak", "stacks": 2, "target": "all_enemies"},
+          {"op": "gain_resource", "resource": "ignite", "amount": 2}
+        ]
+      }
+    },
+    {
+      "id": "flamestrike",
+      "name": "Flamestrike",
+      "icon": "spell_fire_selfdestruct",
+      "spellId": 2120,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "fire",
+      "cost": 2,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Deal 12 fire damage to ALL enemies. Apply 4 Burn to ALL. Gain 2 Ignite.",
+      "effects": [
+        {"op": "damage", "amount": 12, "school": "fire", "target": "all_enemies"},
+        {"op": "apply", "status": "burn", "stacks": 4, "target": "all_enemies"},
+        {"op": "gain_resource", "resource": "ignite", "amount": 2}
+      ],
+      "upgrade": {
+        "name": "Flamestrike (Rank 2)",
+        "cost": 2,
+        "text": "Deal 16 fire damage to ALL enemies. Apply 6 Burn to ALL. Gain 2 Ignite.",
+        "effects": [
+          {"op": "damage", "amount": 16, "school": "fire", "target": "all_enemies"},
+          {"op": "apply", "status": "burn", "stacks": 6, "target": "all_enemies"},
+          {"op": "gain_resource", "resource": "ignite", "amount": 2}
+        ]
+      }
+    },
+    {
+      "id": "mage-armor",
+      "name": "Mage Armor",
+      "icon": "spell_magearmor",
+      "spellId": 6117,
+      "rank": 1,
+      "type": "power",
+      "rarity": "uncommon",
+      "archetype": "arcane",
+      "cost": 2,
+      "target": "self",
+      "flags": [],
+      "text": "Power. Gain 1 Energized (+1 energy each turn).",
+      "effects": [
+        {"op": "apply", "status": "energized", "stacks": 1, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Mage Armor (Rank 2)",
+        "cost": 1,
+        "text": "Power. Gain 1 Energized (+1 energy each turn). Costs 1.",
+        "effects": [
+          {"op": "apply", "status": "energized", "stacks": 1, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "ice-barrier",
+      "name": "Ice Barrier",
+      "icon": "spell_ice_lament",
+      "spellId": 11426,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "frost",
+      "cost": 2,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 14 Block and 2 Thorns.",
+      "effects": [
+        {"op": "block", "amount": 14},
+        {"op": "apply", "status": "thorns", "stacks": 2, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Ice Barrier (Rank 2)",
+        "cost": 2,
+        "text": "Gain 18 Block and 3 Thorns.",
+        "effects": [
+          {"op": "block", "amount": 18},
+          {"op": "apply", "status": "thorns", "stacks": 3, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "presence-of-mind",
+      "name": "Presence of Mind",
+      "icon": "spell_nature_enchantarmor",
+      "spellId": 12043,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "arcane",
+      "cost": 0,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Gain 1 energy. Draw 1 card. Exhaust.",
+      "effects": [
+        {"op": "gain_energy", "amount": 1},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Presence of Mind (Rank 2)",
+        "cost": 0,
+        "text": "Gain 1 energy. Draw 2 cards. Exhaust.",
+        "effects": [
+          {"op": "gain_energy", "amount": 1},
+          {"op": "draw", "count": 2}
+        ]
+      }
+    },
+    {
+      "id": "cold-snap",
+      "name": "Cold Snap",
+      "icon": "spell_frost_wizardmark",
+      "spellId": 12472,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "frost",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "If the enemy is Weak or Frozen: deal 14 frost damage. Else deal 7 and apply 2 Weak.",
+      "effects": [
+        {
+          "op": "conditional",
+          "if": {"type": "status_on_target", "status": "weak"},
+          "then": [
+            {"op": "damage", "amount": 14, "school": "frost"}
+          ],
+          "else": [
+            {"op": "damage", "amount": 7, "school": "frost"},
+            {"op": "apply", "status": "weak", "stacks": 2, "target": "enemy"}
+          ]
+        }
+      ],
+      "upgrade": {
+        "name": "Cold Snap (Rank 2)",
+        "cost": 1,
+        "text": "If the enemy is Weak or Frozen: deal 18 frost damage. Else deal 10 and apply 3 Weak.",
+        "effects": [
+          {
+            "op": "conditional",
+            "if": {"type": "status_on_target", "status": "weak"},
+            "then": [
+              {"op": "damage", "amount": 18, "school": "frost"}
+            ],
+            "else": [
+              {"op": "damage", "amount": 10, "school": "frost"},
+              {"op": "apply", "status": "weak", "stacks": 3, "target": "enemy"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "evocation",
+      "name": "Evocation",
+      "icon": "spell_nature_purge",
+      "spellId": 12051,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "arcane",
+      "cost": 1,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Gain 3 energy. Exhaust.",
+      "effects": [
+        {"op": "gain_energy", "amount": 3}
+      ],
+      "upgrade": {
+        "name": "Evocation (Rank 2)",
+        "cost": 0,
+        "text": "Gain 3 energy. Exhaust. Costs 0.",
+        "effects": [
+          {"op": "gain_energy", "amount": 3}
+        ]
+      }
+    },
+    {
+      "id": "conjure-mana-gem",
+      "name": "Conjure Mana Gem",
+      "icon": "inv_misc_gem_emerald_01",
+      "spellId": 759,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "arcane",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Add 1 Conjured Mana Gem to your hand.",
+      "effects": [
+        {"op": "add_card", "card": "conjured-mana-gem", "to": "hand", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Conjure Mana Gem (Rank 2)",
+        "cost": 1,
+        "text": "Add 2 Conjured Mana Gems to your hand.",
+        "effects": [
+          {"op": "add_card", "card": "conjured-mana-gem", "to": "hand", "count": 2}
+        ]
+      }
+    },
+    {
+      "id": "frost-ward",
+      "name": "Frost Ward",
+      "icon": "spell_frost_frostward",
+      "spellId": 6143,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "frost",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 8 Block. Draw 1 card.",
+      "effects": [
+        {"op": "block", "amount": 8},
+        {"op": "draw", "count": 1}
+      ],
+      "upgrade": {
+        "name": "Frost Ward (Rank 2)",
+        "cost": 1,
+        "text": "Gain 11 Block. Draw 1 card.",
+        "effects": [
+          {"op": "block", "amount": 11},
+          {"op": "draw", "count": 1}
+        ]
+      }
+    },
+    {
+      "id": "teleport-stormwind",
+      "name": "Teleport: Stormwind",
+      "icon": "spell_arcane_teleportstormwind",
+      "spellId": 3561,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "arcane",
+      "cost": 1,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Gain 12 Block and 1 Stealth. Exhaust.",
+      "effects": [
+        {"op": "block", "amount": 12},
+        {"op": "apply", "status": "stealth", "stacks": 1, "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Teleport: Stormwind (Rank 2)",
+        "cost": 1,
+        "text": "Gain 16 Block and 1 Stealth. Exhaust.",
+        "effects": [
+          {"op": "block", "amount": 16},
+          {"op": "apply", "status": "stealth", "stacks": 1, "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "teleport-ironforge",
+      "name": "Teleport: Ironforge",
+      "icon": "spell_arcane_teleportironforge",
+      "spellId": 3562,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "arcane",
+      "cost": 1,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Draw 3 cards. Gain 1 Energy. Exhaust.",
+      "effects": [
+        {"op": "draw", "count": 3},
+        {"op": "gain_energy", "amount": 1}
+      ],
+      "upgrade": {
+        "name": "Teleport: Ironforge (Rank 2)",
+        "cost": 1,
+        "text": "Draw 4 cards. Gain 1 Energy. Exhaust.",
+        "effects": [
+          {"op": "draw", "count": 4},
+          {"op": "gain_energy", "amount": 1}
+        ]
+      }
+    },
+    {
+      "id": "combustion",
+      "name": "Combustion",
+      "icon": "spell_fire_sealoffire",
+      "spellId": 11129,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "rare",
+      "archetype": "fire",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "If you have 3+ Ignite: deal 22 fire damage, spend all Ignite, apply 4 Burn. Else deal 8, apply 2 Burn.",
+      "effects": [
+        {
+          "op": "conditional",
+          "if": {"type": "resource_at_least", "resource": "ignite", "amount": 3},
+          "then": [
+            {"op": "damage", "amount": 22, "school": "fire"},
+            {"op": "spend_resource", "resource": "ignite", "all": true},
+            {"op": "apply", "status": "burn", "stacks": 4, "target": "enemy"}
+          ],
+          "else": [
+            {"op": "damage", "amount": 8, "school": "fire"},
+            {"op": "apply", "status": "burn", "stacks": 2, "target": "enemy"}
+          ]
+        }
+      ],
+      "upgrade": {
+        "name": "Combustion (Rank 2)",
+        "cost": 1,
+        "text": "If you have 3+ Ignite: deal 30 fire damage, spend all Ignite, apply 5 Burn. Else deal 11, apply 2 Burn.",
+        "effects": [
+          {
+            "op": "conditional",
+            "if": {"type": "resource_at_least", "resource": "ignite", "amount": 3},
+            "then": [
+              {"op": "damage", "amount": 30, "school": "fire"},
+              {"op": "spend_resource", "resource": "ignite", "all": true},
+              {"op": "apply", "status": "burn", "stacks": 5, "target": "enemy"}
+            ],
+            "else": [
+              {"op": "damage", "amount": 11, "school": "fire"},
+              {"op": "apply", "status": "burn", "stacks": 2, "target": "enemy"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "ice-block",
+      "name": "Ice Block",
+      "icon": "spell_frost_frost",
+      "spellId": 11958,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "frost",
+      "cost": 2,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Become Intangible for 1 turn and remove all debuffs. Exhaust.",
+      "effects": [
+        {"op": "apply", "status": "intangible", "stacks": 1, "target": "self", "duration": 1},
+        {"op": "remove", "status": "weak", "target": "self"},
+        {"op": "remove", "status": "frail", "target": "self"},
+        {"op": "remove", "status": "vulnerable", "target": "self"}
+      ],
+      "upgrade": {
+        "name": "Ice Block (Rank 2)",
+        "cost": 1,
+        "text": "Become Intangible for 1 turn and remove all debuffs. Exhaust. Costs 1.",
+        "effects": [
+          {"op": "apply", "status": "intangible", "stacks": 1, "target": "self", "duration": 1},
+          {"op": "remove", "status": "weak", "target": "self"},
+          {"op": "remove", "status": "frail", "target": "self"},
+          {"op": "remove", "status": "vulnerable", "target": "self"}
+        ]
+      }
+    },
+    {
+      "id": "arcane-power",
+      "name": "Arcane Power",
+      "icon": "spell_nature_lightning",
+      "spellId": 12042,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "arcane",
+      "cost": 1,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Gain 4 Strength this turn and 2 Arcane Charges. Exhaust.",
+      "effects": [
+        {"op": "apply", "status": "strength", "stacks": 4, "target": "self", "duration": 1},
+        {"op": "gain_resource", "resource": "arcane_charges", "amount": 2}
+      ],
+      "upgrade": {
+        "name": "Arcane Power (Rank 2)",
+        "cost": 1,
+        "text": "Gain 6 Strength this turn and 2 Arcane Charges. Exhaust.",
+        "effects": [
+          {"op": "apply", "status": "strength", "stacks": 6, "target": "self", "duration": 1},
+          {"op": "gain_resource", "resource": "arcane_charges", "amount": 2}
+        ]
+      }
+    },
+    {
+      "id": "arcane-brilliance",
+      "name": "Arcane Brilliance",
+      "icon": "spell_holy_arcaneintellect",
+      "spellId": 23028,
+      "rank": 1,
+      "type": "power",
+      "rarity": "rare",
+      "archetype": "arcane",
+      "cost": 2,
+      "target": "self",
+      "flags": [],
+      "text": "Power. Gain 1 Strength and 3 Arcane Charges.",
+      "effects": [
+        {"op": "apply", "status": "strength", "stacks": 1, "target": "self"},
+        {"op": "gain_resource", "resource": "arcane_charges", "amount": 3}
+      ],
+      "upgrade": {
+        "name": "Arcane Brilliance (Rank 2)",
+        "cost": 1,
+        "text": "Power. Gain 1 Strength and 3 Arcane Charges. Costs 1.",
+        "effects": [
+          {"op": "apply", "status": "strength", "stacks": 1, "target": "self"},
+          {"op": "gain_resource", "resource": "arcane_charges", "amount": 3}
+        ]
+      }
+    },
+    {
+      "id": "blizzard",
+      "name": "Blizzard",
+      "icon": "spell_frost_icestorm",
+      "spellId": 10,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "rare",
+      "archetype": "frost",
+      "cost": 2,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Deal 4 frost damage to ALL enemies 3 times. Apply 1 Weak to ALL.",
+      "effects": [
+        {"op": "damage", "amount": 4, "school": "frost", "target": "all_enemies", "times": 3},
+        {"op": "apply", "status": "weak", "stacks": 1, "target": "all_enemies"}
+      ],
+      "upgrade": {
+        "name": "Blizzard (Rank 2)",
+        "cost": 2,
+        "text": "Deal 6 frost damage to ALL enemies 3 times. Apply 2 Weak to ALL.",
+        "effects": [
+          {"op": "damage", "amount": 6, "school": "frost", "target": "all_enemies", "times": 3},
+          {"op": "apply", "status": "weak", "stacks": 2, "target": "all_enemies"}
+        ]
+      }
+    },
+    {
+      "id": "cone-of-cold",
+      "name": "Cone of Cold",
+      "icon": "spell_frost_glacier",
+      "spellId": 120,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "rare",
+      "archetype": "frost",
+      "cost": 2,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Deal 12 frost damage to ALL enemies. Apply 2 Weak to ALL.",
+      "effects": [
+        {"op": "damage", "amount": 12, "school": "frost", "target": "all_enemies"},
+        {"op": "apply", "status": "weak", "stacks": 2, "target": "all_enemies"}
+      ],
+      "upgrade": {
+        "name": "Cone of Cold (Rank 2)",
+        "cost": 2,
+        "text": "Deal 16 frost damage to ALL enemies. Apply 3 Weak to ALL.",
+        "effects": [
+          {"op": "damage", "amount": 16, "school": "frost", "target": "all_enemies"},
+          {"op": "apply", "status": "weak", "stacks": 3, "target": "all_enemies"}
+        ]
+      }
+    },
+    {
+      "id": "portal-ironforge",
+      "name": "Portal: Ironforge",
+      "icon": "spell_arcane_portalironforge",
+      "spellId": 11416,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "arcane",
+      "cost": 2,
+      "target": "self",
+      "flags": ["exhaust"],
+      "text": "Gain 14 Block and draw 3 cards. Exhaust.",
+      "effects": [
+        {"op": "block", "amount": 14},
+        {"op": "draw", "count": 3}
+      ],
+      "upgrade": {
+        "name": "Portal: Ironforge (Rank 2)",
+        "cost": 1,
+        "text": "Gain 18 Block and draw 3 cards. Exhaust. Costs 1.",
+        "effects": [
+          {"op": "block", "amount": 18},
+          {"op": "draw", "count": 3}
+        ]
+      }
+    },
+    {
+      "id": "pyroblast",
+      "name": "Pyroblast",
+      "icon": "spell_fire_fireball02",
+      "spellId": 11366,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "epic",
+      "archetype": "fire",
+      "cost": 3,
+      "target": "enemy",
+      "flags": [],
+      "text": "If you have 3+ Ignite: deal 38 fire damage, spend all Ignite, apply 5 Burn. Else deal 22, apply 3 Burn.",
+      "effects": [
+        {
+          "op": "conditional",
+          "if": {"type": "resource_at_least", "resource": "ignite", "amount": 3},
+          "then": [
+            {"op": "damage", "amount": 38, "school": "fire"},
+            {"op": "spend_resource", "resource": "ignite", "all": true},
+            {"op": "apply", "status": "burn", "stacks": 5, "target": "enemy"}
+          ],
+          "else": [
+            {"op": "damage", "amount": 22, "school": "fire"},
+            {"op": "apply", "status": "burn", "stacks": 3, "target": "enemy"}
+          ]
+        }
+      ],
+      "upgrade": {
+        "name": "Pyroblast (Rank 2)",
+        "cost": 3,
+        "text": "If you have 3+ Ignite: deal 50 fire damage, spend all Ignite, apply 6 Burn. Else deal 30, apply 4 Burn.",
+        "effects": [
+          {
+            "op": "conditional",
+            "if": {"type": "resource_at_least", "resource": "ignite", "amount": 3},
+            "then": [
+              {"op": "damage", "amount": 50, "school": "fire"},
+              {"op": "spend_resource", "resource": "ignite", "all": true},
+              {"op": "apply", "status": "burn", "stacks": 6, "target": "enemy"}
+            ],
+            "else": [
+              {"op": "damage", "amount": 30, "school": "fire"},
+              {"op": "apply", "status": "burn", "stacks": 4, "target": "enemy"}
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

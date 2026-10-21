@@ -1,0 +1,439 @@
+{
+ "id": "wetlands",
+ "name": "Wetlands",
+ "start": {"name": "Menethil Harbor Inn", "icon": "inv_misc_beer_01"},
+ "continent": "ek",
+ "act": 3,
+ "levelBand": [
+  20,
+  30
+ ],
+ "spire": {
+  "name": "Grim Batol Gate",
+  "lore": "The Dragonmaw orcs hold the road to Grim Batol from their Gates in the eastern Wetlands. Menethil Harbor sees black smoke and red whelps over the fen."
+ },
+ "theme": {
+  "primary": "#4c7a5a",
+  "secondary": "#15251c",
+  "accent": "#c6d98a",
+  "background": "swamp"
+ },
+ "zoneMechanic": {
+  "id": "dragons-breath",
+  "name": "Dragon's Breath",
+  "icon": "spell_fire_selfdestruct",
+  "text": "Every 4th turn a dragon's breath scorches the fen, dealing 8 fire damage to you and every enemy.",
+  "hooks": {
+   "on_turn_start": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "turn_number",
+      "every": 4
+     },
+     "then": [
+      {
+       "op": "damage",
+       "amount": 8,
+       "target": "self",
+       "school": "fire"
+      },
+      {
+       "op": "damage",
+       "amount": 8,
+       "target": "all_enemies",
+       "school": "fire"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "menethil-inn",
+  "name": "The Welcome Inn",
+  "icon": "inv_drink_05",
+  "text": "Take a berth at Menethil Harbor's Welcome Inn: heal 25% of max HP and gain 6 Block.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 25,
+    "target": "self"
+   },
+   {
+    "op": "block",
+    "amount": 6,
+    "target": "self"
+   }
+  ]
+ },
+ "enemiesFile": "wetlands.enemies.json",
+ "encounters": {
+  "normal": [
+   [
+    "mosshide-gnoll",
+    "mosshide-gnoll"
+   ],
+   [
+    "bluegill-forager",
+    "bluegill-forager",
+    "bluegill-muckdweller"
+   ],
+   [
+    "wetlands-crocolisk",
+    "wetlands-crocolisk"
+   ],
+   [
+    "dragonmaw-grunt",
+    "dragonmaw-grunt"
+   ],
+   [
+    "red-whelp",
+    "red-whelp"
+   ],
+   [
+    "raptor",
+    "raptor",
+    "fen-creeper"
+   ],
+   [
+    "mosshide-mongrel",
+    "mosshide-trapper"
+   ],
+   [
+    "bluegill-puddlejumper",
+    "bluegill-warrior"
+   ],
+   [
+    "giant-wetlands-crocolisk",
+    "plague-lurker"
+   ],
+   [
+    "dragonmaw-scout",
+    "dragonmaw-swamprunner"
+   ],
+   [
+    "mosshide-brute",
+    "mosshide-fenrunner"
+   ],
+   [
+    "dragonmaw-raider",
+    "dragonmaw-bonewarder"
+   ],
+   [
+    "black-dragon-whelp",
+    "red-whelp"
+   ],
+   [
+    "mosshide-alpha",
+    "mosshide-mistweaver"
+   ],
+   [
+    "bluegill-raider",
+    "bluegill-forager",
+    "bluegill-forager"
+   ],
+   [
+    "dragonmaw-shadowwarder",
+    "dragonmaw-grunt",
+    "dragonmaw-grunt"
+   ],
+   [
+    "dark-iron-dwarf",
+    "dark-iron-dwarf",
+    "fen-creeper"
+   ],
+   [
+    "dragonmaw-battlemaster",
+    "dragonmaw-scout"
+   ],
+   [
+    "plague-lurker",
+    "giant-wetlands-crocolisk",
+    "raptor"
+   ],
+   [
+    "dragonmaw-bonewarder",
+    "dragonmaw-raider",
+    "dragonmaw-raider"
+   ]
+  ],
+  "elite": [
+   [
+    "razormaw-matriarch",
+    "raptor",
+    "raptor"
+   ],
+   [
+    "sarltooth",
+    "raptor"
+   ],
+   [
+    "dragonmaw-centurion",
+    "dragonmaw-grunt",
+    "dragonmaw-grunt"
+   ]
+  ],
+  "boss": [
+   [
+    "maruk-wyrmscale",
+    "dragonmaw-raider",
+    "dragonmaw-raider"
+   ],
+   [
+    "maruk-wyrmscale",
+    "dragonmaw-shadowwarder",
+    "dragonmaw-battlemaster"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "id": "menethil-harbor",
+   "name": "Menethil Harbor",
+   "icon": "inv_misc_head_human_01",
+   "text": "Menethil Harbor's harbormaster pays dockhands to haul crates before the next boat.",
+   "options": [
+    {
+     "label": "Haul crates (take 4 damage, +40 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 4,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 40
+      }
+     ]
+    },
+    {
+     "label": "Warm up in the Welcome Inn (heal 8)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 8,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Board a boat... and wait",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "dun-modr",
+   "name": "Dun Modr",
+   "icon": "inv_misc_head_dwarf_01",
+   "text": "The dwarven fortress of Dun Modr guards the Thandol Span. Its captain wants a patrol sent to the Wetlands road.",
+   "options": [
+    {
+     "label": "Walk the patrol (take 6 damage, +45 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 45
+      }
+     ]
+    },
+    {
+     "label": "Rest in the garrison (heal 10)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 10,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Pass on",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "angerfang-encampment",
+   "name": "Angerfang Encampment",
+   "icon": "inv_misc_head_orc_01",
+   "text": "The Dragonmaw outpost at Angerfang Encampment stores war supplies behind thin palisades.",
+   "options": [
+    {
+     "label": "Raid the camp (take 8 damage, gain a card reward)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 8,
+       "target": "self"
+      },
+      {
+       "op": "random_card",
+       "pool": "class",
+       "rarity": "rare",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Burn their stores (+25 gold)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 25
+      }
+     ]
+    },
+    {
+     "label": "Stay hidden",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "ironbeards-tomb",
+   "name": "Ironbeard's Tomb",
+   "icon": "inv_misc_bone_humanskull_01",
+   "text": "The tomb of the Wildhammer hero Ironbeard lies in a flooded cave, its gold untouched.",
+   "options": [
+    {
+     "label": "Dive for the gold (take 5 damage, +50 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 5,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 50
+      }
+     ]
+    },
+    {
+     "label": "Pay your respects (heal 6)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 6,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Leave the tomb",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "whelgar-excavation",
+   "name": "Whelgar's Excavation Site",
+   "icon": "inv_pick_02",
+   "text": "Dwarven archaeologists beg for hands to haul relics through the mud.",
+   "options": [
+    {
+     "label": "Haul relics (take 4 damage, +35 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 4,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 35
+      }
+     ]
+    },
+    {
+     "label": "Study the finds (gain a card reward, take 6 damage)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "random_card",
+       "pool": "class",
+       "rarity": "uncommon",
+       "to": "deck_permanent"
+      }
+     ]
+    },
+    {
+     "label": "Decline",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "dragonmaw-shortsword",
+   "name": "Dragonmaw Shortsword",
+   "icon": "inv_sword_01",
+   "rarity": "uncommon",
+   "itemId": 753,
+   "zone": "wetlands",
+   "class": null,
+   "text": "Dragonmaw blade. Start each combat with 1 Strength.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "strength",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "dragonmaw-chain-boots",
+   "name": "Dragonmaw Chain Boots",
+   "icon": "inv_boots_chain_01",
+   "rarity": "uncommon",
+   "itemId": 1955,
+   "zone": "wetlands",
+   "class": null,
+   "text": "Dragonmaw boots. Gain 2 Block at the start of each turn.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "block",
+      "amount": 2,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "bluegill-kukri",
+   "name": "Bluegill Kukri",
+   "icon": "inv_weapon_shortblade_01",
+   "rarity": "common",
+   "itemId": 2046,
+   "zone": "wetlands",
+   "class": null,
+   "text": "Murloc curved blade. Deal 2 damage to a random enemy at the start of each combat.",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "damage",
+      "amount": 2,
+      "target": "enemy"
+     }
+    ]
+   }
+  }
+ ]
+}

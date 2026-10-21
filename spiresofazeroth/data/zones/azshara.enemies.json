@@ -1,0 +1,165 @@
+[
+ {"id":"spitelash-warrior","name":"Spitelash Warrior","tier":"normal","family":"humanoid","type":"naga","level":[46,48],"hp":[48,56],"icon":"achievement_boss_nagabruteboss","npcId":null,"traits":[],
+  "moves":[
+   {"id":"trident-slash","name":"Trident Slash","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":2},
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":8,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"frenzy","name":"Frenzy","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":1,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"spitelash-screamer","name":"Spitelash Screamer","tier":"normal","family":"humanoid","type":"naga","level":[47,49],"hp":[51,60],"icon":"achievement_boss_elitenagamale","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"sonic-scream","name":"Sonic Scream","intent":"cast","effects":[{"op":"damage","amount":8,"school":"nature"},{"op":"apply","status":"silence","stacks":1,"target":"player"}],"cast":true,"weight":2},
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":7}],"weight":2},
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":8,"school":"nature"}],"cast":true,"weight":2}
+  ]},
+ {"id":"spitelash-siren","name":"Spitelash Siren","tier":"normal","family":"humanoid","type":"naga","level":[47,49],"hp":[51,60],"icon":"achievement_boss_elitenagamale","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":8,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"frost-shock","name":"Frost Shock","intent":"cast","effects":[{"op":"damage","amount":6,"school":"frost"},{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":2},
+   {"id":"siren-song","name":"Siren Song","intent":"cast","effects":[{"op":"apply","status":"sleep","stacks":1,"target":"player"}],"cast":true,"weight":1,"cooldown":4}
+  ]},
+ {"id":"spitelash-witch","name":"Spitelash Witch","tier":"normal","family":"humanoid","type":"naga","level":[48,50],"hp":[54,64],"icon":"achievement_boss_elitenagamale","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"frostbolt","name":"Frostbolt","intent":"cast","effects":[{"op":"damage","amount":10,"school":"frost"},{"op":"apply","status":"weak","stacks":1,"target":"player"}],"cast":true,"weight":2},
+   {"id":"curse-of-weakness","name":"Curse of Weakness","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"cast":true,"weight":2,"cooldown":3},
+   {"id":"healing-wave","name":"Healing Wave","intent":"heal","effects":[{"op":"heal","amount":11,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"spitelash-raider","name":"Spitelash Raider","tier":"normal","family":"humanoid","type":"naga","level":[49,51],"hp":[63,74],"icon":"achievement_boss_nagabruteboss","npcId":null,"traits":[],
+  "moves":[
+   {"id":"trident-slash","name":"Trident Slash","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":2},
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":10,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"frenzy","name":"Frenzy","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":1,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"spitelash-battlemaster","name":"Spitelash Battlemaster","tier":"normal","family":"humanoid","type":"naga","level":[51,53],"hp":[80,94],"icon":"achievement_boss_nagabruteboss","npcId":null,"traits":[],
+  "moves":[
+   {"id":"trident-slash","name":"Trident Slash","intent":"attack","effects":[{"op":"damage","amount":16}],"weight":2},
+   {"id":"cleave","name":"Cleave","intent":"attack_multi","effects":[{"op":"damage","amount":8,"times":2}],"weight":2},
+   {"id":"battle-shout","name":"Battle Shout","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"spitelash-enchantress","name":"Spitelash Enchantress","tier":"normal","family":"humanoid","type":"naga","level":[50,52],"hp":[61,71],"icon":"achievement_boss_elitenagamale","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"arcane-missiles","name":"Arcane Missiles","intent":"cast","effects":[{"op":"damage","amount":9,"school":"arcane"}],"cast":true,"weight":2},
+   {"id":"siren-song","name":"Siren Song","intent":"cast","effects":[{"op":"apply","status":"sleep","stacks":1,"target":"player"}],"cast":true,"weight":2,"cooldown":4},
+   {"id":"mana-shield","name":"Mana Shield","intent":"block","effects":[{"op":"block","amount":13,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"legashi-satyr","name":"Legashi Satyr","tier":"normal","family":"demon","type":"satyr","level":[47,49],"hp":[51,60],"icon":"spell_shadow_summonfelhunter","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":9,"school":"shadow"}],"cast":true,"weight":2},
+   {"id":"immolate","name":"Immolate","intent":"cast","effects":[{"op":"damage","amount":6,"school":"fire"},{"op":"apply","status":"burn","stacks":2,"target":"player"}],"cast":true,"weight":2},
+   {"id":"curse-of-weakness","name":"Curse of Weakness","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"cast":true,"weight":2,"cooldown":3}
+  ]},
+ {"id":"legashi-rogue","name":"Legashi Rogue","tier":"normal","family":"demon","type":"satyr","level":[47,49],"hp":[51,60],"icon":"spell_shadow_summonfelhunter","npcId":null,"traits":[],
+  "moves":[
+   {"id":"rake","name":"Rake","intent":"attack","effects":[{"op":"damage","amount":8}],"weight":2},
+   {"id":"dual-strike","name":"Dual Strike","intent":"attack_multi","effects":[{"op":"damage","amount":5,"times":2}],"weight":2},
+   {"id":"sap","name":"Sap","intent":"debuff","effects":[{"op":"apply","status":"stun","stacks":1,"target":"player"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"legashi-hellcaller","name":"Legashi Hellcaller","tier":"normal","family":"demon","type":"satyr","level":[48,50],"hp":[54,64],"icon":"spell_fire_felflamebolt","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"rain-of-fire","name":"Rain of Fire","intent":"cast","effects":[{"op":"damage","amount":8,"school":"fire"},{"op":"apply","status":"burn","stacks":2,"target":"player"}],"cast":true,"weight":2},
+   {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":10,"school":"shadow"}],"cast":true,"weight":2},
+   {"id":"summon-imp","name":"Summon Imp","intent":"summon","effects":[{"op":"summon","unit":"imp","count":1}],"weight":1,"cooldown":5}
+  ]},
+ {"id":"haldarr-satyr","name":"Haldarr Satyr","tier":"normal","family":"demon","type":"satyr","level":[49,51],"hp":[58,68],"icon":"spell_shadow_summonfelhunter","npcId":null,"traits":[],
+  "moves":[
+   {"id":"rake","name":"Rake","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":2},
+   {"id":"dual-strike","name":"Dual Strike","intent":"attack_multi","effects":[{"op":"damage","amount":5,"times":2}],"weight":2},
+   {"id":"sap","name":"Sap","intent":"debuff","effects":[{"op":"apply","status":"stun","stacks":1,"target":"player"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"haldarr-trickster","name":"Haldarr Trickster","tier":"normal","family":"demon","type":"satyr","level":[50,52],"hp":[61,71],"icon":"spell_shadow_summonfelhunter","npcId":null,"traits":[],
+  "moves":[
+   {"id":"backstab","name":"Backstab","intent":"attack","effects":[{"op":"damage","amount":13}],"weight":2},
+   {"id":"cheap-shot","name":"Cheap Shot","intent":"debuff","effects":[{"op":"apply","status":"stun","stacks":1,"target":"player"}],"weight":2,"cooldown":4},
+   {"id":"poison","name":"Poison","intent":"attack","effects":[{"op":"damage","amount":6,"school":"nature"},{"op":"apply","status":"poison","stacks":3,"target":"player"}],"weight":2}
+  ]},
+ {"id":"haldarr-felsworn","name":"Haldarr Felsworn","tier":"normal","family":"demon","type":"satyr","level":[51,53],"hp":[70,83],"icon":"spell_shadow_summonvoidwalker","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","effects":[{"op":"damage","amount":12,"school":"shadow"}],"cast":true,"weight":2},
+   {"id":"immolate","name":"Immolate","intent":"cast","effects":[{"op":"damage","amount":9,"school":"fire"},{"op":"apply","status":"burn","stacks":2,"target":"player"}],"cast":true,"weight":2},
+   {"id":"curse-of-weakness","name":"Curse of Weakness","intent":"cast","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"cast":true,"weight":2,"cooldown":3}
+  ]},
+ {"id":"thunderhead-hippogryph","name":"Thunderhead Hippogryph","tier":"normal","family":"beast","type":"hippogryph","level":[48,50],"hp":[54,64],"icon":"ability_hunter_pet_windserpent","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"wing-buffet","name":"Wing Buffet","intent":"attack","effects":[{"op":"damage","amount":8}],"weight":2},
+   {"id":"dive","name":"Dive","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2,"cooldown":3},
+   {"id":"screech","name":"Screech","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":1}
+  ]},
+ {"id":"thunderhead-stagwing","name":"Thunderhead Stagwing","tier":"normal","family":"beast","type":"hippogryph","level":[49,51],"hp":[63,74],"icon":"ability_hunter_pet_windserpent","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"wing-buffet","name":"Wing Buffet","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":2},
+   {"id":"dive","name":"Dive","intent":"attack","effects":[{"op":"damage","amount":16}],"weight":2,"cooldown":3},
+   {"id":"screech","name":"Screech","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":1}
+  ]},
+ {"id":"thunderhead-skystormer","name":"Thunderhead Skystormer","tier":"normal","family":"beast","type":"hippogryph","level":[50,52],"hp":[61,71],"icon":"ability_hunter_pet_windserpent","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":11,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"dive","name":"Dive","intent":"attack","effects":[{"op":"damage","amount":15}],"weight":2,"cooldown":3},
+   {"id":"static-storm","name":"Static Storm","intent":"attack","effects":[{"op":"damage","amount":6,"school":"nature","target":"all_enemies"}],"weight":2,"cooldown":4}
+  ]},
+ {"id":"thunderhead-consort","name":"Thunderhead Consort","tier":"normal","family":"beast","type":"hippogryph","level":[50,52],"hp":[70,82],"icon":"ability_hunter_pet_windserpent","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"wing-buffet","name":"Wing Buffet","intent":"attack","effects":[{"op":"damage","amount":10}],"weight":2},
+   {"id":"dive","name":"Dive","intent":"attack","effects":[{"op":"damage","amount":18}],"weight":2,"cooldown":3},
+   {"id":"screech","name":"Screech","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":1}
+  ]},
+ {"id":"blue-dragonspawn","name":"Blue Dragonspawn","tier":"normal","family":"dragonkin","type":"dragonspawn","level":[51,53],"hp":[64,75],"icon":"inv_misc_head_dragon_blue","npcId":null,"traits":["breath"],
+  "moves":[
+   {"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":2},
+   {"id":"frost-breath","name":"Frost Breath","intent":"attack","effects":[{"op":"damage","amount":9,"school":"frost","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"tail-sweep","name":"Tail Sweep","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":1}
+  ]},
+ {"id":"cliff-giant","name":"Cliff Giant","tier":"normal","family":"giant","type":"giant","level":[50,52],"hp":[76,89],"icon":"achievement_reputation_ogre","npcId":null,"traits":["slow","huge-hits"],
+  "moves":[
+   {"id":"boulder","name":"Boulder","intent":"attack","effects":[{"op":"damage","amount":24}],"weight":2,"cooldown":2},
+   {"id":"stomp","name":"Stomp","intent":"attack","effects":[{"op":"damage","amount":17}],"weight":2},
+   {"id":"earth-shock","name":"Earth Shock","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"player"}],"weight":1}
+  ]},
+ {"id":"salt-flats-scavenger","name":"Salt Flats Scavenger","tier":"normal","family":"beast","type":"vulture","level":[47,49],"hp":[51,60],"icon":"ability_hunter_pet_vulture","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"peck","name":"Peck","intent":"attack","effects":[{"op":"damage","amount":7}],"weight":2},
+   {"id":"carrion-rend","name":"Carrion Rend","intent":"attack","effects":[{"op":"damage","amount":6},{"op":"apply","status":"bleed","stacks":2,"target":"player"}],"weight":2},
+   {"id":"dive","name":"Dive","intent":"attack","effects":[{"op":"damage","amount":11}],"weight":2,"cooldown":3}
+  ]},
+ {"id":"salt-flats-vulture","name":"Salt Flats Vulture","tier":"normal","family":"beast","type":"vulture","level":[48,50],"hp":[60,70],"icon":"ability_hunter_pet_vulture","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"peck","name":"Peck","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":2},
+   {"id":"carrion-rend","name":"Carrion Rend","intent":"attack","effects":[{"op":"damage","amount":8},{"op":"apply","status":"bleed","stacks":2,"target":"player"}],"weight":2},
+   {"id":"dive","name":"Dive","intent":"attack","effects":[{"op":"damage","amount":14}],"weight":2,"cooldown":3}
+  ]},
+ {"id":"lady-sesspira","name":"Lady Sesspira","tier":"elite","family":"humanoid","type":"naga","level":[52,53],"hp":[168,197],"icon":"achievement_boss_elitenagamale","npcId":null,"traits":["caster"],
+  "moves":[
+   {"id":"frostbolt","name":"Frostbolt","intent":"cast","effects":[{"op":"damage","amount":22,"school":"frost"},{"op":"apply","status":"weak","stacks":2,"target":"player"}],"cast":true,"weight":2},
+   {"id":"frost-nova","name":"Frost Nova","intent":"attack","effects":[{"op":"damage","amount":11,"school":"frost","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":20,"school":"nature"}],"cast":true,"weight":2},
+   {"id":"ice-barrier","name":"Ice Barrier","intent":"block","effects":[{"op":"block","amount":18,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"soriata","name":"Soriata","tier":"elite","family":"humanoid","type":"naga","level":[52,53],"hp":[168,197],"icon":"achievement_boss_nagabruteboss","npcId":null,"traits":[],
+  "moves":[
+   {"id":"trident-thrust","name":"Trident Thrust","intent":"attack","effects":[{"op":"damage","amount":26}],"weight":2},
+   {"id":"cleave","name":"Cleave","intent":"attack_multi","effects":[{"op":"damage","amount":13,"times":2}],"weight":2},
+   {"id":"venom-stab","name":"Venom Stab","intent":"attack","effects":[{"op":"damage","amount":14,"school":"nature"},{"op":"apply","status":"poison","stacks":4,"target":"player"}],"weight":2},
+   {"id":"naga-frenzy","name":"Naga Frenzy","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}
+  ]},
+ {"id":"thunderhead-patriarch","name":"Thunderhead Patriarch","tier":"elite","family":"beast","type":"hippogryph","level":[52,54],"hp":[171,201],"icon":"ability_hunter_pet_windserpent","npcId":null,"traits":["flying"],
+  "moves":[
+   {"id":"dive","name":"Dive","intent":"attack","effects":[{"op":"damage","amount":30}],"weight":2,"cooldown":3},
+   {"id":"wing-buffet","name":"Wing Buffet","intent":"attack","effects":[{"op":"damage","amount":17}],"weight":2},
+   {"id":"thunder-gust","name":"Thunder Gust","intent":"attack","effects":[{"op":"damage","amount":11,"school":"nature","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"screech","name":"Screech","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":1}
+  ]},
+ {"id":"azuregos","name":"Azuregos","tier":"raid","family":"dragonkin","type":"dragon","level":[60,60],"hp":[560,620],"icon":"inv_misc_head_dragon_blue","npcId":6109,"traits":["breath","resist:arcane","boss-reflect"],"pattern":["mark-of-frost","chill","cleave","reflection","cleave"],
+  "moves":[
+   {"id":"mark-of-frost","name":"Mark of Frost","intent":"attack","effects":[{"op":"damage","amount":9,"school":"frost"},{"op":"apply","status":"frostbite","stacks":2,"target":"player"}],"weight":2},
+   {"id":"manastorm","name":"Manastorm","intent":"attack","effects":[{"op":"damage","amount":13,"school":"arcane","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"chill","name":"Chill","intent":"attack","effects":[{"op":"damage","amount":11,"school":"frost"},{"op":"apply","status":"weak","stacks":2,"target":"player"}],"weight":2},
+   {"id":"reflection","name":"Reflection","intent":"buff","effects":[{"op":"apply","status":"thorns","stacks":6,"target":"self"}],"weight":2,"cooldown":5},
+   {"id":"frost-breath","name":"Frost Breath","intent":"attack","effects":[{"op":"damage","amount":20,"school":"frost","target":"all_enemies"}],"weight":2,"cooldown":4},
+   {"id":"cleave","name":"Cleave","intent":"attack_multi","effects":[{"op":"damage","amount":14,"times":2}],"weight":2},
+   {"id":"teleport","name":"Teleport","intent":"debuff","effects":[{"op":"apply","status":"silence","stacks":1,"target":"player"}],"weight":2,"cooldown":6},
+   {"id":"tail-sweep","name":"Tail Sweep","intent":"attack","effects":[{"op":"damage","amount":18}],"weight":2}
+  ],
+  "phases":[
+   {"hpBelowPct":75,"pattern":["mark-of-frost","manastorm","cleave","chill","reflection"],"onEnter":[{"op":"apply","status":"armor","stacks":8,"target":"self"}]},
+   {"hpBelowPct":50,"pattern":["frost-breath","manastorm","teleport","cleave","reflection"],"onEnter":[{"op":"damage","amount":10,"school":"arcane","target":"all_enemies"}]},
+   {"hpBelowPct":25,"pattern":["frost-breath","manastorm","mark-of-frost","tail-sweep","frost-breath"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+  ]}
+]

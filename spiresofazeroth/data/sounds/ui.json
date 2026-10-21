@@ -1,0 +1,119 @@
+{
+ "enemy": {
+  "claw": {
+   "cast": {
+    "fdid": 3083955,
+    "url": "/media/sounds/3083955.mp3",
+    "name": "Dr Rake Revamp Cast 04",
+    "ms": 562
+   },
+   "impact": {
+    "fdid": 4629659,
+    "url": "/media/sounds/4629659.mp3",
+    "name": "10.0 Sabertooth Impact Claw Slash Rip 01",
+    "ms": 697
+   }
+  },
+  "bite": {
+   "cast": {
+    "fdid": 1738785,
+    "url": "/media/sounds/1738785.mp3",
+    "name": "Trilobite Attack 10",
+    "ms": 1167
+   },
+   "impact": {
+    "fdid": 4633594,
+    "url": "/media/sounds/4633594.mp3",
+    "name": "10.0 Dragon2 Chompbite 01",
+    "ms": 827
+   }
+  },
+  "steel": {
+   "cast": {
+    "fdid": 567938,
+    "url": "/media/sounds/567938.mp3",
+    "name": "MediumWeaponNormal",
+    "ms": 304
+   },
+   "impact": {
+    "fdid": 1247339,
+    "url": "/media/sounds/1247339.mp3",
+    "name": "1h Sword Hit Flesh 01",
+    "ms": 1044
+   }
+  },
+  "slam": {
+   "cast": {
+    "fdid": 1345553,
+    "url": "/media/sounds/1345553.mp3",
+    "name": "GO_7TR_TAUREN_WINDMILL03_rockSlam",
+    "ms": 1237
+   },
+   "impact": {
+    "fdid": 975564,
+    "url": "/media/sounds/975564.mp3",
+    "name": "SPELL_Grimelord_AnchorSlam_Impact (7.1 Helya Trash)",
+    "ms": 1534
+   }
+  },
+  "spit": {
+   "cast": {
+    "fdid": 554441,
+    "url": "/media/sounds/554441.mp3",
+    "name": "SPELL_PlantSpitter_Cast",
+    "ms": 1352
+   },
+   "impact": {
+    "fdid": 560703,
+    "url": "/media/sounds/560703.mp3",
+    "name": "Mon_Spires_SpitefulAnimate_Slime_Wound",
+    "ms": 864
+   }
+  }
+ },
+ "ui": {
+  "cardDraw": {
+   "fdid": 567472,
+   "url": "/media/sounds/567472.mp3",
+   "name": "igAbiliityPageTurn",
+   "ms": 633
+  },
+  "cardPlay": {
+   "fdid": 1302923,
+   "url": "/media/sounds/1302923.mp3",
+   "name": "Whoosh Small Revamp 01",
+   "ms": 370
+  },
+  "blockGain": {
+   "fdid": 1260401,
+   "url": "/media/sounds/1260401.mp3",
+   "name": "1h Macehit Mtl Metalshield 01",
+   "ms": 764
+  },
+  "enemyDeath": {
+   "fdid": 560605,
+   "url": "/media/sounds/560605.mp3",
+   "name": "MON_SkeletalRaptor_Death",
+   "ms": 801
+  },
+  "playerDeath": {
+   "fdid": 4737487,
+   "url": "/media/sounds/4737487.mp3",
+   "name": "Dracthyrmale Death 4737487",
+   "ms": 1737
+  },
+  "endTurn": {
+   "fdid": 567457,
+   "url": "/media/sounds/567457.mp3",
+   "name": "Iabilitiesturnpagec",
+   "ms": 755
+  },
+  "heal": {
+   "fdid": 2138730,
+   "url": "/media/sounds/2138730.mp3",
+   "name": "Azeritearmor Selectbuff 01",
+   "ms": 1523
+  }
+ },
+ "note": "Real client sounds from the thewowdb library; picked from catalog.json generic groups. url = /media/sounds/<fdid>.mp3"
+}

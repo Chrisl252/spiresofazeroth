@@ -1,0 +1,561 @@
+{
+ "id": "feralas",
+ "units": {
+  "pimgib": {
+   "name": "Pimgib",
+   "icon": "spell_shadow_summonimp",
+   "hp": 14,
+   "moves": [
+    {
+     "id": "firebolt",
+     "name": "Firebolt",
+     "intent": "attack",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 5,
+       "school": "fire"
+      }
+     ],
+     "weight": 2
+    }
+   ]
+  }
+ },
+ "name": "Feralas",
+ "start": {
+  "name": "Feathermoon Stronghold Inn",
+  "icon": "inv_misc_beer_01"
+ },
+ "continent": "kal",
+ "act": 5,
+ "levelBand": [
+  40,
+  50
+ ],
+ "isHub": false,
+ "spire": {
+  "name": "Dire Maul",
+  "lore": "The ruined Highborne capital of Eldre'Thalas, split into the Warpwood Quarter, the Capital Gardens and the Gordok Commons beneath the Gordunni ogres."
+ },
+ "theme": {
+  "primary": "#3f7a3a",
+  "secondary": "#14261a",
+  "accent": "#e0b84a",
+  "background": "feralas"
+ },
+ "zoneMechanic": {
+  "id": "tribute",
+  "name": "Tribute",
+  "icon": "inv_misc_coin_01",
+  "text": "Spare a Gordok guard (engine on_spare) instead of killing it to earn Tribute. At 3 Tribute King Gordok is weakened and the Tribute chest opens.",
+  "hooks": {
+   "on_spire_start": [
+    {
+     "op": "gain_resource",
+     "resource": "tribute",
+     "amount": 0
+    }
+   ],
+   "on_spare": [
+    {
+     "op": "gain_resource",
+     "resource": "tribute",
+     "amount": 1
+    },
+    {
+     "op": "gold",
+     "amount": 15
+    }
+   ],
+   "on_combat_start": [
+    {
+     "op": "conditional",
+     "if": {
+      "type": "resource_at_least",
+      "resource": "tribute",
+      "amount": 3
+     },
+     "then": [
+      {
+       "op": "apply",
+       "status": "vulnerable",
+       "stacks": 2,
+       "target": "enemy"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rest": {
+  "id": "feathermoon-moonwell",
+  "name": "Feathermoon Moonwell",
+  "icon": "spell_nature_healingtouch",
+  "text": "Bathe in the Feathermoon Moonwell: heal 20% of max HP and wash away Disease, Curse and Poison.",
+  "effects": [
+   {
+    "op": "heal",
+    "pct": 20,
+    "target": "self"
+   },
+   {
+    "op": "remove",
+    "status": "disease",
+    "target": "self"
+   },
+   {
+    "op": "remove",
+    "status": "curse",
+    "target": "self"
+   },
+   {
+    "op": "remove",
+    "status": "poison",
+    "target": "self"
+   }
+  ]
+ },
+ "encounters": {
+  "normal": [
+   [
+    "woodpaw-gnoll",
+    "woodpaw-gnoll"
+   ],
+   [
+    "longtooth-runner",
+    "longtooth-runner",
+    "longtooth-howler"
+   ],
+   [
+    "sprite-darter",
+    "sprite-darter",
+    "sprite-dragon"
+   ],
+   [
+    "northspring-harpy",
+    "northspring-roguefeather"
+   ],
+   [
+    "feral-scar-yeti",
+    "feral-scar-yeti"
+   ],
+   [
+    "woodpaw-brute",
+    "woodpaw-mystic"
+   ],
+   [
+    "frayfeather-hippogryph",
+    "northspring-harpy"
+   ],
+   [
+    "ironfur-bear",
+    "ironfur-glutton"
+   ],
+   [
+    "woodpaw-reaver",
+    "woodpaw-trapper",
+    "woodpaw-elder"
+   ],
+   [
+    "gordunni-ogre",
+    "gordunni-shaman"
+   ],
+   [
+    "frayfeather-stagwing",
+    "frayfeather-skystormer"
+   ],
+   [
+    "rage-scar-yeti",
+    "northspring-slayer"
+   ],
+   [
+    "gordunni-brute",
+    "gordunni-ogre-mage"
+   ],
+   [
+    "gordunni-mauler",
+    "gordunni-warlock"
+   ]
+  ],
+  "elite": [
+   [
+    "woodpaw-alpha",
+    "woodpaw-mystic",
+    "woodpaw-gnoll"
+   ],
+   [
+    "ironfur-patriarch",
+    "ironfur-bear"
+   ],
+   [
+    "frayfeather-patriarch",
+    "frayfeather-skystormer"
+   ],
+   [
+    "grimungous"
+   ]
+  ],
+  "boss": [
+   [
+    "king-gordok"
+   ]
+  ]
+ },
+ "bossAlternates": [
+  {
+   "floor": "dire-maul-west",
+   "enemy": "immolthar"
+  },
+  {
+   "floor": "dire-maul-west",
+   "enemy": "prince-tortheldrin"
+  }
+ ],
+ "events": [
+  {
+   "id": "feathermoon-stronghold",
+   "name": "Feathermoon Stronghold",
+   "icon": "spell_nature_healingtouch",
+   "text": "Sentinels hold the Feathermoon Stronghold against the Gordunni and the ogres of the isle. A priestess offers the Moonwell.",
+   "options": [
+    {
+     "label": "Drink from the Moonwell (heal 18)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 18,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Buy a sentinel ration (-30 gold, +3 max HP)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": -30
+      },
+      {
+       "op": "max_hp",
+       "amount": 3
+      }
+     ],
+     "requires": {
+      "gold": 30
+     }
+    },
+    {
+     "label": "Move on",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "twin-colossals",
+   "name": "The Twin Colossals",
+   "icon": "achievement_reputation_ogre",
+   "text": "The Twin Colossals loom over Feralas; a Cenarion druid asks you to climb Zaetar-style and survey the lands.",
+   "options": [
+    {
+     "label": "Climb and survey (-6 HP, +50 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 6,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 50
+      }
+     ]
+    },
+    {
+     "label": "Study the stone (add a Power-ready card)",
+     "effects": [
+      {
+       "op": "add_card",
+       "card": "mojache-insight",
+       "to": "deck_permanent",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "label": "Skip",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "camp-mojache",
+   "name": "Camp Mojache",
+   "icon": "inv_misc_head_tauren_01",
+   "text": "The Mojache tauren are besieged by Gordunni raiders and ask for hands.",
+   "options": [
+    {
+     "label": "Fight beside them (-8 HP, +45 gold, +1 Strength this spire)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 8,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 45
+      },
+      {
+       "op": "apply",
+       "status": "strength",
+       "stacks": 1,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Trade with the camp (-25 gold, heal 15)",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": -25
+      },
+      {
+       "op": "heal",
+       "amount": 15,
+       "target": "self"
+      }
+     ],
+     "requires": {
+      "gold": 25
+     }
+    },
+    {
+     "label": "Leave",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "knot-thimblejack",
+   "npc": {
+    "name": "Knot Thimblejack",
+    "npcId": 14338,
+    "displayId": 14381,
+    "scale": 0.7
+   },
+   "name": "Knot Thimblejack and the Tribute",
+   "icon": "inv_misc_coin_01",
+   "text": "Knot Thimblejack, the old gnome in Dire Maul West, holds the Tribute chest for those who spared the Gordok guards.",
+   "options": [
+    {
+     "label": "Present the Tribute (needs 3 Tribute): relic + 120 gold",
+     "effects": [
+      {
+       "op": "gold",
+       "amount": 120
+      },
+      {
+       "op": "gain_relic",
+       "relic": "mindtap-talisman"
+      }
+     ],
+     "requires": {
+      "resource": "tribute",
+      "atLeast": 3
+     }
+    },
+    {
+     "label": "Pick the lock by force (-10 HP, 40 gold)",
+     "effects": [
+      {
+       "op": "damage",
+       "amount": 10,
+       "target": "self"
+      },
+      {
+       "op": "gold",
+       "amount": 40
+      }
+     ]
+    },
+    {
+     "label": "Walk away",
+     "effects": []
+    }
+   ]
+  },
+  {
+   "id": "ruins-of-isildien",
+   "name": "Ruins of Isildien",
+   "icon": "spell_arcane_arcane01",
+   "text": "Fallen Highborne ruins glow faintly in the jungle.",
+   "options": [
+    {
+     "label": "Search the ruins",
+     "effects": [
+      {
+       "op": "conditional",
+       "if": {
+        "type": "chance",
+        "p": 0.5
+       },
+       "then": [
+        {
+         "op": "gold",
+         "amount": 60
+        }
+       ],
+       "else": [
+        {
+         "op": "damage",
+         "amount": 7,
+         "target": "self"
+        },
+        {
+         "op": "add_card",
+         "card": "madness",
+         "to": "discard",
+         "count": 1
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "label": "Meditate (heal 10)",
+     "effects": [
+      {
+       "op": "heal",
+       "amount": 10,
+       "target": "self"
+      }
+     ]
+    },
+    {
+     "label": "Leave",
+     "effects": []
+    }
+   ]
+  }
+ ],
+ "relics": [
+  {
+   "id": "royal-seal-of-eldrethalas",
+   "name": "Royal Seal of Eldre'Thalas",
+   "icon": "inv_jewelry_ring_03",
+   "rarity": "rare",
+   "itemId": null,
+   "itemIdSource": "unverified",
+   "zone": "feralas",
+   "class": null,
+   "text": "Start each combat with 6 Block. Your first card each turn costs 1 less (min 0).",
+   "triggers": {
+    "on_combat_start": [
+     {
+      "op": "block",
+      "amount": 6,
+      "target": "self"
+     }
+    ],
+    "on_turn_start": [
+     {
+      "op": "apply",
+      "status": "energized",
+      "stacks": 1,
+      "target": "self"
+     }
+    ]
+   }
+  },
+  {
+   "id": "mindtap-talisman",
+   "name": "Mindtap Talisman",
+   "icon": "inv_jewelry_talisman_01",
+   "rarity": "uncommon",
+   "itemId": null,
+   "itemIdSource": "unverified",
+   "zone": "feralas",
+   "class": null,
+   "text": "25% chance at turn start to gain 1 extra Energy.",
+   "triggers": {
+    "on_turn_start": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "p": 0.25
+      },
+      "then": [
+       {
+        "op": "gain_energy",
+        "amount": 1
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "treants-bane",
+   "name": "Treant's Bane",
+   "icon": "inv_mace_04",
+   "rarity": "uncommon",
+   "itemId": null,
+   "itemIdSource": "unverified",
+   "zone": "feralas",
+   "class": null,
+   "text": "Deal 4 extra damage to Elementals (treants) and Beasts.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "target_is_family",
+       "family": "elemental"
+      },
+      "then": [
+       {
+        "op": "damage",
+        "amount": 4
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "satyrs-lash",
+   "name": "Satyr's Lash",
+   "icon": "inv_weapon_shortblade_05",
+   "rarity": "uncommon",
+   "itemId": null,
+   "itemIdSource": "unverified",
+   "zone": "feralas",
+   "class": null,
+   "text": "Attacks have a 25% chance to apply 2 Bleed.",
+   "triggers": {
+    "on_attack": [
+     {
+      "op": "conditional",
+      "if": {
+       "type": "chance",
+       "p": 0.25
+      },
+      "then": [
+       {
+        "op": "apply",
+        "status": "bleed",
+        "stacks": 2,
+        "target": "enemy"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "enemiesFile": "feralas.enemies.json",
+ "raidFloorsFile": "feralas.raids.json"
+}

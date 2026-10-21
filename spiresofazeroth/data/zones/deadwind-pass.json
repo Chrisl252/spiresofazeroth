@@ -1,0 +1,52 @@
+{
+  "id": "deadwind-pass",
+  "name": "Deadwind Pass",
+  "start": {"name": "Deadwind Pass Camp", "icon": "spell_fire_fire"},
+  "continent": "ek",
+  "act": 6,
+  "levelBand": [55,62],
+  "spire": {
+    "name": "Karazhan",
+    "lore": "The cursed tower of Medivh looms over the pass. In 1.12 its gate is sealed and the spectres outside are all that remain of its guardians."
+  },
+  "theme": {
+    "primary": "#4a3a6a",
+    "secondary": "#120d1c",
+    "accent": "#b78cf0",
+    "background": "haunted-pass"
+  },
+  "zoneMechanic": {
+    "id": "echoes",
+    "name": "Echoes",
+    "icon": "spell_shadow_charm",
+    "text": "Every 3rd card you play echoes: a ghost copy of the effect strikes you for 3 damage.",
+    "hooks": {"on_card_played":[{"op":"conditional","if":{"type":"card_counter","every":3},"then":[{"op":"damage","amount":3,"target":"self"}]}]}
+  },
+  "rest": {
+    "id": "ariden-camp",
+    "name": "Ariden's Camp",
+    "icon": "spell_holy_prayerofhealing",
+    "text": "Rest at Ariden's Camp. Heal 25% of max HP and clear Fear and Madness.",
+    "effects": [
+      {"op":"heal","amount":26,"target":"self"},
+      {"op":"remove","status":"fear","target":"self"},
+      {"op":"remove","status":"madness","target":"self"}
+    ]
+  },
+  "enemiesFile": "deadwind-pass.enemies.json",
+  "encounters": {
+    "normal": [["restless-shade","sky-shadow"],["deadwind-brute","deadwind-warlock","deadwind-brute"],["deadwind-brute"],["deadwind-warlock"],["wailing-spectre"],["sky-shadow"],["restless-shade"]],
+    "elite": [["deadwind-mauler"],["dark-reaver-of-karazhan"]],
+    "boss": [["deadwind-ogre-mage"],["deadwind-ogre-mage","wailing-spectre","restless-shade"]]
+  },
+  "events": [
+    {"id":"aridens-camp","name":"Ariden's Camp","icon":"inv_misc_key_01","text":"Ariden, a wounded Alliance scout, hands you a map to the tower gate before succumbing to a Deadwind warlock's curse.","options":[{"label":"Honor his last request","effects":[{"op":"heal","amount":14,"target":"self"},{"op":"max_hp","amount":3}]},{"label":"Take his supplies","effects":[{"op":"gold","amount":70}]},{"label":"Move on","effects":[]}]},
+    {"id":"karazhan-gate","name":"The Gate of Karazhan","icon":"spell_arcane_portaldarnassus","text":"Karazhan's gate stands sealed. A faint whisper from the lock promises a power beyond the tower's walls.","options":[{"label":"Listen to the whisper","effects":[{"op":"apply","status":"madness","stacks":2,"target":"self"},{"op":"random_card","pool":"any","rarity":"rare","to":"hand"}]},{"label":"Break the seal","effects":[{"op":"damage","amount":14,"target":"self"},{"op":"gold","amount":120}]},{"label":"Leave it sealed","effects":[]}]},
+    {"id":"morgans-plot","name":"Morgan's Plot","icon":"inv_misc_bone_humanskull_02","text":"The restless dead of Morgan's Plot claw at their graves. A gravekeeper offers rest for the dead and coin for the living.","options":[{"label":"Lay the dead to rest","effects":[{"op":"damage","amount":6,"target":"self"},{"op":"max_hp","amount":5}]},{"label":"Rob the graves","effects":[{"op":"gold","amount":100},{"op":"apply","status":"curse","stacks":2,"target":"self"}]},{"label":"Walk through","effects":[]}]},
+    {"id":"deadman-crossing","name":"Deadman's Crossing","icon":"inv_misc_note_01","text":"A bridge of bones spans the ravine. Skeletal sentries collect a toll from all travelers.","options":[{"label":"Pay the toll","effects":[{"op":"gold","amount":-40},{"op":"heal","amount":15,"target":"self"}],"requires":{"gold":40}},{"label":"Fight across","effects":[{"op":"damage","amount":12,"target":"self"},{"op":"gold","amount":60}]},{"label":"Turn back","effects":[]}]}
+  ],
+  "relics": [
+    {"id":"quelserrar","name":"Quel'Serrar","icon":"inv_sword_01","rarity":"epic","itemId":18348,"zone":"deadwind-pass","class":null,"text":"Whenever you play an attack, 20% chance to gain 4 Block.","triggers":{"on_attack":[{"op":"conditional","if":{"type":"chance","pct":20},"then":[{"op":"block","amount":4,"target":"self"}]}]}},
+    {"id":"orb-of-deception","name":"Orb of Deception","icon":"inv_misc_orb_purple","rarity":"rare","itemId":null,"zone":"deadwind-pass","class":null,"text":"Gain 1 Dexterity at the start of combat.","triggers":{"on_combat_start":[{"op":"apply","status":"dexterity","stacks":1,"target":"self"}]}}
+  ]
+}

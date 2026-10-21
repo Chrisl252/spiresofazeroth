@@ -1,0 +1,13 @@
+{
+ "classes": "classes/index.json",
+ "zones": "zones/index.json",
+ "keywords": "keywords.json",
+ "relics": "gear/jewellery.json",
+ "potions": "potions.json",
+ "neutralCards": "neutral-cards.json",
+ "events": "events-common.json",
+ "bosses": "bosses-final.json",
+ "statusCards": "status-cards.json",
+ "mapProfiles": "map-profiles.json",
+ "healers": "healers.json"
+}

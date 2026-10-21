@@ -1,0 +1,52 @@
+/* Shop (goblin merchant) screen. Owner: js/ui/shop.js + js/ui/shopVendor.js. No red backdrop: the zone stage stays visible,
+   wares lie straight on a dark wood/stone table (Blizzard nineslice via .sx-wood .sx-dark). Clicking a ware buys it. */
+.sx-shop .sx-bar { flex: 0 0 auto; }
+.sx-shop__main { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: 520px 1fr; gap: 20px; padding: 10px 48px 0; align-items: stretch; }
+.sx-shop__left { display: flex; flex-direction: column; align-items: center; gap: 12px; min-height: 0; }
+.sx-vendor { position: relative; flex: 1 1 auto; width: 100%; min-height: 380px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 14px; padding-bottom: 14px; cursor: pointer; border-radius: 18px;
+  background: radial-gradient(ellipse 60% 38% at 50% 78%, rgba(255,190,90,.30), transparent 70%); }
+.sx-vendor:hover, .sx-vendor:focus-visible { outline: none; background: radial-gradient(ellipse 66% 42% at 50% 78%, rgba(255,210,110,.42), transparent 70%); }
+.sx-vendor__plate { position: relative; margin-bottom: 120px; padding: 20px; border: 4px solid #7a5f28; border-radius: 50%; background: #15110c; box-shadow: inset 0 0 30px rgba(0,0,0,.7), 0 0 30px rgba(255,190,90,.3); } .sx-vendor__plate .sx-ico { --s: 180px; }
+.sx-vendor__name { position: relative; z-index: 1; text-align: center; display: grid; gap: 2px; padding: 8px 26px; border: 2px solid #6b5220; border-radius: 8px; background: rgba(10,7,4,.82); box-shadow: 0 6px 14px rgba(0,0,0,.6); }
+.sx-vendor__name b { font-family: var(--f-ui); font-weight: 400; font-size: 34px; color: var(--gold); } .sx-vendor__name small { font-size: 22px; color: #cdbf9a; font-family: var(--f-num); }
+.sx-shop__foot { flex: 0 0 auto; display: flex; justify-content: flex-end; padding-top: 14px; } .sx-shop__foot .sp-wowbtn { --h: 74px; min-width: 260px; font-size: 26px; }
+.sx-shop__leave { flex: 0 0 auto; display: grid; place-items: center; padding-bottom: 10px; } .sx-shop__leave .sp-wowbtn { --h: 84px; min-width: 300px; }
+.sx-shop__right { min-width: 0; min-height: 0; display: flex; flex-direction: column; justify-content: center; }
+.sx-table { display: grid; gap: 14px; padding: 40px 48px 44px; --fill: url("/assets/ui/classhall-stone-tile.png"); background-color: #15110c; }
+.sx-shelf { display: grid; gap: 8px; justify-items: center; }
+.sx-shelf__title { margin: 0; font-family: var(--f-ui); font-weight: 400; font-size: 26px; letter-spacing: .06em; text-transform: uppercase; color: #c9a24b; text-shadow: 0 2px 2px #000; }
+.sx-shelf__row { display: flex; gap: 22px; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
+.sx-table__low { display: grid; grid-template-columns: auto auto auto; gap: 18px 40px; justify-content: center; align-items: start; }
+.sx-table__low .sx-shelf__row { flex-wrap: nowrap; gap: 14px; }
+/* a ware is just the thing + its price tag; no box */
+.sx-ware { position: relative; display: grid; justify-items: center; gap: 8px; cursor: pointer; transition: transform .16s ease, filter .16s; transform-origin: 50% 70%; -webkit-tap-highlight-color: transparent; }
+.sx-ware:focus-visible { outline: 3px solid var(--gold); outline-offset: 6px; border-radius: 8px; }
+.sx-ware:hover:not(.sold), .sx-ware:focus-visible:not(.sold) { transform: translateY(-8px) scale(1.1); z-index: 4; filter: drop-shadow(0 0 16px rgba(255,209,0,.6)); }
+.sx-ware--card .sx-cardslot--shop { --cs: .62; animation: none; transform: none; }
+.sx-ware--card .sx-cardslot--shop:hover { transform: none; }
+.sx-ware__body { display: grid; justify-items: center; gap: 4px; text-align: center; width: 150px; } .sx-ware__body b { font-family: var(--f-ui); font-weight: 400; font-size: 21px; line-height: 1.1; color: var(--q, var(--gold)); }
+.sx-ware__body small { font-family: var(--f-num); font-size: 17px; line-height: 1.15; color: #d9ccaa; }
+.sx-ware__ico .sx-ico { --s: 84px; }
+.sx-ware--service .sx-ware__body { width: 170px; }
+.sx-ware__tag { min-height: 40px; display: grid; place-items: center; }
+.sx-price { display: inline-flex; align-items: center; gap: 6px; padding: 3px 14px 3px 8px; border-radius: 999px; font-family: var(--f-num); font-size: 28px; color: #ffe27a; text-shadow: 0 2px 2px #000; background: rgba(8,5,2,.72); border: 2px solid #8a6a2a; transition: box-shadow .16s, background .16s, color .16s; }
+.sx-price__i { width: 28px; height: 28px; margin: 0; border-radius: 50%; }
+.sx-ware:hover:not(.sold) .sx-price { background: #2a1d08; border-color: #ffd24a; box-shadow: 0 0 14px rgba(255,210,74,.7); color: #fff1a8; }
+.sx-price.short { color: #ff7a6a; } .sx-ware.short .sx-price { border-color: #7a2a20; }
+.sx-ware.short:hover:not(.sold) { filter: drop-shadow(0 0 14px rgba(255,60,40,.6)); } .sx-ware.short:hover .sx-price { background: #2a0a06; border-color: #ff5a44; box-shadow: 0 0 14px rgba(255,80,60,.7); color: #ff9a8a; }
+.sx-ware.deny { animation: sx-deny .42s ease; } .sx-ware.deny .sx-price { background: #5a0f08; color: #fff; }
+@keyframes sx-deny { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-9px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(4px); } }
+.sx-ware.sold { cursor: default; filter: grayscale(.85) brightness(.55); } .sx-ware.sold:hover { transform: none; }
+.sx-sold { font-family: var(--f-ui); font-size: 26px; letter-spacing: .12em; color: #c9a24b; text-shadow: 0 2px 2px #000; transform: rotate(-4deg); padding: 2px 12px; border: 2px solid #c9a24b; border-radius: 6px; }
+.sx-fly { position: fixed; z-index: 99999; pointer-events: none; border: 3px solid var(--gold, #ffd24a); border-radius: 10px; overflow: hidden; background: #15110c; box-shadow: 0 0 20px rgba(255,210,74,.8); } .sx-fly img { width: 100%; height: 100%; display: block; margin: 0; }
+@media (prefers-reduced-motion: reduce) { .sx-ware, .sx-ware.deny { transition: none; animation: none; } }
+/* hub embed (Moonglade): shopPanel inside the rest screen */
+.sx-rest__vendor .sx-table { padding: 30px 30px 34px; }
+/* portrait stage */
+.sp-portrait .sx-shop { overflow-y: auto; } .sp-portrait .sx-shop__main { grid-template-columns: 1fr; padding: 10px 24px 0; flex: 0 0 auto; }
+.sp-portrait .sx-vendor { min-height: 420px; flex: 0 0 auto; } .sp-portrait .sx-vendor__name b { font-size: 44px; } .sp-portrait .sx-vendor__name small { font-size: 30px; }
+.sp-portrait .sx-table { padding: 28px 16px 32px; } .sp-portrait .sx-table__low { grid-template-columns: 1fr; } .sp-portrait .sx-ware--card .sx-cardslot--shop { --cs: .8; }
+.sp-portrait .sx-shelf__title { font-size: 36px; } .sp-portrait .sx-price { font-size: 40px; } .sp-portrait .sx-ware__body b { font-size: 30px; } .sp-portrait .sx-ware__body small { font-size: 24px; } .sp-portrait .sx-ware__body { width: 210px; }
+.sp-portrait .sx-shop__foot { justify-content: center; padding-bottom: 24px; }
+.sp-portrait .sx-shop__foot .sp-wowbtn { --h: 76px; min-width: 280px; }
+.sp-portrait .sx-shop__leave .sp-wowbtn { --h: 76px; }

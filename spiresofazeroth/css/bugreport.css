@@ -1,0 +1,21 @@
+/* Floating bug-report button (draggable, Blizzard-style) + report panel. Lives on the stage root so it scales with the game. */
+.sp-bug { position: absolute; z-index: 90; width: 56px; height: 56px; padding: 0; border-radius: 50%; border: 3px solid #c9a24b; cursor: grab; touch-action: none;
+  background: radial-gradient(circle at 35% 30%, #7a1c12, #3a0c08 75%); box-shadow: 0 0 0 2px #050302, 0 4px 10px rgba(0,0,0,.7); color: #ffe9a8; display: grid; place-items: center; opacity: .88; }
+.sp-bug:hover, .sp-bug:focus-visible { opacity: 1; border-color: #fff0a8; box-shadow: 0 0 0 2px #050302, 0 0 16px rgba(255,214,90,.6); }
+.sp-bug.is-drag { cursor: grabbing; opacity: 1; }
+.sp-bug svg { width: 30px; height: 30px; pointer-events: none; }
+.sp-bugp { position: absolute; z-index: 95; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.55); }
+.sp-bugp__box { width: 640px; max-width: 92%; padding: 26px 30px 24px; border: 4px solid #6b5220; border-radius: 10px; color: #3a2410;
+  background: linear-gradient(180deg, #e9d3a0, #cfae6c); box-shadow: 0 0 0 3px #050302, 0 14px 40px rgba(0,0,0,.8); font-family: var(--f-ui, sans-serif); }
+.sp-bugp h3 { margin: 0 0 6px; font: 400 44px/1 var(--f-title, serif); color: #5a1208; }
+.sp-bugp p { margin: 0 0 12px; font-size: 22px; line-height: 1.25; }
+.sp-bugp textarea, .sp-bugp input[type=email] { width: 100%; box-sizing: border-box; margin: 0 0 12px; padding: 10px 12px; font: 22px/1.25 var(--f-ui, sans-serif); color: #2a1808;
+  background: #f4e6c0; border: 2px solid #8a6a2a; border-radius: 6px; }
+.sp-bugp textarea { height: 170px; resize: none; }
+.sp-bugp .sp-bugp__hp { position: absolute; left: -9999px; }
+.sp-bugp__row { display: flex; gap: 14px; justify-content: flex-end; align-items: center; flex-wrap: wrap; }
+.sp-bugp__row .sp-wowbtn { flex-shrink: 0; }
+.sp-bugp__msg { margin-right: auto; font-size: 19px; line-height: 1.25; color: #5a1208; word-break: break-word; }
+.sp-bugp__fallback { color: #5a1208; font-weight: bold; text-decoration: underline; cursor: pointer; }
+.sp-bugp__fallback:hover, .sp-bugp__fallback:focus-visible { color: #8a1a0c; text-shadow: 0 0 6px rgba(255,214,90,.5); }
+

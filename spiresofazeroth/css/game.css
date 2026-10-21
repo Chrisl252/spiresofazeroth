@@ -1,0 +1,131 @@
+/* Spires of Azeroth - screen layout. Mobile-first portrait; widens at 760px. Animations use transform/opacity only. */
+.spires-app { max-width: 1100px; margin: 0 auto; padding: 12px 16px 96px; min-height: 70vh; }
+.spires-credit { font-size: .78rem; opacity: .8; margin: .5rem 0; }
+.sp-screen { display: flex; flex-direction: column; gap: 12px; animation: sp-in .25s ease-out both; }
+@keyframes sp-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.sp-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.sp-grow { flex: 1 1 auto; }
+.sp-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.sp-pad { padding: 12px 14px; }
+.sp-center { text-align: center; }
+
+/* hud */
+.sp-hud { display: flex; gap: 8px 14px; flex-wrap: wrap; align-items: center; padding: 6px 10px; font-size: .9rem; }
+.sp-hud .sp-ico { width: 26px; height: 26px; }
+.sp-hud b { font-family: var(--sp-font); color: var(--sp-gold-hi); }
+.sp-relics { display: flex; gap: 4px; flex-wrap: wrap; }
+.sp-potions { display: flex; gap: 4px; }
+.sp-pot { padding: 0; background: none; border: 0; cursor: pointer; }
+.sp-pot.empty .sp-ico { opacity: .25; }
+
+/* title */
+.sp-hero { text-align: center; padding: 28px 12px; }
+.sp-hero h1 { font-size: clamp(1.8rem, 7vw, 3rem); }
+.sp-hero p { max-width: 46ch; margin: .6rem auto 1.2rem; color: var(--sp-dim); font-size: 1.1rem; }
+.sp-menu { display: grid; gap: 10px; max-width: 320px; margin: 0 auto; }
+
+/* class select */
+.sp-class { display: flex; gap: 10px; align-items: center; padding: 10px; cursor: pointer; text-align: left; color: inherit; width: 100%; }
+.sp-class[aria-pressed="true"] { border-color: var(--sp-gold-hi); box-shadow: inset 0 0 0 1px #000, 0 0 12px rgba(245,215,122,.5); }
+.sp-class.locked { opacity: .5; }
+.sp-class h3 { margin: 0; font-size: 1.1rem; font-family: var(--sp-font); }
+.sp-class small { color: var(--sp-dim); }
+.sp-pick { display: flex; gap: 6px; flex-wrap: wrap; }
+.sp-pick button[aria-pressed="true"] { border-color: var(--sp-gold-hi); background: #5c3a0a; }
+
+/* map */
+.sp-map { position: relative; padding: 10px 6px; overflow-x: hidden; }
+.sp-floor { display: flex; justify-content: space-around; align-items: center; min-height: 54px; position: relative; }
+.sp-floor .lbl { position: absolute; left: 4px; top: 50%; transform: translateY(-50%); font-size: .65rem; color: var(--sp-dim); }
+.sp-node { width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--sp-gold-lo); background: #120d07; display: grid; place-items: center; cursor: default; padding: 0; position: relative; color: inherit; }
+.sp-node .sp-ico { width: 32px; height: 32px; border: 0; border-radius: 50%; box-shadow: none; }
+.sp-node.reach { border-color: var(--sp-gold-hi); cursor: pointer; animation: sp-pulse 1.4s ease-in-out infinite; }
+.sp-node.done { opacity: .45; }
+.sp-node.here { border-color: #1eff00; }
+.sp-node.elite { border-color: var(--sp-orange); } .sp-node.boss { width: 62px; height: 62px; border-color: var(--sp-red); }
+@keyframes sp-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+.sp-edges { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.sp-edges line { stroke: var(--sp-gold-lo); stroke-width: 2; opacity: .6; } .sp-edges line.on { stroke: var(--sp-gold-hi); opacity: 1; }
+.sp-legend { font-size: .78rem; display: flex; gap: 8px 14px; flex-wrap: wrap; color: var(--sp-dim); }
+
+/* combat */
+.sp-combat { gap: 8px; }
+.sp-field { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; min-height: 150px; padding: 8px; }
+.sp-enemy { width: 148px; padding: 8px; position: relative; cursor: default; color: inherit; text-align: center; }
+.sp-enemy.targetable { cursor: pointer; border-color: var(--sp-gold-hi); animation: sp-pulse 1s ease-in-out infinite; }
+.sp-enemy.dead { opacity: .25; filter: grayscale(1); pointer-events: none; }
+.sp-enemy .nm { font-family: var(--sp-font); font-size: .82rem; line-height: 1.1; margin: 4px 0; min-height: 1.8em; }
+.sp-intent { display: inline-flex; align-items: center; gap: 4px; font-family: var(--sp-font); font-size: .95rem; padding: 2px 8px; border-radius: 12px; background: rgba(0,0,0,.6); border: 1px solid var(--sp-gold-lo); margin: 4px 0; }
+.sp-intent.atk { color: #ff7a6b; } .sp-intent.def { color: #6fb7ff; } .sp-intent.cast { color: #d68bff; } .sp-intent.unk { color: var(--sp-dim); }
+.sp-blk { color: #6fb7ff; font-family: var(--sp-font); font-size: .8rem; }
+.sp-statuses { display: flex; gap: 3px; flex-wrap: wrap; justify-content: center; min-height: 20px; margin-top: 4px; }
+.sp-allies { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.sp-ally { width: 110px; padding: 6px; text-align: center; font-size: .78rem; }
+.sp-hero-panel { padding: 8px 10px; display: grid; gap: 6px; }
+.sp-energy { display: inline-grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; font-family: var(--sp-font); font-size: 1.4rem; background: radial-gradient(circle at 35% 30%, #4aa3ff, #12408a); border: 2px solid var(--sp-gold); box-shadow: 0 0 10px rgba(74,163,255,.5); }
+.sp-res { display: flex; gap: 6px; flex-wrap: wrap; font-size: .8rem; }
+.sp-hand { display: flex; gap: 6px; overflow-x: auto; padding: 14px 6px 8px; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; justify-content: flex-start; }
+.sp-card { flex: 0 0 auto; width: 118px; min-height: 164px; padding: 6px; border: 2px solid var(--q, var(--sp-gold)); border-radius: 7px; background: linear-gradient(180deg, #2c2216, #17110a); color: inherit; text-align: center; cursor: pointer; scroll-snap-align: center; position: relative; transition: transform .15s; display: flex; flex-direction: column; gap: 3px; box-shadow: inset 0 0 0 1px #000, 0 2px 6px rgba(0,0,0,.6); font-family: inherit; }
+.sp-card .cost { position: absolute; left: -6px; top: -6px; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-family: var(--sp-font); background: #12408a; border: 2px solid var(--sp-gold); font-size: .95rem; }
+.sp-card .nm { font-family: var(--sp-font); font-size: .82rem; line-height: 1.1; color: var(--q, #fff); min-height: 1.8em; }
+.sp-card .ty { font-size: .64rem; color: var(--sp-dim); text-transform: uppercase; letter-spacing: .06em; }
+.sp-card .tx { font-size: .72rem; line-height: 1.2; flex: 1 1 auto; }
+.sp-card .sp-ico { margin: 0 auto; width: 44px; height: 44px; }
+.sp-card.sel { transform: translateY(-14px) scale(1.04); z-index: 3; border-color: var(--sp-gold-hi); box-shadow: 0 0 14px rgba(245,215,122,.7), inset 0 0 0 1px #000; }
+.sp-card.nope { opacity: .5; filter: grayscale(.5); }
+.sp-card.up .nm::after { content: " +"; color: var(--q-uncommon); }
+.sp-card--static { cursor: default; }
+.sp-card--pick { width: 150px; min-height: 200px; cursor: pointer; }
+.sp-card--pick:hover { transform: translateY(-4px); }
+.sp-bar-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: space-between; }
+.sp-piles { display: flex; gap: 6px; }
+.sp-log { max-height: 84px; overflow: auto; font-size: .75rem; color: var(--sp-dim); padding: 4px 8px; }
+.sp-float { position: absolute; left: 50%; top: 30%; transform: translateX(-50%); font-family: var(--sp-font); font-size: 1.4rem; pointer-events: none; text-shadow: 0 2px 3px #000; animation: sp-float 1s ease-out forwards; z-index: 5; }
+.sp-float.dmg { color: #ff6252; } .sp-float.heal { color: #4cff82; } .sp-float.blk { color: #6fb7ff; } .sp-float.miss { color: #ccc; } .sp-float.gold { color: #ffd24a; font-weight: 900; }
+@keyframes sp-float { from { opacity: 1; transform: translate(-50%, 0); } to { opacity: 0; transform: translate(-50%, -46px); } }
+.sp-shake { animation: sp-shake .3s; }
+@keyframes sp-shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+.sp-hint { text-align: center; font-size: .85rem; color: var(--sp-gold-hi); min-height: 1.3em; }
+
+/* options, rewards, events */
+.sp-opts { display: grid; gap: 10px; }
+.sp-opt { display: flex; gap: 10px; align-items: center; padding: 12px; text-align: left; cursor: pointer; color: inherit; width: 100%; font-size: 1rem; }
+.sp-opt:disabled { opacity: .45; cursor: not-allowed; }
+.sp-opt:hover:not(:disabled) { border-color: var(--sp-gold-hi); }
+.sp-picks { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.sp-item { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px; width: 150px; text-align: center; font-size: .8rem; }
+.sp-price { font-family: var(--sp-font); color: var(--sp-gold-hi); }
+.sp-item.sold { opacity: .35; }
+.sp-event p { line-height: 1.5; font-size: 1.05rem; }
+
+/* codex */
+.sp-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.sp-tabs button[aria-selected="true"] { background: #5c3a0a; border-color: var(--sp-gold-hi); }
+.sp-codex-item { padding: 8px; display: flex; gap: 8px; align-items: center; font-size: .85rem; }
+.sp-codex-item.unseen { opacity: .4; }
+.sp-codex-item a { color: var(--sp-gold-hi); }
+
+/* end */
+.sp-end h2 { font-size: 2rem; }
+.sp-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; }
+.sp-stats div { padding: 8px; text-align: center; } .sp-stats b { display: block; font-family: var(--sp-font); color: var(--sp-gold-hi); font-size: 1.3rem; }
+
+/* settings */
+.sp-set label { display: flex; gap: 10px; align-items: center; min-height: 44px; }
+.sp-set textarea { width: 100%; min-height: 80px; background: #0c0905; color: var(--sp-ink); border: 1px solid var(--sp-gold-lo); font-family: var(--font-mono, monospace); font-size: .75rem; }
+
+@media (min-width: 760px) {
+  .sp-card { width: 140px; min-height: 190px; }
+  .sp-card .tx { font-size: .8rem; }
+  .sp-card:hover:not(.nope) { transform: translateY(-10px); z-index: 4; }
+  .sp-hand { justify-content: center; flex-wrap: wrap; overflow: visible; }
+  .sp-enemy { width: 180px; }
+  .sp-node { width: 54px; height: 54px; }
+  .sp-opts.two { grid-template-columns: 1fr 1fr; }
+}
+
+/* ==== layout-fit 2026-10-17 (layout overhaul agent): the game is one fixed screen. No page scroll, no reserved scrollbar gutter, dvh sizing. ==== */
+html:has(body.sp-game) { overflow: hidden; scrollbar-gutter: auto; height: 100%; }
+body.sp-game { overflow: hidden; height: 100vh; height: 100dvh; margin: 0; overscroll-behavior: none; }
+body.sp-game main.spires-app { height: auto; min-height: 0; }
+body.sp-game.sp-stage-on main.spires-app.sp-stage-host { top: 40px; bottom: 0; }

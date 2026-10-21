@@ -5,13 +5,13 @@
 
 [![Play Live](https://img.shields.io/badge/Play%20Live-thewowdb.com%2Fspiresofazeroth-blue?style=for-the-badge&logo=googlechrome&logoColor=white)](https://thewowdb.com/spiresofazeroth/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg?style=for-the-badge)](LICENSE)
-[![Zero Ads](https://img.shields.io/badge/Monetization-Zero%20Ads%20%2F%20100%25%20Free-green?style=for-the-badge)](#)
+[![100% Free](https://img.shields.io/badge/Price-100%25%20Free-green?style=for-the-badge)](#)
 
 ---
 
 ## 🎮 Play Instantly
 
-No download, no login, no microtransactions, and no ads. Play directly in your web browser:
+No download, no login, and no microtransactions. Play directly in your web browser:
 
 👉 **[https://thewowdb.com/spiresofazeroth/](https://thewowdb.com/spiresofazeroth/)**
 

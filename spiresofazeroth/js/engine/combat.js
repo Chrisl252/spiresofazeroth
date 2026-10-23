@@ -10,6 +10,7 @@ import { applyStatus, turnStart, turnEnd, roundEnd, modeOf } from "./status.js";
 import { fire } from "./relics.js";
 import { makeRng } from "./rng.js";
 import { heroicMods } from "./heroic.js";
+import { talentCarryBlock, talentNoExhaust, talentSweep } from "./talentHooks.js";
 
 // map-profile tuning (data/map-profiles.json combatMods) layered on the heroic modifiers: hp multiplies, strengths add
 function composeMods(h, z, tier) {
@@ -110,7 +111,7 @@ export function startPlayerTurn(C, first = false) {
   C.effectDraws = 0; // per-turn cap on effect-driven draws (effects.js MAX_EFFECT_DRAWS_PER_TURN)
   p.windfuryUsed = false;
   if (p.st.retain_block > 0) { p.st.retain_block -= 1; if (p.st.retain_block <= 0) delete p.st.retain_block; }
-  else p.block = 0;
+  else p.block = talentCarryBlock(C, p.block); // 0 unless Improved Shield Block (Talents V2)
   p.tauntRound = false;
   const r = (C.cls && C.cls.resource) || {};
   const pre = { next: p.energyNext, en: p.st.energized, cold: C.coldDrain, ex: extraEnergy(C), stun: p.st.stun, fr: p.st.frozen };
@@ -226,7 +227,7 @@ export function playCard(C, uid, targetUid) {
   const ctx = { C, src: p, srcKind: "player", target, card: def, cardInst: inst, X, spent: {}, isCardPrimary: true, cardId: def.id };
   if (!fizzled) {
     if (def.trap) armTrap(C, def);
-    else runEffects(ctx, def.effects);
+    else { runEffects(ctx, def.effects); if (!C.result) talentSweep(C, ctx, def); }
     if (!C.result) applyImbues(C, ctx, def);
     if (!C.result && p.st.frostbite && hasSchool(def.effects, "frost")) gainBlock(C, p, p.st.frostbite, { raw: true });
     if (!C.result && hasSchool(def.effects, "holy")) for (const en of C.enemies) delete en.st.veiled;
@@ -236,7 +237,7 @@ export function playCard(C, uid, targetUid) {
   // dispose (a transformed or created-in-effects card may already be elsewhere)
   if (!C.pile.hand.includes(inst) && !C.pile.discard.includes(inst) && !C.pile.exhaust.includes(inst) && !C.pile.draw.includes(inst)) {
     if (def.type === "power" || def.type === "token_power") C.powers.push(inst);
-    else if (hasFlag(inst, "exhaust")) { toExhaust(C, inst); C.lastExhausted = inst; }
+    else if (hasFlag(inst, "exhaust") && !talentNoExhaust(C, def)) { toExhaust(C, inst); C.lastExhausted = inst; }
     else toDiscard(C, inst);
   }
   if (!C.result) {
@@ -257,6 +258,7 @@ export function resolvePending(C, uids) {
       const c = C.pile.draw.find((x) => x.uid === u);
       if (c) { C.pile.draw.splice(C.pile.draw.indexOf(c), 1); C.pile.discard.push(c); }
     }
+    if (pd.after) { runEffects(pd.after.ctx, pd.after.effects); checkDeaths(C); } // the card's remaining effects (Detect Magic: draw 1)
     return true;
   }
   for (const u of chosen) {

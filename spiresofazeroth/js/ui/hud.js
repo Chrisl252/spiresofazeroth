@@ -69,7 +69,7 @@ export function createHud(host, app, o = {}) {
   const relicStrip = h("div", { class: "sp-relics2", "aria-label": "Relics" }), potBelt = h("div", { class: "sp-potions2", "aria-label": "Potions" });
   const zoneLbl = h("span", { class: "sp-tb__zone" }), turnLbl = h("span", { class: "sp-tb__turn" });
   const btn = (label, fn) => h("button", { class: "sp-wowbtn sp-wowbtn--tb", type: "button", onClick: fn }, label);
-  const deckBtn = btn("Deck", () => app.showDeck()), mapBtn = btn("Map", () => (o.onMap ? o.onMap() : null)), setBtn = btn("Settings", () => app.go("settings"));
+  const deckBtn = btn("Deck", () => app.showDeck()), mapBtn = btn("Map", () => (o.onMap ? o.onMap() : null)), setBtn = btn("Settings", () => app.showMenu());
   const fsBtn = h("button", { class: "sp-wowbtn sp-wowbtn--tb sp-wowbtn--fs", type: "button", title: "Fullscreen (F)", "aria-label": "Toggle fullscreen", onClick: () => stage.toggleFullscreen && stage.toggleFullscreen() }, "⛶");
   const top = h("header", { class: "sp-topbar" },
     h("div", { class: "sp-tb__hero" }, h("div", { class: "sp-pf" }, h("div", { class: "sp-pf__c" }, portrait, h("div", { class: "sp-tb__hp" }, topHp), topPw, h("i", { class: "sp-pf__art" }), heroName, heroLvl), topBlock), h("div", { class: "sp-tb__id" }, heroSub)),
@@ -104,7 +104,7 @@ export function createHud(host, app, o = {}) {
 
   // ---------- anchors ----------
   function anchorFor(uid, idx, n) {
-    if (o.anchorFor) { const a = o.anchorFor(uid); if (a) return a; }
+    if (o.anchorFor) { const a = o.anchorFor(uid, idx, n); if (a) return a; }
     const port = stage.portrait, g = stage.groundY;
     const x = port ? Math.min(960, Math.max(400, 680 + (idx - (n - 1) / 2) * 270)) : LANES[idx] || LANES[LANES.length - 1] + (idx - 2) * 200;
     return { x, y: g - 340 };
@@ -210,19 +210,19 @@ export function createHud(host, app, o = {}) {
   const INTENT_H = 64;
   function placePlate(el, a, w) {
     const p = el.parts, feet = a.feet != null ? a.feet : stage.groundY, head = Math.min(a.y, feet - 120);
-    el.style.setProperty("--pw", `${w}px`);
+    el.style.setProperty("--pw", `${w}px`); el.style.setProperty("--pk", w < 150 ? (w / 150).toFixed(3) : "1");
     el.style.left = `${a.x - w / 2}px`; el.style.top = `${head - INTENT_H}px`; el.style.bottom = "auto";
     p.hit.style.height = `${feet - head}px`;
   }
   const dispName = (e, list) => { const same = list.filter((x) => x.name === e.name); return same.length > 1 ? `${e.name} ${String.fromCharCode(65 + same.indexOf(e))}` : e.name; };
-  let lastEnemies = [];
+  let lastEnemies = [], lastLiveSig = "";
   function reposition() {
-    const live = lastEnemies, n = live.length;
+    const live = lastEnemies.filter(isAlive), n = live.length; // dead plates are hidden and keep no column
     const pts = live.map((e, i) => ({ e, a: { ...anchorFor(e.uid, i, n) } }));
     // never let two plates overlap: width shrinks to the lane spacing, then plates are nudged apart
     const xs = pts.map((q) => q.a.x).sort((a, b) => a - b);
     let gap = Infinity; for (let i = 1; i < xs.length; i++) gap = Math.min(gap, xs[i] - xs[i - 1]);
-    const w = Math.max(150, Math.min(stage.portrait ? 280 : 240, gap - 8));
+    const w = Math.max(n > 4 ? 96 : 150, Math.min(stage.portrait ? 280 : 240, gap - 8)); // 5+ enemies: plates shrink to the lane spacing (and scale their text) instead of being shoved off their models
     const order = pts.slice().sort((p, q) => p.a.x - q.a.x);
     for (let i = 1; i < order.length; i++) if (order[i].a.x - order[i - 1].a.x < w + 6) order[i].a.x = order[i - 1].a.x + w + 6;
     const maxX = size().w - w / 2 - 8, over = order.length ? order[order.length - 1].a.x - maxX : 0;
@@ -258,6 +258,7 @@ export function createHud(host, app, o = {}) {
 
     // enemies
     const live = C.enemies; lastEnemies = live;
+    if (o.layoutEnemies) { const sig = live.map((e) => e.uid + (isAlive(e) ? "+" : "-")).join(","); if (sig !== lastLiveSig) { lastLiveSig = sig; o.layoutEnemies(live.map((e) => ({ uid: e.uid, alive: isAlive(e) }))); } } // death / summon / revive: models re-spread over the same living-only lanes the plates use
     const seen = new Set();
     live.forEach((e, i) => {
       seen.add(e.uid);

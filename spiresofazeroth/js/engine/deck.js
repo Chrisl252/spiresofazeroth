@@ -1,5 +1,6 @@
 // Card instances, piles, draw/discard/exhaust, cost evaluation. No DOM.
 import { fx } from "./damage.js";
+import { talentCost } from "./talentHooks.js";
 
 export const HAND_LIMIT = 10;
 const STUB = (id) => ({
@@ -56,6 +57,7 @@ export function cardCost(C, inst) {
   }
   if (inst.costSet !== undefined && inst.costSet !== null) c = inst.costSet;
   if (inst.costMod) c += inst.costMod;
+  c -= talentCost(C, inst); // Talents V2: card_cost
   return Math.max(0, c);
 }
 

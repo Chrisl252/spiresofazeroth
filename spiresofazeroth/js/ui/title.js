@@ -24,7 +24,7 @@ export function render(app) {
   }
   menu.append(btn("Choose class", () => app.go("classSelect"), app.hasSave ? {} : { "data-autofocus": "" }, "sp-wowbtn--lg"));
   const unspent = (app.data.classIds || []).reduce((n, id) => n + talentState(app.meta, id).available, 0);
-  menu.append(h("div", { class: "sp-title-screen__row" }, btn(unspent > 0 ? `Talents (${unspent})` : "Talents", () => app.go("talents", { back: "title" }), {}, "sp-wowbtn--sm"), btn("Codex", () => app.go("codex"), {}, "sp-wowbtn--sm"), btn("Settings", () => app.go("settings"), {}, "sp-wowbtn--sm")));
+  menu.append(h("div", { class: "sp-title-screen__row" }, btn(unspent > 0 ? `Talents (${unspent})` : "Talents", () => app.go("talents", { back: "title" }), {}, "sp-wowbtn--sm"), btn("Codex", () => app.go("codex"), {}, "sp-wowbtn--sm"), btn("Settings", () => app.showMenu(), {}, "sp-wowbtn--sm")));
   const m = app.meta.stats;
   if (m.runs) menu.append(h("p", { class: "sp-title-screen__stats" }, `Runs ${m.runs}  |  Wins ${m.wins}  |  Best act ${m.bestAct}`));
   return h("section", { class: "sp-title-screen" },

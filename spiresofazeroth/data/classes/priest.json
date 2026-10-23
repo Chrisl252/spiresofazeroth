@@ -147,11 +147,11 @@
       },
       "target": "enemy",
       "flags": [],
-      "text": "Deal 6 holy damage.",
+      "text": "Deal 8 holy damage.",
       "effects": [
         {
           "op": "damage",
-          "amount": 6,
+          "amount": 8,
           "school": "holy"
         }
       ],
@@ -183,7 +183,7 @@
       },
       "target": "enemy",
       "flags": [],
-      "text": "Deal 4 shadow damage. Apply 6 Poison.",
+      "text": "Deal 4 shadow damage. Apply 8 Poison.",
       "effects": [
         {
           "op": "damage",
@@ -193,7 +193,7 @@
         {
           "op": "apply",
           "status": "poison",
-          "stacks": 6,
+          "stacks": 8,
           "target": "enemy"
         }
       ],
@@ -228,11 +228,11 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Gain 5 Block.",
+      "text": "Gain 7 Block.",
       "effects": [
         {
           "op": "block",
-          "amount": 5
+          "amount": 7
         }
       ],
       "upgrade": {
@@ -262,15 +262,15 @@
       },
       "target": "self",
       "flags": [],
-      "text": "Gain 5 Block. Heal 4 HP.",
+      "text": "Gain 7 Block. Heal 5 HP.",
       "effects": [
         {
           "op": "block",
-          "amount": 5
+          "amount": 7
         },
         {
           "op": "heal",
-          "amount": 4,
+          "amount": 5,
           "target": "self"
         }
       ],
@@ -307,11 +307,11 @@
       },
       "target": "enemy",
       "flags": [],
-      "text": "Deal 14 shadow damage.",
+      "text": "Deal 16 shadow damage.",
       "effects": [
         {
           "op": "damage",
-          "amount": 14,
+          "amount": 16,
           "school": "shadow"
         }
       ],
@@ -481,11 +481,11 @@
       },
       "target": "enemy",
       "flags": [],
-      "text": "Deal 12 holy damage. Apply 4 Burn.",
+      "text": "Deal 14 holy damage. Apply 4 Burn.",
       "effects": [
         {
           "op": "damage",
-          "amount": 12,
+          "amount": 14,
           "school": "holy"
         },
         {
@@ -529,11 +529,11 @@
       },
       "target": "enemy",
       "flags": [],
-      "text": "Deal 7 shadow damage. Apply 2 Weak.",
+      "text": "Deal 8 shadow damage. Apply 2 Weak.",
       "effects": [
         {
           "op": "damage",
-          "amount": 7,
+          "amount": 8,
           "school": "shadow"
         },
         {
@@ -1789,11 +1789,11 @@
       },
       "target": "enemy",
       "flags": [],
-      "text": "Deal 10 shadow damage. Apply 6 Disease and 2 Weak. Heal 6.",
+      "text": "Deal 12 shadow damage. Apply 6 Disease and 2 Weak. Heal 6.",
       "effects": [
         {
           "op": "damage",
-          "amount": 10,
+          "amount": 12,
           "school": "shadow"
         },
         {
@@ -2056,11 +2056,11 @@
       },
       "target": "all_enemies",
       "flags": [],
-      "text": "Deal 12 holy damage to ALL enemies. Heal 6 HP.",
+      "text": "Deal 14 holy damage to ALL enemies. Heal 6 HP.",
       "effects": [
         {
           "op": "damage",
-          "amount": 12,
+          "amount": 14,
           "school": "holy",
           "target": "all_enemies"
         },

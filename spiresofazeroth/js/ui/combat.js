@@ -40,13 +40,14 @@ export function render(app) {
 
   const hud = createHud(root, app, {
     stage, onEndTurn: () => endTurnFlow(),
-    anchorFor: (uid) => { const a = K && K.actors && K.actors.get(uid); if (!a || !a.baseXY) return null; const b = a.baseXY(); return { x: b.x, y: b.y - a.baseH(), feet: b.y }; }, // lane position, not the lunge-tweened one
+    anchorFor: (uid, idx, n) => { const a = K && K.actors && K.actors.get(uid); if (!a || !a.baseXY) { const L = K && K.actors && K.actors.lanes && idx != null && K.actors.lanes.enemy(idx, n); return L ? { x: L.x, y: L.y - 340, feet: L.y } : null; } const b = a.baseXY(); return { x: b.x, y: b.y - a.baseH(), feet: b.y }; },
+    layoutEnemies: (list) => { if (K && K.actors && K.actors.layoutEnemies) K.actors.layoutEnemies(list); }, // lane position, not the lunge-tweened one
     onPile: (kind) => showPile(kind),
     onPotion: (i, pot) => potClick(i, pot), onPotionAim: (i, pot, el, ev) => potAim(i, pot, el, ev),
     onEnemyClick: (uid) => enemyClick(C.enemies.find((e) => e.uid === uid)),
     onSpare: (uid) => spareFlow(uid),
     onMap: () => modal("The Spire", h("div", { class: "sp-center" }, h("p", {}, `${(data.zone(run.zoneId) || {}).name || "The Spire"}`), h("p", {}, `Act ${run.act} of 6 - floor ${Math.max(0, run.floor + 1)} of 15`), h("p", { class: "sp-dim" }, "Finish the fight to return to the map."))),
-    onSettings: () => app.go("settings"),
+    onSettings: () => app.showMenu(),
   });
   const handCard = (inst) => cardEl(inst.def, { C, inst, cost: cardCost(C, inst), data, tag: "div", tips: false, color: color() });
   const hand = createHand(root, {

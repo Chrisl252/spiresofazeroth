@@ -45,6 +45,7 @@ const app = {
   refreshLocks() { data.setLocked(lockedCardIds(app.meta, data.unlocks)); }, // card unlock tiers -> reward / shop pools (engine/talents.js)
   showDeck: () => modal("Your deck", deckView(app)),
   async go(name, props) {
+    app.screen = name; // read by ui/presence.js
     const mod = await import(`./ui/${SCREENS[name] || name}.js?v=${BUILD}`);
     stage.setFluid(!mod.stageNative); // legacy screens are unscaled documents; stage-native screens get the 1920x1080 space
     if (!mod.stageNative) stage.setBackdrop(app.run && app.run.zoneId ? app.run.zoneId : "default");
@@ -88,6 +89,7 @@ const app = {
 
 import(`./ui/bugReport.js?v=${BUILD}`).then((m) => m.mountBugReport(app, stage)).catch(() => {}); // floating bug-report button
 import(`./ui/patchNotes.js?v=${BUILD}`).then((m) => m.installPatchNotes(app)).catch((e) => console.warn("[spires] patch notes:", e)); // patch notes + "update available" pill
+import(`./ui/presence.js?v=${BUILD}`).then((m) => m.installPresence(app)).catch(() => {}); // live-player heartbeat for the WoWDex console
 appReady = true;
 
 function prewarmGame(app) {

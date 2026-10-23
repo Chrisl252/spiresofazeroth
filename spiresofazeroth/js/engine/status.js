@@ -42,6 +42,7 @@ export const STATUS_DEFS = {
   corrupted: { mode: "intensity", kind: "debuff" },  // lose ceil(stacks/2) HP at turn end
   madness: { mode: "intensity", kind: "debuff" },    // each card has 5% x stacks (max 75%) to fizzle
   feral: { mode: "intensity", kind: "buff" },        // +1 damage per stack
+  worgen_curse: { mode: "intensity", kind: "buff" }, // Silverpine zone buff: +1 damage per stack (same effect as feral, own icon/text)
   metallicize: { mode: "intensity", kind: "buff" },  // block at turn end
   ritual: { mode: "intensity", kind: "buff" },       // +strength at turn start
   rage_gen: { mode: "intensity", kind: "buff" },     // player: +rage at turn start
@@ -122,7 +123,7 @@ export function packBonus(C, e) {
 export function modifyDealt(C, src, amount) {
   if (!src) return amount;
   const st = src.st || {};
-  let a = amount + (st.strength || 0) + (st.enrage || 0) + (st.feral || 0) - (st.curse || 0);
+  let a = amount + (st.strength || 0) + (st.enrage || 0) + (st.feral || 0) + (st.worgen_curse || 0) - (st.curse || 0);
   if (src.kind === "enemy") a += packBonus(C, src);
   if (st.weak) a *= 0.75;
   return Math.max(0, Math.floor(a));

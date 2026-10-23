@@ -5,17 +5,19 @@ import { h } from "./dom.js";
 import { cssReady, btn, scroll } from "./kit.js";
 import { sfx } from "../audio.js";
 import { zone as zoneAudio } from "../audio/zone.js";
+import { extraRows } from "./pauseExtras.js";
 import { isGamepadConnected, getActiveGamepadName } from "../controller.js";
 
 const SPEED_MIN = 0.5, SPEED_MAX = 3;
 const ENUM_MUL = { slow: 1 / 1.6, normal: 1, fast: 1 / 0.45 };
+const OVERLAYS = ".sx-modal-back, .dm-modal, .sp-modal-back, .sp-notes-backdrop, .sp-bugp";
 const isField = (t) => !!t && (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable);
 
 export function attackMul(s) { return s.speedMul > 0 ? s.speedMul : (ENUM_MUL[s.speed] || 1); }
 
 export function installPauseMenu(app) {
   const s = app.meta.settings;
-  let back = null, catalog = null;
+  let back = null, catalog = null, opening = false;
 
   // boot: replay saved audio settings
   if (Number.isFinite(s.musicVolume)) zoneAudio.setVolume(s.musicVolume);
@@ -24,15 +26,23 @@ export function installPauseMenu(app) {
   if (Number.isFinite(s.sfxVolume)) sfx.setVolume(s.sfxVolume);
   if (s.musicTrack) zoneAudio.setTrack(s.musicTrack);
 
-  // The site's wgf-keybinds.js listens on document (bubble) and bails on defaultPrevented; it binds only Escape and [a-z0-9].
-  // A window-capture preventDefault runs first, so the site never navigates or opens its Game Menu here. Game handlers still receive the keys.
+  // ONE keyboard dispatcher (window capture, runs before every document/target handler, incl. the site's wgf-keybinds.js which binds only Escape + [a-z0-9]).
+  //  - menu open: it owns the keyboard. Escape closes it; every other key is stopped here so combat / hand / event / stage hotkeys never fire through it
+  //    (default actions survive, so Tab / Enter / Space / arrows / typing in the menu's own controls still work).
+  //  - menu closed: Escape closes the top-most overlay (their own handlers do), else cancels a pending card/potion aim (hand/combat do), else opens the menu.
   window.addEventListener("keydown", (e) => {
     if (e.ctrlKey || e.altKey || e.metaKey) return;
     if (e.key === "Escape") {
       e.preventDefault();
-      if (back) close(); else if (!document.querySelector(".sx-modal-back, .dm-modal")) open();
+      if (back) { e.stopImmediatePropagation(); close(); return; }
+      if (document.querySelector(OVERLAYS)) return; // that overlay closes itself on this same key
+      const c = app._combat;
+      if (c && ((c.hand && c.hand.selected && c.hand.selected()) || (c.st && c.st.pot !== null && c.st.pot !== undefined))) return; // cancel the aim first
+      e.stopImmediatePropagation();
+      open();
       return;
     }
+    if (back) { e.stopImmediatePropagation(); if (!isField(e.target) && /^[a-zA-Z0-9]$/.test(e.key)) e.preventDefault(); return; }
     if (/^[a-zA-Z0-9]$/.test(e.key) && !isField(e.target)) e.preventDefault();
   }, true);
 
@@ -46,10 +56,11 @@ export function installPauseMenu(app) {
   const save = () => { try { app.save(); } catch (e) { /* ignore */ } };
 
   async function open() {
+    if (back) { const f = back.querySelector("[data-autofocus]"); if (f) f.focus({ preventScroll: true }); return; } // idempotent: focus the existing menu
+    if (opening) return;
+    opening = true;
+    try { await cssReady; if (!catalog) catalog = await zoneAudio.catalog(); } finally { opening = false; }
     if (back) return;
-    await cssReady;
-    if (back) return;
-    if (!catalog) catalog = await zoneAudio.catalog();
     const sel = h("select", {
       class: "pm-select",
       "aria-label": "Zone audio",
@@ -84,11 +95,11 @@ export function installPauseMenu(app) {
 
     const mul = Math.min(SPEED_MAX, Math.max(SPEED_MIN, attackMul(s)));
     const panel = scroll("pm-panel",
-      h("h2", { class: "pm-title" }, "Game Menu"),
-      slider("Attack speed", SPEED_MIN, SPEED_MAX, 0.1, Math.round(mul * 10) / 10, (v) => `${(+v).toFixed(1)}x`, (v) => { s.speedMul = v; save(); if (app.kit && app.kit.fx) { app.kit.fx.speed = v; if (app.kit.actors) app.kit.actors.setSpeed(v); } }),
+      h("h2", { class: "pm-title" }, "Settings"),
+      slider("Attack speed", SPEED_MIN, SPEED_MAX, 0.1, Math.round(mul * 10) / 10, (v) => `${(+v).toFixed(1)}x`, (v) => { s.speedMul = v; s.speed = v < 0.8 ? "slow" : v > 1.6 ? "fast" : "normal"; save(); if (app.kit && app.kit.fx) { app.kit.fx.speed = v; if (app.kit.actors) app.kit.actors.setSpeed(v); } }),
       slider("Music sounds", 0, 100, 5, zoneAudio.volume, pct, (v) => { s.musicVolume = v; zoneAudio.setVolume(v); save(); }),
       slider("Ambient sounds", 0, 100, 5, zoneAudio.ambienceVolume, pct, (v) => { s.ambienceVolume = v; zoneAudio.setAmbienceVolume(v); save(); }),
-      slider("Game sounds", 0, 100, 5, sfx.volume, pct, (v) => { s.sfxVolume = v; sfx.setVolume(v); save(); }),
+      slider("Game sounds", 0, 100, 5, sfx.volume, pct, (v) => { s.sfxVolume = v; sfx.setVolume(v); sfx.setMuted(v === 0); save(); }),
       h("label", { class: "pm-row" }, h("span", { class: "pm-lab" }, "Ambience mode"),
         h("select", {
           class: "pm-select",
@@ -114,12 +125,12 @@ export function installPauseMenu(app) {
           checked: s.vibration !== false,
           onChange: (e) => { s.vibration = e.target.checked; save(); }
         })),
+      ...extraRows(app, save),
       h("div", { class: "pm-btns" },
         btn("Resume", close, { cls: "pm-btn", auto: true }),
-        btn("Settings", () => { close(); app.go("settings"); }, { cls: "pm-btn" }),
-        btn("Abandon run", () => { if (confirm("Abandon this run? Progress in the run is lost.")) { close(); app.abandon(); } }, { cls: "pm-btn", disabled: !app.run }),
+                btn("Abandon run", () => { if (confirm("Abandon this run? Progress in the run is lost.")) { close(); app.abandon(); } }, { cls: "pm-btn", disabled: !app.run }),
         btn("Return to title", () => { close(); app.go("title"); }, { cls: "pm-btn" })));
-    back = h("div", { class: "pm-back", role: "dialog", "aria-modal": "true", "aria-label": "Game Menu", "data-pause-menu": "" }, panel);
+    back = h("div", { class: "pm-back sp-pause-menu", role: "dialog", "aria-modal": "true", "aria-label": "Settings", "data-pause-menu": "" }, panel);
     back.addEventListener("click", (e) => { if (e.target === back) close(); });
     (app.stage && app.stage.root ? app.stage.root : app.root).append(back);
     const f = back.querySelector("[data-autofocus]"); if (f) f.focus({ preventScroll: true });
@@ -127,5 +138,6 @@ export function installPauseMenu(app) {
   function close() { if (back) { back.remove(); back = null; } }
 
   app.openMenu = () => (back ? close() : open());
+  app.showMenu = open; // idempotent open (HUD / title / run-bar Settings buttons)
   app.closeMenu = close;
 }

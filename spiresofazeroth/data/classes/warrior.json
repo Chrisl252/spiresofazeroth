@@ -43,6 +43,7 @@
     "inner-rage"
   ],
   "units": {},
+  "spellIdSource": "memory",
   "cards": [
     {
       "id": "heroic-strike",
@@ -56,18 +57,32 @@
       "cost": 1,
       "target": "enemy",
       "flags": [],
-      "text": "Deal 6 damage. Gain 5 Rage.",
+      "text": "Deal 8 damage. Gain 5 Rage.",
       "effects": [
-        {"op": "damage", "amount": 6},
-        {"op": "gain_resource", "resource": "rage", "amount": 5}
+        {
+          "op": "damage",
+          "amount": 8
+        },
+        {
+          "op": "gain_resource",
+          "resource": "rage",
+          "amount": 5
+        }
       ],
       "upgrade": {
         "name": "Heroic Strike (Rank 2)",
         "cost": 1,
-        "text": "Deal 9 damage. Gain 5 Rage.",
+        "text": "Deal 11 damage. Gain 5 Rage.",
         "effects": [
-          {"op": "damage", "amount": 9},
-          {"op": "gain_resource", "resource": "rage", "amount": 5}
+          {
+            "op": "damage",
+            "amount": 11
+          },
+          {
+            "op": "gain_resource",
+            "resource": "rage",
+            "amount": 5
+          }
         ]
       }
     },
@@ -83,20 +98,50 @@
       "cost": 1,
       "target": "enemy",
       "flags": [],
-      "text": "Deal 6 damage. Spend all Rage: +1 damage per Rage spent (max 20).",
+      "text": "Deal 8 damage. Spend all Rage: +1 damage per Rage spent (max 20).",
       "effects": [
-        {"op": "damage", "amount": 6},
-        {"op": "spend_resource", "resource": "rage", "all": true},
-        {"op": "damage", "amount": {"base": 0, "scale": "rage", "per": 1, "max": 20}}
+        {
+          "op": "damage",
+          "amount": 8
+        },
+        {
+          "op": "spend_resource",
+          "resource": "rage",
+          "all": true
+        },
+        {
+          "op": "damage",
+          "amount": {
+            "base": 0,
+            "scale": "rage",
+            "per": 1,
+            "max": 20
+          }
+        }
       ],
       "upgrade": {
         "name": "Inner Rage (Rank 2)",
         "cost": 1,
-        "text": "Deal 9 damage. Spend all Rage: +1 damage per Rage spent (max 30).",
+        "text": "Deal 11 damage. Spend all Rage: +1 damage per Rage spent (max 30).",
         "effects": [
-          {"op": "damage", "amount": 9},
-          {"op": "spend_resource", "resource": "rage", "all": true},
-          {"op": "damage", "amount": {"base": 0, "scale": "rage", "per": 1, "max": 30}}
+          {
+            "op": "damage",
+            "amount": 11
+          },
+          {
+            "op": "spend_resource",
+            "resource": "rage",
+            "all": true
+          },
+          {
+            "op": "damage",
+            "amount": {
+              "base": 0,
+              "scale": "rage",
+              "per": 1,
+              "max": 30
+            }
+          }
         ]
       }
     },
@@ -114,16 +159,30 @@
       "flags": [],
       "text": "Gain 5 Block. Gain 5 Rage.",
       "effects": [
-        {"op": "block", "amount": 5},
-        {"op": "gain_resource", "resource": "rage", "amount": 5}
+        {
+          "op": "block",
+          "amount": 5
+        },
+        {
+          "op": "gain_resource",
+          "resource": "rage",
+          "amount": 5
+        }
       ],
       "upgrade": {
         "name": "Shield Block (Rank 2)",
         "cost": 1,
         "text": "Gain 8 Block. Gain 5 Rage.",
         "effects": [
-          {"op": "block", "amount": 8},
-          {"op": "gain_resource", "resource": "rage", "amount": 5}
+          {
+            "op": "block",
+            "amount": 8
+          },
+          {
+            "op": "gain_resource",
+            "resource": "rage",
+            "amount": 5
+          }
         ]
       }
     },
@@ -139,20 +198,44 @@
       "cost": 1,
       "target": "enemy",
       "flags": [],
-      "text": "Deal 8 damage. Apply Vulnerable 2. Gain 10 Rage.",
+      "text": "Deal 10 damage. Apply Vulnerable 2. Gain 10 Rage.",
       "effects": [
-        {"op": "damage", "amount": 8},
-        {"op": "apply", "status": "vulnerable", "stacks": 2, "target": "enemy"},
-        {"op": "gain_resource", "resource": "rage", "amount": 10}
+        {
+          "op": "damage",
+          "amount": 10
+        },
+        {
+          "op": "apply",
+          "status": "vulnerable",
+          "stacks": 2,
+          "target": "enemy"
+        },
+        {
+          "op": "gain_resource",
+          "resource": "rage",
+          "amount": 10
+        }
       ],
       "upgrade": {
         "name": "Charge (Rank 2)",
         "cost": 1,
-        "text": "Deal 11 damage. Apply Vulnerable 3. Gain 15 Rage.",
+        "text": "Deal 13 damage. Apply Vulnerable 3. Gain 15 Rage.",
         "effects": [
-          {"op": "damage", "amount": 11},
-          {"op": "apply", "status": "vulnerable", "stacks": 3, "target": "enemy"},
-          {"op": "gain_resource", "resource": "rage", "amount": 15}
+          {
+            "op": "damage",
+            "amount": 13
+          },
+          {
+            "op": "apply",
+            "status": "vulnerable",
+            "stacks": 3,
+            "target": "enemy"
+          },
+          {
+            "op": "gain_resource",
+            "resource": "rage",
+            "amount": 15
+          }
         ]
       }
     },
@@ -168,18 +251,34 @@
       "cost": 1,
       "target": "enemy",
       "flags": [],
-      "text": "Deal 4 damage. Apply 4 Bleed.",
+      "text": "Deal 6 damage. Apply 4 Bleed.",
       "effects": [
-        {"op": "damage", "amount": 4},
-        {"op": "apply", "status": "bleed", "stacks": 4, "target": "enemy"}
+        {
+          "op": "damage",
+          "amount": 6
+        },
+        {
+          "op": "apply",
+          "status": "bleed",
+          "stacks": 4,
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Rend (Rank 2)",
         "cost": 1,
-        "text": "Deal 6 damage. Apply 6 Bleed.",
+        "text": "Deal 8 damage. Apply 6 Bleed.",
         "effects": [
-          {"op": "damage", "amount": 6},
-          {"op": "apply", "status": "bleed", "stacks": 6, "target": "enemy"}
+          {
+            "op": "damage",
+            "amount": 8
+          },
+          {
+            "op": "apply",
+            "status": "bleed",
+            "stacks": 6,
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -197,16 +296,34 @@
       "flags": [],
       "text": "Deal 6 damage to ALL enemies. Apply 1 Weak to ALL.",
       "effects": [
-        {"op": "damage", "amount": 6, "target": "all_enemies"},
-        {"op": "apply", "status": "weak", "stacks": 1, "target": "all_enemies"}
+        {
+          "op": "damage",
+          "amount": 6,
+          "target": "all_enemies"
+        },
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 1,
+          "target": "all_enemies"
+        }
       ],
       "upgrade": {
         "name": "Thunder Clap (Rank 2)",
         "cost": 1,
         "text": "Deal 9 damage to ALL enemies. Apply 2 Weak to ALL.",
         "effects": [
-          {"op": "damage", "amount": 9, "target": "all_enemies"},
-          {"op": "apply", "status": "weak", "stacks": 2, "target": "all_enemies"}
+          {
+            "op": "damage",
+            "amount": 9,
+            "target": "all_enemies"
+          },
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 2,
+            "target": "all_enemies"
+          }
         ]
       }
     },
@@ -224,16 +341,32 @@
       "flags": [],
       "text": "Deal 8 damage. Apply 2 Weak.",
       "effects": [
-        {"op": "damage", "amount": 8},
-        {"op": "apply", "status": "weak", "stacks": 2, "target": "enemy"}
+        {
+          "op": "damage",
+          "amount": 8
+        },
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 2,
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Hamstring (Rank 2)",
         "cost": 1,
         "text": "Deal 11 damage. Apply 3 Weak.",
         "effects": [
-          {"op": "damage", "amount": 11},
-          {"op": "apply", "status": "weak", "stacks": 3, "target": "enemy"}
+          {
+            "op": "damage",
+            "amount": 11
+          },
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 3,
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -251,14 +384,22 @@
       "flags": [],
       "text": "Deal 8 damage to ALL enemies.",
       "effects": [
-        {"op": "damage", "amount": 8, "target": "all_enemies"}
+        {
+          "op": "damage",
+          "amount": 8,
+          "target": "all_enemies"
+        }
       ],
       "upgrade": {
         "name": "Cleave (Rank 2)",
         "cost": 1,
         "text": "Deal 11 damage to ALL enemies.",
         "effects": [
-          {"op": "damage", "amount": 11, "target": "all_enemies"}
+          {
+            "op": "damage",
+            "amount": 11,
+            "target": "all_enemies"
+          }
         ]
       }
     },
@@ -276,18 +417,42 @@
       "flags": [],
       "text": "Deal 7 damage. Apply 2 Vulnerable. Gain 5 Rage.",
       "effects": [
-        {"op": "damage", "amount": 7},
-        {"op": "apply", "status": "vulnerable", "stacks": 2, "target": "enemy"},
-        {"op": "gain_resource", "resource": "rage", "amount": 5}
+        {
+          "op": "damage",
+          "amount": 7
+        },
+        {
+          "op": "apply",
+          "status": "vulnerable",
+          "stacks": 2,
+          "target": "enemy"
+        },
+        {
+          "op": "gain_resource",
+          "resource": "rage",
+          "amount": 5
+        }
       ],
       "upgrade": {
         "name": "Sunder Armor (Rank 2)",
         "cost": 1,
         "text": "Deal 10 damage. Apply 3 Vulnerable. Gain 5 Rage.",
         "effects": [
-          {"op": "damage", "amount": 10},
-          {"op": "apply", "status": "vulnerable", "stacks": 3, "target": "enemy"},
-          {"op": "gain_resource", "resource": "rage", "amount": 5}
+          {
+            "op": "damage",
+            "amount": 10
+          },
+          {
+            "op": "apply",
+            "status": "vulnerable",
+            "stacks": 3,
+            "target": "enemy"
+          },
+          {
+            "op": "gain_resource",
+            "resource": "rage",
+            "amount": 5
+          }
         ]
       }
     },
@@ -305,14 +470,24 @@
       "flags": [],
       "text": "Gain 2 Strength.",
       "effects": [
-        {"op": "apply", "status": "strength", "stacks": 2, "target": "self"}
+        {
+          "op": "apply",
+          "status": "strength",
+          "stacks": 2,
+          "target": "self"
+        }
       ],
       "upgrade": {
         "name": "Battle Shout (Rank 2)",
         "cost": 1,
         "text": "Gain 3 Strength.",
         "effects": [
-          {"op": "apply", "status": "strength", "stacks": 3, "target": "self"}
+          {
+            "op": "apply",
+            "status": "strength",
+            "stacks": 3,
+            "target": "self"
+          }
         ]
       }
     },
@@ -327,19 +502,39 @@
       "archetype": "fury",
       "cost": 0,
       "target": "all_enemies",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Apply 1 Weak to ALL enemies. Gain 5 Rage. Exhaust.",
       "effects": [
-        {"op": "apply", "status": "weak", "stacks": 1, "target": "all_enemies"},
-        {"op": "gain_resource", "resource": "rage", "amount": 5}
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 1,
+          "target": "all_enemies"
+        },
+        {
+          "op": "gain_resource",
+          "resource": "rage",
+          "amount": 5
+        }
       ],
       "upgrade": {
         "name": "Demoralizing Shout (Rank 2)",
         "cost": 0,
         "text": "Apply 2 Weak to ALL enemies. Gain 5 Rage. Exhaust.",
         "effects": [
-          {"op": "apply", "status": "weak", "stacks": 2, "target": "all_enemies"},
-          {"op": "gain_resource", "resource": "rage", "amount": 5}
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 2,
+            "target": "all_enemies"
+          },
+          {
+            "op": "gain_resource",
+            "resource": "rage",
+            "amount": 5
+          }
         ]
       }
     },
@@ -357,18 +552,40 @@
       "flags": [],
       "text": "Lose 3 HP. Gain 2 Energy. Gain 15 Rage.",
       "effects": [
-        {"op": "damage", "amount": 3, "target": "self"},
-        {"op": "gain_energy", "amount": 2},
-        {"op": "gain_resource", "resource": "rage", "amount": 15}
+        {
+          "op": "damage",
+          "amount": 3,
+          "target": "self"
+        },
+        {
+          "op": "gain_energy",
+          "amount": 2
+        },
+        {
+          "op": "gain_resource",
+          "resource": "rage",
+          "amount": 15
+        }
       ],
       "upgrade": {
         "name": "Bloodrage (Rank 2)",
         "cost": 0,
         "text": "Lose 3 HP. Gain 3 Energy. Gain 20 Rage.",
         "effects": [
-          {"op": "damage", "amount": 3, "target": "self"},
-          {"op": "gain_energy", "amount": 3},
-          {"op": "gain_resource", "resource": "rage", "amount": 20}
+          {
+            "op": "damage",
+            "amount": 3,
+            "target": "self"
+          },
+          {
+            "op": "gain_energy",
+            "amount": 3
+          },
+          {
+            "op": "gain_resource",
+            "resource": "rage",
+            "amount": 20
+          }
         ]
       }
     },
@@ -383,19 +600,33 @@
       "archetype": "fury",
       "cost": 1,
       "target": "enemy",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Deal 2 damage 4 times. Interrupt the enemy cast. Exhaust.",
       "effects": [
-        {"op": "damage", "amount": 2, "times": 4},
-        {"op": "cast_interrupt"}
+        {
+          "op": "damage",
+          "amount": 2,
+          "times": 4
+        },
+        {
+          "op": "cast_interrupt"
+        }
       ],
       "upgrade": {
         "name": "Pummel (Rank 2)",
         "cost": 1,
         "text": "Deal 2 damage 5 times. Interrupt the enemy cast. Exhaust.",
         "effects": [
-          {"op": "damage", "amount": 2, "times": 5},
-          {"op": "cast_interrupt"}
+          {
+            "op": "damage",
+            "amount": 2,
+            "times": 5
+          },
+          {
+            "op": "cast_interrupt"
+          }
         ]
       }
     },
@@ -413,18 +644,34 @@
       "flags": [],
       "text": "Deal 5 damage. Gain 5 Block. Interrupt the enemy cast.",
       "effects": [
-        {"op": "damage", "amount": 5},
-        {"op": "block", "amount": 5},
-        {"op": "cast_interrupt"}
+        {
+          "op": "damage",
+          "amount": 5
+        },
+        {
+          "op": "block",
+          "amount": 5
+        },
+        {
+          "op": "cast_interrupt"
+        }
       ],
       "upgrade": {
         "name": "Shield Bash (Rank 2)",
         "cost": 1,
         "text": "Deal 7 damage. Gain 7 Block. Interrupt the enemy cast.",
         "effects": [
-          {"op": "damage", "amount": 7},
-          {"op": "block", "amount": 7},
-          {"op": "cast_interrupt"}
+          {
+            "op": "damage",
+            "amount": 7
+          },
+          {
+            "op": "block",
+            "amount": 7
+          },
+          {
+            "op": "cast_interrupt"
+          }
         ]
       }
     },
@@ -442,16 +689,46 @@
       "flags": [],
       "text": "Deal 8 damage. In Defensive Stance, deal 6 more.",
       "effects": [
-        {"op": "damage", "amount": 8},
-        {"op": "conditional", "if": {"type": "stance_is", "value": "defensive"}, "then": [{"op": "damage", "amount": 6}]}
+        {
+          "op": "damage",
+          "amount": 8
+        },
+        {
+          "op": "conditional",
+          "if": {
+            "type": "stance_is",
+            "value": "defensive"
+          },
+          "then": [
+            {
+              "op": "damage",
+              "amount": 6
+            }
+          ]
+        }
       ],
       "upgrade": {
         "name": "Revenge (Rank 2)",
         "cost": 1,
         "text": "Deal 11 damage. In Defensive Stance, deal 8 more.",
         "effects": [
-          {"op": "damage", "amount": 11},
-          {"op": "conditional", "if": {"type": "stance_is", "value": "defensive"}, "then": [{"op": "damage", "amount": 8}]}
+          {
+            "op": "damage",
+            "amount": 11
+          },
+          {
+            "op": "conditional",
+            "if": {
+              "type": "stance_is",
+              "value": "defensive"
+            },
+            "then": [
+              {
+                "op": "damage",
+                "amount": 8
+              }
+            ]
+          }
         ]
       }
     },
@@ -469,20 +746,50 @@
       "flags": [],
       "text": "If the enemy intends to attack, gain 3 Strength and 6 Block.",
       "effects": [
-        {"op": "conditional", "if": {"type": "enemy_intent", "intent": "attack"}, "then": [
-          {"op": "apply", "status": "strength", "stacks": 3, "target": "self"},
-          {"op": "block", "amount": 6}
-        ]}
+        {
+          "op": "conditional",
+          "if": {
+            "type": "enemy_intent",
+            "intent": "attack"
+          },
+          "then": [
+            {
+              "op": "apply",
+              "status": "strength",
+              "stacks": 3,
+              "target": "self"
+            },
+            {
+              "op": "block",
+              "amount": 6
+            }
+          ]
+        }
       ],
       "upgrade": {
         "name": "Taunt (Rank 2)",
         "cost": 1,
         "text": "If the enemy intends to attack, gain 4 Strength and 9 Block.",
         "effects": [
-          {"op": "conditional", "if": {"type": "enemy_intent", "intent": "attack"}, "then": [
-            {"op": "apply", "status": "strength", "stacks": 4, "target": "self"},
-            {"op": "block", "amount": 9}
-          ]}
+          {
+            "op": "conditional",
+            "if": {
+              "type": "enemy_intent",
+              "intent": "attack"
+            },
+            "then": [
+              {
+                "op": "apply",
+                "status": "strength",
+                "stacks": 4,
+                "target": "self"
+              },
+              {
+                "op": "block",
+                "amount": 9
+              }
+            ]
+          }
         ]
       }
     },
@@ -500,16 +807,30 @@
       "flags": [],
       "text": "Deal 9 damage. Gain 5 Rage.",
       "effects": [
-        {"op": "damage", "amount": 9},
-        {"op": "gain_resource", "resource": "rage", "amount": 5}
+        {
+          "op": "damage",
+          "amount": 9
+        },
+        {
+          "op": "gain_resource",
+          "resource": "rage",
+          "amount": 5
+        }
       ],
       "upgrade": {
         "name": "Mocking Blow (Rank 2)",
         "cost": 1,
         "text": "Deal 12 damage. Gain 5 Rage.",
         "effects": [
-          {"op": "damage", "amount": 12},
-          {"op": "gain_resource", "resource": "rage", "amount": 5}
+          {
+            "op": "damage",
+            "amount": 12
+          },
+          {
+            "op": "gain_resource",
+            "resource": "rage",
+            "amount": 5
+          }
         ]
       }
     },
@@ -527,18 +848,40 @@
       "flags": [],
       "text": "Gain 8 Block. Apply 1 Weak to ALL enemies. Draw 1 card.",
       "effects": [
-        {"op": "block", "amount": 8},
-        {"op": "apply", "status": "weak", "stacks": 1, "target": "all_enemies"},
-        {"op": "draw", "count": 1}
+        {
+          "op": "block",
+          "amount": 8
+        },
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 1,
+          "target": "all_enemies"
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Piercing Howl (Rank 2)",
         "cost": 1,
         "text": "Gain 11 Block. Apply 1 Weak to ALL enemies. Draw 1 card.",
         "effects": [
-          {"op": "block", "amount": 11},
-          {"op": "apply", "status": "weak", "stacks": 1, "target": "all_enemies"},
-          {"op": "draw", "count": 1}
+          {
+            "op": "block",
+            "amount": 11
+          },
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 1,
+            "target": "all_enemies"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
         ]
       }
     },
@@ -553,17 +896,29 @@
       "archetype": "protection",
       "cost": 1,
       "target": "enemy",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Enemy loses 2 Strength. Exhaust.",
       "effects": [
-        {"op": "apply", "status": "strength", "stacks": -2, "target": "enemy"}
+        {
+          "op": "apply",
+          "status": "strength",
+          "stacks": -2,
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Disarm (Rank 2)",
         "cost": 1,
         "text": "Enemy loses 3 Strength. Exhaust.",
         "effects": [
-          {"op": "apply", "status": "strength", "stacks": -3, "target": "enemy"}
+          {
+            "op": "apply",
+            "status": "strength",
+            "stacks": -3,
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -578,21 +933,47 @@
       "archetype": "fury",
       "cost": 1,
       "target": "enemy",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Deal 8 damage. Apply 1 Stun. Gain 10 Rage. Exhaust.",
       "effects": [
-        {"op": "damage", "amount": 8},
-        {"op": "apply", "status": "stun", "stacks": 1, "target": "enemy"},
-        {"op": "gain_resource", "resource": "rage", "amount": 10}
+        {
+          "op": "damage",
+          "amount": 8
+        },
+        {
+          "op": "apply",
+          "status": "stun",
+          "stacks": 1,
+          "target": "enemy"
+        },
+        {
+          "op": "gain_resource",
+          "resource": "rage",
+          "amount": 10
+        }
       ],
       "upgrade": {
         "name": "Intercept (Rank 2)",
         "cost": 1,
         "text": "Deal 11 damage. Apply 1 Stun. Gain 15 Rage. Exhaust.",
         "effects": [
-          {"op": "damage", "amount": 11},
-          {"op": "apply", "status": "stun", "stacks": 1, "target": "enemy"},
-          {"op": "gain_resource", "resource": "rage", "amount": 15}
+          {
+            "op": "damage",
+            "amount": 11
+          },
+          {
+            "op": "apply",
+            "status": "stun",
+            "stacks": 1,
+            "target": "enemy"
+          },
+          {
+            "op": "gain_resource",
+            "resource": "rage",
+            "amount": 15
+          }
         ]
       }
     },
@@ -610,14 +991,20 @@
       "flags": [],
       "text": "Deal 20 damage.",
       "effects": [
-        {"op": "damage", "amount": 20}
+        {
+          "op": "damage",
+          "amount": 20
+        }
       ],
       "upgrade": {
         "name": "Slam (Rank 2)",
         "cost": 2,
         "text": "Deal 26 damage.",
         "effects": [
-          {"op": "damage", "amount": 26}
+          {
+            "op": "damage",
+            "amount": 26
+          }
         ]
       }
     },
@@ -635,16 +1022,48 @@
       "flags": [],
       "text": "Deal 5 damage 2 times. In Battle Stance, deal 5 more.",
       "effects": [
-        {"op": "damage", "amount": 5, "times": 2},
-        {"op": "conditional", "if": {"type": "stance_is", "value": "battle"}, "then": [{"op": "damage", "amount": 5}]}
+        {
+          "op": "damage",
+          "amount": 5,
+          "times": 2
+        },
+        {
+          "op": "conditional",
+          "if": {
+            "type": "stance_is",
+            "value": "battle"
+          },
+          "then": [
+            {
+              "op": "damage",
+              "amount": 5
+            }
+          ]
+        }
       ],
       "upgrade": {
         "name": "Overpower (Rank 2)",
         "cost": 1,
         "text": "Deal 7 damage 2 times. In Battle Stance, deal 7 more.",
         "effects": [
-          {"op": "damage", "amount": 7, "times": 2},
-          {"op": "conditional", "if": {"type": "stance_is", "value": "battle"}, "then": [{"op": "damage", "amount": 7}]}
+          {
+            "op": "damage",
+            "amount": 7,
+            "times": 2
+          },
+          {
+            "op": "conditional",
+            "if": {
+              "type": "stance_is",
+              "value": "battle"
+            },
+            "then": [
+              {
+                "op": "damage",
+                "amount": 7
+              }
+            ]
+          }
         ]
       }
     },
@@ -662,16 +1081,48 @@
       "flags": [],
       "text": "Deal 10 damage. If the enemy is below 50% HP, deal 18 more.",
       "effects": [
-        {"op": "damage", "amount": 10},
-        {"op": "conditional", "if": {"type": "hp_below_pct", "pct": 50, "target": "enemy"}, "then": [{"op": "damage", "amount": 18}]}
+        {
+          "op": "damage",
+          "amount": 10
+        },
+        {
+          "op": "conditional",
+          "if": {
+            "type": "hp_below_pct",
+            "pct": 50,
+            "target": "enemy"
+          },
+          "then": [
+            {
+              "op": "damage",
+              "amount": 18
+            }
+          ]
+        }
       ],
       "upgrade": {
         "name": "Execute (Rank 2)",
         "cost": 1,
         "text": "Deal 14 damage. If the enemy is below 50% HP, deal 24 more.",
         "effects": [
-          {"op": "damage", "amount": 14},
-          {"op": "conditional", "if": {"type": "hp_below_pct", "pct": 50, "target": "enemy"}, "then": [{"op": "damage", "amount": 24}]}
+          {
+            "op": "damage",
+            "amount": 14
+          },
+          {
+            "op": "conditional",
+            "if": {
+              "type": "hp_below_pct",
+              "pct": 50,
+              "target": "enemy"
+            },
+            "then": [
+              {
+                "op": "damage",
+                "amount": 24
+              }
+            ]
+          }
         ]
       }
     },
@@ -691,20 +1142,50 @@
       ],
       "text": "Remove Fear and Stun from you. Gain 15 Rage. Draw 1 card. Exhaust.",
       "effects": [
-        {"op": "remove", "status": "fear", "target": "self"},
-        {"op": "remove", "status": "stun", "target": "self"},
-        {"op": "gain_resource", "resource": "rage", "amount": 15},
-        {"op": "draw", "count": 1}
+        {
+          "op": "remove",
+          "status": "fear",
+          "target": "self"
+        },
+        {
+          "op": "remove",
+          "status": "stun",
+          "target": "self"
+        },
+        {
+          "op": "gain_resource",
+          "resource": "rage",
+          "amount": 15
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Berserker Rage (Rank 2)",
         "cost": 0,
         "text": "Remove Fear and Stun from you. Gain 20 Rage. Draw 2 cards. Exhaust.",
         "effects": [
-          {"op": "remove", "status": "fear", "target": "self"},
-          {"op": "remove", "status": "stun", "target": "self"},
-          {"op": "gain_resource", "resource": "rage", "amount": 20},
-          {"op": "draw", "count": 2}
+          {
+            "op": "remove",
+            "status": "fear",
+            "target": "self"
+          },
+          {
+            "op": "remove",
+            "status": "stun",
+            "target": "self"
+          },
+          {
+            "op": "gain_resource",
+            "resource": "rage",
+            "amount": 20
+          },
+          {
+            "op": "draw",
+            "count": 2
+          }
         ]
       }
     },
@@ -719,19 +1200,41 @@
       "archetype": "fury",
       "cost": 2,
       "target": "all_enemies",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Apply 3 Weak and 3 Vulnerable to ALL enemies. Exhaust.",
       "effects": [
-        {"op": "apply", "status": "weak", "stacks": 3, "target": "all_enemies"},
-        {"op": "apply", "status": "vulnerable", "stacks": 3, "target": "all_enemies"}
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 3,
+          "target": "all_enemies"
+        },
+        {
+          "op": "apply",
+          "status": "vulnerable",
+          "stacks": 3,
+          "target": "all_enemies"
+        }
       ],
       "upgrade": {
         "name": "Intimidating Shout (Rank 2)",
         "cost": 2,
         "text": "Apply 5 Weak and 5 Vulnerable to ALL enemies. Exhaust.",
         "effects": [
-          {"op": "apply", "status": "weak", "stacks": 5, "target": "all_enemies"},
-          {"op": "apply", "status": "vulnerable", "stacks": 5, "target": "all_enemies"}
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 5,
+            "target": "all_enemies"
+          },
+          {
+            "op": "apply",
+            "status": "vulnerable",
+            "stacks": 5,
+            "target": "all_enemies"
+          }
         ]
       }
     },
@@ -749,14 +1252,18 @@
       "flags": [],
       "text": "Double your current Block.",
       "effects": [
-        {"op": "double_block"}
+        {
+          "op": "double_block"
+        }
       ],
       "upgrade": {
         "name": "Challenging Shout (Rank 2)",
         "cost": 0,
         "text": "Double your current Block. Costs 0.",
         "effects": [
-          {"op": "double_block"}
+          {
+            "op": "double_block"
+          }
         ]
       }
     },
@@ -772,18 +1279,34 @@
       "cost": 2,
       "target": "self",
       "flags": [],
-      "text": "Gain 12 Block. Gain 4 Thorns.",
+      "text": "Gain 8 Block. Gain 4 Thorns.",
       "effects": [
-        {"op": "block", "amount": 12},
-        {"op": "apply", "status": "thorns", "stacks": 4, "target": "self"}
+        {
+          "op": "block",
+          "amount": 8
+        },
+        {
+          "op": "apply",
+          "status": "thorns",
+          "stacks": 4,
+          "target": "self"
+        }
       ],
       "upgrade": {
         "name": "Retaliation (Rank 2)",
         "cost": 2,
         "text": "Gain 16 Block. Gain 6 Thorns.",
         "effects": [
-          {"op": "block", "amount": 16},
-          {"op": "apply", "status": "thorns", "stacks": 6, "target": "self"}
+          {
+            "op": "block",
+            "amount": 16
+          },
+          {
+            "op": "apply",
+            "status": "thorns",
+            "stacks": 6,
+            "target": "self"
+          }
         ]
       }
     },
@@ -801,16 +1324,28 @@
       "flags": [],
       "text": "Your next attack deals double damage. Gain 5 Rage.",
       "effects": [
-        {"op": "double_damage_next"},
-        {"op": "gain_resource", "resource": "rage", "amount": 5}
+        {
+          "op": "double_damage_next"
+        },
+        {
+          "op": "gain_resource",
+          "resource": "rage",
+          "amount": 5
+        }
       ],
       "upgrade": {
         "name": "Sweeping Strikes (Rank 2)",
         "cost": 0,
         "text": "Your next attack deals double damage. Gain 5 Rage. Costs 0.",
         "effects": [
-          {"op": "double_damage_next"},
-          {"op": "gain_resource", "resource": "rage", "amount": 5}
+          {
+            "op": "double_damage_next"
+          },
+          {
+            "op": "gain_resource",
+            "resource": "rage",
+            "amount": 5
+          }
         ]
       }
     },
@@ -828,14 +1363,24 @@
       "flags": [],
       "text": "Deal 7 damage to ALL enemies 2 times.",
       "effects": [
-        {"op": "damage", "amount": 7, "target": "all_enemies", "times": 2}
+        {
+          "op": "damage",
+          "amount": 7,
+          "target": "all_enemies",
+          "times": 2
+        }
       ],
       "upgrade": {
         "name": "Whirlwind (Rank 2)",
         "cost": 2,
         "text": "Deal 10 damage to ALL enemies 2 times.",
         "effects": [
-          {"op": "damage", "amount": 10, "target": "all_enemies", "times": 2}
+          {
+            "op": "damage",
+            "amount": 10,
+            "target": "all_enemies",
+            "times": 2
+          }
         ]
       }
     },
@@ -853,18 +1398,44 @@
       "flags": [],
       "text": "Deal 16 damage. Apply 1 Stun. Apply 2 Vulnerable.",
       "effects": [
-        {"op": "damage", "amount": 16},
-        {"op": "apply", "status": "stun", "stacks": 1, "target": "enemy"},
-        {"op": "apply", "status": "vulnerable", "stacks": 2, "target": "enemy"}
+        {
+          "op": "damage",
+          "amount": 16
+        },
+        {
+          "op": "apply",
+          "status": "stun",
+          "stacks": 1,
+          "target": "enemy"
+        },
+        {
+          "op": "apply",
+          "status": "vulnerable",
+          "stacks": 2,
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Concussion Blow (Rank 2)",
         "cost": 2,
         "text": "Deal 22 damage. Apply 1 Stun. Apply 3 Vulnerable.",
         "effects": [
-          {"op": "damage", "amount": 22},
-          {"op": "apply", "status": "stun", "stacks": 1, "target": "enemy"},
-          {"op": "apply", "status": "vulnerable", "stacks": 3, "target": "enemy"}
+          {
+            "op": "damage",
+            "amount": 22
+          },
+          {
+            "op": "apply",
+            "status": "stun",
+            "stacks": 1,
+            "target": "enemy"
+          },
+          {
+            "op": "apply",
+            "status": "vulnerable",
+            "stacks": 3,
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -884,18 +1455,38 @@
       ],
       "text": "Enter Battle Stance. Draw 3 cards. Gain 5 Rage. Exhaust.",
       "effects": [
-        {"op": "set_stance", "value": "battle"},
-        {"op": "draw", "count": 3},
-        {"op": "gain_resource", "resource": "rage", "amount": 5}
+        {
+          "op": "set_stance",
+          "value": "battle"
+        },
+        {
+          "op": "draw",
+          "count": 3
+        },
+        {
+          "op": "gain_resource",
+          "resource": "rage",
+          "amount": 5
+        }
       ],
       "upgrade": {
         "name": "Battle Stance (Rank 2)",
         "cost": 0,
         "text": "Enter Battle Stance. Draw 4 cards. Gain 10 Rage. Exhaust.",
         "effects": [
-          {"op": "set_stance", "value": "battle"},
-          {"op": "draw", "count": 4},
-          {"op": "gain_resource", "resource": "rage", "amount": 10}
+          {
+            "op": "set_stance",
+            "value": "battle"
+          },
+          {
+            "op": "draw",
+            "count": 4
+          },
+          {
+            "op": "gain_resource",
+            "resource": "rage",
+            "amount": 10
+          }
         ]
       }
     },
@@ -911,20 +1502,42 @@
       "cost": 2,
       "target": "self",
       "flags": [],
-      "text": "Enter Defensive Stance. Gain 10 Block. Block is not removed at the start of your turns.",
+      "text": "Enter Defensive Stance. Gain 6 Block. Block is not removed at the start of your turns.",
       "effects": [
-        {"op": "set_stance", "value": "defensive"},
-        {"op": "block", "amount": 10},
-        {"op": "apply", "status": "retain_block", "stacks": 99, "target": "self"}
+        {
+          "op": "set_stance",
+          "value": "defensive"
+        },
+        {
+          "op": "block",
+          "amount": 6
+        },
+        {
+          "op": "apply",
+          "status": "retain_block",
+          "stacks": 99,
+          "target": "self"
+        }
       ],
       "upgrade": {
         "name": "Defensive Stance (Rank 2)",
         "cost": 1,
         "text": "Enter Defensive Stance. Gain 15 Block. Block is not removed at the start of your turns. Costs 1.",
         "effects": [
-          {"op": "set_stance", "value": "defensive"},
-          {"op": "block", "amount": 15},
-          {"op": "apply", "status": "retain_block", "stacks": 99, "target": "self"}
+          {
+            "op": "set_stance",
+            "value": "defensive"
+          },
+          {
+            "op": "block",
+            "amount": 15
+          },
+          {
+            "op": "apply",
+            "status": "retain_block",
+            "stacks": 99,
+            "target": "self"
+          }
         ]
       }
     },
@@ -944,18 +1557,36 @@
       ],
       "text": "Enter Berserker Stance. Gain 1 Energy. Draw 1 card. Exhaust.",
       "effects": [
-        {"op": "set_stance", "value": "berserker"},
-        {"op": "gain_energy", "amount": 1},
-        {"op": "draw", "count": 1}
+        {
+          "op": "set_stance",
+          "value": "berserker"
+        },
+        {
+          "op": "gain_energy",
+          "amount": 1
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Berserker Stance (Rank 2)",
         "cost": 0,
         "text": "Enter Berserker Stance. Gain 1 Energy. Draw 2 cards. Exhaust.",
         "effects": [
-          {"op": "set_stance", "value": "berserker"},
-          {"op": "gain_energy", "amount": 1},
-          {"op": "draw", "count": 2}
+          {
+            "op": "set_stance",
+            "value": "berserker"
+          },
+          {
+            "op": "gain_energy",
+            "amount": 1
+          },
+          {
+            "op": "draw",
+            "count": 2
+          }
         ]
       }
     },
@@ -973,14 +1604,24 @@
       "flags": [],
       "text": "Gain 2 Enrage: when you are hit, gain Strength.",
       "effects": [
-        {"op": "apply", "status": "enrage", "stacks": 2, "target": "self"}
+        {
+          "op": "apply",
+          "status": "enrage",
+          "stacks": 2,
+          "target": "self"
+        }
       ],
       "upgrade": {
         "name": "Enrage (Rank 2)",
         "cost": 1,
         "text": "Gain 3 Enrage: when you are hit, gain Strength.",
         "effects": [
-          {"op": "apply", "status": "enrage", "stacks": 3, "target": "self"}
+          {
+            "op": "apply",
+            "status": "enrage",
+            "stacks": 3,
+            "target": "self"
+          }
         ]
       }
     },
@@ -996,18 +1637,34 @@
       "cost": 2,
       "target": "enemy",
       "flags": [],
-      "text": "Deal 20 damage. Apply 2 Vulnerable.",
+      "text": "Deal 18 damage. Apply 2 Vulnerable.",
       "effects": [
-        {"op": "damage", "amount": 20},
-        {"op": "apply", "status": "vulnerable", "stacks": 2, "target": "enemy"}
+        {
+          "op": "damage",
+          "amount": 18
+        },
+        {
+          "op": "apply",
+          "status": "vulnerable",
+          "stacks": 2,
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Mortal Strike (Rank 2)",
         "cost": 2,
         "text": "Deal 28 damage. Apply 3 Vulnerable.",
         "effects": [
-          {"op": "damage", "amount": 28},
-          {"op": "apply", "status": "vulnerable", "stacks": 3, "target": "enemy"}
+          {
+            "op": "damage",
+            "amount": 28
+          },
+          {
+            "op": "apply",
+            "status": "vulnerable",
+            "stacks": 3,
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -1025,16 +1682,28 @@
       "flags": [],
       "text": "Deal 12 damage. Heal 4 HP.",
       "effects": [
-        {"op": "damage", "amount": 12},
-        {"op": "heal", "amount": 4}
+        {
+          "op": "damage",
+          "amount": 12
+        },
+        {
+          "op": "heal",
+          "amount": 4
+        }
       ],
       "upgrade": {
         "name": "Bloodthirst (Rank 2)",
         "cost": 1,
         "text": "Deal 16 damage. Heal 6 HP.",
         "effects": [
-          {"op": "damage", "amount": 16},
-          {"op": "heal", "amount": 6}
+          {
+            "op": "damage",
+            "amount": 16
+          },
+          {
+            "op": "heal",
+            "amount": 6
+          }
         ]
       }
     },
@@ -1052,14 +1721,24 @@
       "flags": [],
       "text": "Deal damage equal to your Block.",
       "effects": [
-        {"op": "damage", "amount": {"scale": "block"}}
+        {
+          "op": "damage",
+          "amount": {
+            "scale": "block"
+          }
+        }
       ],
       "upgrade": {
         "name": "Shield Slam (Rank 2)",
         "cost": 0,
         "text": "Deal damage equal to your Block. Costs 0.",
         "effects": [
-          {"op": "damage", "amount": {"scale": "block"}}
+          {
+            "op": "damage",
+            "amount": {
+              "scale": "block"
+            }
+          }
         ]
       }
     },
@@ -1074,17 +1753,25 @@
       "archetype": "protection",
       "cost": 2,
       "target": "self",
-      "flags": ["exhaust"],
-      "text": "Gain 30 Block. Exhaust.",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Gain 22 Block. Exhaust.",
       "effects": [
-        {"op": "block", "amount": 30}
+        {
+          "op": "block",
+          "amount": 22
+        }
       ],
       "upgrade": {
         "name": "Shield Wall (Rank 2)",
         "cost": 2,
         "text": "Gain 40 Block. Exhaust.",
         "effects": [
-          {"op": "block", "amount": 40}
+          {
+            "op": "block",
+            "amount": 40
+          }
         ]
       }
     },
@@ -1099,21 +1786,43 @@
       "archetype": "protection",
       "cost": 0,
       "target": "self",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Lose 6 HP. Gain 2 Energy. Draw 3 cards. Exhaust.",
       "effects": [
-        {"op": "damage", "amount": 6, "target": "self"},
-        {"op": "gain_energy", "amount": 2},
-        {"op": "draw", "count": 3}
+        {
+          "op": "damage",
+          "amount": 6,
+          "target": "self"
+        },
+        {
+          "op": "gain_energy",
+          "amount": 2
+        },
+        {
+          "op": "draw",
+          "count": 3
+        }
       ],
       "upgrade": {
         "name": "Last Stand (Rank 2)",
         "cost": 0,
         "text": "Lose 6 HP. Gain 2 Energy. Draw 5 cards. Exhaust.",
         "effects": [
-          {"op": "damage", "amount": 6, "target": "self"},
-          {"op": "gain_energy", "amount": 2},
-          {"op": "draw", "count": 5}
+          {
+            "op": "damage",
+            "amount": 6,
+            "target": "self"
+          },
+          {
+            "op": "gain_energy",
+            "amount": 2
+          },
+          {
+            "op": "draw",
+            "count": 5
+          }
         ]
       }
     },
@@ -1128,10 +1837,19 @@
       "archetype": "fury",
       "cost": 1,
       "target": "self",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Double your Strength. Exhaust.",
       "effects": [
-        {"op": "apply", "status": "strength", "stacks": {"scale": "strength"}, "target": "self"}
+        {
+          "op": "apply",
+          "status": "strength",
+          "stacks": {
+            "scale": "strength"
+          },
+          "target": "self"
+        }
       ],
       "upgrade": {
         "name": "Death Wish (Rank 2)",
@@ -1139,7 +1857,14 @@
         "flags": [],
         "text": "Double your Strength.",
         "effects": [
-          {"op": "apply", "status": "strength", "stacks": {"scale": "strength"}, "target": "self"}
+          {
+            "op": "apply",
+            "status": "strength",
+            "stacks": {
+              "scale": "strength"
+            },
+            "target": "self"
+          }
         ]
       }
     },
@@ -1157,14 +1882,24 @@
       "flags": [],
       "text": "Gain 2 Ritual: at the start of each turn, gain 2 Strength.",
       "effects": [
-        {"op": "apply", "status": "ritual", "stacks": 2, "target": "self"}
+        {
+          "op": "apply",
+          "status": "ritual",
+          "stacks": 2,
+          "target": "self"
+        }
       ],
       "upgrade": {
         "name": "Flurry (Rank 2)",
         "cost": 3,
         "text": "Gain 3 Ritual: at the start of each turn, gain 3 Strength.",
         "effects": [
-          {"op": "apply", "status": "ritual", "stacks": 3, "target": "self"}
+          {
+            "op": "apply",
+            "status": "ritual",
+            "stacks": 3,
+            "target": "self"
+          }
         ]
       }
     },
@@ -1179,21 +1914,39 @@
       "archetype": "fury",
       "cost": 0,
       "target": "self",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Gain 2 Energy. Your next attack deals double damage. Draw 2 cards. Exhaust.",
       "effects": [
-        {"op": "gain_energy", "amount": 2},
-        {"op": "double_damage_next"},
-        {"op": "draw", "count": 2}
+        {
+          "op": "gain_energy",
+          "amount": 2
+        },
+        {
+          "op": "double_damage_next"
+        },
+        {
+          "op": "draw",
+          "count": 2
+        }
       ],
       "upgrade": {
         "name": "Recklessness (Rank 2)",
         "cost": 0,
         "text": "Gain 3 Energy. Your next attack deals double damage. Draw 3 cards. Exhaust.",
         "effects": [
-          {"op": "gain_energy", "amount": 3},
-          {"op": "double_damage_next"},
-          {"op": "draw", "count": 3}
+          {
+            "op": "gain_energy",
+            "amount": 3
+          },
+          {
+            "op": "double_damage_next"
+          },
+          {
+            "op": "draw",
+            "count": 3
+          }
         ]
       }
     }

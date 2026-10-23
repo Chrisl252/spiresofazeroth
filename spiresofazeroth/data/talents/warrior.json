@@ -1,458 +1,729 @@
 {
- "classId": "warrior",
- "trees": [
-  {
-   "id": "arms",
-   "name": "Arms",
-   "icon": "ability_rogue_eviscerate",
-   "talents": [
+  "classId": "warrior",
+  "trees": [
     {
-     "id": "warrior:arms:0",
-     "name": "Improved Heroic Strike",
-     "icon": "ability_rogue_ambush",
-     "tier": 1,
-     "col": 0,
-     "max": 3,
-     "effect": {
-      "key": "str",
-      "per": 1
-     }
+      "id": "arms",
+      "name": "Arms",
+      "icon": "ability_rogue_eviscerate",
+      "talents": [
+        {
+          "id": "warrior:arms:0",
+          "name": "Improved Heroic Strike",
+          "icon": "ability_rogue_ambush",
+          "tier": 1,
+          "col": 0,
+          "max": 3,
+          "effect": {
+            "key": "card_dmg",
+            "per": 1,
+            "arg": "heroic-strike"
+          }
+        },
+        {
+          "id": "warrior:arms:1",
+          "name": "Deflection",
+          "icon": "ability_parry",
+          "tier": 1,
+          "col": 1,
+          "max": 5,
+          "effect": {
+            "key": "deflect",
+            "per": 3
+          }
+        },
+        {
+          "id": "warrior:arms:2",
+          "name": "Improved Rend",
+          "icon": "ability_gouge",
+          "tier": 2,
+          "col": 0,
+          "max": 3,
+          "effect": {
+            "key": "card_apply",
+            "per": 2,
+            "arg": "rend:bleed"
+          },
+          "extra": [
+            {
+              "key": "card_dmg",
+              "per": 2,
+              "arg": "rend"
+            },
+            {
+              "key": "grant",
+              "per": 1,
+              "arg": "rend",
+              "vals": [
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "warrior:arms:3",
+          "name": "Improved Charge",
+          "icon": "ability_warrior_charge",
+          "tier": 2,
+          "col": 1,
+          "max": 2,
+          "effect": {
+            "key": "card_rage",
+            "per": 1,
+            "arg": "charge",
+            "vals": [
+              10,
+              15
+            ]
+          },
+          "extra": [
+            {
+              "key": "card_cost",
+              "per": 1,
+              "arg": "charge",
+              "vals": [
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "warrior:arms:4",
+          "name": "Tactical Mastery",
+          "icon": "spell_nature_enchantarmor",
+          "tier": 3,
+          "col": 0,
+          "max": 5,
+          "effect": {
+            "key": "rage_dmg",
+            "per": 1
+          }
+        },
+        {
+          "id": "warrior:arms:5",
+          "name": "Deep Wounds",
+          "icon": "ability_backstab",
+          "tier": 3,
+          "col": 1,
+          "max": 3,
+          "effect": {
+            "key": "attack_bleed",
+            "per": 1,
+            "vals": [
+              4,
+              6,
+              9
+            ]
+          }
+        },
+        {
+          "id": "warrior:arms:6",
+          "name": "Two-Handed Weapon Specialization",
+          "icon": "inv_axe_09",
+          "tier": 4,
+          "col": 0,
+          "max": 5,
+          "effect": {
+            "key": "heavy_hit",
+            "per": 3
+          }
+        },
+        {
+          "id": "warrior:arms:7",
+          "name": "Anger Management",
+          "icon": "spell_holy_blessingofstamina",
+          "tier": 4,
+          "col": 1,
+          "max": 1,
+          "effect": {
+            "key": "turn_rage",
+            "per": 5,
+            "vals": [
+              12
+            ]
+          }
+        },
+        {
+          "id": "warrior:arms:8",
+          "name": "Impale",
+          "icon": "ability_searingarrow",
+          "tier": 5,
+          "col": 0,
+          "max": 2,
+          "effect": {
+            "key": "bleed_dmg",
+            "per": 4
+          }
+        },
+        {
+          "id": "warrior:arms:9",
+          "name": "Sweeping Strikes",
+          "icon": "ability_rogue_slicedice",
+          "tier": 5,
+          "col": 1,
+          "max": 1,
+          "effect": {
+            "key": "first_aoe",
+            "per": 1,
+            "vals": [
+              1
+            ]
+          }
+        },
+        {
+          "id": "warrior:arms:10",
+          "name": "Poleaxe Specialization",
+          "icon": "inv_weapon_halberd_01",
+          "tier": 6,
+          "col": 0,
+          "max": 3,
+          "effect": {
+            "key": "wounded_dmg",
+            "per": 4,
+            "vals": [
+              2,
+              4,
+              6
+            ]
+          }
+        },
+        {
+          "id": "warrior:arms:11",
+          "name": "Mortal Strike",
+          "icon": "ability_warrior_savageblow",
+          "tier": 6,
+          "col": 1,
+          "max": 1,
+          "effect": {
+            "key": "card_dmg",
+            "per": 1,
+            "arg": "mortal-strike",
+            "vals": [
+              8
+            ]
+          },
+          "extra": [
+            {
+              "key": "card_inflict",
+              "per": 1,
+              "arg": "mortal-strike:bleed",
+              "vals": [
+                4
+              ]
+            },
+            {
+              "key": "grant",
+              "per": 1,
+              "arg": "mortal-strike",
+              "vals": [
+                1
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
-     "id": "warrior:arms:1",
-     "name": "Deflection",
-     "icon": "ability_parry",
-     "tier": 1,
-     "col": 1,
-     "max": 5,
-     "effect": {
-      "key": "dex",
-      "per": 1
-     }
+      "id": "fury",
+      "name": "Fury",
+      "icon": "ability_warrior_innerrage",
+      "talents": [
+        {
+          "id": "warrior:fury:0",
+          "name": "Cruelty",
+          "icon": "ability_rogue_eviscerate",
+          "tier": 1,
+          "col": 0,
+          "max": 5,
+          "effect": {
+            "key": "crit",
+            "per": 3
+          }
+        },
+        {
+          "id": "warrior:fury:1",
+          "name": "Booming Voice",
+          "icon": "spell_nature_purge",
+          "tier": 1,
+          "col": 1,
+          "max": 5,
+          "effect": {
+            "key": "rage_block",
+            "per": 1,
+            "vals": [
+              0,
+              1,
+              1,
+              1,
+              2
+            ]
+          },
+          "extra": [
+            {
+              "key": "start_rage",
+              "per": 2
+            }
+          ]
+        },
+        {
+          "id": "warrior:fury:2",
+          "name": "Unbridled Wrath",
+          "icon": "spell_nature_stoneclawtotem",
+          "tier": 2,
+          "col": 0,
+          "max": 3,
+          "effect": {
+            "key": "attack_rage",
+            "per": 1,
+            "vals": [
+              2,
+              3,
+              4
+            ]
+          }
+        },
+        {
+          "id": "warrior:fury:3",
+          "name": "Improved Battle Shout",
+          "icon": "ability_warrior_battleshout",
+          "tier": 2,
+          "col": 1,
+          "max": 5,
+          "effect": {
+            "key": "card_apply",
+            "per": 1,
+            "arg": "battle-shout:strength",
+            "vals": [
+              1,
+              1,
+              1,
+              1,
+              2
+            ]
+          },
+          "extra": [
+            {
+              "key": "grant",
+              "per": 1,
+              "arg": "battle-shout",
+              "vals": [
+                1
+              ]
+            },
+            {
+              "key": "card_rage",
+              "per": 3,
+              "arg": "battle-shout"
+            }
+          ]
+        },
+        {
+          "id": "warrior:fury:4",
+          "name": "Blood Craze",
+          "icon": "spell_shadow_summonimp",
+          "tier": 3,
+          "col": 0,
+          "max": 3,
+          "effect": {
+            "key": "hurt_heal",
+            "per": 2
+          }
+        },
+        {
+          "id": "warrior:fury:5",
+          "name": "Piercing Howl",
+          "icon": "spell_shadow_deathscream",
+          "tier": 3,
+          "col": 1,
+          "max": 1,
+          "effect": {
+            "key": "card_rage",
+            "per": 1,
+            "arg": "piercing-howl",
+            "vals": [
+              8
+            ]
+          },
+          "extra": [
+            {
+              "key": "grant",
+              "per": 1,
+              "arg": "piercing-howl",
+              "vals": [
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "warrior:fury:6",
+          "name": "Enrage",
+          "icon": "spell_shadow_unholyfrenzy",
+          "tier": 4,
+          "col": 0,
+          "max": 5,
+          "effect": {
+            "key": "hurt_boost",
+            "per": 1
+          }
+        },
+        {
+          "id": "warrior:fury:7",
+          "name": "Flurry",
+          "icon": "ability_ghoulfrenzy",
+          "tier": 4,
+          "col": 1,
+          "max": 3,
+          "effect": {
+            "key": "attack_draw",
+            "per": 1,
+            "vals": [
+              5,
+              4,
+              3
+            ]
+          }
+        },
+        {
+          "id": "warrior:fury:8",
+          "name": "Death Wish",
+          "icon": "spell_shadow_deathpact",
+          "tier": 5,
+          "col": 0,
+          "max": 1,
+          "effect": {
+            "key": "death_wish",
+            "per": 20,
+            "vals": [
+              4
+            ]
+          }
+        },
+        {
+          "id": "warrior:fury:9",
+          "name": "Berserker Stance",
+          "icon": "ability_racial_avatar",
+          "tier": 5,
+          "col": 1,
+          "max": 3,
+          "effect": {
+            "key": "enrage_dmg",
+            "per": 1,
+            "vals": [
+              1,
+              2,
+              3
+            ]
+          }
+        },
+        {
+          "id": "warrior:fury:10",
+          "name": "Bloodthirst",
+          "icon": "spell_nature_bloodlust",
+          "tier": 6,
+          "col": 0,
+          "max": 1,
+          "effect": {
+            "key": "card_dmg",
+            "per": 1,
+            "arg": "bloodthirst",
+            "vals": [
+              1
+            ]
+          },
+          "extra": [
+            {
+              "key": "attack_heal",
+              "per": 2,
+              "vals": [
+                1
+              ]
+            },
+            {
+              "key": "grant",
+              "per": 1,
+              "arg": "bloodthirst",
+              "vals": [
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "warrior:fury:11",
+          "name": "Rampage",
+          "icon": "ability_warrior_rampage",
+          "tier": 6,
+          "col": 1,
+          "max": 1,
+          "effect": {
+            "key": "attack_ramp",
+            "per": 2,
+            "vals": [
+              1
+            ]
+          }
+        }
+      ]
     },
     {
-     "id": "warrior:arms:2",
-     "name": "Improved Rend",
-     "icon": "ability_gouge",
-     "tier": 2,
-     "col": 0,
-     "max": 3,
-     "effect": {
-      "key": "thorns",
-      "per": 2
-     }
-    },
-    {
-     "id": "warrior:arms:3",
-     "name": "Improved Charge",
-     "icon": "ability_warrior_charge",
-     "tier": 2,
-     "col": 1,
-     "max": 2,
-     "effect": {
-      "key": "res",
-      "per": 15
-     }
-    },
-    {
-     "id": "warrior:arms:4",
-     "name": "Tactical Mastery",
-     "icon": "spell_nature_enchantarmor",
-     "tier": 3,
-     "col": 0,
-     "max": 5,
-     "effect": {
-      "key": "res",
-      "per": 5
-     }
-    },
-    {
-     "id": "warrior:arms:5",
-     "name": "Deep Wounds",
-     "icon": "ability_backstab",
-     "tier": 3,
-     "col": 1,
-     "max": 3,
-     "effect": {
-      "key": "str",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:arms:6",
-     "name": "Two-Handed Weapon Specialization",
-     "icon": "inv_axe_09",
-     "tier": 4,
-     "col": 0,
-     "max": 5,
-     "effect": {
-      "key": "str",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:arms:7",
-     "name": "Anger Management",
-     "icon": "spell_holy_blessingofstamina",
-     "tier": 4,
-     "col": 1,
-     "max": 1,
-     "effect": {
-      "key": "rage_gen",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:arms:8",
-     "name": "Impale",
-     "icon": "ability_searingarrow",
-     "tier": 5,
-     "col": 0,
-     "max": 2,
-     "effect": {
-      "key": "str",
-      "per": 2
-     }
-    },
-    {
-     "id": "warrior:arms:9",
-     "name": "Sweeping Strikes",
-     "icon": "ability_rogue_slicedice",
-     "tier": 5,
-     "col": 1,
-     "max": 1,
-     "effect": {
-      "key": "draw1",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:arms:10",
-     "name": "Poleaxe Specialization",
-     "icon": "inv_weapon_halberd_01",
-     "tier": 6,
-     "col": 0,
-     "max": 3,
-     "effect": {
-      "key": "energy1",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:arms:11",
-     "name": "Mortal Strike",
-     "icon": "ability_warrior_savageblow",
-     "tier": 6,
-     "col": 1,
-     "max": 1,
-     "effect": {
-      "key": "str",
-      "per": 4
-     }
+      "id": "protection",
+      "name": "Protection",
+      "icon": "ability_warrior_defensivestance",
+      "talents": [
+        {
+          "id": "warrior:protection:0",
+          "name": "Shield Specialization",
+          "icon": "inv_shield_06",
+          "tier": 1,
+          "col": 0,
+          "max": 5,
+          "effect": {
+            "key": "card_block",
+            "per": 1,
+            "arg": "shield-block"
+          }
+        },
+        {
+          "id": "warrior:protection:1",
+          "name": "Toughness",
+          "icon": "spell_holy_devotion",
+          "tier": 1,
+          "col": 1,
+          "max": 5,
+          "effect": {
+            "key": "h_armor",
+            "per": 1,
+            "vals": [
+              1,
+              1,
+              1,
+              2,
+              2
+            ]
+          },
+          "extra": [
+            {
+              "key": "hp",
+              "per": 2
+            }
+          ]
+        },
+        {
+          "id": "warrior:protection:2",
+          "name": "Anticipation",
+          "icon": "spell_nature_mirrorimage",
+          "tier": 2,
+          "col": 0,
+          "max": 5,
+          "effect": {
+            "key": "turn_block",
+            "per": 1,
+            "vals": [
+              0,
+              1,
+              1,
+              2,
+              2
+            ]
+          },
+          "extra": [
+            {
+              "key": "block_carry",
+              "per": 3
+            }
+          ]
+        },
+        {
+          "id": "warrior:protection:3",
+          "name": "Improved Bloodrage",
+          "icon": "ability_racial_bloodrage",
+          "tier": 2,
+          "col": 1,
+          "max": 2,
+          "effect": {
+            "key": "card_nohurt",
+            "per": 1,
+            "arg": "bloodrage",
+            "vals": [
+              0,
+              1
+            ]
+          },
+          "extra": [
+            {
+              "key": "card_rage",
+              "per": 1,
+              "arg": "bloodrage",
+              "vals": [
+                10,
+                15
+              ]
+            },
+            {
+              "key": "grant",
+              "per": 1,
+              "arg": "bloodrage",
+              "vals": [
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "warrior:protection:4",
+          "name": "Last Stand",
+          "icon": "spell_holy_ashestoashes",
+          "tier": 3,
+          "col": 0,
+          "max": 1,
+          "effect": {
+            "key": "low_hp_guard",
+            "per": 1,
+            "vals": [
+              1
+            ]
+          }
+        },
+        {
+          "id": "warrior:protection:5",
+          "name": "Improved Shield Block",
+          "icon": "ability_defend",
+          "tier": 3,
+          "col": 1,
+          "max": 1,
+          "effect": {
+            "key": "block_carry",
+            "per": 50,
+            "vals": [
+              10
+            ]
+          }
+        },
+        {
+          "id": "warrior:protection:6",
+          "name": "Defiance",
+          "icon": "ability_warrior_innerrage",
+          "tier": 4,
+          "col": 0,
+          "max": 5,
+          "effect": {
+            "key": "block_thorns",
+            "per": 1
+          }
+        },
+        {
+          "id": "warrior:protection:7",
+          "name": "Improved Revenge",
+          "icon": "ability_warrior_revenge",
+          "tier": 4,
+          "col": 1,
+          "max": 3,
+          "effect": {
+            "key": "block_revenge",
+            "per": 1,
+            "vals": [
+              1,
+              2,
+              3
+            ]
+          }
+        },
+        {
+          "id": "warrior:protection:8",
+          "name": "Concussion Blow",
+          "icon": "ability_thunderbolt",
+          "tier": 5,
+          "col": 0,
+          "max": 1,
+          "effect": {
+            "key": "first_stun",
+            "per": 1,
+            "vals": [
+              1
+            ]
+          }
+        },
+        {
+          "id": "warrior:protection:9",
+          "name": "Improved Shield Wall",
+          "icon": "ability_warrior_shieldwall",
+          "tier": 5,
+          "col": 1,
+          "max": 2,
+          "effect": {
+            "key": "card_cost",
+            "per": 1,
+            "arg": "shield-wall",
+            "vals": [
+              0,
+              1
+            ]
+          },
+          "extra": [
+            {
+              "key": "card_block",
+              "per": 1,
+              "arg": "shield-wall",
+              "vals": [
+                0,
+                4
+              ]
+            },
+            {
+              "key": "grant",
+              "per": 1,
+              "arg": "shield-wall",
+              "vals": [
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "warrior:protection:10",
+          "name": "One-Handed Weapon Specialization",
+          "icon": "inv_sword_20",
+          "tier": 6,
+          "col": 0,
+          "max": 3,
+          "effect": {
+            "key": "guard_dmg",
+            "per": 1,
+            "vals": [
+              1,
+              2,
+              3
+            ]
+          }
+        },
+        {
+          "id": "warrior:protection:11",
+          "name": "Shield Slam",
+          "icon": "inv_shield_05",
+          "tier": 6,
+          "col": 1,
+          "max": 1,
+          "effect": {
+            "key": "card_dmg",
+            "per": 1,
+            "arg": "shield-slam",
+            "vals": [
+              3
+            ]
+          },
+          "extra": [
+            {
+              "key": "grant",
+              "per": 1,
+              "arg": "shield-slam",
+              "vals": [
+                1
+              ]
+            }
+          ]
+        }
+      ]
     }
-   ]
-  },
-  {
-   "id": "fury",
-   "name": "Fury",
-   "icon": "ability_warrior_innerrage",
-   "talents": [
-    {
-     "id": "warrior:fury:0",
-     "name": "Cruelty",
-     "icon": "ability_rogue_eviscerate",
-     "tier": 1,
-     "col": 0,
-     "max": 5,
-     "effect": {
-      "key": "str",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:fury:1",
-     "name": "Booming Voice",
-     "icon": "spell_nature_purge",
-     "tier": 1,
-     "col": 1,
-     "max": 5,
-     "effect": {
-      "key": "res",
-      "per": 5
-     }
-    },
-    {
-     "id": "warrior:fury:2",
-     "name": "Unbridled Wrath",
-     "icon": "spell_nature_stoneclawtotem",
-     "tier": 2,
-     "col": 0,
-     "max": 3,
-     "effect": {
-      "key": "rage_gen",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:fury:3",
-     "name": "Improved Battle Shout",
-     "icon": "ability_warrior_battleshout",
-     "tier": 2,
-     "col": 1,
-     "max": 5,
-     "effect": {
-      "key": "str",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:fury:4",
-     "name": "Blood Craze",
-     "icon": "spell_shadow_summonimp",
-     "tier": 3,
-     "col": 0,
-     "max": 3,
-     "effect": {
-      "key": "regen",
-      "per": 2
-     }
-    },
-    {
-     "id": "warrior:fury:5",
-     "name": "Piercing Howl",
-     "icon": "spell_shadow_deathscream",
-     "tier": 3,
-     "col": 1,
-     "max": 1,
-     "effect": {
-      "key": "draw1",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:fury:6",
-     "name": "Enrage",
-     "icon": "spell_shadow_unholyfrenzy",
-     "tier": 4,
-     "col": 0,
-     "max": 5,
-     "effect": {
-      "key": "str",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:fury:7",
-     "name": "Flurry",
-     "icon": "ability_ghoulfrenzy",
-     "tier": 4,
-     "col": 1,
-     "max": 3,
-     "effect": {
-      "key": "draw1",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:fury:8",
-     "name": "Death Wish",
-     "icon": "spell_shadow_deathpact",
-     "tier": 5,
-     "col": 0,
-     "max": 1,
-     "effect": {
-      "key": "energy1",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:fury:9",
-     "name": "Berserker Stance",
-     "icon": "ability_racial_avatar",
-     "tier": 5,
-     "col": 1,
-     "max": 3,
-     "effect": {
-      "key": "goldpct",
-      "per": 5
-     }
-    },
-    {
-     "id": "warrior:fury:10",
-     "name": "Bloodthirst",
-     "icon": "spell_nature_bloodlust",
-     "tier": 6,
-     "col": 0,
-     "max": 1,
-     "effect": {
-      "key": "regen",
-      "per": 4
-     }
-    },
-    {
-     "id": "warrior:fury:11",
-     "name": "Rampage",
-     "icon": "ability_warrior_rampage",
-     "tier": 6,
-     "col": 1,
-     "max": 1,
-     "effect": {
-      "key": "str",
-      "per": 3
-     }
-    }
-   ]
-  },
-  {
-   "id": "protection",
-   "name": "Protection",
-   "icon": "ability_warrior_defensivestance",
-   "talents": [
-    {
-     "id": "warrior:protection:0",
-     "name": "Shield Specialization",
-     "icon": "inv_shield_06",
-     "tier": 1,
-     "col": 0,
-     "max": 5,
-     "effect": {
-      "key": "block",
-      "per": 3
-     }
-    },
-    {
-     "id": "warrior:protection:1",
-     "name": "Toughness",
-     "icon": "spell_holy_devotion",
-     "tier": 1,
-     "col": 1,
-     "max": 5,
-     "effect": {
-      "key": "armor",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:protection:2",
-     "name": "Anticipation",
-     "icon": "spell_nature_mirrorimage",
-     "tier": 2,
-     "col": 0,
-     "max": 5,
-     "effect": {
-      "key": "dex",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:protection:3",
-     "name": "Improved Bloodrage",
-     "icon": "ability_racial_bloodrage",
-     "tier": 2,
-     "col": 1,
-     "max": 2,
-     "effect": {
-      "key": "res",
-      "per": 15
-     }
-    },
-    {
-     "id": "warrior:protection:4",
-     "name": "Last Stand",
-     "icon": "spell_holy_ashestoashes",
-     "tier": 3,
-     "col": 0,
-     "max": 1,
-     "effect": {
-      "key": "hp",
-      "per": 12
-     }
-    },
-    {
-     "id": "warrior:protection:5",
-     "name": "Improved Shield Block",
-     "icon": "ability_defend",
-     "tier": 3,
-     "col": 1,
-     "max": 1,
-     "effect": {
-      "key": "retain_block",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:protection:6",
-     "name": "Defiance",
-     "icon": "ability_warrior_innerrage",
-     "tier": 4,
-     "col": 0,
-     "max": 5,
-     "effect": {
-      "key": "metal",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:protection:7",
-     "name": "Improved Revenge",
-     "icon": "ability_warrior_revenge",
-     "tier": 4,
-     "col": 1,
-     "max": 3,
-     "effect": {
-      "key": "thorns",
-      "per": 3
-     }
-    },
-    {
-     "id": "warrior:protection:8",
-     "name": "Concussion Blow",
-     "icon": "ability_thunderbolt",
-     "tier": 5,
-     "col": 0,
-     "max": 1,
-     "effect": {
-      "key": "energy1",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:protection:9",
-     "name": "Improved Shield Wall",
-     "icon": "ability_warrior_shieldwall",
-     "tier": 5,
-     "col": 1,
-     "max": 2,
-     "effect": {
-      "key": "armor",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:protection:10",
-     "name": "One-Handed Weapon Specialization",
-     "icon": "inv_sword_20",
-     "tier": 6,
-     "col": 0,
-     "max": 3,
-     "effect": {
-      "key": "str",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:protection:11",
-     "name": "Shield Slam",
-     "icon": "inv_shield_05",
-     "tier": 6,
-     "col": 1,
-     "max": 1,
-     "effect": {
-      "key": "block",
-      "per": 12
-     }
-    }
-   ]
-  }
- ]
+  ]
 }

@@ -217,12 +217,20 @@
    "text": "Cannot act until damaged."
   },
   {
+   "id": "worgen_curse",
+   "name": "Curse of the Worgen",
+   "icon": "inv_misc_pelt_wolf_01",
+   "kind": "buff",
+   "stackMode": "none",
+   "text": "The Silverpine curse: your attacks deal +1 damage per stack. Not a Druid form."
+  },
+  {
    "id": "feral",
    "name": "Feral",
    "icon": "ability_druid_catform",
    "kind": "buff",
    "stackMode": "none",
-   "text": "In a feral form: attacks are boosted."
+   "text": "Your attacks deal +1 damage per stack. Druid forms grant it; it is a buff, not a transformation."
   },
   {
    "id": "intangible",

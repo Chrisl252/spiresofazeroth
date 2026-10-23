@@ -109,10 +109,10 @@ function nodeWeight(run, n) {
   return w[n.type] || 1;
 }
 
-export async function simRun(data, { classId, seed, heroic = 0, continent, maxSteps = 900, firstZone = null, stopAfterAct = 0 } = {}) {
+export async function simRun(data, { classId, seed, heroic = 0, continent, maxSteps = 900, firstZone = null, stopAfterAct = 0, talents = null } = {}) {
   await data.loadClass(classId);
   data.setClass(classId);
-  const run = Run.newRun(data, { classId, continent, seed, heroic });
+  const run = Run.newRun(data, { classId, continent, seed, heroic, talents });
   await Run.prepareZonePick(run, data);
   let steps = 0;
   run.actLog = [];

@@ -5,7 +5,7 @@ import { newRun, prepareZonePick } from "../engine/run.js";
 import { newSeedString } from "../engine/rng.js";
 import { heroicName, MAX_HEROIC } from "../engine/heroic.js";
 import { cssReady, btn, tog, ico, banner, scroll } from "./kit.js";
-import { talentState, talentMods, talentSummary, classLevel, nextLevelXp, lockedCardIds } from "../engine/talents.js";
+import { repairSpent, talentState, talentMods, talentSummary, classLevel, nextLevelXp, lockedCardIds } from "../engine/talents.js";
 
 export const stageNative = true;
 
@@ -69,7 +69,9 @@ export async function render(app) {
     seedIn.addEventListener("input", () => { st.seed = seedIn.value.trim() || st.seed; });
     const res = cls.resource || {};
     // account progression for this class (engine/talents.js): level + XP bar, unspent points, the talents that will be live this run
-    const tdef = data.talentDefs.get(st.cls) || null, tstate = talentState(meta, st.cls), mods = talentMods(meta, st.cls, tdef);
+    const tdef = data.talentDefs.get(st.cls) || null;
+    if (tdef && repairSpent(meta, st.cls, tdef)) saveMeta(meta); // Talents V2: clamp saved ranks to the current talent file, refund the difference
+    const tstate = talentState(meta, st.cls), mods = talentMods(meta, st.cls, tdef);
     const th = (data.unlocks && data.unlocks.thresholds) || [], lvl = classLevel(meta, st.cls, th), nxt = nextLevelXp(meta, st.cls, th);
     const xp = ((meta.progress || {})[st.cls] || {}).xp | 0, prevT = lvl > 0 ? th[lvl - 1] : 0, pct = nxt ? Math.round(100 * Math.min(1, (xp - prevT) / Math.max(1, nxt - prevT))) : 100;
     const lockedN = data.unlocks && data.unlocks.classes && data.unlocks.classes[st.cls] ? data.unlocks.classes[st.cls].flat().filter((id) => lockedCardIds(meta, data.unlocks).has(id)).length : 0;

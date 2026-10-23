@@ -22,7 +22,7 @@
   "id": "curse-of-the-worgen",
   "name": "Curse of the Worgen",
   "icon": "spell_shadow_curseofsargeras",
-  "text": "Each card you play has a 25% chance to leave you Feral: your next damaged cards are replaced by Feral variants.",
+  "text": "Each card you play has a 25% chance to leave you under the Curse of the Worgen (a buff, not a Druid form): +1 damage to your attacks per stack.",
   "hooks": {
    "on_card_played": [
     {
@@ -34,7 +34,7 @@
      "then": [
       {
        "op": "apply",
-       "status": "feral",
+       "status": "worgen_curse",
        "stacks": 1,
        "target": "self"
       }

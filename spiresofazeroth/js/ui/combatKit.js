@@ -34,13 +34,14 @@ export function lanesFor(stage) {
         if (n <= 1) return { x: 1360, y: g, s: ZOOM };
         if (n === 2) return { x: [1260, 1480][i], y: g, s: ZOOM };
         if (n === 3) return { x: [1160, 1370, 1580][i], y: g, s: ZOOM };
-        return { x: 1100 + i * (560 / (n - 1)), y: g, s: 0.88 * ZOOM };
+        return { x: 1000 + i * (800 / (n - 1)), y: g, s: (n >= 6 ? 0.72 : n === 5 ? 0.8 : 0.88) * ZOOM }; // 4-6 enemies: fill the enemy side, shrink a little
       },
     };
   }
   return {
     hero: { x: 190, y: g, s: 0.8 },
     enemy(i, n) {
+      if (n >= 4) { const x0 = n >= 5 ? 330 : 440; return { x: x0 + i * ((1000 - x0) / (n - 1)), y: g, s: n >= 5 ? 0.55 : 0.62 }; } // 4-6 enemies: one even row across the enemy side
       const x = Math.min(900, Math.max(470, 690 + (i - (n - 1) / 2) * 250));
       return { x, y: g, s: n > 2 ? 0.7 : n === 2 ? 0.8 : 0.9 };
     },

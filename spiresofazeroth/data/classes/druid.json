@@ -4,7 +4,7 @@
   "icon": "classicon_druid",
   "color": "#FF7D0A",
   "lore": "Versatile shapeshifter of nature: tank heavy hits in Bear Form, bleed foes in Cat Form, or call down stars and mends in Caster Form.",
-  "startingHp": 78,
+  "startingHp": 70,
   "startingGold": 99,
   "defaultContinent": "kal",
   "resource": {
@@ -164,7 +164,7 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Gain 5 Block. Heal 5 HP.",
+      "text": "Gain 5 Block. Heal 4 HP.",
       "breaksForm": true,
       "effects": [
         {
@@ -173,7 +173,7 @@
         },
         {
           "op": "heal",
-          "amount": 5
+          "amount": 4
         }
       ],
       "upgrade": {
@@ -205,7 +205,7 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Enter Bear Form. Gain 5 Block and Thorns 2.",
+      "text": "Enter Bear Form. Gain 5 Block and Thorns 1.",
       "effects": [
         {
           "op": "set_form",
@@ -218,7 +218,7 @@
         {
           "op": "apply",
           "status": "thorns",
-          "stacks": 2,
+          "stacks": 1,
           "target": "self"
         }
       ],
@@ -945,13 +945,13 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Gain Regen 4: heal 2 HP at the end of each turn for 4 turns.",
+      "text": "Gain Regen 3: heal 2 HP at the end of each turn for 4 turns.",
       "breaksForm": true,
       "effects": [
         {
           "op": "apply",
           "status": "regen",
-          "stacks": 4,
+          "stacks": 3,
           "target": "self"
         }
       ],
@@ -983,12 +983,12 @@
       "flags": [
         "exhaust"
       ],
-      "text": "Heal 6 HP now and gain Regen 3. Exhaust.",
+      "text": "Heal 5 HP now and gain Regen 3. Exhaust.",
       "breaksForm": true,
       "effects": [
         {
           "op": "heal",
-          "amount": 6
+          "amount": 5
         },
         {
           "op": "apply",
@@ -1501,7 +1501,7 @@
       "flags": [
         "exhaust"
       ],
-      "text": "Bear Form only. Heal 10 HP and gain 5 Block. Exhaust.",
+      "text": "Bear Form only. Heal 8 HP and gain 5 Block. Exhaust.",
       "requires": {
         "type": "form_is",
         "value": "bear"
@@ -1509,7 +1509,7 @@
       "effects": [
         {
           "op": "heal",
-          "amount": 10
+          "amount": 8
         },
         {
           "op": "block",
@@ -1597,7 +1597,7 @@
       "cost": 2,
       "target": "self",
       "flags": [],
-      "text": "Enter Bear Form (Dire): Bear cards usable. Gain 14 Block, Thorns 2 and +10 max HP this combat.",
+      "text": "Enter Bear Form (Dire): Bear cards usable. Gain 12 Block, Thorns 2 and +10 max HP this combat.",
       "effects": [
         {
           "op": "set_form",
@@ -1605,7 +1605,7 @@
         },
         {
           "op": "block",
-          "amount": 14
+          "amount": 12
         },
         {
           "op": "apply",
@@ -2391,12 +2391,12 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Gain 14 Block and Thorns 2. Retain Block next turn.",
+      "text": "Gain 12 Block and Thorns 2. Retain Block next turn.",
       "breaksForm": true,
       "effects": [
         {
           "op": "block",
-          "amount": 14
+          "amount": 12
         },
         {
           "op": "apply",

@@ -4,7 +4,7 @@
   "icon": "classicon_shaman",
   "color": "#0070DE",
   "lore": "Master of the primordial elements: plant autonomous totems, enchant weapons with Windfury or Flame, and call down lightning shocks.",
-  "startingHp": 75,
+  "startingHp": 66,
   "startingGold": 99,
   "defaultContinent": "kal",
   "resource": {
@@ -127,7 +127,7 @@
           "effects": [
             {
               "op": "damage",
-              "amount": 3,
+              "amount": 2,
               "school": "fire",
               "target": "random_enemy"
             }
@@ -148,7 +148,7 @@
           "effects": [
             {
               "op": "damage",
-              "amount": 5,
+              "amount": 4,
               "school": "fire",
               "target": "random_enemy"
             }
@@ -297,7 +297,7 @@
           "effects": [
             {
               "op": "block",
-              "amount": 3,
+              "amount": 2,
               "target": "player"
             }
           ],
@@ -317,7 +317,7 @@
           "effects": [
             {
               "op": "block",
-              "amount": 5,
+              "amount": 4,
               "target": "player"
             }
           ],
@@ -478,7 +478,7 @@
           "effects": [
             {
               "op": "heal",
-              "amount": 3,
+              "amount": 2,
               "target": "player"
             }
           ],
@@ -835,11 +835,11 @@
       "cost": 1,
       "target": "enemy",
       "flags": [],
-      "text": "Deal 6 nature damage.",
+      "text": "Deal 4 nature damage.",
       "effects": [
         {
           "op": "damage",
-          "amount": 6,
+          "amount": 4,
           "school": "nature"
         }
       ],
@@ -868,11 +868,11 @@
       "cost": 1,
       "target": "enemy",
       "flags": [],
-      "text": "Deal 7 nature damage. Gain 4 Block. Interrupt the enemy cast.",
+      "text": "Deal 5 nature damage. Gain 4 Block. Interrupt the enemy cast.",
       "effects": [
         {
           "op": "damage",
-          "amount": 7,
+          "amount": 5,
           "school": "nature"
         },
         {
@@ -915,7 +915,7 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Gain 5 Block. Heal 6 HP.",
+      "text": "Gain 5 Block. Heal 5 HP.",
       "effects": [
         {
           "op": "block",
@@ -923,7 +923,7 @@
         },
         {
           "op": "heal",
-          "amount": 6
+          "amount": 5
         }
       ],
       "upgrade": {
@@ -995,11 +995,11 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Deal 4 fire damage. Fire totem: deals 3 fire damage to a random enemy each turn.",
+      "text": "Deal 3 fire damage. Fire totem: deals 3 fire damage to a random enemy each turn.",
       "effects": [
         {
           "op": "damage",
-          "amount": 4,
+          "amount": 3,
           "school": "fire"
         },
         {
@@ -1038,11 +1038,11 @@
       "cost": 1,
       "target": "enemy",
       "flags": [],
-      "text": "Deal 6 fire damage. Apply Burn 6.",
+      "text": "Deal 5 fire damage. Apply Burn 6.",
       "effects": [
         {
           "op": "damage",
-          "amount": 6,
+          "amount": 5,
           "school": "fire"
         },
         {
@@ -1083,11 +1083,11 @@
       "cost": 1,
       "target": "enemy",
       "flags": [],
-      "text": "Deal 6 frost damage. Gain 4 Block. Apply Weak 2.",
+      "text": "Deal 5 frost damage. Gain 4 Block. Apply Weak 2.",
       "effects": [
         {
           "op": "damage",
-          "amount": 6,
+          "amount": 5,
           "school": "frost"
         },
         {
@@ -1280,12 +1280,6 @@
           "status": "weapon_imbue_rockbiter",
           "stacks": 1,
           "target": "self"
-        },
-        {
-          "op": "apply",
-          "status": "strength",
-          "stacks": 2,
-          "target": "self"
         }
       ],
       "upgrade": {
@@ -1306,7 +1300,7 @@
           {
             "op": "apply",
             "status": "strength",
-            "stacks": 3,
+            "stacks": 1,
             "target": "self"
           }
         ]
@@ -1394,32 +1388,32 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Power. Gain 8 Block. Gain Thorns 4.",
+      "text": "Power. Gain 6 Block. Gain Thorns 3.",
       "effects": [
         {
           "op": "block",
-          "amount": 8
+          "amount": 6
         },
         {
           "op": "apply",
           "status": "thorns",
-          "stacks": 4,
+          "stacks": 3,
           "target": "self"
         }
       ],
       "upgrade": {
         "name": "Lightning Shield (Rank 2)",
         "cost": 1,
-        "text": "Power. Gain 11 Block. Gain Thorns 6.",
+        "text": "Power. Gain 9 Block. Gain Thorns 4.",
         "effects": [
           {
             "op": "block",
-            "amount": 11
+            "amount": 9
           },
           {
             "op": "apply",
             "status": "thorns",
-            "stacks": 6,
+            "stacks": 4,
             "target": "self"
           }
         ]
@@ -1437,11 +1431,11 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Gain 8 Block. Earth totem: taunts all enemies and gains 8 Block each turn.",
+      "text": "Gain 6 Block. Earth totem: taunts all enemies and gains 8 Block each turn.",
       "effects": [
         {
           "op": "block",
-          "amount": 8
+          "amount": 6
         },
         {
           "op": "totem",
@@ -1552,7 +1546,7 @@
       "cost": 0,
       "target": "self",
       "flags": [],
-      "text": "Gain 4 Block. Heal 4 HP.",
+      "text": "Gain 4 Block. Heal 3 HP.",
       "effects": [
         {
           "op": "block",
@@ -1560,7 +1554,7 @@
         },
         {
           "op": "heal",
-          "amount": 4
+          "amount": 3
         }
       ],
       "upgrade": {
@@ -1694,11 +1688,11 @@
       "cost": 2,
       "target": "all_enemies",
       "flags": [],
-      "text": "Deal 14 nature damage to ALL enemies.",
+      "text": "Deal 12 nature damage to ALL enemies.",
       "effects": [
         {
           "op": "damage",
-          "amount": 14,
+          "amount": 12,
           "school": "nature",
           "target": "all_enemies"
         }
@@ -2335,7 +2329,7 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Gain 8 Block. Heal 8 HP, then heal totems 5 HP.",
+      "text": "Gain 8 Block. Heal 7 HP, then heal totems 5 HP.",
       "effects": [
         {
           "op": "block",
@@ -2343,7 +2337,7 @@
         },
         {
           "op": "heal",
-          "amount": 8
+          "amount": 7
         },
         {
           "op": "heal",

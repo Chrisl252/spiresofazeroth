@@ -12,6 +12,7 @@ import {
 } from "./resources.js";
 import { spawnEnemy } from "./intents.js";
 import { extraCond, installMoreOps } from "./effects-more.js";
+import { talentApplyBonus, talentSkipSelfHit } from "./talentHooks.js";
 
 const MUL_SCALES = new Set(["combo", "combo_points"]); // "N per point" reads as base + per * count; everything else base + floor(count / per)
 
@@ -72,6 +73,7 @@ export function enemyAim(C, e) {
   const abs = [];
   if (p.pet && isAlive(p.pet) && petTargetable(C)) abs.push(p.pet);
   for (const t of Object.values(p.totems || {})) if (t && t.hp > 0) abs.push(t);
+  if (p.tauntRound === "self") return p;
   if (p.tauntRound && abs.length) return C.rng.pick(abs);
   if (e.aim && e.aim !== "player") {
     const found = abs.find((a) => a.uid === e.aim);
@@ -235,6 +237,7 @@ op(["damage", "aoe"], (ctx, e) => {
     for (const t of tgts) {
       let amt = e.pct ? Math.floor(t.maxHp * e.pct / 100) : base;
       if (isSelf) {
+        if (talentSkipSelfHit(ctx)) continue; // Talents V2: card_nohurt
         const loss = dealStatusDamage(C, t, amt, "self");
         if (loss > 0 && t === p) C.stats.selfDamage = (C.stats.selfDamage || 0) + loss;
         continue;
@@ -246,6 +249,7 @@ op(["damage", "aoe"], (ctx, e) => {
         aoe,
         primary: !!ctx.isCardPrimary,
         cardId: ctx.card ? ctx.card.id : undefined,
+        card: ctx.card || undefined, // Talents V2 reads the card's type/id
       });
       if (C.result) return;
     }
@@ -255,7 +259,7 @@ op(["damage", "aoe"], (ctx, e) => {
 op("block", (ctx, e) => {
   if (runMode(ctx)) return;
   const C = ctx.C;
-  for (const t of resolveTargets(ctx, e.target, "self")) gainBlock(C, t, num(ctx, e.amount), { card: !!ctx.cardInst });
+  for (const t of resolveTargets(ctx, e.target, "self")) gainBlock(C, t, num(ctx, e.amount), { card: !!ctx.cardInst, cardId: ctx.card ? ctx.card.id : undefined });
 });
 
 op("heal", (ctx, e) => {
@@ -288,6 +292,7 @@ op("apply", (ctx, e) => {
   }
   const C = ctx.C;
   const p = C.player;
+  if (stacks > 0) stacks += talentApplyBonus(ctx, e.status); // Talents V2: card_apply
   if (ctx.srcKind === "player" && ctx.card && /^curse/i.test(ctx.card.id || "") && p.st.amplify_curse && stacks > 0) {
     stacks *= 2;
     delete p.st.amplify_curse;
@@ -499,7 +504,8 @@ op("cast_interrupt", (ctx, e) => {
     if (t && t.intent && (t.intent.kind === "cast" || ctx.trapFiring)) { t.interrupted = true; fx(ctx.C, { t: "interrupt", uid: t.uid }); }
   }
 });
-op("taunt", (ctx) => { if (ctx.C && ctx.srcKind !== "enemy") ctx.C.player.tauntRound = true; });
+// Taunt: single-target enemy attacks this round go to you (default: Target Dummy, Growl) or, with to:"pet", to your pet/totems (Distracting Shot)
+op("taunt", (ctx, x) => { if (ctx.C && ctx.srcKind !== "enemy") ctx.C.player.tauntRound = x && x.to === "pet" ? "pet" : "self"; });
 op("revive", (ctx, e) => {
   const C = ctx.C;
   if (!C) return;
@@ -536,9 +542,13 @@ export function runEffect(ctx, e) {
 export function runEffects(ctx, effects) {
   if (!effects) return;
   const C = ctx.C;
-  for (const e of effects) {
+  for (let i = 0; i < effects.length; i++) {
     if (C && C.result) return;
-    runEffect(ctx, e);
+    const before = C && C.pending ? C.pending.length : 0;
+    runEffect(ctx, effects[i]);
+    // an interactive scry waits for the player's choice: the rest of the card (e.g. Detect Magic's draw) runs after it resolves
+    const pd = C && C.pending && C.pending.length > before ? C.pending[C.pending.length - 1] : null;
+    if (pd && pd.type === "scry" && i < effects.length - 1) { pd.after = { ctx, effects: effects.slice(i + 1) }; return; }
   }
 }
 

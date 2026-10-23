@@ -4,6 +4,7 @@ import { damageBonus, damageMult, takenAdjust, blockBonus, onDealt, onTaken, onK
 import { fire } from "./relics.js";
 import { runEffects } from "./effects.js";
 import { immuneToSchool, resistMult } from "./immunity.js";
+import { talentDamage, talentTaken, talentThorns, talentBlocked, talentBlock } from "./talentHooks.js";
 
 const ids = (e) => (e && (e.uid || e.kind)) || "?";
 export function fx(C, ev) {
@@ -40,10 +41,11 @@ export function dealDamage(C, src, tgt, amount, o = {}) {
   if (!o.noMods) {
     amt = modifyDealt(C, src, amt);
     amt += damageBonus(C, src, school, o);
+    amt = talentDamage(C, src, tgt, amt, o, amount);
     amt = Math.floor(amt * damageMult(C, src, tgt, school, o));
   }
   let taken = o.noMods ? amt : modifyTaken(C, tgt, amt, school, o);
-  if (!o.noMods) taken = takenAdjust(C, tgt, taken, school);
+  if (!o.noMods) taken = talentTaken(C, tgt, takenAdjust(C, tgt, taken, school), src, o);
   // a stealthed player is missed by single-target enemy attacks
   if (tgt.kind === "player" && tgt.st.stealth && src && src.kind === "enemy" && kind === "attack" && !o.aoe) {
     fx(C, { t: "miss", uid: ids(tgt) });
@@ -80,10 +82,11 @@ export function dealDamage(C, src, tgt, amount, o = {}) {
   if (o.proc || (!o.primary && !o.cardId && src && src.kind === "player")) dmgEv.proc = true;
   fx(C, dmgEv);
   if (taken > 0) wakeOnDamage(tgt);
-  const thorns = (tgt.st.thorns || 0) + (tgt.kind === "player" ? modeThorns(C) : 0);
+  const thorns = (tgt.st.thorns || 0) + (tgt.kind === "player" ? modeThorns(C) + talentThorns(C, tgt, blocked) : 0);
   if (src && src !== tgt && kind === "attack" && thorns > 0 && isAlive(src)) {
     dealDamage(C, tgt, src, thorns, { kind: "thorns", noMods: true, school: "physical" });
   }
+  if (tgt.kind === "player") talentBlocked(C, tgt, src, blocked, hpLoss, kind);
   if (src && src.kind === "player" && tgt.kind === "enemy") onDealt(C, tgt, hpLoss, school);
   if (tgt.kind === "player" && taken > 0) onTaken(C, hpLoss);
   if (tgt.kind === "player") {
@@ -117,7 +120,7 @@ export function dealStatusDamage(C, e, amount, cause) {
 export function gainBlock(C, e, amount, o = {}) {
   if (!e || !isAlive(e)) return 0;
   let a = o.raw ? Math.max(0, Math.floor(amount)) : gainBlockAmount(e, amount);
-  if (!o.raw && e.kind === "player") a += blockBonus(C, o);
+  if (!o.raw && e.kind === "player") a += blockBonus(C, o) + talentBlock(C, o);
   if (a <= 0) return 0;
   e.block += a;
   fx(C, { t: "block", uid: ids(e), amount: a });

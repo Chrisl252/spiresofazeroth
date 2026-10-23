@@ -85,7 +85,8 @@
 .sx-bar__act { font-family: var(--f-num); font-size: 26px; color: #b8a77f; } .sx-bar__act b { color: var(--ink); font-weight: 400; }
 .sx-bar__strip { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .sx-bar__slot { width: 52px; height: 52px; border: 2px solid var(--q, #6b5220); border-radius: 6px; overflow: hidden; background: #0c0905; box-shadow: 0 0 8px var(--q, transparent); }
-.sx-bar__pots { margin-left: 6px; } .sx-bar__pots .sx-bar__slot { border-radius: 50%; }
+.sx-bar__pots { margin-left: 6px; flex: 0 0 auto; flex-wrap: nowrap; padding: 6px 10px; border: 2px solid #6b5220; border-radius: 12px; background: rgba(5,3,2,.55); } .sx-bar__pots .sx-bar__slot { border-radius: 50%; flex: 0 0 auto; }
+.sx-bar__slot--empty { background: url("/assets/ui/blizzard/emptyslot.png") center / 100% 100% no-repeat, #0c0905; box-shadow: none; border-color: #3a2f1c; }
 .sx-bar__deck { margin-left: auto; --h: 62px; min-width: 190px; }
 .sx-bar__set { --h: 62px; min-width: 160px; font-size: 26px; } /* keep the base cap padding: a smaller one slides the red caps over the S and s */
 .sp-portrait .sx-bar { margin: 14px 24px 0; gap: 12px 22px; padding: 14px 22px; }
@@ -444,3 +445,11 @@
 .sx-victory .sv-banner { max-width: 100%; overflow: hidden; align-self: center; }
 .sx-victory .sv-right { min-width: 0; padding-right: 12px; box-sizing: border-box; }
 .sx-victory .lf.lf--inline { max-width: 100%; box-sizing: border-box; }
+/* run bar fit [layout-fix 2026-10-23]: the 2x8 gear grid + set badge + 3 potion slots + 4 buttons must fit one landscape row with nothing overlapping */
+.sp-stage:not(.sp-portrait) .sx-bar .gs-row { grid-template-columns: repeat(8, 32px); gap: 3px; } .sp-stage:not(.sp-portrait) .sx-bar .gs-sock { width: 32px; height: 32px; }
+.sp-stage:not(.sp-portrait) .sx-bar .gs-badge b { display: none; } .sp-stage:not(.sp-portrait) .sx-bar .gs-badge { padding: 2px 10px; }
+.sp-stage:not(.sp-portrait) .sx-bar .sx-bar__slot { width: 46px; height: 46px; } .sp-stage:not(.sp-portrait) .sx-bar__gear, .sp-stage:not(.sp-portrait) .sx-bar__set { flex: 0 0 auto; }
+.sp-portrait .sx-bar .gs-strip, .sp-portrait .sx-bar .sx-bar__pots { flex: 1 1 auto; max-width: 100%; }
+.sp-stage:not(.sp-portrait) .sx-bar { gap: 8px 12px; padding: 8px 18px; } .sp-stage:not(.sp-portrait) .sx-bar__hp { width: 200px; }
+.sp-stage:not(.sp-portrait) .sx-bar__gear { min-width: 130px; --h: 52px; } .sp-stage:not(.sp-portrait) .sx-bar__deck { min-width: 110px; margin-left: 0; } .sp-stage:not(.sp-portrait) .sx-bar__set { min-width: 110px; }
+.sp-stage:not(.sp-portrait) .sx-bar__fs { min-width: 52px; padding: 0 8px; }

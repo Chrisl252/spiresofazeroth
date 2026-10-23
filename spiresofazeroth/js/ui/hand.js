@@ -246,7 +246,7 @@ export function createHand(host, o) {
     layout();
     fireAim(S.tapTarget || null);
   }
-  function cancel() { endExt(); S.sel = null; S.tapTarget = null; S.drag = null; S.queued = null; clearAim(); setEnemyMark(null, null); fireAim(null); items.forEach((it) => it.el.classList.remove("is-aim", "is-drag")); layout(); }
+  function cancel() { if (S.down) endGesture(); endExt(); S.sel = null; S.tapTarget = null; S.drag = null; S.queued = null; clearAim(); setEnemyMark(null, null); fireAim(null); items.forEach((it) => it.el.classList.remove("is-aim", "is-drag")); layout(); }
   // ---------------- external aim (potions): the same arrow + enemy marks, from any element ----------------
   // Press-and-drag: release on an enemy throws it (onDrop), anywhere else cancels. A press released in place turns sticky: the arrow
   // follows the pointer until the next pointerdown (enemy = throw, elsewhere = cancel) or Escape. Without a pointerId it starts sticky.
@@ -386,7 +386,9 @@ export function createHand(host, o) {
       if (en) ext.onDrop(en.dataset.uid); else if (ext.onCancel) ext.onCancel();
       e.stopPropagation(); e.preventDefault(); return;
     }
-    if (!S.sel || S.drag || S.locked) return;
+    if (e.button === 2 && (S.sel || S.drag)) { cancel(); e.preventDefault(); return; } // right-press cancels at once (also mid-drag); contextmenu below is the backstop
+    if (!S.sel || S.drag) return;
+    if (S.locked) { if (S.queued && !(e.target.closest && e.target.closest(".sp-hcard, button, [data-keep-sel]"))) cancel(); return; } // a card held raised during the fx window can still be put back
     if (e.target.closest && e.target.closest(".sp-hcard")) return;
     const it = byId(S.sel); if (!it) return;
     const en = enemyAt(e.clientX, e.clientY);
@@ -464,7 +466,7 @@ export function createHand(host, o) {
   sizeCanvas();
 
   const api = {
-    set, draw, discard, exhaust, select, cancel, layout, refresh: refreshAll,
+    set, draw, discard, exhaust, select, cancel, cancelSelection: cancel, layout, refresh: refreshAll,
     lock(b) {
       const was = S.locked; S.locked = !!b; layer.classList.toggle("is-locked", S.locked);
       // locking must not kill a drag in progress or a queued card (the fx window); end-turn / victory call cancel() themselves

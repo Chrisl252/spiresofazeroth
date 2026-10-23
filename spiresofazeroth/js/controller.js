@@ -31,7 +31,7 @@ function dispatchAction(action) {
   // 1. Modals or Game Menus
   if (isModalOpen()) {
     if (action === "b" || action === "start") {
-      const closeBtn = document.querySelector(".dm-close, .sx-modal__close, .sp-pause-menu button");
+      const closeBtn = document.querySelector(".dm-close, .sx-modal__close, .sp-pause-menu [data-autofocus]");
       if (closeBtn) closeBtn.click();
       else window.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true, cancelable: true }));
       refreshPrompts();

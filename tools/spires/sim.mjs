@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { createData } from "../../spiresofazeroth/js/engine/data.js";
 import { simRun } from "../../spiresofazeroth/js/engine/sim.js";
+import { modsFromSpent } from "../../spiresofazeroth/js/engine/talents.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const args = Object.fromEntries(process.argv.slice(2).reduce((a, x, i, all) => (x.startsWith("--") ? a.concat([[x.slice(2), all[i + 1] && !all[i + 1].startsWith("--") ? all[i + 1] : true]]) : a), []));
@@ -25,9 +26,23 @@ for (const cid of classes || data.classIds) {
   if (!(await data.loadClass(cid))) { console.log(`${cid}: no class data`); continue; }
   const tally = { runs: 0, wins: 0, acts: 0, floors: 0, hp: 0, stalled: 0, errors: 0, drops: 0, worn: 0, set8: 0, bonus: 0, zeroE: 0 };
   const deaths = {};
+  // --talents N[:P]: a character with P points (default 51) that fills tree N first, then the others in order (null = no talents)
+  let tmods = null;
+  if (args.talents !== undefined && args.talents !== "none") {
+    const [tp, tn] = String(args.talents).split(":"), tdef = await fetchJson(`talents/${cid}.json`), primary = +tp || 0;
+    if (tdef) {
+      const spent = {}; let left = +(tn || 51);
+      const order = [tdef.trees[primary], ...tdef.trees.filter((_, k) => k !== primary)].filter(Boolean);
+      for (const tree of order) for (const t of tree.talents) {
+        const r = Math.min(t.max || 1, left); if (r <= 0) break;
+        spent[t.id] = r; left -= r;
+      }
+      tmods = modsFromSpent(tdef, spent); // same aggregation as the live game (engine/talents.js): flat keys + Talents V2 hooks
+    }
+  }
   for (let i = 0; i < runs; i++) {
     try {
-      const r = await simRun(data, { classId: cid, seed: `${seed0}-${i}`, heroic });
+      const r = await simRun(data, { classId: cid, seed: `${seed0}-${i}`, heroic, talents: tmods });
       tally.zeroE += r.stats.zeroEnergyTurns || 0;
       tally.runs++; tally.acts += r.act; tally.floors += r.stats.floors;
       const wornIds = Object.values(r.gear || {}).filter(Boolean); // gear: drops counted the same way the UI path does (afterCombat -> dropGear)

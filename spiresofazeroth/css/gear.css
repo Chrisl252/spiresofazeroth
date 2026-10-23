@@ -15,7 +15,7 @@
 .gs-badge b { font-weight: 400; font-size: 24px; letter-spacing: .02em; } .gs-badge span { font-family: var(--f-num, monospace); font-size: 26px; color: #ffe27a; }
 .gs-badge--full { border-color: #ffd34d; box-shadow: 0 0 14px rgba(255,211,77,.55); }
 .sp-portrait .gs-row { grid-template-columns: repeat(8, 54px); } .sp-portrait .gs-sock { width: 54px; height: 54px; } .sp-portrait .gs-badge b { font-size: 30px; }
-.sx-bar .gs-strip { flex: 1 1 auto; min-width: 0; }
+.sx-bar .gs-strip { flex: 0 0 auto; min-width: max-content; } /* never shrink below the 8-col socket grid: it used to overflow onto the potion belt */
 .gs-tip__slot { color: #b8a77f; } .gs-tip__set { display: block; margin-top: 6px; color: #ffd45a; } .gs-on { color: #1eff00; } .gs-off { color: #8c8c8c; }
 
 /* compact: 2 rows of 8 for the combat top bar */

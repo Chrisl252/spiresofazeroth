@@ -4,7 +4,7 @@
   "icon": "classicon_warlock",
   "color": "#9482C9",
   "lore": "Dark summoner of the Twisting Nether: sacrifice your own vitality for endless power, harvest Soul Shards, and command demonic minions.",
-  "startingHp": 75,
+  "startingHp": 80,
   "startingGold": 99,
   "defaultContinent": "ek",
   "resource": {
@@ -82,11 +82,53 @@
       "name": "Imp",
       "icon": "spell_shadow_summonimp",
       "hp": 20,
-      "pattern": ["firebolt", "firebolt", "blood-pact", "phase-shift"],
+      "pattern": [
+        "firebolt",
+        "firebolt",
+        "blood-pact",
+        "phase-shift"
+      ],
       "moves": [
-        {"id": "firebolt", "name": "Firebolt", "intent": "attack", "effects": [{"op": "damage", "amount": 5, "school": "fire"}], "weight": 3},
-        {"id": "blood-pact", "name": "Blood Pact", "intent": "buff", "effects": [{"op": "apply", "status": "strength", "stacks": 1, "target": "self"}], "weight": 1},
-        {"id": "phase-shift", "name": "Phase Shift", "intent": "block", "effects": [{"op": "block", "amount": 6, "target": "self"}], "weight": 1}
+        {
+          "id": "firebolt",
+          "name": "Firebolt",
+          "intent": "attack",
+          "effects": [
+            {
+              "op": "damage",
+              "amount": 7,
+              "school": "fire"
+            }
+          ],
+          "weight": 3
+        },
+        {
+          "id": "blood-pact",
+          "name": "Blood Pact",
+          "intent": "buff",
+          "effects": [
+            {
+              "op": "apply",
+              "status": "strength",
+              "stacks": 1,
+              "target": "self"
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "id": "phase-shift",
+          "name": "Phase Shift",
+          "intent": "block",
+          "effects": [
+            {
+              "op": "block",
+              "amount": 6,
+              "target": "self"
+            }
+          ],
+          "weight": 1
+        }
       ]
     },
     "voidwalker": {
@@ -94,11 +136,54 @@
       "name": "Voidwalker",
       "icon": "spell_shadow_summonvoidwalker",
       "hp": 34,
-      "pattern": ["torment", "consume-shadows", "sacrifice"],
+      "pattern": [
+        "torment",
+        "consume-shadows",
+        "sacrifice"
+      ],
       "moves": [
-        {"id": "torment", "name": "Torment", "intent": "attack", "effects": [{"op": "damage", "amount": 4, "school": "shadow"}, {"op": "taunt"}], "weight": 2},
-        {"id": "consume-shadows", "name": "Consume Shadows", "intent": "heal", "effects": [{"op": "heal", "amount": 6, "target": "self"}], "weight": 1},
-        {"id": "sacrifice", "name": "Sacrifice", "intent": "block", "effects": [{"op": "block", "amount": 10, "target": "pet"}], "weight": 1}
+        {
+          "id": "torment",
+          "name": "Torment",
+          "intent": "attack",
+          "effects": [
+            {
+              "op": "damage",
+              "amount": 4,
+              "school": "shadow"
+            },
+            {
+              "op": "taunt"
+            }
+          ],
+          "weight": 2
+        },
+        {
+          "id": "consume-shadows",
+          "name": "Consume Shadows",
+          "intent": "heal",
+          "effects": [
+            {
+              "op": "heal",
+              "amount": 6,
+              "target": "self"
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "id": "sacrifice",
+          "name": "Sacrifice",
+          "intent": "block",
+          "effects": [
+            {
+              "op": "block",
+              "amount": 10,
+              "target": "pet"
+            }
+          ],
+          "weight": 1
+        }
       ]
     },
     "succubus": {
@@ -106,11 +191,55 @@
       "name": "Succubus",
       "icon": "spell_shadow_summonsuccubus",
       "hp": 26,
-      "pattern": ["lash-of-pain", "seduction", "lash-of-pain", "soothing-kiss"],
+      "pattern": [
+        "lash-of-pain",
+        "seduction",
+        "lash-of-pain",
+        "soothing-kiss"
+      ],
       "moves": [
-        {"id": "lash-of-pain", "name": "Lash of Pain", "intent": "attack", "effects": [{"op": "damage", "amount": 7, "school": "shadow"}], "weight": 3},
-        {"id": "seduction", "name": "Seduction", "intent": "debuff", "effects": [{"op": "apply", "status": "fear", "stacks": 1, "target": "enemy", "duration": 1}], "weight": 1},
-        {"id": "soothing-kiss", "name": "Soothing Kiss", "intent": "debuff", "effects": [{"op": "apply", "status": "weak", "stacks": 1, "target": "enemy"}], "weight": 1}
+        {
+          "id": "lash-of-pain",
+          "name": "Lash of Pain",
+          "intent": "attack",
+          "effects": [
+            {
+              "op": "damage",
+              "amount": 7,
+              "school": "shadow"
+            }
+          ],
+          "weight": 3
+        },
+        {
+          "id": "seduction",
+          "name": "Seduction",
+          "intent": "debuff",
+          "effects": [
+            {
+              "op": "apply",
+              "status": "fear",
+              "stacks": 1,
+              "target": "enemy",
+              "duration": 1
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "id": "soothing-kiss",
+          "name": "Soothing Kiss",
+          "intent": "debuff",
+          "effects": [
+            {
+              "op": "apply",
+              "status": "weak",
+              "stacks": 1,
+              "target": "enemy"
+            }
+          ],
+          "weight": 1
+        }
       ]
     },
     "felhunter": {
@@ -118,11 +247,54 @@
       "name": "Felhunter",
       "icon": "spell_shadow_summonfelhunter",
       "hp": 28,
-      "pattern": ["shadow-bite", "spell-lock", "devour-magic"],
+      "pattern": [
+        "shadow-bite",
+        "spell-lock",
+        "devour-magic"
+      ],
       "moves": [
-        {"id": "shadow-bite", "name": "Shadow Bite", "intent": "attack", "effects": [{"op": "damage", "amount": 6, "school": "shadow"}], "weight": 2},
-        {"id": "spell-lock", "name": "Spell Lock", "intent": "debuff", "effects": [{"op": "cast_interrupt"}], "weight": 1},
-        {"id": "devour-magic", "name": "Devour Magic", "intent": "heal", "effects": [{"op": "remove", "status": "strength", "target": "enemy"}, {"op": "heal", "amount": 4, "target": "self"}], "weight": 1}
+        {
+          "id": "shadow-bite",
+          "name": "Shadow Bite",
+          "intent": "attack",
+          "effects": [
+            {
+              "op": "damage",
+              "amount": 6,
+              "school": "shadow"
+            }
+          ],
+          "weight": 2
+        },
+        {
+          "id": "spell-lock",
+          "name": "Spell Lock",
+          "intent": "debuff",
+          "effects": [
+            {
+              "op": "cast_interrupt"
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "id": "devour-magic",
+          "name": "Devour Magic",
+          "intent": "heal",
+          "effects": [
+            {
+              "op": "remove",
+              "status": "strength",
+              "target": "enemy"
+            },
+            {
+              "op": "heal",
+              "amount": 4,
+              "target": "self"
+            }
+          ],
+          "weight": 1
+        }
       ]
     },
     "infernal": {
@@ -130,11 +302,52 @@
       "name": "Infernal",
       "icon": "spell_shadow_summoninfernal",
       "hp": 45,
-      "pattern": ["immolation", "fire-bolt", "immolation"],
+      "pattern": [
+        "immolation",
+        "fire-bolt",
+        "immolation"
+      ],
       "moves": [
-        {"id": "immolation", "name": "Immolation", "intent": "attack_multi", "effects": [{"op": "damage", "amount": 5, "school": "fire", "target": "all_enemies"}], "weight": 2},
-        {"id": "fire-bolt", "name": "Fire Bolt", "intent": "attack", "effects": [{"op": "damage", "amount": 9, "school": "fire"}], "weight": 2},
-        {"id": "infernal-stand", "name": "Stand Fast", "intent": "block", "effects": [{"op": "block", "amount": 8, "target": "pet"}], "weight": 1}
+        {
+          "id": "immolation",
+          "name": "Immolation",
+          "intent": "attack_multi",
+          "effects": [
+            {
+              "op": "damage",
+              "amount": 5,
+              "school": "fire",
+              "target": "all_enemies"
+            }
+          ],
+          "weight": 2
+        },
+        {
+          "id": "fire-bolt",
+          "name": "Fire Bolt",
+          "intent": "attack",
+          "effects": [
+            {
+              "op": "damage",
+              "amount": 9,
+              "school": "fire"
+            }
+          ],
+          "weight": 2
+        },
+        {
+          "id": "infernal-stand",
+          "name": "Stand Fast",
+          "intent": "block",
+          "effects": [
+            {
+              "op": "block",
+              "amount": 8,
+              "target": "pet"
+            }
+          ],
+          "weight": 1
+        }
       ]
     },
     "doomguard": {
@@ -142,11 +355,56 @@
       "name": "Doomguard",
       "icon": "spell_shadow_antimagicshell",
       "hp": 50,
-      "pattern": ["rain-of-fire", "war-stomp", "cripple", "rain-of-fire"],
+      "pattern": [
+        "rain-of-fire",
+        "war-stomp",
+        "cripple",
+        "rain-of-fire"
+      ],
       "moves": [
-        {"id": "rain-of-fire", "name": "Rain of Fire", "intent": "attack_multi", "effects": [{"op": "damage", "amount": 6, "school": "fire", "target": "all_enemies"}], "weight": 2},
-        {"id": "war-stomp", "name": "War Stomp", "intent": "debuff", "effects": [{"op": "apply", "status": "stun", "stacks": 1, "target": "enemy", "duration": 1}], "weight": 1},
-        {"id": "cripple", "name": "Cripple", "intent": "debuff", "effects": [{"op": "apply", "status": "weak", "stacks": 2, "target": "enemy"}], "weight": 1}
+        {
+          "id": "rain-of-fire",
+          "name": "Rain of Fire",
+          "intent": "attack_multi",
+          "effects": [
+            {
+              "op": "damage",
+              "amount": 6,
+              "school": "fire",
+              "target": "all_enemies"
+            }
+          ],
+          "weight": 2
+        },
+        {
+          "id": "war-stomp",
+          "name": "War Stomp",
+          "intent": "debuff",
+          "effects": [
+            {
+              "op": "apply",
+              "status": "stun",
+              "stacks": 1,
+              "target": "enemy",
+              "duration": 1
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "id": "cripple",
+          "name": "Cripple",
+          "intent": "debuff",
+          "effects": [
+            {
+              "op": "apply",
+              "status": "weak",
+              "stacks": 2,
+              "target": "enemy"
+            }
+          ],
+          "weight": 1
+        }
       ]
     }
   },
@@ -163,18 +421,28 @@
       "archetype": null,
       "cost": 0,
       "target": "self",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Heal 10 HP. Exhaust.",
       "token": true,
       "effects": [
-        {"op": "heal", "amount": 10, "target": "self"}
+        {
+          "op": "heal",
+          "amount": 10,
+          "target": "self"
+        }
       ],
       "upgrade": {
         "name": "Healthstone (Rank 2)",
         "cost": 0,
         "text": "Heal 14 HP. Exhaust.",
         "effects": [
-          {"op": "heal", "amount": 14, "target": "self"}
+          {
+            "op": "heal",
+            "amount": 14,
+            "target": "self"
+          }
         ]
       }
     },
@@ -189,18 +457,26 @@
       "archetype": null,
       "cost": 0,
       "target": "self",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Revive at 30% HP if you die this combat (once). Exhaust.",
       "token": true,
       "effects": [
-        {"op": "revive", "pct": 30}
+        {
+          "op": "revive",
+          "pct": 30
+        }
       ],
       "upgrade": {
         "name": "Soulstone (Rank 2)",
         "cost": 0,
         "text": "Revive at 50% HP if you die this combat (once). Exhaust.",
         "effects": [
-          {"op": "revive", "pct": 50}
+          {
+            "op": "revive",
+            "pct": 50
+          }
         ]
       }
     }
@@ -218,16 +494,24 @@
       "cost": 1,
       "target": "enemy",
       "flags": [],
-      "text": "Deal 6 shadow damage.",
+      "text": "Deal 9 shadow damage.",
       "effects": [
-        {"op": "damage", "amount": 6, "school": "shadow"}
+        {
+          "op": "damage",
+          "amount": 9,
+          "school": "shadow"
+        }
       ],
       "upgrade": {
         "name": "Shadow Bolt (Rank 2)",
         "cost": 1,
         "text": "Deal 9 shadow damage.",
         "effects": [
-          {"op": "damage", "amount": 9, "school": "shadow"}
+          {
+            "op": "damage",
+            "amount": 9,
+            "school": "shadow"
+          }
         ]
       }
     },
@@ -243,18 +527,36 @@
       "cost": 1,
       "target": "enemy",
       "flags": [],
-      "text": "Deal 4 shadow damage. Apply 5 Poison.",
+      "text": "Deal 4 shadow damage. Apply 7 Poison.",
       "effects": [
-        {"op": "damage", "amount": 4, "school": "shadow"},
-        {"op": "apply", "status": "poison", "stacks": 5, "target": "enemy"}
+        {
+          "op": "damage",
+          "amount": 4,
+          "school": "shadow"
+        },
+        {
+          "op": "apply",
+          "status": "poison",
+          "stacks": 7,
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Corruption (Rank 2)",
         "cost": 1,
         "text": "Deal 6 shadow damage. Apply 8 Poison.",
         "effects": [
-          {"op": "damage", "amount": 6, "school": "shadow"},
-          {"op": "apply", "status": "poison", "stacks": 8, "target": "enemy"}
+          {
+            "op": "damage",
+            "amount": 6,
+            "school": "shadow"
+          },
+          {
+            "op": "apply",
+            "status": "poison",
+            "stacks": 8,
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -272,18 +574,40 @@
       "flags": [],
       "text": "Lose 2 HP. Gain 1 energy. Draw 1 card.",
       "effects": [
-        {"op": "damage", "amount": 2, "school": "shadow", "target": "self"},
-        {"op": "gain_energy", "amount": 1},
-        {"op": "draw", "count": 1}
+        {
+          "op": "damage",
+          "amount": 2,
+          "school": "shadow",
+          "target": "self"
+        },
+        {
+          "op": "gain_energy",
+          "amount": 1
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Life Tap (Rank 2)",
         "cost": 0,
         "text": "Lose 2 HP. Gain 1 energy. Draw 2 cards.",
         "effects": [
-          {"op": "damage", "amount": 2, "school": "shadow", "target": "self"},
-          {"op": "gain_energy", "amount": 1},
-          {"op": "draw", "count": 2}
+          {
+            "op": "damage",
+            "amount": 2,
+            "school": "shadow",
+            "target": "self"
+          },
+          {
+            "op": "gain_energy",
+            "amount": 1
+          },
+          {
+            "op": "draw",
+            "count": 2
+          }
         ]
       }
     },
@@ -299,18 +623,34 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Gain 5 Block and 1 Regen.",
+      "text": "Gain 6 Block and 2 Regen.",
       "effects": [
-        {"op": "block", "amount": 5},
-        {"op": "apply", "status": "regen", "stacks": 1, "target": "self"}
+        {
+          "op": "block",
+          "amount": 6
+        },
+        {
+          "op": "apply",
+          "status": "regen",
+          "stacks": 2,
+          "target": "self"
+        }
       ],
       "upgrade": {
         "name": "Demon Skin (Rank 2)",
         "cost": 1,
         "text": "Gain 8 Block and 1 Regen.",
         "effects": [
-          {"op": "block", "amount": 8},
-          {"op": "apply", "status": "regen", "stacks": 1, "target": "self"}
+          {
+            "op": "block",
+            "amount": 8
+          },
+          {
+            "op": "apply",
+            "status": "regen",
+            "stacks": 1,
+            "target": "self"
+          }
         ]
       }
     },
@@ -328,14 +668,22 @@
       "flags": [],
       "text": "Summon an Imp (Firebolt 5 fire, Blood Pact, Phase Shift).",
       "effects": [
-        {"op": "summon", "unit": "imp", "count": 1}
+        {
+          "op": "summon",
+          "unit": "imp",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Summon Imp (Rank 2)",
         "cost": 0,
         "text": "Summon an Imp (Firebolt 5 fire, Blood Pact, Phase Shift). Costs 0.",
         "effects": [
-          {"op": "summon", "unit": "imp", "count": 1}
+          {
+            "op": "summon",
+            "unit": "imp",
+            "count": 1
+          }
         ]
       }
     },
@@ -353,16 +701,34 @@
       "flags": [],
       "text": "Deal 6 fire damage. Apply 4 Burn.",
       "effects": [
-        {"op": "damage", "amount": 6, "school": "fire"},
-        {"op": "apply", "status": "burn", "stacks": 4, "target": "enemy"}
+        {
+          "op": "damage",
+          "amount": 6,
+          "school": "fire"
+        },
+        {
+          "op": "apply",
+          "status": "burn",
+          "stacks": 4,
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Immolate (Rank 2)",
         "cost": 1,
         "text": "Deal 9 fire damage. Apply 6 Burn.",
         "effects": [
-          {"op": "damage", "amount": 9, "school": "fire"},
-          {"op": "apply", "status": "burn", "stacks": 6, "target": "enemy"}
+          {
+            "op": "damage",
+            "amount": 9,
+            "school": "fire"
+          },
+          {
+            "op": "apply",
+            "status": "burn",
+            "stacks": 6,
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -380,14 +746,24 @@
       "flags": [],
       "text": "Apply 8 Curse (ticks shadow damage each turn).",
       "effects": [
-        {"op": "apply", "status": "curse", "stacks": 8, "target": "enemy"}
+        {
+          "op": "apply",
+          "status": "curse",
+          "stacks": 8,
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Curse of Agony (Rank 2)",
         "cost": 1,
         "text": "Apply 12 Curse (ticks shadow damage each turn).",
         "effects": [
-          {"op": "apply", "status": "curse", "stacks": 12, "target": "enemy"}
+          {
+            "op": "apply",
+            "status": "curse",
+            "stacks": 12,
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -405,16 +781,32 @@
       "flags": [],
       "text": "Apply 3 Weak. Draw 1 card.",
       "effects": [
-        {"op": "apply", "status": "weak", "stacks": 3, "target": "enemy"},
-        {"op": "draw", "count": 1}
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 3,
+          "target": "enemy"
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Curse of Weakness (Rank 2)",
         "cost": 1,
         "text": "Apply 4 Weak. Draw 1 card.",
         "effects": [
-          {"op": "apply", "status": "weak", "stacks": 4, "target": "enemy"},
-          {"op": "draw", "count": 1}
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 4,
+            "target": "enemy"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
         ]
       }
     },
@@ -432,16 +824,32 @@
       "flags": [],
       "text": "Deal 7 shadow damage. Heal 4 HP.",
       "effects": [
-        {"op": "damage", "amount": 7, "school": "shadow"},
-        {"op": "heal", "amount": 4, "target": "self"}
+        {
+          "op": "damage",
+          "amount": 7,
+          "school": "shadow"
+        },
+        {
+          "op": "heal",
+          "amount": 4,
+          "target": "self"
+        }
       ],
       "upgrade": {
         "name": "Drain Life (Rank 2)",
         "cost": 1,
         "text": "Deal 10 shadow damage. Heal 6 HP.",
         "effects": [
-          {"op": "damage", "amount": 10, "school": "shadow"},
-          {"op": "heal", "amount": 6, "target": "self"}
+          {
+            "op": "damage",
+            "amount": 10,
+            "school": "shadow"
+          },
+          {
+            "op": "heal",
+            "amount": 6,
+            "target": "self"
+          }
         ]
       }
     },
@@ -459,16 +867,32 @@
       "flags": [],
       "text": "Deal 7 shadow damage. Gain 1 Soul Shard.",
       "effects": [
-        {"op": "damage", "amount": 7, "school": "shadow"},
-        {"op": "gain_resource", "resource": "soul_shards", "amount": 1}
+        {
+          "op": "damage",
+          "amount": 7,
+          "school": "shadow"
+        },
+        {
+          "op": "gain_resource",
+          "resource": "soul_shards",
+          "amount": 1
+        }
       ],
       "upgrade": {
         "name": "Drain Soul (Rank 2)",
         "cost": 1,
         "text": "Deal 10 shadow damage. Gain 2 Soul Shards.",
         "effects": [
-          {"op": "damage", "amount": 10, "school": "shadow"},
-          {"op": "gain_resource", "resource": "soul_shards", "amount": 2}
+          {
+            "op": "damage",
+            "amount": 10,
+            "school": "shadow"
+          },
+          {
+            "op": "gain_resource",
+            "resource": "soul_shards",
+            "amount": 2
+          }
         ]
       }
     },
@@ -486,16 +910,50 @@
       "flags": [],
       "text": "Deal 7 fire damage. +5 if the enemy is Burning.",
       "effects": [
-        {"op": "damage", "amount": 7, "school": "fire"},
-        {"op": "conditional", "if": {"type": "status_on_target", "status": "burn"}, "then": [{"op": "damage", "amount": 5, "school": "fire"}]}
+        {
+          "op": "damage",
+          "amount": 7,
+          "school": "fire"
+        },
+        {
+          "op": "conditional",
+          "if": {
+            "type": "status_on_target",
+            "status": "burn"
+          },
+          "then": [
+            {
+              "op": "damage",
+              "amount": 5,
+              "school": "fire"
+            }
+          ]
+        }
       ],
       "upgrade": {
         "name": "Searing Pain (Rank 2)",
         "cost": 1,
         "text": "Deal 10 fire damage. +7 if the enemy is Burning.",
         "effects": [
-          {"op": "damage", "amount": 10, "school": "fire"},
-          {"op": "conditional", "if": {"type": "status_on_target", "status": "burn"}, "then": [{"op": "damage", "amount": 7, "school": "fire"}]}
+          {
+            "op": "damage",
+            "amount": 10,
+            "school": "fire"
+          },
+          {
+            "op": "conditional",
+            "if": {
+              "type": "status_on_target",
+              "status": "burn"
+            },
+            "then": [
+              {
+                "op": "damage",
+                "amount": 7,
+                "school": "fire"
+              }
+            ]
+          }
         ]
       }
     },
@@ -510,17 +968,31 @@
       "archetype": "destruction",
       "cost": 1,
       "target": "enemy",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Apply 1 Fear for 2 turns. Exhaust.",
       "effects": [
-        {"op": "apply", "status": "fear", "stacks": 1, "target": "enemy", "duration": 2}
+        {
+          "op": "apply",
+          "status": "fear",
+          "stacks": 1,
+          "target": "enemy",
+          "duration": 2
+        }
       ],
       "upgrade": {
         "name": "Fear (Rank 2)",
         "cost": 1,
         "text": "Apply 1 Fear for 3 turns. Exhaust.",
         "effects": [
-          {"op": "apply", "status": "fear", "stacks": 1, "target": "enemy", "duration": 3}
+          {
+            "op": "apply",
+            "status": "fear",
+            "stacks": 1,
+            "target": "enemy",
+            "duration": 3
+          }
         ]
       }
     },
@@ -538,14 +1010,22 @@
       "flags": [],
       "text": "Summon a Voidwalker (taunts, soaks damage).",
       "effects": [
-        {"op": "summon", "unit": "voidwalker", "count": 1}
+        {
+          "op": "summon",
+          "unit": "voidwalker",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Summon Voidwalker (Rank 2)",
         "cost": 0,
         "text": "Summon a Voidwalker (taunts, soaks damage). Costs 0.",
         "effects": [
-          {"op": "summon", "unit": "voidwalker", "count": 1}
+          {
+            "op": "summon",
+            "unit": "voidwalker",
+            "count": 1
+          }
         ]
       }
     },
@@ -563,18 +1043,42 @@
       "flags": [],
       "text": "Lose 2 HP. Heal your demon 12 HP. Gain 6 Block.",
       "effects": [
-        {"op": "damage", "amount": 2, "school": "shadow", "target": "self"},
-        {"op": "heal", "amount": 12, "target": "pet"},
-        {"op": "block", "amount": 6}
+        {
+          "op": "damage",
+          "amount": 2,
+          "school": "shadow",
+          "target": "self"
+        },
+        {
+          "op": "heal",
+          "amount": 12,
+          "target": "pet"
+        },
+        {
+          "op": "block",
+          "amount": 6
+        }
       ],
       "upgrade": {
         "name": "Health Funnel (Rank 2)",
         "cost": 0,
         "text": "Lose 2 HP. Heal your demon 18 HP. Gain 9 Block.",
         "effects": [
-          {"op": "damage", "amount": 2, "school": "shadow", "target": "self"},
-          {"op": "heal", "amount": 18, "target": "pet"},
-          {"op": "block", "amount": 9}
+          {
+            "op": "damage",
+            "amount": 2,
+            "school": "shadow",
+            "target": "self"
+          },
+          {
+            "op": "heal",
+            "amount": 18,
+            "target": "pet"
+          },
+          {
+            "op": "block",
+            "amount": 9
+          }
         ]
       }
     },
@@ -592,16 +1096,34 @@
       "flags": [],
       "text": "Apply 2 Vulnerable. Gain 1 Soul Shard.",
       "effects": [
-        {"op": "apply", "status": "vulnerable", "stacks": 2, "target": "enemy"},
-        {"op": "gain_resource", "resource": "soul_shards", "amount": 1}
+        {
+          "op": "apply",
+          "status": "vulnerable",
+          "stacks": 2,
+          "target": "enemy"
+        },
+        {
+          "op": "gain_resource",
+          "resource": "soul_shards",
+          "amount": 1
+        }
       ],
       "upgrade": {
         "name": "Curse of Recklessness (Rank 2)",
         "cost": 1,
         "text": "Apply 3 Vulnerable. Gain 1 Soul Shard.",
         "effects": [
-          {"op": "apply", "status": "vulnerable", "stacks": 3, "target": "enemy"},
-          {"op": "gain_resource", "resource": "soul_shards", "amount": 1}
+          {
+            "op": "apply",
+            "status": "vulnerable",
+            "stacks": 3,
+            "target": "enemy"
+          },
+          {
+            "op": "gain_resource",
+            "resource": "soul_shards",
+            "amount": 1
+          }
         ]
       }
     },
@@ -619,17 +1141,34 @@
       "flags": [],
       "text": "Apply 2 Weak. Interrupt the enemy cast.",
       "effects": [
-        {"op": "apply", "status": "weak", "stacks": 2, "target": "enemy"},
-        {"op": "cast_interrupt"}
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 2,
+          "target": "enemy"
+        },
+        {
+          "op": "cast_interrupt"
+        }
       ],
       "upgrade": {
         "name": "Curse of Tongues (Rank 2)",
         "cost": 1,
         "text": "Apply 3 Weak. Interrupt the enemy cast. Draw 1 card.",
         "effects": [
-          {"op": "apply", "status": "weak", "stacks": 3, "target": "enemy"},
-          {"op": "cast_interrupt"},
-          {"op": "draw", "count": 1}
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 3,
+            "target": "enemy"
+          },
+          {
+            "op": "cast_interrupt"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
         ]
       }
     },
@@ -647,16 +1186,30 @@
       "flags": [],
       "text": "Gain 8 Block. Gain 1 Soul Shard.",
       "effects": [
-        {"op": "block", "amount": 8},
-        {"op": "gain_resource", "resource": "soul_shards", "amount": 1}
+        {
+          "op": "block",
+          "amount": 8
+        },
+        {
+          "op": "gain_resource",
+          "resource": "soul_shards",
+          "amount": 1
+        }
       ],
       "upgrade": {
         "name": "Shadow Ward (Rank 2)",
         "cost": 1,
         "text": "Gain 11 Block. Gain 1 Soul Shard.",
         "effects": [
-          {"op": "block", "amount": 11},
-          {"op": "gain_resource", "resource": "soul_shards", "amount": 1}
+          {
+            "op": "block",
+            "amount": 11
+          },
+          {
+            "op": "gain_resource",
+            "resource": "soul_shards",
+            "amount": 1
+          }
         ]
       }
     },
@@ -674,14 +1227,24 @@
       "flags": [],
       "text": "Add 1 Healthstone to your hand.",
       "effects": [
-        {"op": "add_card", "card": "healthstone", "to": "hand", "count": 1}
+        {
+          "op": "add_card",
+          "card": "healthstone",
+          "to": "hand",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Create Healthstone (Rank 2)",
         "cost": 1,
         "text": "Add 2 Healthstones to your hand.",
         "effects": [
-          {"op": "add_card", "card": "healthstone", "to": "hand", "count": 2}
+          {
+            "op": "add_card",
+            "card": "healthstone",
+            "to": "hand",
+            "count": 2
+          }
         ]
       }
     },
@@ -696,17 +1259,29 @@
       "archetype": "demonology",
       "cost": 1,
       "target": "self",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Add 1 Soulstone to your hand. Exhaust.",
       "effects": [
-        {"op": "add_card", "card": "soulstone", "to": "hand", "count": 1}
+        {
+          "op": "add_card",
+          "card": "soulstone",
+          "to": "hand",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Create Soulstone (Rank 2)",
         "cost": 0,
         "text": "Add 1 Soulstone to your hand. Exhaust. Costs 0.",
         "effects": [
-          {"op": "add_card", "card": "soulstone", "to": "hand", "count": 1}
+          {
+            "op": "add_card",
+            "card": "soulstone",
+            "to": "hand",
+            "count": 1
+          }
         ]
       }
     },
@@ -724,16 +1299,32 @@
       "flags": [],
       "text": "Apply 1 Weak. Draw 1 card.",
       "effects": [
-        {"op": "apply", "status": "weak", "stacks": 1, "target": "enemy"},
-        {"op": "draw", "count": 1}
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 1,
+          "target": "enemy"
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Curse of Exhaustion (Rank 2)",
         "cost": 0,
         "text": "Apply 2 Weak. Draw 1 card.",
         "effects": [
-          {"op": "apply", "status": "weak", "stacks": 2, "target": "enemy"},
-          {"op": "draw", "count": 1}
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 2,
+            "target": "enemy"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
         ]
       }
     },
@@ -751,16 +1342,36 @@
       "flags": [],
       "text": "Apply 2 Vulnerable. Apply 2 Weak.",
       "effects": [
-        {"op": "apply", "status": "vulnerable", "stacks": 2, "target": "enemy"},
-        {"op": "apply", "status": "weak", "stacks": 2, "target": "enemy"}
+        {
+          "op": "apply",
+          "status": "vulnerable",
+          "stacks": 2,
+          "target": "enemy"
+        },
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 2,
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Curse of the Elements (Rank 2)",
         "cost": 1,
         "text": "Apply 3 Vulnerable. Apply 3 Weak.",
         "effects": [
-          {"op": "apply", "status": "vulnerable", "stacks": 3, "target": "enemy"},
-          {"op": "apply", "status": "weak", "stacks": 3, "target": "enemy"}
+          {
+            "op": "apply",
+            "status": "vulnerable",
+            "stacks": 3,
+            "target": "enemy"
+          },
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 3,
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -778,14 +1389,22 @@
       "flags": [],
       "text": "Summon a Succubus (Lash of Pain, Seduction, Soothing Kiss).",
       "effects": [
-        {"op": "summon", "unit": "succubus", "count": 1}
+        {
+          "op": "summon",
+          "unit": "succubus",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Summon Succubus (Rank 2)",
         "cost": 0,
         "text": "Summon a Succubus (Lash of Pain, Seduction, Soothing Kiss). Costs 0.",
         "effects": [
-          {"op": "summon", "unit": "succubus", "count": 1}
+          {
+            "op": "summon",
+            "unit": "succubus",
+            "count": 1
+          }
         ]
       }
     },
@@ -803,14 +1422,22 @@
       "flags": [],
       "text": "Summon a Felhunter (Spell Lock, Devour Magic).",
       "effects": [
-        {"op": "summon", "unit": "felhunter", "count": 1}
+        {
+          "op": "summon",
+          "unit": "felhunter",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Summon Felhunter (Rank 2)",
         "cost": 0,
         "text": "Summon a Felhunter (Spell Lock, Devour Magic). Costs 0.",
         "effects": [
-          {"op": "summon", "unit": "felhunter", "count": 1}
+          {
+            "op": "summon",
+            "unit": "felhunter",
+            "count": 1
+          }
         ]
       }
     },
@@ -825,17 +1452,31 @@
       "archetype": "destruction",
       "cost": 1,
       "target": "all_enemies",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Apply 1 Fear to ALL enemies for 2 turns. Exhaust.",
       "effects": [
-        {"op": "apply", "status": "fear", "stacks": 1, "target": "all_enemies", "duration": 2}
+        {
+          "op": "apply",
+          "status": "fear",
+          "stacks": 1,
+          "target": "all_enemies",
+          "duration": 2
+        }
       ],
       "upgrade": {
         "name": "Howl of Terror (Rank 2)",
         "cost": 1,
         "text": "Apply 1 Fear to ALL enemies for 3 turns. Exhaust.",
         "effects": [
-          {"op": "apply", "status": "fear", "stacks": 1, "target": "all_enemies", "duration": 3}
+          {
+            "op": "apply",
+            "status": "fear",
+            "stacks": 1,
+            "target": "all_enemies",
+            "duration": 3
+          }
         ]
       }
     },
@@ -853,16 +1494,32 @@
       "flags": [],
       "text": "Deal 18 fire damage. Gain 1 Soul Shard.",
       "effects": [
-        {"op": "damage", "amount": 18, "school": "fire"},
-        {"op": "gain_resource", "resource": "soul_shards", "amount": 1}
+        {
+          "op": "damage",
+          "amount": 18,
+          "school": "fire"
+        },
+        {
+          "op": "gain_resource",
+          "resource": "soul_shards",
+          "amount": 1
+        }
       ],
       "upgrade": {
         "name": "Soul Fire (Rank 2)",
         "cost": 2,
         "text": "Deal 24 fire damage. Gain 2 Soul Shards.",
         "effects": [
-          {"op": "damage", "amount": 24, "school": "fire"},
-          {"op": "gain_resource", "resource": "soul_shards", "amount": 2}
+          {
+            "op": "damage",
+            "amount": 24,
+            "school": "fire"
+          },
+          {
+            "op": "gain_resource",
+            "resource": "soul_shards",
+            "amount": 2
+          }
         ]
       }
     },
@@ -880,16 +1537,34 @@
       "flags": [],
       "text": "Apply 5 Curse. Heal 4 HP.",
       "effects": [
-        {"op": "apply", "status": "curse", "stacks": 5, "target": "enemy"},
-        {"op": "heal", "amount": 4, "target": "self"}
+        {
+          "op": "apply",
+          "status": "curse",
+          "stacks": 5,
+          "target": "enemy"
+        },
+        {
+          "op": "heal",
+          "amount": 4,
+          "target": "self"
+        }
       ],
       "upgrade": {
         "name": "Siphon Life (Rank 2)",
         "cost": 1,
         "text": "Apply 7 Curse. Heal 6 HP.",
         "effects": [
-          {"op": "apply", "status": "curse", "stacks": 7, "target": "enemy"},
-          {"op": "heal", "amount": 6, "target": "self"}
+          {
+            "op": "apply",
+            "status": "curse",
+            "stacks": 7,
+            "target": "enemy"
+          },
+          {
+            "op": "heal",
+            "amount": 6,
+            "target": "self"
+          }
         ]
       }
     },
@@ -907,18 +1582,38 @@
       "flags": [],
       "text": "Deal 6 shadow damage. Gain 1 Energy. Draw 1 card.",
       "effects": [
-        {"op": "damage", "amount": 6, "school": "shadow"},
-        {"op": "gain_energy", "amount": 1},
-        {"op": "draw", "count": 1}
+        {
+          "op": "damage",
+          "amount": 6,
+          "school": "shadow"
+        },
+        {
+          "op": "gain_energy",
+          "amount": 1
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Drain Mana (Rank 2)",
         "cost": 1,
         "text": "Deal 9 shadow damage. Gain 1 Energy. Draw 2 cards.",
         "effects": [
-          {"op": "damage", "amount": 9, "school": "shadow"},
-          {"op": "gain_energy", "amount": 1},
-          {"op": "draw", "count": 2}
+          {
+            "op": "damage",
+            "amount": 9,
+            "school": "shadow"
+          },
+          {
+            "op": "gain_energy",
+            "amount": 1
+          },
+          {
+            "op": "draw",
+            "count": 2
+          }
         ]
       }
     },
@@ -936,16 +1631,36 @@
       "flags": [],
       "text": "Deal 10 fire damage to ALL enemies. Apply 3 Burn to ALL.",
       "effects": [
-        {"op": "damage", "amount": 10, "school": "fire", "target": "all_enemies"},
-        {"op": "apply", "status": "burn", "stacks": 3, "target": "all_enemies"}
+        {
+          "op": "damage",
+          "amount": 10,
+          "school": "fire",
+          "target": "all_enemies"
+        },
+        {
+          "op": "apply",
+          "status": "burn",
+          "stacks": 3,
+          "target": "all_enemies"
+        }
       ],
       "upgrade": {
         "name": "Rain of Fire (Rank 2)",
         "cost": 2,
         "text": "Deal 14 fire damage to ALL enemies. Apply 4 Burn to ALL.",
         "effects": [
-          {"op": "damage", "amount": 14, "school": "fire", "target": "all_enemies"},
-          {"op": "apply", "status": "burn", "stacks": 4, "target": "all_enemies"}
+          {
+            "op": "damage",
+            "amount": 14,
+            "school": "fire",
+            "target": "all_enemies"
+          },
+          {
+            "op": "apply",
+            "status": "burn",
+            "stacks": 4,
+            "target": "all_enemies"
+          }
         ]
       }
     },
@@ -963,16 +1678,36 @@
       "flags": [],
       "text": "Lose 3 HP. Deal 14 fire damage to ALL enemies.",
       "effects": [
-        {"op": "damage", "amount": 3, "school": "fire", "target": "self"},
-        {"op": "damage", "amount": 14, "school": "fire", "target": "all_enemies"}
+        {
+          "op": "damage",
+          "amount": 3,
+          "school": "fire",
+          "target": "self"
+        },
+        {
+          "op": "damage",
+          "amount": 14,
+          "school": "fire",
+          "target": "all_enemies"
+        }
       ],
       "upgrade": {
         "name": "Hellfire (Rank 2)",
         "cost": 2,
         "text": "Lose 3 HP. Deal 18 fire damage to ALL enemies.",
         "effects": [
-          {"op": "damage", "amount": 3, "school": "fire", "target": "self"},
-          {"op": "damage", "amount": 18, "school": "fire", "target": "all_enemies"}
+          {
+            "op": "damage",
+            "amount": 3,
+            "school": "fire",
+            "target": "self"
+          },
+          {
+            "op": "damage",
+            "amount": 18,
+            "school": "fire",
+            "target": "all_enemies"
+          }
         ]
       }
     },
@@ -990,18 +1725,44 @@
       "flags": [],
       "text": "Deal 9 shadow damage. Heal 6 HP. Apply 1 Fear.",
       "effects": [
-        {"op": "damage", "amount": 9, "school": "shadow"},
-        {"op": "heal", "amount": 6, "target": "self"},
-        {"op": "apply", "status": "fear", "stacks": 1, "target": "enemy"}
+        {
+          "op": "damage",
+          "amount": 9,
+          "school": "shadow"
+        },
+        {
+          "op": "heal",
+          "amount": 6,
+          "target": "self"
+        },
+        {
+          "op": "apply",
+          "status": "fear",
+          "stacks": 1,
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Death Coil (Rank 2)",
         "cost": 1,
         "text": "Deal 12 shadow damage. Heal 8 HP. Apply 1 Fear.",
         "effects": [
-          {"op": "damage", "amount": 12, "school": "shadow"},
-          {"op": "heal", "amount": 8, "target": "self"},
-          {"op": "apply", "status": "fear", "stacks": 1, "target": "enemy"}
+          {
+            "op": "damage",
+            "amount": 12,
+            "school": "shadow"
+          },
+          {
+            "op": "heal",
+            "amount": 8,
+            "target": "self"
+          },
+          {
+            "op": "apply",
+            "status": "fear",
+            "stacks": 1,
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -1019,18 +1780,40 @@
       "flags": [],
       "text": "Your demon loses 3 HP. Gain 2 energy. Draw 1 card.",
       "effects": [
-        {"op": "damage", "amount": 3, "school": "shadow", "target": "pet"},
-        {"op": "gain_energy", "amount": 2},
-        {"op": "draw", "count": 1}
+        {
+          "op": "damage",
+          "amount": 3,
+          "school": "shadow",
+          "target": "pet"
+        },
+        {
+          "op": "gain_energy",
+          "amount": 2
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Dark Pact (Rank 2)",
         "cost": 0,
         "text": "Your demon loses 3 HP. Gain 2 energy. Draw 2 cards.",
         "effects": [
-          {"op": "damage", "amount": 3, "school": "shadow", "target": "pet"},
-          {"op": "gain_energy", "amount": 2},
-          {"op": "draw", "count": 2}
+          {
+            "op": "damage",
+            "amount": 3,
+            "school": "shadow",
+            "target": "pet"
+          },
+          {
+            "op": "gain_energy",
+            "amount": 2
+          },
+          {
+            "op": "draw",
+            "count": 2
+          }
         ]
       }
     },
@@ -1048,16 +1831,36 @@
       "flags": [],
       "text": "Power. Gain 4 Armor and 2 Regen for the rest of combat.",
       "effects": [
-        {"op": "apply", "status": "armor", "stacks": 4, "target": "self"},
-        {"op": "apply", "status": "regen", "stacks": 2, "target": "self"}
+        {
+          "op": "apply",
+          "status": "armor",
+          "stacks": 4,
+          "target": "self"
+        },
+        {
+          "op": "apply",
+          "status": "regen",
+          "stacks": 2,
+          "target": "self"
+        }
       ],
       "upgrade": {
         "name": "Demon Armor (Rank 2)",
         "cost": 1,
         "text": "Power. Gain 5 Armor and 2 Regen for the rest of combat. Costs 1.",
         "effects": [
-          {"op": "apply", "status": "armor", "stacks": 5, "target": "self"},
-          {"op": "apply", "status": "regen", "stacks": 2, "target": "self"}
+          {
+            "op": "apply",
+            "status": "armor",
+            "stacks": 5,
+            "target": "self"
+          },
+          {
+            "op": "apply",
+            "status": "regen",
+            "stacks": 2,
+            "target": "self"
+          }
         ]
       }
     },
@@ -1072,14 +1875,37 @@
       "archetype": "demonology",
       "cost": 1,
       "target": "enemy",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Demon or Elemental: Stun for 3 turns. Others: Apply 2 Weak. Exhaust.",
       "effects": [
         {
           "op": "conditional",
-          "if": {"type": "target_is_family", "family": ["demon", "elemental"]},
-          "then": [{"op": "apply", "status": "stun", "stacks": 1, "target": "enemy", "duration": 3}],
-          "else": [{"op": "apply", "status": "weak", "stacks": 2, "target": "enemy"}]
+          "if": {
+            "type": "target_is_family",
+            "family": [
+              "demon",
+              "elemental"
+            ]
+          },
+          "then": [
+            {
+              "op": "apply",
+              "status": "stun",
+              "stacks": 1,
+              "target": "enemy",
+              "duration": 3
+            }
+          ],
+          "else": [
+            {
+              "op": "apply",
+              "status": "weak",
+              "stacks": 2,
+              "target": "enemy"
+            }
+          ]
         }
       ],
       "upgrade": {
@@ -1089,9 +1915,30 @@
         "effects": [
           {
             "op": "conditional",
-            "if": {"type": "target_is_family", "family": ["demon", "elemental"]},
-            "then": [{"op": "apply", "status": "stun", "stacks": 1, "target": "enemy", "duration": 3}],
-            "else": [{"op": "apply", "status": "weak", "stacks": 3, "target": "enemy"}]
+            "if": {
+              "type": "target_is_family",
+              "family": [
+                "demon",
+                "elemental"
+              ]
+            },
+            "then": [
+              {
+                "op": "apply",
+                "status": "stun",
+                "stacks": 1,
+                "target": "enemy",
+                "duration": 3
+              }
+            ],
+            "else": [
+              {
+                "op": "apply",
+                "status": "weak",
+                "stacks": 3,
+                "target": "enemy"
+              }
+            ]
           }
         ]
       }
@@ -1110,16 +1957,36 @@
       "flags": [],
       "text": "Apply 3 Marked. Apply 1 Vulnerable.",
       "effects": [
-        {"op": "apply", "status": "marked", "stacks": 3, "target": "enemy"},
-        {"op": "apply", "status": "vulnerable", "stacks": 1, "target": "enemy"}
+        {
+          "op": "apply",
+          "status": "marked",
+          "stacks": 3,
+          "target": "enemy"
+        },
+        {
+          "op": "apply",
+          "status": "vulnerable",
+          "stacks": 1,
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Curse of Shadow (Rank 2)",
         "cost": 1,
         "text": "Apply 4 Marked. Apply 2 Vulnerable.",
         "effects": [
-          {"op": "apply", "status": "marked", "stacks": 4, "target": "enemy"},
-          {"op": "apply", "status": "vulnerable", "stacks": 2, "target": "enemy"}
+          {
+            "op": "apply",
+            "status": "marked",
+            "stacks": 4,
+            "target": "enemy"
+          },
+          {
+            "op": "apply",
+            "status": "vulnerable",
+            "stacks": 2,
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -1137,16 +2004,32 @@
       "flags": [],
       "text": "Deal 18 shadow damage. Gain 1 Soul Shard.",
       "effects": [
-        {"op": "damage", "amount": 18, "school": "shadow"},
-        {"op": "gain_resource", "resource": "soul_shards", "amount": 1}
+        {
+          "op": "damage",
+          "amount": 18,
+          "school": "shadow"
+        },
+        {
+          "op": "gain_resource",
+          "resource": "soul_shards",
+          "amount": 1
+        }
       ],
       "upgrade": {
         "name": "Shadowburn (Rank 2)",
         "cost": 1,
         "text": "Deal 24 shadow damage. Gain 2 Soul Shards.",
         "effects": [
-          {"op": "damage", "amount": 24, "school": "shadow"},
-          {"op": "gain_resource", "resource": "soul_shards", "amount": 2}
+          {
+            "op": "damage",
+            "amount": 24,
+            "school": "shadow"
+          },
+          {
+            "op": "gain_resource",
+            "resource": "soul_shards",
+            "amount": 2
+          }
         ]
       }
     },
@@ -1166,13 +2049,28 @@
       "effects": [
         {
           "op": "conditional",
-          "if": {"type": "status_on_target", "status": "burn"},
+          "if": {
+            "type": "status_on_target",
+            "status": "burn"
+          },
           "then": [
-            {"op": "damage", "amount": 22, "school": "fire"},
-            {"op": "remove", "status": "burn", "target": "enemy"}
+            {
+              "op": "damage",
+              "amount": 22,
+              "school": "fire"
+            },
+            {
+              "op": "remove",
+              "status": "burn",
+              "target": "enemy"
+            }
           ],
           "else": [
-            {"op": "damage", "amount": 8, "school": "fire"}
+            {
+              "op": "damage",
+              "amount": 8,
+              "school": "fire"
+            }
           ]
         }
       ],
@@ -1183,13 +2081,28 @@
         "effects": [
           {
             "op": "conditional",
-            "if": {"type": "status_on_target", "status": "burn"},
+            "if": {
+              "type": "status_on_target",
+              "status": "burn"
+            },
             "then": [
-              {"op": "damage", "amount": 28, "school": "fire"},
-              {"op": "remove", "status": "burn", "target": "enemy"}
+              {
+                "op": "damage",
+                "amount": 28,
+                "school": "fire"
+              },
+              {
+                "op": "remove",
+                "status": "burn",
+                "target": "enemy"
+              }
             ],
             "else": [
-              {"op": "damage", "amount": 11, "school": "fire"}
+              {
+                "op": "damage",
+                "amount": 11,
+                "school": "fire"
+              }
             ]
           }
         ]
@@ -1209,14 +2122,24 @@
       "flags": [],
       "text": "Power. 30% of damage you take is redirected to your demon.",
       "effects": [
-        {"op": "apply", "status": "soul_link", "stacks": 1, "target": "self"}
+        {
+          "op": "apply",
+          "status": "soul_link",
+          "stacks": 1,
+          "target": "self"
+        }
       ],
       "upgrade": {
         "name": "Soul Link (Rank 2)",
         "cost": 1,
         "text": "Power. 60% of damage you take is redirected to your demon.",
         "effects": [
-          {"op": "apply", "status": "soul_link", "stacks": 2, "target": "self"}
+          {
+            "op": "apply",
+            "status": "soul_link",
+            "stacks": 2,
+            "target": "self"
+          }
         ]
       }
     },
@@ -1231,21 +2154,47 @@
       "archetype": "demonology",
       "cost": 1,
       "target": "self",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Sacrifice your demon: gain 2 Strength and 2 Soul Shards. Exhaust.",
       "effects": [
-        {"op": "pet_action", "action": "sacrifice"},
-        {"op": "apply", "status": "strength", "stacks": 2, "target": "self"},
-        {"op": "gain_resource", "resource": "soul_shards", "amount": 2}
+        {
+          "op": "pet_action",
+          "action": "sacrifice"
+        },
+        {
+          "op": "apply",
+          "status": "strength",
+          "stacks": 2,
+          "target": "self"
+        },
+        {
+          "op": "gain_resource",
+          "resource": "soul_shards",
+          "amount": 2
+        }
       ],
       "upgrade": {
         "name": "Demonic Sacrifice (Rank 2)",
         "cost": 0,
         "text": "Sacrifice your demon: gain 3 Strength and 2 Soul Shards. Exhaust. Costs 0.",
         "effects": [
-          {"op": "pet_action", "action": "sacrifice"},
-          {"op": "apply", "status": "strength", "stacks": 3, "target": "self"},
-          {"op": "gain_resource", "resource": "soul_shards", "amount": 2}
+          {
+            "op": "pet_action",
+            "action": "sacrifice"
+          },
+          {
+            "op": "apply",
+            "status": "strength",
+            "stacks": 3,
+            "target": "self"
+          },
+          {
+            "op": "gain_resource",
+            "resource": "soul_shards",
+            "amount": 2
+          }
         ]
       }
     },
@@ -1260,19 +2209,35 @@
       "archetype": "demonology",
       "cost": 0,
       "target": "self",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Gain 2 Soul Shards. Draw 2 cards. Exhaust.",
       "effects": [
-        {"op": "gain_resource", "resource": "soul_shards", "amount": 2},
-        {"op": "draw", "count": 2}
+        {
+          "op": "gain_resource",
+          "resource": "soul_shards",
+          "amount": 2
+        },
+        {
+          "op": "draw",
+          "count": 2
+        }
       ],
       "upgrade": {
         "name": "Fel Domination (Rank 2)",
         "cost": 0,
         "text": "Gain 3 Soul Shards. Draw 2 cards. Exhaust.",
         "effects": [
-          {"op": "gain_resource", "resource": "soul_shards", "amount": 3},
-          {"op": "draw", "count": 2}
+          {
+            "op": "gain_resource",
+            "resource": "soul_shards",
+            "amount": 3
+          },
+          {
+            "op": "draw",
+            "count": 2
+          }
         ]
       }
     },
@@ -1287,13 +2252,26 @@
       "archetype": "demonology",
       "cost": 1,
       "target": "enemy",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Demon only: it attacks other enemies for 3 turns. Exhaust.",
       "effects": [
         {
           "op": "conditional",
-          "if": {"type": "target_is_family", "family": "demon"},
-          "then": [{"op": "apply", "status": "taunted", "stacks": 1, "target": "enemy", "duration": 3}]
+          "if": {
+            "type": "target_is_family",
+            "family": "demon"
+          },
+          "then": [
+            {
+              "op": "apply",
+              "status": "taunted",
+              "stacks": 1,
+              "target": "enemy",
+              "duration": 3
+            }
+          ]
         }
       ],
       "upgrade": {
@@ -1303,8 +2281,19 @@
         "effects": [
           {
             "op": "conditional",
-            "if": {"type": "target_is_family", "family": "demon"},
-            "then": [{"op": "apply", "status": "taunted", "stacks": 1, "target": "enemy", "duration": 3}]
+            "if": {
+              "type": "target_is_family",
+              "family": "demon"
+            },
+            "then": [
+              {
+                "op": "apply",
+                "status": "taunted",
+                "stacks": 1,
+                "target": "enemy",
+                "duration": 3
+              }
+            ]
           }
         ]
       }
@@ -1320,19 +2309,37 @@
       "archetype": "affliction",
       "cost": 0,
       "target": "self",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Your next Curse applies double stacks. Draw 1 card. Exhaust.",
       "effects": [
-        {"op": "apply", "status": "amplify_curse", "stacks": 1, "target": "self"},
-        {"op": "draw", "count": 1}
+        {
+          "op": "apply",
+          "status": "amplify_curse",
+          "stacks": 1,
+          "target": "self"
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Amplify Curse (Rank 2)",
         "cost": 0,
         "text": "Your next Curse applies double stacks. Draw 2 cards. Exhaust.",
         "effects": [
-          {"op": "apply", "status": "amplify_curse", "stacks": 1, "target": "self"},
-          {"op": "draw", "count": 2}
+          {
+            "op": "apply",
+            "status": "amplify_curse",
+            "stacks": 1,
+            "target": "self"
+          },
+          {
+            "op": "draw",
+            "count": 2
+          }
         ]
       }
     },
@@ -1347,21 +2354,53 @@
       "archetype": "demonology",
       "cost": 2,
       "target": "none",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Summon an Infernal: Stun ALL enemies 1 turn, deal 8 fire to ALL.",
       "effects": [
-        {"op": "summon", "unit": "infernal", "count": 1},
-        {"op": "damage", "amount": 8, "school": "fire", "target": "all_enemies"},
-        {"op": "apply", "status": "stun", "stacks": 1, "target": "all_enemies", "duration": 1}
+        {
+          "op": "summon",
+          "unit": "infernal",
+          "count": 1
+        },
+        {
+          "op": "damage",
+          "amount": 8,
+          "school": "fire",
+          "target": "all_enemies"
+        },
+        {
+          "op": "apply",
+          "status": "stun",
+          "stacks": 1,
+          "target": "all_enemies",
+          "duration": 1
+        }
       ],
       "upgrade": {
         "name": "Inferno (Rank 2)",
         "cost": 1,
         "text": "Summon an Infernal: Stun ALL enemies 1 turn, deal 12 fire to ALL. Costs 1.",
         "effects": [
-          {"op": "summon", "unit": "infernal", "count": 1},
-          {"op": "damage", "amount": 12, "school": "fire", "target": "all_enemies"},
-          {"op": "apply", "status": "stun", "stacks": 1, "target": "all_enemies", "duration": 1}
+          {
+            "op": "summon",
+            "unit": "infernal",
+            "count": 1
+          },
+          {
+            "op": "damage",
+            "amount": 12,
+            "school": "fire",
+            "target": "all_enemies"
+          },
+          {
+            "op": "apply",
+            "status": "stun",
+            "stacks": 1,
+            "target": "all_enemies",
+            "duration": 1
+          }
         ]
       }
     },
@@ -1376,17 +2415,45 @@
       "archetype": "affliction",
       "cost": 2,
       "target": "enemy",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "After 3 turns the enemy takes 60 shadow damage (delayed). Exhaust.",
       "effects": [
-        {"op": "apply", "status": "delayed", "stacks": 1, "target": "enemy", "duration": 3, "payload": [{"op": "damage", "amount": 60, "school": "shadow"}]}
+        {
+          "op": "apply",
+          "status": "delayed",
+          "stacks": 1,
+          "target": "enemy",
+          "duration": 3,
+          "payload": [
+            {
+              "op": "damage",
+              "amount": 60,
+              "school": "shadow"
+            }
+          ]
+        }
       ],
       "upgrade": {
         "name": "Curse of Doom (Rank 2)",
         "cost": 1,
         "text": "After 2 turns the enemy takes 60 shadow damage (delayed). Exhaust. Costs 1.",
         "effects": [
-          {"op": "apply", "status": "delayed", "stacks": 1, "target": "enemy", "duration": 2, "payload": [{"op": "damage", "amount": 60, "school": "shadow"}]}
+          {
+            "op": "apply",
+            "status": "delayed",
+            "stacks": 1,
+            "target": "enemy",
+            "duration": 2,
+            "payload": [
+              {
+                "op": "damage",
+                "amount": 60,
+                "school": "shadow"
+              }
+            ]
+          }
         ]
       }
     },
@@ -1401,17 +2468,27 @@
       "archetype": "demonology",
       "cost": 2,
       "target": "none",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Summon a Doomguard (Rain of Fire, War Stomp, Cripple). Exhaust.",
       "effects": [
-        {"op": "summon", "unit": "doomguard", "count": 1}
+        {
+          "op": "summon",
+          "unit": "doomguard",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Ritual of Doom (Rank 2)",
         "cost": 1,
         "text": "Summon a Doomguard (Rain of Fire, War Stomp, Cripple). Exhaust. Costs 1.",
         "effects": [
-          {"op": "summon", "unit": "doomguard", "count": 1}
+          {
+            "op": "summon",
+            "unit": "doomguard",
+            "count": 1
+          }
         ]
       }
     }

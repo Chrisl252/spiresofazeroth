@@ -9,6 +9,7 @@
 //     ensureActors()              adds actors for summons
 // Every awaited step goes through safe() (3 s) so a stalled rAF / hidden tab can never deadlock the turn.
 import { safe, logOnce } from "./combatKit.js";
+import { isAlive } from "../engine/damage.js";
 import { cardSounds as SND } from "./cardSounds.js";
 import { createPetStage } from "../stage/petStage.js";
 import { createTotemStage } from "../stage/totemStage.js";
@@ -198,7 +199,9 @@ export function createDirector(o) {
     pets.sync(null);
     totems.sync();
     const live = C.enemies;
-    live.forEach((e, i) => { if (!A.get(e.uid)) A.addEnemy({ uid: e.uid, id: e.id, name: e.name, tier: e.tier, icon: e.icon }, i, live.length); });
+    const alive = live.filter(isAlive);
+    live.forEach((e) => { if (isAlive(e) && !A.get(e.uid)) A.addEnemy({ uid: e.uid, id: e.id, name: e.name, tier: e.tier, icon: e.icon }, alive.indexOf(e), alive.length); });
+    if (A.layoutEnemies) A.layoutEnemies(live.map((e) => ({ uid: e.uid, alive: isAlive(e) }))); // every model re-spreads over its own plate column
   }
 
   // ---- hits ------------------------------------------------------------------------------------------------------------------------

@@ -9,13 +9,10 @@ Data is JSON under `data/` (written by the data agents); the client never edits 
 index.html            thin shell (site masthead/footer, <main id="app">, one module script). NO ad code.
 js/main.js            boot + router (<150 lines). app = { data, meta, run, C, go(), route(), save(), cardDef(), reduced(), delay() }
 js/version.js         BUILD string = cache-buster for data and module URLs
-js/controller.js      gamepad & controller coordinator entrypoint wired in main.js
-js/controller/*       input.js (polling/rumble), combat.js (StS console controls), nav.js (spatial UI), hud.js (prompts)
 js/ui/*               one file per screen; render(app, name) -> Element. Touch only DOM + engine public functions.
 js/engine/*           rules. No DOM. Deterministic given (seed, choices).
 css/wow-ui.css        chrome: gold-trim frames, buttons, bars, tooltip, quality colours (CSS only)
 css/game.css          screen layout (mobile-first portrait, widens at 760px). transform/opacity animations only
-css/controller.css    controller focus rings, button glyphs, HUD action bar
 data/*                content JSON (classes, zones, relics, potions, events, bosses, keywords, status cards)
 tools/spires/         validate-data.mjs, sim.mjs, fixtures/ (fallback data)
 tests/test_spires_static.py
@@ -197,14 +194,3 @@ Layout (integration pass 2, StS2): landscape ground band y=700 (`stage.js` LANDS
 Data: any event (common or zone) may carry `npc: { name, npcId?, displayId?, model?, scale? }`. `model` names a different baked body (e.g. Steamwheedle Merchant wears "Gaxim Rustfizzle"). The slug is `npc-` + lowercase(model || name). No baked body => plate fallback (validate-data lists it as INFO). New speaker = Wowhead classic npc page -> displayId, then `roster-displays.py resolve` + `dev/bake_roster.py` (output keyed by displayId) and add `displays[id]`, `byName[name]`, `heroes[slug]` to index.json. Plate kind comes from the event name (`plateKind`), no data field.
 | js/engine/healer.js | act-transition healer: `healerFor(data, act)`, `enterHealer(run, data)` (heals half the missing HP once per act via `run.healerAct`, sets screen "healer"); called from `proceedAfterSpire` in run.js. |
 | js/ui/healer.js (+ css/healer.css, data/healers.json) | the healer scene (screen "healer" in main.js SCREENS): portrait card from an existing icon, dialogue, heal fx via `playOutcome`, Continue (Enter/Space). |
-
-## Controller subsystem (js/controller)
-
-| file | concern |
-|---|---|
-| js/controller.js | Coordinator entrypoint: wired in `main.js`, handles action dispatching and screen change sync |
-| js/controller/input.js | Hardware Gamepad API polling, deadzones, button debounce, auto-repeat timers, haptic rumble |
-| js/controller/combat.js | Slay the Spire-style console combat scheme: hand navigation, keyword inspect, enemy aiming, potion belt, end turn |
-| js/controller/nav.js | Universal 2D spatial UI navigation, Spire map node selection, modal dialog handling |
-| js/controller/hud.js | Dynamic on-screen controller button prompts bar and glyph rendering |
-| css/controller.css | Golden glowing focus ring animation, Xbox/PS/Nintendo button glyphs, HUD action bar |

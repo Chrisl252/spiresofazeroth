@@ -2,15 +2,27 @@
 // card-unlock rhythm (data/unlocks.json). Pure engine: no DOM. meta.talents[class] = { earned, spent: { talentId: rank } },
 // meta.progress[class] = { xp, runs, wins }. Run modifiers (talentMods) are stamped onto run.talents by newRun and read by
 // combat.startCombat / rewards / run.js. The headless sim never passes a meta, so it is unaffected.
-// Talent pace (owner ask 2026-10-21: a full tree inside 1-2 h of play): points are paid per FLOOR cleared, not only per act.
-// A full 6-act run is ~65 floors, so one good run fills the 51-point cap; tools/spires/talent-pace.mjs measures it per class.
+// Talent pace (owner ruling 2026-10-23 "slow + trim", replacing the 2026-10-21 "full tree in 1-2 h" pace): points are paid per
+// FLOORS_PER_POINT floors cleared + per act + victory, so the 51-point cap takes several runs; TALENT_LIMITS caps what talents can
+// add to a fight (one home: limitTalentMods, applied by talentMods and newRun). Measure with tools/spires/sim.mjs --talents.
+
+import { HOOKS, valueAt, modKey, talentEffects, cardList } from "./talentHookDefs.js";
 
 export const TALENT_CAP = 51;            // a level-60 character has 51 points
 export const TIER_STEP = 5;              // points in a tree needed per tier, like the client
-export const POINTS_PER_FLOOR = 2;       // every floor cleared (fight, elite, boss, event, rest, shop, treasure)
+export const FLOORS_PER_POINT = 5;      // 1 point per 5 floors cleared (fight, elite, boss, event, rest, shop, treasure); was 2 per floor
 export const POINTS_PER_ACT = 1;         // every act cleared
 export const VICTORY_BONUS = 5;          // beating the final boss
 export const TALENT_ECON = 2;            // economy version: 1 = acts only (+1/act, +5/win), 2 = per floor (2026-10-21)
+// Legacy flat-stat classes only: most a fully specced character can bring into a fight (owner ruling 2026-10-23). Talents V2 trees (hook keys,
+// docs/TALENTS_V2.md) never touch these keys, so converting a class removes its dead points; economy keys (gold, goldpct, heal, choice) are not capped.
+export const TALENT_LIMITS = { energy1: 1, draw1: 1, str: 6, dex: 4, spell_power: 6, thorns: 5, armor: 3, metal: 3, regen: 4, block: 10, shield: 10, hp: 25, res: 20, free_cast: 1, rage_gen: 1 };
+export function limitTalentMods(mods) {
+  if (!mods) return mods;
+  const out = { ...mods };
+  for (const [k, cap] of Object.entries(TALENT_LIMITS)) if (out[k] > cap) out[k] = cap;
+  return out;
+}
 
 // every talent maps to ONE of these run modifiers; `text` renders the tooltip for a given total value
 export const EFFECTS = {
@@ -42,6 +54,9 @@ export const EFFECTS = {
   free_cast: { label: "Clearcasting", text: (v) => `Your first card each fight costs 0 Energy.` },
   retain_block: { label: "Retain Block", text: (v) => `Retain all Block for your first turn.` },
 };
+
+// V2 hook keys (talentHookDefs.js) share this table, so the tooltip, the summary and the schema test all read ONE registry
+for (const [k, d] of Object.entries(HOOKS)) EFFECTS[k] = d;
 
 const slot = (meta, cid) => {
   if (!meta.talents) meta.talents = {};
@@ -91,17 +106,50 @@ export function unlearn(meta, cid, tree, talent) {
 }
 export function resetTalents(meta, cid) { slot(meta, cid).spent = {}; }
 
+/** Run modifiers from a { talentId: rank } map: flat keys sum r*per; V2 hooks sum valueAt(rank) under `key[:arg]` (list args fan out per card). */
+export function modsFromSpent(tdef, spent) {
+  const out = {};
+  let any = false;
+  for (const tree of tdef.trees) for (const t of tree.talents) {
+    const r = Math.min(spent[t.id] | 0, t.max);
+    if (r <= 0) continue;
+    for (const e of talentEffects(t)) {
+      const v = valueAt(e, r);
+      if (!v) continue;
+      const keys = e.arg && e.key !== "card_apply" ? cardList(e.arg).map((c) => `${e.key}:${c}`) : [modKey(e)];
+      for (const k of keys) out[k] = (out[k] || 0) + v;
+      any = true;
+    }
+  }
+  return any ? out : null;
+}
 // aggregated run modifiers for a class, from the spent ranks and the class talent file (null when nothing is spent)
 export function talentMods(meta, cid, tdef) {
   if (!meta || !tdef) return null;
-  const s = slot(meta, cid), out = {};
-  let any = false;
-  for (const tree of tdef.trees) for (const t of tree.talents) {
-    const r = s.spent[t.id] | 0;
-    if (!r) continue;
-    out[t.effect.key] = (out[t.effect.key] || 0) + r * t.effect.per; any = true;
+  const out = modsFromSpent(tdef, slot(meta, cid).spent);
+  return out ? limitTalentMods(out) : null;
+}
+/** Clamp saved ranks to the current talent file (unknown ids dropped, ranks above max cut) and refund tiers that lost their prerequisite
+ *  points; refunds are automatic because available = earned - spent. Returns true when `spent` changed (the caller saves). Idempotent. */
+export function repairSpent(meta, cid, tdef) {
+  if (!meta || !tdef) return false;
+  const s = slot(meta, cid);
+  let changed = false;
+  const known = new Map();
+  for (const tree of tdef.trees) for (const t of tree.talents) known.set(t.id, t);
+  for (const id of Object.keys(s.spent)) {
+    const t = known.get(id), r = s.spent[id] | 0;
+    if (!t || r <= 0) { delete s.spent[id]; changed = true; continue; }
+    if (r > t.max) { s.spent[id] = t.max; changed = true; }
   }
-  return any ? out : null;
+  for (const tree of tdef.trees) {
+    for (let guard = 0; guard < 200; guard++) {
+      const bad = tree.talents.filter((t) => (s.spent[t.id] | 0) > 0 && pointsBelow(s.spent, tree, t.tier) < tierNeed(t)).sort((a, b) => b.tier - a.tier)[0];
+      if (!bad) break;
+      delete s.spent[bad.id]; changed = true;
+    }
+  }
+  return changed;
 }
 
 // ---- progression after a run ---------------------------------------------------------------------------------------------
@@ -115,11 +163,11 @@ export function nextLevelXp(meta, cid, thresholds = XP_LEVELS) {
   return lvl >= thresholds.length ? null : thresholds[lvl];
 }
 const actsCleared = (run) => (run.result === "victory" ? Math.max(1, run.act) : Math.max(0, (run.act | 0) - 1));
-/** Talent points a finished run pays before the cap: per floor cleared (the floor you fell on does not count), per act, victory. */
+/** Talent points a finished run pays before the cap: 1 per FLOORS_PER_POINT floors cleared (the floor you fell on does not count), per act, victory. */
 export function runTalentPoints(run) {
   const victory = run.result === "victory";
   const floors = Math.max(0, ((run.stats && run.stats.floors) | 0) - (victory ? 0 : 1));
-  return POINTS_PER_FLOOR * floors + POINTS_PER_ACT * actsCleared(run) + (victory ? VICTORY_BONUS : 0);
+  return Math.floor(floors / FLOORS_PER_POINT) + POINTS_PER_ACT * actsCleared(run) + (victory ? VICTORY_BONUS : 0);
 }
 /** Called once when a run ends. Returns { points, xp, level, prevLevel, newCards } for the run-end screen. */
 export function awardProgress(meta, run, unlocks) {
@@ -181,8 +229,12 @@ export function grantLegacyProgress(meta, classIds) {
 /** Short human summary of a class's active run modifiers, for the class-select sheet ("+6 Max HP, +1 Strength"). */
 export function talentSummary(mods) {
   if (!mods) return "";
-  return Object.entries(mods).map(([k, v]) => {
-    const e = EFFECTS[k]; if (!e) return null;
+  return Object.entries(mods).map(([full, v]) => {
+    const [k, ...rest] = full.split(":"), e = EFFECTS[k]; if (!e) return null;
+    if (HOOKS[k]) { // V2 hook: "Card damage (Heroic Strike)" style; the exact numbers are on the talent tooltips
+      const what = rest.length ? ` (${rest.join(":").split(":")[0].split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")})` : "";
+      return k === "grant" ? null : `${e.label}${what}`;
+    }
     return ["heal", "goldpct", "shop"].includes(k) ? `${e.label} +${v}%` : k === "removal" ? `${e.label} -${v}g` : ["reincarnation", "windfury", "free_cast", "retain_block"].includes(k) ? e.label : `${e.label} +${v}`;
   }).filter(Boolean).join(", ");
 }

@@ -8,6 +8,8 @@ import { startCombat, finishCombat } from "./combat.js";
 import { runEffects } from "./effects.js";
 import { fireRun } from "./relics.js";
 import { heroicMods } from "./heroic.js";
+import { limitTalentMods } from "./talents.js";
+import { addTalentGrants } from "./talentHooks.js";
 import { canUpgrade } from "./deck.js";
 import * as R from "./rewards.js";
 import * as G from "./gear.js";
@@ -22,7 +24,7 @@ const runCtx = (run, data, rng) => ({ C: null, run, rng, data, src: null, srcKin
 export function newRun(data, { classId, continent, seed, heroic = 0, pet = null, talents = null }) {
   const cls = data.classObj(classId);
   const mods = heroicMods(heroic);
-  const T = talents && typeof talents === "object" ? talents : null; // account talents (engine/talents.js talentMods): hp + gold here, the rest in startCombat / rewards
+  const T = talents && typeof talents === "object" ? limitTalentMods(talents) : null; // account talents (engine/talents.js talentMods): hp + gold here, the rest in startCombat / rewards
   const maxHp = Math.max(1, Math.round((cls.startingHp || 70) * mods.startHpPenalty) + ((T && T.hp) | 0));
   const run = {
     v: RUN_VERSION, seed: String(seed), classId, continent: continent || cls.defaultContinent || "ek", heroic, pet,
@@ -33,6 +35,7 @@ export function newRun(data, { classId, continent, seed, heroic = 0, pet = null,
     stats: { floors: 0, fights: 0, elites: 0, bosses: 0, kills: 0, damageTaken: 0, turns: 0, goldEarned: 0 },
     startedAt: 0,
   };
+  addTalentGrants(run, data); // Talents V2: capstone / "learned" cards join the starting deck
   return G.equipStarter(run, data);
 }
 

@@ -112,6 +112,7 @@
     "stealth"
   ],
   "units": {},
+  "spellIdSource": "memory",
   "cards": [
     {
       "id": "sinister-strike",
@@ -125,11 +126,11 @@
       "cost": 1,
       "target": "enemy",
       "flags": [],
-      "text": "Deal 6 damage. Gain 1 Combo Point.",
+      "text": "Deal 7 damage. Gain 1 Combo Point.",
       "effects": [
         {
           "op": "damage",
-          "amount": 6
+          "amount": 7
         },
         {
           "op": "gain_resource",
@@ -286,11 +287,11 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Gain 5 Block. Gain 1 Combo Point.",
+      "text": "Gain 6 Block. Gain 1 Combo Point.",
       "effects": [
         {
           "op": "block",
-          "amount": 5
+          "amount": 6
         },
         {
           "op": "gain_resource",

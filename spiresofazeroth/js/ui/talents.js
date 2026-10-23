@@ -3,7 +3,8 @@
 import { h, icon, tip, esc, fill, cap } from "./dom.js";
 import { saveMeta } from "../engine/save.js";
 import { cssReady, btn, tog, ico, banner, scroll, dark } from "./kit.js";
-import { EFFECTS, TALENT_CAP, TIER_STEP, POINTS_PER_FLOOR, POINTS_PER_ACT, VICTORY_BONUS, talentState, treeSpent, pointsBelow, canLearn, learn, unlearn, resetTalents, talentMods, talentSummary, classLevel, nextLevelXp, lockedCardIds } from "../engine/talents.js";
+import { talentEffects, valueAt } from "../engine/talentHookDefs.js";
+import { repairSpent, EFFECTS, TALENT_CAP, TIER_STEP, FLOORS_PER_POINT, POINTS_PER_ACT, VICTORY_BONUS, talentState, treeSpent, pointsBelow, canLearn, learn, unlearn, resetTalents, talentMods, talentSummary, classLevel, nextLevelXp, lockedCardIds } from "../engine/talents.js";
 
 export const stageNative = true;
 
@@ -20,6 +21,7 @@ export async function render(app, _name, props = {}) {
   const foot = h("div", { class: "sx-tal__foot" });
   await Promise.all(ids.map((id) => Promise.all([data.loadClass(id), data.loadTalents(id)])));
 
+  for (const id of ids) if (repairSpent(meta, id, data.talentDefs.get(id))) saveMeta(meta); // Talents V2: clamp saved ranks, refund the difference
   const save = () => { saveMeta(meta); if (app.refreshLocks) app.refreshLocks(); };
   const unspent = (cid) => talentState(meta, cid).available;
 
@@ -36,8 +38,10 @@ export async function render(app, _name, props = {}) {
   function talentTip(state, tree, t) {
     const r = state.spent[t.id] | 0, e = EFFECTS[t.effect.key] || { label: t.effect.key, text: (v) => `+${v}` };
     const lines = [`<b>${esc(t.name)}</b>`, `<span class="sp-dim">Rank ${r}/${t.max}</span>`];
-    if (r > 0) lines.push(esc(e.text(r * t.effect.per)));
-    if (r < t.max) lines.push(`<span class="sx-tal__next">Next rank: ${esc(e.text((r + 1) * t.effect.per))}</span>`);
+    // every effect of the talent (V2 hooks may carry extras); the numbers come from the same table the engine reads (valueAt)
+    const say = (rank) => talentEffects(t).map((x) => { const d = EFFECTS[x.key] || e; return rank > 0 ? d.text(valueAt(x, rank), x) : ""; }).filter(Boolean);
+    if (r > 0) say(r).forEach((s) => lines.push(esc(s)));
+    if (r < t.max) say(r + 1).forEach((s, i) => lines.push(`<span class="sx-tal__next">${i === 0 ? "Next rank: " : ""}${esc(s)}</span>`));
     const why = canLearn(state, tree, t);
     if (why && r < t.max) lines.push(`<span class="sx-tal__why">${esc(why)}</span>`);
     if (r > 0) lines.push(`<span class="sp-dim">Right click to unlearn.</span>`);
@@ -91,7 +95,7 @@ export async function render(app, _name, props = {}) {
       h("p", { class: "sx-tal__sum" }, mods ? talentSummary(mods) : "No talents learned yet. Spend points on the left; every rank is active from your next run."),
       h("h4", {}, "Card unlocks"), ...rows,
       meta.settings.unlockAll ? h("p", { class: "sx-dim" }, "Unlock all cards is on in Settings.") : null,
-      h("p", { class: "sx-tal__how" }, `How to earn: +${POINTS_PER_FLOOR} talent points per floor cleared, +${POINTS_PER_ACT} per act cleared, +${VICTORY_BONUS} for beating the final boss (up to ${TALENT_CAP}). XP: 1 per floor, 10 per act, 40 per victory.`)));
+      h("p", { class: "sx-tal__how" }, `How to earn: +1 talent point per ${FLOORS_PER_POINT} floors cleared, +${POINTS_PER_ACT} per act cleared, +${VICTORY_BONUS} for beating the final boss (up to ${TALENT_CAP}). XP: 1 per floor, 10 per act, 40 per victory.`)));
   }
 
   function draw() {
@@ -106,7 +110,7 @@ export async function render(app, _name, props = {}) {
   }
   draw();
   fill(host,
-    h("div", { class: "sx-cls__top" }, banner("Talents", `Points come from climbing: ${POINTS_PER_FLOOR} per floor cleared, more for each act and a victory.`), btn("Back", back, { size: "sm", cls: "sx-cls__back", auto: true })),
+    h("div", { class: "sx-cls__top" }, banner("Talents", `Points come from climbing: 1 per ${FLOORS_PER_POINT} floors cleared, more for each act and a victory.`), btn("Back", back, { size: "sm", cls: "sx-cls__back", auto: true })),
     tabs, body, foot);
   return host;
 }

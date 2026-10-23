@@ -113,16 +113,27 @@ const fromB64 = (s) => {
 export function exportSave() {
   return PREFIX + toB64(JSON.stringify({ meta: loadMeta(), run: read(KEY_RUN) }));
 }
+// Pull the base64 payload out of whatever the player pasted: tolerates whitespace / line breaks / zero-width chars, wrapping quotes or
+// extra text, a lower-case prefix, base64url (-_) and missing padding. Old 20261023a strings (plain base64, SPIRES1:) pass unchanged.
+function extractPayload(str) {
+  const raw = String(str || "").replace(/[\u200B-\u200D\u2060\uFEFF]/g, "");
+  const m = /SPIRES1\s*:/i.exec(raw);
+  if (!m) return null;
+  let b = raw.slice(m.index + m[0].length).replace(/[^A-Za-z0-9+/_=-]/g, "").replace(/-/g, "+").replace(/_/g, "/").replace(/=+$/, "");
+  if (b.length % 4 === 1) return "!"; // cut off / not base64
+  while (b.length % 4) b += "=";
+  return b;
+}
 export function importSave(str) {
-  try {
-    const s = String(str || "").trim();
-    if (!s.startsWith(PREFIX)) return { ok: false, error: "Not a Spires of Azeroth save string." };
-    const obj = JSON.parse(fromB64(s.slice(PREFIX.length)));
-    if (!obj || typeof obj !== "object" || !obj.meta) return { ok: false, error: "Save is empty." };
-    saveMeta({ ...defaultMeta(), ...obj.meta });
-    if (obj.run && obj.run.v === 1) saveRun(obj.run); else clearRun();
-    return { ok: true };
-  } catch (e) {
-    return { ok: false, error: "Could not read that save." };
-  }
+  const b64 = extractPayload(str);
+  if (b64 === null) return { ok: false, error: String(str || "").trim() ? "That is not a Spires of Azeroth save string (it should start with SPIRES1:). Copy the whole string again." : "Paste a save string first." };
+  let obj;
+  try { obj = JSON.parse(fromB64(b64)); } catch (e) { return { ok: false, error: "That save string is damaged or cut off. Copy the whole string again and re-paste." }; }
+  if (!obj || typeof obj !== "object" || !obj.meta || typeof obj.meta !== "object") return { ok: false, error: "That save string has no progress in it." };
+  const d = defaultMeta(), m = obj.meta;
+  const meta = { ...d, ...m, codex: { ...d.codex, ...(m.codex || {}) }, settings: { ...d.settings, ...(m.settings || {}) }, stats: { ...d.stats, ...(m.stats || {}) }, heroic: m.heroic || {}, unlocked: m.unlocked || [], talents: m.talents || {}, progress: m.progress || {} };
+  if (!saveMeta(meta)) return { ok: false, error: "This browser would not let the game store the save (storage is blocked or full)." };
+  const run = obj.run && obj.run.v === 1 && obj.run.screen && obj.run.screen !== "end" ? obj.run : null;
+  if (run) { if (!saveRun(run)) return { ok: false, error: "Progress imported, but the run in it could not be stored (storage full)." }; } else clearRun();
+  return { ok: true, run: run ? { classId: run.classId, act: run.act, seed: run.seed } : null };
 }

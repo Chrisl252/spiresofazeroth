@@ -183,7 +183,7 @@ export function createActors(hostEl, opts = {}) {
       family: rec && rec.family, type: rec && rec.type, icon: spec.icon || (rec && rec.icon) || null, iconBase,
       shape: kind === "hero" ? "biped" : undefined,
     }, wake);
-    a.kindOf = kind; a.cls = cls; a.skin = null; a.rec = rec; a.cands = cands; a.name = spec.name; a.dead = false;
+    a.laneS = lane.s; a.kindOf = kind; a.cls = cls; a.skin = null; a.rec = rec; a.cands = cands; a.name = spec.name; a.dead = false;
     const baseLunge = a.lunge, baseDeath = a.death, baseHit = a.hit, baseCastGesture = a.castGesture;
     // In-game clips: Stand loops, Attack / Cast / Hit play once over a faded idle, Death clamps.
     // Caster attacks stay planted and release spells, melee attacks spring forward dynamically.
@@ -386,8 +386,8 @@ export function createActors(hostEl, opts = {}) {
     fit.scale.setScalar(k);
     fit.position.set(-ctr.x * k, -box.min.y * k, -ctr.z * k);
     scene.add(group);
-    a.setGroundW(Math.max(a.baseH() * 0.38, Math.min(size.x * k, a.baseH() * 1.1)) * 0.85);
-    Object.assign(sk0, { group, pivot, mixer, mats, born: performance.now(), k, phase: Math.random() * 6.28, hasClip: !!clips.idle, tier: cand.tier, size: size.y * k });
+    a._gw = Math.max(a.baseH() * 0.38, Math.min(size.x * k, a.baseH() * 1.1)) * 0.85; a.setGroundW(a._gw);
+    Object.assign(sk0, { fit, group, pivot, mixer, mats, born: performance.now(), k, phase: Math.random() * 6.28, hasClip: !!clips.idle, tier: cand.tier, size: size.y * k });
     a.skin = sk0;
     a.kind = "model"; a.setVisible(glLost); clearTimeout(a._t);
     stats.loaded++;
@@ -604,6 +604,22 @@ export function createActors(hostEl, opts = {}) {
     const r = rec(e.id);
     return makeActor({ uid: e.uid, id: e.id, name: e.name, tier: e.tier, icon: e.icon, lane: lanes.enemy(i, n), rec: r || null }, "enemy");
   }
+  // layout-fix: re-lay out the enemy side after a mid-fight summon. list = [{ uid, alive }] in C.enemies order. Living enemies take slots 0..m-1 of m
+  // (lanes.enemy(i, m)), re-scaled to the slot's size; dead ones keep NO slot and fade out so a corpse never renders over a living model.
+  function layoutEnemies(list) {
+    const liveL = list.filter((x) => x.alive && byUid.get(x.uid)), m = liveL.length;
+    liveL.forEach((x, i) => {
+      const a = byUid.get(x.uid); if (a._gone && !a.dead && a.motion && a.motion.tween) { a._gone = false; a.motion.tween("alpha", 1, 200, "out"); } // revived: re-enter the layout visibly
+      const L = lanes.enemy(i, m), ratio = a.laneS ? L.s / a.laneS : 1, bb = a.baseXY();
+      a.setBase(L.x, L.y, bb.h * ratio); a.laneS = L.s;
+      if (a.disposed) return;
+      if (a.dead) return;
+      const sk = a.skin;
+      if (sk && sk.fit && Math.abs(ratio - 1) > 1e-3) { sk.fit.scale.multiplyScalar(ratio); sk.fit.position.multiplyScalar(ratio); sk.size *= ratio; if (a._gw) { a._gw *= ratio; a.setGroundW(a._gw); } }
+    });
+    for (const x of list) { const a = byUid.get(x.uid); if (a && !x.alive && a !== hero && a.motion && a.motion.tween && !a._gone) { a._gone = true; a.motion.tween("alpha", 0, 300, "out"); } }
+    needRender = true; wake();
+  }
   // friendly companion (hunter Guardian pet, shaman totem): the model of enemy-key `e.id` or `e.glb`, facing right, at `e.lane` ({x,y,s})
   function addAlly(e) {
     if (!loaded) return null;
@@ -671,7 +687,7 @@ export function createActors(hostEl, opts = {}) {
   }
 
   const api = {
-    ready, lanes, setHero, setHeroForm, setEnemies, addEnemy, addAlly, remove,
+    ready, lanes, setHero, setHeroForm, setEnemies, addEnemy, layoutEnemies, addAlly, remove,
     setZone, setParallax, setGround, setGroundVisible,
     get ground() { return ground3d; },
     get zone() { return currentZoneId; },

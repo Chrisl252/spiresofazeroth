@@ -210,11 +210,11 @@
       "cost": 1,
       "target": "enemy",
       "flags": [],
-      "text": "Deal 6 physical damage. Your pet attacks.",
+      "text": "Deal 7 physical damage. Your pet attacks.",
       "effects": [
         {
           "op": "damage",
-          "amount": 6
+          "amount": 7
         },
         {
           "op": "pet_action",
@@ -250,11 +250,11 @@
       "cost": 1,
       "target": "enemy",
       "flags": [],
-      "text": "Deal 6 arcane damage. Apply Vulnerable 1.",
+      "text": "Deal 7 arcane damage. Apply Vulnerable 1.",
       "effects": [
         {
           "op": "damage",
-          "amount": 6,
+          "amount": 7,
           "school": "arcane"
         },
         {
@@ -296,11 +296,11 @@
       "cost": 1,
       "target": "enemy",
       "flags": [],
-      "text": "Deal 6 damage. Gain 5 Block.",
+      "text": "Deal 7 damage. Gain 5 Block.",
       "effects": [
         {
           "op": "damage",
-          "amount": 6
+          "amount": 7
         },
         {
           "op": "block",
@@ -907,7 +907,8 @@
           "amount": 5
         },
         {
-          "op": "taunt"
+          "op": "taunt",
+          "to": "pet"
         }
       ],
       "upgrade": {
@@ -920,7 +921,8 @@
             "amount": 8
           },
           {
-            "op": "taunt"
+            "op": "taunt",
+            "to": "pet"
           },
           {
             "op": "block",

@@ -10,9 +10,10 @@ export function runBar(app) {
   const zone = run.zoneId ? data.zone(run.zoneId) : null;
   const relics = gearStrip(app); // gear strip: 16 paper-doll sockets + set badge (replaces the relic strip)
   const pots = h("div", { class: "sx-bar__strip sx-bar__pots" });
-  for (const id of run.potions) {
-    const p = data.potion(id);
-    if (!p) continue;
+  const nPot = Math.max(3, run.potions.length); // 3 fixed slots like the combat belt: empty ones show the classic empty slot art
+  for (let i = 0; i < nPot; i++) {
+    const p = run.potions[i] && data.potion(run.potions[i]);
+    if (!p) { pots.append(h("span", { class: "sx-bar__slot sx-bar__slot--empty", "aria-label": "Potion slot (empty)" })); continue; }
     const b = h("span", { class: "sx-bar__slot", tabindex: "0", "aria-label": p.name }, icon(p.icon, "", p.name));
     tip(b, `<b>${esc(p.name)}</b><br>${esc(p.text)}`);
     pots.append(b);
@@ -27,6 +28,6 @@ export function runBar(app) {
     relics, pots,
     btn(`Gear Bag ${run.gearBag ? run.gearBag.length : 0}`, () => app.showGear(), { size: "sm", cls: "sx-bar__gear" }),
     btn(`Deck ${run.deck.length}`, () => app.showDeck(), { size: "sm", cls: "sx-bar__deck" }),
-    btn("Settings", () => app.go("settings"), { size: "sm", cls: "sx-bar__set", title: "Settings" }),
+    btn("Settings", () => app.showMenu(), { size: "sm", cls: "sx-bar__set", title: "Settings" }),
     btn("⛶", () => app.stage.toggleFullscreen(), { size: "sm", cls: "sx-bar__fs", title: "Fullscreen (F)" }));
 }

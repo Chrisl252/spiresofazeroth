@@ -5,6 +5,7 @@ import { modifyDealt, modifyTaken } from "./status.js";
 import { damageBonus, damageMult, takenAdjust } from "./resources.js";
 import { immuneToSchool, resistMult } from "./immunity.js";
 import { num } from "./effects.js";
+import { talentDamage } from "./talentHooks.js";
 
 // -> { hits, perHit, total, blocked, hpLoss, immune, resist, lethal } | null
 export function previewCardVs(C, inst, tgt) {
@@ -24,6 +25,7 @@ export function previewCardVs(C, inst, tgt) {
         let a = Math.max(0, num(ctx, x.amount));
         a = modifyDealt(C, src, a);
         a += damageBonus(C, src, school, {});
+        a = talentDamage(C, src, tgt, a, { kind: "attack", card: inst.def, dry: true }, Math.max(0, num(ctx, x.amount)));
         a = Math.floor(a * damageMult(C, src, tgt, school, {}));
         a = takenAdjust(C, tgt, modifyTaken(C, tgt, a, school, {}), school);
         const times = num(ctx, x.times, 1) || 1;

@@ -9,7 +9,7 @@
 //  - summoner: summon moves are skipped while 5+ enemies live or this unit already has 2 minions
 import { runEffects } from "./effects.js";
 import { fireTraps } from "./resources.js";
-import { applyStatus, hasTrait, skipsAction, modifyDealt, modifyTaken, onAction, turnEnd } from "./status.js";
+import { applyStatus, hasTrait, skipsAction, modifyDealt, modifyTaken, turnEnd } from "./status.js";
 import { isAlive, fx, log } from "./damage.js";
 import { resolveImmunity } from "./immunity.js";
 
@@ -136,6 +136,8 @@ export function chooseMove(C, e) {
 export function intentInfo(C, e) {
   const it = e && e.intent;
   if (!it) return null;
+  // just rose again (revive) / dazed: it will skip its next action, so it intends nothing (StS2 shows the sleep Zzz, not the old attack)
+  if (e.skipTurns > 0) return { kind: "dazed", name: "Dazed", dazed: true, dmg: 0, hits: 0, block: 0, statuses: [], debuff: null, summon: false, aoe: false, aim: e.aim, cast: null };
   const info = { kind: it.kind, name: it.name, dmg: 0, hits: 0, block: 0, statuses: [], debuff: null, summon: false, aoe: false, aim: e.aim, cast: null };
   const walk = (effs) => {
     for (const x of effs || []) {
@@ -167,7 +169,6 @@ export function intentInfo(C, e) {
 // ---- acting -----------------------------------------------------------------------------
 function done(C, e) {
   e.acts++;
-  onAction(C, e);
   turnEnd(C, e);
 }
 

@@ -22,9 +22,24 @@
     "decayPerTurn": 0
   },
   "archetypes": [
-    {"id": "assassination", "name": "Assassination", "icon": "ability_rogue_rupture", "text": "Poisons, bleeds and big finishers."},
-    {"id": "combat", "name": "Combat", "icon": "ability_warrior_punishingblow", "text": "Steady builders, Energy, defense and control."},
-    {"id": "subtlety", "name": "Subtlety", "icon": "ability_stealth", "text": "Stealth openers, stuns and Combo Point burst."}
+    {
+      "id": "assassination",
+      "name": "Assassination",
+      "icon": "ability_rogue_rupture",
+      "text": "Poisons, bleeds and big finishers."
+    },
+    {
+      "id": "combat",
+      "name": "Combat",
+      "icon": "ability_warrior_punishingblow",
+      "text": "Steady builders, Energy, defense and control."
+    },
+    {
+      "id": "subtlety",
+      "name": "Subtlety",
+      "icon": "ability_stealth",
+      "text": "Stealth openers, stuns and Combo Point burst."
+    }
   ],
   "relics": [
     {
@@ -38,10 +53,28 @@
       "text": "Start each combat with 1 Combo Point. 25% chance on attack: apply 1 Poison.",
       "triggers": {
         "on_combat_start": [
-          {"op": "gain_resource", "resource": "combo", "amount": 1}
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 1
+          }
         ],
         "on_attack": [
-          {"op": "conditional", "if": {"type": "chance", "pct": 25}, "then": [{"op": "apply", "status": "poison", "stacks": 1, "target": "enemy"}]}
+          {
+            "op": "conditional",
+            "if": {
+              "type": "chance",
+              "pct": 25
+            },
+            "then": [
+              {
+                "op": "apply",
+                "status": "poison",
+                "stacks": 1,
+                "target": "enemy"
+              }
+            ]
+          }
         ]
       }
     },
@@ -56,7 +89,12 @@
       "text": "Start each combat Stealthed.",
       "triggers": {
         "on_combat_start": [
-          {"op": "apply", "status": "stealth", "stacks": 1, "target": "self"}
+          {
+            "op": "apply",
+            "status": "stealth",
+            "stacks": 1,
+            "target": "self"
+          }
         ]
       }
     }
@@ -89,16 +127,30 @@
       "flags": [],
       "text": "Deal 6 damage. Gain 1 Combo Point.",
       "effects": [
-        {"op": "damage", "amount": 6},
-        {"op": "gain_resource", "resource": "combo", "amount": 1}
+        {
+          "op": "damage",
+          "amount": 6
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 1
+        }
       ],
       "upgrade": {
         "name": "Sinister Strike (Rank 2)",
         "cost": 1,
         "text": "Deal 9 damage. Gain 1 Combo Point.",
         "effects": [
-          {"op": "damage", "amount": 9},
-          {"op": "gain_resource", "resource": "combo", "amount": 1}
+          {
+            "op": "damage",
+            "amount": 9
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 1
+          }
         ]
       }
     },
@@ -113,21 +165,63 @@
       "archetype": "subtlety",
       "cost": 0,
       "target": "enemy",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Deal 8 damage. Gain 1 Combo Point. If Stealthed, deal 8 more. Exhaust.",
       "effects": [
-        {"op": "damage", "amount": 8},
-        {"op": "gain_resource", "resource": "combo", "amount": 1},
-        {"op": "conditional", "if": {"type": "status_on_target", "status": "stealth", "target": "self"}, "then": [{"op": "damage", "amount": 8}]}
+        {
+          "op": "damage",
+          "amount": 8
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 1
+        },
+        {
+          "op": "conditional",
+          "if": {
+            "type": "status_on_target",
+            "status": "stealth",
+            "target": "self"
+          },
+          "then": [
+            {
+              "op": "damage",
+              "amount": 8
+            }
+          ]
+        }
       ],
       "upgrade": {
         "name": "Backstab (Rank 2)",
         "cost": 0,
         "text": "Deal 12 damage. Gain 1 Combo Point. If Stealthed, deal 12 more. Exhaust.",
         "effects": [
-          {"op": "damage", "amount": 12},
-          {"op": "gain_resource", "resource": "combo", "amount": 1},
-          {"op": "conditional", "if": {"type": "status_on_target", "status": "stealth", "target": "self"}, "then": [{"op": "damage", "amount": 12}]}
+          {
+            "op": "damage",
+            "amount": 12
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 1
+          },
+          {
+            "op": "conditional",
+            "if": {
+              "type": "status_on_target",
+              "status": "stealth",
+              "target": "self"
+            },
+            "then": [
+              {
+                "op": "damage",
+                "amount": 12
+              }
+            ]
+          }
         ]
       }
     },
@@ -145,16 +239,38 @@
       "flags": [],
       "text": "Spend all Combo Points. Deal 6 damage per Combo Point.",
       "effects": [
-        {"op": "damage", "amount": {"base": 0, "scale": "combo", "per": 6}},
-        {"op": "spend_resource", "resource": "combo", "amount": "all"}
+        {
+          "op": "damage",
+          "amount": {
+            "base": 0,
+            "scale": "combo",
+            "per": 6
+          }
+        },
+        {
+          "op": "spend_resource",
+          "resource": "combo",
+          "amount": "all"
+        }
       ],
       "upgrade": {
         "name": "Eviscerate (Rank 2)",
         "cost": 1,
         "text": "Spend all Combo Points. Deal 9 damage per Combo Point.",
         "effects": [
-          {"op": "damage", "amount": {"base": 0, "scale": "combo", "per": 9}},
-          {"op": "spend_resource", "resource": "combo", "amount": "all"}
+          {
+            "op": "damage",
+            "amount": {
+              "base": 0,
+              "scale": "combo",
+              "per": 9
+            }
+          },
+          {
+            "op": "spend_resource",
+            "resource": "combo",
+            "amount": "all"
+          }
         ]
       }
     },
@@ -172,16 +288,30 @@
       "flags": [],
       "text": "Gain 5 Block. Gain 1 Combo Point.",
       "effects": [
-        {"op": "block", "amount": 5},
-        {"op": "gain_resource", "resource": "combo", "amount": 1}
+        {
+          "op": "block",
+          "amount": 5
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 1
+        }
       ],
       "upgrade": {
         "name": "Evasion (Rank 2)",
         "cost": 1,
         "text": "Gain 8 Block. Gain 1 Combo Point.",
         "effects": [
-          {"op": "block", "amount": 8},
-          {"op": "gain_resource", "resource": "combo", "amount": 1}
+          {
+            "op": "block",
+            "amount": 8
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 1
+          }
         ]
       }
     },
@@ -199,16 +329,32 @@
       "flags": [],
       "text": "Gain 1 Stealth. Draw 1 card.",
       "effects": [
-        {"op": "apply", "status": "stealth", "stacks": 1, "target": "self"},
-        {"op": "draw", "count": 1}
+        {
+          "op": "apply",
+          "status": "stealth",
+          "stacks": 1,
+          "target": "self"
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Stealth (Rank 2)",
         "cost": 0,
         "text": "Gain 1 Stealth. Draw 2 cards.",
         "effects": [
-          {"op": "apply", "status": "stealth", "stacks": 1, "target": "self"},
-          {"op": "draw", "count": 2}
+          {
+            "op": "apply",
+            "status": "stealth",
+            "stacks": 1,
+            "target": "self"
+          },
+          {
+            "op": "draw",
+            "count": 2
+          }
         ]
       }
     },
@@ -223,21 +369,47 @@
       "archetype": "combat",
       "cost": 1,
       "target": "enemy",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Deal 4 damage. Gain 1 Combo Point. Apply 1 Stun. Exhaust.",
       "effects": [
-        {"op": "damage", "amount": 4},
-        {"op": "gain_resource", "resource": "combo", "amount": 1},
-        {"op": "apply", "status": "stun", "stacks": 1, "target": "enemy"}
+        {
+          "op": "damage",
+          "amount": 4
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 1
+        },
+        {
+          "op": "apply",
+          "status": "stun",
+          "stacks": 1,
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Gouge (Rank 2)",
         "cost": 1,
         "text": "Deal 7 damage. Gain 1 Combo Point. Apply 1 Stun. Exhaust.",
         "effects": [
-          {"op": "damage", "amount": 7},
-          {"op": "gain_resource", "resource": "combo", "amount": 1},
-          {"op": "apply", "status": "stun", "stacks": 1, "target": "enemy"}
+          {
+            "op": "damage",
+            "amount": 7
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 1
+          },
+          {
+            "op": "apply",
+            "status": "stun",
+            "stacks": 1,
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -252,17 +424,29 @@
       "archetype": "subtlety",
       "cost": 1,
       "target": "enemy",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Apply 2 Sleep. Exhaust.",
       "effects": [
-        {"op": "apply", "status": "sleep", "stacks": 2, "target": "enemy"}
+        {
+          "op": "apply",
+          "status": "sleep",
+          "stacks": 2,
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Sap (Rank 2)",
         "cost": 1,
         "text": "Apply 3 Sleep. Exhaust.",
         "effects": [
-          {"op": "apply", "status": "sleep", "stacks": 3, "target": "enemy"}
+          {
+            "op": "apply",
+            "status": "sleep",
+            "stacks": 3,
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -277,17 +461,25 @@
       "archetype": "combat",
       "cost": 0,
       "target": "self",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Draw 3 cards. Exhaust.",
       "effects": [
-        {"op": "draw", "count": 3}
+        {
+          "op": "draw",
+          "count": 3
+        }
       ],
       "upgrade": {
         "name": "Sprint (Rank 2)",
         "cost": 0,
         "text": "Draw 4 cards. Exhaust.",
         "effects": [
-          {"op": "draw", "count": 4}
+          {
+            "op": "draw",
+            "count": 4
+          }
         ]
       }
     },
@@ -305,18 +497,36 @@
       "flags": [],
       "text": "Deal 6 damage. Gain 1 Combo Point. Interrupt the enemy cast.",
       "effects": [
-        {"op": "damage", "amount": 6},
-        {"op": "gain_resource", "resource": "combo", "amount": 1},
-        {"op": "cast_interrupt"}
+        {
+          "op": "damage",
+          "amount": 6
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 1
+        },
+        {
+          "op": "cast_interrupt"
+        }
       ],
       "upgrade": {
         "name": "Kick (Rank 2)",
         "cost": 1,
         "text": "Deal 9 damage. Gain 1 Combo Point. Interrupt the enemy cast.",
         "effects": [
-          {"op": "damage", "amount": 9},
-          {"op": "gain_resource", "resource": "combo", "amount": 1},
-          {"op": "cast_interrupt"}
+          {
+            "op": "damage",
+            "amount": 9
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 1
+          },
+          {
+            "op": "cast_interrupt"
+          }
         ]
       }
     },
@@ -331,17 +541,29 @@
       "archetype": "combat",
       "cost": 1,
       "target": "enemy",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Apply 3 Weak. Exhaust.",
       "effects": [
-        {"op": "apply", "status": "weak", "stacks": 3, "target": "enemy"}
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 3,
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Blind (Rank 2)",
         "cost": 1,
         "text": "Apply 4 Weak. Exhaust.",
         "effects": [
-          {"op": "apply", "status": "weak", "stacks": 4, "target": "enemy"}
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 4,
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -359,16 +581,30 @@
       "flags": [],
       "text": "Gain 8 Block. Gain 1 Combo Point.",
       "effects": [
-        {"op": "block", "amount": 8},
-        {"op": "gain_resource", "resource": "combo", "amount": 1}
+        {
+          "op": "block",
+          "amount": 8
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 1
+        }
       ],
       "upgrade": {
         "name": "Feint (Rank 2)",
         "cost": 1,
         "text": "Gain 11 Block. Gain 1 Combo Point.",
         "effects": [
-          {"op": "block", "amount": 11},
-          {"op": "gain_resource", "resource": "combo", "amount": 1}
+          {
+            "op": "block",
+            "amount": 11
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 1
+          }
         ]
       }
     },
@@ -383,19 +619,37 @@
       "archetype": "subtlety",
       "cost": 0,
       "target": "enemy",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Apply 1 Weak. Draw 1 card. Exhaust.",
       "effects": [
-        {"op": "apply", "status": "weak", "stacks": 1, "target": "enemy"},
-        {"op": "draw", "count": 1}
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 1,
+          "target": "enemy"
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Distract (Rank 2)",
         "cost": 0,
         "text": "Apply 2 Weak. Draw 1 card. Exhaust.",
         "effects": [
-          {"op": "apply", "status": "weak", "stacks": 2, "target": "enemy"},
-          {"op": "draw", "count": 1}
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 2,
+            "target": "enemy"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
         ]
       }
     },
@@ -410,21 +664,43 @@
       "archetype": "subtlety",
       "cost": 0,
       "target": "enemy",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Deal 5 damage. Gain 10 gold. Gain 1 Combo Point. Exhaust.",
       "effects": [
-        {"op": "damage", "amount": 5},
-        {"op": "gold", "amount": 10},
-        {"op": "gain_resource", "resource": "combo", "amount": 1}
+        {
+          "op": "damage",
+          "amount": 5
+        },
+        {
+          "op": "gold",
+          "amount": 10
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 1
+        }
       ],
       "upgrade": {
         "name": "Pick Pocket (Rank 2)",
         "cost": 0,
         "text": "Deal 8 damage. Gain 15 gold. Gain 1 Combo Point. Exhaust.",
         "effects": [
-          {"op": "damage", "amount": 8},
-          {"op": "gold", "amount": 15},
-          {"op": "gain_resource", "resource": "combo", "amount": 1}
+          {
+            "op": "damage",
+            "amount": 8
+          },
+          {
+            "op": "gold",
+            "amount": 15
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 1
+          }
         ]
       }
     },
@@ -439,19 +715,28 @@
       "archetype": "combat",
       "cost": 0,
       "target": "enemy",
-      "flags": ["retain"],
+      "flags": [
+        "retain"
+      ],
       "text": "Deal 4 damage. Retain.",
       "effects": [
-        {"op": "damage", "amount": 4}
+        {
+          "op": "damage",
+          "amount": 4
+        }
       ],
       "upgrade": {
         "name": "Throw (Rank 2)",
         "cost": 0,
         "text": "Deal 6 damage. Retain.",
         "effects": [
-          {"op": "damage", "amount": 6}
+          {
+            "op": "damage",
+            "amount": 6
+          }
         ]
-      }
+      },
+      "range": "ranged"
     },
     {
       "id": "instant-poison",
@@ -467,16 +752,32 @@
       "flags": [],
       "text": "Deal 6 damage. Apply 3 Poison.",
       "effects": [
-        {"op": "damage", "amount": 6},
-        {"op": "apply", "status": "poison", "stacks": 3, "target": "enemy"}
+        {
+          "op": "damage",
+          "amount": 6
+        },
+        {
+          "op": "apply",
+          "status": "poison",
+          "stacks": 3,
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Instant Poison (Rank 2)",
         "cost": 1,
         "text": "Deal 8 damage. Apply 5 Poison.",
         "effects": [
-          {"op": "damage", "amount": 8},
-          {"op": "apply", "status": "poison", "stacks": 5, "target": "enemy"}
+          {
+            "op": "damage",
+            "amount": 8
+          },
+          {
+            "op": "apply",
+            "status": "poison",
+            "stacks": 5,
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -491,19 +792,41 @@
       "archetype": "assassination",
       "cost": 2,
       "target": "all_enemies",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Apply 4 Poison and 2 Weak to ALL enemies. Exhaust.",
       "effects": [
-        {"op": "apply", "status": "poison", "stacks": 4, "target": "all_enemies"},
-        {"op": "apply", "status": "weak", "stacks": 2, "target": "all_enemies"}
+        {
+          "op": "apply",
+          "status": "poison",
+          "stacks": 4,
+          "target": "all_enemies"
+        },
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 2,
+          "target": "all_enemies"
+        }
       ],
       "upgrade": {
         "name": "Crippling Poison (Rank 2)",
         "cost": 2,
         "text": "Apply 7 Poison and 2 Weak to ALL enemies. Exhaust.",
         "effects": [
-          {"op": "apply", "status": "poison", "stacks": 7, "target": "all_enemies"},
-          {"op": "apply", "status": "weak", "stacks": 2, "target": "all_enemies"}
+          {
+            "op": "apply",
+            "status": "poison",
+            "stacks": 7,
+            "target": "all_enemies"
+          },
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 2,
+            "target": "all_enemies"
+          }
         ]
       }
     },
@@ -521,16 +844,36 @@
       "flags": [],
       "text": "Apply 4 Poison. Enemy loses 1 Strength.",
       "effects": [
-        {"op": "apply", "status": "poison", "stacks": 4, "target": "enemy"},
-        {"op": "apply", "status": "strength", "stacks": -1, "target": "enemy"}
+        {
+          "op": "apply",
+          "status": "poison",
+          "stacks": 4,
+          "target": "enemy"
+        },
+        {
+          "op": "apply",
+          "status": "strength",
+          "stacks": -1,
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Mind-numbing Poison (Rank 2)",
         "cost": 1,
         "text": "Apply 6 Poison. Enemy loses 2 Strength.",
         "effects": [
-          {"op": "apply", "status": "poison", "stacks": 6, "target": "enemy"},
-          {"op": "apply", "status": "strength", "stacks": -2, "target": "enemy"}
+          {
+            "op": "apply",
+            "status": "poison",
+            "stacks": 6,
+            "target": "enemy"
+          },
+          {
+            "op": "apply",
+            "status": "strength",
+            "stacks": -2,
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -545,19 +888,33 @@
       "archetype": "assassination",
       "cost": 0,
       "target": "self",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Your next attack deals double damage. Gain 1 Combo Point. Exhaust.",
       "effects": [
-        {"op": "double_damage_next"},
-        {"op": "gain_resource", "resource": "combo", "amount": 1}
+        {
+          "op": "double_damage_next"
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 1
+        }
       ],
       "upgrade": {
         "name": "Remorseless Attacks (Rank 2)",
         "cost": 0,
         "text": "Your next attack deals double damage. Gain 2 Combo Points. Exhaust.",
         "effects": [
-          {"op": "double_damage_next"},
-          {"op": "gain_resource", "resource": "combo", "amount": 2}
+          {
+            "op": "double_damage_next"
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 2
+          }
         ]
       }
     },
@@ -572,19 +929,35 @@
       "archetype": "assassination",
       "cost": 0,
       "target": "self",
-      "flags": [],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Lose 3 HP. Gain 2 Energy. Exhaust.",
       "effects": [
-        {"op": "damage", "amount": 3, "target": "self"},
-        {"op": "gain_energy", "amount": 2}
+        {
+          "op": "damage",
+          "amount": 3,
+          "target": "self"
+        },
+        {
+          "op": "gain_energy",
+          "amount": 2
+        }
       ],
       "upgrade": {
         "name": "Vigor (Rank 2)",
         "cost": 0,
         "text": "Lose 3 HP. Gain 3 Energy. Exhaust.",
         "effects": [
-          {"op": "damage", "amount": 3, "target": "self"},
-          {"op": "gain_energy", "amount": 3}
+          {
+            "op": "damage",
+            "amount": 3,
+            "target": "self"
+          },
+          {
+            "op": "gain_energy",
+            "amount": 3
+          }
         ]
       }
     },
@@ -602,18 +975,58 @@
       "flags": [],
       "text": "Deal 7 damage. Gain 1 Combo Point. If Stealthed, deal 8 more.",
       "effects": [
-        {"op": "damage", "amount": 7},
-        {"op": "gain_resource", "resource": "combo", "amount": 1},
-        {"op": "conditional", "if": {"type": "status_on_target", "status": "stealth", "target": "self"}, "then": [{"op": "damage", "amount": 8}]}
+        {
+          "op": "damage",
+          "amount": 7
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 1
+        },
+        {
+          "op": "conditional",
+          "if": {
+            "type": "status_on_target",
+            "status": "stealth",
+            "target": "self"
+          },
+          "then": [
+            {
+              "op": "damage",
+              "amount": 8
+            }
+          ]
+        }
       ],
       "upgrade": {
         "name": "Opportunity (Rank 2)",
         "cost": 1,
         "text": "Deal 10 damage. Gain 1 Combo Point. If Stealthed, deal 10 more.",
         "effects": [
-          {"op": "damage", "amount": 10},
-          {"op": "gain_resource", "resource": "combo", "amount": 1},
-          {"op": "conditional", "if": {"type": "status_on_target", "status": "stealth", "target": "self"}, "then": [{"op": "damage", "amount": 10}]}
+          {
+            "op": "damage",
+            "amount": 10
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 1
+          },
+          {
+            "op": "conditional",
+            "if": {
+              "type": "status_on_target",
+              "status": "stealth",
+              "target": "self"
+            },
+            "then": [
+              {
+                "op": "damage",
+                "amount": 10
+              }
+            ]
+          }
         ]
       }
     },
@@ -631,16 +1044,34 @@
       "flags": [],
       "text": "Gain 2 Strength. Gain 1 Combo Point.",
       "effects": [
-        {"op": "apply", "status": "strength", "stacks": 2, "target": "self"},
-        {"op": "gain_resource", "resource": "combo", "amount": 1}
+        {
+          "op": "apply",
+          "status": "strength",
+          "stacks": 2,
+          "target": "self"
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 1
+        }
       ],
       "upgrade": {
         "name": "Lethality (Rank 2)",
         "cost": 1,
         "text": "Gain 3 Strength. Gain 1 Combo Point.",
         "effects": [
-          {"op": "apply", "status": "strength", "stacks": 3, "target": "self"},
-          {"op": "gain_resource", "resource": "combo", "amount": 1}
+          {
+            "op": "apply",
+            "status": "strength",
+            "stacks": 3,
+            "target": "self"
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 1
+          }
         ]
       }
     },
@@ -658,16 +1089,42 @@
       "flags": [],
       "text": "Spend all Combo Points. Apply 4 Bleed per Combo Point.",
       "effects": [
-        {"op": "apply", "status": "bleed", "stacks": {"base": 0, "scale": "combo", "per": 4}, "target": "enemy"},
-        {"op": "spend_resource", "resource": "combo", "amount": "all"}
+        {
+          "op": "apply",
+          "status": "bleed",
+          "stacks": {
+            "base": 0,
+            "scale": "combo",
+            "per": 4
+          },
+          "target": "enemy"
+        },
+        {
+          "op": "spend_resource",
+          "resource": "combo",
+          "amount": "all"
+        }
       ],
       "upgrade": {
         "name": "Rupture (Rank 2)",
         "cost": 1,
         "text": "Spend all Combo Points. Apply 6 Bleed per Combo Point.",
         "effects": [
-          {"op": "apply", "status": "bleed", "stacks": {"base": 0, "scale": "combo", "per": 6}, "target": "enemy"},
-          {"op": "spend_resource", "resource": "combo", "amount": "all"}
+          {
+            "op": "apply",
+            "status": "bleed",
+            "stacks": {
+              "base": 0,
+              "scale": "combo",
+              "per": 6
+            },
+            "target": "enemy"
+          },
+          {
+            "op": "spend_resource",
+            "resource": "combo",
+            "amount": "all"
+          }
         ]
       }
     },
@@ -685,18 +1142,66 @@
       "flags": [],
       "text": "Apply 6 Bleed. Gain 1 Combo Point. If Stealthed, apply 1 Silence.",
       "effects": [
-        {"op": "apply", "status": "bleed", "stacks": 6, "target": "enemy"},
-        {"op": "gain_resource", "resource": "combo", "amount": 1},
-        {"op": "conditional", "if": {"type": "status_on_target", "status": "stealth", "target": "self"}, "then": [{"op": "apply", "status": "silence", "stacks": 1, "target": "enemy"}]}
+        {
+          "op": "apply",
+          "status": "bleed",
+          "stacks": 6,
+          "target": "enemy"
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 1
+        },
+        {
+          "op": "conditional",
+          "if": {
+            "type": "status_on_target",
+            "status": "stealth",
+            "target": "self"
+          },
+          "then": [
+            {
+              "op": "apply",
+              "status": "silence",
+              "stacks": 1,
+              "target": "enemy"
+            }
+          ]
+        }
       ],
       "upgrade": {
         "name": "Garrote (Rank 2)",
         "cost": 1,
         "text": "Apply 9 Bleed. Gain 1 Combo Point. If Stealthed, apply 1 Silence.",
         "effects": [
-          {"op": "apply", "status": "bleed", "stacks": 9, "target": "enemy"},
-          {"op": "gain_resource", "resource": "combo", "amount": 1},
-          {"op": "conditional", "if": {"type": "status_on_target", "status": "stealth", "target": "self"}, "then": [{"op": "apply", "status": "silence", "stacks": 1, "target": "enemy"}]}
+          {
+            "op": "apply",
+            "status": "bleed",
+            "stacks": 9,
+            "target": "enemy"
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 1
+          },
+          {
+            "op": "conditional",
+            "if": {
+              "type": "status_on_target",
+              "status": "stealth",
+              "target": "self"
+            },
+            "then": [
+              {
+                "op": "apply",
+                "status": "silence",
+                "stacks": 1,
+                "target": "enemy"
+              }
+            ]
+          }
         ]
       }
     },
@@ -714,18 +1219,58 @@
       "flags": [],
       "text": "Deal 10 damage. Gain 2 Combo Points. If Stealthed, deal 12 more.",
       "effects": [
-        {"op": "damage", "amount": 10},
-        {"op": "gain_resource", "resource": "combo", "amount": 2},
-        {"op": "conditional", "if": {"type": "status_on_target", "status": "stealth", "target": "self"}, "then": [{"op": "damage", "amount": 12}]}
+        {
+          "op": "damage",
+          "amount": 10
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 2
+        },
+        {
+          "op": "conditional",
+          "if": {
+            "type": "status_on_target",
+            "status": "stealth",
+            "target": "self"
+          },
+          "then": [
+            {
+              "op": "damage",
+              "amount": 12
+            }
+          ]
+        }
       ],
       "upgrade": {
         "name": "Ambush (Rank 2)",
         "cost": 1,
         "text": "Deal 14 damage. Gain 2 Combo Points. If Stealthed, deal 14 more.",
         "effects": [
-          {"op": "damage", "amount": 14},
-          {"op": "gain_resource", "resource": "combo", "amount": 2},
-          {"op": "conditional", "if": {"type": "status_on_target", "status": "stealth", "target": "self"}, "then": [{"op": "damage", "amount": 14}]}
+          {
+            "op": "damage",
+            "amount": 14
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 2
+          },
+          {
+            "op": "conditional",
+            "if": {
+              "type": "status_on_target",
+              "status": "stealth",
+              "target": "self"
+            },
+            "then": [
+              {
+                "op": "damage",
+                "amount": 14
+              }
+            ]
+          }
         ]
       }
     },
@@ -740,21 +1285,47 @@
       "archetype": "subtlety",
       "cost": 1,
       "target": "enemy",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Deal 6 damage. Gain 2 Combo Points. Apply 1 Stun. Exhaust.",
       "effects": [
-        {"op": "damage", "amount": 6},
-        {"op": "gain_resource", "resource": "combo", "amount": 2},
-        {"op": "apply", "status": "stun", "stacks": 1, "target": "enemy"}
+        {
+          "op": "damage",
+          "amount": 6
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 2
+        },
+        {
+          "op": "apply",
+          "status": "stun",
+          "stacks": 1,
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Cheap Shot (Rank 2)",
         "cost": 1,
         "text": "Deal 9 damage. Gain 2 Combo Points. Apply 1 Stun. Exhaust.",
         "effects": [
-          {"op": "damage", "amount": 9},
-          {"op": "gain_resource", "resource": "combo", "amount": 2},
-          {"op": "apply", "status": "stun", "stacks": 1, "target": "enemy"}
+          {
+            "op": "damage",
+            "amount": 9
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 2
+          },
+          {
+            "op": "apply",
+            "status": "stun",
+            "stacks": 1,
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -772,16 +1343,36 @@
       "flags": [],
       "text": "Gain 1 Strength and 1 Dexterity.",
       "effects": [
-        {"op": "apply", "status": "strength", "stacks": 1, "target": "self"},
-        {"op": "apply", "status": "dexterity", "stacks": 1, "target": "self"}
+        {
+          "op": "apply",
+          "status": "strength",
+          "stacks": 1,
+          "target": "self"
+        },
+        {
+          "op": "apply",
+          "status": "dexterity",
+          "stacks": 1,
+          "target": "self"
+        }
       ],
       "upgrade": {
         "name": "Slice and Dice (Rank 2)",
         "cost": 1,
         "text": "Gain 2 Strength and 2 Dexterity.",
         "effects": [
-          {"op": "apply", "status": "strength", "stacks": 2, "target": "self"},
-          {"op": "apply", "status": "dexterity", "stacks": 2, "target": "self"}
+          {
+            "op": "apply",
+            "status": "strength",
+            "stacks": 2,
+            "target": "self"
+          },
+          {
+            "op": "apply",
+            "status": "dexterity",
+            "stacks": 2,
+            "target": "self"
+          }
         ]
       }
     },
@@ -796,19 +1387,37 @@
       "archetype": "subtlety",
       "cost": 1,
       "target": "self",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Gain 1 Stealth. Gain 8 Block. Exhaust.",
       "effects": [
-        {"op": "apply", "status": "stealth", "stacks": 1, "target": "self"},
-        {"op": "block", "amount": 8}
+        {
+          "op": "apply",
+          "status": "stealth",
+          "stacks": 1,
+          "target": "self"
+        },
+        {
+          "op": "block",
+          "amount": 8
+        }
       ],
       "upgrade": {
         "name": "Vanish (Rank 2)",
         "cost": 1,
         "text": "Gain 1 Stealth. Gain 12 Block. Exhaust.",
         "effects": [
-          {"op": "apply", "status": "stealth", "stacks": 1, "target": "self"},
-          {"op": "block", "amount": 12}
+          {
+            "op": "apply",
+            "status": "stealth",
+            "stacks": 1,
+            "target": "self"
+          },
+          {
+            "op": "block",
+            "amount": 12
+          }
         ]
       }
     },
@@ -826,16 +1435,28 @@
       "flags": [],
       "text": "Deal 8 damage. Gain 6 Block.",
       "effects": [
-        {"op": "damage", "amount": 8},
-        {"op": "block", "amount": 6}
+        {
+          "op": "damage",
+          "amount": 8
+        },
+        {
+          "op": "block",
+          "amount": 6
+        }
       ],
       "upgrade": {
         "name": "Riposte (Rank 2)",
         "cost": 1,
         "text": "Deal 11 damage. Gain 8 Block.",
         "effects": [
-          {"op": "damage", "amount": 11},
-          {"op": "block", "amount": 8}
+          {
+            "op": "damage",
+            "amount": 11
+          },
+          {
+            "op": "block",
+            "amount": 8
+          }
         ]
       }
     },
@@ -853,14 +1474,24 @@
       "flags": [],
       "text": "Gain 2 Dexterity.",
       "effects": [
-        {"op": "apply", "status": "dexterity", "stacks": 2, "target": "self"}
+        {
+          "op": "apply",
+          "status": "dexterity",
+          "stacks": 2,
+          "target": "self"
+        }
       ],
       "upgrade": {
         "name": "Ghostly Strike (Rank 2)",
         "cost": 1,
         "text": "Gain 3 Dexterity.",
         "effects": [
-          {"op": "apply", "status": "dexterity", "stacks": 3, "target": "self"}
+          {
+            "op": "apply",
+            "status": "dexterity",
+            "stacks": 3,
+            "target": "self"
+          }
         ]
       }
     },
@@ -878,14 +1509,24 @@
       "flags": [],
       "text": "Apply 6 Poison.",
       "effects": [
-        {"op": "apply", "status": "poison", "stacks": 6, "target": "enemy"}
+        {
+          "op": "apply",
+          "status": "poison",
+          "stacks": 6,
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Deadly Poison (Rank 2)",
         "cost": 1,
         "text": "Apply 9 Poison.",
         "effects": [
-          {"op": "apply", "status": "poison", "stacks": 9, "target": "enemy"}
+          {
+            "op": "apply",
+            "status": "poison",
+            "stacks": 9,
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -900,10 +1541,19 @@
       "archetype": "assassination",
       "cost": 1,
       "target": "enemy",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Double the enemy's Poison. Exhaust.",
       "effects": [
-        {"op": "apply", "status": "poison", "stacks": {"scale": "poison"}, "target": "enemy"}
+        {
+          "op": "apply",
+          "status": "poison",
+          "stacks": {
+            "scale": "poison"
+          },
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Wound Poison (Rank 2)",
@@ -911,7 +1561,14 @@
         "flags": [],
         "text": "Double the enemy's Poison.",
         "effects": [
-          {"op": "apply", "status": "poison", "stacks": {"scale": "poison"}, "target": "enemy"}
+          {
+            "op": "apply",
+            "status": "poison",
+            "stacks": {
+              "scale": "poison"
+            },
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -929,17 +1586,48 @@
       "flags": [],
       "text": "Spend all Combo Points. Apply 1 Vulnerable per Combo Point (max 5).",
       "effects": [
-        {"op": "apply", "status": "vulnerable", "stacks": {"base": 0, "scale": "combo", "per": 1, "max": 5}, "target": "enemy"},
-        {"op": "spend_resource", "resource": "combo", "amount": "all"}
+        {
+          "op": "apply",
+          "status": "vulnerable",
+          "stacks": {
+            "base": 0,
+            "scale": "combo",
+            "per": 1,
+            "max": 5
+          },
+          "target": "enemy"
+        },
+        {
+          "op": "spend_resource",
+          "resource": "combo",
+          "amount": "all"
+        }
       ],
       "upgrade": {
         "name": "Expose Armor (Rank 2)",
         "cost": 1,
         "text": "Spend all Combo Points. Apply 1 Vulnerable per Combo Point (max 5). Draw 1 card.",
         "effects": [
-          {"op": "apply", "status": "vulnerable", "stacks": {"base": 0, "scale": "combo", "per": 1, "max": 5}, "target": "enemy"},
-          {"op": "spend_resource", "resource": "combo", "amount": "all"},
-          {"op": "draw", "count": 1}
+          {
+            "op": "apply",
+            "status": "vulnerable",
+            "stacks": {
+              "base": 0,
+              "scale": "combo",
+              "per": 1,
+              "max": 5
+            },
+            "target": "enemy"
+          },
+          {
+            "op": "spend_resource",
+            "resource": "combo",
+            "amount": "all"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
         ]
       }
     },
@@ -954,19 +1642,35 @@
       "archetype": "subtlety",
       "cost": 0,
       "target": "self",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Gain 2 Combo Points. Draw 1 card. Exhaust.",
       "effects": [
-        {"op": "gain_resource", "resource": "combo", "amount": 2},
-        {"op": "draw", "count": 1}
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 2
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Premeditation (Rank 2)",
         "cost": 0,
         "text": "Gain 3 Combo Points. Draw 1 card. Exhaust.",
         "effects": [
-          {"op": "gain_resource", "resource": "combo", "amount": 3},
-          {"op": "draw", "count": 1}
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 3
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
         ]
       }
     },
@@ -984,16 +1688,30 @@
       "flags": [],
       "text": "Deal 8 damage to ALL enemies. Draw 1 card.",
       "effects": [
-        {"op": "damage", "amount": 8, "target": "all_enemies"},
-        {"op": "draw", "count": 1}
+        {
+          "op": "damage",
+          "amount": 8,
+          "target": "all_enemies"
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Blade Flurry (Rank 2)",
         "cost": 1,
         "text": "Deal 11 damage to ALL enemies. Draw 1 card.",
         "effects": [
-          {"op": "damage", "amount": 11, "target": "all_enemies"},
-          {"op": "draw", "count": 1}
+          {
+            "op": "damage",
+            "amount": 11,
+            "target": "all_enemies"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
         ]
       }
     },
@@ -1008,19 +1726,33 @@
       "archetype": "assassination",
       "cost": 0,
       "target": "self",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Your next attack deals double damage. Gain 2 Combo Points. Exhaust.",
       "effects": [
-        {"op": "double_damage_next"},
-        {"op": "gain_resource", "resource": "combo", "amount": 2}
+        {
+          "op": "double_damage_next"
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 2
+        }
       ],
       "upgrade": {
         "name": "Cold Blood (Rank 2)",
         "cost": 0,
         "text": "Your next attack deals double damage. Gain 3 Combo Points. Exhaust.",
         "effects": [
-          {"op": "double_damage_next"},
-          {"op": "gain_resource", "resource": "combo", "amount": 3}
+          {
+            "op": "double_damage_next"
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 3
+          }
         ]
       }
     },
@@ -1035,19 +1767,33 @@
       "archetype": "subtlety",
       "cost": 0,
       "target": "self",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Draw 3 cards. Gain 1 Energy. Exhaust.",
       "effects": [
-        {"op": "draw", "count": 3},
-        {"op": "gain_energy", "amount": 1}
+        {
+          "op": "draw",
+          "count": 3
+        },
+        {
+          "op": "gain_energy",
+          "amount": 1
+        }
       ],
       "upgrade": {
         "name": "Preparation (Rank 2)",
         "cost": 0,
         "text": "Draw 4 cards. Gain 2 Energy. Exhaust.",
         "effects": [
-          {"op": "draw", "count": 4},
-          {"op": "gain_energy", "amount": 2}
+          {
+            "op": "draw",
+            "count": 4
+          },
+          {
+            "op": "gain_energy",
+            "amount": 2
+          }
         ]
       }
     },
@@ -1065,18 +1811,50 @@
       "flags": [],
       "text": "Spend all Combo Points. Apply 1 Stun. Deal 4 damage per Combo Point.",
       "effects": [
-        {"op": "apply", "status": "stun", "stacks": 1, "target": "enemy"},
-        {"op": "damage", "amount": {"base": 0, "scale": "combo", "per": 4}},
-        {"op": "spend_resource", "resource": "combo", "amount": "all"}
+        {
+          "op": "apply",
+          "status": "stun",
+          "stacks": 1,
+          "target": "enemy"
+        },
+        {
+          "op": "damage",
+          "amount": {
+            "base": 0,
+            "scale": "combo",
+            "per": 4
+          }
+        },
+        {
+          "op": "spend_resource",
+          "resource": "combo",
+          "amount": "all"
+        }
       ],
       "upgrade": {
         "name": "Kidney Shot (Rank 2)",
         "cost": 1,
         "text": "Spend all Combo Points. Apply 1 Stun. Deal 6 damage per Combo Point.",
         "effects": [
-          {"op": "apply", "status": "stun", "stacks": 1, "target": "enemy"},
-          {"op": "damage", "amount": {"base": 0, "scale": "combo", "per": 6}},
-          {"op": "spend_resource", "resource": "combo", "amount": "all"}
+          {
+            "op": "apply",
+            "status": "stun",
+            "stacks": 1,
+            "target": "enemy"
+          },
+          {
+            "op": "damage",
+            "amount": {
+              "base": 0,
+              "scale": "combo",
+              "per": 6
+            }
+          },
+          {
+            "op": "spend_resource",
+            "resource": "combo",
+            "amount": "all"
+          }
         ]
       }
     },
@@ -1094,18 +1872,42 @@
       "flags": [],
       "text": "Deal 8 damage. Gain 1 Combo Point. Apply 2 Vulnerable.",
       "effects": [
-        {"op": "damage", "amount": 8},
-        {"op": "gain_resource", "resource": "combo", "amount": 1},
-        {"op": "apply", "status": "vulnerable", "stacks": 2, "target": "enemy"}
+        {
+          "op": "damage",
+          "amount": 8
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 1
+        },
+        {
+          "op": "apply",
+          "status": "vulnerable",
+          "stacks": 2,
+          "target": "enemy"
+        }
       ],
       "upgrade": {
         "name": "Hemorrhage (Rank 2)",
         "cost": 1,
         "text": "Deal 11 damage. Gain 1 Combo Point. Apply 3 Vulnerable.",
         "effects": [
-          {"op": "damage", "amount": 11},
-          {"op": "gain_resource", "resource": "combo", "amount": 1},
-          {"op": "apply", "status": "vulnerable", "stacks": 3, "target": "enemy"}
+          {
+            "op": "damage",
+            "amount": 11
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 1
+          },
+          {
+            "op": "apply",
+            "status": "vulnerable",
+            "stacks": 3,
+            "target": "enemy"
+          }
         ]
       }
     },
@@ -1123,16 +1925,30 @@
       "flags": [],
       "text": "Gain 3 Combo Points. Draw 1 card.",
       "effects": [
-        {"op": "gain_resource", "resource": "combo", "amount": 3},
-        {"op": "draw", "count": 1}
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 3
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
       ],
       "upgrade": {
         "name": "Seal Fate (Rank 2)",
         "cost": 1,
         "text": "Gain 4 Combo Points. Draw 1 card.",
         "effects": [
-          {"op": "gain_resource", "resource": "combo", "amount": 4},
-          {"op": "draw", "count": 1}
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 4
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
         ]
       }
     },
@@ -1150,16 +1966,30 @@
       "flags": [],
       "text": "Deal 10 damage. Gain 2 Combo Points.",
       "effects": [
-        {"op": "damage", "amount": 10},
-        {"op": "gain_resource", "resource": "combo", "amount": 2}
+        {
+          "op": "damage",
+          "amount": 10
+        },
+        {
+          "op": "gain_resource",
+          "resource": "combo",
+          "amount": 2
+        }
       ],
       "upgrade": {
         "name": "Ruthlessness (Rank 2)",
         "cost": 1,
         "text": "Deal 14 damage. Gain 2 Combo Points.",
         "effects": [
-          {"op": "damage", "amount": 14},
-          {"op": "gain_resource", "resource": "combo", "amount": 2}
+          {
+            "op": "damage",
+            "amount": 14
+          },
+          {
+            "op": "gain_resource",
+            "resource": "combo",
+            "amount": 2
+          }
         ]
       }
     },
@@ -1174,21 +2004,41 @@
       "archetype": "combat",
       "cost": 1,
       "target": "self",
-      "flags": ["exhaust"],
+      "flags": [
+        "exhaust"
+      ],
       "text": "Gain 3 Energy. Gain 2 Energy next turn. Draw 2 cards. Exhaust.",
       "effects": [
-        {"op": "gain_energy", "amount": 3},
-        {"op": "energy_next_turn", "amount": 2},
-        {"op": "draw", "count": 2}
+        {
+          "op": "gain_energy",
+          "amount": 3
+        },
+        {
+          "op": "energy_next_turn",
+          "amount": 2
+        },
+        {
+          "op": "draw",
+          "count": 2
+        }
       ],
       "upgrade": {
         "name": "Adrenaline Rush (Rank 2)",
         "cost": 0,
         "text": "Gain 3 Energy. Gain 2 Energy next turn. Draw 2 cards. Exhaust. Costs 0.",
         "effects": [
-          {"op": "gain_energy", "amount": 3},
-          {"op": "energy_next_turn", "amount": 2},
-          {"op": "draw", "count": 2}
+          {
+            "op": "gain_energy",
+            "amount": 3
+          },
+          {
+            "op": "energy_next_turn",
+            "amount": 2
+          },
+          {
+            "op": "draw",
+            "count": 2
+          }
         ]
       }
     }

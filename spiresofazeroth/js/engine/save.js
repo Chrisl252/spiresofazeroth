@@ -39,7 +39,7 @@ function drop(key) {
 
 export const defaultMeta = () => ({
   v: 1, unlocked: [], heroic: {}, codex: { cards: {}, enemies: {}, relics: {} },
-  settings: { speed: "normal", speedMul: null, musicVolume: null, sfxVolume: null, musicTrack: null, sound: false, reducedMotion: null, unlockAll: false },
+  settings: { speed: "normal", speedMul: null, musicVolume: null, sfxVolume: null, ambienceVolume: null, ambienceMode: "occasional", musicTrack: null, sound: false, reducedMotion: null, unlockAll: false },
   stats: { runs: 0, wins: 0, bestAct: 0 }, lastSeed: "",
   talents: {}, progress: {}, // engine/talents.js: per-class { earned, spent } and { xp, runs, wins }
 });

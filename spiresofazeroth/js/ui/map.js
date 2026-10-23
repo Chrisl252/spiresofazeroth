@@ -1,7 +1,9 @@
 // Spire map (stage-native, StS2 style): parchment scroll, ONE tavern start at the bottom centre, 2-3 inked lanes, big plates.
 // Engine calls kept as they were: reachableNodes / enterNode, abandon sets run.screen = "end".
 import { h, icon, tip } from "./dom.js";
-import { enterNode, reachableNodes } from "../engine/run.js";
+import { enterNode, reachableNodes, prepareZonePick } from "../engine/run.js";
+import { generateSpire } from "../engine/map.js";
+import { heroicMods } from "../engine/heroic.js";
 import { cssReady, ico, btn, dark } from "./kit.js";
 import { runBar } from "./runbar.js";
 import { drawPath } from "./mapPath.js";
@@ -34,6 +36,15 @@ const startInfo = (zone) => (zone && zone.start) || { name: "The Inn", icon: "in
 export async function render(app) {
   await cssReady;
   const { run, data, stage } = app;
+  if (!run) return app.go("title");
+  if (!run.zoneId) {
+    await prepareZonePick(run, data);
+    return app.go("zonepick");
+  }
+  if (!run.map || !run.map.floors) {
+    const mods = heroicMods(run.heroic || 0);
+    run.map = generateSpire(run.seed, `${run.act}:${run.zoneId}`, { eliteBonus: mods.eliteBonus, profile: data.mapProfile ? data.mapProfile(run.zoneId) : null });
+  }
   stage.setBackdrop(run.zoneId || "default", { tint: { primary: "#d9b25c", secondary: "#2b1c0a", accent: "#f0d68a" } });
   const zone = data.zone(run.zoneId);
   const map = run.map;

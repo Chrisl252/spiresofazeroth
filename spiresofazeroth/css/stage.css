@@ -108,5 +108,11 @@ body.sp-stage-on main.spires-app.sp-stage-host > .sp-stage { z-index: 1; }
 }
 body.sp-stage-on .sp-reduce .sp-bd-slot { transition: none; }
 /* fullscreen: the stage host fills the screen on black */
-.sp-stage-host:fullscreen { background: #000; width: 100vw; height: 100vh; }
-.sp-stage-host:-webkit-full-screen { background: #000; width: 100vw; height: 100vh; }
+.sp-stage-host:fullscreen, .sp-stage-host:-webkit-full-screen { background: #000; width: 100vw; height: 100vh; overflow: visible; }
+/* pseudo-fullscreen (iPhone Safari has no element fullscreen; js/stage/stage.js setPseudo): the host covers the whole viewport,
+   above the site masthead + cookie bar, page scroll locked, notch/home-bar insets kept clear */
+html.sp-pseudo-fs, html.sp-pseudo-fs body { overflow: hidden !important; overscroll-behavior: none; height: 100%; }
+body.sp-stage-on main.spires-app.sp-stage-host.sp-pseudo-fs-host, .sp-stage-host.sp-pseudo-fs-host {
+  position: fixed !important; inset: 0 !important; top: 0 !important; width: 100vw; height: 100vh; height: 100dvh; max-width: none; margin: 0;
+  z-index: 2147483000; background: #000;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); box-sizing: border-box; }

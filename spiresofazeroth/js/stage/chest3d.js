@@ -22,7 +22,7 @@ export async function mountChest(host, { kind = "fight", x = 1400, y = 700, W = 
   canvas.className = "gs-chest-canvas";
   canvas.style.cssText = `position:absolute;left:0;top:0;width:${W}px;height:${H}px;pointer-events:none;z-index:3`;
   host.append(canvas);
-  const dispose = () => { cancelAnimationFrame(raf); raf = 0; try { renderer.dispose(); } catch (e) { /* noop */ } canvas.remove(); };
+  const dispose = () => { cancelAnimationFrame(raf); raf = 0; try { renderer.dispose(); renderer.forceContextLoss(); } catch (e) { /* noop */ } canvas.remove(); };
   let raf = 0;
   let gltf;
   try {

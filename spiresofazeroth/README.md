@@ -3,17 +3,17 @@
 > **A free, open-source Classic World of Warcraft roguelike deckbuilder in your browser.**
 > Climb the spires of Azeroth, draft iconic vanilla spells, equip legendary gear and Tier sets, and conquer the raid bosses of Classic WoW.
 
-[![Play Live](https://img.shields.io/badge/Play%20Live-thewowdb.com%2Fspiresofazeroth-blue?style=for-the-badge&logo=googlechrome&logoColor=white)](https://thewowdb.com/spiresofazeroth/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg?style=for-the-badge)](LICENSE)
-[![100% Free](https://img.shields.io/badge/Price-100%25%20Free-green?style=for-the-badge)](#)
+[![Play Live](http<local path>)](http<local path>)
+[![License: MIT](http<local path>)](LICENSE)
+[![Zero Ads](http<local path>)](#)
 
 ---
 
 ## 🎮 Play Instantly
 
-No download, no login, and no microtransactions. Play directly in your web browser:
+No download, no login, no microtransactions, and no ads. Play directly in your web browser:
 
-👉 **[https://thewowdb.com/spiresofazeroth/](https://thewowdb.com/spiresofazeroth/)**
+👉 **[http<local path>](http<local path>)**
 
 ---
 
@@ -76,10 +76,10 @@ Spires of Azeroth is built with vanilla ES Modules and Three.js — no build ste
 
 ### Quick Start
 
-1. **Get the source.** The game is the `spiresofazeroth/` folder (plus `tools/spires/` and `tests/test_spires_static.py`) of the TheWoWDB site repository; the standalone public mirror is `https://github.com/Chrisl252/spiresofazeroth`.
+1. **Get the source.** The game is the `spiresofazeroth/` folder (plus `tools/spires/` and `tests/test_spires_static.py`) of the TheWoWDB site repository; the standalone public mirror is `http<local path>`.
    ```bash
-   git clone https://github.com/Chrisl252/spiresofazeroth.git
-   cd spiresofazeroth
+   git clone http<local path>
+   cd spires-of-azeroth
    ```
    **Blizzard art and audio are not in the repository.** Icons, 3D character models, spell sounds, UI textures and fonts stay on thewowdb.com (they are Blizzard's, see Legal below). `tools/spires/dev-server.mjs` fetches anything missing locally from the live site, so a fresh clone runs with full art; a plain static server shows the game logic without the art.
 
@@ -95,7 +95,7 @@ Spires of Azeroth is built with vanilla ES Modules and Three.js — no build ste
    node tools/spires/dev-server.mjs 8766
    ```
 
-3. Open `http://localhost:8000/spiresofazeroth/` (or `http://localhost:8766/spiresofazeroth/`) in your browser.
+3. Open `htt<local path>` (or `htt<local path>`) in your browser.
 
 ---
 
@@ -122,7 +122,7 @@ node tools/spires/combat-drive.mjs '{"cls":"mage","zone":"elwynn","fights":1}'
 Found a bug or have balance feedback?
 - Click the in-game **"Report a Bug"** parchment button at the bottom of the screen.
 - Or open an issue directly here on GitHub.
-- Bug reports from the live game reach the maintainer; for this repository, please open a GitHub issue.
+- Bug reports deliver directly to the project maintainer (`bugs@example.com`).
 
 ---
 

@@ -16,8 +16,8 @@
   "dun-morogh": {
    "fdid": 407226,
    "crop": [
-    0.25,
-    0.8
+    0.31,
+    0.78
    ],
    "theme": {
     "primary": "#a9c7e8",
@@ -40,8 +40,8 @@
   "loch-modan": {
    "fdid": 427941,
    "crop": [
-    0.25,
-    0.8
+    0.31,
+    0.78
    ],
    "theme": {
     "primary": "#4a7fa0",
@@ -52,8 +52,8 @@
   "silverpine-forest": {
    "fdid": 427941,
    "crop": [
-    0.25,
-    0.8
+    0.31,
+    0.78
    ],
    "theme": {
     "primary": "#6a5a8a",
@@ -64,8 +64,8 @@
   "westfall": {
    "fdid": 2820825,
    "crop": [
-    0.25,
-    0.8
+    0.31,
+    0.78
    ],
    "theme": {
     "primary": "#c8a24a",
@@ -76,8 +76,8 @@
   "redridge-mountains": {
    "fdid": 411684,
    "crop": [
-    0.25,
-    0.8
+    0.31,
+    0.78
    ],
    "theme": {
     "primary": "#a24a2a",
@@ -100,8 +100,8 @@
   "wetlands": {
    "fdid": 411683,
    "crop": [
-    0.25,
-    0.8
+    0.31,
+    0.78
    ],
    "theme": {
     "primary": "#4c7a5a",
@@ -112,8 +112,8 @@
   "hillsbrad-foothills": {
    "fdid": 411684,
    "crop": [
-    0.25,
-    0.8
+    0.31,
+    0.78
    ],
    "theme": {
     "primary": "#7a8a3c",
@@ -280,8 +280,8 @@
   "mulgore": {
    "fdid": 4684456,
    "crop": [
-    0.08,
-    0.99
+    0.14,
+    0.9
    ],
    "theme": {
     "primary": "#c98a3d",
@@ -292,8 +292,8 @@
   "teldrassil": {
    "fdid": 1417745,
    "crop": [
-    0.25,
-    0.8
+    0.31,
+    0.78
    ],
    "theme": {
     "primary": "#6a3f9c",
@@ -316,8 +316,8 @@
   "the-barrens": {
    "fdid": 7354407,
    "crop": [
-    0.08,
-    0.857
+    0.14,
+    0.837
    ],
    "theme": {
     "primary": "#c8a24a",
@@ -326,7 +326,7 @@
    }
   },
   "stonetalon-mountains": {
-   "fdid": 236060,
+   "fdid": 4731628,
    "crop": [
     0.25,
     0.8
@@ -412,8 +412,8 @@
   "azshara": {
    "fdid": 2125650,
    "crop": [
-    0.25,
-    0.8
+    0.31,
+    0.78
    ],
    "theme": {
     "primary": "#4a7fbf",
@@ -436,8 +436,8 @@
   "un-goro-crater": {
    "fdid": 1864572,
    "crop": [
-    0.25,
-    0.8
+    0.31,
+    0.78
    ],
    "theme": {
     "primary": "#d97a2b",
@@ -472,8 +472,8 @@
   "moonglade": {
    "fdid": 1417745,
    "crop": [
-    0.25,
-    0.8
+    0.31,
+    0.78
    ],
    "theme": {
     "primary": "#7a8fd8",
@@ -505,8 +505,8 @@
   "default": {
    "fdid": 427941,
    "crop": [
-    0.25,
-    0.8
+    0.31,
+    0.78
    ]
   }
  }

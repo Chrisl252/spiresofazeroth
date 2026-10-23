@@ -437,3 +437,10 @@ button.sp-pot2 {
 .lf-row--belt-full .lf-ico {
   filter: brightness(0.8);
 }
+
+/* dazed intent (a risen undead skips its next action): drifting Zzz above the head, StS2 style */
+.sp-int__zzz { display: inline-flex; align-items: flex-end; gap: 2px; height: 56px; font-family: var(--f-ui); color: #cfe3ff; text-shadow: 0 0 6px #2a4f8a, 0 2px 2px #000; }
+.sp-int__zzz i { font-style: normal; animation: sp-zzz 1.8s ease-in-out infinite; }
+.sp-int__zzz i:nth-child(1) { font-size: 26px; } .sp-int__zzz i:nth-child(2) { font-size: 34px; animation-delay: .3s; } .sp-int__zzz i:nth-child(3) { font-size: 44px; animation-delay: .6s; }
+@keyframes sp-zzz { 0%, 100% { transform: translateY(0); opacity: .55; } 50% { transform: translateY(-8px); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .sp-int__zzz i { animation: none; opacity: .9; } }

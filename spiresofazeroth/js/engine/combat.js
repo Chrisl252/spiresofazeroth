@@ -6,7 +6,7 @@ import {
 } from "./deck.js";
 import { initResources, startOfTurn, endOfTurn, extraDraw, extraEnergy, armTrap, spendRes } from "./resources.js";
 import { buildEnemy, chooseMove, enemyAct, checkPhases } from "./intents.js";
-import { applyStatus, turnStart, turnEnd, roundEnd, modeOf, onAction } from "./status.js";
+import { applyStatus, turnStart, turnEnd, roundEnd, modeOf } from "./status.js";
 import { fire } from "./relics.js";
 import { makeRng } from "./rng.js";
 import { heroicMods } from "./heroic.js";
@@ -64,7 +64,23 @@ export function startCombat(o) {
 
 // Account talents (engine/talents.js talentMods, stamped on run.talents by newRun). Statuses + resource + first-turn energy before the
 // combat-start relics fire; block + draw after the first hand is dealt. Absent (headless sim, old saves) = no-op.
-const TALENT_STATUS = { str: "strength", dex: "dexterity", thorns: "thorns", metal: "metallicize" }; // regen joins after the first turn starts, or its first tick is wasted at full HP
+const TALENT_STATUS = {
+  str: "strength",
+  dex: "dexterity",
+  thorns: "thorns",
+  metal: "metallicize",
+  spell_power: "spell_power",
+  armor: "armor",
+  shield: "shield",
+  rage_gen: "rage_gen",
+  feral: "feral",
+  stealth: "stealth",
+  vampiric: "vampiric_embrace",
+  reincarnation: "reincarnation",
+  windfury: "weapon_imbue_windfury",
+  free_cast: "free_cast",
+  retain_block: "retain_block",
+}; // regen joins after the first turn starts, or its first tick is wasted at full HP
 function applyTalentsStart(C, T) {
   if (!T) return;
   const p = C.player;
@@ -91,6 +107,7 @@ export function startPlayerTurn(C, first = false) {
   C.phase = "player";
   C.endTurnRequested = false;
   C.cardsThisTurn = 0;
+  C.effectDraws = 0; // per-turn cap on effect-driven draws (effects.js MAX_EFFECT_DRAWS_PER_TURN)
   p.windfuryUsed = false;
   if (p.st.retain_block > 0) { p.st.retain_block -= 1; if (p.st.retain_block <= 0) delete p.st.retain_block; }
   else p.block = 0;
@@ -157,7 +174,8 @@ function applyImbues(C, ctx, def) {
   }
   if ((st.weapon_imbue_windfury || st.weapon_imbue_windfury_2) && !C.player.windfuryUsed) {
     C.player.windfuryUsed = true;
-    const dmg = (def.effects || []).filter((e) => e.op === "damage");
+    const bonus = st.weapon_imbue_windfury_2 ? 2 : 0; // Rank 2: the extra strike hits for +2
+    const dmg = (def.effects || []).filter((e) => e.op === "damage").map((e) => (bonus && typeof e.amount === "number" ? { ...e, amount: e.amount + bonus } : e));
     if (dmg.length && t && isAlive(t)) runEffects(ctx, dmg);
   }
 }
@@ -198,7 +216,6 @@ export function playCard(C, uid, targetUid) {
   { const k = C.typeCounts || (C.typeCounts = {}); k[def.type] = (k[def.type] || 0) + 1; }
   if (target) C.lastTarget = target;
   fx(C, { t: "play", uid: inst.uid, id: def.id });
-  onAction(C, p);
   if (C.result) return { ok: true, endTurn: false };
   let fizzled = false;
   if (p.st.madness > 0 && C.rng.chance(Math.min(0.75, p.st.madness * 0.05))) {

@@ -48,7 +48,7 @@ export async function render(app, name) {
       body.append(h("div", { class: "sx-rest__vendor" }, h("h3", { class: "sx-ribbon sx-ribbon--gold" }, zone.vendor.name || "Vendor"), h("p", {}, zone.vendor.text || ""),
         shopPanel(app, openHubShop(run, data), redraw)));
     }
-    const go = h("div", { class: `sx-rest__go ${hub ? "sx-rest__go--flow" : ""}` }, btn(hub ? "Continue the journey" : "Leave the fire", async () => { await leaveScreen(run, data); app.save(); app.route(); }, { size: "lg", auto: true }));
+    const go = h("div", { class: `sx-rest__go ${hub ? "sx-rest__go--flow" : ""}` }, btn(hub ? "Continue the journey" : "Leave the fire", async (e) => { if (e && e.currentTarget) e.currentTarget.disabled = true; await leaveScreen(run, data); app.save(); app.route(); }, { size: "lg", auto: true }));
     if (hub) body.append(go);
     queueMicrotask(() => { stopFire = mountCampfire(canvas, { reduced: () => app.reduced(), paused: () => stage.paused }); });
     return [runBar(app), h("div", { class: "sx-rest__glow", "aria-hidden": "true" }), canvas, body, hub ? null : go];

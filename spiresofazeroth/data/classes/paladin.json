@@ -750,27 +750,27 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Draw 1 card. Gain 1 Energy next turn. Seal: Judgement gains 2 Energy and draws 2 cards.",
+      "text": "Draw 1 card. Gain 1 Energy next turn. Seal: Judgement gains 1 Energy and draws 2 cards.",
       "effects": [
         {"op": "draw", "count": 1},
         {"op": "energy_next_turn", "amount": 1},
         {"op": "set_seal", "value": "wisdom"}
       ],
       "onJudge": [
-        {"op": "gain_energy", "amount": 2},
+        {"op": "gain_energy", "amount": 1},
         {"op": "draw", "count": 2}
       ],
       "upgrade": {
         "name": "Seal of Wisdom (Rank 2)",
         "cost": 1,
-        "text": "Draw 2 cards. Gain 1 Energy next turn. Seal: Judgement gains 2 Energy and draws 3 cards.",
+        "text": "Draw 2 cards. Gain 1 Energy next turn. Seal: Judgement gains 1 Energy and draws 3 cards.",
         "effects": [
           {"op": "draw", "count": 2},
           {"op": "energy_next_turn", "amount": 1},
           {"op": "set_seal", "value": "wisdom"}
         ],
         "onJudge": [
-          {"op": "gain_energy", "amount": 2},
+          {"op": "gain_energy", "amount": 1},
           {"op": "draw", "count": 3}
         ]
       }

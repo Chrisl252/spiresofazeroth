@@ -118,6 +118,10 @@ export function createHud(host, app, o = {}) {
     if (e.st.veiled) { wrap.append(h("span", { class: "sp-int__unk" }, "?")); tip(wrap, "<b>Veiled</b><br>You cannot see this enemy's next move."); return wrap; }
     const info = intentInfo(C, e);
     if (!info) { wrap.append(h("span", { class: "sp-int__unk" }, "?")); return wrap; }
+    if (info.dazed) { // risen undead: knocked out for a turn, no attack queued
+      wrap.classList.add("is-dazed"); wrap.append(h("span", { class: "sp-int__zzz" }, h("i", {}, "Z"), h("i", {}, "z"), h("i", {}, "z")));
+      wrap.setAttribute("aria-label", `${e.name} is dazed`); tip(wrap, "<b>Dazed</b><br>It just rose again and skips its next action."); return wrap;
+    }
     const parts = [];
     if (info.dmg > 0) {
       const multi = info.hits > 1;

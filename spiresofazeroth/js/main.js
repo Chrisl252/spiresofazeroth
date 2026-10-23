@@ -1,5 +1,5 @@
 // Boot + router only. Screens live in js/ui/*, rules in js/engine/*. A screen module exports render(app, name) -> Element.
-import { BUILD } from "./version.js";
+const { BUILD } = await import(`./version.js${new URL(import.meta.url).search}`);
 import { createData, browserFetcher } from "./engine/data.js";
 import { cardDef } from "./engine/deck.js";
 import { ensureGear } from "./engine/gear.js";
@@ -10,6 +10,8 @@ import { mountStage } from "./stage/stage.js";
 import { zone as zoneAudio } from "./audio/zone.js";
 import { installPauseMenu } from "./ui/pauseMenu.js";
 import { installCardInspect } from "./ui/cardInspect.js";
+import { openGearBag } from "./ui/gearBag.js";
+import { installController } from "./controller.js";
 
 const SCREENS = {
   title: "title", classSelect: "classSelect", codex: "codex", settings: "settings", talents: "talents",
@@ -39,6 +41,7 @@ const app = {
   reduced: () => app.meta.settings.reducedMotion === true || (app.meta.settings.reducedMotion === null && matchMedia("(prefers-reduced-motion: reduce)").matches),
   delay: (ms) => (app.reduced() ? 0 : ms * (app.meta.settings.speedMul > 0 ? 1 / app.meta.settings.speedMul : ({ slow: 1.6, normal: 1, fast: 0.45 }[app.meta.settings.speed] || 1))),
   save() { saveMeta(app.meta); if (app.run) { if (app.run.screen === "end") clearRun(); else saveRun(app.run); } },
+  showGear: () => openGearBag(app),
   refreshLocks() { data.setLocked(lockedCardIds(app.meta, data.unlocks)); }, // card unlock tiers -> reward / shop pools (engine/talents.js)
   showDeck: () => modal("Your deck", deckView(app)),
   async go(name, props) {
@@ -61,19 +64,30 @@ const app = {
   },
   route() { return app.go(app.run ? app.run.screen : "title"); },
   async resume() {
-    const r = loadRun();
-    if (!r) return false;
-    await data.loadClass(r.classId);
-    data.setClass(r.classId);
-    for (const id of r.zonesVisited) await data.loadZone(id);
-    ensureGear(r, data); // gear: legacy relic ids -> gear slots
-    app.run = r;
-    return true;
+    try {
+      const r = loadRun();
+      if (!r) return false;
+      if (!Array.isArray(r.zonesVisited)) r.zonesVisited = [];
+      if (r.zoneId && !r.zonesVisited.includes(r.zoneId)) r.zonesVisited.push(r.zoneId);
+      if (r.classId) {
+        await data.loadClass(r.classId);
+        data.setClass(r.classId);
+      }
+      for (const id of r.zonesVisited) await data.loadZone(id);
+      if (r.zoneId) await data.loadZone(r.zoneId);
+      ensureGear(r, data); // gear: legacy relic ids -> gear slots
+      app.run = r;
+      return true;
+    } catch (e) {
+      console.error("[spires] resume error:", e);
+      return false;
+    }
   },
   abandon() { clearRun(); app.run = null; return app.go("title"); },
 };
 
 import(`./ui/bugReport.js?v=${BUILD}`).then((m) => m.mountBugReport(app, stage)).catch(() => {}); // floating bug-report button
+import(`./ui/patchNotes.js?v=${BUILD}`).then((m) => m.installPatchNotes(app)).catch((e) => console.warn("[spires] patch notes:", e)); // patch notes + "update available" pill
 appReady = true;
 
 function prewarmGame(app) {
@@ -101,7 +115,7 @@ function prewarmGame(app) {
 
 async function boot() {
   root.append(h("p", { class: "sp-center sp-dim" }, "Loading the spires..."));
-  window.addEventListener("unhandledrejection", () => {});
+  window.addEventListener("unhandledrejection", (e) => console.error("[spires] unhandledrejection:", e && e.reason));
   try {
     await data.load();
     if (!data.classIds.length) throw new Error("data/classes/index.json missing");
@@ -116,5 +130,6 @@ async function boot() {
 }
 installPauseMenu(app); // Escape menu + site keybind lockout (js/ui/pauseMenu.js)
 installCardInspect(app); // hover a card -> keyword/stance explanations beside it (js/ui/cardInspect.js)
+installController(app); // Gamepad & Controller support (js/controller.js)
 window.__spires = app; // debugging + smoke tests
 boot();

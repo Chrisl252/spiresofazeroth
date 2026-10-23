@@ -1,11 +1,18 @@
-// Floating bug-report button (draggable, remembers where you left it) + a small report form. Posts to /api/spires/bug, which emails the site.
+// Floating bug-report button (draggable, remembers where you left it) + a small report form.
+// "Email report" POSTs to /api/spires/bug, which emails Chris; mailto is the fallback if SMTP is down.
 // Starts bottom-left next to the draw pile. Lives on the stage root, so it scales with the 1920x1080 design space.
 import { h, clear } from "./dom.js";
 import { BUILD } from "../version.js";
 
 const KEY = "spires.bugBtn", ENDPOINT = "/api/spires/bug", START = { x: 184, y: 1080 - 42 - 56 }, SIZE = 56, DESIGN = { w: 1920, h: 1080 };
 const BUG_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14" rx="5" ry="6.5"/><path d="M9.5 7.6 8 5M14.5 7.6 16 5M7 11H3.5M17 11h3.5M7.2 15.5H4M16.8 15.5H20M8 19.5l-2 2M16 19.5l2 2M12 7.5v13"/></svg>';
-const ISSUES = "https://github.com/Chrisl252/spiresofazeroth/issues/new";
+const FALLBACK_EMAIL = "bugs@example.com";
+const SAY = {
+  send: "Email report",
+  sending: "Sending...",
+  thanks: "Thanks! Report emailed.",
+  alt: "Open in your email app instead",
+};
 
 const load = () => { try { const p = JSON.parse(localStorage.getItem(KEY)); if (p && isFinite(p.x) && isFinite(p.y)) return p; } catch (e) { /* storage blocked */ } return null; };
 const save = (p) => { try { localStorage.setItem(KEY, JSON.stringify(p)); } catch (e) { /* storage blocked */ } };
@@ -36,8 +43,9 @@ function buildMailtoUrl(reportText, emailVal, ctx) {
     "",
     "--- context ---",
     ...Object.entries(ctx).map(([k, v]) => `${k}: ${v}`),
+    `contact: ${emailVal || "-"}`,
   ];
-  return `${ISSUES}?title=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+  return `mailto:${FALLBACK_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
 }
 
 export function mountBugReport(app, stage) {
@@ -70,7 +78,7 @@ export function mountBugReport(app, stage) {
     const ta = h("textarea", { placeholder: "What happened? What did you expect?", maxlength: 2000, "aria-label": "Describe the bug" });
     const em = h("input", { type: "email", placeholder: "Your email (optional, only if you want a reply)", maxlength: 254, "aria-label": "Email" });
     const hp = h("input", { class: "sp-bugp__hp", type: "text", name: "website", tabindex: "-1", autocomplete: "off", "aria-hidden": "true" });
-    const send = h("button", { class: "sp-wowbtn sp-wowbtn--sm", type: "button" }, "Send report");
+    const send = h("button", { class: "sp-wowbtn sp-wowbtn--sm", type: "button" }, SAY.send);
     const cancel = h("button", { class: "sp-wowbtn sp-wowbtn--sm", type: "button" }, "Close");
     const box = h("div", { class: "sp-bugp__box", role: "dialog", "aria-modal": "true", "aria-label": "Report a bug" },
       h("h3", {}, "Report a bug"), h("p", {}, "Tell us what went wrong. Your class, floor and build are attached automatically."), ta, em, hp, h("div", { class: "sp-bugp__row" }, msg, cancel, send));
@@ -78,6 +86,7 @@ export function mountBugReport(app, stage) {
     const close = () => { document.removeEventListener("keydown", onKey, true); wrap.remove(); };
     const onKey = (e) => { if (e.key === "Escape") { e.stopPropagation(); close(); } };
     document.addEventListener("keydown", onKey, true);
+    wrap.addEventListener("keydown", (e) => e.stopPropagation()); // typing here must never reach the game's key handlers
     wrap.addEventListener("pointerdown", (e) => { if (e.target === wrap) close(); });
     cancel.addEventListener("click", close);
     function showFallback(errText, reportText, emailVal, ctx) {
@@ -88,11 +97,13 @@ export function mountBugReport(app, stage) {
         class: "sp-bugp__fallback",
         target: "_blank",
         rel: "noopener noreferrer",
-      }, "Open a GitHub issue");
+      }, SAY.alt);
       msg.append(document.createTextNode(`${errText} `), link);
     }
 
-    send.addEventListener("click", async () => {
+    send.addEventListener("click", () => { viaSite(); });
+
+    async function viaSite() {
       const text = ta.value.trim();
       if (text.length < 5) {
         clear(msg);
@@ -101,7 +112,7 @@ export function mountBugReport(app, stage) {
       }
       send.disabled = true;
       clear(msg);
-      msg.textContent = "Sending...";
+      msg.textContent = SAY.sending;
       const emailVal = em.value.trim();
       const ctx = context(app);
       let success = false;
@@ -109,10 +120,10 @@ export function mountBugReport(app, stage) {
       try {
         let signal;
         if (typeof AbortSignal !== "undefined" && typeof AbortSignal.timeout === "function") {
-          signal = AbortSignal.timeout(10000);
+          signal = AbortSignal.timeout(12000);
         } else if (typeof AbortController !== "undefined") {
           const controller = new AbortController();
-          timer = setTimeout(() => controller.abort(), 10000);
+          timer = setTimeout(() => controller.abort(), 12000);
           signal = controller.signal;
         }
 
@@ -123,19 +134,21 @@ export function mountBugReport(app, stage) {
           signal,
         });
         const j = await r.json().catch(() => ({}));
-        if (r.ok && j.ok) {
+        if (r.ok && j.ok && j.emailed !== false) {
           success = true;
           clear(msg);
-          msg.textContent = "Thanks! Report sent.";
+          msg.textContent = SAY.thanks;
           ta.value = "";
           setTimeout(close, 1400);
           return;
         }
-        const err = j.error || (r.status ? `Server returned ${r.status}.` : "Could not send.");
+        const err = j.emailed === false
+          ? "Saved, but email did not send."
+          : (j.error || (r.status ? `Server returned ${r.status}.` : "Could not send."));
         showFallback(err, text, emailVal, ctx);
       } catch (e) {
         const isTimeout = e && (e.name === "TimeoutError" || e.name === "AbortError");
-        const err = isTimeout ? "Request timed out (10s)." : "Could not reach the server.";
+        const err = isTimeout ? "Request timed out (12s)." : "Could not reach the server.";
         showFallback(err, text, emailVal, ctx);
       } finally {
         if (timer) clearTimeout(timer);
@@ -143,7 +156,7 @@ export function mountBugReport(app, stage) {
           send.disabled = false;
         }
       }
-    });
+    }
     stage.root.append(wrap);
     ta.focus();
   }

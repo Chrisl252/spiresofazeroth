@@ -14,7 +14,7 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "str",
+      "key": "spell_power",
       "per": 1
      }
     },
@@ -27,42 +27,42 @@
      "max": 1,
      "effect": {
       "key": "thorns",
-      "per": 2
+      "per": 3
      }
     },
     {
      "id": "druid:balance:2",
-     "name": "Improved Nature's Grasp",
-     "icon": "spell_nature_natureswrath",
+     "name": "Improved Moonfire",
+     "icon": "spell_nature_starfall",
      "tier": 2,
      "col": 0,
-     "max": 4,
+     "max": 5,
      "effect": {
-      "key": "thorns",
+      "key": "spell_power",
       "per": 1
      }
     },
     {
      "id": "druid:balance:3",
-     "name": "Improved Entangling Roots",
-     "icon": "spell_nature_stranglevines",
+     "name": "Improved Thorns",
+     "icon": "spell_nature_thorns",
      "tier": 2,
      "col": 1,
      "max": 3,
      "effect": {
-      "key": "block",
+      "key": "thorns",
       "per": 2
      }
     },
     {
      "id": "druid:balance:4",
-     "name": "Improved Moonfire",
-     "icon": "spell_nature_starfall",
+     "name": "Omen of Clarity",
+     "icon": "spell_nature_crystalball",
      "tier": 3,
      "col": 0,
-     "max": 5,
+     "max": 1,
      "effect": {
-      "key": "str",
+      "key": "free_cast",
       "per": 1
      }
     },
@@ -80,61 +80,61 @@
     },
     {
      "id": "druid:balance:6",
-     "name": "Natural Shapeshifter",
-     "icon": "spell_nature_wispsplode",
+     "name": "Nature's Reach",
+     "icon": "spell_nature_naturetouchgrow",
      "tier": 4,
      "col": 0,
-     "max": 3,
-     "effect": {
-      "key": "energy1",
-      "per": 1
-     }
-    },
-    {
-     "id": "druid:balance:7",
-     "name": "Improved Thorns",
-     "icon": "spell_nature_thorns",
-     "tier": 4,
-     "col": 1,
-     "max": 3,
-     "effect": {
-      "key": "thorns",
-      "per": 1
-     }
-    },
-    {
-     "id": "druid:balance:8",
-     "name": "Omen of Clarity",
-     "icon": "spell_nature_crystalball",
-     "tier": 5,
-     "col": 0,
-     "max": 1,
+     "max": 2,
      "effect": {
       "key": "draw1",
       "per": 1
      }
     },
     {
+     "id": "druid:balance:7",
+     "name": "Vengeance",
+     "icon": "spell_nature_purge",
+     "tier": 4,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "spell_power",
+      "per": 1
+     }
+    },
+    {
+     "id": "druid:balance:8",
+     "name": "Moonfury",
+     "icon": "spell_nature_starfall",
+     "tier": 5,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "spell_power",
+      "per": 2
+     }
+    },
+    {
      "id": "druid:balance:9",
-     "name": "Nature's Reach",
-     "icon": "spell_nature_naturetouchgrow",
+     "name": "Dreamstate",
+     "icon": "spell_nature_wispsplode",
      "tier": 5,
      "col": 1,
-     "max": 2,
+     "max": 3,
      "effect": {
-      "key": "goldpct",
-      "per": 5
+      "key": "res",
+      "per": 15
      }
     },
     {
      "id": "druid:balance:10",
-     "name": "Vengeance",
-     "icon": "spell_nature_purge",
+     "name": "Wrath of Cenarius",
+     "icon": "spell_nature_naturesblessing",
      "tier": 6,
      "col": 0,
-     "max": 5,
+     "max": 2,
      "effect": {
-      "key": "dex",
+      "key": "energy1",
       "per": 1
      }
     },
@@ -146,8 +146,8 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "hp",
-      "per": 10
+      "key": "spell_power",
+      "per": 4
      }
     }
    ]
@@ -165,8 +165,8 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "str",
-      "per": 1
+      "key": "res",
+      "per": 2
      }
     },
     {
@@ -177,7 +177,7 @@
      "col": 1,
      "max": 5,
      "effect": {
-      "key": "res",
+      "key": "str",
       "per": 1
      }
     },
@@ -189,7 +189,7 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "dex",
+      "key": "stealth",
       "per": 1
      }
     },
@@ -213,7 +213,7 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "block",
+      "key": "armor",
       "per": 1
      }
     },
@@ -231,62 +231,62 @@
     },
     {
      "id": "druid:feral:6",
-     "name": "Feral Charge",
-     "icon": "ability_hunter_pet_bear",
+     "name": "Sharpened Claws",
+     "icon": "inv_misc_monsterclaw_04",
      "tier": 4,
      "col": 0,
-     "max": 1,
+     "max": 3,
      "effect": {
-      "key": "res",
+      "key": "feral",
       "per": 2
      }
     },
     {
      "id": "druid:feral:7",
-     "name": "Sharpened Claws",
-     "icon": "inv_misc_monsterclaw_04",
+     "name": "Predatory Strikes",
+     "icon": "ability_hunter_pet_cat",
      "tier": 4,
      "col": 1,
      "max": 3,
      "effect": {
       "key": "str",
-      "per": 1
+      "per": 2
      }
     },
     {
      "id": "druid:feral:8",
-     "name": "Improved Shred",
-     "icon": "spell_shadow_vampiricaura",
-     "tier": 5,
-     "col": 0,
-     "max": 2,
-     "effect": {
-      "key": "res",
-      "per": 1
-     }
-    },
-    {
-     "id": "druid:feral:9",
-     "name": "Predatory Strikes",
-     "icon": "ability_hunter_pet_cat",
-     "tier": 5,
-     "col": 1,
-     "max": 3,
-     "effect": {
-      "key": "str",
-      "per": 1
-     }
-    },
-    {
-     "id": "druid:feral:10",
      "name": "Blood Frenzy",
      "icon": "ability_ghoulfrenzy",
-     "tier": 6,
+     "tier": 5,
      "col": 0,
      "max": 2,
      "effect": {
       "key": "regen",
+      "per": 3
+     }
+    },
+    {
+     "id": "druid:feral:9",
+     "name": "Savage Fury",
+     "icon": "ability_druid_ravage",
+     "tier": 5,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "feral",
       "per": 2
+     }
+    },
+    {
+     "id": "druid:feral:10",
+     "name": "Leader of the Pack",
+     "icon": "spell_nature_unyeildingstamina",
+     "tier": 6,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "draw1",
+      "per": 1
      }
     },
     {
@@ -295,10 +295,10 @@
      "icon": "spell_holy_blessingofagility",
      "tier": 6,
      "col": 1,
-     "max": 5,
+     "max": 1,
      "effect": {
       "key": "hp",
-      "per": 4
+      "per": 16
      }
     }
    ]
@@ -316,7 +316,7 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "dex",
+      "key": "armor",
       "per": 1
      }
     },
@@ -329,7 +329,7 @@
      "max": 5,
      "effect": {
       "key": "res",
-      "per": 1
+      "per": 10
      }
     },
     {
@@ -341,7 +341,7 @@
      "max": 5,
      "effect": {
       "key": "heal",
-      "per": 6
+      "per": 8
      }
     },
     {
@@ -353,7 +353,7 @@
      "max": 5,
      "effect": {
       "key": "block",
-      "per": 1
+      "per": 2
      }
     },
     {
@@ -370,86 +370,86 @@
     },
     {
      "id": "druid:restoration:5",
-     "name": "Reflection",
-     "icon": "spell_frost_windwalkon",
+     "name": "Insect Swarm",
+     "icon": "spell_nature_insectswarm",
      "tier": 3,
      "col": 1,
-     "max": 3,
+     "max": 1,
      "effect": {
-      "key": "goldpct",
+      "key": "thorns",
       "per": 4
      }
     },
     {
      "id": "druid:restoration:6",
-     "name": "Insect Swarm",
-     "icon": "spell_nature_insectswarm",
+     "name": "Subtlety",
+     "icon": "ability_eyeoftheowl",
      "tier": 4,
      "col": 0,
-     "max": 1,
+     "max": 5,
      "effect": {
-      "key": "thorns",
-      "per": 3
+      "key": "hp",
+      "per": 4
      }
     },
     {
      "id": "druid:restoration:7",
-     "name": "Subtlety",
-     "icon": "ability_eyeoftheowl",
-     "tier": 4,
-     "col": 1,
-     "max": 5,
-     "effect": {
-      "key": "hp",
-      "per": 3
-     }
-    },
-    {
-     "id": "druid:restoration:8",
-     "name": "Tranquil Spirit",
-     "icon": "spell_holy_elunesgrace",
-     "tier": 5,
-     "col": 0,
-     "max": 5,
-     "effect": {
-      "key": "regen",
-      "per": 1
-     }
-    },
-    {
-     "id": "druid:restoration:9",
      "name": "Improved Rejuvenation",
      "icon": "spell_nature_rejuvenation",
-     "tier": 5,
+     "tier": 4,
      "col": 1,
      "max": 3,
      "effect": {
       "key": "regen",
+      "per": 2
+     }
+    },
+    {
+     "id": "druid:restoration:8",
+     "name": "Gift of Nature",
+     "icon": "spell_nature_protectionformnature",
+     "tier": 5,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "heal",
+      "per": 8
+     }
+    },
+    {
+     "id": "druid:restoration:9",
+     "name": "Nature's Swiftness",
+     "icon": "spell_nature_ravenform",
+     "tier": 5,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "free_cast",
       "per": 1
      }
     },
     {
      "id": "druid:restoration:10",
-     "name": "Gift of Nature",
-     "icon": "spell_nature_protectionformnature",
+     "name": "Empowered Touch",
+     "icon": "spell_nature_healingtouch",
      "tier": 6,
      "col": 0,
-     "max": 5,
+     "max": 3,
      "effect": {
       "key": "heal",
-      "per": 6
+      "per": 10
      }
     },
     {
      "id": "druid:restoration:11",
-     "name": "Swiftmend",
+     "name": "Swiftmend & Tranquility",
      "icon": "inv_relics_idolofrejuvenation",
      "tier": 6,
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "draw1",
-      "per": 1
+      "key": "regen",
+      "per": 5
      }
     }
    ]

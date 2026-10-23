@@ -5,6 +5,7 @@ import { summarize } from "../engine/run.js";
 import { cssReady, btn, ico, scroll } from "./kit.js";
 import { mountPortrait } from "./combatKit.js";
 import { gearLevel } from "../engine/gear.js";
+import { recordRunAggregate } from "./runTelemetry.js";
 
 export const stageNative = true;
 
@@ -31,6 +32,7 @@ export async function render(app) {
   if (!run.endRecorded) {
     run.endRecorded = true;
     unlocked = recordRunEnd(meta, run, data.classIds, data.unlocks);
+    recordRunAggregate(run, meta);
     if (app.refreshLocks) app.refreshLocks();
     run.unlocked = unlocked;
     track("run_end", { class: run.classId, act: run.act, victory: run.result === "victory" ? 1 : 0, floor: run.floor + 1 });

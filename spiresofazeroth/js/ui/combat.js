@@ -21,6 +21,10 @@ export const stageNative = true;
 
 export function render(app) {
   const { run, data, stage } = app;
+  if (!run || !run.pending || !run.pending.encounter) {
+    if (run) run.screen = "map";
+    return app.go("map");
+  }
   if (!app.C || app.C.run !== run) app.C = beginCombat(run, data, { interactive: true });
   const C = app.C;
   const st = { pot: null, busy: false, booting: true, done: false, picks: new Set(), lastPlayed: null, prev: [] };
@@ -63,6 +67,23 @@ export function render(app) {
     onAim: (inst, targetUid) => aimPreview(inst, targetUid), // StS2 damage ghosts on the enemy HP bars
   });
   root.append(pendingHost);
+
+  app._combat = {
+    C,
+    st,
+    hand,
+    hud,
+    playerTurn,
+    doPlay,
+    endTurn: () => endTurnFlow(),
+    usePotion: (i, targetUid) => usePotionFlow(i, targetUid),
+    potAim: (i, pot, el, ev) => potAim(i, pot, el, ev),
+    spare: (uid) => spareFlow(uid),
+    showPile: (kind) => showPile(kind),
+    aimPreview: (inst, targetUid) => aimPreview(inst, targetUid),
+    clearAimPreview: () => hud.clearPreview(),
+    update,
+  };
 
   const instOf = (uid) => C.pile.hand.find((c) => c.uid === uid);
   const sortedDefs = (list) => list.slice().sort((a, b) => (a.def.name > b.def.name ? 1 : -1));
@@ -262,6 +283,7 @@ export function render(app) {
     hand.lock(true);
     const lost = C.result === "lose" || (C.player && C.player.hp <= 0);
     if (lost && K && K.actors && K.actors.get("player")) await safe(K.actors.death("player"), "hero-death", 2500);
+    if (C.result === "retreat" && K && K.fx) K.fx.banner("You hearth away");
     afterCombat(run, data, C);
     app.C = null;
     app.save();
@@ -333,7 +355,7 @@ export function render(app) {
 
   const keys = (ev) => {
     if (!root.isConnected) { cleanup(); return; }
-    if (ev.target.tagName === "INPUT") return;
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test(ev.target.tagName) || ev.target.isContentEditable || document.querySelector(".sp-bugp")) return;
     if ((ev.key.toLowerCase() === "e" || ev.key === " ") && !ev.ctrlKey && !ev.metaKey && playerTurn() && !hand.selected()) { if (ev.key === " ") ev.preventDefault(); endTurnFlow(); } // E or Space ends the turn (README); Space on a focused card still selects it (the card handler stops propagation)
     else if (ev.key === "Escape" && st.pot !== null) { st.pot = null; update(); }
   };
@@ -342,6 +364,7 @@ export function render(app) {
   let cleaned = false;
   function cleanup() {
     if (cleaned) return; cleaned = true;
+    if (app._combat && app._combat.C === C) app._combat = null;
     if (st.closeTips) st.closeTips();
     document.removeEventListener("keydown", keys); hand.destroy();
     if (mo) mo.disconnect();

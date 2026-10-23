@@ -3,7 +3,7 @@ import { spawnSync } from "node:child_process";
 import { mkdirSync } from "node:fs";
 const [outDir = "shots", only = "", vp = ""] = process.argv.slice(2);
 mkdirSync(outDir, { recursive: true });
-const BASE = "http://127.0.0.1:8766/spiresofazeroth/";
+const BASE = "htt<local path>";
 const HEAD = `[...document.querySelectorAll('button')].find(b=>/Essential only/.test(b.textContent))?.click(); const a=window.__spires; const R=await import('/spiresofazeroth/js/engine/run.js');
 const mk=async(cls)=>{cls=cls||'warrior'; await a.data.loadClass(cls); a.data.setClass(cls); const run=R.newRun(a.data,{classId:cls,continent:'ek',seed:'shot1',heroic:0,pet:null}); a.run=run; await R.prepareZonePick(run,a.data); return run;};
 const inMap=async(cls,fl)=>{const run=await mk(cls); await R.chooseZone(run,a.data,run.pending.options[0]); run.floor=fl; run.col=0; run.hp=Math.round(run.maxHp*0.7); return run;};

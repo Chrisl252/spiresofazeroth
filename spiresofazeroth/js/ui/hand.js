@@ -12,6 +12,12 @@ import { cardEl } from "./card.js";
 import { cardSounds } from "./cardSounds.js";
 
 const CW = 260, CH = 380;
+// hud.js LANES start at 1180 with a 240px plate; HP sits under the feet. A raised card must stay left of that bar.
+export const ENEMY_HP_LEFT = 1180 - 120;
+export function aimedCardX(x, sc, isPortrait) {
+  if (isPortrait) return x;
+  return Math.min(x, ENEMY_HP_LEFT - 16 - (CW * sc) / 2);
+}
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
 export function createHand(host, o) {
@@ -55,12 +61,16 @@ export function createHand(host, o) {
       if (S.drag && S.drag.it === it) return;
       const t = n <= 1 ? 0 : (i - (n - 1) / 2) / ((n - 1) / 2);
       let x = cx + (i - (n - 1) / 2) * spacing, y = h - tuck + (CH * s) / 2 + t * t * 22, rot = t * 14 * Math.min(1, n / 5), sc = s, z = 10 + i;
+      if (!portrait() && t > 0) y += t * 56; // right-fan rotation lifts the top-left corner; drop those cards so they miss enemy HP
       if (hi >= 0 && i !== hi) { const d = i - hi, sign = Math.sign(d); x += sign * (88 / Math.abs(d) ** 0.8) * (portrait() ? 0.5 : 1); }
       if (i === hi) {
         const sel = S.sel === it.inst.uid;
         rot = 0; z = 80;
         if (portrait()) { sc = sel ? 1.5 : 1.18; y = sel ? h - CH * sc / 2 - 200 : h - (CH * s) / 2 - 26 - 60; }
-        else { sc = HOVER; y = h - (CH * sc) / 2 - 24 - (sel ? 50 : 0); }
+        else {
+          sc = HOVER;
+          y = h - (CH * sc) / 2 - 18 - (sel ? 36 : 0);
+        }
       }
       it.rest = { x, y, rot, sc };
       it.el.classList.toggle("is-hover", i === hi);
@@ -321,7 +331,7 @@ export function createHand(host, o) {
       // StS2: an aimed card parks raised at the hand centre and never follows the pointer onto the enemies; the arrow does the travelling
       if (!dr.pos) {
         const sc = portrait() ? 1.0 : HOVER;
-        dr.pos = portrait() ? { x: size().w / 2, y: h - 760 } : { x: size().w / 2 + 20, y: h - (CH * sc) / 2 - 24 };
+        dr.pos = portrait() ? { x: size().w / 2, y: h - 760 } : { x: aimedCardX(size().w / 2 + 20, sc, false), y: h - (CH * sc) / 2 - 18 };
         dr.it.el.style.transition = ""; place(dr.it, dr.pos.x, dr.pos.y, 0, sc, 90);
       }
     } else {
@@ -391,7 +401,7 @@ export function createHand(host, o) {
   }
   function onKey(e) {
     if (!layer.isConnected) return api.destroy();
-    if (S.locked || e.target.tagName === "INPUT" || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (S.locked || /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) || e.target.isContentEditable || document.querySelector(".sp-bugp") || e.ctrlKey || e.metaKey || e.altKey) return;
     const n = parseInt(e.key, 10);
     if (n >= 1 && n <= 9 && items[n - 1]) {
       const id = items[n - 1].inst.uid;
@@ -465,6 +475,38 @@ export function createHand(host, o) {
     elOf(id) { const it = byId(id); return it ? it.el : null; },
     selected: () => S.sel,
     aimFrom, aiming: () => !!S.ext,
+    cards: () => items.map((it) => it.inst),
+    cardElements: () => items.map((it) => it.el),
+    hoverCard(uid) {
+      if (S.drag || S.locked) return;
+      S.hover = uid || null;
+      layout();
+      fireAim(null);
+    },
+    getHovered: () => S.hover,
+    playSelected(targetUid) {
+      const it = S.sel ? byId(S.sel) : (S.hover ? byId(S.hover) : null);
+      if (!it) return false;
+      return tryPlay(it, targetUid || null);
+    },
+    setAimTarget(uid) {
+      const en = uid ? document.querySelector(`.sp-eplate[data-uid="${uid}"]`) : null;
+      S.tapTarget = uid || null;
+      setEnemyMark(en, "tap");
+      if (en) {
+        const r = en.getBoundingClientRect();
+        const p = stage.toStage(r.left + r.width / 2, r.top + r.height * 0.35);
+        S.ptr = { x: p.x, y: p.y, cx: r.left + r.width / 2, cy: r.top + r.height * 0.35 };
+      }
+    },
+    toggleKeywordTip(force) {
+      if (force === false || (force === undefined && kwtip.style.display !== "none")) {
+        kwtip.style.display = "none";
+      } else {
+        const it = (S.sel && byId(S.sel)) || (S.hover && byId(S.hover));
+        if (it) placeTip(it);
+      }
+    },
     destroy() {
       document.removeEventListener("pointermove", onDocMove, true); document.removeEventListener("pointerdown", onDocDown, true); document.removeEventListener("keydown", onKey);
       clearAim(); if (unResize) unResize(); layer.remove(); canvas.remove(); kwtip.remove();

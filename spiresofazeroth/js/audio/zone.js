@@ -3,20 +3,27 @@
 // Seam: stage.setBackdrop(zoneId) -> zone.enter(zoneId) (one call site, stage.js); router -> zone.screen(name, app) (one call site, main.js).
 // Browsers block audio until a gesture: enter() just records the zone; the first pointerdown/keydown starts everything.
 // Honours the Settings "Sound effects" toggle (sfx.muted) and a separate Music volume (0-100, localStorage spires.music.volume).
-import { resolveSoundUrl } from "../audio.js";
+import { resolveSoundUrl, soundsReady } from "../audio.js";
 import { sfx } from "../audio.js";
 
 const FADE = 1.2;            // seconds, crossfade both ways
-const DUCK = 0.5;            // -6 dB music while a fight is on (ambience stays)
-const AMB_LEVEL = 0.8;       // ambience relative to the Music slider
+const DUCK_MUSIC = 0.75;     // music in combat (-2.5 dB: stays audible, avoids sudden silence)
+const DUCK_AMB = 0.35;       // ambience ducked heavily in combat so SFX & music lead
 const VKEY = "spires.music.volume";
-const store = { get() { try { return localStorage.getItem(VKEY); } catch (e) { return null; } }, set(v) { try { localStorage.setItem(VKEY, String(v)); } catch (e) { /* private mode */ } } };
+const A_VOL_KEY = "spires.ambience.volume";
+const A_MODE_KEY = "spires.ambience.mode";
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, String(v)); } catch (e) { /* private mode */ } }
+};
 
 // ?mute=1 (owner rule for tests): no Audio element is ever created.
 const MUTE = (() => { try { return new URLSearchParams(location.search).get("mute") === "1"; } catch (e) { return false; } })();
 let table = null, loading = null, unlocked = false, hidden = false;
 let want = null;                                   // last zone id asked for
-let vol = (() => { const n = parseInt(store.get(), 10); return Number.isFinite(n) ? Math.max(0, Math.min(100, n)) : 60; })();
+let vol = (() => { const n = parseInt(store.get(VKEY), 10); return Number.isFinite(n) ? Math.max(0, Math.min(100, n)) : 60; })();
+let ambVol = (() => { const n = parseInt(store.get(A_VOL_KEY), 10); return Number.isFinite(n) ? Math.max(0, Math.min(100, n)) : 30; })();
+let ambMode = (() => { const m = store.get(A_MODE_KEY); return ["occasional", "continuous", "off"].includes(m) ? m : "occasional"; })();
 let duck = false, bossOn = false, curKey = null, curAmb = null, lastMode = "";
 const music = [];                                  // voices: {el, g, t, kind}
 const amb = [];
@@ -26,23 +33,49 @@ const canOgg = () => { if (ext === null) { try { ext = new Audio().canPlayType('
 const fixUrl = (u) => (canOgg() ? u : u.replace(/\.ogg$/, ".mp3"));
 
 function load() {
-  if (!loading) loading = fetch(new URL("../../data/sounds/zones.json", import.meta.url)).then((r) => r.json()).then((j) => (table = j)).catch(() => (table = {}));
+  if (!loading) {
+    loading = Promise.all([
+      fetch(new URL("../../data/sounds/zones.json", import.meta.url)).then((r) => r.json()).then((j) => (table = j)).catch(() => (table = {})),
+      soundsReady
+    ]).then(([t]) => t);
+  }
   return loading;
 }
 function level(kind) {
   if (hidden) return 0;
-  const mVol = vol / 100;
-  if (mVol <= 0) return 0;
-  return mVol * (kind === "amb" ? AMB_LEVEL : 1);
+  if (kind === "music") {
+    return vol / 100;
+  }
+  if (kind === "amb") {
+    if (ambMode === "off" || ambVol <= 0) return 0;
+    return ambVol / 100;
+  }
+  return 1;
 }
 
 function voice(list, url, kind, loop) {
   if (MUTE) return null;
+  if (kind === "amb" && (ambMode === "off" || ambVol <= 0)) return null;
   url = url ? fixUrl(url) : null;
   if (!url) return null;
   let el; try { el = new Audio(resolveSoundUrl(url)); } catch (e) { return null; }
-  el.loop = !!loop; el.preload = "auto";
-  const v = { el, g: 0, t: 1, kind, url, queued: false };
+  el.preload = "auto";
+  const v = { el, g: 0, t: 1, kind, url, queued: false, oneShot: false };
+  if (kind === "amb") {
+    if (ambMode === "continuous") {
+      el.addEventListener("loadedmetadata", () => {
+        if (el.duration >= 25) { el.loop = true; v.oneShot = false; }
+        else { el.loop = false; v.oneShot = true; }
+      });
+      el.loop = false;
+      v.oneShot = true;
+    } else {
+      el.loop = false;
+      v.oneShot = true;
+    }
+  } else {
+    el.loop = !!loop;
+  }
   list.push(v);
   el.volume = 0;
   const p = el.play(); if (p && p.catch) p.catch(() => { v.t = 0; v.dead = true; });
@@ -57,9 +90,23 @@ function tick() {
       const v = list[i];
       const step = dt / FADE;
       v.g = v.t > v.g ? Math.min(v.t, v.g + step) : Math.max(v.t, v.g - step);
-      const d = v.kind === "music" && v.t > 0 && duck ? DUCK : 1;
+      const d = (v.t > 0 && duck) ? (v.kind === "music" ? DUCK_MUSIC : DUCK_AMB) : 1;
       try { v.el.volume = Math.max(0, Math.min(1, v.g * d * level(v.kind))); } catch (e) { /* ignore */ }
       if (hidden && !v.el.paused) v.el.pause(); else if (!hidden && v.el.paused && v.t > 0 && !v.dead && unlocked && !v.el.ended) { const p = v.el.play(); if (p && p.catch) p.catch(() => {}); }
+      if (v.oneShot && v.t > 0 && v.el.ended && !hidden) {
+        if (ambMode === "off" || ambVol <= 0) {
+          v.t = 0;
+        } else {
+          const gapRange = (ambMode === "occasional") ? [25, 50] : [10, 18];
+          if (!v.next) v.next = now + (gapRange[0] + Math.random() * (gapRange[1] - gapRange[0])) * 1000;
+          else if (now >= v.next) {
+            v.next = 0;
+            try { v.el.currentTime = 0; } catch (e) { /* ignore */ }
+            const p = v.el.play();
+            if (p && p.catch) p.catch(() => {});
+          }
+        }
+      }
       if (v.kind === "music" && v.t > 0 && !v.queued && v.el.duration && v.el.duration - v.el.currentTime < FADE + 0.15) { v.queued = true; nextTrack(); }
       if (v.kind === "music" && v.t > 0 && !v.queued && v.el.ended) { v.queued = true; nextTrack(); }
       if (v.g <= 0 && v.t <= 0) { try { v.el.pause(); v.el.removeAttribute("src"); v.el.load(); } catch (e) { /* ignore */ } list.splice(i, 1); }
@@ -90,10 +137,10 @@ function nextTrackFirst() {
 }
 function setAmbience(url) {
   url = url ? fixUrl(url) : null;
-  if (url === curAmb) return;
+  if (url === curAmb && amb.some((x) => x.t > 0)) return;
   curAmb = url;
   for (const v of amb) v.t = 0;
-  if (url) { voice(amb, url, "amb", true); }
+  if (url && ambMode !== "off" && ambVol > 0) { voice(amb, url, "amb", true); }
 }
 
 function resolveTarget() {
@@ -196,9 +243,9 @@ if (typeof document !== "undefined") {
 }
 
 function stinger(url) {
-  if (!url || sfx.muted || vol === 0) return;
+  if (!url || sfx.muted || vol === 0 || sfx.volume === 0 || hidden) return;
   if (MUTE) return;
-  try { const a = new Audio(resolveSoundUrl(url)); a.volume = Math.min(1, 0.35 + 0.65 * vol / 100); const p = a.play(); if (p && p.catch) p.catch(() => {}); } catch (e) { /* ignore */ }
+  try { const a = new Audio(resolveSoundUrl(url)); a.volume = Math.min(1, (0.35 + 0.65 * vol / 100) * sfx.volume / 100); const p = a.play(); if (p && p.catch) p.catch(() => {}); } catch (e) { /* ignore */ }
 }
 
 export const zone = {
@@ -226,7 +273,42 @@ export const zone = {
     if (changed) apply();
   },
   get volume() { return vol; },
-  setVolume(v) { vol = Math.max(0, Math.min(100, Math.round(+v) || 0)); store.set(vol); startTick(); },
+  setVolume(v) { vol = Math.max(0, Math.min(100, Math.round(+v) || 0)); store.set(VKEY, vol); startTick(); },
+  get ambienceVolume() { return ambVol; },
+  setAmbienceVolume(v) {
+    ambVol = Math.max(0, Math.min(100, Math.round(+v) || 0));
+    store.set(A_VOL_KEY, ambVol);
+    if (ambVol === 0) {
+      for (const v of amb) v.t = 0;
+    } else if (!amb.some((x) => x.t > 0)) {
+      apply();
+    }
+    startTick();
+  },
+  get ambienceMode() { return ambMode; },
+  setAmbienceMode(m) {
+    if (!["occasional", "continuous", "off"].includes(m)) m = "occasional";
+    ambMode = m;
+    store.set(A_MODE_KEY, ambMode);
+    if (ambMode === "off") {
+      for (const v of amb) { v.t = 0; try { v.el.pause(); } catch (e) {} }
+    } else {
+      if (!amb.some((x) => x.t > 0)) {
+        apply();
+      } else {
+        for (const v of amb) {
+          if (ambMode === "continuous" && v.el.duration >= 25) {
+            v.el.loop = true;
+            v.oneShot = false;
+          } else {
+            v.el.loop = false;
+            v.oneShot = true;
+          }
+        }
+      }
+    }
+    startTick();
+  },
   // Catalog of zones and their authentic audio for menus and selectors
   async catalog() {
     await load();

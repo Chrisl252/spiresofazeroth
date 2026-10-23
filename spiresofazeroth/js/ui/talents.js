@@ -3,7 +3,7 @@
 import { h, icon, tip, esc, fill, cap } from "./dom.js";
 import { saveMeta } from "../engine/save.js";
 import { cssReady, btn, tog, ico, banner, scroll, dark } from "./kit.js";
-import { EFFECTS, TALENT_CAP, TIER_STEP, VICTORY_BONUS, talentState, treeSpent, pointsBelow, canLearn, learn, unlearn, resetTalents, talentMods, talentSummary, classLevel, nextLevelXp, lockedCardIds } from "../engine/talents.js";
+import { EFFECTS, TALENT_CAP, TIER_STEP, POINTS_PER_FLOOR, POINTS_PER_ACT, VICTORY_BONUS, talentState, treeSpent, pointsBelow, canLearn, learn, unlearn, resetTalents, talentMods, talentSummary, classLevel, nextLevelXp, lockedCardIds } from "../engine/talents.js";
 
 export const stageNative = true;
 
@@ -91,7 +91,7 @@ export async function render(app, _name, props = {}) {
       h("p", { class: "sx-tal__sum" }, mods ? talentSummary(mods) : "No talents learned yet. Spend points on the left; every rank is active from your next run."),
       h("h4", {}, "Card unlocks"), ...rows,
       meta.settings.unlockAll ? h("p", { class: "sx-dim" }, "Unlock all cards is on in Settings.") : null,
-      h("p", { class: "sx-tal__how" }, `How to earn: +1 talent point per act cleared, +${VICTORY_BONUS} for beating the final boss. XP: 1 per floor, 10 per act, 40 per victory.`)));
+      h("p", { class: "sx-tal__how" }, `How to earn: +${POINTS_PER_FLOOR} talent points per floor cleared, +${POINTS_PER_ACT} per act cleared, +${VICTORY_BONUS} for beating the final boss (up to ${TALENT_CAP}). XP: 1 per floor, 10 per act, 40 per victory.`)));
   }
 
   function draw() {
@@ -106,7 +106,7 @@ export async function render(app, _name, props = {}) {
   }
   draw();
   fill(host,
-    h("div", { class: "sx-cls__top" }, banner("Talents", "Points come from climbing: one per act cleared, five for a victory."), btn("Back", back, { size: "sm", cls: "sx-cls__back", auto: true })),
+    h("div", { class: "sx-cls__top" }, banner("Talents", `Points come from climbing: ${POINTS_PER_FLOOR} per floor cleared, more for each act and a victory.`), btn("Back", back, { size: "sm", cls: "sx-cls__back", auto: true })),
     tabs, body, foot);
   return host;
 }

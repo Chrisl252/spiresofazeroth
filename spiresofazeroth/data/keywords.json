@@ -301,7 +301,7 @@
    "name": "Rockbiter Weapon",
    "icon": "spell_nature_rockbiter",
    "kind": "buff",
-   "stackMode": "duration",
+   "stackMode": "intensity",
    "text": "Your attacks deal +2 damage."
   },
   {
@@ -309,7 +309,7 @@
    "name": "Flametongue Weapon",
    "icon": "spell_fire_flametounge",
    "kind": "buff",
-   "stackMode": "duration",
+   "stackMode": "intensity",
    "text": "Your attacks burn the target."
   },
   {
@@ -317,7 +317,7 @@
    "name": "Flametongue Weapon II",
    "icon": "spell_fire_flametounge",
    "kind": "buff",
-   "stackMode": "duration",
+   "stackMode": "intensity",
    "text": "Your attacks burn the target harder."
   },
   {
@@ -325,7 +325,7 @@
    "name": "Frostbrand Weapon",
    "icon": "spell_frost_frostbrand",
    "kind": "buff",
-   "stackMode": "duration",
+   "stackMode": "intensity",
    "text": "Your attacks apply Weak."
   },
   {
@@ -333,7 +333,7 @@
    "name": "Frostbrand Weapon II",
    "icon": "spell_frost_frostbrand",
    "kind": "buff",
-   "stackMode": "duration",
+   "stackMode": "intensity",
    "text": "Your attacks apply stronger Weak."
   },
   {
@@ -341,16 +341,16 @@
    "name": "Windfury Weapon",
    "icon": "spell_nature_cyclone",
    "kind": "buff",
-   "stackMode": "duration",
-   "text": "Your attacks may strike twice."
+   "stackMode": "intensity",
+   "text": "Imbue lasts the whole combat. Your first attack each turn strikes twice."
   },
   {
    "id": "weapon_imbue_windfury_2",
    "name": "Windfury Weapon II",
    "icon": "spell_nature_cyclone",
    "kind": "buff",
-   "stackMode": "duration",
-   "text": "Your attacks often strike twice."
+   "stackMode": "intensity",
+   "text": "Imbue lasts the whole combat. Your first attack each turn strikes twice, hitting harder."
   },
   {
    "id": "spell_power",

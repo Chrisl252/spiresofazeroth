@@ -1,0 +1,220 @@
+/* Controller Support Styles for Spires of Azeroth */
+
+/* Controller Mode Root */
+body.sp-gamepad-mode .sp-ctrl-focus {
+  outline: 3px solid #ffd100 !important;
+  outline-offset: 4px !important;
+  box-shadow: 0 0 16px rgba(255, 209, 0, 0.8), 0 0 24px rgba(255, 160, 0, 0.4) !important;
+  position: relative;
+  z-index: 100 !important;
+  animation: sp-ctrl-pulse 1.8s ease-in-out infinite alternate;
+}
+
+/* For cards in hand specifically when controller-focused */
+body.sp-gamepad-mode .sp-hcard.sp-ctrl-focus {
+  transform-origin: center bottom;
+  filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.9));
+}
+
+@keyframes sp-ctrl-pulse {
+  from {
+    outline-color: #ffd100;
+    box-shadow: 0 0 12px rgba(255, 209, 0, 0.6);
+  }
+  to {
+    outline-color: #fff2a3;
+    box-shadow: 0 0 22px rgba(255, 225, 80, 0.95), 0 0 32px rgba(255, 160, 0, 0.5);
+  }
+}
+
+/* Controller Button Glyphs */
+.sp-glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  line-height: 1;
+  text-transform: uppercase;
+  border-radius: 999px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  user-select: none;
+  vertical-align: middle;
+  padding: 2px 5px;
+  min-width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+}
+
+.sp-glyph--round {
+  width: 19px;
+  height: 19px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 11px;
+}
+
+/* Button Colors (Standard Xbox / PS / Nintendo styling) */
+.sp-glyph--a {
+  background: linear-gradient(180deg, #38d359 0%, #1c8834 100%);
+  color: #ffffff;
+  border: 1px solid #145e24;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.sp-glyph--b {
+  background: linear-gradient(180deg, #ff4d4d 0%, #ba1919 100%);
+  color: #ffffff;
+  border: 1px solid #7c0a0a;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.sp-glyph--x {
+  background: linear-gradient(180deg, #4aa6ff 0%, #1865b8 100%);
+  color: #ffffff;
+  border: 1px solid #0f3f74;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.sp-glyph--y {
+  background: linear-gradient(180deg, #ffc736 0%, #c48700 100%);
+  color: #1a1200;
+  border: 1px solid #825a00;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.sp-glyph--shoulder,
+.sp-glyph--trigger,
+.sp-glyph--menu {
+  background: linear-gradient(180deg, #3d444e 0%, #20242a 100%);
+  color: #d8e0ea;
+  border: 1px solid #13161a;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+
+.sp-glyph--dpad {
+  background: linear-gradient(180deg, #444b54 0%, #282d33 100%);
+  color: #f0f4f8;
+  border: 1px solid #181b1e;
+  font-size: 10px;
+}
+
+/* Controller In-UI Badges (attached to specific game buttons) */
+.sp-ctrl-badge {
+  display: none;
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+}
+
+body.sp-gamepad-mode .sp-ctrl-badge {
+  display: inline-flex;
+}
+
+/* End Turn Controller Badge */
+.sp-turn__btn .sp-ctrl-badge {
+  top: -8px;
+  right: -8px;
+}
+
+/* Pile Controller Badges */
+.sp-hud__piles .sp-ctrl-badge {
+  top: -6px;
+  right: -6px;
+}
+
+/* Controller HUD Prompts Bar */
+.sp-controller-hud {
+  position: fixed;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%) translateY(50px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1500;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(12, 10, 8, 0.9);
+  border: 1px solid #d4af37;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7), inset 0 0 10px rgba(212, 175, 55, 0.2);
+  border-radius: 20px;
+  padding: 6px 18px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #e6cc80;
+  font-size: 12px;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+  white-space: nowrap;
+}
+
+body.sp-gamepad-mode .sp-controller-hud {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.sp-ctrl-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sp-ctrl-label {
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: #f7e7b4;
+}
+
+.sp-ctrl-divider {
+  width: 1px;
+  height: 14px;
+  background: rgba(212, 175, 55, 0.3);
+}
+
+/* Subtle target indicator in combat when targeting enemies via controller */
+body.sp-gamepad-mode .sp-eplate.sp-ctrl-focus {
+  outline: 3px solid #ff4444 !important;
+  box-shadow: 0 0 20px rgba(255, 50, 50, 0.8) !important;
+}
+
+/* In potion belt */
+body.sp-gamepad-mode .sp-belt__slot.sp-ctrl-focus {
+  outline: 3px solid #b48cff !important;
+  box-shadow: 0 0 18px rgba(180, 140, 255, 0.8) !important;
+}
+
+/* Controller status in settings / pause menu */
+.sp-ctrl-status-card {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sp-ctrl-status-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #f7e7b4;
+  font-weight: 600;
+}
+
+.sp-ctrl-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+  background: #666;
+}
+
+.sp-ctrl-status-dot.connected {
+  background: #38d359;
+  box-shadow: 0 0 6px #38d359;
+}

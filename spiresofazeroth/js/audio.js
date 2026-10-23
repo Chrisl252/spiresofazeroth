@@ -1,6 +1,8 @@
 // Tiny sound player (GEAR_SPEC section 2): HTMLAudio, unlocked on the first user gesture, default ON, mute remembered in localStorage.
 // Files live in assets/sfx/ as .ogg + .mp3 (copied from the classic client: LootCoinLarge, LootCoinSmall, ChestOpen); the page never calls /sounds/.
 //   sfx.play("coin" | "coinSmall" | "chest")   sfx.playUrl(url, {volume, cut})   sfx.preload(urls)   sfx.muted   sfx.setMuted(bool)
+import { BUILD } from "./version.js";
+
 const BASE = new URL("../assets/sfx/", import.meta.url).href;
 const FILES = { coin: "loot-coin", coinSmall: "loot-coin-small", chest: "chest-open" };
 const KEY = "spires.sfx.muted";
@@ -42,9 +44,22 @@ if (typeof document !== "undefined") {
 const SND_BASE = new URL("../assets/sounds/", import.meta.url).href;
 const bundled = new Set();
 let bundledReady = false;
-if (typeof fetch === "function") {
-  fetch(`${SND_BASE}index.json`).then((r) => (r.ok ? r.json() : null)).then((j) => { for (const id of (j && j.fdids) || []) bundled.add(String(id)); bundledReady = true; }).catch(() => { bundledReady = true; });
-}
+export const soundsReady = (typeof fetch === "function")
+  ? (import.meta.url.startsWith("file:") && typeof process !== "undefined"
+      ? import("node:fs").then((fs) => {
+          try {
+            const p = new URL("../assets/sounds/index.json", import.meta.url);
+            const j = JSON.parse(fs.readFileSync(p, "utf-8"));
+            for (const id of (j && j.fdids) || []) bundled.add(String(id));
+            bundledReady = true;
+          } catch (e) { bundledReady = true; }
+        }).catch(() => { bundledReady = true; })
+      : fetch(`${SND_BASE}index.json?v=${BUILD}`)
+          .then((r) => (r.ok ? r.json() : null))
+          .then((j) => { for (const id of (j && j.fdids) || []) bundled.add(String(id)); bundledReady = true; })
+          .catch(() => { bundledReady = true; })
+    )
+  : Promise.resolve();
 export function resolveSoundUrl(url) {
   const m = /^\/media\/sounds\/(\d+)\.(mp3|ogg|m4r)$/.exec(String(url || ""));
   return m && bundled.has(m[1]) ? `${SND_BASE}${m[1]}.${m[2]}` : url;
@@ -64,16 +79,24 @@ function libEl(url) {
   return a;
 }
 
+// Muting also cuts anything already playing (long VO lines, clones) so nothing audible outlives the switch.
+function silence() {
+  for (const a of lru.values()) { try { a.pause(); } catch (e) { /* ignore */ } }
+  for (const a of cache.values()) { try { if (a) a.pause(); } catch (e) { /* ignore */ } }
+}
+
 export const sfx = {
   get muted() { return muted; },
   get volume() { return gain; },
   setVolume(v) {
+    const was = gain;
     gain = Math.max(0, Math.min(100, Math.round(+v) || 0));
     try { localStorage.setItem("spires.sfx.volume", String(gain)); } catch (e) { /* private mode */ }
-    if (gain === 0) { muted = true; store.set("1"); }
-    else if (muted && !FORCE_MUTE) { muted = false; store.set("0"); }
+    if (gain === 0) { muted = true; store.set("1"); silence(); }
+    // only a slider raised OUT of zero un-mutes; re-applying a saved volume at boot must never override an explicit mute
+    else if (muted && was === 0 && !FORCE_MUTE) { muted = false; store.set("0"); }
   },
-  setMuted(v) { muted = !!v || FORCE_MUTE; store.set(muted ? "1" : "0"); },
+  setMuted(v) { muted = !!v || FORCE_MUTE; store.set(muted ? "1" : "0"); if (muted) silence(); },
   // preload(urls): fetch ahead, never blocks (idle-time, in small batches); silent if muted/unavailable.
   preload(urls) {
     const list = [...new Set(urls)].filter(Boolean);

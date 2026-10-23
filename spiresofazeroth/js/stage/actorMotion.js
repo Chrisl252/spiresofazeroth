@@ -54,7 +54,7 @@ export function choreography(core) {
       const b = core.base();
       const tf = target && target.feet ? target.feet : { x: b.x + core.facing * 300, y: b.y };
       const dir = Math.sign(tf.x - b.x) || core.facing;
-      if (opts.cast || opts.spell) {
+      if (opts.cast || opts.spell || opts.ranged || opts.shoot) {
         // Caster stance: stay planted, windup gather, forward spell release recoil, recover
         await Promise.all([m.tween("x", -dir * 24, 110, "inOut"), m.tween("sy", 1.06, 110, "out"), m.tween("sx", 0.95, 110, "out")]);
         await Promise.all([m.tween("x", dir * 28, 130, "out"), m.tween("sy", 0.94, 130, "out"), m.tween("sx", 1.04, 130, "out")]);

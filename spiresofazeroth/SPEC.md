@@ -1,11 +1,37 @@
-# Spires of Azeroth — Shared Build Contract (v1, 2026-10-16)
+# Spires of Azeroth â€” Shared Build Contract (v1, 2026-10-16)
 
 Every agent on this lane builds against THIS file. If the spec and your memory disagree, the spec wins.
 Source brief: `<local path>` (read it once).
 
 ## 0. Where we are
-- The game is the static `spiresofazeroth/` folder (no build step). Hosting and database notes of the
-  live site are not part of the public mirror. Bump `BUILD` in `js/version.js` on every data/JS change.
+- Worktree: `<local path>` Â· branch `lane/spires-of-azeroth-20261016` (from `main`).
+  The main checkout `<local path>` is 232 commits BEHIND main and dirty with co-workers' lanes â€” never touch it.
+- Game root: `<worktree>\spiresofazeroth\` â†’ served live as `http<local path>`.
+  nginx `location / { try_files $uri $uri/ =404; }` serves any static folder at the repo root (same as `addons/`, `about/`).
+  Cache there is 300 s edge / cf-purge on deploy, NOT the 1-year immutable rule (that applies only to `/assets/` and `/static/`).
+  Still: `index.html` loads `js/main.js?v=<BUILD>` and every `fetch()` of `data/*.json` appends `?v=<BUILD>` where BUILD is the
+  constant in `js/version.js`. Bump it on every data/JS change.
+- Icons: the site ships **~35,000 Blizzard icons** at `assets/icons/<slug>.jpg`. `assets/icons/` is GITIGNORED (prod artefact), so the
+  files are NOT in the worktree. Verify slugs against the main checkout: `<local path>`
+  (31,979 spell_/ability_/inv_ icons there; the validator reads `SPIRES_ICON_DIR`, default that path). Slug = lowercase icon filename (slug = lowercase icon filename, e.g.
+  `spell_fire_flamebolt.jpg`, `ability_warrior_charge.jpg`, `inv_misc_questionmark.jpg`, `ability_hunter_pet_wolf.jpg`).
+  Live URL `http<local path>` (1-y immutable, already served). **Never download icons. Never add new
+  files to assets/icons.** Every `icon` field in game data is a bare slug (no path, no extension). The validator fails the build if
+  `assets/icons/<slug>.jpg` is not on disk. If a spell's exact icon is missing, pick the closest real icon of that school that IS
+  on disk (`ls assets/icons | grep <keyword>`), never a made-up name.
+- Production `<production path>` is NOT a git checkout; Chris deploys himself. Agents never touch WSL `/srv/`, never run deploy scripts.
+- DB (`wgf-postgres`, db `wowgoldfarms`, schema `datamine`, classic product `wow_classic_era`) is reachable ONLY through WSL and
+  WSL exec wedged at 11:xx today (`Wsl/Service/0x8007274c`). ONE bounded attempt per agent (`timeout 60`), never a retry loop.
+  Tables: `datamine.creature(creature_id,name,classification,creature_type,creature_family)`, `datamine.creature_type`,
+  `datamine.creature_family`, `datamine.spell(spell_id,name,description)`, `datamine.spell_misc(spell_id,icon_file_data_id,school_mask)`,
+  `datamine.icon_file(file_data_id,slug)`, `datamine.spell_levels`, `datamine.spell_class_options(spell_id,spell_class_set)`.
+  Build scoping: `WHERE t.build_seen_id = (SELECT max(_b.id) FROM datamine.build_seen _b WHERE _b.product='wow_classic_era' AND
+  EXISTS (SELECT 1 FROM datamine.<table> _t WHERE _t.build_seen_id=_b.id))`. Always `LIMIT`. Never `COUNT(*)`.
+  **Client DB2s carry no zone placement**, so zone rosters come from the agent's classic knowledge; the DB (when reachable) verifies
+  that each creature NAME exists in classic and supplies family/type. Record the verification state in `data/zones/COVERAGE.md`.
+- Hard rules that bind here: files < 800 lines; vanilla JS/CSS only (no frameworks, no bundler); one concern per file; no AdSense on
+  the game page; no Wowhead calls from the page (first-party only); `node --check` every JS file; `node tools/spires/validate-data.mjs`
+  must pass before you report done.
 
 ## 1. Folder layout (fixed)
 ```
@@ -44,7 +70,7 @@ spiresofazeroth/
   data/zones/COVERAGE.md
   ARCHITECTURE.md  CONTRIBUTING.md
 tools/spires/validate-data.mjs   schema + cross-ref + icon-on-disk validator (exit 1 on any failure)
-tools/spires/sim.mjs             node headless sim: --class X --runs N --seed S → win rate per act
+tools/spires/sim.mjs             node headless sim: --class X --runs N --seed S â†’ win rate per act
 tests/test_spires_static.py      pytest: validator exit 0, no adsense loader in spiresofazeroth/index.html, files < 800 lines
 ```
 
@@ -72,21 +98,21 @@ Numbers may be an int or a `{ "base": n, "scale": "<resource>|<status>", "per": 
 | `conditional` | `if`: `{type: "status_on_target"\|"resource_at_least"\|"hp_below_pct"\|"cards_in_hand"\|"enemy_intent"\|"turn_number"\|"form_is"\|"seal_is"\|"stance_is"\|"school_last"\|"target_is_family"\|"chance", ...}`, `then`:[effects], `else`:[effects] | branch |
 | `repeat` | `times`, `effects` | loop |
 | `set_form` / `set_stance` / `set_seal` / `set_aspect` | `value` | class mode switches |
-| `judgement` | — | consumes the active Seal, fires its `onJudge` effects (paladin) |
+| `judgement` | â€” | consumes the active Seal, fires its `onJudge` effects (paladin) |
 | `pet_action` | `action` | hunter/warlock pet acts now |
 | `pet_max_hp` | `amount` | hunter Feed Pet: living pet gains max HP and HP for THIS fight (pets reset each combat) |
 | `totem` | `slot` (`earth`\|`fire`\|`water`\|`air`), `unit` | place/replace a totem |
-| `retain` / `ethereal` / `innate` / `unplayable` | flags, not ops — live in `card.flags` | |
+| `retain` / `ethereal` / `innate` / `unplayable` | flags, not ops â€” live in `card.flags` | |
 | `scry` | `count` | look at top cards, discard any |
 | `gold` | `amount` | run gold |
 | `max_hp` | `amount` | permanent max HP |
 | `random_card` | `pool`:`class`\|`neutral`\|`any`, `rarity`, `to`, `cost` | generate a random card |
 | `energy_next_turn` | `amount` | |
 | `double_block` / `double_damage_next` | | |
-| `cast_interrupt` | — | cancels an enemy "cast" intent (humanoid casters) |
-| `taunt` | — | forces single-target enemy intents on self (pet/totem absorbs) |
+| `cast_interrupt` | â€” | cancels an enemy "cast" intent (humanoid casters) |
+| `taunt` | â€” | forces single-target enemy intents on self (pet/totem absorbs) |
 | `revive` | `pct` | undead mechanic |
-| `end_turn` | — | |
+| `end_turn` | â€” | |
 
 Status ids (keywords.json is authoritative): `vulnerable weak frail poison bleed burn frozen slow stun fear silence strength
 dexterity thorns stealth shield regen disease curse enrage armor taunted marked frostbite cold corrupted madness sleep feral
@@ -113,7 +139,7 @@ intangible metallicize ritual rage_gen energized`. Each status entry: `{ "id", "
   "resource": { "id": "rage", "name": "Rage", "icon": "ability_racial_bloodrage", "max": 100, "rules": "text shown in codex",
                 "energyPerTurn": 3, "startOfCombat": 0, "gainOnDamageDealt": 5, "gainOnDamageTaken": 5, "decayPerTurn": 0 },
   "archetypes": [ { "id": "arms", "name": "Arms", "icon": "ability_rogue_eviscerate", "text": "..." }, ... 3 total ],
-  "relics": [ { ...full relic object (see §5) with "class":"warrior" }, { ... } ],   // 2 INLINE class relics
+  "relics": [ { ...full relic object (see Â§5) with "class":"warrior" }, { ... } ],   // 2 INLINE class relics
   "starterDeck": [ "heroic-strike", "heroic-strike", "heroic-strike", "heroic-strike", "shield-block", "shield-block", "shield-block", "shield-block", "charge", "rend" ],
   "units": { "<petId>": { "name":"Wolf", "icon":"ability_hunter_pet_wolf", "hp":20, "moves":[...same shape as enemy moves...] } },
   // HUNTER PET = GUARDIAN (Slay the Spire 2 "Osty" rule), resource.pet = { guardian:true, hpPct:30, moves:[Claw], default, choices }:
@@ -142,9 +168,9 @@ intangible metallicize ritual rage_gen energized`. Each status entry: `{ "id", "
   ]
 }
 ```
-Rules: 10-card starter (basics), ≥40 cards total, ≥12 per archetype coverage, every card a real 1.12 spell name of that class
+Rules: 10-card starter (basics), â‰¥40 cards total, â‰¥12 per archetype coverage, every card a real 1.12 spell name of that class
 (no TBC+; the brief lists the exclusions). Spell ranks as upgrades. `spellId` from the DB when reachable, else null and a
-`"spellIdSource": "unverified"` note. Card text ≤ 140 chars.
+`"spellIdSource": "unverified"` note. Card text â‰¤ 140 chars.
 
 ## 4. Zone JSON (`data/zones/<zone>.json`)
 ```json
@@ -171,7 +197,7 @@ Rules: 10-card starter (basics), ≥40 cards total, ≥12 per archetype coverage
   ],
   "encounters": { "normal": [ ["young-wolf","young-wolf"], ["kobold-vermin","kobold-vermin","kobold-vermin"] ], "elite": [ ["goldtooth"] ], "boss": [ ["hogger"] ] },
   "events": [ { "id":"...", "name":"...", "icon":"...", "text":"...", "options":[ { "label":"...", "effects":[...], "requires": {...} } ] } ],   // 3-6, real quests/NPCs
-  "relics": [ { ...full relic object (see §5) with "zone":"elwynn-forest" } ],   // 2-4 INLINE relic objects; the loader merges them into the pool
+  "relics": [ { ...full relic object (see Â§5) with "zone":"elwynn-forest" } ],   // 2-4 INLINE relic objects; the loader merges them into the pool
   "enemiesFile": "elwynn-forest.enemies.json",                              // OPTIONAL: when the roster would push the file past ~800 lines, move
                                                                             // the "enemies" array into data/zones/<zone>.enemies.json (a bare JSON array)
   "raidFloors": [ { "id":"the-stockade", "name":"The Stockade", "unlock":"act_complete", "encounters":{...}, "enemies":[...] } ]   // optional
@@ -180,7 +206,7 @@ Rules: 10-card starter (basics), ≥40 cards total, ≥12 per archetype coverage
 Rules: FULL hostile roster for the zone (every hostile mob that existed in 1.12 in that zone, grouped by tier). Real names,
 level band, family. Moves themed on the mob's real abilities. Intent kinds: `attack attack_multi block buff debuff summon cast
 heal flee unknown`. Encounter lists sized by level (1-4 mobs). Elites 2-3 per zone, boss 1 (+ alternates allowed). Named "?"
-placeholders in the brief are NOT truth — use the real classic NPC. Record roster size and verification status in COVERAGE.md.
+placeholders in the brief are NOT truth â€” use the real classic NPC. Record roster size and verification status in COVERAGE.md.
 
 ## 5. relics.json (GLOBAL relics only; zone/class relics live inline in their files) / potions.json / neutral-cards.json
 ```json
@@ -202,7 +228,7 @@ flag `run.healerAct = run.act` (a reload or a second call is a no-op, so it can 
 ## 6. Reporting format (every agent, at the end)
 1. Files written (paths) + line counts.
 2. `node --check` results for each JS file (raw).
-3. `node tools/spires/validate-data.mjs` output (raw) — or, if the validator does not exist yet, the exact list of icon slugs
+3. `node tools/spires/validate-data.mjs` output (raw) â€” or, if the validator does not exist yet, the exact list of icon slugs
    you used that are MISSING from `assets/icons/` (run `ls assets/icons/<slug>.jpg`), and anything else unverified.
 4. Counts: cards per class / enemies per zone by tier / relics / potions.
 5. Open questions in one list. No prose beyond that.

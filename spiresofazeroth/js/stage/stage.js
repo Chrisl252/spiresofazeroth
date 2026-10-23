@@ -53,6 +53,11 @@ export function mountStage(appRoot, opts = {}) {
     if (stage.actors && stage.actors.setGround) stage.actors.setGround(stage.groundY);
     subs.forEach((fn) => fn(stage));
   }
+  let layoutRaf = 0;
+  function scheduleLayout() {
+    if (layoutRaf) return;
+    layoutRaf = requestAnimationFrame(() => { layoutRaf = 0; layout(); });
+  }
 
   stage.toStage = (clientX, clientY) => {
     const r = root.getBoundingClientRect();
@@ -74,21 +79,38 @@ export function mountStage(appRoot, opts = {}) {
   stage.refreshMotion = () => backdrop.refreshMotion();
 
   // fullscreen: the stage host goes fullscreen (so the site masthead / cookie bar, which live outside it, are not drawn) and re-scales
-  stage.isFullscreen = () => document.fullscreenElement === appRoot;
+  // iPad Safari / older Android only have the webkit-prefixed API; iPhone Safari has no element fullscreen at all, so there the host is
+  // pinned over the whole viewport instead (css/stage.css .sp-pseudo-fs). Both paths fire "fullscreenchange" on document for js/main.js.
+  const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement || null;
+  let pseudo = false;
+  const setPseudo = (on) => {
+    pseudo = on;
+    document.documentElement.classList.toggle("sp-pseudo-fs", on);
+    appRoot.classList.toggle("sp-pseudo-fs-host", on);
+    if (on) window.scrollTo(0, 0);
+    document.dispatchEvent(new Event("fullscreenchange"));
+  };
+  stage.isFullscreen = () => pseudo || fsEl() === appRoot;
   stage.toggleFullscreen = () => {
     try {
-      if (stage.isFullscreen()) return document.exitFullscreen && document.exitFullscreen();
-      if (appRoot.requestFullscreen) return appRoot.requestFullscreen({ navigationUI: "hide" }).catch(() => {});
-    } catch (_) { /* denied */ }
+      if (pseudo) return setPseudo(false);
+      if (fsEl() === appRoot) return (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+      if (appRoot.requestFullscreen) return appRoot.requestFullscreen({ navigationUI: "hide" }).catch(() => setPseudo(true));
+      if (appRoot.webkitRequestFullscreen) { appRoot.webkitRequestFullscreen(); return setTimeout(() => { if (fsEl() !== appRoot) setPseudo(true); }, 300); }
+      return setPseudo(true);
+    } catch (_) { setPseudo(true); }
   };
-  document.addEventListener("fullscreenchange", () => { root.classList.toggle("sp-fs", stage.isFullscreen()); layout(); subs.forEach((fn) => fn(stage)); setTimeout(layout, 120); });
+  const onFs = () => { root.classList.toggle("sp-fs", stage.isFullscreen()); scheduleLayout(); setTimeout(scheduleLayout, 120); setTimeout(scheduleLayout, 500); };
+  document.addEventListener("fullscreenchange", onFs);
+  document.addEventListener("webkitfullscreenchange", () => document.dispatchEvent(new Event("fullscreenchange")));
+  if (window.visualViewport) window.visualViewport.addEventListener("resize", scheduleLayout); // iOS URL bar / keyboard
   document.addEventListener("keydown", (e) => {
     if ((e.key === "f" || e.key === "F") && !e.ctrlKey && !e.metaKey && !e.altKey && !/^(INPUT|TEXTAREA|SELECT)$/.test((e.target && e.target.tagName) || "")) stage.toggleFullscreen();
   });
   document.addEventListener("visibilitychange", () => (document.hidden ? stage.pause() : stage.resume()));
-  if (typeof ResizeObserver !== "undefined") new ResizeObserver(layout).observe(appRoot);
-  window.addEventListener("resize", layout);
-  window.addEventListener("orientationchange", layout);
+  if (typeof ResizeObserver !== "undefined") new ResizeObserver(scheduleLayout).observe(appRoot);
+  window.addEventListener("resize", scheduleLayout);
+  window.addEventListener("orientationchange", scheduleLayout);
   layout();
   return stage;
 }

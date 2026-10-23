@@ -7,498 +7,2306 @@
   "startingHp": 75,
   "startingGold": 99,
   "defaultContinent": "ek",
-  "resource": {"id":"pet","name":"Guardian Pet", "tip": "Your pet intercepts single-target attacks aimed at you and claws enemies each turn. Keep it healthy with Mend Pet.", "icon":"ability_hunter_beastcall","max":0,"rules":"Your Pet acts as a Guardian that intercepts single-target attacks aimed at you. Arm traps before enemy attacks strike, and use ranged shots to pick off threats from safety.", "energyPerTurn":3,"startOfCombat":0,"gainOnDamageDealt":0,"gainOnDamageTaken":0,"decayPerTurn":0,"pet":{"guardian":true,"hpPct":25,"moves":[{"id":"claw","name":"Claw","intent":"attack","effects":[{"op":"damage","amount":4}],"weight":1}],"default":"wolf","choices":["wolf","cat","boar","raptor","owl","bat","gorilla","bear"]}},
-  "archetypes": [{"id":"beast-mastery","name":"Beast Mastery","icon":"ability_hunter_beasttaming","text":"Your pet does the work: buff it, heal it, and let it act twice."},{"id":"marksmanship","name":"Marksmanship","icon":"ability_marksmanship","text":"Mark the target, then hit it with big ranged shots and Volley."},{"id":"survival","name":"Survival","icon":"ability_hunter_swiftstrike","text":"Traps, slows and stuns: control the fight, then finish with melee bites."}],
-  "relics": [
-    {"id":"rhokdelar-longbow","name":"Rhok'delar, Longbow of the Ancient Keepers","icon":"inv_weapon_bow_08","rarity":"rare","itemId":18713,"zone":null,"class":"hunter","text":"Start each combat with the enemy Marked 3.","triggers":{
-      "on_combat_start": [
-        {"op":"apply","status":"marked","stacks":3,"target":"enemy"}
+  "resource": {
+    "id": "pet",
+    "name": "Guardian Pet",
+    "tip": "Your pet intercepts single-target attacks aimed at you and claws enemies each turn. Keep it healthy with Mend Pet.",
+    "icon": "ability_hunter_beastcall",
+    "max": 0,
+    "rules": "Your Pet acts as a Guardian that intercepts single-target attacks aimed at you. Arm traps before enemy attacks strike, and use ranged shots to pick off threats from safety.",
+    "energyPerTurn": 3,
+    "startOfCombat": 0,
+    "gainOnDamageDealt": 0,
+    "gainOnDamageTaken": 0,
+    "decayPerTurn": 0,
+    "pet": {
+      "guardian": true,
+      "hpPct": 25,
+      "moves": [
+        {
+          "id": "claw",
+          "name": "Claw",
+          "intent": "attack",
+          "effects": [
+            {
+              "op": "damage",
+              "amount": 4
+            }
+          ],
+          "weight": 1
+        }
+      ],
+      "default": "wolf",
+      "choices": [
+        "wolf",
+        "cat",
+        "boar",
+        "raptor",
+        "owl",
+        "bat",
+        "gorilla",
+        "bear"
       ]
-    }},
-    {"id":"giantstalker-helm","name":"Giantstalker's Helmet","icon":"inv_helmet_05","rarity":"uncommon","itemId":16846,"zone":null,"class":"hunter","text":"At the start of each turn, your pet attacks once more.","triggers":{
-      "on_turn_start": [
-        {"op":"pet_action","action":"attack"}
-      ]
-    }}
+    }
+  },
+  "archetypes": [
+    {
+      "id": "beast-mastery",
+      "name": "Beast Mastery",
+      "icon": "ability_hunter_beasttaming",
+      "text": "Your pet does the work: buff it, heal it, and let it act twice."
+    },
+    {
+      "id": "marksmanship",
+      "name": "Marksmanship",
+      "icon": "ability_marksmanship",
+      "text": "Mark the target, then hit it with big ranged shots and Volley."
+    },
+    {
+      "id": "survival",
+      "name": "Survival",
+      "icon": "ability_hunter_swiftstrike",
+      "text": "Traps, slows and stuns: control the fight, then finish with melee bites."
+    }
   ],
-  "starterDeck": ["auto-shot","auto-shot","auto-shot","arcane-shot","raptor-strike","raptor-strike","raptor-strike","aspect-of-the-monkey","mend-pet","aspect-of-the-hawk"],
+  "relics": [
+    {
+      "id": "rhokdelar-longbow",
+      "name": "Rhok'delar, Longbow of the Ancient Keepers",
+      "icon": "inv_weapon_bow_08",
+      "rarity": "rare",
+      "itemId": 18713,
+      "zone": null,
+      "class": "hunter",
+      "text": "Start each combat with the enemy Marked 3.",
+      "triggers": {
+        "on_combat_start": [
+          {
+            "op": "apply",
+            "status": "marked",
+            "stacks": 3,
+            "target": "enemy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "giantstalker-helm",
+      "name": "Giantstalker's Helmet",
+      "icon": "inv_helmet_05",
+      "rarity": "uncommon",
+      "itemId": 16846,
+      "zone": null,
+      "class": "hunter",
+      "text": "At the start of each turn, your pet attacks once more.",
+      "triggers": {
+        "on_turn_start": [
+          {
+            "op": "pet_action",
+            "action": "attack"
+          }
+        ]
+      }
+    }
+  ],
+  "starterDeck": [
+    "auto-shot",
+    "auto-shot",
+    "auto-shot",
+    "arcane-shot",
+    "raptor-strike",
+    "raptor-strike",
+    "raptor-strike",
+    "aspect-of-the-monkey",
+    "mend-pet",
+    "aspect-of-the-hawk"
+  ],
   "units": {
-    "wolf": {"name":"Wolf","icon":"ability_hunter_pet_wolf","text":"Cosmetic companion","role":"Cosmetic: looks and sounds only","keyword":"","detail":"Wolf is a cosmetic choice. Every pet has the same Guardian HP and the same Claw: enemy attacks hit your pet first.","cry":"Howl"},
-    "cat": {"name":"Cat","icon":"ability_hunter_pet_cat","text":"Cosmetic companion","role":"Cosmetic: looks and sounds only","keyword":"","detail":"Cat is a cosmetic choice. Every pet has the same Guardian HP and the same Claw: enemy attacks hit your pet first.","cry":"Hiss"},
-    "boar": {"name":"Boar","icon":"ability_hunter_pet_boar","text":"Cosmetic companion","role":"Cosmetic: looks and sounds only","keyword":"","detail":"Boar is a cosmetic choice. Every pet has the same Guardian HP and the same Claw: enemy attacks hit your pet first.","cry":"Squeal"},
-    "raptor": {"name":"Raptor","icon":"ability_hunter_pet_raptor","text":"Cosmetic companion","role":"Cosmetic: looks and sounds only","keyword":"","detail":"Raptor is a cosmetic choice. Every pet has the same Guardian HP and the same Claw: enemy attacks hit your pet first.","cry":"Screech"},
-    "owl": {"name":"Owl","icon":"ability_hunter_pet_owl","text":"Cosmetic companion","role":"Cosmetic: looks and sounds only","keyword":"","detail":"Owl is a cosmetic choice. Every pet has the same Guardian HP and the same Claw: enemy attacks hit your pet first.","cry":"Hoot"},
-    "bat": {"name":"Bat","icon":"ability_hunter_pet_bat","text":"Cosmetic companion","role":"Cosmetic: looks and sounds only","keyword":"","detail":"Bat is a cosmetic choice. Every pet has the same Guardian HP and the same Claw: enemy attacks hit your pet first.","cry":"Screech"},
-    "gorilla": {"name":"Gorilla","icon":"ability_hunter_pet_gorilla","text":"Cosmetic companion","role":"Cosmetic: looks and sounds only","keyword":"","detail":"Gorilla is a cosmetic choice. Every pet has the same Guardian HP and the same Claw: enemy attacks hit your pet first.","cry":"Roar"},
-    "bear": {"name":"Bear","icon":"ability_hunter_pet_bear","text":"Cosmetic companion","role":"Cosmetic: looks and sounds only","keyword":"","detail":"Bear is a cosmetic choice. Every pet has the same Guardian HP and the same Claw: enemy attacks hit your pet first.","cry":"Growl"}
+    "wolf": {
+      "name": "Wolf",
+      "icon": "ability_hunter_pet_wolf",
+      "text": "Cosmetic companion",
+      "role": "Cosmetic: looks and sounds only",
+      "keyword": "",
+      "detail": "Wolf is a cosmetic choice. Every pet has the same Guardian HP and the same Claw: enemy attacks hit your pet first.",
+      "cry": "Howl"
+    },
+    "cat": {
+      "name": "Cat",
+      "icon": "ability_hunter_pet_cat",
+      "text": "Cosmetic companion",
+      "role": "Cosmetic: looks and sounds only",
+      "keyword": "",
+      "detail": "Cat is a cosmetic choice. Every pet has the same Guardian HP and the same Claw: enemy attacks hit your pet first.",
+      "cry": "Hiss"
+    },
+    "boar": {
+      "name": "Boar",
+      "icon": "ability_hunter_pet_boar",
+      "text": "Cosmetic companion",
+      "role": "Cosmetic: looks and sounds only",
+      "keyword": "",
+      "detail": "Boar is a cosmetic choice. Every pet has the same Guardian HP and the same Claw: enemy attacks hit your pet first.",
+      "cry": "Squeal"
+    },
+    "raptor": {
+      "name": "Raptor",
+      "icon": "ability_hunter_pet_raptor",
+      "text": "Cosmetic companion",
+      "role": "Cosmetic: looks and sounds only",
+      "keyword": "",
+      "detail": "Raptor is a cosmetic choice. Every pet has the same Guardian HP and the same Claw: enemy attacks hit your pet first.",
+      "cry": "Screech"
+    },
+    "owl": {
+      "name": "Owl",
+      "icon": "ability_hunter_pet_owl",
+      "text": "Cosmetic companion",
+      "role": "Cosmetic: looks and sounds only",
+      "keyword": "",
+      "detail": "Owl is a cosmetic choice. Every pet has the same Guardian HP and the same Claw: enemy attacks hit your pet first.",
+      "cry": "Hoot"
+    },
+    "bat": {
+      "name": "Bat",
+      "icon": "ability_hunter_pet_bat",
+      "text": "Cosmetic companion",
+      "role": "Cosmetic: looks and sounds only",
+      "keyword": "",
+      "detail": "Bat is a cosmetic choice. Every pet has the same Guardian HP and the same Claw: enemy attacks hit your pet first.",
+      "cry": "Screech"
+    },
+    "gorilla": {
+      "name": "Gorilla",
+      "icon": "ability_hunter_pet_gorilla",
+      "text": "Cosmetic companion",
+      "role": "Cosmetic: looks and sounds only",
+      "keyword": "",
+      "detail": "Gorilla is a cosmetic choice. Every pet has the same Guardian HP and the same Claw: enemy attacks hit your pet first.",
+      "cry": "Roar"
+    },
+    "bear": {
+      "name": "Bear",
+      "icon": "ability_hunter_pet_bear",
+      "text": "Cosmetic companion",
+      "role": "Cosmetic: looks and sounds only",
+      "keyword": "",
+      "detail": "Bear is a cosmetic choice. Every pet has the same Guardian HP and the same Claw: enemy attacks hit your pet first.",
+      "cry": "Growl"
+    }
   },
   "spellIdSource": "rank-1 ids from classic knowledge; DB wow_classic_era name lookup agreed on 104/130 names (rest: DB min(spell_id) hit older ids); not individually class-verified",
   "cards": [
-    {"id":"auto-shot","weaponIcon":true,"name":"Auto Shot","icon":"ability_whirlwind","spellId":75,"rank":1,"type":"attack","rarity":"basic","archetype":"marksmanship","cost":1,"target":"enemy","flags":[],"text":"Deal 6 physical damage. Your pet attacks.",
+    {
+      "id": "auto-shot",
+      "weaponIcon": true,
+      "name": "Auto Shot",
+      "icon": "ability_whirlwind",
+      "spellId": 75,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "marksmanship",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 physical damage. Your pet attacks.",
       "effects": [
-        {"op":"damage","amount":6},
-        {"op":"pet_action","action":"attack"}
+        {
+          "op": "damage",
+          "amount": 6
+        },
+        {
+          "op": "pet_action",
+          "action": "attack"
+        }
       ],
-      "upgrade": {"name":"Auto Shot (Rank 2)","cost":1,"text":"Deal 9 physical damage. Your pet attacks.","effects":[
-        {"op":"damage","amount":9},
-        {"op":"pet_action","action":"attack"}
-      ]}
+      "upgrade": {
+        "name": "Auto Shot (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 physical damage. Your pet attacks.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 9
+          },
+          {
+            "op": "pet_action",
+            "action": "attack"
+          }
+        ]
+      },
+      "range": "ranged"
     },
-    {"id":"arcane-shot","name":"Arcane Shot","icon":"ability_impalingbolt","spellId":3044,"rank":1,"type":"attack","rarity":"basic","archetype":"marksmanship","cost":1,"target":"enemy","flags":[],"text":"Deal 6 arcane damage. Apply Vulnerable 1.",
+    {
+      "id": "arcane-shot",
+      "name": "Arcane Shot",
+      "icon": "ability_impalingbolt",
+      "spellId": 3044,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "marksmanship",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 arcane damage. Apply Vulnerable 1.",
       "effects": [
-        {"op":"damage","amount":6,"school":"arcane"},
-        {"op":"apply","status":"vulnerable","stacks":1,"target":"enemy"}
+        {
+          "op": "damage",
+          "amount": 6,
+          "school": "arcane"
+        },
+        {
+          "op": "apply",
+          "status": "vulnerable",
+          "stacks": 1,
+          "target": "enemy"
+        }
       ],
-      "upgrade": {"name":"Arcane Shot (Rank 2)","cost":1,"text":"Deal 9 arcane damage. Apply Vulnerable 2.","effects":[
-        {"op":"damage","amount":9,"school":"arcane"},
-        {"op":"apply","status":"vulnerable","stacks":2,"target":"enemy"}
-      ]}
+      "upgrade": {
+        "name": "Arcane Shot (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 arcane damage. Apply Vulnerable 2.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 9,
+            "school": "arcane"
+          },
+          {
+            "op": "apply",
+            "status": "vulnerable",
+            "stacks": 2,
+            "target": "enemy"
+          }
+        ]
+      },
+      "range": "ranged"
     },
-    {"id":"raptor-strike","name":"Raptor Strike","icon":"ability_meleedamage","spellId":2973,"rank":1,"type":"attack","rarity":"basic","archetype":"survival","cost":1,"target":"enemy","flags":[],"text":"Deal 6 damage. Gain 5 Block.",
+    {
+      "id": "raptor-strike",
+      "name": "Raptor Strike",
+      "icon": "ability_meleedamage",
+      "spellId": 2973,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "survival",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 damage. Gain 5 Block.",
       "effects": [
-        {"op":"damage","amount":6},
-        {"op":"block","amount":5}
+        {
+          "op": "damage",
+          "amount": 6
+        },
+        {
+          "op": "block",
+          "amount": 5
+        }
       ],
-      "upgrade": {"name":"Raptor Strike (Rank 2)","cost":1,"text":"Deal 9 damage. Gain 8 Block.","effects":[
-        {"op":"damage","amount":9},
-        {"op":"block","amount":8}
-      ]}
+      "upgrade": {
+        "name": "Raptor Strike (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 damage. Gain 8 Block.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 9
+          },
+          {
+            "op": "block",
+            "amount": 8
+          }
+        ]
+      },
+      "range": "melee"
     },
-    {"id":"claw","name":"Claw","icon":"ability_druid_rake","spellId":16827,"rank":1,"type":"attack","rarity":"basic","archetype":"beast-mastery","cost":1,"target":"enemy","flags":[],"text":"Deal 5 damage. Gain 4 Block. Your pet attacks.",
+    {
+      "id": "claw",
+      "name": "Claw",
+      "icon": "ability_druid_rake",
+      "spellId": 16827,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "basic",
+      "archetype": "beast-mastery",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 5 damage. Gain 4 Block. Your pet attacks.",
       "effects": [
-        {"op":"damage","amount":5},
-        {"op":"block","amount":4},
-        {"op":"pet_action","action":"attack"}
+        {
+          "op": "damage",
+          "amount": 5
+        },
+        {
+          "op": "block",
+          "amount": 4
+        },
+        {
+          "op": "pet_action",
+          "action": "attack"
+        }
       ],
-      "upgrade": {"name":"Claw (Rank 2)","cost":1,"text":"Deal 8 damage. Gain 6 Block. Your pet attacks.","effects":[
-        {"op":"damage","amount":8},
-        {"op":"block","amount":6},
-        {"op":"pet_action","action":"attack"}
-      ]}
+      "upgrade": {
+        "name": "Claw (Rank 2)",
+        "cost": 1,
+        "text": "Deal 8 damage. Gain 6 Block. Your pet attacks.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 8
+          },
+          {
+            "op": "block",
+            "amount": 6
+          },
+          {
+            "op": "pet_action",
+            "action": "attack"
+          }
+        ]
+      }
     },
-    {"id":"mend-pet","name":"Mend Pet","icon":"ability_hunter_mendpet","spellId":136,"rank":1,"type":"skill","rarity":"basic","archetype":"beast-mastery","cost":1,"target":"self","flags":[],"text":"Gain 6 Block. Your pet heals 6 HP and gains 6 Block.",
+    {
+      "id": "mend-pet",
+      "name": "Mend Pet",
+      "icon": "ability_hunter_mendpet",
+      "spellId": 136,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "basic",
+      "archetype": "beast-mastery",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 6 Block. Your pet heals 6 HP and gains 6 Block.",
       "effects": [
-        {"op":"block","amount":6},
-        {"op":"heal","amount":6,"target":"pet"},
-        {"op":"block","amount":6,"target":"pet"}
+        {
+          "op": "block",
+          "amount": 6
+        },
+        {
+          "op": "heal",
+          "amount": 6,
+          "target": "pet"
+        },
+        {
+          "op": "block",
+          "amount": 6,
+          "target": "pet"
+        }
       ],
-      "upgrade": {"name":"Mend Pet (Rank 2)","cost":1,"text":"Gain 9 Block. Your pet heals 10 HP and gains 9 Block.","effects":[
-        {"op":"block","amount":9},
-        {"op":"heal","amount":10,"target":"pet"},
-        {"op":"block","amount":9,"target":"pet"}
-      ]}
+      "upgrade": {
+        "name": "Mend Pet (Rank 2)",
+        "cost": 1,
+        "text": "Gain 9 Block. Your pet heals 10 HP and gains 9 Block.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 9
+          },
+          {
+            "op": "heal",
+            "amount": 10,
+            "target": "pet"
+          },
+          {
+            "op": "block",
+            "amount": 9,
+            "target": "pet"
+          }
+        ]
+      }
     },
-    {"id":"aspect-of-the-hawk","name":"Aspect of the Hawk","icon":"spell_nature_ravenform","spellId":13165,"rank":1,"type":"stance","rarity":"basic","archetype":"marksmanship","cost":1,"target":"self","flags":[],"text":"Enter Aspect of the Hawk: your attacks deal +2 damage while it lasts.",
+    {
+      "id": "aspect-of-the-hawk",
+      "name": "Aspect of the Hawk",
+      "icon": "spell_nature_ravenform",
+      "spellId": 13165,
+      "rank": 1,
+      "type": "stance",
+      "rarity": "basic",
+      "archetype": "marksmanship",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Enter Aspect of the Hawk: your attacks deal +2 damage while it lasts.",
       "effects": [
-        {"op":"set_aspect","value":"hawk"}
+        {
+          "op": "set_aspect",
+          "value": "hawk"
+        }
       ],
-      "upgrade": {"name":"Aspect of the Hawk (Rank 2)","cost":1,"text":"Enter Aspect of the Hawk (+2 attack damage). Draw 1 card.","effects":[
-        {"op":"set_aspect","value":"hawk"},
-        {"op":"draw","count":1}
-      ]}
+      "upgrade": {
+        "name": "Aspect of the Hawk (Rank 2)",
+        "cost": 1,
+        "text": "Enter Aspect of the Hawk (+2 attack damage). Draw 1 card.",
+        "effects": [
+          {
+            "op": "set_aspect",
+            "value": "hawk"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      }
     },
-    {"id":"call-pet","name":"Call Pet","icon":"ability_hunter_beastcall","spellId":883,"rank":1,"type":"skill","rarity":"common","archetype":"beast-mastery","cost":1,"target":"self","flags":[],"text":"Gain 5 Block. Your pet acts twice now and gains 5 Block.",
+    {
+      "id": "call-pet",
+      "name": "Call Pet",
+      "icon": "ability_hunter_beastcall",
+      "spellId": 883,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "beast-mastery",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 5 Block. Your pet acts twice now and gains 5 Block.",
       "effects": [
-        {"op":"block","amount":5},
-        {"op":"pet_action","action":"attack"},
-        {"op":"pet_action","action":"attack"},
-        {"op":"block","amount":5,"target":"pet"}
+        {
+          "op": "block",
+          "amount": 5
+        },
+        {
+          "op": "pet_action",
+          "action": "attack"
+        },
+        {
+          "op": "pet_action",
+          "action": "attack"
+        },
+        {
+          "op": "block",
+          "amount": 5,
+          "target": "pet"
+        }
       ],
-      "upgrade": {"name":"Call Pet (Rank 2)","cost":1,"text":"Gain 8 Block. Your pet acts twice now and gains 8 Block.","effects":[
-        {"op":"block","amount":8},
-        {"op":"pet_action","action":"attack"},
-        {"op":"pet_action","action":"attack"},
-        {"op":"block","amount":8,"target":"pet"}
-      ]}
+      "upgrade": {
+        "name": "Call Pet (Rank 2)",
+        "cost": 1,
+        "text": "Gain 8 Block. Your pet acts twice now and gains 8 Block.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 8
+          },
+          {
+            "op": "pet_action",
+            "action": "attack"
+          },
+          {
+            "op": "pet_action",
+            "action": "attack"
+          },
+          {
+            "op": "block",
+            "amount": 8,
+            "target": "pet"
+          }
+        ]
+      }
     },
-    {"id":"feed-pet","name":"Feed Pet","icon":"ability_hunter_beasttraining","spellId":6991,"rank":1,"type":"skill","rarity":"common","archetype":"beast-mastery","cost":1,"target":"self","flags":["exhaust"],"text":"Gain 6 Block. Your pet gains +6 max HP and heals 6 for this fight. Exhaust.",
+    {
+      "id": "feed-pet",
+      "name": "Feed Pet",
+      "icon": "ability_hunter_beasttraining",
+      "spellId": 6991,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "beast-mastery",
+      "cost": 1,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Gain 6 Block. Your pet gains +6 max HP and heals 6 for this fight. Exhaust.",
       "effects": [
-        {"op":"block","amount":6},
-        {"op":"pet_max_hp","amount":6}
+        {
+          "op": "block",
+          "amount": 6
+        },
+        {
+          "op": "pet_max_hp",
+          "amount": 6
+        }
       ],
-      "upgrade": {"name":"Feed Pet (Rank 2)","cost":1,"text":"Gain 9 Block. Your pet gains +10 max HP and heals 10 for this fight. Exhaust.","effects":[
-        {"op":"block","amount":9},
-        {"op":"pet_max_hp","amount":10}
-      ]}
+      "upgrade": {
+        "name": "Feed Pet (Rank 2)",
+        "cost": 1,
+        "text": "Gain 9 Block. Your pet gains +10 max HP and heals 10 for this fight. Exhaust.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 9
+          },
+          {
+            "op": "pet_max_hp",
+            "amount": 10
+          }
+        ]
+      }
     },
-    {"id":"beast-lore","name":"Beast Lore","icon":"ability_physical_taunt","spellId":1462,"rank":1,"type":"skill","rarity":"common","archetype":"beast-mastery","cost":0,"target":"enemy","flags":[],"text":"Apply Marked 2. Scry 2.",
+    {
+      "id": "beast-lore",
+      "name": "Beast Lore",
+      "icon": "ability_physical_taunt",
+      "spellId": 1462,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "beast-mastery",
+      "cost": 0,
+      "target": "enemy",
+      "flags": [],
+      "text": "Apply Marked 2. Scry 2.",
       "effects": [
-        {"op":"apply","status":"marked","stacks":2,"target":"enemy"},
-        {"op":"scry","count":2}
+        {
+          "op": "apply",
+          "status": "marked",
+          "stacks": 2,
+          "target": "enemy"
+        },
+        {
+          "op": "scry",
+          "count": 2
+        }
       ],
-      "upgrade": {"name":"Beast Lore (Rank 2)","cost":0,"text":"Apply Marked 3. Scry 3.","effects":[
-        {"op":"apply","status":"marked","stacks":3,"target":"enemy"},
-        {"op":"scry","count":3}
-      ]}
+      "upgrade": {
+        "name": "Beast Lore (Rank 2)",
+        "cost": 0,
+        "text": "Apply Marked 3. Scry 3.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "marked",
+            "stacks": 3,
+            "target": "enemy"
+          },
+          {
+            "op": "scry",
+            "count": 3
+          }
+        ]
+      }
     },
-    {"id":"eyes-of-the-beast","name":"Eyes of the Beast","icon":"ability_eyeoftheowl","spellId":1002,"rank":1,"type":"skill","rarity":"common","archetype":"beast-mastery","cost":1,"target":"self","flags":[],"text":"Your pet acts. Draw 1 card.",
+    {
+      "id": "eyes-of-the-beast",
+      "name": "Eyes of the Beast",
+      "icon": "ability_eyeoftheowl",
+      "spellId": 1002,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "beast-mastery",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Your pet acts. Draw 1 card.",
       "effects": [
-        {"op":"pet_action","action":"attack"},
-        {"op":"draw","count":1}
+        {
+          "op": "pet_action",
+          "action": "attack"
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
       ],
-      "upgrade": {"name":"Eyes of the Beast (Rank 2)","cost":1,"text":"Your pet acts. Draw 2 cards.","effects":[
-        {"op":"pet_action","action":"attack"},
-        {"op":"draw","count":2}
-      ]}
+      "upgrade": {
+        "name": "Eyes of the Beast (Rank 2)",
+        "cost": 1,
+        "text": "Your pet acts. Draw 2 cards.",
+        "effects": [
+          {
+            "op": "pet_action",
+            "action": "attack"
+          },
+          {
+            "op": "draw",
+            "count": 2
+          }
+        ]
+      }
     },
-    {"id":"revive-pet","name":"Revive Pet","icon":"ability_hunter_beastsoothe","spellId":982,"rank":1,"type":"skill","rarity":"common","archetype":"beast-mastery","cost":2,"target":"self","flags":["exhaust"],"text":"Rally your pet if it fled this fight, at 50% HP. Your pet acts. Exhaust.",
+    {
+      "id": "revive-pet",
+      "name": "Revive Pet",
+      "icon": "ability_hunter_beastsoothe",
+      "spellId": 982,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "beast-mastery",
+      "cost": 2,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Rally your pet if it fled this fight, at 50% HP. Your pet acts. Exhaust.",
       "effects": [
-        {"op":"revive","pct":50,"target":"pet"},
-        {"op":"pet_action","action":"attack"}
+        {
+          "op": "revive",
+          "pct": 50,
+          "target": "pet"
+        },
+        {
+          "op": "pet_action",
+          "action": "attack"
+        }
       ],
-      "upgrade": {"name":"Revive Pet (Rank 2)","cost":1,"text":"Rally your pet if it fled this fight, at full HP. Your pet acts. Exhaust.","effects":[
-        {"op":"revive","pct":100,"target":"pet"},
-        {"op":"pet_action","action":"attack"}
-      ]}
+      "upgrade": {
+        "name": "Revive Pet (Rank 2)",
+        "cost": 1,
+        "text": "Rally your pet if it fled this fight, at full HP. Your pet acts. Exhaust.",
+        "effects": [
+          {
+            "op": "revive",
+            "pct": 100,
+            "target": "pet"
+          },
+          {
+            "op": "pet_action",
+            "action": "attack"
+          }
+        ]
+      }
     },
-    {"id":"scare-beast","name":"Scare Beast","icon":"ability_druid_cower","spellId":1513,"rank":1,"type":"skill","rarity":"common","archetype":"beast-mastery","cost":1,"target":"enemy","flags":[],"text":"Beast only: apply Fear 2 and Weak 1. Other targets: Weak 1.",
+    {
+      "id": "scare-beast",
+      "name": "Scare Beast",
+      "icon": "ability_druid_cower",
+      "spellId": 1513,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "beast-mastery",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Beast only: apply Fear 2 and Weak 1. Other targets: Weak 1.",
       "effects": [
-        {"op":"conditional","if":{"type":"target_is_family","value":"beast"},"then":[{"op":"apply","status":"fear","stacks":2,"target":"enemy"},{"op":"apply","status":"weak","stacks":1,"target":"enemy"}],"else":[{"op":"apply","status":"weak","stacks":1,"target":"enemy"}]}
+        {
+          "op": "conditional",
+          "if": {
+            "type": "target_is_family",
+            "value": "beast"
+          },
+          "then": [
+            {
+              "op": "apply",
+              "status": "fear",
+              "stacks": 2,
+              "target": "enemy"
+            },
+            {
+              "op": "apply",
+              "status": "weak",
+              "stacks": 1,
+              "target": "enemy"
+            }
+          ],
+          "else": [
+            {
+              "op": "apply",
+              "status": "weak",
+              "stacks": 1,
+              "target": "enemy"
+            }
+          ]
+        }
       ],
-      "upgrade": {"name":"Scare Beast (Rank 2)","cost":1,"text":"Beast: Fear 3 and Weak 2. Other targets: Weak 2.","effects":[
-        {"op":"conditional","if":{"type":"target_is_family","value":"beast"},"then":[{"op":"apply","status":"fear","stacks":3,"target":"enemy"},{"op":"apply","status":"weak","stacks":2,"target":"enemy"}],"else":[{"op":"apply","status":"weak","stacks":2,"target":"enemy"}]}
-      ]}
+      "upgrade": {
+        "name": "Scare Beast (Rank 2)",
+        "cost": 1,
+        "text": "Beast: Fear 3 and Weak 2. Other targets: Weak 2.",
+        "effects": [
+          {
+            "op": "conditional",
+            "if": {
+              "type": "target_is_family",
+              "value": "beast"
+            },
+            "then": [
+              {
+                "op": "apply",
+                "status": "fear",
+                "stacks": 3,
+                "target": "enemy"
+              },
+              {
+                "op": "apply",
+                "status": "weak",
+                "stacks": 2,
+                "target": "enemy"
+              }
+            ],
+            "else": [
+              {
+                "op": "apply",
+                "status": "weak",
+                "stacks": 2,
+                "target": "enemy"
+              }
+            ]
+          }
+        ]
+      }
     },
-    {"id":"concussive-shot","name":"Concussive Shot","icon":"spell_frost_stun","spellId":5116,"rank":1,"type":"attack","rarity":"common","archetype":"marksmanship","cost":1,"target":"enemy","flags":[],"text":"Deal 5 damage. Apply Weak 2.",
+    {
+      "id": "concussive-shot",
+      "name": "Concussive Shot",
+      "icon": "spell_frost_stun",
+      "spellId": 5116,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "marksmanship",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 5 damage. Apply Weak 2.",
       "effects": [
-        {"op":"damage","amount":5},
-        {"op":"apply","status":"weak","stacks":2,"target":"enemy"}
+        {
+          "op": "damage",
+          "amount": 5
+        },
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 2,
+          "target": "enemy"
+        }
       ],
-      "upgrade": {"name":"Concussive Shot (Rank 2)","cost":1,"text":"Deal 8 damage. Apply Weak 3.","effects":[
-        {"op":"damage","amount":8},
-        {"op":"apply","status":"weak","stacks":3,"target":"enemy"}
-      ]}
+      "upgrade": {
+        "name": "Concussive Shot (Rank 2)",
+        "cost": 1,
+        "text": "Deal 8 damage. Apply Weak 3.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 8
+          },
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 3,
+            "target": "enemy"
+          }
+        ]
+      },
+      "range": "ranged"
     },
-    {"id":"serpent-sting","name":"Serpent Sting","icon":"ability_hunter_quickshot","spellId":1978,"rank":1,"type":"attack","rarity":"common","archetype":"marksmanship","cost":1,"target":"enemy","flags":[],"text":"Apply Poison 5.",
+    {
+      "id": "serpent-sting",
+      "name": "Serpent Sting",
+      "icon": "ability_hunter_quickshot",
+      "spellId": 1978,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "marksmanship",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Apply Poison 5.",
       "effects": [
-        {"op":"apply","status":"poison","stacks":5,"target":"enemy"}
+        {
+          "op": "apply",
+          "status": "poison",
+          "stacks": 5,
+          "target": "enemy"
+        }
       ],
-      "upgrade": {"name":"Serpent Sting (Rank 2)","cost":1,"text":"Apply Poison 8.","effects":[
-        {"op":"apply","status":"poison","stacks":8,"target":"enemy"}
-      ]}
+      "upgrade": {
+        "name": "Serpent Sting (Rank 2)",
+        "cost": 1,
+        "text": "Apply Poison 8.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "poison",
+            "stacks": 8,
+            "target": "enemy"
+          }
+        ]
+      },
+      "range": "ranged"
     },
-    {"id":"hunters-mark","name":"Hunter's Mark","icon":"ability_hunter_snipershot","spellId":1130,"rank":1,"type":"skill","rarity":"common","archetype":"marksmanship","cost":1,"target":"enemy","flags":[],"text":"Apply Marked 3 and Vulnerable 1.",
+    {
+      "id": "hunters-mark",
+      "name": "Hunter's Mark",
+      "icon": "ability_hunter_snipershot",
+      "spellId": 1130,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "marksmanship",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Apply Marked 3 and Vulnerable 1.",
       "effects": [
-        {"op":"apply","status":"marked","stacks":3,"target":"enemy"},
-        {"op":"apply","status":"vulnerable","stacks":1,"target":"enemy"}
+        {
+          "op": "apply",
+          "status": "marked",
+          "stacks": 3,
+          "target": "enemy"
+        },
+        {
+          "op": "apply",
+          "status": "vulnerable",
+          "stacks": 1,
+          "target": "enemy"
+        }
       ],
-      "upgrade": {"name":"Hunter's Mark (Rank 2)","cost":1,"text":"Apply Marked 4 and Vulnerable 2.","effects":[
-        {"op":"apply","status":"marked","stacks":4,"target":"enemy"},
-        {"op":"apply","status":"vulnerable","stacks":2,"target":"enemy"}
-      ]}
+      "upgrade": {
+        "name": "Hunter's Mark (Rank 2)",
+        "cost": 1,
+        "text": "Apply Marked 4 and Vulnerable 2.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "marked",
+            "stacks": 4,
+            "target": "enemy"
+          },
+          {
+            "op": "apply",
+            "status": "vulnerable",
+            "stacks": 2,
+            "target": "enemy"
+          }
+        ]
+      }
     },
-    {"id":"distracting-shot","name":"Distracting Shot","icon":"ability_golemstormbolt","spellId":20736,"rank":1,"type":"attack","rarity":"common","archetype":"marksmanship","cost":1,"target":"enemy","flags":[],"text":"Deal 5 damage. Taunt: the enemy targets your pet.",
+    {
+      "id": "distracting-shot",
+      "name": "Distracting Shot",
+      "icon": "ability_golemstormbolt",
+      "spellId": 20736,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "marksmanship",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 5 damage. Taunt: the enemy targets your pet.",
       "effects": [
-        {"op":"damage","amount":5},
-        {"op":"taunt"}
+        {
+          "op": "damage",
+          "amount": 5
+        },
+        {
+          "op": "taunt"
+        }
       ],
-      "upgrade": {"name":"Distracting Shot (Rank 2)","cost":1,"text":"Deal 8 damage. Taunt to your pet. Pet gains 4 Block.","effects":[
-        {"op":"damage","amount":8},
-        {"op":"taunt"},
-        {"op":"block","amount":4,"target":"pet"}
-      ]}
+      "upgrade": {
+        "name": "Distracting Shot (Rank 2)",
+        "cost": 1,
+        "text": "Deal 8 damage. Taunt to your pet. Pet gains 4 Block.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 8
+          },
+          {
+            "op": "taunt"
+          },
+          {
+            "op": "block",
+            "amount": 4,
+            "target": "pet"
+          }
+        ]
+      },
+      "range": "ranged"
     },
-    {"id":"wing-clip","name":"Wing Clip","icon":"ability_rogue_trip","spellId":2974,"rank":1,"type":"attack","rarity":"common","archetype":"survival","cost":1,"target":"enemy","flags":[],"text":"Deal 4 damage. Apply Weak 2.",
+    {
+      "id": "wing-clip",
+      "name": "Wing Clip",
+      "icon": "ability_rogue_trip",
+      "spellId": 2974,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "survival",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 4 damage. Apply Weak 2.",
       "effects": [
-        {"op":"damage","amount":4},
-        {"op":"apply","status":"weak","stacks":2,"target":"enemy"}
+        {
+          "op": "damage",
+          "amount": 4
+        },
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 2,
+          "target": "enemy"
+        }
       ],
-      "upgrade": {"name":"Wing Clip (Rank 2)","cost":1,"text":"Deal 6 damage. Apply Weak 3.","effects":[
-        {"op":"damage","amount":6},
-        {"op":"apply","status":"weak","stacks":3,"target":"enemy"}
-      ]}
+      "upgrade": {
+        "name": "Wing Clip (Rank 2)",
+        "cost": 1,
+        "text": "Deal 6 damage. Apply Weak 3.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 6
+          },
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 3,
+            "target": "enemy"
+          }
+        ]
+      },
+      "range": "melee"
     },
-    {"id":"mongoose-bite","name":"Mongoose Bite","icon":"ability_hunter_swiftstrike","spellId":1495,"rank":1,"type":"attack","rarity":"common","archetype":"survival","cost":1,"target":"enemy","flags":[],"text":"Deal 9 damage. Gain 5 Block if you Disengaged this turn.",
+    {
+      "id": "mongoose-bite",
+      "name": "Mongoose Bite",
+      "icon": "ability_hunter_swiftstrike",
+      "spellId": 1495,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "common",
+      "archetype": "survival",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 9 damage. Gain 5 Block if you Disengaged this turn.",
       "effects": [
-        {"op":"damage","amount":9},
-        {"op":"conditional","if":{"type":"school_last","value":"disengage"},"then":[{"op":"block","amount":5}]}
+        {
+          "op": "damage",
+          "amount": 9
+        },
+        {
+          "op": "conditional",
+          "if": {
+            "type": "school_last",
+            "value": "disengage"
+          },
+          "then": [
+            {
+              "op": "block",
+              "amount": 5
+            }
+          ]
+        }
       ],
-      "upgrade": {"name":"Mongoose Bite (Rank 2)","cost":1,"text":"Deal 12 damage. Gain 7 Block if you Disengaged this turn.","effects":[
-        {"op":"damage","amount":12},
-        {"op":"conditional","if":{"type":"school_last","value":"disengage"},"then":[{"op":"block","amount":7}]}
-      ]}
+      "upgrade": {
+        "name": "Mongoose Bite (Rank 2)",
+        "cost": 1,
+        "text": "Deal 12 damage. Gain 7 Block if you Disengaged this turn.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 12
+          },
+          {
+            "op": "conditional",
+            "if": {
+              "type": "school_last",
+              "value": "disengage"
+            },
+            "then": [
+              {
+                "op": "block",
+                "amount": 7
+              }
+            ]
+          }
+        ]
+      },
+      "range": "melee"
     },
-    {"id":"aspect-of-the-monkey","name":"Aspect of the Monkey","icon":"ability_hunter_aspectofthemonkey","spellId":13163,"rank":1,"type":"stance","rarity":"common","archetype":"survival","cost":1,"target":"self","flags":[],"text":"Gain 8 Block. Enter Aspect of the Monkey: +3 Block on every Block card.",
+    {
+      "id": "aspect-of-the-monkey",
+      "name": "Aspect of the Monkey",
+      "icon": "ability_hunter_aspectofthemonkey",
+      "spellId": 13163,
+      "rank": 1,
+      "type": "stance",
+      "rarity": "common",
+      "archetype": "survival",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 8 Block. Enter Aspect of the Monkey: +3 Block on every Block card.",
       "effects": [
-        {"op":"block","amount":8},
-        {"op":"set_aspect","value":"monkey"}
+        {
+          "op": "block",
+          "amount": 8
+        },
+        {
+          "op": "set_aspect",
+          "value": "monkey"
+        }
       ],
-      "upgrade": {"name":"Aspect of the Monkey (Rank 2)","cost":1,"text":"Gain 11 Block. Enter Aspect of the Monkey: +3 Block per Block card.","effects":[
-        {"op":"block","amount":11},
-        {"op":"set_aspect","value":"monkey"}
-      ]}
+      "upgrade": {
+        "name": "Aspect of the Monkey (Rank 2)",
+        "cost": 1,
+        "text": "Gain 11 Block. Enter Aspect of the Monkey: +3 Block per Block card.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 11
+          },
+          {
+            "op": "set_aspect",
+            "value": "monkey"
+          }
+        ]
+      }
     },
-    {"id":"flare","name":"Flare","icon":"spell_fire_flare","spellId":1543,"rank":1,"type":"skill","rarity":"common","archetype":"survival","cost":0,"target":"enemy","flags":[],"text":"Remove Stealth from the enemy. Apply Vulnerable 1. Draw 1.",
+    {
+      "id": "flare",
+      "name": "Flare",
+      "icon": "spell_fire_flare",
+      "spellId": 1543,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "survival",
+      "cost": 0,
+      "target": "enemy",
+      "flags": [],
+      "text": "Remove Stealth from the enemy. Apply Vulnerable 1. Draw 1.",
       "effects": [
-        {"op":"remove","status":"stealth","target":"enemy"},
-        {"op":"apply","status":"vulnerable","stacks":1,"target":"enemy"},
-        {"op":"draw","count":1}
+        {
+          "op": "remove",
+          "status": "stealth",
+          "target": "enemy"
+        },
+        {
+          "op": "apply",
+          "status": "vulnerable",
+          "stacks": 1,
+          "target": "enemy"
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
       ],
-      "upgrade": {"name":"Flare (Rank 2)","cost":0,"text":"Remove Stealth. Apply Vulnerable 2. Draw 1.","effects":[
-        {"op":"remove","status":"stealth","target":"enemy"},
-        {"op":"apply","status":"vulnerable","stacks":2,"target":"enemy"},
-        {"op":"draw","count":1}
-      ]}
+      "upgrade": {
+        "name": "Flare (Rank 2)",
+        "cost": 0,
+        "text": "Remove Stealth. Apply Vulnerable 2. Draw 1.",
+        "effects": [
+          {
+            "op": "remove",
+            "status": "stealth",
+            "target": "enemy"
+          },
+          {
+            "op": "apply",
+            "status": "vulnerable",
+            "stacks": 2,
+            "target": "enemy"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      }
     },
-    {"id":"disengage","name":"Disengage","icon":"ability_rogue_feint","spellId":781,"rank":1,"type":"skill","rarity":"common","archetype":"survival","cost":0,"target":"self","flags":[],"text":"Gain 6 Block. Draw 1 card.",
+    {
+      "id": "disengage",
+      "name": "Disengage",
+      "icon": "ability_rogue_feint",
+      "spellId": 781,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "survival",
+      "cost": 0,
+      "target": "self",
+      "flags": [],
+      "text": "Gain 6 Block. Draw 1 card.",
       "effects": [
-        {"op":"block","amount":6},
-        {"op":"draw","count":1}
+        {
+          "op": "block",
+          "amount": 6
+        },
+        {
+          "op": "draw",
+          "count": 1
+        }
       ],
-      "upgrade": {"name":"Disengage (Rank 2)","cost":0,"text":"Gain 9 Block. Draw 1 card.","effects":[
-        {"op":"block","amount":9},
-        {"op":"draw","count":1}
-      ]}
+      "upgrade": {
+        "name": "Disengage (Rank 2)",
+        "cost": 0,
+        "text": "Gain 9 Block. Draw 1 card.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 9
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      }
     },
-    {"id":"feign-death","name":"Feign Death","icon":"ability_rogue_feigndeath","spellId":5384,"rank":1,"type":"skill","rarity":"common","archetype":"survival","cost":1,"target":"self","flags":["exhaust"],"text":"Gain 10 Block and Stealth 1. The enemy attack this turn is cancelled. Exhaust.",
+    {
+      "id": "feign-death",
+      "name": "Feign Death",
+      "icon": "ability_rogue_feigndeath",
+      "spellId": 5384,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "common",
+      "archetype": "survival",
+      "cost": 1,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Gain 10 Block and Stealth 1. The enemy attack this turn is cancelled. Exhaust.",
       "effects": [
-        {"op":"block","amount":10},
-        {"op":"apply","status":"stealth","stacks":1,"target":"self"},
-        {"op":"cast_interrupt"}
+        {
+          "op": "block",
+          "amount": 10
+        },
+        {
+          "op": "apply",
+          "status": "stealth",
+          "stacks": 1,
+          "target": "self"
+        },
+        {
+          "op": "cast_interrupt"
+        }
       ],
-      "upgrade": {"name":"Feign Death (Rank 2)","cost":1,"text":"Gain 14 Block and Stealth 1. Cancel the enemy attack. Exhaust.","effects":[
-        {"op":"block","amount":14},
-        {"op":"apply","status":"stealth","stacks":1,"target":"self"},
-        {"op":"cast_interrupt"}
-      ]}
+      "upgrade": {
+        "name": "Feign Death (Rank 2)",
+        "cost": 1,
+        "text": "Gain 14 Block and Stealth 1. Cancel the enemy attack. Exhaust.",
+        "effects": [
+          {
+            "op": "block",
+            "amount": 14
+          },
+          {
+            "op": "apply",
+            "status": "stealth",
+            "stacks": 1,
+            "target": "self"
+          },
+          {
+            "op": "cast_interrupt"
+          }
+        ]
+      }
     },
-    {"id":"aspect-of-the-pack","name":"Aspect of the Pack","icon":"ability_mount_whitetiger","spellId":13159,"rank":1,"type":"stance","rarity":"uncommon","archetype":"beast-mastery","cost":1,"target":"self","flags":[],"text":"Enter Aspect of the Pack: your pet attacks twice per turn. Pet gains 6 Block.",
+    {
+      "id": "aspect-of-the-pack",
+      "name": "Aspect of the Pack",
+      "icon": "ability_mount_whitetiger",
+      "spellId": 13159,
+      "rank": 1,
+      "type": "stance",
+      "rarity": "uncommon",
+      "archetype": "beast-mastery",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Enter Aspect of the Pack: your pet attacks twice per turn. Pet gains 6 Block.",
       "effects": [
-        {"op":"set_aspect","value":"pack"},
-        {"op":"block","amount":6,"target":"pet"}
+        {
+          "op": "set_aspect",
+          "value": "pack"
+        },
+        {
+          "op": "block",
+          "amount": 6,
+          "target": "pet"
+        }
       ],
-      "upgrade": {"name":"Aspect of the Pack (Rank 2)","cost":1,"text":"Enter Aspect of the Pack: pet attacks twice per turn. Pet gains 9 Block. Draw 1.","effects":[
-        {"op":"set_aspect","value":"pack"},
-        {"op":"block","amount":9,"target":"pet"},
-        {"op":"draw","count":1}
-      ]}
+      "upgrade": {
+        "name": "Aspect of the Pack (Rank 2)",
+        "cost": 1,
+        "text": "Enter Aspect of the Pack: pet attacks twice per turn. Pet gains 9 Block. Draw 1.",
+        "effects": [
+          {
+            "op": "set_aspect",
+            "value": "pack"
+          },
+          {
+            "op": "block",
+            "amount": 9,
+            "target": "pet"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      }
     },
-    {"id":"aspect-of-the-wild","name":"Aspect of the Wild","icon":"spell_nature_protectionformnature","spellId":20043,"rank":1,"type":"stance","rarity":"uncommon","archetype":"beast-mastery","cost":1,"target":"self","flags":[],"text":"Enter Aspect of the Wild: take 2 less nature and 1 less damage from every hit.",
+    {
+      "id": "aspect-of-the-wild",
+      "name": "Aspect of the Wild",
+      "icon": "spell_nature_protectionformnature",
+      "spellId": 20043,
+      "rank": 1,
+      "type": "stance",
+      "rarity": "uncommon",
+      "archetype": "beast-mastery",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Enter Aspect of the Wild: take 2 less nature and 1 less damage from every hit.",
       "effects": [
-        {"op":"set_aspect","value":"wild"},
-        {"op":"block","amount":5}
+        {
+          "op": "set_aspect",
+          "value": "wild"
+        },
+        {
+          "op": "block",
+          "amount": 5
+        }
       ],
-      "upgrade": {"name":"Aspect of the Wild (Rank 2)","cost":1,"text":"Enter Aspect of the Wild: take less damage from every hit. Gain 8 Block.","effects":[
-        {"op":"set_aspect","value":"wild"},
-        {"op":"block","amount":8}
-      ]}
+      "upgrade": {
+        "name": "Aspect of the Wild (Rank 2)",
+        "cost": 1,
+        "text": "Enter Aspect of the Wild: take less damage from every hit. Gain 8 Block.",
+        "effects": [
+          {
+            "op": "set_aspect",
+            "value": "wild"
+          },
+          {
+            "op": "block",
+            "amount": 8
+          }
+        ]
+      }
     },
-    {"id":"aspect-of-the-beast","name":"Aspect of the Beast","icon":"ability_mount_pinktiger","spellId":13161,"rank":1,"type":"stance","rarity":"uncommon","archetype":"beast-mastery","cost":1,"target":"self","flags":[],"text":"Enter Aspect of the Beast: your pet deals +3 damage.",
+    {
+      "id": "aspect-of-the-beast",
+      "name": "Aspect of the Beast",
+      "icon": "ability_mount_pinktiger",
+      "spellId": 13161,
+      "rank": 1,
+      "type": "stance",
+      "rarity": "uncommon",
+      "archetype": "beast-mastery",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Enter Aspect of the Beast: your pet deals +3 damage.",
       "effects": [
-        {"op":"set_aspect","value":"beast"},
-        {"op":"apply","status":"strength","stacks":1,"target":"pet"}
+        {
+          "op": "set_aspect",
+          "value": "beast"
+        },
+        {
+          "op": "apply",
+          "status": "strength",
+          "stacks": 1,
+          "target": "pet"
+        }
       ],
-      "upgrade": {"name":"Aspect of the Beast (Rank 2)","cost":1,"text":"Enter Aspect of the Beast: pet deals +3 damage. Pet Strength 2.","effects":[
-        {"op":"set_aspect","value":"beast"},
-        {"op":"apply","status":"strength","stacks":2,"target":"pet"}
-      ]}
+      "upgrade": {
+        "name": "Aspect of the Beast (Rank 2)",
+        "cost": 1,
+        "text": "Enter Aspect of the Beast: pet deals +3 damage. Pet Strength 2.",
+        "effects": [
+          {
+            "op": "set_aspect",
+            "value": "beast"
+          },
+          {
+            "op": "apply",
+            "status": "strength",
+            "stacks": 2,
+            "target": "pet"
+          }
+        ]
+      }
     },
-    {"id":"tranquilizing-shot","name":"Tranquilizing Shot","icon":"spell_nature_drowsy","spellId":19801,"rank":1,"type":"attack","rarity":"uncommon","archetype":"beast-mastery","cost":1,"target":"enemy","flags":[],"text":"Deal 6 damage. Remove Enrage and Strength from the enemy.",
+    {
+      "id": "tranquilizing-shot",
+      "name": "Tranquilizing Shot",
+      "icon": "spell_nature_drowsy",
+      "spellId": 19801,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "beast-mastery",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 damage. Remove Enrage and Strength from the enemy.",
       "effects": [
-        {"op":"damage","amount":6},
-        {"op":"remove","status":"enrage","target":"enemy"},
-        {"op":"remove","status":"strength","target":"enemy"}
+        {
+          "op": "damage",
+          "amount": 6
+        },
+        {
+          "op": "remove",
+          "status": "enrage",
+          "target": "enemy"
+        },
+        {
+          "op": "remove",
+          "status": "strength",
+          "target": "enemy"
+        }
       ],
-      "upgrade": {"name":"Tranquilizing Shot (Rank 2)","cost":1,"text":"Deal 9 damage. Remove Enrage and Strength from the enemy.","effects":[
-        {"op":"damage","amount":9},
-        {"op":"remove","status":"enrage","target":"enemy"},
-        {"op":"remove","status":"strength","target":"enemy"}
-      ]}
+      "upgrade": {
+        "name": "Tranquilizing Shot (Rank 2)",
+        "cost": 1,
+        "text": "Deal 9 damage. Remove Enrage and Strength from the enemy.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 9
+          },
+          {
+            "op": "remove",
+            "status": "enrage",
+            "target": "enemy"
+          },
+          {
+            "op": "remove",
+            "status": "strength",
+            "target": "enemy"
+          }
+        ]
+      },
+      "range": "ranged"
     },
-    {"id":"tame-beast","name":"Tame Beast","icon":"ability_hunter_beasttaming","spellId":1515,"rank":1,"type":"skill","rarity":"uncommon","archetype":"beast-mastery","cost":2,"target":"self","flags":["exhaust"],"text":"Your pet acts twice and gains 8 Block. Exhaust.",
+    {
+      "id": "tame-beast",
+      "name": "Tame Beast",
+      "icon": "ability_hunter_beasttaming",
+      "spellId": 1515,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "beast-mastery",
+      "cost": 2,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Your pet acts twice and gains 8 Block. Exhaust.",
       "effects": [
-        {"op":"pet_action","action":"attack"},
-        {"op":"pet_action","action":"attack"},
-        {"op":"block","amount":8,"target":"pet"}
+        {
+          "op": "pet_action",
+          "action": "attack"
+        },
+        {
+          "op": "pet_action",
+          "action": "attack"
+        },
+        {
+          "op": "block",
+          "amount": 8,
+          "target": "pet"
+        }
       ],
-      "upgrade": {"name":"Tame Beast (Rank 2)","cost":1,"text":"Your pet acts twice and gains 12 Block. Exhaust.","effects":[
-        {"op":"pet_action","action":"attack"},
-        {"op":"pet_action","action":"attack"},
-        {"op":"block","amount":12,"target":"pet"}
-      ]}
+      "upgrade": {
+        "name": "Tame Beast (Rank 2)",
+        "cost": 1,
+        "text": "Your pet acts twice and gains 12 Block. Exhaust.",
+        "effects": [
+          {
+            "op": "pet_action",
+            "action": "attack"
+          },
+          {
+            "op": "pet_action",
+            "action": "attack"
+          },
+          {
+            "op": "block",
+            "amount": 12,
+            "target": "pet"
+          }
+        ]
+      }
     },
-    {"id":"multi-shot","name":"Multi-Shot","icon":"ability_upgrademoonglaive","spellId":2643,"rank":1,"type":"attack","rarity":"uncommon","archetype":"marksmanship","cost":1,"target":"all_enemies","flags":[],"text":"Deal 8 damage to ALL enemies.",
+    {
+      "id": "multi-shot",
+      "name": "Multi-Shot",
+      "icon": "ability_upgrademoonglaive",
+      "spellId": 2643,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "marksmanship",
+      "cost": 1,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Deal 8 damage to ALL enemies.",
       "effects": [
-        {"op":"damage","amount":8,"target":"all_enemies"}
+        {
+          "op": "damage",
+          "amount": 8,
+          "target": "all_enemies"
+        }
       ],
-      "upgrade": {"name":"Multi-Shot (Rank 2)","cost":1,"text":"Deal 11 damage to ALL enemies.","effects":[
-        {"op":"damage","amount":11,"target":"all_enemies"}
-      ]}
+      "upgrade": {
+        "name": "Multi-Shot (Rank 2)",
+        "cost": 1,
+        "text": "Deal 11 damage to ALL enemies.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 11,
+            "target": "all_enemies"
+          }
+        ]
+      },
+      "range": "ranged"
     },
-    {"id":"scatter-shot","name":"Scatter Shot","icon":"ability_golemstormbolt","spellId":19503,"rank":1,"type":"attack","rarity":"uncommon","archetype":"marksmanship","cost":1,"target":"enemy","flags":[],"text":"Deal 6 damage. Apply Stun 1.",
+    {
+      "id": "scatter-shot",
+      "name": "Scatter Shot",
+      "icon": "ability_golemstormbolt",
+      "spellId": 19503,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "marksmanship",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 6 damage. Apply Stun 1.",
       "effects": [
-        {"op":"damage","amount":6},
-        {"op":"apply","status":"stun","stacks":1,"target":"enemy"}
+        {
+          "op": "damage",
+          "amount": 6
+        },
+        {
+          "op": "apply",
+          "status": "stun",
+          "stacks": 1,
+          "target": "enemy"
+        }
       ],
-      "upgrade": {"name":"Scatter Shot (Rank 2)","cost":1,"text":"Deal 7 damage. Apply Stun 1.","effects":[
-        {"op":"damage","amount":7},
-        {"op":"apply","status":"stun","stacks":1,"target":"enemy"}
-      ]}
+      "upgrade": {
+        "name": "Scatter Shot (Rank 2)",
+        "cost": 1,
+        "text": "Deal 7 damage. Apply Stun 1.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 7
+          },
+          {
+            "op": "apply",
+            "status": "stun",
+            "stacks": 1,
+            "target": "enemy"
+          }
+        ]
+      },
+      "range": "ranged"
     },
-    {"id":"viper-sting","name":"Viper Sting","icon":"ability_hunter_aspectoftheviper","spellId":3034,"rank":1,"type":"attack","rarity":"uncommon","archetype":"marksmanship","cost":1,"target":"enemy","flags":[],"text":"Deal 4 damage. Apply Weak 2. Gain 1 Energy next turn.",
+    {
+      "id": "viper-sting",
+      "name": "Viper Sting",
+      "icon": "ability_hunter_aspectoftheviper",
+      "spellId": 3034,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "marksmanship",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 4 damage. Apply Weak 2. Gain 1 Energy next turn.",
       "effects": [
-        {"op":"damage","amount":4},
-        {"op":"apply","status":"weak","stacks":2,"target":"enemy"},
-        {"op":"energy_next_turn","amount":1}
+        {
+          "op": "damage",
+          "amount": 4
+        },
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 2,
+          "target": "enemy"
+        },
+        {
+          "op": "energy_next_turn",
+          "amount": 1
+        }
       ],
-      "upgrade": {"name":"Viper Sting (Rank 2)","cost":1,"text":"Deal 6 damage. Apply Weak 3. Gain 1 Energy next turn.","effects":[
-        {"op":"damage","amount":6},
-        {"op":"apply","status":"weak","stacks":3,"target":"enemy"},
-        {"op":"energy_next_turn","amount":1}
-      ]}
+      "upgrade": {
+        "name": "Viper Sting (Rank 2)",
+        "cost": 1,
+        "text": "Deal 6 damage. Apply Weak 3. Gain 1 Energy next turn.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 6
+          },
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 3,
+            "target": "enemy"
+          },
+          {
+            "op": "energy_next_turn",
+            "amount": 1
+          }
+        ]
+      },
+      "range": "ranged"
     },
-    {"id":"scorpid-sting","name":"Scorpid Sting","icon":"ability_hunter_criticalshot","spellId":3043,"rank":1,"type":"attack","rarity":"uncommon","archetype":"marksmanship","cost":1,"target":"enemy","flags":[],"text":"Deal 4 damage. Apply Weak 2 and Frail 1.",
+    {
+      "id": "scorpid-sting",
+      "name": "Scorpid Sting",
+      "icon": "ability_hunter_criticalshot",
+      "spellId": 3043,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "marksmanship",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 4 damage. Apply Weak 2 and Frail 1.",
       "effects": [
-        {"op":"damage","amount":4},
-        {"op":"apply","status":"weak","stacks":2,"target":"enemy"},
-        {"op":"apply","status":"frail","stacks":1,"target":"enemy"}
+        {
+          "op": "damage",
+          "amount": 4
+        },
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 2,
+          "target": "enemy"
+        },
+        {
+          "op": "apply",
+          "status": "frail",
+          "stacks": 1,
+          "target": "enemy"
+        }
       ],
-      "upgrade": {"name":"Scorpid Sting (Rank 2)","cost":1,"text":"Deal 6 damage. Apply Weak 3 and Frail 2.","effects":[
-        {"op":"damage","amount":6},
-        {"op":"apply","status":"weak","stacks":3,"target":"enemy"},
-        {"op":"apply","status":"frail","stacks":2,"target":"enemy"}
-      ]}
+      "upgrade": {
+        "name": "Scorpid Sting (Rank 2)",
+        "cost": 1,
+        "text": "Deal 6 damage. Apply Weak 3 and Frail 2.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 6
+          },
+          {
+            "op": "apply",
+            "status": "weak",
+            "stacks": 3,
+            "target": "enemy"
+          },
+          {
+            "op": "apply",
+            "status": "frail",
+            "stacks": 2,
+            "target": "enemy"
+          }
+        ]
+      },
+      "range": "ranged"
     },
-    {"id":"freezing-trap","name":"Freezing Trap","icon":"spell_frost_chainsofice","spellId":1499,"rank":1,"type":"skill","rarity":"uncommon","archetype":"survival","cost":1,"target":"self","flags":[],"text":"Trap. Arms: the first enemy attack is Frozen 2 and does nothing.","trap":true,
+    {
+      "id": "freezing-trap",
+      "name": "Freezing Trap",
+      "icon": "spell_frost_chainsofice",
+      "spellId": 1499,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "survival",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Trap. Arms: the first enemy attack is Frozen 2 and does nothing.",
+      "trap": true,
       "effects": [],
       "apply": [
-        {"op":"apply","status":"frozen","stacks":2,"target":"attacker"},
-        {"op":"cast_interrupt"}
+        {
+          "op": "apply",
+          "status": "frozen",
+          "stacks": 2,
+          "target": "attacker"
+        },
+        {
+          "op": "cast_interrupt"
+        }
       ],
-      "upgrade": {"name":"Freezing Trap (Rank 2)","cost":0,"text":"Trap, costs 0. Arms: the first enemy attack is Frozen 2 and does nothing.","effects":[]}
+      "upgrade": {
+        "name": "Freezing Trap (Rank 2)",
+        "cost": 0,
+        "text": "Trap, costs 0. Arms: the first enemy attack is Frozen 2 and does nothing.",
+        "effects": []
+      }
     },
-    {"id":"immolation-trap","name":"Immolation Trap","icon":"spell_fire_flameshock","spellId":13795,"rank":1,"type":"skill","rarity":"uncommon","archetype":"survival","cost":1,"target":"self","flags":[],"text":"Trap. Arms: the first enemy attack burns it for Burn 8 and deals 6 fire.","trap":true,
+    {
+      "id": "immolation-trap",
+      "name": "Immolation Trap",
+      "icon": "spell_fire_flameshock",
+      "spellId": 13795,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "survival",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Trap. Arms: the first enemy attack burns it for Burn 8 and deals 6 fire.",
+      "trap": true,
       "effects": [],
       "apply": [
-        {"op":"damage","amount":6,"school":"fire","target":"attacker"},
-        {"op":"apply","status":"burn","stacks":8,"target":"attacker"}
+        {
+          "op": "damage",
+          "amount": 6,
+          "school": "fire",
+          "target": "attacker"
+        },
+        {
+          "op": "apply",
+          "status": "burn",
+          "stacks": 8,
+          "target": "attacker"
+        }
       ],
-      "upgrade": {"name":"Immolation Trap (Rank 2)","cost":1,"text":"Trap. Arms: the first enemy attack burns it for Burn 12 and deals 8 fire.","effects":[]}
+      "upgrade": {
+        "name": "Immolation Trap (Rank 2)",
+        "cost": 1,
+        "text": "Trap. Arms: the first enemy attack burns it for Burn 12 and deals 8 fire.",
+        "effects": []
+      }
     },
-    {"id":"frost-trap","name":"Frost Trap","icon":"spell_frost_freezingbreath","spellId":13809,"rank":1,"type":"skill","rarity":"uncommon","archetype":"survival","cost":1,"target":"self","flags":[],"text":"Trap. Arms: the first enemy attack applies Weak 3 and Frostbite 2 to ALL enemies.","trap":true,
+    {
+      "id": "frost-trap",
+      "name": "Frost Trap",
+      "icon": "spell_frost_freezingbreath",
+      "spellId": 13809,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "uncommon",
+      "archetype": "survival",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Trap. Arms: the first enemy attack applies Weak 3 and Frostbite 2 to ALL enemies.",
+      "trap": true,
       "effects": [],
       "apply": [
-        {"op":"apply","status":"weak","stacks":3,"target":"all_enemies"},
-        {"op":"apply","status":"frostbite","stacks":2,"target":"all_enemies"}
+        {
+          "op": "apply",
+          "status": "weak",
+          "stacks": 3,
+          "target": "all_enemies"
+        },
+        {
+          "op": "apply",
+          "status": "frostbite",
+          "stacks": 2,
+          "target": "all_enemies"
+        }
       ],
-      "upgrade": {"name":"Frost Trap (Rank 2)","cost":1,"text":"Trap. Arms: first enemy attack applies Weak 4 and Frostbite 3 to ALL enemies.","effects":[]}
+      "upgrade": {
+        "name": "Frost Trap (Rank 2)",
+        "cost": 1,
+        "text": "Trap. Arms: first enemy attack applies Weak 4 and Frostbite 3 to ALL enemies.",
+        "effects": []
+      }
     },
-    {"id":"counterattack","name":"Counterattack","icon":"ability_warrior_challange","spellId":19306,"rank":1,"type":"attack","rarity":"uncommon","archetype":"survival","cost":1,"target":"enemy","flags":[],"text":"Deal 8 damage. If the enemy intends to attack, gain 6 Block and apply Stun 1.",
+    {
+      "id": "counterattack",
+      "name": "Counterattack",
+      "icon": "ability_warrior_challange",
+      "spellId": 19306,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "uncommon",
+      "archetype": "survival",
+      "cost": 1,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 8 damage. If the enemy intends to attack, gain 6 Block and apply Stun 1.",
       "effects": [
-        {"op":"damage","amount":8},
-        {"op":"conditional","if":{"type":"enemy_intent","value":"attack"},"then":[{"op":"block","amount":6},{"op":"apply","status":"stun","stacks":1,"target":"enemy"}]}
+        {
+          "op": "damage",
+          "amount": 8
+        },
+        {
+          "op": "conditional",
+          "if": {
+            "type": "enemy_intent",
+            "value": "attack"
+          },
+          "then": [
+            {
+              "op": "block",
+              "amount": 6
+            },
+            {
+              "op": "apply",
+              "status": "stun",
+              "stacks": 1,
+              "target": "enemy"
+            }
+          ]
+        }
       ],
-      "upgrade": {"name":"Counterattack (Rank 2)","cost":1,"text":"Deal 11 damage. If the enemy intends to attack, gain 9 Block and apply Stun 1.","effects":[
-        {"op":"damage","amount":11},
-        {"op":"conditional","if":{"type":"enemy_intent","value":"attack"},"then":[{"op":"block","amount":9},{"op":"apply","status":"stun","stacks":1,"target":"enemy"}]}
-      ]}
+      "upgrade": {
+        "name": "Counterattack (Rank 2)",
+        "cost": 1,
+        "text": "Deal 11 damage. If the enemy intends to attack, gain 9 Block and apply Stun 1.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 11
+          },
+          {
+            "op": "conditional",
+            "if": {
+              "type": "enemy_intent",
+              "value": "attack"
+            },
+            "then": [
+              {
+                "op": "block",
+                "amount": 9
+              },
+              {
+                "op": "apply",
+                "status": "stun",
+                "stacks": 1,
+                "target": "enemy"
+              }
+            ]
+          }
+        ]
+      },
+      "range": "melee"
     },
-    {"id":"aspect-of-the-cheetah","name":"Aspect of the Cheetah","icon":"ability_mount_jungletiger","spellId":5118,"rank":1,"type":"stance","rarity":"uncommon","archetype":"survival","cost":0,"target":"self","flags":[],"text":"Enter Aspect of the Cheetah: draw 1 extra card each turn. Draw 2 now.",
+    {
+      "id": "aspect-of-the-cheetah",
+      "name": "Aspect of the Cheetah",
+      "icon": "ability_mount_jungletiger",
+      "spellId": 5118,
+      "rank": 1,
+      "type": "stance",
+      "rarity": "uncommon",
+      "archetype": "survival",
+      "cost": 0,
+      "target": "self",
+      "flags": [],
+      "text": "Enter Aspect of the Cheetah: draw 1 extra card each turn. Draw 2 now.",
       "effects": [
-        {"op":"set_aspect","value":"cheetah"},
-        {"op":"draw","count":2}
+        {
+          "op": "set_aspect",
+          "value": "cheetah"
+        },
+        {
+          "op": "draw",
+          "count": 2
+        }
       ],
-      "upgrade": {"name":"Aspect of the Cheetah (Rank 2)","cost":0,"text":"Enter Aspect of the Cheetah: draw 1 extra card each turn. Draw 3 now.","effects":[
-        {"op":"set_aspect","value":"cheetah"},
-        {"op":"draw","count":3}
-      ]}
+      "upgrade": {
+        "name": "Aspect of the Cheetah (Rank 2)",
+        "cost": 0,
+        "text": "Enter Aspect of the Cheetah: draw 1 extra card each turn. Draw 3 now.",
+        "effects": [
+          {
+            "op": "set_aspect",
+            "value": "cheetah"
+          },
+          {
+            "op": "draw",
+            "count": 3
+          }
+        ]
+      }
     },
-    {"id":"aimed-shot","name":"Aimed Shot","icon":"ability_hunter_aimedshot","spellId":19434,"rank":1,"type":"attack","rarity":"rare","archetype":"marksmanship","cost":2,"target":"enemy","flags":[],"text":"Deal 20 damage. Double against Marked targets.",
+    {
+      "id": "aimed-shot",
+      "name": "Aimed Shot",
+      "icon": "ability_hunter_aimedshot",
+      "spellId": 19434,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "rare",
+      "archetype": "marksmanship",
+      "cost": 2,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 20 damage. Double against Marked targets.",
       "effects": [
-        {"op":"conditional","if":{"type":"status_on_target","status":"marked"},"then":[{"op":"damage","amount":40}],"else":[{"op":"damage","amount":20}]}
+        {
+          "op": "conditional",
+          "if": {
+            "type": "status_on_target",
+            "status": "marked"
+          },
+          "then": [
+            {
+              "op": "damage",
+              "amount": 40
+            }
+          ],
+          "else": [
+            {
+              "op": "damage",
+              "amount": 20
+            }
+          ]
+        }
       ],
-      "upgrade": {"name":"Aimed Shot (Rank 2)","cost":2,"text":"Deal 26 damage. Double against Marked targets.","effects":[
-        {"op":"conditional","if":{"type":"status_on_target","status":"marked"},"then":[{"op":"damage","amount":52}],"else":[{"op":"damage","amount":26}]}
-      ]}
+      "upgrade": {
+        "name": "Aimed Shot (Rank 2)",
+        "cost": 2,
+        "text": "Deal 26 damage. Double against Marked targets.",
+        "effects": [
+          {
+            "op": "conditional",
+            "if": {
+              "type": "status_on_target",
+              "status": "marked"
+            },
+            "then": [
+              {
+                "op": "damage",
+                "amount": 52
+              }
+            ],
+            "else": [
+              {
+                "op": "damage",
+                "amount": 26
+              }
+            ]
+          }
+        ]
+      },
+      "range": "ranged"
     },
-    {"id":"volley","name":"Volley","icon":"ability_marksmanship","spellId":1510,"rank":1,"type":"attack","rarity":"rare","archetype":"marksmanship","cost":3,"target":"all_enemies","flags":[],"text":"Deal 6 damage to ALL enemies 3 times.",
+    {
+      "id": "volley",
+      "name": "Volley",
+      "icon": "ability_marksmanship",
+      "spellId": 1510,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "rare",
+      "archetype": "marksmanship",
+      "cost": 3,
+      "target": "all_enemies",
+      "flags": [],
+      "text": "Deal 6 damage to ALL enemies 3 times.",
       "effects": [
-        {"op":"damage","amount":6,"target":"all_enemies","times":3}
+        {
+          "op": "damage",
+          "amount": 6,
+          "target": "all_enemies",
+          "times": 3
+        }
       ],
-      "upgrade": {"name":"Volley (Rank 2)","cost":3,"text":"Deal 8 damage to ALL enemies 3 times.","effects":[
-        {"op":"damage","amount":8,"target":"all_enemies","times":3}
-      ]}
+      "upgrade": {
+        "name": "Volley (Rank 2)",
+        "cost": 3,
+        "text": "Deal 8 damage to ALL enemies 3 times.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 8,
+            "target": "all_enemies",
+            "times": 3
+          }
+        ]
+      },
+      "range": "ranged"
     },
-    {"id":"rapid-fire","name":"Rapid Fire","icon":"ability_hunter_runningshot","spellId":3045,"rank":1,"type":"skill","rarity":"rare","archetype":"marksmanship","cost":1,"target":"self","flags":["exhaust"],"text":"Gain 2 Energy and draw 2 cards. Your next attack deals double damage. Exhaust.",
+    {
+      "id": "rapid-fire",
+      "name": "Rapid Fire",
+      "icon": "ability_hunter_runningshot",
+      "spellId": 3045,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "marksmanship",
+      "cost": 1,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Gain 2 Energy and draw 2 cards. Your next attack deals double damage. Exhaust.",
       "effects": [
-        {"op":"gain_energy","amount":2},
-        {"op":"draw","count":2},
-        {"op":"double_damage_next"}
+        {
+          "op": "gain_energy",
+          "amount": 2
+        },
+        {
+          "op": "draw",
+          "count": 2
+        },
+        {
+          "op": "double_damage_next"
+        }
       ],
-      "upgrade": {"name":"Rapid Fire (Rank 2)","cost":1,"text":"Gain 3 Energy, draw 3. Your next attack deals double damage. Exhaust.","effects":[
-        {"op":"gain_energy","amount":3},
-        {"op":"draw","count":3},
-        {"op":"double_damage_next"}
-      ]}
+      "upgrade": {
+        "name": "Rapid Fire (Rank 2)",
+        "cost": 1,
+        "text": "Gain 3 Energy, draw 3. Your next attack deals double damage. Exhaust.",
+        "effects": [
+          {
+            "op": "gain_energy",
+            "amount": 3
+          },
+          {
+            "op": "draw",
+            "count": 3
+          },
+          {
+            "op": "double_damage_next"
+          }
+        ]
+      }
     },
-    {"id":"wyvern-sting","name":"Wyvern Sting","icon":"inv_spear_02","spellId":19386,"rank":1,"type":"attack","rarity":"rare","archetype":"survival","cost":2,"target":"enemy","flags":[],"text":"Deal 4 damage. Apply Sleep 2 and Poison 10.",
+    {
+      "id": "wyvern-sting",
+      "name": "Wyvern Sting",
+      "icon": "inv_spear_02",
+      "spellId": 19386,
+      "rank": 1,
+      "type": "attack",
+      "rarity": "rare",
+      "archetype": "survival",
+      "cost": 2,
+      "target": "enemy",
+      "flags": [],
+      "text": "Deal 4 damage. Apply Sleep 2 and Poison 10.",
       "effects": [
-        {"op":"damage","amount":4},
-        {"op":"apply","status":"sleep","stacks":2,"target":"enemy"},
-        {"op":"apply","status":"poison","stacks":10,"target":"enemy"}
+        {
+          "op": "damage",
+          "amount": 4
+        },
+        {
+          "op": "apply",
+          "status": "sleep",
+          "stacks": 2,
+          "target": "enemy"
+        },
+        {
+          "op": "apply",
+          "status": "poison",
+          "stacks": 10,
+          "target": "enemy"
+        }
       ],
-      "upgrade": {"name":"Wyvern Sting (Rank 2)","cost":2,"text":"Deal 6 damage. Apply Sleep 3 and Poison 14.","effects":[
-        {"op":"damage","amount":6},
-        {"op":"apply","status":"sleep","stacks":3,"target":"enemy"},
-        {"op":"apply","status":"poison","stacks":14,"target":"enemy"}
-      ]}
+      "upgrade": {
+        "name": "Wyvern Sting (Rank 2)",
+        "cost": 2,
+        "text": "Deal 6 damage. Apply Sleep 3 and Poison 14.",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 6
+          },
+          {
+            "op": "apply",
+            "status": "sleep",
+            "stacks": 3,
+            "target": "enemy"
+          },
+          {
+            "op": "apply",
+            "status": "poison",
+            "stacks": 14,
+            "target": "enemy"
+          }
+        ]
+      },
+      "range": "ranged"
     },
-    {"id":"deterrence","name":"Deterrence","icon":"ability_parry","spellId":19263,"rank":1,"type":"skill","rarity":"rare","archetype":"survival","cost":1,"target":"self","flags":["exhaust"],"text":"Gain Intangible 1 and 8 Block this turn. Exhaust.",
+    {
+      "id": "deterrence",
+      "name": "Deterrence",
+      "icon": "ability_parry",
+      "spellId": 19263,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "survival",
+      "cost": 1,
+      "target": "self",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Gain Intangible 1 and 8 Block this turn. Exhaust.",
       "effects": [
-        {"op":"apply","status":"intangible","stacks":1,"target":"self"},
-        {"op":"block","amount":8}
+        {
+          "op": "apply",
+          "status": "intangible",
+          "stacks": 1,
+          "target": "self"
+        },
+        {
+          "op": "block",
+          "amount": 8
+        }
       ],
-      "upgrade": {"name":"Deterrence (Rank 2)","cost":1,"text":"Gain Intangible 1 and 12 Block this turn. Exhaust.","effects":[
-        {"op":"apply","status":"intangible","stacks":1,"target":"self"},
-        {"op":"block","amount":12}
-      ]}
+      "upgrade": {
+        "name": "Deterrence (Rank 2)",
+        "cost": 1,
+        "text": "Gain Intangible 1 and 12 Block this turn. Exhaust.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "intangible",
+            "stacks": 1,
+            "target": "self"
+          },
+          {
+            "op": "block",
+            "amount": 12
+          }
+        ]
+      }
     },
-    {"id":"explosive-trap","name":"Explosive Trap","icon":"spell_fire_selfdestruct","spellId":13813,"rank":1,"type":"skill","rarity":"rare","archetype":"survival","cost":2,"target":"self","flags":[],"text":"Trap. Arms: the first enemy attack deals 14 fire to ALL enemies and Burn 5.","trap":true,
+    {
+      "id": "explosive-trap",
+      "name": "Explosive Trap",
+      "icon": "spell_fire_selfdestruct",
+      "spellId": 13813,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "survival",
+      "cost": 2,
+      "target": "self",
+      "flags": [],
+      "text": "Trap. Arms: the first enemy attack deals 14 fire to ALL enemies and Burn 5.",
+      "trap": true,
       "effects": [],
       "apply": [
-        {"op":"damage","amount":14,"school":"fire","target":"all_enemies"},
-        {"op":"apply","status":"burn","stacks":5,"target":"all_enemies"}
+        {
+          "op": "damage",
+          "amount": 14,
+          "school": "fire",
+          "target": "all_enemies"
+        },
+        {
+          "op": "apply",
+          "status": "burn",
+          "stacks": 5,
+          "target": "all_enemies"
+        }
       ],
-      "upgrade": {"name":"Explosive Trap (Rank 2)","cost":2,"text":"Trap. Arms: first enemy attack deals 20 fire to ALL enemies and Burn 8.","effects":[]}
+      "upgrade": {
+        "name": "Explosive Trap (Rank 2)",
+        "cost": 2,
+        "text": "Trap. Arms: first enemy attack deals 20 fire to ALL enemies and Burn 8.",
+        "effects": []
+      }
     },
-    {"id":"intimidation","name":"Intimidation","icon":"ability_devour","spellId":19577,"rank":1,"type":"skill","rarity":"rare","archetype":"beast-mastery","cost":1,"target":"self","flags":[],"text":"Your pet attacks and Stuns the enemy 1 turn. Pet gains 6 Block.",
+    {
+      "id": "intimidation",
+      "name": "Intimidation",
+      "icon": "ability_devour",
+      "spellId": 19577,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "rare",
+      "archetype": "beast-mastery",
+      "cost": 1,
+      "target": "self",
+      "flags": [],
+      "text": "Your pet attacks and Stuns the enemy 1 turn. Pet gains 6 Block.",
       "effects": [
-        {"op":"pet_action","action":"attack"},
-        {"op":"apply","status":"stun","stacks":1,"target":"enemy"},
-        {"op":"block","amount":6,"target":"pet"}
+        {
+          "op": "pet_action",
+          "action": "attack"
+        },
+        {
+          "op": "apply",
+          "status": "stun",
+          "stacks": 1,
+          "target": "enemy"
+        },
+        {
+          "op": "block",
+          "amount": 6,
+          "target": "pet"
+        }
       ],
-      "upgrade": {"name":"Intimidation (Rank 2)","cost":1,"text":"Your pet attacks and Stuns 1 turn. Pet gains 10 Block. Draw 1.","effects":[
-        {"op":"pet_action","action":"attack"},
-        {"op":"apply","status":"stun","stacks":1,"target":"enemy"},
-        {"op":"block","amount":10,"target":"pet"},
-        {"op":"draw","count":1}
-      ]}
+      "upgrade": {
+        "name": "Intimidation (Rank 2)",
+        "cost": 1,
+        "text": "Your pet attacks and Stuns 1 turn. Pet gains 10 Block. Draw 1.",
+        "effects": [
+          {
+            "op": "pet_action",
+            "action": "attack"
+          },
+          {
+            "op": "apply",
+            "status": "stun",
+            "stacks": 1,
+            "target": "enemy"
+          },
+          {
+            "op": "block",
+            "amount": 10,
+            "target": "pet"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      }
     },
-    {"id":"bestial-wrath","name":"Bestial Wrath","icon":"ability_druid_ferociousbite","spellId":19574,"rank":1,"type":"skill","rarity":"epic","archetype":"beast-mastery","cost":2,"target":"self","flags":["exhaust"],"text":"Your pet gains Enrage and Strength 4, acts twice, and takes only 1 damage per hit this turn. Exhaust.",
-      "effects": [
-        {"op":"apply","status":"enrage","stacks":1,"target":"pet"},
-        {"op":"apply","status":"strength","stacks":4,"target":"pet"},
-        {"op":"pet_action","action":"attack"},
-        {"op":"pet_action","action":"attack"},
-        {"op":"apply","status":"intangible","stacks":1,"target":"pet"}
+    {
+      "id": "bestial-wrath",
+      "name": "Bestial Wrath",
+      "icon": "ability_druid_ferociousbite",
+      "spellId": 19574,
+      "rank": 1,
+      "type": "skill",
+      "rarity": "epic",
+      "archetype": "beast-mastery",
+      "cost": 2,
+      "target": "self",
+      "flags": [
+        "exhaust"
       ],
-      "upgrade": {"name":"Bestial Wrath (Rank 2)","cost":1,"text":"Your pet gains Enrage and Strength 6, acts twice, takes only 1 damage per hit this turn. Exhaust.","effects":[
-        {"op":"apply","status":"enrage","stacks":1,"target":"pet"},
-        {"op":"apply","status":"strength","stacks":6,"target":"pet"},
-        {"op":"pet_action","action":"attack"},
-        {"op":"pet_action","action":"attack"},
-        {"op":"apply","status":"intangible","stacks":1,"target":"pet"}
-      ]}
+      "text": "Your pet gains Enrage and Strength 4, acts twice, and takes only 1 damage per hit this turn. Exhaust.",
+      "effects": [
+        {
+          "op": "apply",
+          "status": "enrage",
+          "stacks": 1,
+          "target": "pet"
+        },
+        {
+          "op": "apply",
+          "status": "strength",
+          "stacks": 4,
+          "target": "pet"
+        },
+        {
+          "op": "pet_action",
+          "action": "attack"
+        },
+        {
+          "op": "pet_action",
+          "action": "attack"
+        },
+        {
+          "op": "apply",
+          "status": "intangible",
+          "stacks": 1,
+          "target": "pet"
+        }
+      ],
+      "upgrade": {
+        "name": "Bestial Wrath (Rank 2)",
+        "cost": 1,
+        "text": "Your pet gains Enrage and Strength 6, acts twice, takes only 1 damage per hit this turn. Exhaust.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "enrage",
+            "stacks": 1,
+            "target": "pet"
+          },
+          {
+            "op": "apply",
+            "status": "strength",
+            "stacks": 6,
+            "target": "pet"
+          },
+          {
+            "op": "pet_action",
+            "action": "attack"
+          },
+          {
+            "op": "pet_action",
+            "action": "attack"
+          },
+          {
+            "op": "apply",
+            "status": "intangible",
+            "stacks": 1,
+            "target": "pet"
+          }
+        ]
+      }
     },
-    {"id":"trueshot-aura","name":"Trueshot Aura","icon":"ability_trueshot","spellId":19506,"rank":1,"type":"power","rarity":"epic","archetype":"marksmanship","cost":2,"target":"self","flags":[],"text":"Power. Your attacks deal +3 damage and your pet deals +2. Lasts all combat.",
+    {
+      "id": "trueshot-aura",
+      "name": "Trueshot Aura",
+      "icon": "ability_trueshot",
+      "spellId": 19506,
+      "rank": 1,
+      "type": "power",
+      "rarity": "epic",
+      "archetype": "marksmanship",
+      "cost": 2,
+      "target": "self",
+      "flags": [],
+      "text": "Power. Your attacks deal +3 damage and your pet deals +2. Lasts all combat.",
       "effects": [
-        {"op":"apply","status":"strength","stacks":3,"target":"self"},
-        {"op":"apply","status":"strength","stacks":2,"target":"pet"}
+        {
+          "op": "apply",
+          "status": "strength",
+          "stacks": 3,
+          "target": "self"
+        },
+        {
+          "op": "apply",
+          "status": "strength",
+          "stacks": 2,
+          "target": "pet"
+        }
       ],
-      "upgrade": {"name":"Trueshot Aura (Rank 2)","cost":1,"text":"Power. Your attacks deal +4 damage, your pet +3. Lasts all combat.","effects":[
-        {"op":"apply","status":"strength","stacks":4,"target":"self"},
-        {"op":"apply","status":"strength","stacks":3,"target":"pet"}
-      ]}
+      "upgrade": {
+        "name": "Trueshot Aura (Rank 2)",
+        "cost": 1,
+        "text": "Power. Your attacks deal +4 damage, your pet +3. Lasts all combat.",
+        "effects": [
+          {
+            "op": "apply",
+            "status": "strength",
+            "stacks": 4,
+            "target": "self"
+          },
+          {
+            "op": "apply",
+            "status": "strength",
+            "stacks": 3,
+            "target": "pet"
+          }
+        ]
+      }
     }
   ]
 }

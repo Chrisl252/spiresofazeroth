@@ -9,7 +9,18 @@ export function render(app) {
   const btn = (label, onClick, extra = {}, cls = "") => h("button", { class: `sp-wowbtn ${cls}`, type: "button", onClick, ...extra }, label);
   const menu = h("div", { class: "sp-title-screen__menu" });
   if (app.hasSave) {
-    menu.append(btn("Continue run", async () => { if (await app.resume()) app.route(); else app.go("classSelect"); }, { "data-autofocus": "" }, "sp-wowbtn--lg"));
+    menu.append(btn("Continue run", async () => {
+      try {
+        if (await app.resume()) {
+          await app.route();
+        } else {
+          await app.go("classSelect");
+        }
+      } catch (err) {
+        console.error("[spires] Continue run error:", err);
+        app.abandon();
+      }
+    }, { "data-autofocus": "" }, "sp-wowbtn--lg"));
   }
   menu.append(btn("Choose class", () => app.go("classSelect"), app.hasSave ? {} : { "data-autofocus": "" }, "sp-wowbtn--lg"));
   const unspent = (app.data.classIds || []).reduce((n, id) => n + talentState(app.meta, id).available, 0);

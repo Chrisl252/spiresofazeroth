@@ -3,7 +3,7 @@
 // consequence icon + coloured chips (eventChips.js), keys 1-9. Picking plays the outcome (eventScene.playOutcome), shows what
 // actually happened under the choice, then "Continue". Options may require gold / a relic / a flag (engine optionAvailable).
 import { h, fill } from "./dom.js";
-import { eventDef, optionAvailable, chooseEventOption, leaveNode } from "../engine/run.js";
+import { eventDef, optionAvailable, chooseEventOption, leaveNode, hasHearthstone, useHearthstone } from "../engine/run.js";
 import { cssReady, btn, ico } from "./kit.js";
 import { runBar } from "./runbar.js";
 import { chipsFor, optionIcon, optionTitle } from "./eventChips.js";
@@ -90,6 +90,13 @@ export async function render(app) {
     redraw();
     playOutcome(app, host, res.parts);
   }
+  function hearth() { // the Hearthstone card's event side: leave with no outcome at all
+    if (busy || run.pending.result || !useHearthstone(run)) return;
+    busy = true; finish();
+    run.pending.result.sum = { text: "You hearth away and leave the event behind.", chips: [], i: -1 };
+    app.save();
+    redraw();
+  }
 
   const onKey = (e) => {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
@@ -112,6 +119,9 @@ export async function render(app) {
         ico(r.ic.slug, { size: "sm" }),
         h("span", { class: "ev-opt__body" }, h("b", { class: "ev-opt__t" }, r.title), r.chips.length ? h("span", { class: "ev-chips" }, ...r.chips.map(chipEl)) : null)));
     });
+    if (!done && hasHearthstone(run)) list.append(h("button", { class: "ev-opt ev-opt--blue", type: "button", role: "listitem", onClick: hearth },
+      h("span", { class: "ev-opt__key" }, "H"), ico("inv_misc_rune_01", { size: "sm" }),
+      h("span", { class: "ev-opt__body" }, h("b", { class: "ev-opt__t" }, "Use your Hearthstone: leave without choosing"))));
     const sum = done && res.sum;
     const resultBlock = done ? h("div", { class: "ev-result" },
       h("p", {}, sum ? sum.text : `You chose: ${res.label}.`),

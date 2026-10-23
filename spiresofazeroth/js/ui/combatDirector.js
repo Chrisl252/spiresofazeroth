@@ -20,7 +20,7 @@ const MAX_HITS = 8;
 
 export function enemyRecipe(e, moveName) {
   const n = String(moveName || "").toLowerCase();
-  if (/spit|bolt|shot|arrow|spray|hex|curse|shadow|frost|fire|spell|venom|web|breath|fling|throw|cast|blast|nova|lightning/.test(n)) return "spit";
+  if (/spit|bolt|shoot|shot|arrow|spray|hex|curse|shadow|frost|fire|spell|venom|web|breath|fling|throw|cast|blast|nova|lightning/.test(n)) return "spit";
   if (/slam|smash|crush|stomp|pound|hammer|fist|quake|charge|ram/.test(n)) return "slam";
   if (/bite|snap|fang|maul|gore|sting|devour|chomp/.test(n)) return "bite";
   if (/claw|rake|swipe|scratch|rend|pounce|talon|lash|gouge/.test(n)) return "claw";
@@ -29,6 +29,66 @@ export function enemyRecipe(e, moveName) {
   if (fam === "giant" || fam === "elemental" || fam === "mechanical" || ty === "golem") return "slam";
   if (fam === "beast") return /wolf|boar|spider|snake|bat|crocolisk|hyena|raptor|scorpid/.test(ty) ? "bite" : "claw";
   return "steel";
+}
+
+
+export const MELEE_EXCEPTIONS = /^(cheap[-_ ]shot|kidney[-_ ]shot|raptor[-_ ]strike|mongoose[-_ ]bite|wing[-_ ]clip|counterattack|claw|maul|swipe|rake|shred|bash|pounce|ravage|ferocious[-_ ]bite|rip|sinister[-_ ]strike|hemorrhage|backstab|ambush|eviscerate|gouge|kick|riposte|blade[-_ ]flurry|garrote|rupture|heroic[-_ ]strike|charge|intercept|rend|hamstring|cleave|sunder[-_ ]armor|pummel|shield[-_ ]bash|revenge|mocking[-_ ]blow|slam|overpower|execute|whirlwind|concussion[-_ ]blow|mortal[-_ ]strike|bloodthirst|shield[-_ ]slam|thunder[-_ ]clap)$/i;
+export const RANGED_CARD_RE = /shot|shoot|arrow|bow|gun|crossbow|rifle|pistol|snipe|aimed|volley|barrage|sting|trap|throw|thrown|shuriken|grenade|bomb|mortar|boomerang|dart|javelin|wand|bolt|blast|beam|spray|spit/i;
+export const RANGED_ICON_RE = /inv_weapon_bow_|inv_weapon_crossbow_|inv_weapon_rifle_|inv_wand_|inv_throwingaxe_|inv_throwingknife_|inv_misc_bomb_|inv_misc_ammo_|inv_battery_/i;
+
+export function isCardRanged(def, classId, el) {
+  if (!def) return false;
+  if (def.range === "ranged") return true;
+  if (def.range === "melee") return false;
+  const id = String(def.id || "").toLowerCase().trim();
+  const name = String(def.name || "").toLowerCase().trim();
+  if (MELEE_EXCEPTIONS.test(id) || MELEE_EXCEPTIONS.test(name)) return false;
+  const cls = String(def.class || def.cls || classId || "").toLowerCase();
+  if (cls === "hunter") {
+    if (def.type === "attack" || def.type === "trap") return true;
+  }
+  if (RANGED_CARD_RE.test(id) || RANGED_CARD_RE.test(name)) return true;
+  const icon = String(def.icon || "").toLowerCase();
+  if (RANGED_ICON_RE.test(icon)) return true;
+  if (def.school && !["physical", "bleed"].includes(def.school)) return true;
+  if (el && MELEE_EL[el] == null) return true;
+  return false;
+}
+
+export const RANGED_ENEMY_RE = /archer|marksman|hunter|ranger|bowman|rifleman|gunner|cannoneer|headhunter|thrower|sniper|spitter|caster|mage|wizard|warlock|priest|shaman|sorcerer|conjur|necromanc|witch|geomanc|pyromanc|druid|magus|acolyte|seer|oracle|invoker/i;
+export const RANGED_MOVE_RE = /shoot|shot|arrow|bow|gun|rifle|throw|thrown|toss|hurl|bolt|spit|spray|blast|curse|shadow|frost|fire|spell|breath|lightning|acid|web|beam|rain|bomb|mortar|grenade|lance|missile|poison|venom|dart|javelin|cannon|flare|discharge|hex|nova|smite|scorch|headhunt/i;
+export const MELEE_ENEMY_MOVES = /^(cheap[-_ ]shot|kidney[-_ ]shot|bite|claw|rake|swipe|scratch|rend|pounce|talon|lash|gouge|strike|stab|slash|cleave|shank|blade|sword|axe|cut|bash|backstab|maul|gore|devour|chomp)$/i;
+
+export function isEnemyRanged(e, moveName, rec0) {
+  const m = String(moveName || "").toLowerCase().trim();
+  if (/cheap[-_ ]shot|kidney[-_ ]shot/i.test(m)) return false;
+  if (RANGED_MOVE_RE.test(m)) return true;
+  if (rec0 === "spit") return true;
+  const nm = String(e && (e.name || e.type || e.family) || "").toLowerCase();
+  if (RANGED_ENEMY_RE.test(nm)) {
+    if (MELEE_ENEMY_MOVES.test(m)) return false;
+    return true;
+  }
+  return false;
+}
+
+export function enemySpec(e, moveName, rec0, isRanged) {
+  if (!isRanged) return "enemy:" + rec0;
+  const n = String(moveName || "").toLowerCase();
+  if (/fire|pyro|flame|scorch|lava|burn/i.test(n)) return "fire:attack";
+  if (/frost|ice|chill|blizzard/i.test(n)) return "frost:attack";
+  if (/shadow|dark|void|curse|hex|death/i.test(n)) return "shadow:attack";
+  if (/lightning|thunder|spark|shock/i.test(n)) return "lightning:attack";
+  if (/holy|smite|radiant/i.test(n)) return "holy:attack";
+  if (/arcane|magic/i.test(n)) return "arcane:attack";
+  if (/spit|acid|venom|web|slime|poison/i.test(n)) return "enemy:spit";
+  if (/shoot|shot|arrow|bow|gun|rifle|throw|thrown|axe|dagger|spear|javelin|dart|headhunt|bullet|cannon|mortar|bomb|rock|boulder/i.test(n)) return "steel:attack";
+  if (rec0 === "spit") {
+    const fam = String((e && (e.family || e.type)) || "").toLowerCase();
+    if (/spider|snake|scorpid|worm|wasp|spitter|hydra|ooze|slime/i.test(fam)) return "enemy:spit";
+    return "steel:attack";
+  }
+  return "steel:attack";
 }
 
 export function snap(C) {
@@ -160,7 +220,7 @@ export function createDirector(o) {
     let first = true;
     const tgtUid = targets.find((t) => !gone(t)) || targets[0];
     const lungeP = A && A.get(src) && tgtUid ? safe(
-      (isRanged && A.cast) ? A.cast(src, tgtUid, { gap }) : A.lunge(src, tgtUid, { gap }),
+      isRanged ? (A.shoot ? A.shoot(src, tgtUid, { gap, ranged: true }) : (A.cast ? A.cast(src, tgtUid, { gap, ranged: true }) : Promise.resolve())) : A.lunge(src, tgtUid, { gap }),
       `attack:${src}->${tgtUid}`,
       2500
     ) : Promise.resolve();
@@ -228,9 +288,9 @@ export function createDirector(o) {
     SND.cast(def); SND.ui("cardPlay");
     try {
       if (cardHits.length) {
-        const isSpellAttack = MELEE_EL[el] == null || (def.school && !["physical", "bleed"].includes(def.school)) || def.range === "ranged";
-        const lead = MELEE_EL[el] != null ? MELEE_EL[el] : 0;
-        await strike({ src: "player", hits: cardHits, spec: def, lead, gap: isSpellAttack ? 1400 : 190, isRanged: isSpellAttack, onFirst: sideFx });
+        const isRanged = isCardRanged(def, C.classId, el);
+        const lead = isRanged ? 0 : (MELEE_EL[el] != null ? MELEE_EL[el] : 0);
+        await strike({ src: "player", hits: cardHits, spec: def, lead, gap: isRanged ? 1400 : 190, isRanged, onFirst: sideFx });
       } else {
         const to = kind !== "power" && tgt && !gone(tgt) ? tgt : "player";
         const spec = kind === "heal" || (kind === "skill" && rest.some((e) => e.t === "heal") && !rest.some((e) => e.t === "block")) ? `${el}:heal` : def;
@@ -271,8 +331,10 @@ export function createDirector(o) {
     if (hits.length) SND.enemy(rec0, "cast", moveName);
     try {
       if (hits.length) {
-        const isRanged = rec0 === "spit" || /spit|bolt|shot|arrow|curse|shadow|frost|fire|spell|breath|cast|blast|nova|lightning/.test(String(moveName || "").toLowerCase());
-        await strike({ src: e.uid, hits, spec: "enemy:" + rec0, lead: ENEMY_LEAD[rec0] || 0, gap: isRanged ? 1400 : 190, isRanged, onFirst: sideFx });
+        const isRanged = isEnemyRanged(e, moveName, rec0);
+        const spec = enemySpec(e, moveName, rec0, isRanged);
+        const lead = isRanged ? 0 : (ENEMY_LEAD[rec0] || 0);
+        await strike({ src: e.uid, hits, spec, lead, gap: isRanged ? 1400 : 190, isRanged, onFirst: sideFx });
       } else {
         const blocked = rest.some((x) => x.t === "block" && x.uid === e.uid);
         if (A && !gone(e.uid)) {

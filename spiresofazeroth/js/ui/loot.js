@@ -7,7 +7,7 @@
 import { h, icon, tip, esc, toast } from "./dom.js";
 import { banner, btn } from "./kit.js";
 import { gearCss, gearStrip, gearTip } from "./gearStrip.js";
-import { gearLevel } from "../engine/gear.js";
+import { gearLevel, isStarter } from "../engine/gear.js";
 import { takeRelic, takePotion } from "../engine/run.js";
 import { heroicMods } from "../engine/heroic.js";
 import { sfx } from "../audio.js";
@@ -15,6 +15,10 @@ import { getKit, clearStage, lanesFor, watchLeave } from "./combatKit.js";
 
 export const needsLoot = (pd) => !!(pd && !pd.lootSeen && (pd.gear || (pd.type === "treasure" && (pd.gold || pd.relic))));
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const withTimeout = (promise, ms, onTimeout) => new Promise((resolve, reject) => {
+  const timer = setTimeout(() => { onTimeout(); resolve(null); }, ms);
+  Promise.resolve(promise).then((value) => { clearTimeout(timer); resolve(value); }, (error) => { clearTimeout(timer); reject(error); });
+});
 
 // One LootFrame row: 64 px icon (quality border, optional quantity badge) + name coloured by quality.
 function row({ ic, name, q = "common", qty = 0, cls = "", tipHtml = null }) {
@@ -51,7 +55,7 @@ export function buildLootFrame(app, pd, { onTake = () => {}, tag = "Spoils" } = 
   };
   const pt = pd.taken || {};
   if (pd.gold) add(row({ ic: "inv_misc_coin_17", name: `${pd.gold} Gold`, cls: "lf-row--coin" }), "coin", null);
-  if (pd.gear) { const g = pd.gear, r = data.relic(g.id); if (r) add(row({ ic: r.icon, name: g.upgrade ? `Upgrade: ${r.name}` : r.name, q: r.rarity || "common", tipHtml: (g.upgrade ? `<b style="color:#1eff00">Upgraded</b> - replaces your ${esc(r.name)} with the stronger version.<br>` : "") + gearTip(r, run, data) }), "gear", null); }
+  if (pd.gear) { const g = pd.gear, r = data.relic(g.id); if (r) add(row({ ic: r.icon, name: g.upgrade ? `Upgrade: ${r.name}` : r.name, q: r.rarity || "common", tipHtml: (g.replaced && !isStarter(g.replaced) ? "Previous item kept in your Gear Bag.<br>" : "") + (g.upgrade ? `<b style="color:#1eff00">Upgraded</b> - replaces your ${esc(r.name)} with the stronger version.<br>` : "") + gearTip(r, run, data) }), "gear", null); }
   if (pd.relics && pd.relics.length && !pt.relic) {
     const ids = pd.relicChoose ? pd.relics : pd.relics.slice(0, 1);
     for (const id of ids) { const r = data.relic(id); if (r) add(row({ ic: r.icon, name: r.name, q: r.rarity || "common", tipHtml: gearTip(r, run, data), cls: pd.relicChoose ? "lf-row--choose" : "" }), "relic", () => takeRelic(run, data, id), pd.relicChoose ? "relic" : null); }
@@ -119,12 +123,14 @@ export async function showLoot(app, host, pd, done) {
   const lane = lanesFor(stage).enemy(0, 1);
   const W = stage.size.w, H = stage.size.h, FW = stage.portrait ? Math.round(W * 0.88) : 560;
   const cx = stage.portrait ? lane.x : Math.min(lane.x, W - FW - 50 - 230), groundY = lane.y + 10; // landscape: the chest sits left of the frame
+  const flatChest = h("div", { class: "lt-flatchest", style: { left: `${cx}px`, top: `${groundY}px` } }, icon("inv_misc_treasurechest01b", "", "Treasure chest"));
+  root.append(flatChest);
   const finalState = () => {
     if (!g && !pd.relic && !pd.gold) { close(); return; }
     const list = h("div", { class: "lf-list" });
     const add = (el, take) => { const o = { el, take, done: false }; el.addEventListener("click", (e) => { e.stopPropagation(); if (e.shiftKey) lootAll(); else takeRow(o); }); rows.push(o); list.append(el); };
     if (pd.gold) add(row({ ic: "inv_misc_coin_17", name: `${pd.gold} Gold`, cls: "lf-row--coin" }), null);
-    if (g) { const r = data.relic(g.id); if (r) add(row({ ic: r.icon, name: g.upgrade ? `Upgrade: ${r.name}` : r.name, q: r.rarity || "common", tipHtml: (g.upgrade ? `<b style="color:#1eff00">Upgraded</b> - replaces your ${esc(r.name)} with the stronger version.<br>` : "") + gearTip(r, run, data) }), null); }
+    if (g) { const r = data.relic(g.id); if (r) add(row({ ic: r.icon, name: g.upgrade ? `Upgrade: ${r.name}` : r.name, q: r.rarity || "common", tipHtml: (g.replaced && !isStarter(g.replaced) ? "Previous item kept in your Gear Bag.<br>" : "") + (g.upgrade ? `<b style="color:#1eff00">Upgraded</b> - replaces your ${esc(r.name)} with the stronger version.<br>` : "") + gearTip(r, run, data) }), null); }
     if (treasure && pd.relic && !g) { const r = data.relic(pd.relic); if (r) add(row({ ic: r.icon, name: r.name, q: r.rarity || "common", tipHtml: gearTip(r, run, data) }), () => { takeRelic(run, data, pd.relic); }); }
     const X = h("button", { class: "lf-x", type: "button", "aria-label": "Close and loot all", title: "Close (loots everything)" }, "X");
     X.addEventListener("click", (e) => { e.stopPropagation(); lootAll(); });
@@ -140,17 +146,27 @@ export async function showLoot(app, host, pd, done) {
     finished = true;
   };
 
-  try {
-    kit = await getKit(app);
-    if (kit.actors) { clearStage(kit); kit.actors.setHero({ classId: run.classId, gearMask: gearLevel(run) }); }
-  } catch (e) { kit = null; }
+  let kitTimedOut = false;
+  const kitPromise = getKit(app).then((loaded) => {
+    if (!kitTimedOut && loaded.actors) { clearStage(loaded); loaded.actors.setHero({ classId: run.classId, gearMask: gearLevel(run) }); }
+    return loaded;
+  }).catch((e) => { console.warn("[spires] loot stage unavailable:", e && e.message); return null; });
+  kit = await withTimeout(kitPromise, 2500, () => {
+    kitTimedOut = true;
+    console.warn("[spires] loot stage setup timed out; using the flat chest");
+  });
   const fx = kit && kit.fx, P = fx && fx.particles;
   const chestSize = { fight: 330, elite: 380, boss: 440 }[pd.chest] || 330;
-  try {
-    const { mountChest } = await import("../stage/chest3d.js");
-    chest = await mountChest(stage.layers.actors, { kind: pd.chest || "fight", x: cx, y: groundY, W, H, size: chestSize * (stage.portrait ? 0.8 : 1), reduced });
-  } catch (e) { chest = null; }
-  if (!chest) root.append(h("div", { class: "lt-flatchest", style: { left: `${cx}px`, top: `${groundY}px` } }, icon("inv_box_01", "", "Treasure chest")));
+  let chestTimedOut = false;
+  const chestPromise = import("../stage/chest3d.js")
+    .then(({ mountChest }) => mountChest(stage.layers.actors, { kind: pd.chest || "fight", x: cx, y: groundY, W, H, size: chestSize * (stage.portrait ? 0.8 : 1), reduced }))
+    .catch((e) => { console.warn("[spires] 3d loot chest unavailable:", e && e.message); return null; });
+  chest = await withTimeout(chestPromise, 4000, () => {
+    chestTimedOut = true;
+    console.warn("[spires] 3d loot chest timed out; using the flat chest");
+  });
+  if (chestTimedOut) chestPromise.then((lateChest) => { if (lateChest) lateChest.dispose(); });
+  if (chest) flatChest.remove();
   const top = { x: cx, y: groundY - chestSize * 0.5 };
   const wake = () => { if (fx) fx.at(0.001, () => {}); };
 

@@ -15,7 +15,7 @@
      "max": 5,
      "effect": {
       "key": "goldpct",
-      "per": 3
+      "per": 4
      }
     },
     {
@@ -26,7 +26,7 @@
      "col": 1,
      "max": 5,
      "effect": {
-      "key": "str",
+      "key": "spell_power",
       "per": 1
      }
     },
@@ -39,42 +39,42 @@
      "max": 2,
      "effect": {
       "key": "block",
-      "per": 3
-     }
-    },
-    {
-     "id": "shaman:elemental:3",
-     "name": "Elemental Warding",
-     "icon": "spell_nature_spiritarmor",
-     "tier": 2,
-     "col": 1,
-     "max": 3,
-     "effect": {
-      "key": "hp",
       "per": 4
      }
     },
     {
-     "id": "shaman:elemental:4",
+     "id": "shaman:elemental:3",
      "name": "Call of Flame",
      "icon": "spell_fire_immolation",
-     "tier": 3,
-     "col": 0,
+     "tier": 2,
+     "col": 1,
      "max": 3,
      "effect": {
       "key": "thorns",
+      "per": 2
+     }
+    },
+    {
+     "id": "shaman:elemental:4",
+     "name": "Elemental Focus",
+     "icon": "spell_shadow_manaburn",
+     "tier": 3,
+     "col": 0,
+     "max": 1,
+     "effect": {
+      "key": "free_cast",
       "per": 1
      }
     },
     {
      "id": "shaman:elemental:5",
-     "name": "Elemental Focus",
-     "icon": "spell_shadow_manaburn",
+     "name": "Call of Thunder",
+     "icon": "spell_nature_callstorm",
      "tier": 3,
      "col": 1,
-     "max": 1,
+     "max": 5,
      "effect": {
-      "key": "energy1",
+      "key": "spell_power",
       "per": 1
      }
     },
@@ -92,50 +92,50 @@
     },
     {
      "id": "shaman:elemental:7",
-     "name": "Call of Thunder",
-     "icon": "spell_nature_callstorm",
+     "name": "Eye of the Storm",
+     "icon": "spell_nature_eyeofthestorm",
      "tier": 4,
      "col": 1,
-     "max": 5,
+     "max": 3,
      "effect": {
-      "key": "str",
-      "per": 1
+      "key": "shield",
+      "per": 5
      }
     },
     {
      "id": "shaman:elemental:8",
-     "name": "Improved Fire Totems",
-     "icon": "spell_fire_sealoffire",
+     "name": "Elemental Fury",
+     "icon": "spell_fire_volcano",
      "tier": 5,
      "col": 0,
-     "max": 2,
+     "max": 1,
      "effect": {
-      "key": "thorns",
-      "per": 1
+      "key": "spell_power",
+      "per": 3
      }
     },
     {
      "id": "shaman:elemental:9",
-     "name": "Eye of the Storm",
-     "icon": "spell_nature_eyeofthestorm",
+     "name": "Lightning Mastery",
+     "icon": "spell_nature_lightning",
      "tier": 5,
      "col": 1,
      "max": 3,
      "effect": {
-      "key": "regen",
+      "key": "draw1",
       "per": 1
      }
     },
     {
      "id": "shaman:elemental:10",
-     "name": "Elemental Fury",
-     "icon": "spell_fire_volcano",
+     "name": "Storm, Earth and Fire",
+     "icon": "spell_nature_spiritarmor",
      "tier": 6,
      "col": 0,
-     "max": 1,
+     "max": 2,
      "effect": {
-      "key": "str",
-      "per": 3
+      "key": "thorns",
+      "per": 2
      }
     },
     {
@@ -146,7 +146,7 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "draw1",
+      "key": "energy1",
       "per": 1
      }
     }
@@ -166,7 +166,7 @@
      "max": 5,
      "effect": {
       "key": "hp",
-      "per": 3
+      "per": 4
      }
     },
     {
@@ -178,74 +178,50 @@
      "max": 5,
      "effect": {
       "key": "block",
-      "per": 2
+      "per": 3
      }
     },
     {
      "id": "shaman:enhancement:2",
-     "name": "Guardian Totems",
-     "icon": "spell_nature_stoneskintotem",
+     "name": "Thundering Strikes",
+     "icon": "ability_thunderbolt",
      "tier": 2,
      "col": 0,
-     "max": 2,
+     "max": 5,
      "effect": {
-      "key": "dex",
+      "key": "str",
       "per": 1
      }
     },
     {
      "id": "shaman:enhancement:3",
-     "name": "Thundering Strikes",
-     "icon": "ability_thunderbolt",
+     "name": "Improved Ghost Wolf",
+     "icon": "spell_nature_spiritwolf",
      "tier": 2,
      "col": 1,
-     "max": 5,
+     "max": 2,
      "effect": {
-      "key": "str",
-      "per": 1
+      "key": "gold",
+      "per": 25
      }
     },
     {
      "id": "shaman:enhancement:4",
-     "name": "Improved Ghost Wolf",
-     "icon": "spell_nature_spiritwolf",
+     "name": "Improved Lightning Shield",
+     "icon": "spell_nature_lightningshield",
      "tier": 3,
      "col": 0,
-     "max": 2,
+     "max": 3,
      "effect": {
-      "key": "gold",
-      "per": 15
+      "key": "thorns",
+      "per": 3
      }
     },
     {
      "id": "shaman:enhancement:5",
-     "name": "Improved Lightning Shield",
-     "icon": "spell_nature_lightningshield",
-     "tier": 3,
-     "col": 1,
-     "max": 3,
-     "effect": {
-      "key": "thorns",
-      "per": 1
-     }
-    },
-    {
-     "id": "shaman:enhancement:6",
-     "name": "Enhancing Totems",
-     "icon": "spell_nature_earthbindtotem",
-     "tier": 4,
-     "col": 0,
-     "max": 2,
-     "effect": {
-      "key": "dex",
-      "per": 1
-     }
-    },
-    {
-     "id": "shaman:enhancement:7",
      "name": "Two-Handed Axes and Maces",
      "icon": "inv_axe_10",
-     "tier": 4,
+     "tier": 3,
      "col": 1,
      "max": 1,
      "effect": {
@@ -254,50 +230,74 @@
      }
     },
     {
-     "id": "shaman:enhancement:8",
-     "name": "Anticipation",
-     "icon": "spell_nature_mirrorimage",
-     "tier": 5,
+     "id": "shaman:enhancement:6",
+     "name": "Flurry",
+     "icon": "ability_ghoulfrenzy",
+     "tier": 4,
      "col": 0,
-     "max": 5,
+     "max": 3,
      "effect": {
-      "key": "dex",
+      "key": "draw1",
       "per": 1
      }
     },
     {
-     "id": "shaman:enhancement:9",
-     "name": "Flurry",
-     "icon": "ability_ghoulfrenzy",
-     "tier": 5,
+     "id": "shaman:enhancement:7",
+     "name": "Toughness",
+     "icon": "spell_holy_devotion",
+     "tier": 4,
      "col": 1,
      "max": 5,
      "effect": {
+      "key": "armor",
+      "per": 1
+     }
+    },
+    {
+     "id": "shaman:enhancement:8",
+     "name": "Weapon Mastery",
+     "icon": "inv_sword_20",
+     "tier": 5,
+     "col": 0,
+     "max": 3,
+     "effect": {
       "key": "str",
+      "per": 2
+     }
+    },
+    {
+     "id": "shaman:enhancement:9",
+     "name": "Stormstrike",
+     "icon": "spell_holy_sealofmight",
+     "tier": 5,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "energy1",
       "per": 1
      }
     },
     {
      "id": "shaman:enhancement:10",
-     "name": "Toughness",
-     "icon": "spell_holy_devotion",
+     "name": "Shamanistic Rage",
+     "icon": "spell_nature_bloodlust",
      "tier": 6,
      "col": 0,
-     "max": 5,
+     "max": 2,
      "effect": {
-      "key": "hp",
+      "key": "regen",
       "per": 3
      }
     },
     {
      "id": "shaman:enhancement:11",
-     "name": "Stormstrike",
-     "icon": "spell_holy_sealofmight",
+     "name": "Windfury Weapon",
+     "icon": "spell_nature_cyclone",
      "tier": 6,
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "energy1",
+      "key": "windfury",
       "per": 1
      }
     }
@@ -317,7 +317,7 @@
      "max": 5,
      "effect": {
       "key": "heal",
-      "per": 6
+      "per": 8
      }
     },
     {
@@ -329,74 +329,50 @@
      "max": 5,
      "effect": {
       "key": "goldpct",
-      "per": 3
+      "per": 4
      }
     },
     {
      "id": "shaman:restoration:2",
-     "name": "Improved Reincarnation",
-     "icon": "spell_nature_reincarnation",
+     "name": "Ancestral Healing",
+     "icon": "spell_nature_undyingstrength",
      "tier": 2,
      "col": 0,
-     "max": 2,
+     "max": 3,
      "effect": {
-      "key": "hp",
-      "per": 6
+      "key": "armor",
+      "per": 1
      }
     },
     {
      "id": "shaman:restoration:3",
-     "name": "Ancestral Healing",
-     "icon": "spell_nature_undyingstrength",
+     "name": "Totemic Focus",
+     "icon": "spell_nature_moonglow",
      "tier": 2,
      "col": 1,
-     "max": 3,
+     "max": 5,
      "effect": {
-      "key": "block",
-      "per": 2
+      "key": "res",
+      "per": 10
      }
     },
     {
      "id": "shaman:restoration:4",
-     "name": "Totemic Focus",
-     "icon": "spell_nature_moonglow",
+     "name": "Healing Focus",
+     "icon": "spell_nature_healingwavelesser",
      "tier": 3,
      "col": 0,
-     "max": 5,
+     "max": 3,
      "effect": {
-      "key": "dex",
-      "per": 1
+      "key": "regen",
+      "per": 2
      }
     },
     {
      "id": "shaman:restoration:5",
-     "name": "Nature's Guidance",
-     "icon": "spell_frost_stun",
-     "tier": 3,
-     "col": 1,
-     "max": 3,
-     "effect": {
-      "key": "str",
-      "per": 1
-     }
-    },
-    {
-     "id": "shaman:restoration:6",
-     "name": "Healing Focus",
-     "icon": "spell_nature_healingwavelesser",
-     "tier": 4,
-     "col": 0,
-     "max": 5,
-     "effect": {
-      "key": "regen",
-      "per": 1
-     }
-    },
-    {
-     "id": "shaman:restoration:7",
      "name": "Totemic Mastery",
      "icon": "spell_nature_nullward",
-     "tier": 4,
+     "tier": 3,
      "col": 1,
      "max": 1,
      "effect": {
@@ -405,22 +381,22 @@
      }
     },
     {
-     "id": "shaman:restoration:8",
+     "id": "shaman:restoration:6",
      "name": "Healing Grace",
      "icon": "spell_nature_healingtouch",
-     "tier": 5,
+     "tier": 4,
      "col": 0,
      "max": 3,
      "effect": {
       "key": "heal",
-      "per": 8
+      "per": 12
      }
     },
     {
-     "id": "shaman:restoration:9",
+     "id": "shaman:restoration:7",
      "name": "Restorative Totems",
      "icon": "spell_nature_manaregentotem",
-     "tier": 5,
+     "tier": 4,
      "col": 1,
      "max": 5,
      "effect": {
@@ -429,26 +405,50 @@
      }
     },
     {
-     "id": "shaman:restoration:10",
+     "id": "shaman:restoration:8",
      "name": "Tidal Mastery",
      "icon": "spell_nature_tranquility",
-     "tier": 6,
+     "tier": 5,
      "col": 0,
-     "max": 5,
+     "max": 3,
      "effect": {
-      "key": "hp",
-      "per": 3
+      "key": "shield",
+      "per": 6
      }
     },
     {
-     "id": "shaman:restoration:11",
+     "id": "shaman:restoration:9",
      "name": "Mana Tide Totem",
      "icon": "spell_frost_summonwaterelemental",
-     "tier": 6,
+     "tier": 5,
      "col": 1,
      "max": 1,
      "effect": {
       "key": "energy1",
+      "per": 1
+     }
+    },
+    {
+     "id": "shaman:restoration:10",
+     "name": "Purification",
+     "icon": "spell_frost_wizardmark",
+     "tier": 6,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "heal",
+      "per": 10
+     }
+    },
+    {
+     "id": "shaman:restoration:11",
+     "name": "Reincarnation",
+     "icon": "spell_nature_reincarnation",
+     "tier": 6,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "reincarnation",
       "per": 1
      }
     }

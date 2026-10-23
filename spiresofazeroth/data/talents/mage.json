@@ -8,10 +8,22 @@
    "talents": [
     {
      "id": "mage:arcane:0",
+     "name": "Arcane Focus",
+     "icon": "spell_holy_devotion",
+     "tier": 1,
+     "col": 0,
+     "max": 5,
+     "effect": {
+      "key": "spell_power",
+      "per": 1
+     }
+    },
+    {
+     "id": "mage:arcane:1",
      "name": "Arcane Subtlety",
      "icon": "spell_holy_dispelmagic",
      "tier": 1,
-     "col": 0,
+     "col": 1,
      "max": 2,
      "effect": {
       "key": "dex",
@@ -19,123 +31,111 @@
      }
     },
     {
-     "id": "mage:arcane:1",
-     "name": "Arcane Focus",
-     "icon": "spell_holy_devotion",
-     "tier": 1,
-     "col": 1,
-     "max": 5,
-     "effect": {
-      "key": "str",
-      "per": 1
-     }
-    },
-    {
      "id": "mage:arcane:2",
-     "name": "Improved Arcane Missiles",
-     "icon": "spell_nature_starfall",
+     "name": "Magic Absorption",
+     "icon": "spell_nature_astralrecovery",
      "tier": 2,
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "res",
-      "per": 1
+      "key": "shield",
+      "per": 2
      }
     },
     {
      "id": "mage:arcane:3",
-     "name": "Wand Specialization",
-     "icon": "inv_wand_01",
+     "name": "Arcane Concentration",
+     "icon": "spell_shadow_manaburn",
      "tier": 2,
      "col": 1,
-     "max": 2,
+     "max": 3,
      "effect": {
-      "key": "str",
+      "key": "free_cast",
       "per": 1
      }
     },
     {
      "id": "mage:arcane:4",
-     "name": "Magic Absorption",
-     "icon": "spell_nature_astralrecovery",
+     "name": "Improved Arcane Explosion",
+     "icon": "spell_nature_wispsplode",
      "tier": 3,
      "col": 0,
-     "max": 5,
+     "max": 3,
      "effect": {
-      "key": "block",
-      "per": 1
+      "key": "thorns",
+      "per": 2
      }
     },
     {
      "id": "mage:arcane:5",
-     "name": "Arcane Concentration",
-     "icon": "spell_shadow_manaburn",
+     "name": "Magic Attunement",
+     "icon": "spell_nature_abolishmagic",
      "tier": 3,
      "col": 1,
-     "max": 5,
+     "max": 2,
      "effect": {
-      "key": "goldpct",
-      "per": 3
+      "key": "hp",
+      "per": 6
      }
     },
     {
      "id": "mage:arcane:6",
-     "name": "Magic Attunement",
-     "icon": "spell_nature_abolishmagic",
+     "name": "Improved Mana Shield",
+     "icon": "spell_shadow_detectlesserinvisibility",
      "tier": 4,
      "col": 0,
      "max": 2,
      "effect": {
-      "key": "hp",
+      "key": "shield",
       "per": 5
      }
     },
     {
      "id": "mage:arcane:7",
-     "name": "Improved Arcane Explosion",
-     "icon": "spell_nature_wispsplode",
+     "name": "Arcane Resilience",
+     "icon": "spell_arcane_arcaneresilience",
      "tier": 4,
      "col": 1,
-     "max": 3,
+     "max": 1,
      "effect": {
-      "key": "thorns",
+      "key": "armor",
       "per": 1
      }
     },
     {
      "id": "mage:arcane:8",
-     "name": "Arcane Resilience",
-     "icon": "spell_arcane_arcaneresilience",
+     "name": "Presence of Mind",
+     "icon": "spell_nature_enchantarmor",
      "tier": 5,
      "col": 0,
      "max": 1,
      "effect": {
-      "key": "hp",
-      "per": 10
+      "key": "free_cast",
+      "per": 1
      }
     },
     {
      "id": "mage:arcane:9",
-     "name": "Improved Mana Shield",
-     "icon": "spell_shadow_detectlesserinvisibility",
+     "name": "Arcane Mind",
+     "icon": "spell_holy_magicalsentry",
      "tier": 5,
      "col": 1,
-     "max": 2,
+     "max": 4,
      "effect": {
-      "key": "block",
-      "per": 3
+      "key": "draw1",
+      "per": 1
      }
     },
     {
      "id": "mage:arcane:10",
-     "name": "Presence of Mind",
-     "icon": "spell_nature_enchantarmor",
+     "name": "Spell Power",
+     "icon": "spell_nature_starfall",
      "tier": 6,
      "col": 0,
-     "max": 1,
+     "max": 3,
      "effect": {
-      "key": "energy1",
-      "per": 1
+      "key": "spell_power",
+      "per": 2
      }
     },
     {
@@ -146,8 +146,8 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "draw1",
-      "per": 1
+      "key": "spell_power",
+      "per": 4
      }
     }
    ]
@@ -165,7 +165,7 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "str",
+      "key": "spell_power",
       "per": 1
      }
     },
@@ -207,86 +207,86 @@
     },
     {
      "id": "mage:fire:4",
-     "name": "Improved Fire Blast",
-     "icon": "spell_fire_fireball",
+     "name": "Incinerate",
+     "icon": "spell_fire_flameshock",
      "tier": 3,
      "col": 0,
-     "max": 3,
+     "max": 2,
      "effect": {
-      "key": "res",
-      "per": 1
+      "key": "spell_power",
+      "per": 2
      }
     },
     {
      "id": "mage:fire:5",
-     "name": "Incinerate",
-     "icon": "spell_fire_flameshock",
+     "name": "Improved Flamestrike",
+     "icon": "spell_fire_selfdestruct",
      "tier": 3,
      "col": 1,
-     "max": 2,
+     "max": 3,
      "effect": {
-      "key": "str",
-      "per": 1
+      "key": "spell_power",
+      "per": 2
      }
     },
     {
      "id": "mage:fire:6",
-     "name": "Improved Flamestrike",
-     "icon": "spell_fire_selfdestruct",
-     "tier": 4,
-     "col": 0,
-     "max": 3,
-     "effect": {
-      "key": "thorns",
-      "per": 1
-     }
-    },
-    {
-     "id": "mage:fire:7",
-     "name": "Pyroblast",
-     "icon": "spell_fire_fireball02",
-     "tier": 4,
-     "col": 1,
-     "max": 1,
-     "effect": {
-      "key": "str",
-      "per": 3
-     }
-    },
-    {
-     "id": "mage:fire:8",
      "name": "Burning Soul",
      "icon": "spell_fire_fire",
-     "tier": 5,
+     "tier": 4,
      "col": 0,
      "max": 2,
      "effect": {
       "key": "hp",
+      "per": 6
+     }
+    },
+    {
+     "id": "mage:fire:7",
+     "name": "Master of Elements",
+     "icon": "spell_fire_masterofelements",
+     "tier": 4,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "goldpct",
       "per": 5
      }
     },
     {
-     "id": "mage:fire:9",
-     "name": "Improved Scorch",
-     "icon": "spell_fire_soulburn",
+     "id": "mage:fire:8",
+     "name": "Fire Power",
+     "icon": "spell_fire_immolation",
      "tier": 5,
-     "col": 1,
-     "max": 3,
+     "col": 0,
+     "max": 5,
      "effect": {
-      "key": "regen",
+      "key": "spell_power",
       "per": 1
      }
     },
     {
-     "id": "mage:fire:10",
-     "name": "Master of Elements",
-     "icon": "spell_fire_masterofelements",
-     "tier": 6,
-     "col": 0,
+     "id": "mage:fire:9",
+     "name": "Critical Mass",
+     "icon": "spell_fire_fireball02",
+     "tier": 5,
+     "col": 1,
      "max": 3,
      "effect": {
-      "key": "goldpct",
-      "per": 4
+      "key": "spell_power",
+      "per": 2
+     }
+    },
+    {
+     "id": "mage:fire:10",
+     "name": "Pyroblast",
+     "icon": "spell_fire_fireball02",
+     "tier": 6,
+     "col": 0,
+     "max": 1,
+     "effect": {
+      "key": "energy1",
+      "per": 1
      }
     },
     {
@@ -297,8 +297,8 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "energy1",
-      "per": 1
+      "key": "spell_power",
+      "per": 4
      }
     }
    ]
@@ -317,7 +317,7 @@
      "max": 2,
      "effect": {
       "key": "block",
-      "per": 3
+      "per": 4
      }
     },
     {
@@ -328,7 +328,7 @@
      "col": 1,
      "max": 5,
      "effect": {
-      "key": "str",
+      "key": "spell_power",
       "per": 1
      }
     },
@@ -340,7 +340,7 @@
      "col": 0,
      "max": 3,
      "effect": {
-      "key": "str",
+      "key": "spell_power",
       "per": 1
      }
     },
@@ -365,7 +365,7 @@
      "max": 3,
      "effect": {
       "key": "thorns",
-      "per": 1
+      "per": 2
      }
     },
     {
@@ -377,7 +377,7 @@
      "max": 2,
      "effect": {
       "key": "block",
-      "per": 2
+      "per": 4
      }
     },
     {
@@ -389,7 +389,7 @@
      "max": 3,
      "effect": {
       "key": "regen",
-      "per": 1
+      "per": 2
      }
     },
     {
@@ -400,8 +400,8 @@
      "col": 1,
      "max": 3,
      "effect": {
-      "key": "str",
-      "per": 1
+      "key": "spell_power",
+      "per": 2
      }
     },
     {
@@ -418,26 +418,26 @@
     },
     {
      "id": "mage:frost:9",
-     "name": "Improved Blizzard",
-     "icon": "spell_frost_icestorm",
-     "tier": 5,
-     "col": 1,
-     "max": 3,
-     "effect": {
-      "key": "hp",
-      "per": 3
-     }
-    },
-    {
-     "id": "mage:frost:10",
      "name": "Arctic Reach",
      "icon": "spell_shadow_darkritual",
-     "tier": 6,
-     "col": 0,
+     "tier": 5,
+     "col": 1,
      "max": 2,
      "effect": {
       "key": "draw1",
       "per": 1
+     }
+    },
+    {
+     "id": "mage:frost:10",
+     "name": "Shatter",
+     "icon": "spell_frost_frostshock",
+     "tier": 6,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "spell_power",
+      "per": 2
      }
     },
     {
@@ -448,8 +448,8 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "block",
-      "per": 8
+      "key": "retain_block",
+      "per": 1
      }
     }
    ]

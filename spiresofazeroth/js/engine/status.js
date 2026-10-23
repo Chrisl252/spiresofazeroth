@@ -27,7 +27,7 @@ export const STATUS_DEFS = {
   intangible: { mode: "duration", kind: "buff" },    // every hit reduced to 1
   // intensity
   poison: { mode: "intensity", kind: "debuff" },     // HP loss at its owner turn start, then -1
-  bleed: { mode: "intensity", kind: "debuff" },      // HP loss each time its owner plays a card / acts; -1 per round
+  bleed: { mode: "intensity", kind: "debuff" },      // HP loss at its owner's turn end; -1 per round
   burn: { mode: "intensity", kind: "debuff" },       // HP loss at its owner turn end, then -1
   strength: { mode: "intensity", kind: "buff", negative: true },
   dexterity: { mode: "intensity", kind: "buff", negative: true },
@@ -187,13 +187,9 @@ export function turnStart(C, e) {
   }
 }
 
-export function onAction(C, e) {
-  // bleed ticks whenever its owner plays a card (player) or acts (enemy)
-  if (e.hp > 0 && e.st.bleed > 0) dealStatusDamage(C, e, e.st.bleed, "bleed");
-}
-
 export function turnEnd(C, e) {
   const st = e.st;
+  if (e.hp > 0 && st.bleed > 0) dealStatusDamage(C, e, st.bleed, "bleed");
   if (e.hp > 0 && st.burn > 0) {
     dealStatusDamage(C, e, st.burn, "burn");
     st.burn -= 1;

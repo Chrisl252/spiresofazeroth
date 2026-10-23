@@ -23,6 +23,10 @@ const FAN = (i, n) => (n === 1 ? 0 : -7 + (14 * i) / (n - 1));
 export async function render(app, name) {
   await cssReady;
   const { run, data, stage } = app;
+  if (!run || !run.pending) {
+    if (run) run.screen = "map";
+    return app.go("map");
+  }
   stage.setBackdrop(run.zoneId || "default");
   const pd = run.pending;
   const host = h("section", { class: "sx-screen sx-reward" });

@@ -4,6 +4,7 @@ import { exportSave, importSave, clearRun, defaultMeta, saveMeta } from "../engi
 import { cssReady, btn, banner, scroll } from "./kit.js";
 import { sfx } from "../audio.js";
 import { zone as zoneAudio } from "../audio/zone.js";
+import { isGamepadConnected, getActiveGamepadName } from "../controller.js";
 
 export const stageNative = true;
 
@@ -53,6 +54,37 @@ export async function render(app) {
     }
   });
 
+  // Ambient sounds volume slider (0-100)
+  const curAmb = Number.isFinite(s.ambienceVolume) ? s.ambienceVolume : zoneAudio.ambienceVolume;
+  const aval = h("span", { class: "sx-dim" }, `${curAmb}%`);
+  const ambSlider = h("input", {
+    type: "range", min: "0", max: "100", step: "5", class: "sx-range",
+    "aria-label": "Ambient sounds volume",
+    value: String(curAmb),
+    onInput: (e) => {
+      const v = +e.target.value;
+      zoneAudio.setAmbienceVolume(v);
+      set({ ambienceVolume: v });
+      aval.textContent = `${v}%`;
+    }
+  });
+
+  // Ambient loop mode select
+  const curAmbMode = s.ambienceMode || zoneAudio.ambienceMode || "occasional";
+  const ambModeSelect = h("select", {
+    class: "sx-select",
+    "aria-label": "Ambient loop mode",
+    onChange: (e) => {
+      const m = e.target.value;
+      zoneAudio.setAmbienceMode(m);
+      set({ ambienceMode: m });
+    }
+  },
+    ...[["occasional", "Occasional (natural intervals)"], ["continuous", "Continuous (classic loop)"], ["off", "Off (silence ambience)"]].map(([val, label]) =>
+      h("option", { value: val, ...(curAmbMode === val ? { selected: "" } : {}) }, label)
+    )
+  );
+
   const catalog = await zoneAudio.catalog();
   const zsel = h("select", { class: "sx-select", "aria-label": "Zone audio", onChange: (e) => { const u = e.target.value || null; set({ musicTrack: u }); zoneAudio.setTrack(u); } },
     h("option", { value: "" }, "Zone default (Current Zone)"));
@@ -77,9 +109,22 @@ export async function render(app) {
       h("label", { class: "sx-row" }, h("span", {}, "Motion"), motion),
       h("label", { class: "sx-row" }, h("span", {}, "Game sounds"), h("span", { class: "sx-set__vol" }, sfxRange, sval)),
       h("label", { class: "sx-row" }, h("span", {}, "Music sounds"), h("span", { class: "sx-set__vol" }, music, mval)),
+      h("label", { class: "sx-row" }, h("span", {}, "Ambient sounds"), h("span", { class: "sx-set__vol" }, ambSlider, aval)),
+      h("label", { class: "sx-row" }, h("span", {}, "Ambience loop"), ambModeSelect),
       h("label", { class: "sx-row" }, h("span", {}, "Zone audio"), zsel),
       h("label", { class: "sx-row sx-row--check" }, fsck, h("span", {}, "Fullscreen (F key)")),
       h("label", { class: "sx-row sx-row--check" }, unlock, h("span", {}, "Unlock every card (skip the level ladder)")),
+      h("h3", { class: "sx-ribbon" }, "Controller"),
+      h("div", { class: "sx-row" }, h("span", {}, "Gamepad Status"), h("span", { class: "sx-dim" }, isGamepadConnected() ? getActiveGamepadName().slice(0, 32) : "No controller detected (press any button)")),
+      h("label", { class: "sx-row sx-row--check" },
+        h("input", {
+          type: "checkbox",
+          class: "sx-check",
+          checked: s.vibration !== false ? "checked" : "",
+          onChange: (e) => set({ vibration: e.target.checked })
+        }),
+        h("span", {}, "Vibration (Haptic rumble)")
+      ),
       h("h3", { class: "sx-ribbon" }, "Save"),
       h("div", { class: "sx-set__btns" },
         btn("Export", async () => { const str = exportSave(); box.value = str; try { await navigator.clipboard.writeText(str); toast("Save copied to clipboard."); } catch (e) { toast("Copy the text below."); } }, { size: "sm" }),

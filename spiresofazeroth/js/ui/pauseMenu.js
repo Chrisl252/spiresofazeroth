@@ -5,6 +5,7 @@ import { h } from "./dom.js";
 import { cssReady, btn, scroll } from "./kit.js";
 import { sfx } from "../audio.js";
 import { zone as zoneAudio } from "../audio/zone.js";
+import { isGamepadConnected, getActiveGamepadName } from "../controller.js";
 
 const SPEED_MIN = 0.5, SPEED_MAX = 3;
 const ENUM_MUL = { slow: 1 / 1.6, normal: 1, fast: 1 / 0.45 };
@@ -18,6 +19,8 @@ export function installPauseMenu(app) {
 
   // boot: replay saved audio settings
   if (Number.isFinite(s.musicVolume)) zoneAudio.setVolume(s.musicVolume);
+  if (Number.isFinite(s.ambienceVolume)) zoneAudio.setAmbienceVolume(s.ambienceVolume);
+  if (s.ambienceMode) zoneAudio.setAmbienceMode(s.ambienceMode);
   if (Number.isFinite(s.sfxVolume)) sfx.setVolume(s.sfxVolume);
   if (s.musicTrack) zoneAudio.setTrack(s.musicTrack);
 
@@ -84,8 +87,33 @@ export function installPauseMenu(app) {
       h("h2", { class: "pm-title" }, "Game Menu"),
       slider("Attack speed", SPEED_MIN, SPEED_MAX, 0.1, Math.round(mul * 10) / 10, (v) => `${(+v).toFixed(1)}x`, (v) => { s.speedMul = v; save(); if (app.kit && app.kit.fx) { app.kit.fx.speed = v; if (app.kit.actors) app.kit.actors.setSpeed(v); } }),
       slider("Music sounds", 0, 100, 5, zoneAudio.volume, pct, (v) => { s.musicVolume = v; zoneAudio.setVolume(v); save(); }),
+      slider("Ambient sounds", 0, 100, 5, zoneAudio.ambienceVolume, pct, (v) => { s.ambienceVolume = v; zoneAudio.setAmbienceVolume(v); save(); }),
       slider("Game sounds", 0, 100, 5, sfx.volume, pct, (v) => { s.sfxVolume = v; sfx.setVolume(v); save(); }),
+      h("label", { class: "pm-row" }, h("span", { class: "pm-lab" }, "Ambience mode"),
+        h("select", {
+          class: "pm-select",
+          "aria-label": "Ambient loop mode",
+          onChange: (e) => {
+            const m = e.target.value;
+            s.ambienceMode = m;
+            zoneAudio.setAmbienceMode(m);
+            save();
+          }
+        },
+          ...[["occasional", "Occasional (natural intervals)"], ["continuous", "Continuous (classic loop)"], ["off", "Off (silence ambience)"]].map(([val, label]) =>
+            h("option", { value: val, ...(zoneAudio.ambienceMode === val ? { selected: "" } : {}) }, label)
+          )
+        )
+      ),
       h("label", { class: "pm-row" }, h("span", { class: "pm-lab" }, "Zone audio"), sel),
+      h("div", { class: "pm-row" }, h("span", { class: "pm-lab" }, "Controller"), h("span", { class: "pm-val" }, isGamepadConnected() ? getActiveGamepadName().slice(0, 22) : "None")),
+      h("label", { class: "pm-row" }, h("span", { class: "pm-lab" }, "Controller rumble"),
+        h("input", {
+          type: "checkbox",
+          class: "sx-check",
+          checked: s.vibration !== false,
+          onChange: (e) => { s.vibration = e.target.checked; save(); }
+        })),
       h("div", { class: "pm-btns" },
         btn("Resume", close, { cls: "pm-btn", auto: true }),
         btn("Settings", () => { close(); app.go("settings"); }, { cls: "pm-btn" }),

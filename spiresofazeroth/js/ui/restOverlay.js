@@ -47,7 +47,9 @@ export function upgradeOverlay(app, host, { title = "Upgrade a card", sub = "Cho
 
   function confirm(i) {
     const box = h("div", { class: "sx-up__confirm" });
+    let busy = false;
     const done = async () => {
+      if (busy) return; busy = true; // a double-click must not upgrade twice
       box.classList.add("is-forging");
       box.replaceChildren(h("div", { class: "sx-up__side is-after is-forge" }, cardSlot(app.cardDef(run.deck[i].id, true), {}, { lift: false, cls: "sx-cardslot--big" })), h("p", { class: "sx-up__done" }, "Upgraded!"));
       layer.classList.add("is-flaring");
@@ -73,6 +75,7 @@ export function restOverlay(app, host, { onConfirm, flare }) {
     h("h3", {}, `Heal ${after - run.hp} HP`),
     h("div", { class: "sx-up__pair sx-up__pair--hp" }, h("div", { class: "sx-up__side" }, h("h4", {}, "Now"), bar(run.hp, "is-before")), h("span", { class: "sx-up__arrow", "aria-hidden": "true" }, ""), h("div", { class: "sx-up__side" }, h("h4", {}, "After resting"), bar(after, "is-after"))),
     h("div", { class: "sx-up__btns" }, btn("Rest", async () => {
+      if (box.classList.contains("is-forging")) return; // a double-click must not heal twice
       layer.classList.add("is-flaring"); box.classList.add("is-forging");
       if (flare) flare(app.reduced() ? 0 : 1100);
       await sleep(app.reduced() ? 0 : 1100);

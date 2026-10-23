@@ -39,7 +39,7 @@
      "max": 3,
      "effect": {
       "key": "thorns",
-      "per": 1
+      "per": 2
      }
     },
     {
@@ -51,7 +51,7 @@
      "max": 2,
      "effect": {
       "key": "res",
-      "per": 10
+      "per": 15
      }
     },
     {
@@ -63,38 +63,14 @@
      "max": 5,
      "effect": {
       "key": "res",
-      "per": 4
+      "per": 5
      }
     },
     {
      "id": "warrior:arms:5",
-     "name": "Iron Will",
-     "icon": "spell_magic_magearmor",
-     "tier": 3,
-     "col": 1,
-     "max": 5,
-     "effect": {
-      "key": "hp",
-      "per": 3
-     }
-    },
-    {
-     "id": "warrior:arms:6",
-     "name": "Anger Management",
-     "icon": "spell_holy_blessingofstamina",
-     "tier": 4,
-     "col": 0,
-     "max": 1,
-     "effect": {
-      "key": "res",
-      "per": 20
-     }
-    },
-    {
-     "id": "warrior:arms:7",
      "name": "Deep Wounds",
      "icon": "ability_backstab",
-     "tier": 4,
+     "tier": 3,
      "col": 1,
      "max": 3,
      "effect": {
@@ -103,10 +79,10 @@
      }
     },
     {
-     "id": "warrior:arms:8",
+     "id": "warrior:arms:6",
      "name": "Two-Handed Weapon Specialization",
      "icon": "inv_axe_09",
-     "tier": 5,
+     "tier": 4,
      "col": 0,
      "max": 5,
      "effect": {
@@ -115,26 +91,50 @@
      }
     },
     {
-     "id": "warrior:arms:9",
+     "id": "warrior:arms:7",
+     "name": "Anger Management",
+     "icon": "spell_holy_blessingofstamina",
+     "tier": 4,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "rage_gen",
+      "per": 1
+     }
+    },
+    {
+     "id": "warrior:arms:8",
      "name": "Impale",
      "icon": "ability_searingarrow",
      "tier": 5,
-     "col": 1,
+     "col": 0,
      "max": 2,
      "effect": {
-      "key": "energy1",
+      "key": "str",
+      "per": 2
+     }
+    },
+    {
+     "id": "warrior:arms:9",
+     "name": "Sweeping Strikes",
+     "icon": "ability_rogue_slicedice",
+     "tier": 5,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "draw1",
       "per": 1
      }
     },
     {
      "id": "warrior:arms:10",
-     "name": "Sweeping Strikes",
-     "icon": "ability_rogue_slicedice",
+     "name": "Poleaxe Specialization",
+     "icon": "inv_weapon_halberd_01",
      "tier": 6,
      "col": 0,
-     "max": 1,
+     "max": 3,
      "effect": {
-      "key": "draw1",
+      "key": "energy1",
       "per": 1
      }
     },
@@ -147,7 +147,7 @@
      "max": 1,
      "effect": {
       "key": "str",
-      "per": 3
+      "per": 4
      }
     }
    ]
@@ -159,22 +159,10 @@
    "talents": [
     {
      "id": "warrior:fury:0",
-     "name": "Booming Voice",
-     "icon": "spell_nature_purge",
-     "tier": 1,
-     "col": 0,
-     "max": 5,
-     "effect": {
-      "key": "res",
-      "per": 4
-     }
-    },
-    {
-     "id": "warrior:fury:1",
      "name": "Cruelty",
      "icon": "ability_rogue_eviscerate",
      "tier": 1,
-     "col": 1,
+     "col": 0,
      "max": 5,
      "effect": {
       "key": "str",
@@ -182,22 +170,10 @@
      }
     },
     {
-     "id": "warrior:fury:2",
-     "name": "Improved Demoralizing Shout",
-     "icon": "ability_warrior_warcry",
-     "tier": 2,
-     "col": 0,
-     "max": 5,
-     "effect": {
-      "key": "dex",
-      "per": 1
-     }
-    },
-    {
-     "id": "warrior:fury:3",
-     "name": "Unbridled Wrath",
-     "icon": "spell_nature_stoneclawtotem",
-     "tier": 2,
+     "id": "warrior:fury:1",
+     "name": "Booming Voice",
+     "icon": "spell_nature_purge",
+     "tier": 1,
      "col": 1,
      "max": 5,
      "effect": {
@@ -206,15 +182,39 @@
      }
     },
     {
+     "id": "warrior:fury:2",
+     "name": "Unbridled Wrath",
+     "icon": "spell_nature_stoneclawtotem",
+     "tier": 2,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "rage_gen",
+      "per": 1
+     }
+    },
+    {
+     "id": "warrior:fury:3",
+     "name": "Improved Battle Shout",
+     "icon": "ability_warrior_battleshout",
+     "tier": 2,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "str",
+      "per": 1
+     }
+    },
+    {
      "id": "warrior:fury:4",
-     "name": "Improved Cleave",
-     "icon": "ability_warrior_cleave",
+     "name": "Blood Craze",
+     "icon": "spell_shadow_summonimp",
      "tier": 3,
      "col": 0,
      "max": 3,
      "effect": {
-      "key": "thorns",
-      "per": 1
+      "key": "regen",
+      "per": 2
      }
     },
     {
@@ -231,22 +231,10 @@
     },
     {
      "id": "warrior:fury:6",
-     "name": "Blood Craze",
-     "icon": "spell_shadow_summonimp",
+     "name": "Enrage",
+     "icon": "spell_shadow_unholyfrenzy",
      "tier": 4,
      "col": 0,
-     "max": 3,
-     "effect": {
-      "key": "regen",
-      "per": 2
-     }
-    },
-    {
-     "id": "warrior:fury:7",
-     "name": "Improved Battle Shout",
-     "icon": "ability_warrior_battleshout",
-     "tier": 4,
-     "col": 1,
      "max": 5,
      "effect": {
       "key": "str",
@@ -254,23 +242,23 @@
      }
     },
     {
-     "id": "warrior:fury:8",
-     "name": "Enrage",
-     "icon": "spell_shadow_unholyfrenzy",
-     "tier": 5,
-     "col": 0,
-     "max": 5,
+     "id": "warrior:fury:7",
+     "name": "Flurry",
+     "icon": "ability_ghoulfrenzy",
+     "tier": 4,
+     "col": 1,
+     "max": 3,
      "effect": {
-      "key": "goldpct",
-      "per": 4
+      "key": "draw1",
+      "per": 1
      }
     },
     {
-     "id": "warrior:fury:9",
+     "id": "warrior:fury:8",
      "name": "Death Wish",
      "icon": "spell_shadow_deathpact",
      "tier": 5,
-     "col": 1,
+     "col": 0,
      "max": 1,
      "effect": {
       "key": "energy1",
@@ -278,27 +266,39 @@
      }
     },
     {
+     "id": "warrior:fury:9",
+     "name": "Berserker Stance",
+     "icon": "ability_racial_avatar",
+     "tier": 5,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "goldpct",
+      "per": 5
+     }
+    },
+    {
      "id": "warrior:fury:10",
-     "name": "Flurry",
-     "icon": "ability_ghoulfrenzy",
+     "name": "Bloodthirst",
+     "icon": "spell_nature_bloodlust",
      "tier": 6,
      "col": 0,
-     "max": 5,
+     "max": 1,
      "effect": {
-      "key": "hp",
-      "per": 2
+      "key": "regen",
+      "per": 4
      }
     },
     {
      "id": "warrior:fury:11",
-     "name": "Bloodthirst",
-     "icon": "spell_nature_bloodlust",
+     "name": "Rampage",
+     "icon": "ability_warrior_rampage",
      "tier": 6,
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "regen",
-      "per": 5
+      "key": "str",
+      "per": 3
      }
     }
    ]
@@ -317,15 +317,27 @@
      "max": 5,
      "effect": {
       "key": "block",
-      "per": 2
+      "per": 3
      }
     },
     {
      "id": "warrior:protection:1",
-     "name": "Anticipation",
-     "icon": "spell_nature_mirrorimage",
+     "name": "Toughness",
+     "icon": "spell_holy_devotion",
      "tier": 1,
      "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "armor",
+      "per": 1
+     }
+    },
+    {
+     "id": "warrior:protection:2",
+     "name": "Anticipation",
+     "icon": "spell_nature_mirrorimage",
+     "tier": 2,
+     "col": 0,
      "max": 5,
      "effect": {
       "key": "dex",
@@ -333,27 +345,15 @@
      }
     },
     {
-     "id": "warrior:protection:2",
+     "id": "warrior:protection:3",
      "name": "Improved Bloodrage",
      "icon": "ability_racial_bloodrage",
      "tier": 2,
-     "col": 0,
+     "col": 1,
      "max": 2,
      "effect": {
       "key": "res",
-      "per": 10
-     }
-    },
-    {
-     "id": "warrior:protection:3",
-     "name": "Toughness",
-     "icon": "spell_holy_devotion",
-     "tier": 2,
-     "col": 1,
-     "max": 5,
-     "effect": {
-      "key": "hp",
-      "per": 4
+      "per": 15
      }
     },
     {
@@ -365,7 +365,7 @@
      "max": 1,
      "effect": {
       "key": "hp",
-      "per": 10
+      "per": 12
      }
     },
     {
@@ -376,28 +376,16 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "block",
-      "per": 5
+      "key": "retain_block",
+      "per": 1
      }
     },
     {
      "id": "warrior:protection:6",
-     "name": "Improved Revenge",
-     "icon": "ability_warrior_revenge",
-     "tier": 4,
-     "col": 0,
-     "max": 3,
-     "effect": {
-      "key": "thorns",
-      "per": 2
-     }
-    },
-    {
-     "id": "warrior:protection:7",
      "name": "Defiance",
      "icon": "ability_warrior_innerrage",
      "tier": 4,
-     "col": 1,
+     "col": 0,
      "max": 5,
      "effect": {
       "key": "metal",
@@ -405,14 +393,26 @@
      }
     },
     {
-     "id": "warrior:protection:8",
-     "name": "Improved Sunder Armor",
-     "icon": "ability_warrior_sunder",
-     "tier": 5,
-     "col": 0,
+     "id": "warrior:protection:7",
+     "name": "Improved Revenge",
+     "icon": "ability_warrior_revenge",
+     "tier": 4,
+     "col": 1,
      "max": 3,
      "effect": {
-      "key": "str",
+      "key": "thorns",
+      "per": 3
+     }
+    },
+    {
+     "id": "warrior:protection:8",
+     "name": "Concussion Blow",
+     "icon": "ability_thunderbolt",
+     "tier": 5,
+     "col": 0,
+     "max": 1,
+     "effect": {
+      "key": "energy1",
       "per": 1
      }
     },
@@ -424,19 +424,19 @@
      "col": 1,
      "max": 2,
      "effect": {
-      "key": "heal",
-      "per": 10
+      "key": "armor",
+      "per": 1
      }
     },
     {
      "id": "warrior:protection:10",
-     "name": "Concussion Blow",
-     "icon": "ability_thunderbolt",
+     "name": "One-Handed Weapon Specialization",
+     "icon": "inv_sword_20",
      "tier": 6,
      "col": 0,
-     "max": 1,
+     "max": 3,
      "effect": {
-      "key": "energy1",
+      "key": "str",
       "per": 1
      }
     },
@@ -449,7 +449,7 @@
      "max": 1,
      "effect": {
       "key": "block",
-      "per": 8
+      "per": 12
      }
     }
    ]

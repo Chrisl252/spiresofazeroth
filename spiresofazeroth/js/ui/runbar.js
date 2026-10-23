@@ -25,6 +25,7 @@ export function runBar(app) {
     h("div", { class: "sx-bar__gold" }, icon("inv_misc_coin_01", "", ""), h("b", {}, run.gold)),
     h("div", { class: "sx-bar__act" }, "Act ", h("b", {}, `${Math.max(1, run.act)}/6`), "  Floor ", h("b", {}, Math.max(0, run.floor + 1))),
     relics, pots,
+    btn(`Gear Bag ${run.gearBag ? run.gearBag.length : 0}`, () => app.showGear(), { size: "sm", cls: "sx-bar__gear" }),
     btn(`Deck ${run.deck.length}`, () => app.showDeck(), { size: "sm", cls: "sx-bar__deck" }),
     btn("Settings", () => app.go("settings"), { size: "sm", cls: "sx-bar__set", title: "Settings" }),
     btn("⛶", () => app.stage.toggleFullscreen(), { size: "sm", cls: "sx-bar__fs", title: "Fullscreen (F)" }));

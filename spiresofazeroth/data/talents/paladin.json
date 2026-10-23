@@ -8,74 +8,74 @@
    "talents": [
     {
      "id": "paladin:holy:0",
-     "name": "Divine Strength",
-     "icon": "ability_golemthunderclap",
+     "name": "Divine Intellect",
+     "icon": "spell_nature_sleep",
      "tier": 1,
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "str",
-      "per": 1
+      "key": "hp",
+      "per": 4
      }
     },
     {
      "id": "paladin:holy:1",
-     "name": "Divine Intellect",
-     "icon": "spell_nature_sleep",
+     "name": "Spiritual Focus",
+     "icon": "spell_arcane_blink",
      "tier": 1,
      "col": 1,
      "max": 5,
      "effect": {
-      "key": "hp",
-      "per": 3
+      "key": "heal",
+      "per": 8
      }
     },
     {
      "id": "paladin:holy:2",
-     "name": "Spiritual Focus",
-     "icon": "spell_arcane_blink",
-     "tier": 2,
-     "col": 0,
-     "max": 5,
-     "effect": {
-      "key": "heal",
-      "per": 6
-     }
-    },
-    {
-     "id": "paladin:holy:3",
-     "name": "Improved Seal of Righteousness",
-     "icon": "ability_thunderbolt",
-     "tier": 2,
-     "col": 1,
-     "max": 5,
-     "effect": {
-      "key": "str",
-      "per": 1
-     }
-    },
-    {
-     "id": "paladin:holy:4",
      "name": "Healing Light",
      "icon": "spell_holy_holybolt",
-     "tier": 3,
+     "tier": 2,
      "col": 0,
      "max": 3,
      "effect": {
       "key": "heal",
+      "per": 12
+     }
+    },
+    {
+     "id": "paladin:holy:3",
+     "name": "Improved Blessing of Wisdom",
+     "icon": "spell_holy_sealofwisdom",
+     "tier": 2,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "res",
       "per": 10
      }
     },
     {
-     "id": "paladin:holy:5",
+     "id": "paladin:holy:4",
      "name": "Consecration",
      "icon": "spell_holy_innerfire",
      "tier": 3,
-     "col": 1,
+     "col": 0,
      "max": 1,
      "effect": {
       "key": "thorns",
-      "per": 3
+      "per": 4
+     }
+    },
+    {
+     "id": "paladin:holy:5",
+     "name": "Illumination",
+     "icon": "spell_holy_greaterheal",
+     "tier": 3,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "regen",
+      "per": 1
      }
     },
     {
@@ -87,67 +87,67 @@
      "max": 2,
      "effect": {
       "key": "hp",
-      "per": 6
+      "per": 8
      }
     },
     {
      "id": "paladin:holy:7",
-     "name": "Unyielding Faith",
-     "icon": "spell_holy_unyieldingfaith",
+     "name": "Divine Favor",
+     "icon": "spell_holy_heal",
      "tier": 4,
      "col": 1,
-     "max": 2,
+     "max": 1,
      "effect": {
-      "key": "dex",
+      "key": "free_cast",
       "per": 1
      }
     },
     {
      "id": "paladin:holy:8",
-     "name": "Illumination",
-     "icon": "spell_holy_greaterheal",
+     "name": "Holy Power",
+     "icon": "spell_holy_searinglight",
      "tier": 5,
      "col": 0,
-     "max": 5,
+     "max": 3,
      "effect": {
-      "key": "regen",
-      "per": 1
+      "key": "spell_power",
+      "per": 2
      }
     },
     {
      "id": "paladin:holy:9",
-     "name": "Improved Blessing of Wisdom",
-     "icon": "spell_holy_sealofwisdom",
-     "tier": 5,
-     "col": 1,
-     "max": 5,
-     "effect": {
-      "key": "goldpct",
-      "per": 4
-     }
-    },
-    {
-     "id": "paladin:holy:10",
-     "name": "Divine Favor",
-     "icon": "spell_holy_heal",
-     "tier": 6,
-     "col": 0,
-     "max": 1,
-     "effect": {
-      "key": "energy1",
-      "per": 1
-     }
-    },
-    {
-     "id": "paladin:holy:11",
      "name": "Holy Shock",
      "icon": "spell_holy_searinglight",
-     "tier": 6,
+     "tier": 5,
      "col": 1,
      "max": 1,
      "effect": {
       "key": "draw1",
       "per": 1
+     }
+    },
+    {
+     "id": "paladin:holy:10",
+     "name": "Sanctified Light",
+     "icon": "spell_holy_healingfocus",
+     "tier": 6,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "heal",
+      "per": 10
+     }
+    },
+    {
+     "id": "paladin:holy:11",
+     "name": "Light's Grace",
+     "icon": "spell_holy_blessedrecovery",
+     "tier": 6,
+     "col": 1,
+     "max": 1,
+     "effect": {
+      "key": "shield",
+      "per": 16
      }
     }
    ]
@@ -159,38 +159,38 @@
    "talents": [
     {
      "id": "paladin:protection:0",
-     "name": "Improved Devotion Aura",
-     "icon": "spell_holy_devotionaura",
+     "name": "Redoubt",
+     "icon": "ability_defend",
      "tier": 1,
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "dex",
-      "per": 1
+      "key": "block",
+      "per": 3
      }
     },
     {
      "id": "paladin:protection:1",
-     "name": "Redoubt",
-     "icon": "ability_defend",
+     "name": "Improved Devotion Aura",
+     "icon": "spell_holy_devotionaura",
      "tier": 1,
      "col": 1,
      "max": 5,
      "effect": {
-      "key": "block",
-      "per": 2
+      "key": "armor",
+      "per": 1
      }
     },
     {
      "id": "paladin:protection:2",
-     "name": "Precision",
-     "icon": "ability_rogue_ambush",
+     "name": "Toughness",
+     "icon": "spell_holy_devotion",
      "tier": 2,
      "col": 0,
-     "max": 3,
+     "max": 5,
      "effect": {
-      "key": "str",
-      "per": 1
+      "key": "hp",
+      "per": 4
      }
     },
     {
@@ -201,32 +201,32 @@
      "col": 1,
      "max": 2,
      "effect": {
-      "key": "hp",
-      "per": 5
+      "key": "shield",
+      "per": 6
      }
     },
     {
      "id": "paladin:protection:4",
-     "name": "Toughness",
-     "icon": "spell_holy_devotion",
+     "name": "Blessing of Kings",
+     "icon": "spell_magic_greaterblessingofkings",
      "tier": 3,
      "col": 0,
-     "max": 5,
+     "max": 1,
      "effect": {
       "key": "hp",
-      "per": 3
+      "per": 10
      }
     },
     {
      "id": "paladin:protection:5",
-     "name": "Blessing of Kings",
-     "icon": "spell_magic_greaterblessingofkings",
+     "name": "Shield Specialization",
+     "icon": "inv_shield_06",
      "tier": 3,
      "col": 1,
-     "max": 1,
+     "max": 3,
      "effect": {
-      "key": "energy1",
-      "per": 1
+      "key": "block",
+      "per": 3
      }
     },
     {
@@ -238,54 +238,54 @@
      "max": 3,
      "effect": {
       "key": "thorns",
-      "per": 1
-     }
-    },
-    {
-     "id": "paladin:protection:7",
-     "name": "Shield Specialization",
-     "icon": "inv_shield_06",
-     "tier": 4,
-     "col": 1,
-     "max": 3,
-     "effect": {
-      "key": "block",
       "per": 2
      }
     },
     {
-     "id": "paladin:protection:8",
-     "name": "Anticipation",
-     "icon": "spell_nature_mirrorimage",
-     "tier": 5,
-     "col": 0,
+     "id": "paladin:protection:7",
+     "name": "Reckoning",
+     "icon": "spell_holy_blessingofstrength",
+     "tier": 4,
+     "col": 1,
      "max": 5,
      "effect": {
-      "key": "dex",
+      "key": "metal",
+      "per": 1
+     }
+    },
+    {
+     "id": "paladin:protection:8",
+     "name": "Improved Hammer of Justice",
+     "icon": "spell_holy_sealofmight",
+     "tier": 5,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "energy1",
       "per": 1
      }
     },
     {
      "id": "paladin:protection:9",
-     "name": "Improved Hammer of Justice",
-     "icon": "spell_holy_sealofmight",
+     "name": "One-Handed Weapon Specialization",
+     "icon": "inv_sword_20",
      "tier": 5,
      "col": 1,
      "max": 3,
      "effect": {
-      "key": "draw1",
+      "key": "str",
       "per": 1
      }
     },
     {
      "id": "paladin:protection:10",
-     "name": "Reckoning",
-     "icon": "spell_holy_blessingofstrength",
+     "name": "Ardent Defender",
+     "icon": "spell_holy_ardentdefender",
      "tier": 6,
      "col": 0,
-     "max": 5,
+     "max": 2,
      "effect": {
-      "key": "metal",
+      "key": "armor",
       "per": 1
      }
     },
@@ -298,7 +298,7 @@
      "max": 1,
      "effect": {
       "key": "block",
-      "per": 6
+      "per": 10
      }
     }
    ]
@@ -329,7 +329,7 @@
      "max": 5,
      "effect": {
       "key": "goldpct",
-      "per": 3
+      "per": 4
      }
     },
     {
@@ -358,38 +358,38 @@
     },
     {
      "id": "paladin:retribution:4",
-     "name": "Deflection",
-     "icon": "ability_parry",
-     "tier": 3,
-     "col": 0,
-     "max": 5,
-     "effect": {
-      "key": "dex",
-      "per": 1
-     }
-    },
-    {
-     "id": "paladin:retribution:5",
-     "name": "Vindication",
-     "icon": "spell_holy_vindication",
-     "tier": 3,
-     "col": 1,
-     "max": 3,
-     "effect": {
-      "key": "thorns",
-      "per": 1
-     }
-    },
-    {
-     "id": "paladin:retribution:6",
      "name": "Conviction",
      "icon": "spell_holy_retributionaura",
-     "tier": 4,
+     "tier": 3,
      "col": 0,
      "max": 5,
      "effect": {
       "key": "str",
       "per": 1
+     }
+    },
+    {
+     "id": "paladin:retribution:5",
+     "name": "Eye for an Eye",
+     "icon": "spell_holy_eyeforaneye",
+     "tier": 3,
+     "col": 1,
+     "max": 2,
+     "effect": {
+      "key": "thorns",
+      "per": 3
+     }
+    },
+    {
+     "id": "paladin:retribution:6",
+     "name": "Pursuit of Justice",
+     "icon": "spell_holy_persuitofjustice",
+     "tier": 4,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "gold",
+      "per": 25
      }
     },
     {
@@ -406,38 +406,38 @@
     },
     {
      "id": "paladin:retribution:8",
-     "name": "Pursuit of Justice",
-     "icon": "spell_holy_persuitofjustice",
+     "name": "Two-Handed Weapon Specialization",
+     "icon": "inv_hammer_04",
      "tier": 5,
      "col": 0,
-     "max": 2,
+     "max": 3,
      "effect": {
-      "key": "gold",
-      "per": 15
+      "key": "str",
+      "per": 2
      }
     },
     {
      "id": "paladin:retribution:9",
-     "name": "Eye for an Eye",
-     "icon": "spell_holy_eyeforaneye",
+     "name": "Sanctity Aura",
+     "icon": "spell_holy_mindvision",
      "tier": 5,
      "col": 1,
-     "max": 2,
+     "max": 3,
      "effect": {
-      "key": "thorns",
+      "key": "spell_power",
       "per": 2
      }
     },
     {
      "id": "paladin:retribution:10",
-     "name": "Two-Handed Weapon Specialization",
-     "icon": "inv_hammer_04",
+     "name": "Vengeance",
+     "icon": "ability_racial_avatar",
      "tier": 6,
      "col": 0,
      "max": 3,
      "effect": {
       "key": "str",
-      "per": 1
+      "per": 2
      }
     },
     {
@@ -448,7 +448,7 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "res",
+      "key": "energy1",
       "per": 1
      }
     }

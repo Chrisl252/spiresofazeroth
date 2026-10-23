@@ -37,16 +37,26 @@ export const cap = (s) => String(s || "").replace(/[-_]/g, " ").replace(/\b\w/g,
 export function track(name, params) { try { if (window.gtag) window.gtag("event", name, params); } catch (e) { /* ignore */ } }
 
 // ---- tooltip ----
-let tipEl = null;
+let tipEl = null, tipPoint = null, tipFullscreenListener = false;
+function showTip(html, x, y) {
+  if (!tipEl) tipEl = h("div", { class: "sp-tip", role: "tooltip" });
+  const parent = document.fullscreenElement || document.body;
+  if (tipEl.parentElement !== parent) parent.append(tipEl);
+  tipPoint = { x, y };
+  tipEl.innerHTML = html;
+  tipEl.style.display = "block";
+  const w = tipEl.offsetWidth, hgt = tipEl.offsetHeight;
+  tipEl.style.left = Math.max(6, Math.min(window.innerWidth - w - 6, x + 12)) + "px";
+  tipEl.style.top = Math.max(6, Math.min(window.innerHeight - hgt - 6, y + 14)) + "px";
+}
 export function tip(el, html) {
-  const show = (x, y) => {
-    if (!tipEl) { tipEl = h("div", { class: "sp-tip", role: "tooltip" }); document.body.append(tipEl); }
-    tipEl.innerHTML = html;
-    tipEl.style.display = "block";
-    const w = tipEl.offsetWidth, hgt = tipEl.offsetHeight;
-    tipEl.style.left = Math.max(6, Math.min(window.innerWidth - w - 6, x + 12)) + "px";
-    tipEl.style.top = Math.max(6, Math.min(window.innerHeight - hgt - 6, y + 14)) + "px";
-  };
+  const show = (x, y) => showTip(html, x, y);
+  if (!tipFullscreenListener) {
+    document.addEventListener("fullscreenchange", () => {
+      if (tipEl && tipEl.style.display === "block" && tipPoint) showTip(tipEl.innerHTML, tipPoint.x, tipPoint.y);
+    });
+    tipFullscreenListener = true;
+  }
   const hide = () => { if (tipEl) tipEl.style.display = "none"; };
   el.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") show(e.clientX, e.clientY); });
   el.addEventListener("pointermove", (e) => { if (e.pointerType === "mouse" && tipEl && tipEl.style.display === "block") show(e.clientX, e.clientY); });

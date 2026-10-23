@@ -1,0 +1,25 @@
+/* Patch notes window + floating update pill (js/ui/patchNotes.js). Fixed to the viewport, above the stage. */
+.sp-notes-backdrop { position: fixed; inset: 0; z-index: 9000; display: flex; align-items: center; justify-content: center;
+  padding: 16px; background: rgba(0, 0, 0, 0.72); }
+.sp-notes { width: min(640px, 100%); max-height: calc(100vh - 32px); overflow-y: auto; overscroll-behavior: contain;
+  padding: 24px 28px; color: #e8dcc0; background: linear-gradient(#1d1610, #120d09); border: 2px solid #8a6a2e;
+  border-radius: 8px; box-shadow: 0 0 0 1px #000, 0 12px 40px rgba(0, 0, 0, 0.8); font-size: 16px; line-height: 1.5; }
+.sp-notes-title { margin: 0; color: #ffd100; font-size: 28px; text-shadow: 0 2px 0 #000; }
+.sp-notes-date { margin: 2px 0 14px; color: #a8987a; font-size: 13px; }
+.sp-notes-p { margin: 0 0 10px; }
+.sp-notes-sec h3 { margin: 16px 0 6px; color: #ffd100; font-size: 18px; }
+.sp-notes-sec ul { margin: 0; padding-left: 20px; }
+.sp-notes-sec li { margin: 3px 0; }
+.sp-notes-outro { margin-top: 16px; font-style: italic; }
+.sp-notes-close { display: block; margin: 18px auto 0; }
+
+.sp-update-pill { position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 8999;
+  display: flex; align-items: center; gap: 10px; padding: 10px 20px; cursor: pointer;
+  color: #1a1206; font: 700 16px/1.2 inherit; background: linear-gradient(#ffe066, #e0a800);
+  border: 2px solid #5a3c00; border-radius: 999px; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
+  animation: sp-update-bob 2.4s ease-in-out infinite; }
+.sp-update-pill:hover { filter: brightness(1.1); }
+.sp-update-dot { width: 10px; height: 10px; border-radius: 50%; background: #2fd24a; box-shadow: 0 0 8px #2fd24a; }
+@keyframes sp-update-bob { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 3px); } }
+@media (prefers-reduced-motion: reduce) { .sp-update-pill { animation: none; } }
+@media (max-width: 520px) { .sp-update-pill { font-size: 14px; padding: 8px 14px; max-width: calc(100vw - 32px); } }

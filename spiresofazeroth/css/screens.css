@@ -108,7 +108,7 @@
 /* ---------- coin + modal ---------- */
 .sx-coin { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-num); font-size: 32px; color: #ffe27a; text-shadow: 0 2px 2px #000; }
 .sx-coin.short { color: #ff7a6b; } .sx-coin__i { width: 38px; height: 38px; margin: 0; border-radius: 50%; }
-.sx-modal-back { position: absolute; inset: 0; z-index: 40; display: grid; place-items: center; background: rgba(4,3,2,.74); pointer-events: auto; animation: sx-fade .18s ease both; }
+.sx-modal-back { position: absolute; inset: 0; z-index: 40; display: grid; grid-template-rows: minmax(0, 1fr); place-items: center; background: rgba(4,3,2,.74); pointer-events: auto; animation: sx-fade .18s ease both; }
 .sx-modal { width: min(1500px, 94%); max-height: 90%; display: flex; flex-direction: column; }
 .sx-modal__head { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 16px; } .sx-modal__head h3 { margin: 0; font-family: var(--f-title); font-weight: 400; font-size: 52px; }
 .sx-modal__body { overflow-y: auto; min-height: 0; padding: 12px 6px 18px; }
@@ -278,7 +278,7 @@
 .sp-portrait .ev-plate--sign .ev-board { transform-origin: 50% -150px; }
 
 /* ---------- run end ---------- */
-.sx-end { flex-direction: row; align-items: center; justify-content: center; gap: 60px; padding: 20px 80px 90px; }
+.sx-end { flex-direction: row; align-items: center; align-items: safe center; justify-content: center; gap: 60px; padding: 20px 80px 90px; overflow-y: auto; }
 .sx-end::before { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0; }
 .sx-end.lose::before { background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(60,0,0,.2), rgba(25,0,0,.65)); } .sx-end.win::before { background: radial-gradient(ellipse 60% 70% at 50% 40%, rgba(255,210,90,.2), transparent 70%); }
 .sx-end > * { position: relative; z-index: 1; }
@@ -361,7 +361,7 @@
 .sp-stage:not(.sp-portrait) .sx-cls__go .sp-wowbtn { --h: 84px; }
 /* shop */
 /* settings + codex pages */
-.sp-stage:not(.sp-portrait) .sx-page__sheet { margin: 8px auto 20px; padding: 40px 54px; gap: 10px; overflow: hidden; }
+.sp-stage:not(.sp-portrait) .sx-page__sheet { margin: 8px auto 20px; padding: 40px 54px; gap: 10px; overflow-y: auto; overscroll-behavior: contain; } /* settings buttons were clipped when the sheet ran long (2026-10-23) */
 .sp-stage:not(.sp-portrait) .sx-set .sx-row { min-height: 56px; font-size: 28px; }
 .sp-stage:not(.sp-portrait) .sx-set .sx-area { min-height: 90px; height: 90px; }
 .sp-stage:not(.sp-portrait) .sx-page__top .sx-banner h2 { font-size: 64px; } .sp-stage:not(.sp-portrait) .sx-page__top .sx-banner p { margin-top: 2px; }

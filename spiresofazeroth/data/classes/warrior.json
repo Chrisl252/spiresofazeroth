@@ -686,8 +686,10 @@
       "archetype": "fury",
       "cost": 0,
       "target": "self",
-      "flags": [],
-      "text": "Remove Fear and Stun from you. Gain 15 Rage. Draw 1 card.",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Remove Fear and Stun from you. Gain 15 Rage. Draw 1 card. Exhaust.",
       "effects": [
         {"op": "remove", "status": "fear", "target": "self"},
         {"op": "remove", "status": "stun", "target": "self"},
@@ -697,7 +699,7 @@
       "upgrade": {
         "name": "Berserker Rage (Rank 2)",
         "cost": 0,
-        "text": "Remove Fear and Stun from you. Gain 20 Rage. Draw 2 cards.",
+        "text": "Remove Fear and Stun from you. Gain 20 Rage. Draw 2 cards. Exhaust.",
         "effects": [
           {"op": "remove", "status": "fear", "target": "self"},
           {"op": "remove", "status": "stun", "target": "self"},
@@ -877,8 +879,10 @@
       "archetype": "arms",
       "cost": 0,
       "target": "self",
-      "flags": [],
-      "text": "Enter Battle Stance. Draw 3 cards. Gain 5 Rage.",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Enter Battle Stance. Draw 3 cards. Gain 5 Rage. Exhaust.",
       "effects": [
         {"op": "set_stance", "value": "battle"},
         {"op": "draw", "count": 3},
@@ -887,7 +891,7 @@
       "upgrade": {
         "name": "Battle Stance (Rank 2)",
         "cost": 0,
-        "text": "Enter Battle Stance. Draw 4 cards. Gain 10 Rage.",
+        "text": "Enter Battle Stance. Draw 4 cards. Gain 10 Rage. Exhaust.",
         "effects": [
           {"op": "set_stance", "value": "battle"},
           {"op": "draw", "count": 4},
@@ -935,8 +939,10 @@
       "archetype": "fury",
       "cost": 0,
       "target": "self",
-      "flags": [],
-      "text": "Enter Berserker Stance. Gain 1 Energy. Draw 1 card.",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Enter Berserker Stance. Gain 1 Energy. Draw 1 card. Exhaust.",
       "effects": [
         {"op": "set_stance", "value": "berserker"},
         {"op": "gain_energy", "amount": 1},
@@ -945,7 +951,7 @@
       "upgrade": {
         "name": "Berserker Stance (Rank 2)",
         "cost": 0,
-        "text": "Enter Berserker Stance. Gain 1 Energy. Draw 2 cards.",
+        "text": "Enter Berserker Stance. Gain 1 Energy. Draw 2 cards. Exhaust.",
         "effects": [
           {"op": "set_stance", "value": "berserker"},
           {"op": "gain_energy", "amount": 1},

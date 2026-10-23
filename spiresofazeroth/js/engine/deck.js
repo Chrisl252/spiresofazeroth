@@ -65,6 +65,7 @@ export function whyUnplayable(C, inst) {
   if (C.result || C.phase !== "player") return "Not your turn";
   if (d.cost === -1 || hasFlag(inst, "unplayable")) return "Unplayable";
   if (p.st.silence && isSpellCard(inst)) return "Silenced";
+  if (d.effects.some((e) => e && e.op === "retreat") && (C.tier === "boss" || C.tier === "raid" || C.enemies.some((e) => e.tier === "boss" || e.tier === "raid"))) return "No retreat from a boss";
   const cost = cardCost(C, inst);
   if (cost !== "X" && cost > p.energy) return "Not enough energy";
   if (d.resourceCost) {

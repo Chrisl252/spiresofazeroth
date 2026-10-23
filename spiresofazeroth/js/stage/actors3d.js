@@ -28,8 +28,9 @@ const MAXW = { hero: 260, normal: 270, elite: 330, boss: 600, totem: 140 };
 const MODEL_BUDGET = 6, BUF_CACHE = 16;
 const PX_PER_YD = 147, FLOOR = { normal: 0.5, elite: 0.66, boss: 0.78, totem: 0.75 };   // in-game scale: a 1.9 yd human = 280 px; small beasts stay small (floored), huge ones cap at the tier height
 const CASTER_NAME = /mage|wizard|warlock|shaman|priest|acolyte|apprentice|neophyte|cultist|seer|witch|sorcer|conjur|necromanc|invoker|diviner|illusion|magus|oracle|summoner|enchant|druid|shade/i;
+const RANGED_NAME = /archer|marksman|hunter|ranger|bowman|rifleman|gunner|cannoneer|headhunter|thrower|sniper|spitter/i;
 const HERO_CASTERS = new Set(["mage", "warlock", "priest"]);
-const ONESHOT = ["attack", "attack2", "cast", "precast", "hit", "idle2"];
+const ONESHOT = ["attack", "attack2", "cast", "shoot", "precast", "hit", "idle2"];
 const DEFAULT_LANES = {
   hero: { x: 420, y: 760, s: 1 },
   enemy(i, n) {
@@ -58,7 +59,7 @@ export function createActors(hostEl, opts = {}) {
   for (const l of [groundL, platesL, fxL]) l.style.cssText = `position:absolute;left:0;top:0;width:${W}px;height:${H}px;pointer-events:none`;
 
   // ---- renderer (null => everything stays on plates)
-  let renderer = null, scene = null, camera = null;
+  let renderer = null, scene = null, camera = null, glLost = false;
   let hemiLight = null, keyLight = null, rimLight = null, sceneFog = null;
   let ground3d = null;
   try {
@@ -94,8 +95,10 @@ export function createActors(hostEl, opts = {}) {
     sceneFog = null;
     scene.fog = null;
     ground3d = createGround3d(scene, { designW: W, designH: H, groundY: opts.groundY || 758 });
-    renderer.domElement.addEventListener("webglcontextlost", (e) => { e.preventDefault(); needRender = true; });
-    renderer.domElement.addEventListener("webglcontextrestored", () => { needRender = true; wake(); });
+    // Context loss (tab switch / GPU pressure / too many live contexts): preventDefault so the browser may restore it; while it is gone the
+    // DOM plates are shown for every actor so the fight is never invisible, and once restored three re-uploads everything and the plates hide again.
+    renderer.domElement.addEventListener("webglcontextlost", (e) => { e.preventDefault(); glLost = true; for (const a of byUid.values()) a.setVisible(true); });
+    renderer.domElement.addEventListener("webglcontextrestored", () => { glLost = false; for (const a of byUid.values()) if (a.skin) a.setVisible(false); needRender = true; wake(); });
   } catch (err) { console.warn("[actors3d] WebGL unavailable, plates only:", err); renderer = null; }
 
   let curPR = 0;
@@ -185,25 +188,27 @@ export function createActors(hostEl, opts = {}) {
     // In-game clips: Stand loops, Attack / Cast / Hit play once over a faded idle, Death clamps.
     // Caster attacks stay planted and release spells, melee attacks spring forward dynamically.
     const isCaster = (o = {}) => {
-      if (o.spell || o.cast) return true;
-      if (kind === "hero") return !a.form && (HERO_CASTERS.has(a.heroClass) || o.spell || o.cast);
-      return CASTER_NAME.test(a.name || "") || o.spell || o.cast;
+      if (o.spell || o.cast || o.ranged || o.shoot) return true;
+      if (kind === "hero") return !a.form && (HERO_CASTERS.has(a.heroClass) || o.spell || o.cast || o.ranged || o.shoot);
+      return CASTER_NAME.test(a.name || "") || RANGED_NAME.test(a.name || "") || o.spell || o.cast || o.ranged || o.shoot;
     };
     a.lunge = async (t, o = {}) => {
       const sk = a.skin;
       const caster = isCaster(o);
 
-      if (!sk || !sk.mixer) return baseLunge(t, { ...o, cast: caster, spell: caster });
+      if (!sk || !sk.mixer) return baseLunge(t, { ...o, cast: caster, spell: caster, ranged: caster });
 
-      const key = (caster && sk.clips.cast) ? "cast" : (sk.clips.attack2 && Math.random() < 0.4 ? "attack2" : (sk.clips.attack ? "attack" : (sk.clips.cast ? "cast" : null)));
+      const key = (o.ranged || o.shoot) ? (sk.clips.shoot || sk.clips.cast || sk.clips.attack)
+        : (caster && sk.clips.cast) ? "cast"
+        : (sk.clips.attack2 && Math.random() < 0.4 ? "attack2" : (sk.clips.attack ? "attack" : (sk.clips.cast ? "cast" : null)));
 
       if (caster) {
-        // Caster stance: stay planted, windup gather, forward spell release recoil, recover
+        // Caster / ranged stance: stay planted, windup gather, forward spell release recoil, recover
         const IMPACT_MS = 380;
         if (sk.clips.precast) { const pm = playOnce(sk, "precast", 2.2); await a.motion.wait(Math.min(200, pm)); }
         if (key && sk.clips[key]) playOnce(sk, key, 0, IMPACT_MS / 0.45);
         wake();
-        await baseLunge(t, { ...o, cast: true, spell: true, onImpact: o.onImpact });
+        await baseLunge(t, { ...o, cast: true, spell: true, ranged: true, onImpact: o.onImpact });
         return;
       }
 
@@ -354,7 +359,7 @@ export function createActors(hostEl, opts = {}) {
       const find = (re) => anims.find((c) => re.test(c.name));
       const idle = find(/^idle$/i) || find(/^(idle|stand)/i) || find(/stand|idle|breath/i) || (cand.tier === "retail" ? anims[0] : null);
       if (idle) { const act = mixer.clipAction(idle); act.play(); act.time = Math.random() * idle.duration; clips.idle = act; }
-      for (const [k, re] of [["attack", /^attack$/i], ["attack2", /^attack2$/i], ["cast", /^cast$/i], ["precast", /^precast$/i], ["hit", /^hit$/i], ["idle2", /^idle2$/i], ["death", /^(death|die)/i]]) {
+      for (const [k, re] of [["attack", /^attack$/i], ["attack2", /^attack2$/i], ["cast", /^cast$/i], ["shoot", /^(shoot|bow|rifle|gun|range)/i], ["precast", /^precast$/i], ["hit", /^hit$/i], ["idle2", /^idle2$/i], ["death", /^(death|die)/i]]) {
         const c = find(re) || (k === "attack" ? find(/^attack/i) : null); if (!c) continue;
         const act = mixer.clipAction(c); act.setLoop(THREE.LoopOnce, 1); act.clampWhenFinished = true; clips[k] = act;
       }
@@ -384,7 +389,7 @@ export function createActors(hostEl, opts = {}) {
     a.setGroundW(Math.max(a.baseH() * 0.38, Math.min(size.x * k, a.baseH() * 1.1)) * 0.85);
     Object.assign(sk0, { group, pivot, mixer, mats, born: performance.now(), k, phase: Math.random() * 6.28, hasClip: !!clips.idle, tier: cand.tier, size: size.y * k });
     a.skin = sk0;
-    a.kind = "model"; a.setVisible(false); clearTimeout(a._t);
+    a.kind = "model"; a.setVisible(glLost); clearTimeout(a._t);
     stats.loaded++;
     needRender = true; wake();
   }
@@ -510,8 +515,13 @@ export function createActors(hostEl, opts = {}) {
     } else if (!hasSkin) last = 0;
     if (tweening || hasSkin) raf = requestAnimationFrame(frame);
   }
-  document.addEventListener("visibilitychange", () => { last = 0; if (!document.hidden) { needRender = true; wake(); } });
-  window.addEventListener("resize", () => { curPR = 0; needRender = true; wake(); });
+  document.addEventListener("visibilitychange", () => {
+    last = 0;
+    if (document.hidden) return;
+    try { if (renderer && !glLost && renderer.getContext().isContextLost()) { glLost = true; for (const a of byUid.values()) a.setVisible(true); } } catch (_) { /* noop */ }
+    needRender = true; wake();
+  });
+  window.addEventListener("resize", () => { needRender = true; wake(); });
   if (window.IntersectionObserver) new IntersectionObserver((en) => { onscreen = en[0].isIntersecting; if (onscreen) { needRender = true; wake(); } }).observe(hostEl);
 
   // ---- public API
@@ -669,7 +679,8 @@ export function createActors(hostEl, opts = {}) {
     get: (uid) => byUid.get(uid) || null,
     uids: () => [...byUid.keys()],
     lunge(uid, targetUid, o) { const a = need(uid); return a ? a.lunge(byUid.get(targetUid) ? byUid.get(targetUid).anchor() : null, o) : Promise.resolve(); },
-    cast(uid, targetUid, o) { const a = need(uid); return a ? a.lunge(byUid.get(targetUid) ? byUid.get(targetUid).anchor() : null, { ...o, cast: true, spell: true }) : Promise.resolve(); },
+    cast(uid, targetUid, o) { const a = need(uid); return a ? a.lunge(byUid.get(targetUid) ? byUid.get(targetUid).anchor() : null, { ...o, cast: true, spell: true, ranged: true }) : Promise.resolve(); },
+    shoot(uid, targetUid, o) { const a = need(uid); return a ? a.lunge(byUid.get(targetUid) ? byUid.get(targetUid).anchor() : null, { ...o, cast: true, spell: true, ranged: true, shoot: true }) : Promise.resolve(); },
     castGesture(uid, o) { const a = need(uid); return a ? (a.castGesture ? a.castGesture(o) : a.statusPulse(o && o.color)) : Promise.resolve(); },
     hit(uid, o) { const a = need(uid); return a ? a.hit(o) : Promise.resolve(); },
     block(uid) { const a = need(uid); return a ? a.block() : Promise.resolve(); },
@@ -681,7 +692,7 @@ export function createActors(hostEl, opts = {}) {
     setTheme(t) { theme = t; for (const a of byUid.values()) a.setTheme(t); },
     pause() { paused = true; }, resume() { paused = false; needRender = true; wake(); },
     stats: () => ({ ...stats, avgRenderMs: stats.frames ? stats.renderMs / stats.frames : 0, actors: byUid.size, distinctModels: distinctFdids().size, bufferCache: bufs.size, webgl: !!renderer }),
-    dispose() { for (const a of [...byUid.values()]) destroy(a); if (ground3d) ground3d.dispose(); if (renderer) renderer.dispose(); for (const l of [groundL, canvasWrap, platesL, fxL]) l.remove(); },
+    dispose() { for (const a of [...byUid.values()]) destroy(a); if (ground3d) ground3d.dispose(); if (renderer) { try { renderer.dispose(); renderer.forceContextLoss(); } catch (_) { /* noop */ } } for (const l of [groundL, canvasWrap, platesL, fxL]) l.remove(); },
   };
   fitResolution();
   setZone(currentZoneId);

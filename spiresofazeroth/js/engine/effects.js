@@ -319,7 +319,19 @@ op("remove", (ctx, e) => {
   }
 });
 
-op("draw", (ctx, e) => { if (ctx.C) drawCards(ctx.C, Math.max(0, Math.floor(num(ctx, e.count, 1)))); });
+// Engine backstop against thin-deck infinite loops (draw -> refund -> draw ...): card/effect-driven draws are capped per player turn.
+// The turn-start hand and the opening hand are drawn by combat.js directly and are not counted. Reset in combat.startPlayerTurn.
+export const MAX_EFFECT_DRAWS_PER_TURN = 10;
+op("draw", (ctx, e) => {
+  const C = ctx.C; if (!C) return;
+  let n = Math.max(0, Math.floor(num(ctx, e.count, 1)));
+  if (ctx.srcKind !== "enemy") {
+    const left = Math.max(0, MAX_EFFECT_DRAWS_PER_TURN - (C.effectDraws || 0));
+    n = Math.min(n, left);
+    C.effectDraws = (C.effectDraws || 0) + n;
+  }
+  if (n > 0) drawCards(C, n);
+});
 
 function pickCards(ctx, count, random, why) {
   const C = ctx.C;
@@ -501,7 +513,8 @@ op("revive", (ctx, e) => {
   C.player.reviveArmed = Math.max(C.player.reviveArmed || 0, pct); // once per combat; spent in damage.checkDeaths
 });
 op("end_turn", (ctx) => { if (ctx.C) ctx.C.endTurnRequested = true; });
-op("retreat", (ctx) => { if (ctx.run) ctx.run.retreat = true; });
+// Hearthstone: in a fight it ends the combat now with no rewards (run.afterCombat sends the hero back to the map); in an event it flags the retreat
+op("retreat", (ctx) => { if (ctx.C) { ctx.C.result = "retreat"; ctx.C.phase = "over"; } else if (ctx.run) ctx.run.retreat = true; });
 // flags, not ops: tolerated so a stray flag in an effects array does not fail validation
 op(["retain", "ethereal", "innate", "unplayable"], () => {});
 

@@ -86,7 +86,7 @@ export function createFallbackActor(layers, spec, wake) {
   const shape = spec.shape || shapeFor(spec.family, spec.type);
   let theme = { ...DEFAULT_THEME, ...(spec.theme || {}) };
   const uid = spec.uid;
-  const ns = "http://www.w3.org/2000/svg";
+  const ns = "htt<local path>";
   const gid = "sa" + Math.random().toString(36).slice(2, 8);
 
   const el = document.createElement("div"); el.className = "sa-plate"; el.dataset.uid = uid;

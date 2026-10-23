@@ -27,7 +27,7 @@
      "max": 5,
      "effect": {
       "key": "thorns",
-      "per": 1
+      "per": 2
      }
     },
     {
@@ -39,7 +39,7 @@
      "max": 3,
      "effect": {
       "key": "block",
-      "per": 2
+      "per": 3
      }
     },
     {
@@ -51,7 +51,7 @@
      "max": 2,
      "effect": {
       "key": "res",
-      "per": 1
+      "per": 2
      }
     },
     {
@@ -62,20 +62,20 @@
      "col": 0,
      "max": 2,
      "effect": {
-      "key": "regen",
-      "per": 2
+      "key": "energy1",
+      "per": 1
      }
     },
     {
      "id": "warlock:affliction:5",
-     "name": "Improved Drain Life",
-     "icon": "spell_shadow_lifedrain02",
+     "name": "Fel Concentration",
+     "icon": "spell_shadow_fingerofdeath",
      "tier": 3,
      "col": 1,
      "max": 5,
      "effect": {
-      "key": "regen",
-      "per": 1
+      "key": "hp",
+      "per": 4
      }
     },
     {
@@ -86,39 +86,15 @@
      "col": 0,
      "max": 3,
      "effect": {
-      "key": "str",
-      "per": 1
+      "key": "spell_power",
+      "per": 2
      }
     },
     {
      "id": "warlock:affliction:7",
-     "name": "Fel Concentration",
-     "icon": "spell_shadow_fingerofdeath",
-     "tier": 4,
-     "col": 1,
-     "max": 5,
-     "effect": {
-      "key": "hp",
-      "per": 3
-     }
-    },
-    {
-     "id": "warlock:affliction:8",
-     "name": "Amplify Curse",
-     "icon": "spell_shadow_contagion",
-     "tier": 5,
-     "col": 0,
-     "max": 1,
-     "effect": {
-      "key": "energy1",
-      "per": 1
-     }
-    },
-    {
-     "id": "warlock:affliction:9",
      "name": "Grim Reach",
      "icon": "spell_shadow_callofbone",
-     "tier": 5,
+     "tier": 4,
      "col": 1,
      "max": 2,
      "effect": {
@@ -127,15 +103,39 @@
      }
     },
     {
-     "id": "warlock:affliction:10",
+     "id": "warlock:affliction:8",
      "name": "Nightfall",
      "icon": "spell_shadow_twilight",
+     "tier": 5,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "free_cast",
+      "per": 1
+     }
+    },
+    {
+     "id": "warlock:affliction:9",
+     "name": "Shadow Mastery",
+     "icon": "spell_shadow_blackplague",
+     "tier": 5,
+     "col": 1,
+     "max": 5,
+     "effect": {
+      "key": "spell_power",
+      "per": 1
+     }
+    },
+    {
+     "id": "warlock:affliction:10",
+     "name": "Dark Pact",
+     "icon": "spell_shadow_darkritual",
      "tier": 6,
      "col": 0,
      "max": 2,
      "effect": {
-      "key": "goldpct",
-      "per": 5
+      "key": "energy1",
+      "per": 1
      }
     },
     {
@@ -146,8 +146,8 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "regen",
-      "per": 4
+      "key": "vampiric",
+      "per": 1
      }
     }
    ]
@@ -166,87 +166,51 @@
      "max": 2,
      "effect": {
       "key": "heal",
-      "per": 10
+      "per": 15
      }
     },
     {
      "id": "warlock:demonology:1",
-     "name": "Improved Imp",
-     "icon": "spell_shadow_summonimp",
+     "name": "Demonic Embrace",
+     "icon": "spell_shadow_metamorphosis",
      "tier": 1,
      "col": 1,
-     "max": 3,
+     "max": 5,
      "effect": {
-      "key": "str",
-      "per": 1
+      "key": "hp",
+      "per": 5
      }
     },
     {
      "id": "warlock:demonology:2",
-     "name": "Demonic Embrace",
-     "icon": "spell_shadow_metamorphosis",
+     "name": "Improved Voidwalker",
+     "icon": "spell_shadow_summonvoidwalker",
      "tier": 2,
      "col": 0,
-     "max": 5,
+     "max": 3,
      "effect": {
-      "key": "hp",
-      "per": 4
+      "key": "shield",
+      "per": 5
      }
     },
     {
      "id": "warlock:demonology:3",
-     "name": "Improved Health Funnel",
-     "icon": "spell_shadow_lifedrain",
-     "tier": 2,
-     "col": 1,
-     "max": 2,
-     "effect": {
-      "key": "regen",
-      "per": 1
-     }
-    },
-    {
-     "id": "warlock:demonology:4",
-     "name": "Improved Voidwalker",
-     "icon": "spell_shadow_summonvoidwalker",
-     "tier": 3,
-     "col": 0,
-     "max": 3,
-     "effect": {
-      "key": "block",
-      "per": 2
-     }
-    },
-    {
-     "id": "warlock:demonology:5",
      "name": "Fel Intellect",
      "icon": "spell_holy_magicalsentry",
-     "tier": 3,
+     "tier": 2,
      "col": 1,
      "max": 5,
      "effect": {
       "key": "res",
-      "per": 1
+      "per": 15
      }
     },
     {
-     "id": "warlock:demonology:6",
-     "name": "Improved Succubus",
-     "icon": "spell_shadow_summonsuccubus",
-     "tier": 4,
-     "col": 0,
-     "max": 3,
-     "effect": {
-      "key": "dex",
-      "per": 1
-     }
-    },
-    {
-     "id": "warlock:demonology:7",
+     "id": "warlock:demonology:4",
      "name": "Fel Domination",
      "icon": "spell_nature_removecurse",
-     "tier": 4,
-     "col": 1,
+     "tier": 3,
+     "col": 0,
      "max": 1,
      "effect": {
       "key": "energy1",
@@ -254,23 +218,23 @@
      }
     },
     {
-     "id": "warlock:demonology:8",
+     "id": "warlock:demonology:5",
      "name": "Fel Stamina",
      "icon": "spell_shadow_antishadow",
-     "tier": 5,
-     "col": 0,
+     "tier": 3,
+     "col": 1,
      "max": 5,
      "effect": {
       "key": "hp",
-      "per": 3
+      "per": 5
      }
     },
     {
-     "id": "warlock:demonology:9",
+     "id": "warlock:demonology:6",
      "name": "Master Summoner",
      "icon": "spell_shadow_impphaseshift",
-     "tier": 5,
-     "col": 1,
+     "tier": 4,
+     "col": 0,
      "max": 2,
      "effect": {
       "key": "draw1",
@@ -278,15 +242,51 @@
      }
     },
     {
-     "id": "warlock:demonology:10",
+     "id": "warlock:demonology:7",
      "name": "Unholy Power",
      "icon": "spell_shadow_shadowworddominate",
-     "tier": 6,
-     "col": 0,
+     "tier": 4,
+     "col": 1,
      "max": 5,
      "effect": {
       "key": "str",
       "per": 1
+     }
+    },
+    {
+     "id": "warlock:demonology:8",
+     "name": "Demonic Sacrifice",
+     "icon": "spell_shadow_psychicscream",
+     "tier": 5,
+     "col": 0,
+     "max": 3,
+     "effect": {
+      "key": "spell_power",
+      "per": 2
+     }
+    },
+    {
+     "id": "warlock:demonology:9",
+     "name": "Master Demonologist",
+     "icon": "spell_shadow_shadowward",
+     "tier": 5,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "armor",
+      "per": 1
+     }
+    },
+    {
+     "id": "warlock:demonology:10",
+     "name": "Demonic Aegis",
+     "icon": "spell_shadow_demonicaegis",
+     "tier": 6,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "shield",
+      "per": 8
      }
     },
     {
@@ -297,8 +297,8 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "block",
-      "per": 6
+      "key": "armor",
+      "per": 2
      }
     }
    ]
@@ -316,7 +316,7 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "str",
+      "key": "spell_power",
       "per": 1
      }
     },
@@ -329,7 +329,7 @@
      "max": 5,
      "effect": {
       "key": "goldpct",
-      "per": 3
+      "per": 4
      }
     },
     {
@@ -358,45 +358,21 @@
     },
     {
      "id": "warlock:destruction:4",
-     "name": "Improved Firebolt",
-     "icon": "spell_fire_firebolt",
+     "name": "Devastation",
+     "icon": "spell_fire_flameshock",
      "tier": 3,
      "col": 0,
-     "max": 2,
+     "max": 5,
      "effect": {
-      "key": "res",
+      "key": "spell_power",
       "per": 1
      }
     },
     {
      "id": "warlock:destruction:5",
-     "name": "Improved Lash of Pain",
-     "icon": "spell_shadow_curse",
-     "tier": 3,
-     "col": 1,
-     "max": 2,
-     "effect": {
-      "key": "str",
-      "per": 1
-     }
-    },
-    {
-     "id": "warlock:destruction:6",
-     "name": "Devastation",
-     "icon": "spell_fire_flameshock",
-     "tier": 4,
-     "col": 0,
-     "max": 5,
-     "effect": {
-      "key": "str",
-      "per": 1
-     }
-    },
-    {
-     "id": "warlock:destruction:7",
      "name": "Shadowburn",
      "icon": "spell_shadow_scourgebuild",
-     "tier": 4,
+     "tier": 3,
      "col": 1,
      "max": 1,
      "effect": {
@@ -405,22 +381,22 @@
      }
     },
     {
-     "id": "warlock:destruction:8",
+     "id": "warlock:destruction:6",
      "name": "Intensity",
      "icon": "spell_fire_lavaspawn",
-     "tier": 5,
+     "tier": 4,
      "col": 0,
      "max": 2,
      "effect": {
       "key": "hp",
-      "per": 5
+      "per": 6
      }
     },
     {
-     "id": "warlock:destruction:9",
+     "id": "warlock:destruction:7",
      "name": "Destructive Reach",
      "icon": "spell_shadow_corpseexplode",
-     "tier": 5,
+     "tier": 4,
      "col": 1,
      "max": 2,
      "effect": {
@@ -429,14 +405,38 @@
      }
     },
     {
-     "id": "warlock:destruction:10",
+     "id": "warlock:destruction:8",
      "name": "Improved Searing Pain",
      "icon": "spell_fire_soulburn",
-     "tier": 6,
+     "tier": 5,
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "regen",
+      "key": "spell_power",
+      "per": 1
+     }
+    },
+    {
+     "id": "warlock:destruction:9",
+     "name": "Ruin",
+     "icon": "spell_shadow_deathanddecay",
+     "tier": 5,
+     "col": 1,
+     "max": 3,
+     "effect": {
+      "key": "spell_power",
+      "per": 2
+     }
+    },
+    {
+     "id": "warlock:destruction:10",
+     "name": "Emberstorm",
+     "icon": "spell_fire_selfdestruct",
+     "tier": 6,
+     "col": 0,
+     "max": 2,
+     "effect": {
+      "key": "energy1",
       "per": 1
      }
     },
@@ -448,8 +448,8 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "str",
-      "per": 3
+      "key": "spell_power",
+      "per": 4
      }
     }
    ]

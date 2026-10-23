@@ -1,9 +1,9 @@
 // Gear (GEAR_SPEC): relics ARE gear. A piece is a relic object (same triggers/DSL) plus slot/set/item/icon/displayId/tier, so the relic bus
-// (relics.js fire/fireRun) runs it untouched. run.relics stays the array of owned ids; run.gear mirrors slot -> id. Set bonuses are
+// (relics.js fire/fireRun) runs it untouched. run.relics contains active relic/gear ids; run.gear mirrors slot -> id. Set bonuses are
 // synthetic relics `set:<setId>:<n>` kept in run.relics while enough pieces are worn. DOM-free (the sim imports this).
 //   loadClassGear(d, classId, get)   data.js hook: registers a class's set pieces, weapon, `+` upgrades and set-bonus relics
 //   ensureGear(run, data)            run.gear exists + legacy relic ids mapped (call when a saved run resumes)
-//   equip(run, data, id)             -> { key, replaced } puts a piece on, swapping whatever held the slot
+//   equip(run, data, id)             -> { key, replaced } equips a piece and stores displaced non-starter gear
 //   dropGear(run, data)              -> { id, key, slot, upgrade, replaced, setBefore, setAfter, bonuses } | null  (the post-combat drop)
 //   setInfo(run, data)               -> { set, count, bonuses:[{pieces,name,text,active}], next }
 export const PAPERDOLL = ["head", "neck", "shoulder", "back", "chest", "wrist", "hands", "waist", "legs", "feet", "finger1", "finger2", "trinket1", "trinket2", "mainHand", "offHand"];
@@ -102,6 +102,7 @@ export function syncSetBonuses(run, data) {
 
 // ---- equipping ---------------------------------------------------------------------------------------------------------
 export function ensureGear(run, data) {
+  if (!Array.isArray(run.gearBag)) run.gearBag = [];
   if (run.gear) return run;
   run.gear = emptyGear();
   const old = run.relics.slice();
@@ -132,7 +133,13 @@ export function equip(run, data, id) {
   if (!r) return null;
   const key = targetKey(run, data, r);
   const replaced = run.gear[key] || null;
-  if (replaced) { const i = run.relics.indexOf(replaced); if (i >= 0) run.relics.splice(i, 1); }
+  const bagIndex = run.gearBag.indexOf(id);
+  if (bagIndex >= 0) run.gearBag.splice(bagIndex, 1);
+  if (replaced && replaced !== id) {
+    const i = run.relics.indexOf(replaced);
+    if (i >= 0) run.relics.splice(i, 1);
+    if (!isStarter(replaced) && !run.gearBag.includes(replaced)) run.gearBag.push(replaced);
+  }
   run.gear[key] = id;
   if (!run.relics.includes(id)) run.relics.push(id);
   return { key, replaced };
@@ -145,7 +152,7 @@ export function dropGear(run, data) {
   const before = setInfo(run, data).count;
   const piece = (slot) => (slot === "mainHand" ? g.weapon : g.pieces.find((p) => p.slot === slot));
   let id = null, upgrade = false;
-  const owned = (x) => run.relics.includes(x) || Object.values(run.gear).includes(x); // never the same item twice (owner report 2026-10-21)
+  const owned = (x) => run.relics.includes(x) || run.gearBag.includes(x) || Object.values(run.gear).includes(x); // never the same item twice
   for (const s of DROP_ORDER) if ((!run.gear[s] || isStarter(run.gear[s])) && piece(s) && !owned(piece(s).id) && !owned(`${piece(s).id}+`)) { id = piece(s).id; break; }
   if (!id) {
     for (const s of DROP_ORDER) { const cur = run.gear[s]; if (cur && !isStarter(cur) && !String(cur).endsWith("+") && piece(s) && !owned(`${cur}+`)) { id = `${cur}+`; upgrade = true; break; } }

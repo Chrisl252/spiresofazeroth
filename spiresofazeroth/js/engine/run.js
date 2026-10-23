@@ -27,7 +27,7 @@ export function newRun(data, { classId, continent, seed, heroic = 0, pet = null,
   const run = {
     v: RUN_VERSION, seed: String(seed), classId, continent: continent || cls.defaultContinent || "ek", heroic, pet,
     act: 0, zoneId: null, zonesVisited: [], map: null, floor: -1, col: -1, hp: maxHp, maxHp, gold: (cls.startingGold || 99) + ((T && T.gold) | 0), talents: T,
-    deck: (cls.starterDeck || []).map((id) => ({ id, up: false })), relics: [], gear: G.emptyGear(), potions: [], carry: {}, disease: 0,
+    deck: (cls.starterDeck || []).map((id) => ({ id, up: false })), relics: [], gear: G.emptyGear(), gearBag: [], potions: [], carry: {}, disease: 0,
     potionMiss: 0, removals: 0, seenEvents: [], seen: { cards: {}, enemies: {}, relics: {} }, spire: {},
     screen: "zonepick", pending: null, result: null,
     stats: { floors: 0, fights: 0, elites: 0, bosses: 0, kills: 0, damageTaken: 0, turns: 0, goldEarned: 0 },
@@ -222,6 +222,12 @@ export function afterCombat(run, data, C) {
   run.stats.damageTaken += C.stats.damageTaken;
   run.stats.turns += C.stats.turns;
   run.stats.zeroEnergyTurns = (run.stats.zeroEnergyTurns || 0) + (C.stats.zeroEnergyTurns || 0);
+  if (C.result === "retreat") { // Hearthstone: no gold, cards, gear or loot; the node counts as passed and the hero is back on the map
+    run.stats.retreats = (run.stats.retreats || 0) + 1;
+    run.pending = null;
+    run.screen = "map";
+    return sum;
+  }
   const tier = run.pending.tier;
   if (tier === "elite") run.stats.elites++;
   if (tier === "boss") run.stats.bosses++;

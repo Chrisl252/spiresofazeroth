@@ -4,7 +4,7 @@ import { h, icon, tip, esc, fill, cap } from "./dom.js";
 import { saveMeta } from "../engine/save.js";
 import { cssReady, btn, tog, ico, banner, scroll, dark } from "./kit.js";
 import { talentEffects, valueAt } from "../engine/talentHookDefs.js";
-import { repairSpent, EFFECTS, TALENT_CAP, TIER_STEP, FLOORS_PER_POINT, POINTS_PER_ACT, VICTORY_BONUS, talentState, treeSpent, pointsBelow, canLearn, learn, unlearn, resetTalents, talentMods, talentSummary, classLevel, nextLevelXp, lockedCardIds } from "../engine/talents.js";
+import { TALENT_LIMITS, SOFT_RATE, repairSpent, EFFECTS, TALENT_CAP, TIER_STEP, FLOORS_PER_POINT, POINTS_PER_ACT, VICTORY_BONUS, talentState, treeSpent, pointsBelow, canLearn, learn, unlearn, resetTalents, talentMods, talentSummary, classLevel, nextLevelXp, lockedCardIds } from "../engine/talents.js";
 
 export const stageNative = true;
 
@@ -93,6 +93,7 @@ export async function render(app, _name, props = {}) {
       h("div", { class: "sx-tal__xp" }, h("i", { style: { width: `${pct}%` } }), h("span", {}, next ? `${p.xp | 0} / ${next} XP` : `${p.xp | 0} XP`)),
       h("div", { class: "sx-tal__pts" }, h("b", {}, String(state.available)), h("span", {}, `unspent of ${state.earned} / ${TALENT_CAP} talent points`)),
       h("p", { class: "sx-tal__sum" }, mods ? talentSummary(mods) : "No talents learned yet. Spend points on the left; every rank is active from your next run."),
+      mods && Object.entries(TALENT_LIMITS).some(([k, c]) => c > 1 && mods[k] >= c) ? h("p", { class: "sx-tal__how" }, `Past its soft cap, a stat keeps growing at +1 for every ${SOFT_RATE} more. Energy and card draw stay at +1.`) : null,
       h("h4", {}, "Card unlocks"), ...rows,
       meta.settings.unlockAll ? h("p", { class: "sx-dim" }, "Unlock all cards is on in Settings.") : null,
       h("p", { class: "sx-tal__how" }, `How to earn: +1 talent point per ${FLOORS_PER_POINT} floors cleared, +${POINTS_PER_ACT} per act cleared, +${VICTORY_BONUS} for beating the final boss (up to ${TALENT_CAP}). XP: 1 per floor, 10 per act, 40 per victory.`)));

@@ -6,7 +6,7 @@
 import { h } from "./dom.js";
 import { BUILD } from "../version.js";
 
-const SEEN_KEY = "spires.notesSeen", NOTES_ID = "2026-10-23-c", POLL_MS = 4 * 60 * 1000;
+const SEEN_KEY = "spires.notesSeen", NOTES_ID = "2026-10-23-d", POLL_MS = 4 * 60 * 1000;
 
 const NOTES = {
   title: "Patch Notes",
@@ -16,6 +16,12 @@ const NOTES = {
     "I've been working through them one by one. We're in the middle of fixing every reported bug and making some significant improvements to the game, so expect more updates soon.",
   ],
   sections: [
+    { head: "Talent caps lightened", items: [
+      "You were right: the new stat caps (like +6 Spell Power) hit too hard and left a lot of talents doing nothing. Thank you for telling us.",
+      "The caps are now soft caps. Past the cap, a stat keeps growing at +1 for every 4 more, so every point you spend counts again. A full Mage tree now gives about +12 to +20 Spell Power instead of +6.",
+      "Energy and card draw from talents still top out at +1 each, so no class can loop its turn forever.",
+      "This is a stopgap for the eight classes still on the old talents. Their full rebuild, like the Warrior one below, is next.",
+    ] },
     { head: "New tonight: Warrior talents rebuilt", items: [
       "Thanks to the player who showed that Arms points 17 to 20 did nothing: the stat caps filled up and every later point was wasted. That is gone for Warriors.",
       "All 36 Warrior talents now do their real WoW job instead of \"+1 Strength\". Deep Wounds makes your attacks apply Bleed, Impale hits Bleeding enemies harder, Flurry draws a card after a run of attacks, Last Stand saves you once per fight at low health, Revenge hits back when your Block soaks a full attack, and more.",

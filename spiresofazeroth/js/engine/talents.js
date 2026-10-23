@@ -17,10 +17,19 @@ export const TALENT_ECON = 2;            // economy version: 1 = acts only (+1/a
 // Legacy flat-stat classes only: most a fully specced character can bring into a fight (owner ruling 2026-10-23). Talents V2 trees (hook keys,
 // docs/TALENTS_V2.md) never touch these keys, so converting a class removes its dead points; economy keys (gold, goldpct, heal, choice) are not capped.
 export const TALENT_LIMITS = { energy1: 1, draw1: 1, str: 6, dex: 4, spell_power: 6, thorns: 5, armor: 3, metal: 3, regen: 4, block: 10, shield: 10, hp: 25, res: 20, free_cast: 1, rage_gen: 1 };
+export const SOFT_RATE = 4;
+const HARD_KEYS = new Set(["energy1", "draw1", "free_cast", "rage_gen"]);
+const LIMITED = Symbol("talentLimited");
 export function limitTalentMods(mods) {
   if (!mods) return mods;
   const out = { ...mods };
-  for (const [k, cap] of Object.entries(TALENT_LIMITS)) if (out[k] > cap) out[k] = cap;
+  if (mods[LIMITED]) return mods; // talentMods already limited these; newRun calls this again
+  for (const [k, cap] of Object.entries(TALENT_LIMITS)) {
+    if (!(out[k] > cap)) continue;
+    // soft cap (2026-10-23 night, "lighten the nerf"): past the cap every SOFT_RATE more points still add +1; per-fight engine keys stay hard
+    out[k] = HARD_KEYS.has(k) ? cap : cap + Math.floor((out[k] - cap) / SOFT_RATE);
+  }
+  Object.defineProperty(out, LIMITED, { value: true });
   return out;
 }
 

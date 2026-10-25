@@ -6,6 +6,7 @@
   "lore": "Master of martial combat, shields, and battle stances: turns every blow dealt and received into devastating momentum.",
   "startingHp": 80,
   "startingGold": 99,
+  "novice": {"hp": 20, "enemyHp": 0.65},
   "defaultContinent": "ek",
   "spellIdSource": "memory",
   "resource": {

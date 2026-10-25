@@ -23,3 +23,6 @@
 @keyframes sp-update-bob { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 3px); } }
 @media (prefers-reduced-motion: reduce) { .sp-update-pill { animation: none; } }
 @media (max-width: 520px) { .sp-update-pill { font-size: 14px; padding: 8px 14px; max-width: calc(100vw - 32px); } }
+.sp-notes-sec li.sp-notes-row { list-style: none; margin: 6px 0 6px -20px; display: flex; align-items: center; gap: 10px; }
+.sp-notes-ico { width: 36px; height: 36px; flex: none; border: 1px solid #7a5c2e; border-radius: 4px; box-shadow: 0 1px 3px #000; }
+.sp-notes-row b { color: #ffd100; }

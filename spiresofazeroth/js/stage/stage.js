@@ -6,7 +6,7 @@ import { zone as zoneAudio } from "../audio/zone.js";
 
 export const DESIGN = { w: 1920, h: 1080 };
 const PORTRAIT_GROUND_Y = 1010;
-const LANDSCAPE_GROUND_Y = 758; // Actors stand at y: 760; ground plane aligns directly to feet at y: 758
+const LANDSCAPE_GROUND_Y = 730; // StS2 1:1: feet on y 730 of 1080; the ground plane aligns to the feet
 void GROUND_Y;
 const el = (cls, id, tag = "div") => { const e = document.createElement(tag); if (cls) e.className = cls; if (id) e.id = id; return e; };
 

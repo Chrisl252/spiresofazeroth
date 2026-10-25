@@ -6,6 +6,7 @@
   "lore": "Dark summoner of the Twisting Nether: sacrifice your own vitality for endless power, harvest Soul Shards, and command demonic minions.",
   "startingHp": 80,
   "startingGold": 99,
+  "novice": {"hp": 10, "enemyHp": 0.8},
   "defaultContinent": "ek",
   "resource": {
     "id": "soul_shards",

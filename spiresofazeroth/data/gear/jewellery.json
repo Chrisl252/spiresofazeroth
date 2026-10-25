@@ -241,31 +241,39 @@
    "id": "thunderfury",
    "name": "Thunderfury, Blessed Blade of the Windseeker",
    "icon": "inv_sword_39",
-   "rarity": "epic",
+   "rarity": "legendary",
    "itemId": 19019,
    "zone": null,
    "class": null,
-   "text": "Attacks have a 20% chance to call lightning (10 Nature damage to a random enemy) and apply 1 Weak.",
+   "text": "Legendary. Every fight opens with 1 Weak on all enemies. Attacks have a 30% chance to call lightning: 12 Nature damage and 2 Weak to ALL enemies.",
    "triggers": {
+    "on_combat_start": [
+     {
+      "op": "apply",
+      "status": "weak",
+      "stacks": 1,
+      "target": "all_enemies"
+     }
+    ],
     "on_attack": [
      {
       "op": "conditional",
       "if": {
        "type": "chance",
-       "pct": 20
+       "pct": 30
       },
       "then": [
        {
         "op": "damage",
-        "amount": 10,
-        "target": "random_enemy",
+        "amount": 12,
+        "target": "all_enemies",
         "school": "nature"
        },
        {
         "op": "apply",
         "status": "weak",
-        "stacks": 1,
-        "target": "enemy"
+        "stacks": 2,
+        "target": "all_enemies"
        }
       ]
      }
@@ -279,12 +287,18 @@
    "id": "atiesh",
    "name": "Atiesh, Greatstaff of the Guardian",
    "icon": "inv_staff_20",
-   "rarity": "epic",
+   "rarity": "legendary",
    "itemId": 22589,
    "zone": null,
    "class": null,
-   "text": "Gain 1 Energy and draw 1 extra card each turn.",
+   "text": "Legendary. Draw 2 extra cards at the start of combat. Gain 1 Energy and draw 1 extra card each turn.",
    "triggers": {
+    "on_combat_start": [
+     {
+      "op": "draw",
+      "count": 2
+     }
+    ],
     "on_turn_start": [
      {
       "op": "gain_energy",

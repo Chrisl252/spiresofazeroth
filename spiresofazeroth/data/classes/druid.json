@@ -6,6 +6,7 @@
   "lore": "Versatile shapeshifter of nature: tank heavy hits in Bear Form, bleed foes in Cat Form, or call down stars and mends in Caster Form.",
   "startingHp": 70,
   "startingGold": 99,
+  "novice": {"hp": 4, "enemyHp": 0.95},
   "defaultContinent": "kal",
   "resource": {
     "id": "combo",

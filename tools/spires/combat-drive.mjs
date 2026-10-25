@@ -126,7 +126,7 @@ for (let f = 0; f < O.fights; f++) {
       const after = await ev(`window.__spires.C?{h:window.__spires.C.pile.hand.length,e:window.__spires.C.player.energy,t:(__q('.sp-toast')||{}).textContent,ph:window.__spires.C.phase,sel:!!__q('.sp-hcard.is-sel')}:null`);
       (rec.log = rec.log || []).push(`${c.type}${aim ? "+aim" : ""}:${st.cards.length}->${after && after.h}|${st.energy}>${after && after.e}|${(after && after.t) || ""}|${after && after.ph}`);
       rec.plays++;
-      for (const [nm, tp, ms] of [["lunge", "attack", 330], ["power", "power", 420], ["block", "skill", 300]]) if (wantShots.has(nm) && pref.length && c.type === tp) { await sleep(Math.round(ms / O.slow)); await shot(nm + "-" + O.cls); wantShots.delete(nm); }
+      for (const [nm, tp, ms] of [["lunge", "attack", O.lungeMs || 330], ["power", "power", O.powerMs || 420], ["block", "skill", O.blockMs || 300]]) if (wantShots.has(nm) && pref.length && c.type === tp) { await sleep(Math.round(ms / O.slow)); await shot(nm + "-" + O.cls); wantShots.delete(nm); }
       if (wantShots.has("death")) { await sleep(Math.round(500 / O.slow)); const dn = await ev(`window.__spires.C?window.__spires.C.enemies.filter(e=>e.hp<=0).length:0`); if (dn > deadBefore) { await sleep(Math.round(250 / O.slow)); await shot("death-" + O.cls); wantShots.delete("death"); } }
       await sleep(350);
       for (let w = 0; w < 40; w++) { const lk = await ev(`!!__q('.sp-hand.is-locked')`); if (!lk) break; await sleep(200); }

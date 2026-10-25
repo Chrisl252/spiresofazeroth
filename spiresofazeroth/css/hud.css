@@ -437,6 +437,7 @@ button.sp-pot2 {
   opacity: 0.85;
   text-shadow: 0 1px 2px #000;
 }
+.lf-row--belt-full.lf-row--drink::after { content: "(Belt full: click to drink)"; color: #7fdc6a; }
 .lf-row--belt-full .lf-ico {
   filter: brightness(0.8);
 }

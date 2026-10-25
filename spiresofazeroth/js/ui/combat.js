@@ -177,6 +177,7 @@ export function render(app) {
     const pre = snapBefore();
     const r = playCard(C, inst.uid, targetUid || undefined);
     if (!r.ok) { toast(r.why || "Cannot play that."); update(); return false; }
+    if (C.drawBlocked) { toast(C.drawBlocked === "hand" ? "Your hand is full (10 cards)." : "No more card draw this turn."); C.drawBlocked = null; } // player report 10-24: "unable to draw more than 8"
     if (C.classId === "druid" && K && K.actors && K.actors.setHeroForm) {
       K.actors.setHeroForm(C.player.form);
     }

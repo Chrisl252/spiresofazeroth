@@ -55,10 +55,19 @@ export async function render(app) {
   const go = async () => {
     if (busy || !host.isConnected) return;
     busy = true;
-    document.removeEventListener("keydown", onKey, true);
-    await proceedAfterSpire(run, data); // healerAct === act now, so this routes on (hub / zone pick / end)
-    app.save();
-    app.route();
+    const b = continueBtn.querySelector("button");
+    if (b) b.textContent = "Loading...";
+    try {
+      if (run.screen === "healer") await proceedAfterSpire(run, data); // healerAct === act now, so this routes on (hub / zone pick / end); a retry only re-routes (no second hub heal)
+      app.save();
+      await app.route();
+      document.removeEventListener("keydown", onKey, true);
+    } catch (e) {
+      // a dropped connection mid-load used to leave Continue dead for good: let the player try again
+      console.warn("[spires] healer continue failed:", e && e.message);
+      busy = false;
+      if (b) b.textContent = "Couldn't load. Click to try again";
+    }
   };
 
   const onKey = (e) => {

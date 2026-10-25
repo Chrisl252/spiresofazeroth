@@ -9,6 +9,7 @@ import { runBar } from "./runbar.js";
 import { chipsFor, optionIcon, optionTitle } from "./eventChips.js";
 import { mountScene, playOutcome } from "./eventScene.js";
 import { watchLeave } from "./combatKit.js";
+import { deckChanges, revealCards } from "./cardReveal.js";
 
 export const stageNative = true;
 const TYPE_MS = 18;
@@ -80,7 +81,7 @@ export async function render(app) {
     const r = rows[i];
     if (busy || run.pending.result || !r || !optionAvailable(run, r.o)) return;
     busy = true; finish();
-    const before = snapshot(run);
+    const before = snapshot(run), deck0 = run.deck.map((c) => ({ ...c }));
     chooseEventOption(run, data, i);
     const fu = run.pending.followUp;
     const res = outcome(before, snapshot(run), fu && fu.type === "combat", fu && fu.type === "vendor");
@@ -89,6 +90,7 @@ export async function render(app) {
     const nb = runBar(app); bar.replaceWith(nb); bar = nb; // HP / gold now show the new values
     redraw();
     playOutcome(app, host, res.parts);
+    revealCards(app, deckChanges(deck0, run.deck)); // show the exact card(s) gained, big and centred
   }
   function hearth() { // the Hearthstone card's event side: leave with no outcome at all
     if (busy || run.pending.result || !useHearthstone(run)) return;

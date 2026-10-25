@@ -31,6 +31,7 @@
 .gs-bag__info span { color: #b8a77f; font-size: 20px; }
 .gs-bag__info p { margin: 0; color: #fff4d6; font-size: 20px; }
 .gs-bag__equip { flex: 0 0 auto; }
+.gs-bag__btns { display: flex; flex: 0 0 auto; gap: 6px; }
 .gs-bag__note { margin: 8px 0 0; color: #b8a77f; font-size: 20px; }
 
 /* ---------- loot screen ---------- */
@@ -130,3 +131,42 @@
 .pot-flash { animation: pot-flash 1.2s ease-out 1; }
 @keyframes pot-flash { 0% { transform: scale(1.7); box-shadow: 0 0 0 4px #ffe27a, 0 0 30px 10px #ffd34d; } 50% { transform: scale(1); box-shadow: 0 0 0 4px #ffe27a, 0 0 22px 6px #ffd34d; } 100% { box-shadow: 0 0 0 2px #7a6230, 0 0 0 4px #050302; } }
 /* ===== /victory loot ===== */
+/* choose-one gear (boss / elite loot): WoW loot-roll feel - quality glow, inline effect text, shine on hover, "Looted" on pick */
+.lf-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.lf-sub { font-family: var(--f-num, sans-serif); font-size: 19px; line-height: 1.2; color: #e8dcc0; text-shadow: 0 1px 2px #000; white-space: normal; }
+.lf--inline .lf-row--choose { max-height: 120px; }
+.lf-row--choose .lf-name { font-size: 27px; } .lf-row--choose::after { white-space: nowrap; flex: none; font-size: 17px; }
+.lf-row--choose { position: relative; overflow: hidden; border-color: color-mix(in srgb, var(--rq, #fff) 45%, transparent); background: linear-gradient(90deg, color-mix(in srgb, var(--rq, #fff) 16%, rgba(0,0,0,.55)), rgba(0,0,0,.45)); transition: transform .18s ease, border-color .18s, box-shadow .18s; }
+.lf-row--choose .lf-ico { box-shadow: 0 0 14px 2px color-mix(in srgb, var(--rq, #fff) 70%, transparent); animation: lf-qpulse 2.4s ease-in-out infinite; }
+.lf-row--choose::before { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.22) 48%, transparent 66%); transform: translateX(-120%); pointer-events: none; }
+.lf-row--choose:hover { transform: translateX(-6px) scale(1.015); border-color: var(--rq, #fff); box-shadow: 0 0 22px color-mix(in srgb, var(--rq, #fff) 55%, transparent), inset 0 0 18px color-mix(in srgb, var(--rq, #fff) 25%, transparent); }
+.lf-row--choose:hover::before { animation: lf-shine .7s ease-out; }
+.lf-row--choose.is-won { border-color: #ffd100; box-shadow: 0 0 34px rgba(255,209,0,.75), inset 0 0 26px rgba(255,209,0,.35); animation: lf-won .5s ease-out; }
+.lf-row--choose.is-won::after { content: "Looted"; color: #ffd100; font-size: 26px; text-shadow: 0 0 10px rgba(255,209,0,.8), 0 2px 2px #000; }
+.lf-row--choose.is-won .lf-ico { animation: lf-pop .5s cubic-bezier(.2,1.6,.4,1); }
+@keyframes lf-qpulse { 50% { box-shadow: 0 0 24px 5px color-mix(in srgb, var(--rq, #fff) 85%, transparent); } }
+@keyframes lf-shine { to { transform: translateX(120%); } }
+@keyframes lf-won { 0% { background-color: rgba(255,230,140,.6); } 100% { background-color: transparent; } }
+@keyframes lf-pop { 40% { transform: scale(1.25); } }
+@media (prefers-reduced-motion: reduce) { .lf-row--choose .lf-ico, .lf-row--choose:hover::before { animation: none; } }
+
+/* ---- gear swap polish (build 20261024b, "New gear" setting): loot-row swap chip, compare tooltip, Gear Bag worn line ---- */
+.lf-row--gear { position: relative; }
+.lf-row--gear .lf-txt { flex: 1 1 auto; }
+.lf-row--bagged .lf-ico { filter: saturate(.75); }
+.lf-row--bagged .lf-sub { color: #ffd45a; }
+.lf-chip { flex: none; margin-left: auto; padding: 8px 18px; border: 2px solid #c9a24b; border-radius: 6px; background: linear-gradient(#5a1a0e, #2c0b05); color: #ffd45a;
+  font: 22px var(--f-ui, serif); letter-spacing: .02em; text-shadow: 0 1px 2px #000; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,220,140,.25), 0 2px 6px rgba(0,0,0,.6); transition: filter .15s, transform .15s; }
+.lf-chip:hover, .lf-chip:focus-visible { filter: brightness(1.3); transform: translateY(-1px); outline: none; }
+.lf-chip:active { transform: translateY(1px); }
+.lf-chip[hidden] { display: none; }
+.lf-row.gone .lf-chip { pointer-events: none; }
+.gs-tip__hr { margin: 8px 0 6px; border: 0; border-top: 1px solid rgba(201,162,75,.4); }
+.gs-tip__worn { color: #8c8c8c; font-size: .9em; text-transform: uppercase; letter-spacing: .05em; }
+.gs-bag__pref { display: flex; flex-direction: column; gap: 6px; padding-bottom: 12px; border-bottom: 1px solid rgba(201,162,75,.3); }
+.gs-bag__hint, .gs-bag .gs-bag__note { margin: 0; color: #3b2a12; font-size: 21px; text-shadow: none; } /* dark ink: the modal is parchment */
+.gs-bag__info .gs-bag__vs { color: #9d9d9d; font-size: 19px; }
+.gs-bag__vs b { font: inherit; color: var(--q, #fff); }
+.gs-bag__vs--free { color: #1eff00 !important; }
+@media (prefers-reduced-motion: reduce) { .lf-chip { transition: none; } }
+.sp-reduce .lf-chip { transition: none; }

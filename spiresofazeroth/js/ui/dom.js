@@ -50,7 +50,7 @@ function showTip(html, x, y) {
   tipEl.style.top = Math.max(6, Math.min(window.innerHeight - hgt - 6, y + 14)) + "px";
 }
 export function tip(el, html) {
-  const show = (x, y) => showTip(html, x, y);
+  const show = (x, y) => showTip(typeof html === "function" ? html() : html, x, y); // html may be a getter for rows whose state changes (loot gear swap)
   if (!tipFullscreenListener) {
     document.addEventListener("fullscreenchange", () => {
       if (tipEl && tipEl.style.display === "block" && tipPoint) showTip(tipEl.innerHTML, tipPoint.x, tipPoint.y);

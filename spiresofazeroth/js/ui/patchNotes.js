@@ -3,82 +3,84 @@
 // Update check: polls version.js (no-store) every few minutes and on tab focus; when the server BUILD differs from the
 // BUILD this page loaded, a pill floats at the top of the screen. Clicking it reloads onto the new build.
 // Wired by ONE line in js/main.js.
-import { h } from "./dom.js";
+import { h, icon } from "./dom.js";
 import { BUILD } from "../version.js";
 
-const SEEN_KEY = "spires.notesSeen", NOTES_ID = "2026-10-23-d", POLL_MS = 4 * 60 * 1000;
+const SEEN_KEY = "spires.notesSeen", NOTES_ID = "2026-10-24-c", POLL_MS = 4 * 60 * 1000;
 
+// items: a plain string, or { ic: icon slug, name, text } for a picture row
 const NOTES = {
   title: "Patch Notes",
-  date: "October 23, 2026",
+  date: "October 24, 2026",
   intro: [
-    "Thank you to everyone who hit the little bug button and sent a report. Every one of them landed in my inbox, and they are the reason this update exists.",
-    "I've been working through them one by one. We're in the middle of fixing every reported bug and making some significant improvements to the game, so expect more updates soon.",
+    "Big one: every class has new talents, spells look like they do in WoW, and the early game is friendlier. Thank you for every bug report.",
   ],
   sections: [
-    { head: "Talent caps lightened", items: [
-      "You were right: the new stat caps (like +6 Spell Power) hit too hard and left a lot of talents doing nothing. Thank you for telling us.",
-      "The caps are now soft caps. Past the cap, a stat keeps growing at +1 for every 4 more, so every point you spend counts again. A full Mage tree now gives about +12 to +20 Spell Power instead of +6.",
-      "Energy and card draw from talents still top out at +1 each, so no class can loop its turn forever.",
-      "This is a stopgap for the eight classes still on the old talents. Their full rebuild, like the Warrior one below, is next.",
+    { head: "Legendaries feel legendary (24c)", items: [
+      { ic: "inv_sword_39", name: "Thunderfury", text: "Now Legendary. Every fight opens with 1 Weak on all enemies, and attacks have a 30% chance (was 20%) to hit ALL enemies for 12 Nature damage and 2 Weak (was 10 to one enemy, 1 Weak)." },
+      { ic: "inv_staff_20", name: "Atiesh", text: "Now Legendary. Still +1 Energy and +1 card each turn, and now draws 2 extra cards at the start of every fight." },
     ] },
-    { head: "New tonight: Warrior talents rebuilt", items: [
-      "Thanks to the player who showed that Arms points 17 to 20 did nothing: the stat caps filled up and every later point was wasted. That is gone for Warriors.",
-      "All 36 Warrior talents now do their real WoW job instead of \"+1 Strength\". Deep Wounds makes your attacks apply Bleed, Impale hits Bleeding enemies harder, Flurry draws a card after a run of attacks, Last Stand saves you once per fight at low health, Revenge hits back when your Block soaks a full attack, and more.",
-      "Every point you spend now changes a number you can see. Points you already spent are kept.",
-      "The other eight classes get the same rebuild next. Until then their talents work as before.",
+    { head: "New: choose how gear is equipped (24b)", items: [
+      { ic: "inv_misc_bag_09", name: "New gear setting", text: "Escape menu or Gear Bag: Empty slots only (default), Always equip, or Never. Fight drops follow it too, so a weaker piece no longer replaces your best one." },
+      { ic: "inv_chest_plate16", name: "Equip or swap back", text: "A gear drop that went to your bag has an Equip button right on the loot row. One that went on has Swap back." },
+      { ic: "inv_misc_eye_01", name: "Compare before you swap", text: "Gear tooltips on loot and in the Gear Bag now show what you are wearing in that slot, and the bag lists what each piece would replace." },
     ] },
-    { head: "Class balance (cards)", items: [
-      "Warrior, Mage, Warlock and Priest hit harder: Heroic Strike 6 to 8, Fireball and Frostbolt 6 to 9, Shadow Bolt 6 to 9, Smite 6 to 8, and more.",
-      "Hunter and Rogue basics deal 1 more damage.",
-      "Shaman and Druid were winning far too often: Lightning Bolt 6 to 4, totems and heals trimmed, Druid heals and Block trimmed.",
-      "Rockbiter Weapon was secretly giving double its damage bonus. It now gives exactly what the card says.",
+    { head: "New talents for every class", items: [
+      "Every talent now does a real WoW job instead of \"+1 stat\", and every point you spend changes a number you can see. Points you already spent are kept.",
+      { ic: "classicon_warrior", name: "Warrior", text: "Deep Wounds makes Bleed, Revenge hits back, Last Stand saves you once per fight." },
+      { ic: "classicon_paladin", name: "Paladin", text: "Heals give Block, Redoubt keeps your Block, Repentance stuns." },
+      { ic: "classicon_hunter", name: "Hunter", text: "Your pet comes back once per fight, traps Weaken, Silencing Shot interrupts." },
+      { ic: "classicon_rogue", name: "Rogue", text: "Poison on every hit, start fights in Stealth, Cold Blood doubles a finisher." },
+      { ic: "classicon_priest", name: "Priest", text: "Shields that last, Holy crits, Shadowform cuts the damage you take." },
+      { ic: "classicon_shaman", name: "Shaman", text: "Shock crits, Windfury strikes twice, Reincarnation once per run." },
+      { ic: "classicon_mage", name: "Mage", text: "Arcane Charges, Ignite Burn, Frostbite freezes and Shatter breaks." },
+      { ic: "classicon_warlock", name: "Warlock", text: "Nightfall casts a free Shadow Bolt, Soul Link shares damage with your demon." },
+      { ic: "classicon_druid", name: "Druid", text: "Moonfire Burn, Bear and Cat form bonuses, Swiftmend leaves healing over time." },
     ] },
-    { head: "Fixed tonight", items: [
-      "Target Dummy and Growl now really Taunt: enemies attack you instead of your pet. Distracting Shot still pulls attacks onto your pet.",
-      "Detect Magic: the draw now waits for you to pick from the top 3 cards and draws the right one.",
-      "Import Save works again with strings copied on Android, and tells you clearly if a string is broken.",
-      "Monsters stay over their own nameplates when other enemies die, so spells land on the enemy you aim at.",
-      "Mudrock Snapjaws (and every turtle) are real turtles now, not cats. A few ghosts that showed up as sharks are ghosts again.",
-      "Phones: enemy nameplates no longer overlap in big fights.",
-      "Silverpine's Curse of the Worgen has its own wolf icon, so it no longer looks like Feral Form.",
+    { head: "Spells look like WoW", items: [
+      "Spells now use the real spell art from the WoW client: the real missile flies, the real impact lands, and buffs glow on your hero.",
+      { ic: "spell_holy_holysmite", name: "Smite", text: "Holy glow in your hands, then a golden burst." },
+      { ic: "spell_shadow_shadowbolt", name: "Shadow Bolt", text: "A real shadow missile across the field." },
+      { ic: "ability_impalingbolt", name: "Arcane Shot", text: "The real arcane shot, start to finish." },
+      { ic: "spell_nature_earthshock", name: "Earth Shock", text: "Nature cast and the real shock burst on the target." },
     ] },
-    { head: "Balance update (talents, earlier today)", items: [
-      "Talents were too strong: one good run filled all 51 points and made every class close to unbeatable. Points now come at 1 per 5 floors cleared (plus acts and victories), so your tree fills over several runs.",
-      "Talents can now add at most +1 energy and +1 card drawn per fight, and big stat stacks (Strength, spell power, Thorns and others) are capped.",
-      "Points you've already earned stay yours. Your character is just less overpowered than before.",
-      "Starting health: Shaman 75 to 66, Druid 78 to 70, Mage 75 to 82, Warlock 75 to 80. A deeper class-by-class card pass is next.",
+    { head: "A friendlier start", items: [
+      { ic: "spell_nature_lightning", name: "Shaman", text: "Lightning Bolt 5 (was 4), Earth Shock 6, Searing Totem 4, Healing Wave heals 6." },
+      { ic: "ability_druid_treeoflife", name: "Teldrassil", text: "Nature spells now heal an enemy for 1 (was 3), so Shamans and Druids can get through." },
+      { ic: "spell_holy_devotion", name: "Novice's Resolve", text: "Haven't spent a talent point yet? You get extra max HP and enemies have less health. It ends with your first talent point." },
+      { ic: "inv_misc_head_dragon_01", name: "Act 1 boss", text: "Less health and 1 guard instead of 2. Act 1 elites and all of Act 2 are a bit softer too." },
+      { ic: "ability_druid_maul", name: "Teldrassil elites", text: "Rageclaw has less health and gets less Strength. Githyiss poisons for 3 instead of 4." },
     ] },
-    { head: "Also fixed earlier today", items: [
-      "One Settings menu: pressing Escape in Settings no longer opens a second menu on top. Every option lives in one scrolling menu, and game keys can't play your turn while it's open.",
-      "You can always put a card back: click it again, right-click, click empty space or drag it back to your hand. Right-clicking mid-drag no longer plays the card anyway.",
-      "Summoned adds (like Murlocs) now spread out across the screen over their own nameplates instead of stacking on top of each other.",
-      "Potions are no longer hidden under your gear in the top bar on the map, reward and shop screens.",
-      "The energy orb now uses real WoW UI art.",
-      "Silverpine's Curse of the Worgen is a damage buff, not a Druid form; its description now says so (it was never Frost Trap turning into Feral Form).",
+    { head: "Gear and cards (from your reports)", items: [
+      { ic: "inv_jewelry_trinket_01", name: "Second trinket and ring", text: "The Gear Bag now has a button for each slot, so you can swap your second trinket or ring." },
+      { ic: "inv_misc_bag_09", name: "Your gear stays on", text: "New loot no longer swaps out the trinket, cloak or off-hand you picked. If the slot is taken, it goes to your Gear Bag." },
+      { ic: "inv_misc_cape_18", name: "Pass on boss loot", text: "Choose-one loot now has a Pass row if you like what you are wearing." },
+      { ic: "inv_misc_book_09", name: "Steady hand", text: "Cards no longer shake when you hover them, including the ones on the far right." },
+      { ic: "spell_holy_righteousnessaura", name: "Seal of Wisdom", text: "Judgement now draws 1 card (2 upgraded) and no longer refunds Energy, which ends the Seal and Judgement loop." },
+      { ic: "inv_misc_note_01", name: "Draw limit", text: "When the hand is full or the 10-draw-per-turn limit is hit, the game now tells you." },
     ] },
-    { head: "Fixed earlier today", items: [
-      "Gear bag scrolls again, so you can see and equip every item, not just the first 7.",
-      "Characters and enemies no longer vanish (or leave a white screen) after switching tabs or deep into a long run.",
-      "Treasure chests and the campfire no longer stop responding late in a run.",
-      "Campfire: double-clicking can no longer skip past your rest or upgrade.",
-      "Windfury Weapon (and every Shaman weapon imbue) now lasts the whole fight, as the card says.",
-      "Infinite card-draw and energy loops (Paladin seals, Warrior stances, Rogue Vigor) are closed.",
-      "Mute stays muted, even after a reload or a reward fanfare.",
-      "Typing in the bug report box no longer plays your turn.",
-      "Zone art no longer shows logos from later expansions (Stonetalon, Hillsbrad and others).",
-      "Mobile: Fullscreen now works on iPhone, iPad and Android, and Settings / end-of-run buttons are no longer cut off.",
+    { head: "Fixed", items: [
+      { ic: "inv_misc_horn_01", name: "Zone music", text: "If your browser refused to start a track once, the music stayed off for the whole zone. It now comes back on your next click." },
+      { ic: "inv_misc_cape_18", name: "Boss loot", text: "Gear choices glow in their quality colour, show what they do right on the row, and flash Looted when you pick one." },
+      { ic: "spell_holy_prayerofhealing", name: "Campfires", text: "Now a clean choice: Rest or Upgrade. No more two different heal buttons." },
+      { ic: "inv_misc_book_09", name: "Event cards", text: "When an event gives you a card, the exact card now shows big in the middle of the screen." },
+      { ic: "spell_holy_holybolt", name: "Uther's Continue button", text: "If the connection drops, it now says so and lets you click again instead of freezing." },
+      { ic: "inv_potion_52", name: "Potions after a fight", text: "Belt full? Click a dropped healing potion to drink it on the spot. Click a belt potion to drink it any time." },
+      { ic: "ability_hunter_pet_bear", name: "Bears are bears", text: "Rabid Thistle Bears and other bears no longer show up as furbolgs." },
+    ] },
+    { head: "Earlier today", items: [
+      "Taunt works on Target Dummy and Growl, Detect Magic draws the right card, turtles are turtles again, monsters stay over their nameplates.",
+      "Gear bag scrolls, no more white screens, campfire and chests stay clickable, mute stays muted, fullscreen works on phones.",
     ] },
     { head: "Still working on", items: [
-      "Hogger's re-summoned minions missing nameplates (we can't reproduce it yet, so reports with details help a lot).",
-      "The Stonetalon Mountains boss texture.",
-      "iPhone players who can't get past the title screen.",
-      "Rebuilt talents for the other eight classes, and a little more starting power for players with no talents yet.",
-      "More mobile polish.",
+      "Hogger's re-summoned minions, the Stonetalon boss texture, iPhones stuck on the title screen.",
     ] },
   ],
   outro: "Keep the reports coming. Thanks for playing!",
 };
+
+const noteItem = (i) => (typeof i === "string" ? h("li", {}, i)
+  : h("li", { class: "sp-notes-row" }, icon(i.ic, "sp-notes-ico", i.name), h("span", {}, h("b", {}, i.name), " ", i.text)));
 
 const seen = () => { try { return localStorage.getItem(SEEN_KEY) === NOTES_ID; } catch (e) { return true; } };
 const markSeen = () => { try { localStorage.setItem(SEEN_KEY, NOTES_ID); } catch (e) { /* storage blocked */ } };
@@ -93,7 +95,7 @@ export function openPatchNotes() {
       h("p", { class: "sp-notes-date" }, `${NOTES.date} · build ${BUILD}`),
       ...NOTES.intro.map((t) => h("p", { class: "sp-notes-p" }, t)),
       ...NOTES.sections.map((s) => h("div", { class: "sp-notes-sec" },
-        h("h3", {}, s.head), h("ul", {}, ...s.items.map((i) => h("li", {}, i))))),
+        h("h3", {}, s.head), h("ul", {}, ...s.items.map(noteItem)))),
       h("p", { class: "sp-notes-p sp-notes-outro" }, NOTES.outro),
       h("button", { class: "sp-btn sp-notes-close", onClick: close }, "Back to the spires")));
   document.addEventListener("keydown", onKey, true); // capture: game hotkeys never see keys while the notes are open

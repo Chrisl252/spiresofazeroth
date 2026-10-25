@@ -3,10 +3,10 @@ import { heroicMods } from "./heroic.js";
 import { resolveImmunity, cardUselessOn } from "./immunity.js";
 
 const CARD_WEIGHTS = { common: 60, uncommon: 30, rare: 9, epic: 1 };
-const RELIC_WEIGHTS = { common: 50, uncommon: 33, rare: 14, epic: 3 };
+const RELIC_WEIGHTS = { common: 50, uncommon: 33, rare: 14, epic: 3, legendary: 1 }; // legendary = Thunderfury / Atiesh: rarer than epic
 const POTION_WEIGHTS = { common: 65, uncommon: 25, rare: 10, epic: 2 };
 const CARD_PRICE = { common: 50, uncommon: 80, rare: 150, epic: 260 };
-const RELIC_PRICE = { common: 150, uncommon: 200, rare: 260, epic: 320 };
+const RELIC_PRICE = { common: 150, uncommon: 200, rare: 260, epic: 320, legendary: 450 };
 const POTION_PRICE = { common: 45, uncommon: 65, rare: 90, epic: 120 };
 
 const fallbackRarity = ["common", "uncommon", "rare"];
@@ -54,7 +54,7 @@ export function rollGold(run, rng, tier) {
 }
 
 function relicEligible(run, data, r) {
-  if (run.relics.includes(r.id) || r.legacy || r.bonus || r.tier >= 1) return false; // set pieces drop through gear.js dropGear, never as a relic roll
+  if (run.relics.includes(r.id) || (run.gearBag && run.gearBag.includes(r.id)) || r.legacy || r.bonus || r.tier >= 1) return false; // set pieces drop through gear.js dropGear, never as a relic roll
   const twin = data.gear && data.gear.legacy && data.gear.legacy[r.id]; // an old id that maps onto a gear piece the run already wears = the same item twice
   if (twin && (run.relics.includes(twin) || run.relics.includes(`${twin}+`))) return false;
   if (r.base && run.relics.includes(r.base)) return false;
@@ -65,7 +65,7 @@ function relicEligible(run, data, r) {
 export function relicPool(run, data) { return data.allRelics().filter((r) => relicEligible(run, data, r)); }
 
 export function rollRelics(run, data, rng, count = 1, { minRarity } = {}) {
-  const pool = relicPool(run, data).filter((r) => !minRarity || ["rare", "epic"].includes(r.rarity));
+  const pool = relicPool(run, data).filter((r) => !minRarity || ["rare", "epic", "legendary"].includes(r.rarity));
   const out = [];
   const bag = pool.slice();
   while (out.length < count && bag.length) {

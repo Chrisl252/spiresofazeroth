@@ -14,7 +14,7 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "spell_power",
+      "key": "mag_focus",
       "per": 1
      }
     },
@@ -26,8 +26,12 @@
      "col": 1,
      "max": 2,
      "effect": {
-      "key": "dex",
-      "per": 1
+      "key": "deflect",
+      "vals": [
+       6,
+       12
+      ],
+      "per": 6
      }
     },
     {
@@ -38,8 +42,8 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "shield",
-      "per": 2
+      "key": "mag_absorb",
+      "per": 1
      }
     },
     {
@@ -50,8 +54,13 @@
      "col": 1,
      "max": 3,
      "effect": {
-      "key": "free_cast",
-      "per": 1
+      "key": "mag_clear",
+      "vals": [
+       10,
+       20,
+       30
+      ],
+      "per": 10
      }
     },
     {
@@ -62,8 +71,9 @@
      "col": 0,
      "max": 3,
      "effect": {
-      "key": "thorns",
-      "per": 2
+      "key": "card_dmg",
+      "per": 3,
+      "arg": "arcane-explosion"
      }
     },
     {
@@ -74,8 +84,8 @@
      "col": 1,
      "max": 2,
      "effect": {
-      "key": "hp",
-      "per": 6
+      "key": "mag_charge_start",
+      "per": 3
      }
     },
     {
@@ -86,9 +96,21 @@
      "col": 0,
      "max": 2,
      "effect": {
-      "key": "shield",
-      "per": 5
-     }
+      "key": "card_block",
+      "per": 5,
+      "arg": "mana-shield"
+     },
+     "extra": [
+      {
+       "key": "mag_cardcharge",
+       "vals": [
+        1,
+        2
+       ],
+       "arg": "mana-shield",
+       "per": 1
+      }
+     ]
     },
     {
      "id": "mage:arcane:7",
@@ -98,8 +120,11 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "armor",
-      "per": 1
+      "key": "h_armor",
+      "vals": [
+       5
+      ],
+      "per": 5
      }
     },
     {
@@ -110,9 +135,19 @@
      "col": 0,
      "max": 1,
      "effect": {
-      "key": "free_cast",
-      "per": 1
-     }
+      "key": "grant",
+      "per": 1,
+      "arg": "presence-of-mind"
+     },
+     "extra": [
+      {
+       "key": "mag_pom",
+       "vals": [
+        6
+       ],
+       "per": 6
+      }
+     ]
     },
     {
      "id": "mage:arcane:9",
@@ -122,7 +157,7 @@
      "col": 1,
      "max": 4,
      "effect": {
-      "key": "draw1",
+      "key": "mag_mind",
       "per": 1
      }
     },
@@ -134,7 +169,7 @@
      "col": 0,
      "max": 3,
      "effect": {
-      "key": "spell_power",
+      "key": "mag_spow",
       "per": 2
      }
     },
@@ -146,9 +181,19 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "spell_power",
-      "per": 4
-     }
+      "key": "grant",
+      "per": 1,
+      "arg": "arcane-power"
+     },
+     "extra": [
+      {
+       "key": "mag_apower",
+       "vals": [
+        30
+       ],
+       "per": 30
+      }
+     ]
     }
    ]
   },
@@ -165,9 +210,20 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "spell_power",
-      "per": 1
-     }
+      "key": "card_dmg",
+      "per": 1,
+      "arg": "fireball"
+     },
+     "extra": [
+      {
+       "key": "card_inflict",
+       "vals": [
+        1
+       ],
+       "arg": "fireball:burn",
+       "per": 1
+      }
+     ]
     },
     {
      "id": "mage:fire:1",
@@ -177,7 +233,7 @@
      "col": 1,
      "max": 5,
      "effect": {
-      "key": "dex",
+      "key": "mag_impact",
       "per": 1
      }
     },
@@ -189,8 +245,8 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "thorns",
-      "per": 1
+      "key": "mag_ignite",
+      "per": 15
      }
     },
     {
@@ -201,9 +257,20 @@
      "col": 1,
      "max": 2,
      "effect": {
-      "key": "draw1",
-      "per": 1
-     }
+      "key": "card_dmg",
+      "per": 1,
+      "arg": "fire-blast"
+     },
+     "extra": [
+      {
+       "key": "card_inflict",
+       "arg": "fire-blast:burn",
+       "vals": [
+        1
+       ],
+       "per": 1
+      }
+     ]
     },
     {
      "id": "mage:fire:4",
@@ -213,9 +280,17 @@
      "col": 0,
      "max": 2,
      "effect": {
-      "key": "spell_power",
-      "per": 2
-     }
+      "key": "card_dmg",
+      "per": 1,
+      "arg": "scorch"
+     },
+     "extra": [
+      {
+       "key": "card_apply",
+       "per": 1,
+       "arg": "scorch:vulnerable"
+      }
+     ]
     },
     {
      "id": "mage:fire:5",
@@ -225,9 +300,17 @@
      "col": 1,
      "max": 3,
      "effect": {
-      "key": "spell_power",
-      "per": 2
-     }
+      "key": "card_dmg",
+      "per": 5,
+      "arg": "flamestrike"
+     },
+     "extra": [
+      {
+       "key": "card_apply",
+       "per": 1,
+       "arg": "flamestrike:burn"
+      }
+     ]
     },
     {
      "id": "mage:fire:6",
@@ -237,9 +320,15 @@
      "col": 0,
      "max": 2,
      "effect": {
-      "key": "hp",
-      "per": 6
-     }
+      "key": "mag_ign_start",
+      "per": 2
+     },
+     "extra": [
+      {
+       "key": "mag_soul",
+       "per": 6
+      }
+     ]
     },
     {
      "id": "mage:fire:7",
@@ -249,8 +338,8 @@
      "col": 1,
      "max": 3,
      "effect": {
-      "key": "goldpct",
-      "per": 5
+      "key": "mag_elements",
+      "per": 8
      }
     },
     {
@@ -261,7 +350,7 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "spell_power",
+      "key": "mag_firepower",
       "per": 1
      }
     },
@@ -273,8 +362,14 @@
      "col": 1,
      "max": 3,
      "effect": {
-      "key": "spell_power",
-      "per": 2
+      "key": "mag_crit",
+      "vals": [
+       5,
+       10,
+       15
+      ],
+      "arg": "fire",
+      "per": 5
      }
     },
     {
@@ -285,9 +380,17 @@
      "col": 0,
      "max": 1,
      "effect": {
-      "key": "energy1",
-      "per": 1
-     }
+      "key": "grant",
+      "per": 1,
+      "arg": "pyroblast"
+     },
+     "extra": [
+      {
+       "key": "card_cost",
+       "per": 1,
+       "arg": "pyroblast"
+      }
+     ]
     },
     {
      "id": "mage:fire:11",
@@ -297,9 +400,19 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "spell_power",
-      "per": 4
-     }
+      "key": "grant",
+      "per": 1,
+      "arg": "combustion"
+     },
+     "extra": [
+      {
+       "key": "mag_comb",
+       "vals": [
+        50
+       ],
+       "per": 50
+      }
+     ]
     }
    ]
   },
@@ -316,8 +429,9 @@
      "col": 0,
      "max": 2,
      "effect": {
-      "key": "block",
-      "per": 4
+      "key": "card_block",
+      "per": 5,
+      "arg": "frost-ward,ice-barrier"
      }
     },
     {
@@ -328,8 +442,9 @@
      "col": 1,
      "max": 5,
      "effect": {
-      "key": "spell_power",
-      "per": 1
+      "key": "card_dmg",
+      "per": 2,
+      "arg": "frostbolt"
      }
     },
     {
@@ -340,8 +455,8 @@
      "col": 0,
      "max": 3,
      "effect": {
-      "key": "spell_power",
-      "per": 1
+      "key": "mag_prec",
+      "per": 3
      }
     },
     {
@@ -352,8 +467,9 @@
      "col": 1,
      "max": 5,
      "effect": {
-      "key": "dex",
-      "per": 1
+      "key": "mag_crit",
+      "per": 5,
+      "arg": "frost"
      }
     },
     {
@@ -364,8 +480,13 @@
      "col": 0,
      "max": 3,
      "effect": {
-      "key": "thorns",
-      "per": 2
+      "key": "mag_frostbite",
+      "vals": [
+       15,
+       30,
+       45
+      ],
+      "per": 15
      }
     },
     {
@@ -376,9 +497,17 @@
      "col": 1,
      "max": 2,
      "effect": {
-      "key": "block",
-      "per": 4
-     }
+      "key": "card_dmg",
+      "per": 1,
+      "arg": "frost-nova"
+     },
+     "extra": [
+      {
+       "key": "card_apply",
+       "per": 1,
+       "arg": "frost-nova:weak"
+      }
+     ]
     },
     {
      "id": "mage:frost:6",
@@ -388,7 +517,7 @@
      "col": 0,
      "max": 3,
      "effect": {
-      "key": "regen",
+      "key": "mag_perma",
       "per": 2
      }
     },
@@ -400,8 +529,8 @@
      "col": 1,
      "max": 3,
      "effect": {
-      "key": "spell_power",
-      "per": 2
+      "key": "mag_pierce",
+      "per": 1
      }
     },
     {
@@ -412,9 +541,27 @@
      "col": 0,
      "max": 1,
      "effect": {
-      "key": "energy1",
-      "per": 1
-     }
+      "key": "grant",
+      "per": 1,
+      "arg": "cold-snap"
+     },
+     "extra": [
+      {
+       "key": "card_dmg",
+       "vals": [
+        4
+       ],
+       "arg": "cold-snap",
+       "per": 4
+      },
+      {
+       "key": "mag_snap",
+       "vals": [
+        1
+       ],
+       "per": 1
+      }
+     ]
     },
     {
      "id": "mage:frost:9",
@@ -424,8 +571,9 @@
      "col": 1,
      "max": 2,
      "effect": {
-      "key": "draw1",
-      "per": 1
+      "key": "card_dmg",
+      "per": 2,
+      "arg": "blizzard,cone-of-cold"
      }
     },
     {
@@ -436,8 +584,8 @@
      "col": 0,
      "max": 3,
      "effect": {
-      "key": "spell_power",
-      "per": 2
+      "key": "mag_shatter",
+      "per": 20
      }
     },
     {
@@ -448,9 +596,19 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "retain_block",
-      "per": 1
-     }
+      "key": "grant",
+      "per": 1,
+      "arg": "ice-block"
+     },
+     "extra": [
+      {
+       "key": "mag_iceblock",
+       "vals": [
+        15
+       ],
+       "per": 15
+      }
+     ]
     }
    ]
   }

@@ -5,6 +5,7 @@
 // The runtime that applies these lives in talentHooks.js; the roster + rules are documented in docs/TALENTS_V2.md.
 // text(v, E) renders the tooltip for the value at a rank, so the tooltip can never drift from the numbers in the JSON.
 
+import { CLASS_DEFS } from "./talents-v2/defs.js"; // per-class hook defs (pure data), merged into HOOKS below
 export const HEAVY_HIT = 8;       // heavy_hit: base damage a single hit needs
 export const ENRAGE_RAGE = 30;    // enrage_dmg: Rage needed
 export const GUARD_BLOCK = 8;     // guard_dmg: Block needed
@@ -27,7 +28,7 @@ export const HOOKS = {
   card_inflict: { label: "Card status", text: (v, e) => { const [c, s] = String(e.arg).split(":"); return `${cardName(c)} also applies ${v} ${statusName(s)} to its target.`; } },
   card_cost: { label: "Card cost", text: (v, e) => (v > 0 ? `${names(e.arg)} cost${cardList(e.arg).length > 1 ? "" : "s"} ${v} less Energy.` : "") },
   card_rage: { label: "Card Rage", text: (v, e) => (v > 0 ? `${names(e.arg)} grants ${v} more Rage.` : "") },
-  card_block: { label: "Card Block", text: (v, e) => `${names(e.arg)} give +${v} Block.` },
+  card_block: { label: "Card Block", text: (v, e) => `${names(e.arg)} give${cardList(e.arg).length > 1 ? "" : "s"} +${v} Block.` },
   card_noexhaust: { label: "No Exhaust", text: (v, e) => (v > 0 ? `${names(e.arg)} no longer Exhausts.` : "") },
   card_nohurt: { label: "No self damage", text: (v, e) => (v > 0 ? `${names(e.arg)} no longer costs you HP.` : "") },
   grant: { label: "Learns", text: (v, e) => (v > 0 ? `Adds ${names(e.arg)} to your deck at the start of each run.` : "") },
@@ -63,6 +64,8 @@ export const HOOKS = {
   hurt_boost: { label: "Enrage", text: (v) => `After you lose HP, your next Attack deals +${v} damage.` },
   low_hp_guard: { label: "Last Stand", text: (v) => (v > 0 ? `Once per fight, when you fall to ${LAST_STAND.hpPct}% HP or less: gain ${LAST_STAND.block} Block and heal ${LAST_STAND.healPct}% of your max HP.` : "") },
 };
+
+for (const [k, d] of Object.entries(CLASS_DEFS)) { if (HOOKS[k]) throw new Error(`talent hook key collision: ${k}`); HOOKS[k] = d; }
 
 /** value of effect E at a rank */
 export function valueAt(e, rank) {

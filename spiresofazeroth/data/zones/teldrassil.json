@@ -25,7 +25,7 @@
   "id": "corrupted-tree",
   "name": "Corrupted Tree",
   "icon": "ability_druid_treeoflife",
-  "text": "Timberlings and Grellkin feed on nature magic: every nature spell you play heals one enemy for 3. Fire and physical hits are unaffected.",
+  "text": "Timberlings and Grellkin feed on nature magic: every nature spell you play heals one enemy for 1. Fire and physical hits are unaffected.",
   "hooks": {
    "on_card_played": [
     {
@@ -37,7 +37,7 @@
      "then": [
       {
        "op": "heal",
-       "amount": 3,
+       "amount": 1,
        "target": "enemy"
       }
      ]

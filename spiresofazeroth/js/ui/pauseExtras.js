@@ -2,6 +2,7 @@
 // plus save export / import / erase. Everything persists in app.meta.settings (same keys as before: speed, reducedMotion, unlockAll, fullscreen).
 import { h, toast } from "./dom.js";
 import { btn } from "./kit.js";
+import { autoEquipSelect } from "./autoEquip.js";
 import { exportSave, importSave, clearRun, defaultMeta, saveMeta } from "../engine/save.js";
 
 export function extraRows(app, save) {
@@ -17,6 +18,7 @@ export function extraRows(app, save) {
   return [
     h("label", { class: "pm-row" }, h("span", { class: "pm-lab" }, "Motion"), motion),
     h("label", { class: "pm-row" }, h("span", { class: "pm-lab" }, "Fullscreen (F)"), fs),
+    h("label", { class: "pm-row" }, h("span", { class: "pm-lab" }, "New gear"), autoEquipSelect(app)),
     h("label", { class: "pm-row" }, h("span", { class: "pm-lab" }, "Unlock every card"), unlock),
     h("div", { class: "pm-row pm-row--save" }, h("span", { class: "pm-lab" }, "Save"),
       btn("Export", async () => { const str = exportSave(); box.value = str; try { await navigator.clipboard.writeText(str); toast("Save copied to clipboard."); } catch (e) { toast("Copy the text below."); } }, { size: "sm" }),

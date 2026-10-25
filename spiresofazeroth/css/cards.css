@@ -132,3 +132,15 @@
 .spi__row--debuff b { color: #ff7a5c; } .spi__row--buff b { color: #8dff86; }
 .spi__row--stance b, .spi__row--seal b, .spi__row--form b, .spi__row--aspect b, .spi__row--totem b { color: #7fd8ff; }
 @media (prefers-reduced-motion: reduce) { .spi, .spi__row, .spc { transition: none; animation: none; } }
+/* full-screen card reveal (js/ui/cardReveal.js): event rewards shown big, centred */
+.sp-reveal { position: fixed; inset: 0; z-index: 8500; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; background: rgba(0,0,0,.78); cursor: pointer; animation: sp-reveal-in .25s ease-out; }
+.sp-reveal-row { display: flex; gap: 48px; align-items: flex-end; justify-content: center; flex-wrap: wrap; max-width: 96vw; }
+.sp-reveal-item { display: flex; flex-direction: column; align-items: center; gap: 14px; animation: sp-reveal-pop .45s cubic-bezier(.2,1.4,.4,1); }
+.sp-reveal-item .spc { zoom: var(--reveal-zoom, 1.5); filter: drop-shadow(0 0 24px rgba(255,209,0,.45)); }
+.sp-reveal-item.is-curse .spc { filter: drop-shadow(0 0 24px rgba(160,40,200,.6)); }
+.sp-reveal-tag { margin-bottom: 30px; font-family: var(--f-ui, serif); font-size: 30px; color: #ffd100; text-shadow: 0 2px 0 #000; }
+.sp-reveal-item.is-curse .sp-reveal-tag { color: #d38bff; }
+.sp-reveal-hint { font-size: 18px; color: #c8b993; text-shadow: 0 1px 2px #000; }
+@media (max-height: 760px), (max-width: 700px) { .sp-reveal { --reveal-zoom: 1.1; } }
+@keyframes sp-reveal-in { from { opacity: 0; } }
+@keyframes sp-reveal-pop { from { transform: scale(.4); opacity: 0; } }

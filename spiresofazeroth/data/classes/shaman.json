@@ -6,6 +6,7 @@
   "lore": "Master of the primordial elements: plant autonomous totems, enchant weapons with Windfury or Flame, and call down lightning shocks.",
   "startingHp": 66,
   "startingGold": 99,
+  "novice": {"hp": 14, "enemyHp": 0.85, "lateEnemyHp": 1.35},
   "defaultContinent": "kal",
   "resource": {
     "id": "totems",
@@ -835,11 +836,11 @@
       "cost": 1,
       "target": "enemy",
       "flags": [],
-      "text": "Deal 4 nature damage.",
+      "text": "Deal 5 nature damage.",
       "effects": [
         {
           "op": "damage",
-          "amount": 4,
+          "amount": 5,
           "school": "nature"
         }
       ],
@@ -868,11 +869,11 @@
       "cost": 1,
       "target": "enemy",
       "flags": [],
-      "text": "Deal 5 nature damage. Gain 4 Block. Interrupt the enemy cast.",
+      "text": "Deal 6 nature damage. Gain 4 Block. Interrupt the enemy cast.",
       "effects": [
         {
           "op": "damage",
-          "amount": 5,
+          "amount": 6,
           "school": "nature"
         },
         {
@@ -915,7 +916,7 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Gain 5 Block. Heal 5 HP.",
+      "text": "Gain 5 Block. Heal 6 HP.",
       "effects": [
         {
           "op": "block",
@@ -923,7 +924,7 @@
         },
         {
           "op": "heal",
-          "amount": 5
+          "amount": 6
         }
       ],
       "upgrade": {
@@ -995,11 +996,11 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Deal 3 fire damage. Fire totem: deals 3 fire damage to a random enemy each turn.",
+      "text": "Deal 4 fire damage. Fire totem: deals 3 fire damage to a random enemy each turn.",
       "effects": [
         {
           "op": "damage",
-          "amount": 3,
+          "amount": 4,
           "school": "fire"
         },
         {

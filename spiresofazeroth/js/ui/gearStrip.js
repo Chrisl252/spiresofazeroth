@@ -1,7 +1,7 @@
 // Gear strip (GEAR_SPEC section 5): 16 sockets in paper-doll order (empty ones dim, filled ones show the icon + tooltip) and the set badge.
-// ONE call site per bar:  gearStrip(app)  -> element.   Shared bits for loot.js / codex.js: gearCss, gearTip, socket.
+// ONE call site per bar:  gearStrip(app)  -> element.   Shared bits for loot.js / codex.js / gearBag.js: gearCss, gearTip, compareTip, socket.
 import { h, icon, tip, esc, qClass } from "./dom.js";
-import { PAPERDOLL, SLOT_LABEL, worn, setInfo } from "../engine/gear.js";
+import { PAPERDOLL, SLOT_LABEL, worn, setInfo, isStarter, keysFor, slotOf } from "../engine/gear.js";
 
 export const gearCss = new Promise((res) => {
   const href = new URL("../../css/gear.css", import.meta.url).href;
@@ -25,6 +25,19 @@ export function gearTip(r, run, data) {
       s += `<br><span class="gs-tip__set">${esc(si.set.name)} (${si.count}/${si.size})</span>`;
       for (const b of si.bonuses) s += `<br><span class="${b.active ? "gs-on" : "gs-off"}">(${b.pieces}) ${esc(b.name)}: ${esc(b.text)}</span>`;
     }
+  }
+  return s;
+}
+
+// Tooltip for a NEW piece next to what the player wears in that slot (both sockets for rings / trinkets), so a swap is an informed choice.
+export function compareTip(r, run, data, lead = "") {
+  let s = lead + gearTip(r, run, data);
+  const keys = keysFor(slotOf(r)).filter((k) => run && run.gear && run.gear[k] && run.gear[k] !== r.id);
+  for (const k of keys) {
+    const cur = data.relic(run.gear[k]);
+    if (!cur) continue;
+    s += `<hr class="gs-tip__hr"><span class="gs-tip__worn">Currently worn${keys.length > 1 ? ` (${esc(SLOT_LABEL[k])} ${k.endsWith("2") ? 2 : 1})` : ""}</span><br>`;
+    s += isStarter(cur.id) ? `<b style="color:var(--q-common)">${esc(cur.name)}</b><br><span class="gs-tip__slot">Starter, no effect</span>` : gearTip(cur, run, data);
   }
   return s;
 }

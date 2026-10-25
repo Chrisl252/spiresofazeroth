@@ -11,6 +11,7 @@ import { zone as zoneAudio } from "./audio/zone.js";
 import { installPauseMenu } from "./ui/pauseMenu.js";
 import { installCardInspect } from "./ui/cardInspect.js";
 import { openGearBag } from "./ui/gearBag.js";
+import { applyAutoEquip } from "./ui/autoEquip.js";
 import { installController } from "./controller.js";
 
 const SCREENS = {
@@ -46,7 +47,8 @@ const app = {
   showDeck: () => modal("Your deck", deckView(app)),
   async go(name, props) {
     app.screen = name; // read by ui/presence.js
-    const mod = await import(`./ui/${SCREENS[name] || name}.js?v=${BUILD}`);
+    const url = `./ui/${SCREENS[name] || name}.js?v=${BUILD}`;
+    const mod = await import(url).catch(() => new Promise((r) => setTimeout(r, 1500)).then(() => import(`${url}&retry=1`))); // one retry: a blip mid-run must not strand the player
     stage.setFluid(!mod.stageNative); // legacy screens are unscaled documents; stage-native screens get the 1920x1080 space
     if (!mod.stageNative) stage.setBackdrop(app.run && app.run.zoneId ? app.run.zoneId : "default");
     document.body.classList.toggle("sp-run", !!app.run);
@@ -86,6 +88,7 @@ const app = {
   },
   abandon() { clearRun(); app.run = null; return app.go("title"); },
 };
+applyAutoEquip(app); // "New gear" setting -> engine/gear.js
 
 import(`./ui/bugReport.js?v=${BUILD}`).then((m) => m.mountBugReport(app, stage)).catch(() => {}); // floating bug-report button
 import(`./ui/patchNotes.js?v=${BUILD}`).then((m) => m.installPatchNotes(app)).catch((e) => console.warn("[spires] patch notes:", e)); // patch notes + "update available" pill

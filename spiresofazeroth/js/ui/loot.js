@@ -6,9 +6,12 @@
 //   needsLoot(pd) -> bool          showLoot(app, host, pd, done) -> Promise   (host = the reward screen section; done() runs on continue)
 import { h, icon, tip, esc, toast } from "./dom.js";
 import { banner, btn } from "./kit.js";
-import { gearCss, gearStrip, gearTip } from "./gearStrip.js";
-import { gearLevel, isStarter } from "../engine/gear.js";
+import { compareTip, gearCss, gearStrip, gearTip } from "./gearStrip.js";
+import { equip, gearLevel, goesToBag, isStarter, SLOT_LABEL, syncSetBonuses } from "../engine/gear.js";
 import { takeRelic, takePotion } from "../engine/run.js";
+import { runEffects } from "../engine/effects.js";
+import { canUsePotionOutOfCombat } from "./belt.js";
+import { runBar } from "./runbar.js";
 import { heroicMods } from "../engine/heroic.js";
 import { sfx } from "../audio.js";
 import { getKit, clearStage, lanesFor, watchLeave } from "./combatKit.js";
@@ -21,17 +24,70 @@ const withTimeout = (promise, ms, onTimeout) => new Promise((resolve, reject) =>
 });
 
 // One LootFrame row: 64 px icon (quality border, optional quantity badge) + name coloured by quality.
-function row({ ic, name, q = "common", qty = 0, cls = "", tipHtml = null }) {
+function row({ ic, name, q = "common", qty = 0, cls = "", tipHtml = null, sub = "" }) {
   const el = h("button", { class: `lf-row ${cls}`, type: "button" },
     h("span", { class: `lf-ico q-${q}` }, icon(ic, "", ""), qty > 1 ? h("i", { class: "lf-qty" }, String(qty)) : null),
-    h("span", { class: `lf-name q-${q}` }, name));
+    sub ? h("span", { class: "lf-txt" }, h("span", { class: `lf-name q-${q}` }, name), h("span", { class: "lf-sub" }, sub)) : h("span", { class: `lf-name q-${q}` }, name));
+  el.style.setProperty("--rq", `var(--q-${q})`); // quality colour for the choose-one glow (css/gear.css)
   if (tipHtml) tip(el, tipHtml);
+  return el;
+}
+
+// The fight's gear drop as a loot row with its own swap chip. The drop is either worn (chip "Swap back" re-equips what it replaced) or waiting in
+// the Gear Bag because the slot was taken (chip "Equip"). The tooltip compares it with what is worn. onSwap(key) repaints strips / bars.
+function gearRow(app, g, onSwap = () => {}) {
+  const { run, data } = app, r = data.relic(g.id);
+  if (!r) return null;
+  const el = row({ ic: r.icon, name: g.upgrade ? `Upgrade: ${r.name}` : r.name, q: r.rarity || "common", sub: " ", cls: "lf-row--gear" });
+  const sub = el.querySelector(".lf-sub");
+  const chip = h("span", { class: "lf-chip", role: "button", tabindex: "0" });
+  el.append(chip);
+  const key = g.bagged ? g.wouldKey : g.key;
+  let other = g.bagged ? run.gear[key] : g.replaced; // the piece on the other side of the swap
+  const worn = () => run.gear[key] === g.id;
+  const lead = () => {
+    if (worn()) return g.upgrade ? `<b style="color:#1eff00">Upgraded</b> - replaces your ${esc(r.name.replace(/\+$/, ""))} with the stronger version.<br>` : "";
+    const o = other && data.relic(other);
+    return `<span style="color:#ffd45a">In your Gear Bag.</span> ${o && !isStarter(other) ? `Your ${esc(o.name)} stays on.` : "Equip it when you want it."}<br>`;
+  };
+  const paint = () => {
+    const o = other && data.relic(other), keep = o && !isStarter(other);
+    if (worn()) {
+      sub.textContent = keep ? `Equipped. ${o.name} went to your Gear Bag.` : `Equipped: ${SLOT_LABEL[key] || "Gear"}`;
+      chip.textContent = "Swap back";
+      chip.hidden = !(keep && run.gearBag.includes(other));
+    } else {
+      sub.textContent = keep ? `In your Gear Bag. You keep ${o.name}.` : "In your Gear Bag.";
+      chip.textContent = "Equip";
+      chip.hidden = false;
+    }
+    el.classList.toggle("lf-row--bagged", !worn());
+  };
+  tip(el, () => compareTip(r, run, data, lead()));
+  const swap = (e) => {
+    e.stopPropagation(); e.preventDefault();
+    const was = worn(), id = was ? other : g.id;
+    const res = equip(run, data, id, key);
+    if (!res) return;
+    if (!was) other = res.replaced;
+    syncSetBonuses(run, data);
+    g.bagged = !worn(); g.key = worn() ? key : null; g.replaced = worn() ? other : null;
+    app.save();
+    sfx.play("coinSmall", { volume: 0.5 });
+    toast(worn() ? `Equipped ${r.name}` : `${data.relic(id) ? data.relic(id).name : "Your gear"} is back on`);
+    paint();
+    const bar = document.querySelector(".sx-bar"); if (bar) bar.replaceWith(runBar(app));
+    onSwap(key);
+  };
+  chip.addEventListener("click", swap);
+  chip.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") swap(e); });
+  paint();
   return el;
 }
 
 // ---- VICTORY LOOT FRAME (inline, no chest): every drop of a combat win as one WoW LootFrame panel -----------------------------------------------
 // buildLootFrame(app, pd, { onTake(kind), tag }) -> { el, rows, takeAll(), pending() }
-//   rows: coin (already in the purse - the click is the pickup), gear (already equipped), relics (relicChoose = take ONE, the others drop away), potion (-> belt; refuses when full).
+//   rows: coin (already in the purse - the click is the pickup), gear (worn, or in the Gear Bag when the slot was taken - its chip swaps), relics (relicChoose = take ONE, the others drop away), potion (-> belt; refuses when full).
 //   takeAll() collects everything that can be collected without a decision (never picks between relics); pending() = true while a relic CHOICE is still open.
 export function buildLootFrame(app, pd, { onTake = () => {}, tag = "Spoils" } = {}) {
   const { run, data } = app, reduced = app.reduced();
@@ -39,30 +95,56 @@ export function buildLootFrame(app, pd, { onTake = () => {}, tag = "Spoils" } = 
   const list = h("div", { class: "lf-list" });
   const add = (el, kind, take, group = null) => {
     const o = { el, kind, take, group, done: false };
-    el.addEventListener("click", (e) => { e.stopPropagation(); if (e.shiftKey) takeAll(); else takeRow(o); });
+    el.addEventListener("click", (e) => { e.stopPropagation(); if (e.shiftKey) takeAll(); else takeRow(o, true); });
     rows.push(o); list.append(el); return o;
   };
   const drop = (o) => { o.done = true; o.el.classList.add("gone"); o.el.disabled = true; };
-  const takeRow = (o) => {
+  const takeRow = (o, manual = false) => {
     if (o.done) return false;
-    if (o.take && o.take() === false) return false;
-    drop(o);
-    if (o.group) rows.forEach((x) => { if (x.group === o.group && !x.done) drop(x); }); // choose-one: the rest are left behind
-    sfx.play(o.kind === "coin" ? "coinSmall" : "coin", { volume: 0.6 });
+    if (o.take && o.take(manual) === false) return false;
+    if (o.group && !reduced && o.kind !== "pass") { // choose-one: the pick flashes "Looted" before it slides off; the rest are left behind at once
+      o.done = true; o.el.disabled = true; o.el.classList.add("is-won");
+      setTimeout(() => o.el.classList.add("gone"), 900);
+    } else drop(o);
+    if (o.group) rows.forEach((x) => { if (x.group === o.group && !x.done) drop(x); });
+    if (o.kind !== "pass") sfx.play(o.kind === "coin" ? "coinSmall" : "coin", { volume: 0.6 });
     updatePotionStatus();
     onTake(o.kind, o);
     return true;
   };
   const pt = pd.taken || {};
   if (pd.gold) add(row({ ic: "inv_misc_coin_17", name: `${pd.gold} Gold`, cls: "lf-row--coin" }), "coin", null);
-  if (pd.gear) { const g = pd.gear, r = data.relic(g.id); if (r) add(row({ ic: r.icon, name: g.upgrade ? `Upgrade: ${r.name}` : r.name, q: r.rarity || "common", tipHtml: (g.replaced && !isStarter(g.replaced) ? "Previous item kept in your Gear Bag.<br>" : "") + (g.upgrade ? `<b style="color:#1eff00">Upgraded</b> - replaces your ${esc(r.name)} with the stronger version.<br>` : "") + gearTip(r, run, data) }), "gear", null); }
+  if (pd.gear) { const el = gearRow(app, pd.gear); if (el) add(el, "gear", () => { if (pd.gear.bagged) toast(`${data.relic(pd.gear.id).name} is in your Gear Bag`); }); }
   if (pd.relics && pd.relics.length && !pt.relic) {
     const ids = pd.relicChoose ? pd.relics : pd.relics.slice(0, 1);
-    for (const id of ids) { const r = data.relic(id); if (r) add(row({ ic: r.icon, name: r.name, q: r.rarity || "common", tipHtml: gearTip(r, run, data), cls: pd.relicChoose ? "lf-row--choose" : "" }), "relic", () => takeRelic(run, data, id), pd.relicChoose ? "relic" : null); }
+    for (const id of ids) {
+      const r = data.relic(id); if (!r) continue;
+      const bagNote = goesToBag(run, data, id) ? `<span style="color:#9d9d9d">Your worn ${esc(SLOT_LABEL[r.slot] || "gear")} stays on: this goes to your Gear Bag.</span><br>` : "";
+      add(row({ ic: r.icon, name: r.name, q: r.rarity || "common", tipHtml: bagNote + gearTip(r, run, data), cls: pd.relicChoose ? "lf-row--choose" : "", sub: pd.relicChoose ? r.text : "" }), "relic", () => {
+        const ok = takeRelic(run, data, id);
+        if (ok && run.gearBag && run.gearBag.includes(id)) toast(`${r.name} sent to your Gear Bag`);
+        return ok;
+      }, pd.relicChoose ? "relic" : null);
+    }
+    // choose-one is never forced (player report 10-24: "no possibility to skip the loot"): Pass leaves every piece behind
+    if (pd.relicChoose && ids.length) add(row({ ic: "inv_misc_bag_09", name: "Pass", sub: "Keep your gear, leave these behind", cls: "lf-row--pass" }), "pass", () => { if (run.pending && run.pending.taken) run.pending.taken.relic = true; return true; }, "relic");
   }
   if (pd.potion && !pt.potion) {
     const p = data.potion(pd.potion);
-    if (p) add(row({ ic: p.icon, name: p.name, q: "uncommon", cls: "lf-row--potion", tipHtml: `<b>${esc(p.name)}</b><br>${esc(p.text)}` }), "potion", () => { if (takePotion(run, data, pd.potion)) return true; toast("Potion belt is full."); return false; });
+    if (p) add(row({ ic: p.icon, name: p.name, q: "uncommon", cls: "lf-row--potion", tipHtml: `<b>${esc(p.name)}</b><br>${esc(p.text)}` }), "potion", (manual) => {
+      if (takePotion(run, data, pd.potion)) return true;
+      // belt full: a click drinks it on the spot (heal / max HP potions), so a full belt never wastes a healing drop
+      if (manual && canUsePotionOutOfCombat(p)) {
+        const hp0 = run.hp;
+        runEffects({ run, data, src: null, srcKind: "potion" }, p.effects);
+        if (run.pending && run.pending.taken) run.pending.taken.potion = true;
+        toast(`Belt full, so you drank the ${p.name}${run.hp > hp0 ? `: +${run.hp - hp0} HP` : ""}`);
+        const bar = document.querySelector(".sx-bar"); if (bar) bar.replaceWith(runBar(app));
+        return true;
+      }
+      toast(canUsePotionOutOfCombat(p) ? "Potion belt is full. Click this potion to drink it now." : "Potion belt is full. Drink or discard one from your belt first.");
+      return false;
+    });
   }
   const takeAll = async () => {
     for (const o of rows) { if (o.done || o.group) continue; if (takeRow(o) && !reduced) await new Promise((r) => setTimeout(r, 140)); }
@@ -77,6 +159,7 @@ export function buildLootFrame(app, pd, { onTake = () => {}, tag = "Spoils" } = 
     const slots = heroicMods(run.heroic).potionSlots;
     const full = run.potions.length >= slots;
     potRow.el.classList.toggle("lf-row--belt-full", full);
+    potRow.el.classList.toggle("lf-row--drink", full && canUsePotionOutOfCombat(data.potion(pd.potion)));
   };
   updatePotionStatus();
   return { el, foot, rows, takeAll, pending: () => rows.some((o) => o.group && !o.done), left: () => rows.filter((o) => !o.done).length, refresh: updatePotionStatus };
@@ -130,7 +213,7 @@ export async function showLoot(app, host, pd, done) {
     const list = h("div", { class: "lf-list" });
     const add = (el, take) => { const o = { el, take, done: false }; el.addEventListener("click", (e) => { e.stopPropagation(); if (e.shiftKey) lootAll(); else takeRow(o); }); rows.push(o); list.append(el); };
     if (pd.gold) add(row({ ic: "inv_misc_coin_17", name: `${pd.gold} Gold`, cls: "lf-row--coin" }), null);
-    if (g) { const r = data.relic(g.id); if (r) add(row({ ic: r.icon, name: g.upgrade ? `Upgrade: ${r.name}` : r.name, q: r.rarity || "common", tipHtml: (g.replaced && !isStarter(g.replaced) ? "Previous item kept in your Gear Bag.<br>" : "") + (g.upgrade ? `<b style="color:#1eff00">Upgraded</b> - replaces your ${esc(r.name)} with the stronger version.<br>` : "") + gearTip(r, run, data) }), null); }
+    if (g) { const el = gearRow(app, g, (key) => strip.replaceChildren(gearStrip(app, { flash: key }))); if (el) add(el, () => { if (g.bagged) toast(`${data.relic(g.id).name} is in your Gear Bag`); }); }
     if (treasure && pd.relic && !g) { const r = data.relic(pd.relic); if (r) add(row({ ic: r.icon, name: r.name, q: r.rarity || "common", tipHtml: gearTip(r, run, data) }), () => { takeRelic(run, data, pd.relic); }); }
     const X = h("button", { class: "lf-x", type: "button", "aria-label": "Close and loot all", title: "Close (loots everything)" }, "X");
     X.addEventListener("click", (e) => { e.stopPropagation(); lootAll(); });
@@ -142,7 +225,7 @@ export async function showLoot(app, host, pd, done) {
     frame.style.left = `${stage.portrait ? Math.round((W - FW) / 2) : W - FW - 50}px`;
     frame.style.top = `${stage.portrait ? Math.round(groundY + 70) : 150}px`;
     root.append(frame);
-    if (g) strip.replaceChildren(gearStrip(app, { flash: g.key }));
+    if (g) strip.replaceChildren(gearStrip(app, { flash: g.bagged ? null : g.key }));
     finished = true;
   };
 

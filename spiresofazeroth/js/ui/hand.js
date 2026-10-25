@@ -61,6 +61,7 @@ export function createHand(host, o) {
       if (S.drag && S.drag.it === it) return;
       const t = n <= 1 ? 0 : (i - (n - 1) / 2) / ((n - 1) / 2);
       let x = cx + (i - (n - 1) / 2) * spacing, y = h - tuck + (CH * s) / 2 + t * t * 22, rot = t * 14 * Math.min(1, n / 5), sc = s, z = 10 + i;
+      it.slotX = x; // fixed fan slot (before hover spread): mouse hover is picked from these, so moving cards never steal the hover
       if (!portrait() && t > 0) y += t * 56; // right-fan rotation lifts the top-left corner; drop those cards so they miss enemy HP
       if (hi >= 0 && i !== hi) { const d = i - hi, sign = Math.sign(d); x += sign * (88 / Math.abs(d) ** 0.8) * (portrait() ? 0.5 : 1); }
       if (i === hi) {
@@ -90,6 +91,15 @@ export function createHand(host, o) {
     kwtip.style.top = `${r.y - CH * HOVER / 2 + 16}px`;
   }
 
+  function hoverAt(e) {
+    if (S.drag || S.sel || S.locked || !items.length) return;
+    const p = stage ? stage.toStage(e.clientX, e.clientY) : { x: e.clientX };
+    let best = null, bd = Infinity;
+    for (const it of items) { const d = Math.abs((it.slotX ?? 0) - p.x); if (d < bd) { bd = d; best = it; } }
+    if (!best || best.inst.uid === S.hover) return;
+    S.hover = best.inst.uid; layout(); fireAim(null);
+  }
+
   // ---------------- card elements ----------------
   function build(inst) {
     const el = o.render ? o.render(inst) : cardEl(inst.def, { inst, tag: "div", tips: false });
@@ -97,8 +107,16 @@ export function createHand(host, o) {
     el.setAttribute("role", "listitem");
     el.tabIndex = 0;
     const hit = document.createElement("span"); hit.className = "spc__hit"; el.append(hit);
-    el.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse" && !S.drag && !S.sel && !S.locked) { S.hover = inst.uid; layout(); fireAim(null); } });
-    el.addEventListener("pointerleave", (e) => { if (e.pointerType === "mouse" && S.hover === inst.uid && !S.drag) { S.hover = null; layout(); fireAim(null); } });
+    // Player reports 10-23 ("cards shake when you hover, far right very hard to play"): hovering spreads the neighbours, which used to
+    // put the pointer on a neighbour, flip the hover, spread back, repeat. Hover now follows the pointer's x against the fixed fan slots.
+    el.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") hoverAt(e); });
+    el.addEventListener("pointermove", (e) => { if (e.pointerType === "mouse") hoverAt(e); });
+    el.addEventListener("pointerleave", (e) => {
+      if (e.pointerType !== "mouse" || S.drag || !S.hover) return;
+      const to = e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest(".sp-hcard");
+      if (to && layer.contains(to)) return; // moved onto another hand card: its own pointerenter/move decides
+      S.hover = null; layout(); fireAim(null);
+    });
     el.addEventListener("focus", () => { if (!S.drag && !S.sel && !S.locked) { S.hover = inst.uid; layout(); fireAim(null); } });
     el.addEventListener("blur", () => { if (S.hover === inst.uid && !S.sel) { S.hover = null; fireAim(null); } });
     el.addEventListener("pointerdown", (e) => onDown(e, inst));

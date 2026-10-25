@@ -5,7 +5,7 @@ import { loadClassGear, loadLegacyMap, slotOf } from "./gear.js";
 const HD = new URL("../../assets/icons-hd/", import.meta.url).href; // 256px upscaled icons, relative so dev + deploy both resolve
 const arr = (o, key) => (Array.isArray(o) ? o : o && Array.isArray(o[key]) ? o[key] : []);
 
-export const RARITY_ORDER = ["basic", "common", "uncommon", "rare", "epic"];
+export const RARITY_ORDER = ["basic", "common", "uncommon", "rare", "epic", "legendary"];
 export const QUALITY_COLORS = { basic: "#ffffff", common: "#ffffff", uncommon: "#1eff00", rare: "#0070dd", epic: "#a335ee", legendary: "#ff8000" };
 
 export function createData({ fetchJson }) {

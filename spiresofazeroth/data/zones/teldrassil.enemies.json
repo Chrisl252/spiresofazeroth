@@ -20,9 +20,9 @@
  {"id":"gnarlpine-pathfinder","name":"Gnarlpine Pathfinder","tier":"normal","family":"humanoid","type":"furbolg","level":[7,9],"hp":[12,18],"icon":"ability_racial_bearform","npcId":null,"traits":[],"moves":[{"id":"swipe","name":"Swipe","intent":"attack","effects":[{"op":"damage","amount":5}],"weight":3},{"id":"maul","name":"Maul","intent":"attack","effects":[{"op":"damage","amount":7}],"weight":1,"cooldown":2},{"id":"enrage","name":"Enrage","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}]},
  {"id":"gnarlpine-augur","name":"Gnarlpine Augur","tier":"normal","family":"humanoid","type":"furbolg","level":[8,10],"hp":[12,19],"icon":"ability_racial_bearform","npcId":null,"traits":["caster"],"moves":[{"id":"lightning-bolt","name":"Lightning Bolt","intent":"cast","effects":[{"op":"damage","amount":5,"school":"nature"}],"weight":2},{"id":"healing-wave","name":"Healing Wave","intent":"heal","effects":[{"op":"heal","amount":6,"target":"ally"}],"weight":1,"cooldown":3},{"id":"entangling-roots","name":"Entangling Roots","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"enemy"}],"weight":1,"cooldown":3}]},
  {"id":"timberling-trampler","name":"Timberling Trampler","tier":"normal","family":"elemental","type":"timberling","level":[8,10],"hp":[12,19],"icon":"ability_druid_treeoflife","npcId":null,"traits":["nature_absorb"],"moves":[{"id":"slam","name":"Slam","intent":"attack","effects":[{"op":"damage","amount":5}],"weight":3},{"id":"thorns","name":"Thorns","intent":"buff","effects":[{"op":"apply","status":"thorns","stacks":2,"target":"self"}],"weight":1,"cooldown":4}]},
- {"id":"githyiss-the-vile","name":"Githyiss the Vile","tier":"elite","family":"beast","type":"spider","level":[8,9],"hp":[43,58],"icon":"ability_hunter_pet_spider","npcId":null,"traits":[],
+ {"id":"githyiss-the-vile","name":"Githyiss the Vile","tier":"elite","family":"beast","type":"spider","level":[8,9],"hp":[40,50],"icon":"ability_hunter_pet_spider","npcId":null,"traits":[],
   "moves":[
-   {"id":"venom-bite","name":"Venom Bite","intent":"attack","effects":[{"op":"damage","amount":7},{"op":"apply","status":"poison","stacks":4,"target":"enemy"}],"weight":3},
+   {"id":"venom-bite","name":"Venom Bite","intent":"attack","effects":[{"op":"damage","amount":7},{"op":"apply","status":"poison","stacks":3,"target":"enemy"}],"weight":3},
    {"id":"web-wrap","name":"Web Wrap","intent":"debuff","effects":[{"op":"damage","amount":3},{"op":"apply","status":"weak","stacks":2,"target":"enemy"},{"op":"apply","status":"frozen","stacks":1,"target":"enemy"}],"weight":2,"cooldown":3},
    {"id":"skitter","name":"Skitter","intent":"block","effects":[{"op":"block","amount":8,"target":"self"}],"weight":1,"cooldown":3},
    {"id":"poison-cloud","name":"Poison Cloud","intent":"attack","effects":[{"op":"damage","amount":4,"target":"all_enemies"},{"op":"apply","status":"poison","stacks":2,"target":"enemy"}],"weight":1,"cooldown":4}
@@ -32,16 +32,16 @@
    {"hpBelowPct":50,"name":"Venom Frenzy","pattern":["venom-bite","poison-cloud","web-wrap"],"onEnter":[{"op":"apply","status":"strength","stacks":2,"target":"self"}]}
   ]
  },
- {"id":"rageclaw","name":"Rageclaw","tier":"elite","family":"beast","type":"bear","level":[9,10],"hp":[44,59],"icon":"ability_hunter_pet_bear","npcId":null,"traits":[],
+ {"id":"rageclaw","name":"Rageclaw","tier":"elite","family":"beast","type":"bear","level":[9,10],"hp":[42,52],"icon":"ability_hunter_pet_bear","npcId":null,"traits":[],
   "moves":[
    {"id":"maul","name":"Maul","intent":"attack","effects":[{"op":"damage","amount":9}],"weight":3},
    {"id":"swipe","name":"Swipe","intent":"attack","effects":[{"op":"damage","amount":5,"target":"all_enemies"}],"weight":2,"cooldown":2},
-   {"id":"demoralizing-roar","name":"Demoralizing Roar","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":2,"target":"enemy"}],"weight":1,"cooldown":3},
+   {"id":"demoralizing-roar","name":"Demoralizing Roar","intent":"debuff","effects":[{"op":"apply","status":"weak","stacks":1,"target":"enemy"}],"weight":1,"cooldown":3},
    {"id":"corrupted-fury","name":"Corrupted Fury","intent":"buff","effects":[{"op":"apply","status":"strength","stacks":2,"target":"self"}],"weight":1,"cooldown":4}
   ],
   "pattern":["maul","swipe","demoralizing-roar","maul","corrupted-fury"],
   "phases":[
-   {"hpBelowPct":50,"name":"Corrupted Rage","pattern":["swipe","maul","swipe","corrupted-fury"],"onEnter":[{"op":"apply","status":"strength","stacks":3,"target":"self"}]}
+   {"hpBelowPct":50,"name":"Corrupted Rage","pattern":["swipe","maul","swipe","corrupted-fury"],"onEnter":[{"op":"apply","status":"strength","stacks":2,"target":"self"}]}
   ]
  },
  {"id":"lord-melenas","name":"Lord Melenas","tier":"boss","family":"humanoid","type":"night-elf","level":[10,10],"hp":[90,120],"icon":"inv_misc_head_elf_01","npcId":2038,"traits":["caster","nature_absorb"],

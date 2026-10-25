@@ -7,7 +7,7 @@ import { generateSpire, nextNodes, nodeAt } from "./map.js";
 import { startCombat, finishCombat } from "./combat.js";
 import { runEffects } from "./effects.js";
 import { fireRun } from "./relics.js";
-import { heroicMods } from "./heroic.js";
+import { heroicMods, noviceOf } from "./heroic.js";
 import { limitTalentMods } from "./talents.js";
 import { addTalentGrants } from "./talentHooks.js";
 import { canUpgrade } from "./deck.js";
@@ -25,7 +25,7 @@ export function newRun(data, { classId, continent, seed, heroic = 0, pet = null,
   const cls = data.classObj(classId);
   const mods = heroicMods(heroic);
   const T = talents && typeof talents === "object" ? limitTalentMods(talents) : null; // account talents (engine/talents.js talentMods): hp + gold here, the rest in startCombat / rewards
-  const maxHp = Math.max(1, Math.round((cls.startingHp || 70) * mods.startHpPenalty) + ((T && T.hp) | 0));
+  const maxHp = Math.max(1, Math.round((cls.startingHp || 70) * mods.startHpPenalty) + ((T && T.hp) | 0) + (T ? 0 : noviceOf(cls).hp));
   const run = {
     v: RUN_VERSION, seed: String(seed), classId, continent: continent || cls.defaultContinent || "ek", heroic, pet,
     act: 0, zoneId: null, zonesVisited: [], map: null, floor: -1, col: -1, hp: maxHp, maxHp, gold: (cls.startingGold || 99) + ((T && T.gold) | 0), talents: T,
@@ -278,7 +278,8 @@ export function takeRelic(run, data, id) {
   const twin = data.gear && data.gear.legacy && data.gear.legacy[id];
   if (twin && twin !== id && (run.relics.includes(twin) || run.relics.includes(`${twin}+`))) return false; // already worn under its gear name
   const r = data.relic(id);
-  const eq = r && r.slot ? G.equip(run, data, id) : null; // gear: jewellery/trinkets take a socket (swapping the weakest when full)
+  const bag = r && r.slot && G.goesToBag(run, data, id);
+  const eq = bag ? G.stow(run, id) : r && r.slot ? G.equip(run, data, id) : null; // gear: a free/starter socket equips; worn gear is never displaced (-> Gear Bag)
   if (!eq) run.relics.push(id);
   if (run.pending) run.pending.equipped = eq;
   markSeen(run, "relics", id);

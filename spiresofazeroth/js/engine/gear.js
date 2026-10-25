@@ -4,8 +4,9 @@
 //   loadClassGear(d, classId, get)   data.js hook: registers a class's set pieces, weapon, `+` upgrades and set-bonus relics
 //   ensureGear(run, data)            run.gear exists + legacy relic ids mapped (call when a saved run resumes)
 //   equip(run, data, id)             -> { key, replaced } equips a piece and stores displaced non-starter gear
-//   dropGear(run, data)              -> { id, key, slot, upgrade, replaced, setBefore, setAfter, bonuses } | null  (the post-combat drop)
+//   dropGear(run, data)              -> { id, key, slot, upgrade, replaced, bagged, wouldKey, setBefore, setAfter, bonuses } | null  (the post-combat drop; bagged = sent to the Gear Bag)
 //   setInfo(run, data)               -> { set, count, bonuses:[{pieces,name,text,active}], next }
+//   setAutoEquip(mode)               the player's "New gear" setting: smart (free/starter sockets only) | always | never (Gear Bag)
 export const PAPERDOLL = ["head", "neck", "shoulder", "back", "chest", "wrist", "hands", "waist", "legs", "feet", "finger1", "finger2", "trinket1", "trinket2", "mainHand", "offHand"];
 export const SLOT_LABEL = { head: "Head", neck: "Neck", shoulder: "Shoulders", back: "Back", chest: "Chest", wrist: "Wrists", hands: "Hands", waist: "Waist", legs: "Legs", feet: "Feet",
   finger: "Finger", finger1: "Finger", finger2: "Finger", trinket: "Trinket", trinket1: "Trinket", trinket2: "Trinket", mainHand: "Main Hand", offHand: "Off Hand" };
@@ -127,11 +128,12 @@ function targetKey(run, data, r) {
   return keys.slice().sort((a, b) => (RANK[(data.relic(run.gear[a]) || {}).rarity] || 0) - (RANK[(data.relic(run.gear[b]) || {}).rarity] || 0))[0];
 }
 
-export function equip(run, data, id) {
+// `at` = an explicit socket (trinket2 / finger2 ...) chosen by the player in the Gear Bag; ignored unless it fits the piece's slot.
+export function equip(run, data, id, at = null) {
   ensureGear(run, data);
   const r = data.relic(id);
   if (!r) return null;
-  const key = targetKey(run, data, r);
+  const key = at && keysFor(slotOf(r)).includes(at) ? at : targetKey(run, data, r);
   const replaced = run.gear[key] || null;
   const bagIndex = run.gearBag.indexOf(id);
   if (bagIndex >= 0) run.gearBag.splice(bagIndex, 1);
@@ -155,11 +157,15 @@ export function dropGear(run, data) {
   const owned = (x) => run.relics.includes(x) || run.gearBag.includes(x) || Object.values(run.gear).includes(x); // never the same item twice
   for (const s of DROP_ORDER) if ((!run.gear[s] || isStarter(run.gear[s])) && piece(s) && !owned(piece(s).id) && !owned(`${piece(s).id}+`)) { id = piece(s).id; break; }
   if (!id) {
-    for (const s of DROP_ORDER) { const cur = run.gear[s]; if (cur && !isStarter(cur) && !String(cur).endsWith("+") && piece(s) && !owned(`${cur}+`)) { id = `${cur}+`; upgrade = true; break; } }
+    for (const s of DROP_ORDER) { const cur = run.gear[s]; if (cur && !isStarter(cur) && !String(cur).endsWith("+") && piece(s) && data.relic(`${cur}+`) && !owned(`${cur}+`)) { id = `${cur}+`; upgrade = true; break; } }
   }
   if (!id) { for (const s of DROP_ORDER) { const p = piece(s); if (p && !owned(p.id) && !owned(`${p.id}+`)) { id = p.id; break; } } } // a socket holding something else: the set piece still comes
   if (!id) { run.stats && (run.stats.gearDry = (run.stats.gearDry || 0) + 1); return null; }
   const r = data.relic(id);
+  if (goesToBag(run, data, id)) { // player report 10-25: a weaker drop kept auto-equipping over strong gear - it now waits in the Gear Bag
+    stow(run, id);
+    return { id, key: null, slot: r.slot, upgrade, replaced: null, bagged: true, wouldKey: targetKey(run, data, r), setBefore: before, setAfter: before, bonuses: [] };
+  }
   const { key, replaced } = equip(run, data, id);
   const bonuses = syncSetBonuses(run, data);
   return { id, key, slot: r.slot, upgrade, replaced, setBefore: before, setAfter: setInfo(run, data).count, bonuses };
@@ -180,4 +186,29 @@ export function wouldReplace(run, data, id) {
   const r = data.relic(id);
   if (!r || !r.slot || !run.gear) return null;
   return run.gear[targetKey(run, data, r)] || null;
+}
+
+// "New gear" setting (Escape menu / Gear Bag). Module state so the DOM-free engine and the sim share one rule; the app sets it at boot.
+export const AUTO_EQUIP = ["smart", "always", "never"];
+let autoEquip = "smart";
+export const setAutoEquip = (mode) => { autoEquip = AUTO_EQUIP.includes(mode) ? mode : "smart"; };
+export const getAutoEquip = () => autoEquip;
+
+// Does a new piece (fight drop / loot / shop / event) go to the Gear Bag instead of being worn?
+//   smart  (default): only free or starter sockets, or over its own base (an upgrade) - worn gear is never pushed out (reports 10-24, 10-25)
+//   always : the old behaviour, it replaces the weakest piece in that slot
+//   never  : every piece waits in the Gear Bag until the player equips it
+export function goesToBag(run, data, id) {
+  ensureGear(run, data);
+  const r = data.relic(id);
+  if (!r || !r.slot) return false;
+  if (autoEquip === "never") return true;
+  if (autoEquip === "always") return false;
+  const cur = run.gear[targetKey(run, data, r)];
+  return !!cur && !isStarter(cur) && cur !== r.base;
+}
+export function stow(run, id) {
+  if (!Array.isArray(run.gearBag)) run.gearBag = [];
+  if (!run.gearBag.includes(id)) run.gearBag.push(id);
+  return { key: null, bagged: true };
 }

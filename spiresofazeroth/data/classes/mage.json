@@ -6,6 +6,7 @@
   "lore": "Master of Arcane mysteries, Fire burst, and Frost control: chain spell schools together to incinerate or weaken your enemies.",
   "startingHp": 82,
   "startingGold": 99,
+  "novice": {"hp": 26, "enemyHp": 0.6},
   "defaultContinent": "ek",
   "resource": {
     "id": "arcane_charges",

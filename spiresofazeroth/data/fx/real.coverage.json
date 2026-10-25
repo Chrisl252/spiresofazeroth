@@ -1,0 +1,4705 @@
+{
+ "wrath": {
+  "cls": "druid",
+  "name": "Wrath",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact",
+   "missile",
+   "precast"
+  ]
+ },
+ "healing-touch": {
+  "cls": "druid",
+  "name": "Healing Touch",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "bear-form": {
+  "cls": "druid",
+  "name": "Bear Form",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "impact",
+   "precast"
+  ]
+ },
+ "cat-form": {
+  "cls": "druid",
+  "name": "Cat Form",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "impact",
+   "precast"
+  ]
+ },
+ "claw": {
+  "cls": "hunter",
+  "name": "Claw",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "moonfire": {
+  "cls": "druid",
+  "name": "Moonfire",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "insect-swarm": {
+  "cls": "druid",
+  "name": "Insect Swarm",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact"
+  ]
+ },
+ "entangling-roots": {
+  "cls": "druid",
+  "name": "Entangling Roots",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "faerie-fire": {
+  "cls": "druid",
+  "name": "Faerie Fire",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "natures-grasp": {
+  "cls": "druid",
+  "name": "Nature's Grasp",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "maul": {
+  "cls": "druid",
+  "name": "Maul",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "aura",
+   "cast",
+   "impact"
+  ]
+ },
+ "swipe": {
+  "cls": "druid",
+  "name": "Swipe",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "growl": {
+  "cls": "druid",
+  "name": "Growl",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "demoralizing-roar": {
+  "cls": "druid",
+  "name": "Demoralizing Roar",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "rake": {
+  "cls": "druid",
+  "name": "Rake",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "shred": {
+  "cls": "druid",
+  "name": "Shred",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact"
+  ]
+ },
+ "mark-of-the-wild": {
+  "cls": "druid",
+  "name": "Mark of the Wild",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "rejuvenation": {
+  "cls": "druid",
+  "name": "Rejuvenation",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "regrowth": {
+  "cls": "druid",
+  "name": "Regrowth",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "remove-curse": {
+  "cls": "druid",
+  "name": "Remove Curse",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "abolish-poison": {
+  "cls": "druid",
+  "name": "Abolish Poison",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "cure-poison": {
+  "cls": "shaman",
+  "name": "Cure Poison",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "starfire": {
+  "cls": "druid",
+  "name": "Starfire",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "thorns": {
+  "cls": "druid",
+  "name": "Thorns",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "hibernate": {
+  "cls": "druid",
+  "name": "Hibernate",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "soothe-animal": {
+  "cls": "druid",
+  "name": "Soothe Animal",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "bash": {
+  "cls": "druid",
+  "name": "Bash",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "impact"
+  ]
+ },
+ "enrage": {
+  "cls": "warrior",
+  "name": "Enrage",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "frenzied-regeneration": {
+  "cls": "druid",
+  "name": "Frenzied Regeneration",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast"
+  ]
+ },
+ "feral-charge": {
+  "cls": "druid",
+  "name": "Feral Charge",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast"
+  ]
+ },
+ "dire-bear-form": {
+  "cls": "druid",
+  "name": "Dire Bear Form",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact",
+   "precast"
+  ]
+ },
+ "ravage": {
+  "cls": "druid",
+  "name": "Ravage",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "pounce": {
+  "cls": "druid",
+  "name": "Pounce",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "impact"
+  ]
+ },
+ "prowl": {
+  "cls": "druid",
+  "name": "Prowl",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "dash": {
+  "cls": "druid",
+  "name": "Dash",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "gift-of-the-wild": {
+  "cls": "druid",
+  "name": "Gift of the Wild",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "moonkin-form": {
+  "cls": "druid",
+  "name": "Moonkin Form",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact",
+   "precast"
+  ]
+ },
+ "hurricane": {
+  "cls": "druid",
+  "name": "Hurricane",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "impact",
+   "precast"
+  ]
+ },
+ "rip": {
+  "cls": "druid",
+  "name": "Rip",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "ferocious-bite": {
+  "cls": "druid",
+  "name": "Ferocious Bite",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "tigers-fury": {
+  "cls": "druid",
+  "name": "Tiger's Fury",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "swiftmend": {
+  "cls": "druid",
+  "name": "Swiftmend",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "innervate": {
+  "cls": "druid",
+  "name": "Innervate",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "natures-swiftness": {
+  "cls": "shaman",
+  "name": "Nature's Swiftness",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "barkskin": {
+  "cls": "druid",
+  "name": "Barkskin",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "tranquility": {
+  "cls": "druid",
+  "name": "Tranquility",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "rebirth": {
+  "cls": "druid",
+  "name": "Rebirth",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "auto-shot": {
+  "cls": "hunter",
+  "name": "Auto Shot",
+  "status": "fallback",
+  "via": "none",
+  "starter": true,
+  "roles": []
+ },
+ "arcane-shot": {
+  "cls": "hunter",
+  "name": "Arcane Shot",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "impact",
+   "missile"
+  ]
+ },
+ "raptor-strike": {
+  "cls": "hunter",
+  "name": "Raptor Strike",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "impact"
+  ]
+ },
+ "mend-pet": {
+  "cls": "hunter",
+  "name": "Mend Pet",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "aspect-of-the-hawk": {
+  "cls": "hunter",
+  "name": "Aspect of the Hawk",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "call-pet": {
+  "cls": "hunter",
+  "name": "Call Pet",
+  "status": "real",
+  "via": "borrowed",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "feed-pet": {
+  "cls": "hunter",
+  "name": "Feed Pet",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "beast-lore": {
+  "cls": "hunter",
+  "name": "Beast Lore",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "eyes-of-the-beast": {
+  "cls": "hunter",
+  "name": "Eyes of the Beast",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "revive-pet": {
+  "cls": "hunter",
+  "name": "Revive Pet",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "scare-beast": {
+  "cls": "hunter",
+  "name": "Scare Beast",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "concussive-shot": {
+  "cls": "hunter",
+  "name": "Concussive Shot",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "impact",
+   "missile"
+  ]
+ },
+ "serpent-sting": {
+  "cls": "hunter",
+  "name": "Serpent Sting",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact",
+   "missile"
+  ]
+ },
+ "hunters-mark": {
+  "cls": "hunter",
+  "name": "Hunter's Mark",
+  "status": "partial",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura"
+  ]
+ },
+ "distracting-shot": {
+  "cls": "hunter",
+  "name": "Distracting Shot",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact",
+   "missile"
+  ]
+ },
+ "wing-clip": {
+  "cls": "hunter",
+  "name": "Wing Clip",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "mongoose-bite": {
+  "cls": "hunter",
+  "name": "Mongoose Bite",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "aspect-of-the-monkey": {
+  "cls": "hunter",
+  "name": "Aspect of the Monkey",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "flare": {
+  "cls": "hunter",
+  "name": "Flare",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "missile"
+  ]
+ },
+ "disengage": {
+  "cls": "hunter",
+  "name": "Disengage",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "feign-death": {
+  "cls": "hunter",
+  "name": "Feign Death",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "aspect-of-the-pack": {
+  "cls": "hunter",
+  "name": "Aspect of the Pack",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "aspect-of-the-wild": {
+  "cls": "hunter",
+  "name": "Aspect of the Wild",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "aspect-of-the-beast": {
+  "cls": "hunter",
+  "name": "Aspect of the Beast",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "tranquilizing-shot": {
+  "cls": "hunter",
+  "name": "Tranquilizing Shot",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact",
+   "missile"
+  ]
+ },
+ "tame-beast": {
+  "cls": "hunter",
+  "name": "Tame Beast",
+  "status": "partial",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura"
+  ]
+ },
+ "multi-shot": {
+  "cls": "hunter",
+  "name": "Multi-Shot",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact",
+   "missile"
+  ]
+ },
+ "scatter-shot": {
+  "cls": "hunter",
+  "name": "Scatter Shot",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "impact",
+   "missile"
+  ]
+ },
+ "viper-sting": {
+  "cls": "hunter",
+  "name": "Viper Sting",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact",
+   "missile"
+  ]
+ },
+ "scorpid-sting": {
+  "cls": "hunter",
+  "name": "Scorpid Sting",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact",
+   "missile"
+  ]
+ },
+ "freezing-trap": {
+  "cls": "hunter",
+  "name": "Freezing Trap",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "immolation-trap": {
+  "cls": "hunter",
+  "name": "Immolation Trap",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "frost-trap": {
+  "cls": "hunter",
+  "name": "Frost Trap",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "counterattack": {
+  "cls": "hunter",
+  "name": "Counterattack",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "impact"
+  ]
+ },
+ "aspect-of-the-cheetah": {
+  "cls": "hunter",
+  "name": "Aspect of the Cheetah",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "aimed-shot": {
+  "cls": "hunter",
+  "name": "Aimed Shot",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "impact",
+   "missile"
+  ]
+ },
+ "volley": {
+  "cls": "hunter",
+  "name": "Volley",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "impact",
+   "missile"
+  ]
+ },
+ "rapid-fire": {
+  "cls": "hunter",
+  "name": "Rapid Fire",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast"
+  ]
+ },
+ "wyvern-sting": {
+  "cls": "hunter",
+  "name": "Wyvern Sting",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "missile"
+  ]
+ },
+ "deterrence": {
+  "cls": "hunter",
+  "name": "Deterrence",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "explosive-trap": {
+  "cls": "hunter",
+  "name": "Explosive Trap",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "intimidation": {
+  "cls": "hunter",
+  "name": "Intimidation",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "bestial-wrath": {
+  "cls": "hunter",
+  "name": "Bestial Wrath",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "trueshot-aura": {
+  "cls": "hunter",
+  "name": "Trueshot Aura",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast"
+  ]
+ },
+ "fireball": {
+  "cls": "mage",
+  "name": "Fireball",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact",
+   "missile",
+   "precast"
+  ]
+ },
+ "frostbolt": {
+  "cls": "mage",
+  "name": "Frostbolt",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "missile",
+   "precast"
+  ]
+ },
+ "arcane-missiles": {
+  "cls": "mage",
+  "name": "Arcane Missiles",
+  "status": "partial",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "aura"
+  ]
+ },
+ "mana-shield": {
+  "cls": "mage",
+  "name": "Mana Shield",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "blink": {
+  "cls": "mage",
+  "name": "Blink",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "fire-blast": {
+  "cls": "mage",
+  "name": "Fire Blast",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "scorch": {
+  "cls": "mage",
+  "name": "Scorch",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "arcane-explosion": {
+  "cls": "mage",
+  "name": "Arcane Explosion",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "frost-nova": {
+  "cls": "mage",
+  "name": "Frost Nova",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "counterspell": {
+  "cls": "mage",
+  "name": "Counterspell",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "frost-armor": {
+  "cls": "mage",
+  "name": "Frost Armor",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "ice-armor": {
+  "cls": "mage",
+  "name": "Ice Armor",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "arcane-intellect": {
+  "cls": "mage",
+  "name": "Arcane Intellect",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "conjure-water": {
+  "cls": "mage",
+  "name": "Conjure Water",
+  "status": "partial",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "precast"
+  ]
+ },
+ "conjure-food": {
+  "cls": "mage",
+  "name": "Conjure Food",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "precast"
+  ]
+ },
+ "fire-ward": {
+  "cls": "mage",
+  "name": "Fire Ward",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "remove-lesser-curse": {
+  "cls": "mage",
+  "name": "Remove Lesser Curse",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "dampen-magic": {
+  "cls": "mage",
+  "name": "Dampen Magic",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "amplify-magic": {
+  "cls": "mage",
+  "name": "Amplify Magic",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "slow-fall": {
+  "cls": "mage",
+  "name": "Slow Fall",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "detect-magic": {
+  "cls": "mage",
+  "name": "Detect Magic",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "polymorph": {
+  "cls": "mage",
+  "name": "Polymorph",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "blast-wave": {
+  "cls": "mage",
+  "name": "Blast Wave",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "flamestrike": {
+  "cls": "mage",
+  "name": "Flamestrike",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "mage-armor": {
+  "cls": "mage",
+  "name": "Mage Armor",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "ice-barrier": {
+  "cls": "mage",
+  "name": "Ice Barrier",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "presence-of-mind": {
+  "cls": "mage",
+  "name": "Presence of Mind",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "cold-snap": {
+  "cls": "mage",
+  "name": "Cold Snap",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "evocation": {
+  "cls": "mage",
+  "name": "Evocation",
+  "status": "partial",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura"
+  ]
+ },
+ "conjure-mana-gem": {
+  "cls": "mage",
+  "name": "Conjure Mana Gem",
+  "status": "partial",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "precast"
+  ]
+ },
+ "frost-ward": {
+  "cls": "mage",
+  "name": "Frost Ward",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "teleport-stormwind": {
+  "cls": "mage",
+  "name": "Teleport: Stormwind",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "teleport-ironforge": {
+  "cls": "mage",
+  "name": "Teleport: Ironforge",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "combustion": {
+  "cls": "mage",
+  "name": "Combustion",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "ice-block": {
+  "cls": "mage",
+  "name": "Ice Block",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "arcane-power": {
+  "cls": "mage",
+  "name": "Arcane Power",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "arcane-brilliance": {
+  "cls": "mage",
+  "name": "Arcane Brilliance",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "blizzard": {
+  "cls": "mage",
+  "name": "Blizzard",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "cone-of-cold": {
+  "cls": "mage",
+  "name": "Cone of Cold",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "portal-ironforge": {
+  "cls": "mage",
+  "name": "Portal: Ironforge",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "pyroblast": {
+  "cls": "mage",
+  "name": "Pyroblast",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "missile",
+   "precast"
+  ]
+ },
+ "conjured-water": {
+  "cls": "mage",
+  "name": "Conjured Water",
+  "status": "fallback",
+  "via": "none",
+  "starter": false,
+  "roles": []
+ },
+ "conjured-food": {
+  "cls": "mage",
+  "name": "Conjured Food",
+  "status": "fallback",
+  "via": "none",
+  "starter": false,
+  "roles": []
+ },
+ "conjured-mana-gem": {
+  "cls": "mage",
+  "name": "Conjured Mana Gem",
+  "status": "fallback",
+  "via": "none",
+  "starter": false,
+  "roles": []
+ },
+ "seal-of-righteousness": {
+  "cls": "paladin",
+  "name": "Seal of Righteousness",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "impact"
+  ]
+ },
+ "judgement": {
+  "cls": "paladin",
+  "name": "Judgement",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "holy-light": {
+  "cls": "paladin",
+  "name": "Holy Light",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "devotion-aura": {
+  "cls": "paladin",
+  "name": "Devotion Aura",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "flash-of-light": {
+  "cls": "paladin",
+  "name": "Flash of Light",
+  "status": "partial",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "precast"
+  ]
+ },
+ "seal-of-the-crusader": {
+  "cls": "paladin",
+  "name": "Seal of the Crusader",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "seal-of-justice": {
+  "cls": "paladin",
+  "name": "Seal of Justice",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "blessing-of-might": {
+  "cls": "paladin",
+  "name": "Blessing of Might",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "blessing-of-wisdom": {
+  "cls": "paladin",
+  "name": "Blessing of Wisdom",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "blessing-of-light": {
+  "cls": "paladin",
+  "name": "Blessing of Light",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "blessing-of-freedom": {
+  "cls": "paladin",
+  "name": "Blessing of Freedom",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "blessing-of-protection": {
+  "cls": "paladin",
+  "name": "Blessing of Protection",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "blessing-of-salvation": {
+  "cls": "paladin",
+  "name": "Blessing of Salvation",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "divine-protection": {
+  "cls": "paladin",
+  "name": "Divine Protection",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "hammer-of-justice": {
+  "cls": "paladin",
+  "name": "Hammer of Justice",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact"
+  ]
+ },
+ "turn-undead": {
+  "cls": "paladin",
+  "name": "Turn Undead",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "retribution-aura": {
+  "cls": "paladin",
+  "name": "Retribution Aura",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "sanctity-aura": {
+  "cls": "paladin",
+  "name": "Sanctity Aura",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "concentration-aura": {
+  "cls": "paladin",
+  "name": "Concentration Aura",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast"
+  ]
+ },
+ "redemption": {
+  "cls": "paladin",
+  "name": "Redemption",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "divine-intervention": {
+  "cls": "paladin",
+  "name": "Divine Intervention",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "precast"
+  ]
+ },
+ "seal-of-command": {
+  "cls": "paladin",
+  "name": "Seal of Command",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "seal-of-light": {
+  "cls": "paladin",
+  "name": "Seal of Light",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "seal-of-wisdom": {
+  "cls": "paladin",
+  "name": "Seal of Wisdom",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "blessing-of-sanctuary": {
+  "cls": "paladin",
+  "name": "Blessing of Sanctuary",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "consecration": {
+  "cls": "paladin",
+  "name": "Consecration",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact"
+  ]
+ },
+ "holy-wrath": {
+  "cls": "paladin",
+  "name": "Holy Wrath",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "missile",
+   "precast"
+  ]
+ },
+ "exorcism": {
+  "cls": "paladin",
+  "name": "Exorcism",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "cleanse": {
+  "cls": "paladin",
+  "name": "Cleanse",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "righteous-fury": {
+  "cls": "paladin",
+  "name": "Righteous Fury",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "reckoning": {
+  "cls": "paladin",
+  "name": "Reckoning",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "vengeance": {
+  "cls": "paladin",
+  "name": "Vengeance",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "eye-for-an-eye": {
+  "cls": "paladin",
+  "name": "Eye for an Eye",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "holy-shock": {
+  "cls": "paladin",
+  "name": "Holy Shock",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "divine-favor": {
+  "cls": "paladin",
+  "name": "Divine Favor",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "divine-shield": {
+  "cls": "paladin",
+  "name": "Divine Shield",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "holy-shield": {
+  "cls": "paladin",
+  "name": "Holy Shield",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast"
+  ]
+ },
+ "repentance": {
+  "cls": "paladin",
+  "name": "Repentance",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact"
+  ]
+ },
+ "blessing-of-kings": {
+  "cls": "paladin",
+  "name": "Blessing of Kings",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "hammer-of-wrath": {
+  "cls": "paladin",
+  "name": "Hammer of Wrath",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "missile",
+   "precast"
+  ]
+ },
+ "lay-on-hands": {
+  "cls": "paladin",
+  "name": "Lay on Hands",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "smite": {
+  "cls": "priest",
+  "name": "Smite",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "shadow-word-pain": {
+  "cls": "priest",
+  "name": "Shadow Word: Pain",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "power-word-shield": {
+  "cls": "priest",
+  "name": "Power Word: Shield",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "lesser-heal": {
+  "cls": "priest",
+  "name": "Lesser Heal",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "mind-blast": {
+  "cls": "priest",
+  "name": "Mind Blast",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "heal": {
+  "cls": "priest",
+  "name": "Heal",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "flash-heal": {
+  "cls": "priest",
+  "name": "Flash Heal",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "renew": {
+  "cls": "priest",
+  "name": "Renew",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "holy-fire": {
+  "cls": "priest",
+  "name": "Holy Fire",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "mind-flay": {
+  "cls": "priest",
+  "name": "Mind Flay",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "inner-fire": {
+  "cls": "priest",
+  "name": "Inner Fire",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "power-word-fortitude": {
+  "cls": "priest",
+  "name": "Power Word: Fortitude",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "dispel-magic": {
+  "cls": "priest",
+  "name": "Dispel Magic",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "abolish-disease": {
+  "cls": "priest",
+  "name": "Abolish Disease",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "cure-disease": {
+  "cls": "shaman",
+  "name": "Cure Disease",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "fade": {
+  "cls": "priest",
+  "name": "Fade",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "touch-of-weakness": {
+  "cls": "priest",
+  "name": "Touch of Weakness",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast"
+  ]
+ },
+ "starshards": {
+  "cls": "priest",
+  "name": "Starshards",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "hex-of-weakness": {
+  "cls": "priest",
+  "name": "Hex of Weakness",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "levitate": {
+  "cls": "priest",
+  "name": "Levitate",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "mind-vision": {
+  "cls": "priest",
+  "name": "Mind Vision",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "impact"
+  ]
+ },
+ "psychic-scream": {
+  "cls": "priest",
+  "name": "Psychic Scream",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "silence": {
+  "cls": "priest",
+  "name": "Silence",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "fear-ward": {
+  "cls": "priest",
+  "name": "Fear Ward",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "feedback": {
+  "cls": "priest",
+  "name": "Feedback",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast"
+  ]
+ },
+ "elunes-grace": {
+  "cls": "priest",
+  "name": "Elune's Grace",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "shackle-undead": {
+  "cls": "priest",
+  "name": "Shackle Undead",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "inner-focus": {
+  "cls": "priest",
+  "name": "Inner Focus",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "divine-spirit": {
+  "cls": "priest",
+  "name": "Divine Spirit",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "prayer-of-fortitude": {
+  "cls": "priest",
+  "name": "Prayer of Fortitude",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "desperate-prayer": {
+  "cls": "priest",
+  "name": "Desperate Prayer",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "shadowguard": {
+  "cls": "priest",
+  "name": "Shadowguard",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "resurrection": {
+  "cls": "priest",
+  "name": "Resurrection",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "lightwell": {
+  "cls": "priest",
+  "name": "Lightwell",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "precast"
+  ]
+ },
+ "shadowform": {
+  "cls": "priest",
+  "name": "Shadowform",
+  "status": "partial",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura"
+  ]
+ },
+ "vampiric-embrace": {
+  "cls": "priest",
+  "name": "Vampiric Embrace",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "devouring-plague": {
+  "cls": "priest",
+  "name": "Devouring Plague",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "prayer-of-healing": {
+  "cls": "priest",
+  "name": "Prayer of Healing",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "greater-heal": {
+  "cls": "priest",
+  "name": "Greater Heal",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "power-infusion": {
+  "cls": "priest",
+  "name": "Power Infusion",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "mana-burn": {
+  "cls": "priest",
+  "name": "Mana Burn",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "holy-nova": {
+  "cls": "priest",
+  "name": "Holy Nova",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "mind-control": {
+  "cls": "priest",
+  "name": "Mind Control",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "spirit-of-redemption": {
+  "cls": "priest",
+  "name": "Spirit of Redemption",
+  "status": "real",
+  "via": "borrowed",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "sinister-strike": {
+  "cls": "rogue",
+  "name": "Sinister Strike",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "impact"
+  ]
+ },
+ "backstab": {
+  "cls": "rogue",
+  "name": "Backstab",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "eviscerate": {
+  "cls": "rogue",
+  "name": "Eviscerate",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "evasion": {
+  "cls": "rogue",
+  "name": "Evasion",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "stealth": {
+  "cls": "rogue",
+  "name": "Stealth",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": true,
+  "roles": [
+   "impact",
+   "precast"
+  ]
+ },
+ "gouge": {
+  "cls": "rogue",
+  "name": "Gouge",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact"
+  ]
+ },
+ "sap": {
+  "cls": "rogue",
+  "name": "Sap",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "sprint": {
+  "cls": "rogue",
+  "name": "Sprint",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "kick": {
+  "cls": "rogue",
+  "name": "Kick",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "blind": {
+  "cls": "rogue",
+  "name": "Blind",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "feint": {
+  "cls": "rogue",
+  "name": "Feint",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "distract": {
+  "cls": "rogue",
+  "name": "Distract",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "pick-pocket": {
+  "cls": "rogue",
+  "name": "Pick Pocket",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "throw": {
+  "cls": "rogue",
+  "name": "Throw",
+  "status": "fallback",
+  "via": "none",
+  "starter": false,
+  "roles": []
+ },
+ "instant-poison": {
+  "cls": "rogue",
+  "name": "Instant Poison",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "crippling-poison": {
+  "cls": "rogue",
+  "name": "Crippling Poison",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "mind-numbing-poison": {
+  "cls": "rogue",
+  "name": "Mind-numbing Poison",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "remorseless-attacks": {
+  "cls": "rogue",
+  "name": "Remorseless Attacks",
+  "status": "fallback",
+  "via": "none",
+  "starter": false,
+  "roles": []
+ },
+ "vigor": {
+  "cls": "rogue",
+  "name": "Vigor",
+  "status": "fallback",
+  "via": "none",
+  "starter": false,
+  "roles": []
+ },
+ "opportunity": {
+  "cls": "rogue",
+  "name": "Opportunity",
+  "status": "fallback",
+  "via": "none",
+  "starter": false,
+  "roles": []
+ },
+ "lethality": {
+  "cls": "rogue",
+  "name": "Lethality",
+  "status": "fallback",
+  "via": "none",
+  "starter": false,
+  "roles": []
+ },
+ "rupture": {
+  "cls": "rogue",
+  "name": "Rupture",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "garrote": {
+  "cls": "rogue",
+  "name": "Garrote",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "ambush": {
+  "cls": "rogue",
+  "name": "Ambush",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "cheap-shot": {
+  "cls": "rogue",
+  "name": "Cheap Shot",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact"
+  ]
+ },
+ "slice-and-dice": {
+  "cls": "rogue",
+  "name": "Slice and Dice",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast"
+  ]
+ },
+ "vanish": {
+  "cls": "rogue",
+  "name": "Vanish",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast"
+  ]
+ },
+ "riposte": {
+  "cls": "rogue",
+  "name": "Riposte",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "impact"
+  ]
+ },
+ "ghostly-strike": {
+  "cls": "rogue",
+  "name": "Ghostly Strike",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "deadly-poison": {
+  "cls": "rogue",
+  "name": "Deadly Poison",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "wound-poison": {
+  "cls": "rogue",
+  "name": "Wound Poison",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "expose-armor": {
+  "cls": "rogue",
+  "name": "Expose Armor",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "premeditation": {
+  "cls": "rogue",
+  "name": "Premeditation",
+  "status": "fallback",
+  "via": "none",
+  "starter": false,
+  "roles": []
+ },
+ "blade-flurry": {
+  "cls": "rogue",
+  "name": "Blade Flurry",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "cold-blood": {
+  "cls": "rogue",
+  "name": "Cold Blood",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "preparation": {
+  "cls": "rogue",
+  "name": "Preparation",
+  "status": "fallback",
+  "via": "none",
+  "starter": false,
+  "roles": []
+ },
+ "kidney-shot": {
+  "cls": "rogue",
+  "name": "Kidney Shot",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact"
+  ]
+ },
+ "hemorrhage": {
+  "cls": "rogue",
+  "name": "Hemorrhage",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "seal-fate": {
+  "cls": "rogue",
+  "name": "Seal Fate",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "ruthlessness": {
+  "cls": "rogue",
+  "name": "Ruthlessness",
+  "status": "fallback",
+  "via": "none",
+  "starter": false,
+  "roles": []
+ },
+ "adrenaline-rush": {
+  "cls": "rogue",
+  "name": "Adrenaline Rush",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "lightning-bolt": {
+  "cls": "shaman",
+  "name": "Lightning Bolt",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact",
+   "missile",
+   "precast"
+  ]
+ },
+ "earth-shock": {
+  "cls": "shaman",
+  "name": "Earth Shock",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "healing-wave": {
+  "cls": "shaman",
+  "name": "Healing Wave",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "stoneskin-totem": {
+  "cls": "shaman",
+  "name": "Stoneskin Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": true,
+  "roles": [
+   "impact"
+  ]
+ },
+ "searing-totem": {
+  "cls": "shaman",
+  "name": "Searing Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": true,
+  "roles": [
+   "impact"
+  ]
+ },
+ "flame-shock": {
+  "cls": "shaman",
+  "name": "Flame Shock",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "missile",
+   "precast"
+  ]
+ },
+ "frost-shock": {
+  "cls": "shaman",
+  "name": "Frost Shock",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "purge": {
+  "cls": "shaman",
+  "name": "Purge",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "fire-nova-totem": {
+  "cls": "shaman",
+  "name": "Fire Nova Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "earthbind-totem": {
+  "cls": "shaman",
+  "name": "Earthbind Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "rockbiter-weapon": {
+  "cls": "shaman",
+  "name": "Rockbiter Weapon",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "flametongue-weapon": {
+  "cls": "shaman",
+  "name": "Flametongue Weapon",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "frostbrand-weapon": {
+  "cls": "shaman",
+  "name": "Frostbrand Weapon",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "lightning-shield": {
+  "cls": "shaman",
+  "name": "Lightning Shield",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "stoneclaw-totem": {
+  "cls": "shaman",
+  "name": "Stoneclaw Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "strength-of-earth-totem": {
+  "cls": "shaman",
+  "name": "Strength of Earth Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "ghost-wolf": {
+  "cls": "shaman",
+  "name": "Ghost Wolf",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "lesser-healing-wave": {
+  "cls": "shaman",
+  "name": "Lesser Healing Wave",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "healing-stream-totem": {
+  "cls": "shaman",
+  "name": "Healing Stream Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "mana-spring-totem": {
+  "cls": "shaman",
+  "name": "Mana Spring Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "tremor-totem": {
+  "cls": "shaman",
+  "name": "Tremor Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "chain-lightning": {
+  "cls": "shaman",
+  "name": "Chain Lightning",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "magma-totem": {
+  "cls": "shaman",
+  "name": "Magma Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "flametongue-totem": {
+  "cls": "shaman",
+  "name": "Flametongue Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "windfury-weapon": {
+  "cls": "shaman",
+  "name": "Windfury Weapon",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "grace-of-air-totem": {
+  "cls": "shaman",
+  "name": "Grace of Air Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "poison-cleansing-totem": {
+  "cls": "shaman",
+  "name": "Poison Cleansing Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "disease-cleansing-totem": {
+  "cls": "shaman",
+  "name": "Disease Cleansing Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "fire-resistance-totem": {
+  "cls": "shaman",
+  "name": "Fire Resistance Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "frost-resistance-totem": {
+  "cls": "shaman",
+  "name": "Frost Resistance Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "nature-resistance-totem": {
+  "cls": "shaman",
+  "name": "Nature Resistance Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "sentry-totem": {
+  "cls": "shaman",
+  "name": "Sentry Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "windfury-totem": {
+  "cls": "shaman",
+  "name": "Windfury Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "grounding-totem": {
+  "cls": "shaman",
+  "name": "Grounding Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "mana-tide-totem": {
+  "cls": "shaman",
+  "name": "Mana Tide Totem",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "chain-heal": {
+  "cls": "shaman",
+  "name": "Chain Heal",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "reincarnation": {
+  "cls": "shaman",
+  "name": "Reincarnation",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "ancestral-spirit": {
+  "cls": "shaman",
+  "name": "Ancestral Spirit",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "stormstrike": {
+  "cls": "shaman",
+  "name": "Stormstrike",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact",
+   "precast"
+  ]
+ },
+ "elemental-mastery": {
+  "cls": "shaman",
+  "name": "Elemental Mastery",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "shadow-bolt": {
+  "cls": "warlock",
+  "name": "Shadow Bolt",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact",
+   "missile",
+   "precast"
+  ]
+ },
+ "corruption": {
+  "cls": "warlock",
+  "name": "Corruption",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "life-tap": {
+  "cls": "warlock",
+  "name": "Life Tap",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "demon-skin": {
+  "cls": "warlock",
+  "name": "Demon Skin",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "summon-imp": {
+  "cls": "warlock",
+  "name": "Summon Imp",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "immolate": {
+  "cls": "warlock",
+  "name": "Immolate",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "curse-of-agony": {
+  "cls": "warlock",
+  "name": "Curse of Agony",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "curse-of-weakness": {
+  "cls": "warlock",
+  "name": "Curse of Weakness",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "drain-life": {
+  "cls": "warlock",
+  "name": "Drain Life",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "drain-soul": {
+  "cls": "warlock",
+  "name": "Drain Soul",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "searing-pain": {
+  "cls": "warlock",
+  "name": "Searing Pain",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "fear": {
+  "cls": "warlock",
+  "name": "Fear",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "summon-voidwalker": {
+  "cls": "warlock",
+  "name": "Summon Voidwalker",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "health-funnel": {
+  "cls": "warlock",
+  "name": "Health Funnel",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "curse-of-recklessness": {
+  "cls": "warlock",
+  "name": "Curse of Recklessness",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "curse-of-tongues": {
+  "cls": "warlock",
+  "name": "Curse of Tongues",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "shadow-ward": {
+  "cls": "warlock",
+  "name": "Shadow Ward",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "create-healthstone": {
+  "cls": "warlock",
+  "name": "Create Healthstone",
+  "status": "partial",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "precast"
+  ]
+ },
+ "create-soulstone": {
+  "cls": "warlock",
+  "name": "Create Soulstone",
+  "status": "partial",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "precast"
+  ]
+ },
+ "curse-of-exhaustion": {
+  "cls": "warlock",
+  "name": "Curse of Exhaustion",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "curse-of-the-elements": {
+  "cls": "warlock",
+  "name": "Curse of the Elements",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "summon-succubus": {
+  "cls": "warlock",
+  "name": "Summon Succubus",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "summon-felhunter": {
+  "cls": "warlock",
+  "name": "Summon Felhunter",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "howl-of-terror": {
+  "cls": "warlock",
+  "name": "Howl of Terror",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "soul-fire": {
+  "cls": "warlock",
+  "name": "Soul Fire",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "missile",
+   "precast"
+  ]
+ },
+ "siphon-life": {
+  "cls": "warlock",
+  "name": "Siphon Life",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "drain-mana": {
+  "cls": "warlock",
+  "name": "Drain Mana",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "rain-of-fire": {
+  "cls": "warlock",
+  "name": "Rain of Fire",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "hellfire": {
+  "cls": "warlock",
+  "name": "Hellfire",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "death-coil": {
+  "cls": "warlock",
+  "name": "Death Coil",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "missile",
+   "precast"
+  ]
+ },
+ "dark-pact": {
+  "cls": "warlock",
+  "name": "Dark Pact",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "demon-armor": {
+  "cls": "warlock",
+  "name": "Demon Armor",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "banish": {
+  "cls": "warlock",
+  "name": "Banish",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "curse-of-shadow": {
+  "cls": "warlock",
+  "name": "Curse of Shadow",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "shadowburn": {
+  "cls": "warlock",
+  "name": "Shadowburn",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "conflagrate": {
+  "cls": "warlock",
+  "name": "Conflagrate",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "soul-link": {
+  "cls": "warlock",
+  "name": "Soul Link",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "demonic-sacrifice": {
+  "cls": "warlock",
+  "name": "Demonic Sacrifice",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "fel-domination": {
+  "cls": "warlock",
+  "name": "Fel Domination",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "enslave-demon": {
+  "cls": "warlock",
+  "name": "Enslave Demon",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "amplify-curse": {
+  "cls": "warlock",
+  "name": "Amplify Curse",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "inferno": {
+  "cls": "warlock",
+  "name": "Inferno",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "curse-of-doom": {
+  "cls": "warlock",
+  "name": "Curse of Doom",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "ritual-of-doom": {
+  "cls": "warlock",
+  "name": "Ritual of Doom",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "healthstone": {
+  "cls": "warlock",
+  "name": "Healthstone",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "cast"
+  ]
+ },
+ "soulstone": {
+  "cls": "warlock",
+  "name": "Soulstone",
+  "status": "fallback",
+  "via": "none",
+  "starter": false,
+  "roles": []
+ },
+ "heroic-strike": {
+  "cls": "warrior",
+  "name": "Heroic Strike",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "impact"
+  ]
+ },
+ "inner-rage": {
+  "cls": "warrior",
+  "name": "Inner Rage",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "impact"
+  ]
+ },
+ "shield-block": {
+  "cls": "warrior",
+  "name": "Shield Block",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast"
+  ]
+ },
+ "charge": {
+  "cls": "warrior",
+  "name": "Charge",
+  "status": "real",
+  "via": "exact",
+  "starter": true,
+  "roles": [
+   "cast"
+  ]
+ },
+ "rend": {
+  "cls": "warrior",
+  "name": "Rend",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "thunder-clap": {
+  "cls": "warrior",
+  "name": "Thunder Clap",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact"
+  ]
+ },
+ "hamstring": {
+  "cls": "warrior",
+  "name": "Hamstring",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "cleave": {
+  "cls": "warrior",
+  "name": "Cleave",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "sunder-armor": {
+  "cls": "warrior",
+  "name": "Sunder Armor",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "battle-shout": {
+  "cls": "warrior",
+  "name": "Battle Shout",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast"
+  ]
+ },
+ "demoralizing-shout": {
+  "cls": "warrior",
+  "name": "Demoralizing Shout",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "bloodrage": {
+  "cls": "warrior",
+  "name": "Bloodrage",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "pummel": {
+  "cls": "warrior",
+  "name": "Pummel",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "shield-bash": {
+  "cls": "warrior",
+  "name": "Shield Bash",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "revenge": {
+  "cls": "warrior",
+  "name": "Revenge",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "taunt": {
+  "cls": "warrior",
+  "name": "Taunt",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "mocking-blow": {
+  "cls": "warrior",
+  "name": "Mocking Blow",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "piercing-howl": {
+  "cls": "warrior",
+  "name": "Piercing Howl",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact"
+  ]
+ },
+ "disarm": {
+  "cls": "warrior",
+  "name": "Disarm",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "impact"
+  ]
+ },
+ "intercept": {
+  "cls": "warrior",
+  "name": "Intercept",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast"
+  ]
+ },
+ "slam": {
+  "cls": "warrior",
+  "name": "Slam",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "overpower": {
+  "cls": "warrior",
+  "name": "Overpower",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "execute": {
+  "cls": "warrior",
+  "name": "Execute",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "berserker-rage": {
+  "cls": "warrior",
+  "name": "Berserker Rage",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "intimidating-shout": {
+  "cls": "warrior",
+  "name": "Intimidating Shout",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "challenging-shout": {
+  "cls": "warrior",
+  "name": "Challenging Shout",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "retaliation": {
+  "cls": "warrior",
+  "name": "Retaliation",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "sweeping-strikes": {
+  "cls": "warrior",
+  "name": "Sweeping Strikes",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "whirlwind": {
+  "cls": "warrior",
+  "name": "Whirlwind",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "concussion-blow": {
+  "cls": "warrior",
+  "name": "Concussion Blow",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "impact"
+  ]
+ },
+ "battle-stance": {
+  "cls": "warrior",
+  "name": "Battle Stance",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast"
+  ]
+ },
+ "defensive-stance": {
+  "cls": "warrior",
+  "name": "Defensive Stance",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast"
+  ]
+ },
+ "berserker-stance": {
+  "cls": "warrior",
+  "name": "Berserker Stance",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast"
+  ]
+ },
+ "mortal-strike": {
+  "cls": "warrior",
+  "name": "Mortal Strike",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "bloodthirst": {
+  "cls": "warrior",
+  "name": "Bloodthirst",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "shield-slam": {
+  "cls": "warrior",
+  "name": "Shield Slam",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "shield-wall": {
+  "cls": "warrior",
+  "name": "Shield Wall",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "last-stand": {
+  "cls": "warrior",
+  "name": "Last Stand",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "cast"
+  ]
+ },
+ "death-wish": {
+  "cls": "warrior",
+  "name": "Death Wish",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "flurry": {
+  "cls": "warrior",
+  "name": "Flurry",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "recklessness": {
+  "cls": "warrior",
+  "name": "Recklessness",
+  "status": "real",
+  "via": "exact",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "goblin-sapper-charge": {
+  "cls": "neutral",
+  "name": "Goblin Sapper Charge",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "thorium-grenade": {
+  "cls": "neutral",
+  "name": "Thorium Grenade",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "missile",
+   "precast"
+  ]
+ },
+ "iron-grenade": {
+  "cls": "neutral",
+  "name": "Iron Grenade",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "missile",
+   "precast"
+  ]
+ },
+ "dense-dynamite": {
+  "cls": "neutral",
+  "name": "Dense Dynamite",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "aura",
+   "impact",
+   "missile",
+   "precast"
+  ]
+ },
+ "heavy-runecloth-bandage": {
+  "cls": "neutral",
+  "name": "Heavy Runecloth Bandage",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "hearthstone": {
+  "cls": "neutral",
+  "name": "Hearthstone",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "goblin-rocket-helmet": {
+  "cls": "neutral",
+  "name": "Goblin Rocket Helmet",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "gnomish-death-ray": {
+  "cls": "neutral",
+  "name": "Gnomish Death Ray",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "gnomish-net-o-matic-projector": {
+  "cls": "neutral",
+  "name": "Gnomish Net-o-Matic Projector",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "goblin-mortar": {
+  "cls": "neutral",
+  "name": "Goblin Mortar",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "aura",
+   "impact",
+   "missile"
+  ]
+ },
+ "flash-bomb": {
+  "cls": "neutral",
+  "name": "Flash Bomb",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "aura",
+   "impact",
+   "missile",
+   "precast"
+  ]
+ },
+ "big-iron-bomb": {
+  "cls": "neutral",
+  "name": "Big Iron Bomb",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "impact",
+   "missile",
+   "precast"
+  ]
+ },
+ "target-dummy": {
+  "cls": "neutral",
+  "name": "Target Dummy",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast",
+   "precast"
+  ]
+ },
+ "gnomish-shrink-ray": {
+  "cls": "neutral",
+  "name": "Gnomish Shrink Ray",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "goblin-jumper-cables": {
+  "cls": "neutral",
+  "name": "Goblin Jumper Cables",
+  "status": "real",
+  "via": "borrowed",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "discombobulator-ray": {
+  "cls": "neutral",
+  "name": "Discombobulator Ray",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "skull-of-impending-doom": {
+  "cls": "neutral",
+  "name": "Skull of Impending Doom",
+  "status": "real",
+  "via": "borrowed",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "missile",
+   "precast"
+  ]
+ },
+ "nifty-stopwatch": {
+  "cls": "neutral",
+  "name": "Nifty Stopwatch",
+  "status": "fallback",
+  "via": "none",
+  "starter": false,
+  "roles": []
+ },
+ "linkens-boomerang": {
+  "cls": "neutral",
+  "name": "Linken's Boomerang",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "missile",
+   "precast"
+  ]
+ },
+ "furbolg-medicine-pouch": {
+  "cls": "neutral",
+  "name": "Furbolg Medicine Pouch",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "dense-sharpening-stone": {
+  "cls": "neutral",
+  "name": "Dense Sharpening Stone",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "impact"
+  ]
+ },
+ "brilliant-mana-oil": {
+  "cls": "neutral",
+  "name": "Brilliant Mana Oil",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "cast",
+   "precast"
+  ]
+ },
+ "brilliant-wizard-oil": {
+  "cls": "neutral",
+  "name": "Brilliant Wizard Oil",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "cast",
+   "precast"
+  ]
+ },
+ "major-healing-potion-card": {
+  "cls": "neutral",
+  "name": "Major Healing Potion",
+  "status": "partial",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "precast"
+  ]
+ },
+ "free-action-potion-card": {
+  "cls": "neutral",
+  "name": "Free Action Potion",
+  "status": "partial",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "precast"
+  ]
+ },
+ "elixir-of-the-mongoose-card": {
+  "cls": "neutral",
+  "name": "Elixir of the Mongoose",
+  "status": "partial",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "precast"
+  ]
+ },
+ "flask-of-the-titans-card": {
+  "cls": "neutral",
+  "name": "Flask of the Titans",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "corrupted": {
+  "cls": "status",
+  "name": "Corrupted Blood",
+  "status": "real",
+  "via": "sibling-rank",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact"
+  ]
+ },
+ "madness": {
+  "cls": "status",
+  "name": "Madness",
+  "status": "real",
+  "via": "borrowed",
+  "starter": false,
+  "roles": [
+   "aura",
+   "cast"
+  ]
+ },
+ "twilight-curse": {
+  "cls": "status",
+  "name": "Twilight Curse",
+  "status": "real",
+  "via": "borrowed",
+  "starter": false,
+  "roles": [
+   "cast",
+   "impact",
+   "precast"
+  ]
+ },
+ "mojache-insight": {
+  "cls": "status",
+  "name": "Mojache Insight",
+  "status": "fallback",
+  "via": "none",
+  "starter": false,
+  "roles": []
+ }
+}

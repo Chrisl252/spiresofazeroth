@@ -78,9 +78,20 @@ function voice(list, url, kind, loop) {
   }
   list.push(v);
   el.volume = 0;
-  const p = el.play(); if (p && p.catch) p.catch(() => { v.t = 0; v.dead = true; });
+  const p = el.play(); if (p && p.catch) p.catch(() => {
+    v.t = 0; v.dead = true;
+    if (kind === "music") retryMusic(); // a refused start (autoplay timing, load blip) must not silence the zone's music for good
+  });
   startTick();
   return v;
+}
+let retryArmed = false;
+function retryMusic() {
+  if (retryArmed || typeof document === "undefined") return;
+  retryArmed = true; curKey = null; // the next apply() rebuilds the playlist instead of skipping "same zone"
+  const go = () => { retryArmed = false; document.removeEventListener("pointerdown", go, true); document.removeEventListener("keydown", go, true); apply(); };
+  document.addEventListener("pointerdown", go, true);
+  document.addEventListener("keydown", go, true);
 }
 function startTick() { if (!timer) { lastT = performance.now(); timer = setInterval(tick, 50); } }
 function tick() {

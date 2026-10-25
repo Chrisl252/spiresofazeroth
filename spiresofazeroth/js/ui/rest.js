@@ -39,7 +39,8 @@ export async function render(app, name) {
     opts.append(
       mk("spell_holy_prayerofhealing", "Rest", `Heal ${heal} HP.`, () => restOverlay(app, host, { flare, onConfirm: () => { restHeal(run, data); app.save(); redraw(); } }), hub && pd.used.heal),
       mk("inv_misc_gear_01", hub ? "Class trainer" : "Upgrade", hub ? `Learn the next rank of a spell (${(zone.trainer || {}).upgradeCost || 75} gold).` : "Upgrade one card.", () => upgradeModal(hub ? (zone.trainer || {}).upgradeCost || 75 : 0), hub && (pd.used.trainer || run.gold < ((zone.trainer || {}).upgradeCost || 75))));
-    if (zone && zone.rest) opts.append(mk(zone.rest.icon || "spell_nature_healingtouch", zone.rest.name || "Campfire", zone.rest.text || "", () => { restZoneAction(run, data); app.save(); redraw(); }, hub && pd.used.zone));
+    if (hub && zone && zone.rest) opts.append( // campfires = Rest OR Upgrade only (the zone rest is another heal); the hub keeps it
+      mk(zone.rest.icon || "spell_nature_healingtouch", zone.rest.name || "Campfire", zone.rest.text || "", () => { restZoneAction(run, data); app.save(); redraw(); }, hub && pd.used.zone));
     const canvas = h("canvas", { class: "sx-rest__fire", width: 900, height: 560, "aria-hidden": "true" });
     const body = h("div", { class: "sx-rest__body" },
       banner(hub ? (zone ? zone.name : "Moonglade") : "Campfire", hub ? "A safe haven between acts. Do as much as you like." : spent() ? "You have rested." : "Choose one."),

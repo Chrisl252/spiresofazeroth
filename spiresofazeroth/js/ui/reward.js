@@ -6,15 +6,15 @@ import { runBar } from "./runbar.js";
 import { needsLoot, showLoot, buildLootFrame } from "./loot.js";
 import { getKit, clearStage } from "./combatKit.js";
 import { gearLevel } from "../engine/gear.js";
-import { SLOT_LABEL, wouldReplace } from "../engine/gear.js";
+import { goesToBag, SLOT_LABEL, wouldReplace } from "../engine/gear.js";
 import { beltEl } from "./belt.js";
 
 export const stageNative = true;
 
 export function relicBtn(app, id, onClick, extra = null) {
   const r = app.data.relic(id) || { name: id, text: "", icon: null, rarity: "common" };
-  const old = r.slot ? app.data.relic(wouldReplace(app.run, app.data, id)) : null; // gear: jewellery takes a socket, swapping the weakest when full
-  const note = r.slot ? h("span", { class: "sx-plate__slot" }, `${SLOT_LABEL[r.slot] || ""}${old ? ` - replaces ${old.name}` : ""}`) : null;
+  const old = r.slot ? app.data.relic(wouldReplace(app.run, app.data, id)) : null; // gear: a free/starter socket equips, worn gear is never displaced
+  const note = r.slot ? h("span", { class: "sx-plate__slot" }, `${SLOT_LABEL[r.slot] || ""}${goesToBag(app.run, app.data, id) ? " - goes to your Gear Bag" : old ? ` - replaces ${old.name}` : ""}`) : null;
   return plate({ ic: r.icon, title: r.name, text: r.text, onClick, q: qClass(r.rarity), extra: extra || note, cls: "sx-plate--relic", size: "sm" });
 }
 
@@ -40,7 +40,7 @@ export async function render(app, name) {
       const taken = pd.taken || !pd.relic;
       return [runBar(app), h("div", { class: "sx-reward__body" },
         banner("Treasure", "The chest creaks open."),
-        h("div", { class: "sx-loot" }, goldPlate(pd.gold), pd.gear && app.data.relic(pd.gear.id) ? plate({ ic: app.data.relic(pd.gear.id).icon, title: app.data.relic(pd.gear.id).name, text: `${SLOT_LABEL[app.data.relic(pd.gear.id).slot] || ""}: equipped. ${app.data.relic(pd.gear.id).text}`, q: qClass(app.data.relic(pd.gear.id).rarity), cls: "sx-plate--relic sx-plate--static", size: "sm" }) : null, pd.relic && !pd.taken ? relicBtn(app, pd.relic, () => { takeRelic(run, data, pd.relic); app.save(); redraw(); }) : null),
+        h("div", { class: "sx-loot" }, goldPlate(pd.gold), pd.gear && app.data.relic(pd.gear.id) ? plate({ ic: app.data.relic(pd.gear.id).icon, title: app.data.relic(pd.gear.id).name, text: `${SLOT_LABEL[app.data.relic(pd.gear.id).slot] || ""}: ${pd.gear.bagged ? "in your Gear Bag" : "equipped"}. ${app.data.relic(pd.gear.id).text}`, q: qClass(app.data.relic(pd.gear.id).rarity), cls: "sx-plate--relic sx-plate--static", size: "sm" }) : null, pd.relic && !pd.taken ? relicBtn(app, pd.relic, () => { takeRelic(run, data, pd.relic); app.save(); redraw(); }) : null),
         taken ? h("p", { class: "sx-reward__note" }, pd.relic ? "Relic taken." : "The chest holds nothing else.") : h("p", { class: "sx-reward__note" }, "Take the relic, then press on."),
         h("div", { class: "sx-reward__go" }, btn("Continue", go, { size: "lg", auto: true })))];
     }
@@ -73,7 +73,7 @@ export async function render(app, name) {
       const choosing = loot.pending();
       goBtn.disabled = choosing;
       goBtn.classList.toggle("is-ready", !goBtn.disabled);
-      hint.textContent = choosing ? "Choose one relic from the loot." : !decided() ? "Choose a card, or continue without one." : "Take what you want, then continue.";
+      hint.textContent = choosing ? "Choose one piece of loot, or Pass." : !decided() ? "Choose a card, or continue without one." : "Take what you want, then continue.";
     }
     function paintLeft() {
       left.replaceChildren();

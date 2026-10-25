@@ -6,6 +6,7 @@
   "lore": "Master of stealth, daggers, and lethal toxins: build rapid Combo Points from the shadows and execute foes with brutal finishers.",
   "startingHp": 70,
   "startingGold": 99,
+  "novice": {"hp": 10, "enemyHp": 0.8},
   "defaultContinent": "ek",
   "spellIdSource": "memory",
   "resource": {

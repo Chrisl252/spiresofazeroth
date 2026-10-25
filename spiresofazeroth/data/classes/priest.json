@@ -6,6 +6,7 @@
   "lore": "Master of Holy Light and Shadow madness: protect yourself with sacred Power Word shields, or enter Shadowform to siphon life from enemies.",
   "startingHp": 75,
   "startingGold": 99,
+  "novice": {"hp": 10, "enemyHp": 0.8},
   "defaultContinent": "ek",
   "resource": {
     "id": "form",

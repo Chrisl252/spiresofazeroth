@@ -6,6 +6,7 @@
   "lore": "Tactical marksman and beastmaster: commands a faithful beast companion to intercept hits, arms defensive traps, and snipes from safety.",
   "startingHp": 75,
   "startingGold": 99,
+  "novice": {"hp": 18, "enemyHp": 0.74},
   "defaultContinent": "ek",
   "resource": {
     "id": "pet",

@@ -14,8 +14,8 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "hp",
-      "per": 4
+      "key": "hun_pet_hp",
+      "per": 2
      }
     },
     {
@@ -26,7 +26,7 @@
      "col": 1,
      "max": 5,
      "effect": {
-      "key": "str",
+      "key": "hun_hawk_dmg",
       "per": 1
      }
     },
@@ -38,9 +38,20 @@
      "col": 0,
      "max": 3,
      "effect": {
-      "key": "armor",
-      "per": 1
-     }
+      "key": "hun_pet_block",
+      "per": 2
+     },
+     "extra": [
+      {
+       "key": "h_armor",
+       "per": 1,
+       "vals": [
+        0,
+        0,
+        1
+       ]
+      }
+     ]
     },
     {
      "id": "hunter:beast-mastery:3",
@@ -50,8 +61,8 @@
      "col": 1,
      "max": 2,
      "effect": {
-      "key": "gold",
-      "per": 20
+      "key": "hun_open_block",
+      "per": 3
      }
     },
     {
@@ -62,7 +73,7 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "str",
+      "key": "hun_pet_dmg",
       "per": 1
      }
     },
@@ -74,9 +85,24 @@
      "col": 1,
      "max": 2,
      "effect": {
-      "key": "heal",
-      "per": 15
-     }
+      "key": "hun_pet_revive",
+      "per": 30,
+      "vals": [
+       30,
+       60
+      ]
+     },
+     "extra": [
+      {
+       "key": "card_cost",
+       "per": 1,
+       "arg": "revive-pet",
+       "vals": [
+        0,
+        1
+       ]
+      }
+     ]
     },
     {
      "id": "hunter:beast-mastery:6",
@@ -86,8 +112,8 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "thorns",
-      "per": 1
+      "key": "hun_pet_crit",
+      "per": 2
      }
     },
     {
@@ -98,8 +124,8 @@
      "col": 1,
      "max": 2,
      "effect": {
-      "key": "regen",
-      "per": 3
+      "key": "hun_bond_heal",
+      "per": 1
      }
     },
     {
@@ -110,8 +136,11 @@
      "col": 0,
      "max": 1,
      "effect": {
-      "key": "energy1",
-      "per": 1
+      "key": "hun_pet_swift",
+      "per": 2,
+      "vals": [
+       2
+      ]
      }
     },
     {
@@ -122,7 +151,7 @@
      "col": 1,
      "max": 3,
      "effect": {
-      "key": "draw1",
+      "key": "hun_frenzy",
       "per": 1
      }
     },
@@ -134,8 +163,8 @@
      "col": 0,
      "max": 2,
      "effect": {
-      "key": "hp",
-      "per": 8
+      "key": "hun_pack_dmg",
+      "per": 1
      }
     },
     {
@@ -146,9 +175,29 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "str",
-      "per": 4
-     }
+      "key": "hun_wrath",
+      "per": 15,
+      "vals": [
+       15
+      ]
+     },
+     "extra": [
+      {
+       "key": "hun_wrath_start",
+       "per": 1,
+       "vals": [
+        1
+       ]
+      },
+      {
+       "key": "card_cost",
+       "per": 1,
+       "arg": "bestial-wrath",
+       "vals": [
+        1
+       ]
+      }
+     ]
     }
    ]
   },
@@ -165,8 +214,8 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "goldpct",
-      "per": 4
+      "key": "hun_first_shot",
+      "per": 3
      }
     },
     {
@@ -177,8 +226,8 @@
      "col": 1,
      "max": 5,
      "effect": {
-      "key": "str",
-      "per": 1
+      "key": "hun_shot_crit",
+      "per": 5
      }
     },
     {
@@ -189,9 +238,17 @@
      "col": 0,
      "max": 3,
      "effect": {
-      "key": "str",
-      "per": 1
-     }
+      "key": "card_apply",
+      "per": 2,
+      "arg": "hunters-mark:marked"
+     },
+     "extra": [
+      {
+       "key": "card_apply",
+       "per": 1,
+       "arg": "beast-lore:marked"
+      }
+     ]
     },
     {
      "id": "hunter:marksmanship:3",
@@ -201,9 +258,23 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "draw1",
-      "per": 1
-     }
+      "key": "grant",
+      "per": 1,
+      "arg": "aimed-shot",
+      "vals": [
+       1
+      ]
+     },
+     "extra": [
+      {
+       "key": "card_dmg",
+       "per": 1,
+       "arg": "aimed-shot",
+       "vals": [
+        10
+       ]
+      }
+     ]
     },
     {
      "id": "hunter:marksmanship:4",
@@ -213,8 +284,8 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "str",
-      "per": 1
+      "key": "hun_crit_bonus",
+      "per": 6
      }
     },
     {
@@ -225,7 +296,7 @@
      "col": 1,
      "max": 3,
      "effect": {
-      "key": "hp",
+      "key": "hun_shot_block",
       "per": 4
      }
     },
@@ -237,8 +308,9 @@
      "col": 0,
      "max": 3,
      "effect": {
-      "key": "draw1",
-      "per": 1
+      "key": "card_dmg",
+      "per": 2,
+      "arg": "multi-shot,volley,arcane-shot"
      }
     },
     {
@@ -249,9 +321,22 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "energy1",
-      "per": 1
-     }
+      "key": "first_stun",
+      "per": 1,
+      "vals": [
+       1
+      ]
+     },
+     "extra": [
+      {
+       "key": "card_dmg",
+       "per": 1,
+       "arg": "scatter-shot",
+       "vals": [
+        4
+       ]
+      }
+     ]
     },
     {
      "id": "hunter:marksmanship:8",
@@ -261,7 +346,7 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "str",
+      "key": "hun_shot_dmg",
       "per": 1
      }
     },
@@ -273,8 +358,8 @@
      "col": 1,
      "max": 3,
      "effect": {
-      "key": "str",
-      "per": 2
+      "key": "hun_marked_dmg",
+      "per": 1
      }
     },
     {
@@ -285,8 +370,11 @@
      "col": 0,
      "max": 1,
      "effect": {
-      "key": "energy1",
-      "per": 1
+      "key": "hun_silence",
+      "per": 2,
+      "vals": [
+       2
+      ]
      }
     },
     {
@@ -297,9 +385,22 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "str",
-      "per": 4
-     }
+      "key": "hun_aura_crit",
+      "per": 4,
+      "vals": [
+       4
+      ]
+     },
+     "extra": [
+      {
+       "key": "grant",
+       "per": 1,
+       "arg": "trueshot-aura",
+       "vals": [
+        1
+       ]
+      }
+     ]
     }
    ]
   },
@@ -316,9 +417,15 @@
      "col": 0,
      "max": 3,
      "effect": {
-      "key": "str",
-      "per": 1
-     }
+      "key": "hun_slayer",
+      "per": 4
+     },
+     "extra": [
+      {
+       "key": "hun_slay_all",
+       "per": 1
+      }
+     ]
     },
     {
      "id": "hunter:survival:1",
@@ -328,8 +435,8 @@
      "col": 1,
      "max": 5,
      "effect": {
-      "key": "dex",
-      "per": 1
+      "key": "deflect",
+      "per": 5
      }
     },
     {
@@ -340,9 +447,23 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "thorns",
+      "key": "hun_trap_weak",
       "per": 2
-     }
+     },
+     "extra": [
+      {
+       "key": "grant",
+       "per": 1,
+       "arg": "freezing-trap",
+       "vals": [
+        1,
+        1,
+        1,
+        1,
+        1
+       ]
+      }
+     ]
     },
     {
      "id": "hunter:survival:3",
@@ -352,9 +473,16 @@
      "col": 1,
      "max": 2,
      "effect": {
-      "key": "energy1",
-      "per": 1
-     }
+      "key": "hun_melee_crit",
+      "per": 15
+     },
+     "extra": [
+      {
+       "key": "card_dmg",
+       "per": 3,
+       "arg": "raptor-strike"
+      }
+     ]
     },
     {
      "id": "hunter:survival:4",
@@ -364,8 +492,8 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "hp",
-      "per": 5
+      "key": "hun_kill_heal",
+      "per": 6
      }
     },
     {
@@ -376,9 +504,19 @@
      "col": 1,
      "max": 2,
      "effect": {
-      "key": "draw1",
-      "per": 1
-     }
+      "key": "hun_trap_block",
+      "per": 6
+     },
+     "extra": [
+      {
+       "key": "hun_trap_draw",
+       "per": 1,
+       "vals": [
+        0,
+        1
+       ]
+      }
+     ]
     },
     {
      "id": "hunter:survival:6",
@@ -388,9 +526,23 @@
      "col": 0,
      "max": 1,
      "effect": {
-      "key": "block",
-      "per": 8
-     }
+      "key": "grant",
+      "per": 1,
+      "arg": "deterrence",
+      "vals": [
+       1
+      ]
+     },
+     "extra": [
+      {
+       "key": "card_block",
+       "per": 4,
+       "arg": "deterrence",
+       "vals": [
+        4
+       ]
+      }
+     ]
     },
     {
      "id": "hunter:survival:7",
@@ -400,9 +552,31 @@
      "col": 1,
      "max": 3,
      "effect": {
-      "key": "thorns",
-      "per": 2
-     }
+      "key": "hun_trap_dmg",
+      "per": 4
+     },
+     "extra": [
+      {
+       "key": "grant",
+       "per": 1,
+       "arg": "immolation-trap",
+       "vals": [
+        1,
+        1,
+        1
+       ]
+      },
+      {
+       "key": "grant",
+       "per": 1,
+       "arg": "explosive-trap",
+       "vals": [
+        0,
+        0,
+        1
+       ]
+      }
+     ]
     },
     {
      "id": "hunter:survival:8",
@@ -412,9 +586,21 @@
      "col": 0,
      "max": 2,
      "effect": {
-      "key": "thorns",
-      "per": 3
-     }
+      "key": "grant",
+      "per": 1,
+      "arg": "counterattack",
+      "vals": [
+       1,
+       1
+      ]
+     },
+     "extra": [
+      {
+       "key": "card_dmg",
+       "per": 3,
+       "arg": "counterattack"
+      }
+     ]
     },
     {
      "id": "hunter:survival:9",
@@ -424,7 +610,7 @@
      "col": 1,
      "max": 3,
      "effect": {
-      "key": "str",
+      "key": "wounded_dmg",
       "per": 2
      }
     },
@@ -436,8 +622,8 @@
      "col": 0,
      "max": 3,
      "effect": {
-      "key": "dex",
-      "per": 1
+      "key": "turn_block",
+      "per": 2
      }
     },
     {
@@ -448,9 +634,31 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "regen",
-      "per": 4
-     }
+      "key": "grant",
+      "per": 1,
+      "arg": "wyvern-sting",
+      "vals": [
+       1
+      ]
+     },
+     "extra": [
+      {
+       "key": "card_dmg",
+       "per": 3,
+       "arg": "wyvern-sting",
+       "vals": [
+        3
+       ]
+      },
+      {
+       "key": "card_apply",
+       "per": 5,
+       "arg": "wyvern-sting:poison",
+       "vals": [
+        5
+       ]
+      }
+     ]
     }
    ]
   }

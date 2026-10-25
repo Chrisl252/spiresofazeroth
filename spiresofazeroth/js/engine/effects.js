@@ -6,7 +6,7 @@
 //   C is null in run-mode (events, shop, rest, pickup): only run-level ops take effect (hp, gold, deck, max hp).
 import { dealDamage, dealStatusDamage, gainBlock, healEntity, isAlive, fx, log } from "./damage.js";
 import { applyStatus, removeStatus, modeOf, STATUS_DEFS, hasTrait } from "./status.js";
-import { drawCards, addCards, toDiscard, toExhaust, makeInst, hasFlag } from "./deck.js";
+import { drawCards, addCards, toDiscard, toExhaust, makeInst, hasFlag, HAND_LIMIT } from "./deck.js";
 import {
   addRes, spendRes, summonAlly, placeTotem, petAct, judge, revivePet, sacrificePet, randomPetId, petTargetable,
 } from "./resources.js";
@@ -332,10 +332,15 @@ op("draw", (ctx, e) => {
   let n = Math.max(0, Math.floor(num(ctx, e.count, 1)));
   if (ctx.srcKind !== "enemy") {
     const left = Math.max(0, MAX_EFFECT_DRAWS_PER_TURN - (C.effectDraws || 0));
+    if (n > left) C.drawBlocked = "cap"; // the combat UI tells the player why the draw stopped
     n = Math.min(n, left);
     C.effectDraws = (C.effectDraws || 0) + n;
   }
-  if (n > 0) drawCards(C, n);
+  if (n > 0) {
+    const before = C.pile.hand.length;
+    drawCards(C, n);
+    if (ctx.srcKind !== "enemy" && C.pile.hand.length - before < n && C.pile.hand.length >= HAND_LIMIT) C.drawBlocked = "hand";
+  }
 });
 
 function pickCards(ctx, count, random, why) {

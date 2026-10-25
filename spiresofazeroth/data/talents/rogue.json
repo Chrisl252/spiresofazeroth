@@ -14,8 +14,8 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "str",
-      "per": 1
+      "key": "rog_finisher_crit",
+      "per": 4
      }
     },
     {
@@ -26,8 +26,12 @@
      "col": 1,
      "max": 2,
      "effect": {
-      "key": "energy1",
-      "per": 1
+      "key": "rog_remorseless",
+      "per": 1,
+      "vals": [
+       6,
+       12
+      ]
      }
     },
     {
@@ -38,8 +42,13 @@
      "col": 0,
      "max": 3,
      "effect": {
-      "key": "res",
-      "per": 2
+      "key": "rog_ruthless",
+      "per": 1,
+      "vals": [
+       20,
+       40,
+       60
+      ]
      }
     },
     {
@@ -50,9 +59,15 @@
      "col": 1,
      "max": 2,
      "effect": {
-      "key": "goldpct",
-      "per": 5
-     }
+      "key": "wounded_dmg",
+      "per": 2
+     },
+     "extra": [
+      {
+       "key": "rog_kill_heal",
+       "per": 3
+      }
+     ]
     },
     {
      "id": "rogue:assassination:4",
@@ -62,9 +77,28 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "thorns",
-      "per": 2
-     }
+      "key": "rog_atk_poison",
+      "per": 1,
+      "vals": [
+       1,
+       1,
+       1,
+       1,
+       2
+      ]
+     },
+     "extra": [
+      {
+       "key": "card_apply",
+       "per": 1,
+       "arg": "deadly-poison:poison"
+      },
+      {
+       "key": "card_apply",
+       "per": 1,
+       "arg": "instant-poison:poison"
+      }
+     ]
     },
     {
      "id": "rogue:assassination:5",
@@ -74,7 +108,7 @@
      "col": 1,
      "max": 2,
      "effect": {
-      "key": "res",
+      "key": "rog_finisher_block",
       "per": 2
      }
     },
@@ -86,8 +120,8 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "str",
-      "per": 1
+      "key": "rog_builder_dmg",
+      "per": 2
      }
     },
     {
@@ -98,9 +132,20 @@
      "col": 1,
      "max": 2,
      "effect": {
-      "key": "draw1",
-      "per": 1
-     }
+      "key": "card_dmg",
+      "per": 4,
+      "arg": "kidney-shot"
+     },
+     "extra": [
+      {
+       "key": "grant",
+       "per": 1,
+       "arg": "kidney-shot",
+       "vals": [
+        1
+       ]
+      }
+     ]
     },
     {
      "id": "rogue:assassination:8",
@@ -110,7 +155,7 @@
      "col": 0,
      "max": 1,
      "effect": {
-      "key": "energy1",
+      "key": "rog_combo_start",
       "per": 1
      }
     },
@@ -122,8 +167,8 @@
      "col": 1,
      "max": 3,
      "effect": {
-      "key": "res",
-      "per": 3
+      "key": "rog_seal_fate",
+      "per": 25
      }
     },
     {
@@ -134,9 +179,19 @@
      "col": 0,
      "max": 3,
      "effect": {
-      "key": "thorns",
+      "key": "rog_poison_dmg",
       "per": 2
-     }
+     },
+     "extra": [
+      {
+       "key": "grant",
+       "per": 1,
+       "arg": "wound-poison",
+       "vals": [
+        1
+       ]
+      }
+     ]
     },
     {
      "id": "rogue:assassination:11",
@@ -146,9 +201,19 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "free_cast",
+      "key": "rog_cold_blood",
       "per": 1
-     }
+     },
+     "extra": [
+      {
+       "key": "grant",
+       "per": 1,
+       "arg": "cold-blood",
+       "vals": [
+        1
+       ]
+      }
+     ]
     }
    ]
   },
@@ -165,8 +230,9 @@
      "col": 0,
      "max": 2,
      "effect": {
-      "key": "res",
-      "per": 2
+      "key": "card_dmg",
+      "per": 8,
+      "arg": "sinister-strike"
      }
     },
     {
@@ -177,8 +243,8 @@
      "col": 1,
      "max": 5,
      "effect": {
-      "key": "dex",
-      "per": 1
+      "key": "rog_dodge",
+      "per": 6
      }
     },
     {
@@ -189,8 +255,9 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "block",
-      "per": 3
+      "key": "card_block",
+      "per": 4,
+      "arg": "evasion,feint,riposte"
      }
     },
     {
@@ -201,8 +268,8 @@
      "col": 1,
      "max": 5,
      "effect": {
-      "key": "str",
-      "per": 1
+      "key": "crit",
+      "per": 5
      }
     },
     {
@@ -213,9 +280,21 @@
      "col": 0,
      "max": 2,
      "effect": {
-      "key": "hp",
-      "per": 8
-     }
+      "key": "card_apply",
+      "per": 1,
+      "arg": "blind:weak"
+     },
+     "extra": [
+      {
+       "key": "card_noexhaust",
+       "per": 1,
+       "arg": "blind",
+       "vals": [
+        0,
+        1
+       ]
+      }
+     ]
     },
     {
      "id": "rogue:combat:5",
@@ -225,9 +304,24 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "thorns",
-      "per": 4
-     }
+      "key": "block_revenge",
+      "per": 5
+     },
+     "extra": [
+      {
+       "key": "grant",
+       "per": 1,
+       "arg": "riposte",
+       "vals": [
+        1
+       ]
+      },
+      {
+       "key": "card_dmg",
+       "per": 2,
+       "arg": "riposte"
+      }
+     ]
     },
     {
      "id": "rogue:combat:6",
@@ -237,9 +331,27 @@
      "col": 0,
      "max": 1,
      "effect": {
-      "key": "draw1",
-      "per": 1
-     }
+      "key": "attack_draw",
+      "per": 1,
+      "vals": [
+       5
+      ]
+     },
+     "extra": [
+      {
+       "key": "grant",
+       "per": 1,
+       "arg": "blade-flurry",
+       "vals": [
+        1
+       ]
+      },
+      {
+       "key": "card_dmg",
+       "per": 3,
+       "arg": "blade-flurry"
+      }
+     ]
     },
     {
      "id": "rogue:combat:7",
@@ -249,8 +361,15 @@
      "col": 1,
      "max": 5,
      "effect": {
-      "key": "str",
-      "per": 1
+      "key": "rog_second_strike",
+      "per": 1,
+      "vals": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ]
      }
     },
     {
@@ -261,8 +380,8 @@
      "col": 0,
      "max": 2,
      "effect": {
-      "key": "str",
-      "per": 2
+      "key": "heavy_hit",
+      "per": 1
      }
     },
     {
@@ -273,8 +392,8 @@
      "col": 1,
      "max": 3,
      "effect": {
-      "key": "str",
-      "per": 2
+      "key": "rog_finisher_dmg",
+      "per": 1
      }
     },
     {
@@ -285,8 +404,8 @@
      "col": 0,
      "max": 2,
      "effect": {
-      "key": "res",
-      "per": 3
+      "key": "hurt_heal",
+      "per": 1
      }
     },
     {
@@ -297,8 +416,11 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "energy1",
-      "per": 2
+      "key": "rog_rush",
+      "per": 1,
+      "vals": [
+       1
+      ]
      }
     }
    ]
@@ -316,9 +438,18 @@
      "col": 0,
      "max": 5,
      "effect": {
-      "key": "stealth",
-      "per": 1
-     }
+      "key": "rog_stealth_dmg",
+      "per": 3
+     },
+     "extra": [
+      {
+       "key": "rog_start_stealth",
+       "per": 1,
+       "vals": [
+        1
+       ]
+      }
+     ]
     },
     {
      "id": "rogue:subtlety:1",
@@ -328,8 +459,9 @@
      "col": 1,
      "max": 5,
      "effect": {
-      "key": "str",
-      "per": 1
+      "key": "card_dmg",
+      "per": 5,
+      "arg": "backstab,ambush,opportunity,cheap-shot"
      }
     },
     {
@@ -340,9 +472,25 @@
      "col": 0,
      "max": 2,
      "effect": {
-      "key": "gold",
-      "per": 25
-     }
+      "key": "card_dmg",
+      "per": 3,
+      "arg": "pick-pocket"
+     },
+     "extra": [
+      {
+       "key": "card_noexhaust",
+       "per": 1,
+       "arg": "pick-pocket",
+       "vals": [
+        0,
+        1
+       ]
+      },
+      {
+       "key": "gold",
+       "per": 25
+      }
+     ]
     },
     {
      "id": "rogue:subtlety:3",
@@ -352,9 +500,25 @@
      "col": 1,
      "max": 2,
      "effect": {
-      "key": "dex",
-      "per": 1
-     }
+      "key": "card_block",
+      "per": 4,
+      "arg": "vanish"
+     },
+     "extra": [
+      {
+       "key": "card_cost",
+       "per": 1,
+       "arg": "vanish",
+       "vals": [
+        0,
+        1
+       ]
+      },
+      {
+       "key": "rog_dodge",
+       "per": 5
+      }
+     ]
     },
     {
      "id": "rogue:subtlety:4",
@@ -364,9 +528,20 @@
      "col": 0,
      "max": 3,
      "effect": {
-      "key": "stealth",
-      "per": 1
-     }
+      "key": "rog_start_stealth",
+      "per": 1,
+      "vals": [
+       1,
+       1,
+       1
+      ]
+     },
+     "extra": [
+      {
+       "key": "rog_stealth_block",
+       "per": 2
+      }
+     ]
     },
     {
      "id": "rogue:subtlety:5",
@@ -376,8 +551,13 @@
      "col": 1,
      "max": 3,
      "effect": {
-      "key": "res",
-      "per": 2
+      "key": "rog_initiative",
+      "per": 1,
+      "vals": [
+       34,
+       67,
+       100
+      ]
      }
     },
     {
@@ -388,9 +568,19 @@
      "col": 0,
      "max": 1,
      "effect": {
-      "key": "block",
-      "per": 8
-     }
+      "key": "grant",
+      "per": 1,
+      "arg": "ghostly-strike",
+      "vals": [
+       1
+      ]
+     },
+     "extra": [
+      {
+       "key": "deflect",
+       "per": 15
+      }
+     ]
     },
     {
      "id": "rogue:subtlety:7",
@@ -400,9 +590,21 @@
      "col": 1,
      "max": 3,
      "effect": {
-      "key": "str",
-      "per": 2
-     }
+      "key": "bleed_dmg",
+      "per": 1
+     },
+     "extra": [
+      {
+       "key": "card_apply",
+       "per": 1,
+       "arg": "rupture:bleed"
+      },
+      {
+       "key": "card_apply",
+       "per": 1,
+       "arg": "garrote:bleed"
+      }
+     ]
     },
     {
      "id": "rogue:subtlety:8",
@@ -412,8 +614,12 @@
      "col": 0,
      "max": 2,
      "effect": {
-      "key": "draw1",
-      "per": 1
+      "key": "rog_first_strike",
+      "per": 1,
+      "vals": [
+       1,
+       2
+      ]
      }
     },
     {
@@ -424,8 +630,8 @@
      "col": 1,
      "max": 3,
      "effect": {
-      "key": "str",
-      "per": 2
+      "key": "rog_debuff_dmg",
+      "per": 1
      }
     },
     {
@@ -436,8 +642,8 @@
      "col": 0,
      "max": 2,
      "effect": {
-      "key": "res",
-      "per": 3
+      "key": "rog_premed",
+      "per": 1
      }
     },
     {
@@ -448,7 +654,7 @@
      "col": 1,
      "max": 1,
      "effect": {
-      "key": "free_cast",
+      "key": "rog_prep",
       "per": 1
      }
     }

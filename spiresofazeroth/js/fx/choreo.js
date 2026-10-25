@@ -5,6 +5,7 @@ import { createParticles, mulberry32 } from "./particles.js";
 import { createNumbers } from "./numbers.js";
 import { PALETTE, ELEMENTS, KINDS, elementFor, kindFor } from "./elements.js";
 import { runLook, needsTarget } from "./cardfx.js";
+import { createRealPlayer } from "./realplay.js";   // real WoW spell art (data/fx/real.json); falls back to the recipe look
 
 export { elementFor, kindFor, PALETTE, ELEMENTS, KINDS };
 export const ENEMY_RECIPES = ["claw", "bite", "steel", "spit", "slam"];
@@ -36,6 +37,7 @@ export function createFx(hostEl, o = {}) {
   let k = 1, sheets = null, L = null, P = null, looks = {}; const fxState = {};
   const rng = mulberry32(o.seed || 20261017);
   const timers = [], actors = [], auras = new Map();
+  const real = createRealPlayer({ root: o.root, v: o.v });
   const stats = { frames: 0, msSum: 0, msMax: 0, peakParticles: 0, peakSheets: 0 };
 
   // DOM: canvas + dom layer (numbers/banner/flash) inside the host
@@ -330,6 +332,12 @@ export function createFx(hostEl, o = {}) {
       } };
     auras.set(key, a); actors.push(a); wake(); return a;
   }
+  /** persistent real-art aura: `insts` = looping m2emit instances; clearAura(key) stops them (same contract as aura()) */
+  function setAura(key, insts) {
+    clearAura(key);
+    const a = { done: false, dying: false, update() { if (a.dying) { insts.forEach((i) => i && i.stop()); a.done = true; } }, draw() {} };
+    auras.set(key, a); actors.push(a); wake();
+  }
   function clearAura(key) {
     if (key === undefined) { for (const a of auras.values()) a.dying = true; auras.clear(); return; }
     const a = auras.get(key); if (a) { a.dying = true; auras.delete(key); }
@@ -338,7 +346,7 @@ export function createFx(hostEl, o = {}) {
   // ---- public API -----------------------------------------------------------------------------------------------------------------------
   /** play("fire:attack" | "enemy:claw" | "claw" | {element,kind} | card, {from,to,fromUid,toUid,amount,onImpact,scale,persist,key}) */
   async function play(spec, opts = {}) {
-    await ready;
+    await ready; await real.ready;
     let el, kind, enemy = null;
     if (typeof spec === "string") {
       const s = spec.replace(/^enem<local path> "");
@@ -352,6 +360,11 @@ export function createFx(hostEl, o = {}) {
     const c = makeCtx(opts, enemy ? "steel" : el);
     // per-card spell look (data/fx/cards.json); element x kind recipes below stay as the fallback
     const lk = !enemy && looks[(spec && spec.id) || opts.cardId];
+    const rl = !enemy && !opts.noReal && real.entryFor((spec && spec.id) || opts.cardId);
+    if (rl && (kind === "attack" || kind === "skill" || kind === "power" || kind === "heal")) {
+      await Promise.race([real.ensure(rl, 450), new Promise((r) => setTimeout(r, 500))]);
+      return new Promise((resolve) => { real.run({ c, L, P, at, actors, wake, numbers, impactCore, projectile, settle, mix, rng, state: fxState, clock: () => clock, aura, hitStop, setAura }, rl, kind, resolve, lk); wake(); });
+    }
     if (lk && !(needsTarget(lk) && kind !== "attack" && !opts.to)) {
       return new Promise((resolve) => { runLook({ c, L, P, at, actors, wake, numbers, impactCore, projectile, settle, mix, rng, state: fxState, clock: () => clock, aura, hitStop }, lk, kind, resolve); wake(); });
     }
@@ -363,7 +376,7 @@ export function createFx(hostEl, o = {}) {
   }
 
   const api = {
-    ready, canvas, numbers, play, elementFor, kindFor, at, after, aura, clearAura, hitStop,
+    ready, canvas, numbers, play, real, elementFor, kindFor, at, after, aura, clearAura, hitStop,
     banner: (t, o2) => numbers.banner(t, o2), kick: (a) => numbers.kick(a), flash: (p, o2) => numbers.flash(p, o2),
     get speed() { return speed; }, set speed(v) { speed = clamp(+v || 1, 0.25, 4); },
     get reduced() { return reduced; }, set reduced(v) { reduced = !!v; if (P) P.setReduced(reduced); },
@@ -371,7 +384,7 @@ export function createFx(hostEl, o = {}) {
     get particles() { return P; }, get sheets() { return L; },
     stats: () => ({ ...stats, avgMs: stats.frames ? stats.msSum / stats.frames : 0, alive: P ? P.count : 0, sheetsAlive: L ? L.count : 0, k }),
     resetStats() { stats.frames = 0; stats.msSum = 0; stats.msMax = 0; stats.peakParticles = 0; stats.peakSheets = 0; },
-    clear() { timers.length = 0; actors.length = 0; auras.clear(); if (L) L.clear(); if (P) P.clear(); },
+    clear() { real.clear(); timers.length = 0; actors.length = 0; auras.clear(); if (L) L.clear(); if (P) P.clear(); },
     destroy() { api.clear(); cancelAnimationFrame(raf); canvas.remove(); dom.remove(); },
   };
   return api;

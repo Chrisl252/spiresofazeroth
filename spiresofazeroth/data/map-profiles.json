@@ -131,13 +131,13 @@
    "eliteTier": 0.5,
    "extra": {
     "elite": 1,
-    "boss": 2
+    "boss": 1
    },
    "combatMods": {
     "enemyHpMult": {
      "normal": 1.0,
-     "elite": 1.2,
-     "boss": 1.4
+     "elite": 1.1,
+     "boss": 1.2
     }
    },
    "goldMult": 0.6,
@@ -272,9 +272,9 @@
    },
    "combatMods": {
     "enemyHpMult": {
-     "normal": 1.3,
-     "elite": 1.4,
-     "boss": 1.45
+     "normal": 1.15,
+     "elite": 1.25,
+     "boss": 1.25
     }
    },
    "goldMult": 0.8,

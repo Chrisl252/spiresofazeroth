@@ -24,17 +24,17 @@ export function speedMul(app) {
   return d > 0 ? 1000 / d : 1;
 }
 
-const ZOOM = 0.8; // StS2 framing: landscape actors at 80% so the scene reads zoomed out with room around the cast
+const ZOOM = 0.68; // StS2 framing 1:1 (measured off a StS2 1080p frame): hero body ~23% of screen height, feet on y ~730
 export function lanesFor(stage) {
   const g = stage.groundY;
   if (!stage.portrait) { // StS2 layout: hero left, enemies on the right third, all feet on one band
     return {
-      hero: { x: 560, y: g, s: ZOOM },
+      hero: { x: 483, y: g, s: ZOOM },
       enemy(i, n) {
-        if (n <= 1) return { x: 1360, y: g, s: ZOOM };
-        if (n === 2) return { x: [1260, 1480][i], y: g, s: ZOOM };
-        if (n === 3) return { x: [1160, 1370, 1580][i], y: g, s: ZOOM };
-        return { x: 1000 + i * (800 / (n - 1)), y: g, s: (n >= 6 ? 0.72 : n === 5 ? 0.8 : 0.88) * ZOOM }; // 4-6 enemies: fill the enemy side, shrink a little
+        if (n <= 1) return { x: 1432, y: g, s: ZOOM };
+        if (n === 2) return { x: [1310, 1560][i], y: g, s: ZOOM };
+        if (n === 3) return { x: [1186, 1432, 1683][i], y: g, s: ZOOM };
+        return { x: 1080 + i * (680 / (n - 1)), y: g, s: (n >= 6 ? 0.72 : n === 5 ? 0.8 : 0.88) * ZOOM }; // 4-6 enemies: fill the enemy side, shrink a little
       },
     };
   }

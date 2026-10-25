@@ -9,14 +9,14 @@ import { buildEnemy, chooseMove, enemyAct, checkPhases } from "./intents.js";
 import { applyStatus, turnStart, turnEnd, roundEnd, modeOf } from "./status.js";
 import { fire } from "./relics.js";
 import { makeRng } from "./rng.js";
-import { heroicMods } from "./heroic.js";
+import { heroicMods, noviceOf } from "./heroic.js";
 import { talentCarryBlock, talentNoExhaust, talentSweep } from "./talentHooks.js";
 
 // map-profile tuning (data/map-profiles.json combatMods) layered on the heroic modifiers: hp multiplies, strengths add
-function composeMods(h, z, tier) {
-  if (!z) return h;
+function composeMods(h, z, tier, nov = 1) {
+  if (!z) return nov !== 1 ? { ...h, enemyHpMult: h.enemyHpMult * nov } : h;
   const hp = typeof z.enemyHpMult === "object" && z.enemyHpMult ? z.enemyHpMult[tier] || 1 : z.enemyHpMult || 1; // number = all tiers, or { normal, elite, boss }
-  return { ...h, enemyHpMult: h.enemyHpMult * hp, normalStrength: h.normalStrength + (z.normalStrength || 0), eliteStrength: h.eliteStrength + (z.eliteStrength || 0), bossStrength: h.bossStrength + (z.bossStrength || 0) };
+  return { ...h, enemyHpMult: h.enemyHpMult * hp * nov, normalStrength: h.normalStrength + (z.normalStrength || 0), eliteStrength: h.eliteStrength + (z.eliteStrength || 0), bossStrength: h.bossStrength + (z.bossStrength || 0) };
 }
 
 export const BASE_DRAW = 5;
@@ -27,7 +27,7 @@ export function startCombat(o) {
   const cls = data.classObj(run.classId);
   const C = {
     data, run, cls, classId: run.classId, zone: o.zone || null, tier: o.tier || "normal", rng: o.rng || makeRng(run.seed + "|combat"),
-    enemyDefs: o.enemyDefs || {}, interactive: !!o.interactive, heroicMods: composeMods(heroicMods(run.heroic || 0), o.zoneMods, o.tier),
+    enemyDefs: o.enemyDefs || {}, interactive: !!o.interactive, heroicMods: composeMods(heroicMods(run.heroic || 0), o.zoneMods, o.tier, run.talents ? 1 : noviceOf(cls, run.act).enemyHp),
     turn: 0, phase: "setup", result: null, log: [], fx: [], uidSeq: 0, actionId: 0, enemies: [], relics: run.relics.slice(),
     potions: run.potions, stats: { damageDealt: 0, damageTaken: 0, cardsPlayed: 0, kills: 0, turns: 0 }, pending: [], powers: [],
     lastSchool: null, lastCardId: null, lastTarget: null, coldDrain: 0, endTurnRequested: false,
@@ -108,7 +108,7 @@ export function startPlayerTurn(C, first = false) {
   C.phase = "player";
   C.endTurnRequested = false;
   C.cardsThisTurn = 0;
-  C.effectDraws = 0; // per-turn cap on effect-driven draws (effects.js MAX_EFFECT_DRAWS_PER_TURN)
+  C.effectDraws = 0; C.drawBlocked = null; // per-turn cap on effect-driven draws (effects.js MAX_EFFECT_DRAWS_PER_TURN)
   p.windfuryUsed = false;
   if (p.st.retain_block > 0) { p.st.retain_block -= 1; if (p.st.retain_block <= 0) delete p.st.retain_block; }
   else p.block = talentCarryBlock(C, p.block); // 0 unless Improved Shield Block (Talents V2)

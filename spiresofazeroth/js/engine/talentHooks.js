@@ -10,6 +10,7 @@ import { applyStatus } from "./status.js";
 import { gainBlock, healEntity, isAlive, fx, log, dealDamage } from "./damage.js";
 import { drawCards } from "./deck.js";
 import { runEffects } from "./effects.js";
+import { classFire, classDeal, classTaken } from "./talents-v2/hooks.js"; // per-class V2 runtimes
 import { HEAVY_HIT, ENRAGE_RAGE, GUARD_BLOCK, LAST_STAND, SWEEP_RAGE, RAGE_PER_DMG, WOUNDED_PCT } from "./talentHookDefs.js";
 
 const T = (C) => (C && C.run && C.run.talents) || null;
@@ -22,6 +23,7 @@ const usesRage = (C) => !!(C.cls && C.cls.resource && C.cls.resource.id === "rag
 // ---- relic-bus handler (relics.fire -> here, every event name) -------------------------------------------------------------------
 export function talentFire(C, name, extra = {}) {
   if (!T(C)) return;
+  classFire(C, name, extra);
   const S = st(C), p = C.player;
   if (name === "on_combat_start") {
     const armor = tv(C, "h_armor");
@@ -72,7 +74,9 @@ export function talentFire(C, name, extra = {}) {
 // ---- dealing damage (damage.js, after damageBonus; preview.js passes dry:true) ---------------------------------------------------
 /** base = the hit's amount before any modifier. Returns the adjusted running amount. */
 export function talentDamage(C, src, tgt, amt, o, base) {
-  if (!T(C) || !src || src.kind !== "player" || !tgt || tgt.kind !== "enemy" || o.kind === "thorns") return amt;
+  if (!T(C) || !tgt || tgt.kind !== "enemy" || o.kind === "thorns") return amt;
+  amt = classDeal(C, src, tgt, amt, o, base); // per-class hooks see every hit (spells, pets, totems)
+  if (!src || src.kind !== "player") return amt;
   const def = o.card;
   if (!isAttack(def)) return amt;
   const S = st(C), p = C.player;
@@ -94,6 +98,7 @@ export function talentDamage(C, src, tgt, amt, o, base) {
 }
 /** damage the player is about to take from an enemy attack (after takenAdjust) */
 export function talentTaken(C, tgt, taken, src, o) {
+  if (T(C) && tgt && tgt.kind === "player" && taken > 0) taken = classTaken(C, tgt, taken, src, o);
   if (!T(C) || !tgt || tgt.kind !== "player" || !src || src.kind !== "enemy" || (o.kind || "attack") !== "attack" || taken <= 0) return taken;
   let a = taken;
   const dw = tv(C, "death_wish"); if (dw > 0) a = Math.floor(a * (100 + Math.floor(dw / 2)) / 100);

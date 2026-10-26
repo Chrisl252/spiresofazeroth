@@ -80,28 +80,22 @@ No download, no login, no microtransactions, and no ads. Play directly in your w
 
 Spires of Azeroth is built with vanilla ES Modules and Three.js — no build steps, bundlers, or transpilers required!
 
-### Quick Start
+### Quick Start (play it on your own computer)
 
-1. **Get the source.** The game is the `spiresofazeroth/` folder (plus `tools/spires/` and `tests/test_spires_static.py`) of the TheWoWDB site repository; the standalone public mirror is `https://github.com/Chrisl252/spires-of-azeroth`.
-   ```bash
-   git clone https://github.com/Chrisl252/spires-of-azeroth.git
-   cd spires-of-azeroth
-   ```
-   **Blizzard art and audio are not in the repository.** Icons, 3D character models, spell sounds, UI textures and fonts stay on thewowdb.com (they are Blizzard's, see Legal below). `tools/spires/dev-server.mjs` fetches anything missing locally from the live site, so a fresh clone runs with full art; a plain static server shows the game logic without the art.
+Yes, you can download it and play offline-ish on your own machine. You need **Node.js 18+** (free, https://nodejs.org) and an internet connection the first time, because the Blizzard art and sounds are fetched from thewowdb.com (see below).
 
-2. **Serve with any static HTTP server:**
-   ```bash
-   # Using npx serve:
-   npx serve .
+```bash
+git clone https://github.com/Chrisl252/spiresofazeroth.git
+cd spiresofazeroth
+node tools/spires/dev-server.mjs 8766
+```
 
-   # Or using Python:
-   python -m http.server 8000
+Then open **http://localhost:8766/spiresofazeroth/** in your browser. That is the whole setup: no `npm install`, no build step.
 
-   # Or using the built-in dev server:
-   node tools/spires/dev-server.mjs 8766
-   ```
-
-3. Open `http://localhost:8000/spiresofazeroth/` (or `http://localhost:8766/spiresofazeroth/`) in your browser.
+- **Why the dev server:** Blizzard icons, 3D character models, spell sounds, UI textures and fonts are not in this repository (they are Blizzard's, see Legal below). `tools/spires/dev-server.mjs` serves the game from your clone and fetches only those missing art and audio files from the live site, so a fresh clone runs with full art. A plain static server (`npx serve`, `python -m http.server`) runs the game logic but shows no art or sound.
+- **Your progress** (characters, talents, settings) is saved in your browser's local storage, separate from the live site's.
+- **Different port:** `node tools/spires/dev-server.mjs 9000`, then use that port in the URL.
+- **Fully offline:** point `WGF_ASSETS` and `WGF_SOUNDS` at your own copies of the art and audio.
 
 ---
 

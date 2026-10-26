@@ -11,10 +11,11 @@ const cache = new Map(); // slug -> Promise<ArrayBuffer>
 
 export function createRaceViewer(host, { reduced = () => false } = {}) {
   const canvas = document.createElement("canvas");
+  const touch = typeof matchMedia === "function" && matchMedia("(pointer: coarse)").matches; // phones/tablets: tight GPU memory, so no MSAA and a lower pixel ratio
   canvas.className = "cc-model__canvas";
   host.append(canvas);
   let renderer;
-  try { renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "low-power" }); } catch (e) { canvas.remove(); return { show: async () => false, dispose() {}, ok: false }; }
+  try { renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: !touch, powerPreference: "low-power" }); } catch (e) { canvas.remove(); return { show: async () => false, dispose() {}, ok: false }; }
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.setClearColor(0x000000, 0);
   const scene = new THREE.Scene();
@@ -23,11 +24,13 @@ export function createRaceViewer(host, { reduced = () => false } = {}) {
   const key = new THREE.DirectionalLight(0xffd7a0, 2.2); key.position.set(-2, 4, 5); scene.add(key);
   const rim = new THREE.DirectionalLight(0x78a4ff, 1.2); rim.position.set(3, 2, -4); scene.add(rim);
   const pivot = new THREE.Group(); scene.add(pivot);
+  canvas.addEventListener("webglcontextlost", (e) => { e.preventDefault(); host.dataset.model = ""; host.classList.add("cc-model--none"); }); // GPU dropped the context (mobile memory pressure): hide the canvas, no crash
+  canvas.addEventListener("webglcontextrestored", () => { host.classList.remove("cc-model--none"); if (raceId) { const slug = raceId; raceId = ""; show(slug); } });
   let model = null, raf = 0, t0 = performance.now(), drag = 0, dragging = false, lastX = 0, token = 0, dead = false, raceId = "";
 
   function size() {
     const w = Math.max(2, host.clientWidth), h = Math.max(2, host.clientHeight);
-    renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+    renderer.setPixelRatio(Math.min(touch ? 1.25 : 2, window.devicePixelRatio || 1));
     renderer.setSize(w, h, false);
     cam.aspect = w / h; cam.updateProjectionMatrix();
   }
@@ -62,13 +65,25 @@ export function createRaceViewer(host, { reduced = () => false } = {}) {
     if (!cache.has(slug)) cache.set(slug, fetch(`${BASE}${slug}.glb?v=${BUILD}`).then((r) => { if (!r.ok) throw new Error(`${slug} ${r.status}`); return r.arrayBuffer(); }).catch((e) => { cache.delete(slug); throw e; }));
     return cache.get(slug);
   }
-  async function show(slug) {
-    const my = ++token;
+  function free(obj) { // dispose geometry, every material texture slot, and the decoded bitmaps (ImageBitmaps are not GC'd with the GL texture)
+    obj.traverse((o) => {
+      if (o.geometry) o.geometry.dispose();
+      if (o.material) [].concat(o.material).forEach((m) => {
+        for (const k in m) { const t = m[k]; if (t && t.isTexture) { if (t.image && t.image.close) try { t.image.close(); } catch (e) { /* already closed */ } t.dispose(); } }
+        m.dispose();
+      });
+    });
+  }
+  let chain = Promise.resolve(); // one parse at a time: rapid clicks used to decode a dozen models at once and crash phone browsers
+  const show = (slug) => { const my = ++token; const p = chain.then(() => build(slug, my)); chain = p.catch(() => {}); return p; };
+  async function build(slug, my) {
     try {
+      if (dead || my !== token) return false; // superseded by a newer click while queued: skip the decode entirely
       const buf = await load(slug);
-      const gltf = await new Promise((res, rej) => new GLTFLoader().parse(buf.slice(0), BASE, res, rej));
       if (dead || my !== token) return false;
-      if (model) { pivot.remove(model); model.traverse((o) => { if (o.geometry) o.geometry.dispose(); if (o.material) [].concat(o.material).forEach((m) => { if (m.map) m.map.dispose(); m.dispose(); }); }); }
+      const gltf = await new Promise((res, rej) => new GLTFLoader().parse(buf.slice(0), BASE, res, rej));
+      if (dead || my !== token) { free(gltf.scene); return false; }
+      if (model) { pivot.remove(model); free(model); }
       model = gltf.scene;
       let skin = null; // the head geoset ships with an unbound material; its UVs sit in the body skin atlas (face is on that sheet), so bind that
       model.traverse((o) => { if (o.material && !skin && o.material.map) skin = o.material.map; });

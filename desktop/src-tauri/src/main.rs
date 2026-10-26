@@ -45,7 +45,7 @@ fn respond(req: Request, status: u16, ctype: &str, body: Vec<u8>) {
     let _ = req.respond(r);
 }
 
-fn handle(app: tauri::AppHandle, cache: PathBuf, req: Request) {
+fn serve_req(app: tauri::AppHandle, cache: PathBuf, req: Request) {
     let raw = req.url().split('?').next().unwrap_or("/").to_string();
     if raw.contains("..") || raw.contains('\\') {
         return respond(req, 400, "text/plain", b"bad path".to_vec());
@@ -98,7 +98,7 @@ fn main() {
             thread::spawn(move || {
                 for req in server.incoming_requests() {
                     let (h, c) = (handle.clone(), cache.clone());
-                    thread::spawn(move || handle(h, c, req));
+                    thread::spawn(move || serve_req(h, c, req));
                 }
             });
             let url = format!("http://127.0.0.1:{port}/spiresofazeroth/");

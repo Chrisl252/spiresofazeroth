@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Spires of Azeroth</string>
+    <string name="title_activity_main">Spires of Azeroth</string>
+    <string name="package_name">com.thewowdb.spiresofazeroth</string>
+    <string name="custom_url_scheme">com.thewowdb.spiresofazeroth</string>
+</resources>

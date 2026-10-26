@@ -1,6 +1,6 @@
 import { BUILD } from "../version.js";
 
-const ENDPOINT = "http<local path>";
+const ENDPOINT = "https://api.thewowdb.com/api/spires/run-end";
 
 function analyticsConsentGranted() {
   try {

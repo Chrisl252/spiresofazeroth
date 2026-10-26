@@ -506,11 +506,11 @@
       "upgrade": {
         "name": "Shadow Bolt (Rank 2)",
         "cost": 1,
-        "text": "Deal 9 shadow damage.",
+        "text": "Deal 12 shadow damage.",
         "effects": [
           {
             "op": "damage",
-            "amount": 9,
+            "amount": 12,
             "school": "shadow"
           }
         ]
@@ -2472,23 +2472,41 @@
       "flags": [
         "exhaust"
       ],
-      "text": "Summon a Doomguard (Rain of Fire, War Stomp, Cripple). Exhaust.",
+      "text": "Summon a Doomguard. It uses Rain of Fire (6 to ALL), War Stomp (Stun) and Cripple (2 Weak) right away, then keeps acting each turn. Exhaust.",
       "effects": [
         {
           "op": "summon",
           "unit": "doomguard",
           "count": 1
+        },
+        {
+          "op": "pet_action"
+        },
+        {
+          "op": "pet_action"
+        },
+        {
+          "op": "pet_action"
         }
       ],
       "upgrade": {
         "name": "Ritual of Doom (Rank 2)",
         "cost": 1,
-        "text": "Summon a Doomguard (Rain of Fire, War Stomp, Cripple). Exhaust. Costs 1.",
+        "text": "Summon a Doomguard. It uses Rain of Fire (6 to ALL), War Stomp (Stun) and Cripple (2 Weak) right away, then keeps acting each turn. Exhaust. Costs 1.",
         "effects": [
           {
             "op": "summon",
             "unit": "doomguard",
             "count": 1
+          },
+          {
+            "op": "pet_action"
+          },
+          {
+            "op": "pet_action"
+          },
+          {
+            "op": "pet_action"
           }
         ]
       }

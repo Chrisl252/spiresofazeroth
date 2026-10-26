@@ -15,10 +15,10 @@ keep their shape; gear is wired through ONE registration line per seam.
 - The relic trigger bus (`js/engine/relics.js`, `fireRun`) is the gear bus. A piece of gear IS a relic
   object (same effect DSL, same triggers) plus: `slot`, `set`, `setPiece`, `item` (classic itemId),
   `icon`, `displayId` (item display, for dressing), `tier` (0 starter, 1 = Tier 1), `stats` text.
-- `run.relics` stays the array of owned ids (so saves/sim/codex keep working) and gains a mirror
-  `run.gear = { head, shoulder, chest, wrist, hands, waist, legs, feet, back, mainHand, offHand,
-  neck, finger1, finger2, trinket1, trinket2 }` (slot -> gear id or null). Equipping fills the slot;
-  a drop for a filled slot upgrades (replaces) it; the old piece's effects stop.
+- `run.relics` contains active relic and equipped gear ids (so saves/sim/codex keep working),
+  `run.gear` maps paper-doll slots to equipped ids, and `run.gearBag` stores unequipped gear ids.
+  Equipping fills the slot; a drop for a filled slot equips the new piece and stores the old non-starter
+  piece in the bag, where its effects remain inactive until equipped again.
 - 16 slots. The 8 armour slots + weapon(s) come from the class's **Tier 1 set** (real classic names,
   item ids, icons from `/assets/icons/`): Warrior Battlegear of Might, Paladin Lawbringer Armor, Hunter
   Giantstalker Armor, Rogue Nightslayer Armor, Priest Vestments of Prophecy, Shaman The Earthfury,
@@ -54,11 +54,13 @@ keep their shape; gear is wired through ONE registration line per seam.
 - **Sound**: the first in-game sound. `js/audio.js` grows a tiny player (HTMLAudio, unlocked on first
   user gesture, default ON with a mute toggle in Settings; remember in localStorage). Ship
   `assets/sfx/loot-coin.ogg` + `.mp3`: the classic "coin loot" / auction-house purchase sound from the
-  site's sound library (WSL `<production path>`, indexed by the sounds pages; search LootCoinSmall /
+  site's sound library (WSL `/srv/wgf-sounds`, indexed by the sounds pages; search LootCoinSmall /
   LootCoinLarge / PutDownCoins / AuctionWindow). Copy the file into the game folder at build time — the
   page never calls `/sounds/`. Also: chest open creak + item "whoosh" if present in the same library.
-- Click/press to continue → the existing reward screen (cards). Equip is automatic; the screen says
-  "Equipped" with a before/after of the slot if it replaced a piece.
+- Click/press to continue → the existing reward screen (cards). Equip is automatic; displaced
+  non-starter gear goes into the run's gear bag rather than being deleted. The bag is available
+  from the run bar outside combat so players can equip stored pieces later; stored pieces do not
+  provide active effects until equipped.
 
 ## 3. The hero dresses up (dressing bake lane)
 
@@ -117,7 +119,7 @@ via the DB; 0 until then).
    `assets/models/hero/*`, `dev/hero-gear.html`, and the `setHero({gearMask})` change in
    `js/stage/actors3d.js` (minimal, backed up).
 Verification, backups, commits by explicit path (prefix `spires v2 gear:` / `spires v2 dress:`), no
-`<production path>`, fresh-profile Chrome only — as in VISUAL_SPEC.md §Verification.
+`/srv/wgf`, fresh-profile Chrome only — as in VISUAL_SPEC.md §Verification.
 
 ## 7. Starter outfit (owner ruling 2026-10-17, supersedes "you start naked")
 - State 0 is the class's real classic starter outfit (wago CharStartOutfit 1.15.9.70003, OutfitID 0, our race/sex pair; list in `data/gear/starter.json`, built by `tools/spires/build-starter.py` from `gear_roster.STARTER`).

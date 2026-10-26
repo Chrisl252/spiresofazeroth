@@ -57,7 +57,7 @@ export async function render(app) {
       h("div", { class: "sx-end__btns" },
         btn("Copy seed", async () => { try { await navigator.clipboard.writeText(run.seed); toast("Seed copied."); } catch (e) { toast(run.seed); } }, { size: "sm" }),
         btn(unlocked.some((u) => u.type === "talent") ? "Spend talents" : "Talents", () => { app.run = null; app.hasSave = false; app.go("talents", { cls: run.classId, back: "classSelect" }); }, { size: "sm" }),
-        btn("New run", () => { app.run = null; app.hasSave = false; app.go("classSelect"); }, { size: "lg", auto: true }),
+        btn("New run", () => { app.run = null; app.hasSave = false; app.go("charSelect"); }, { size: "lg", auto: true }),
         btn("Title", () => { app.run = null; app.hasSave = false; app.go("title"); }, { size: "sm" }))));
   setTimeout(() => mountPortrait(app, screen.querySelector("#end-hero"), { classId: run.classId, gearMask: gearLevel(run), pose: win ? "idle" : "death", pad: 120, leaveEl: screen }), 160);
   return screen;

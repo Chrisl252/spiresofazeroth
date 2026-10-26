@@ -1,0 +1,414 @@
+{
+ "build": "2.5.6.70006",
+ "source": "wago.tools GlobalStrings / CharBaseInfo",
+ "factions": {
+  "alliance": "The Alliance consists of five races: the noble humans, the adventurous dwarves, the enigmatic night elves, the ingenious gnomes, and the honorable draenei. Bound by a loathing for all things demonic, they fight to restore order in this war-torn world.",
+  "horde": "Five races comprise the Horde: the brutal orcs, the shadowy undead, the spiritual tauren, the quick-witted trolls, and the driven blood elves. Beset by enemies on all sides, these outcasts have forged a union they hope will ensure their mutual survival."
+ },
+ "races": [
+  {
+   "key": "human",
+   "raceId": 1,
+   "name": "Human",
+   "faction": "alliance",
+   "zone": "elwynn-forest",
+   "continent": "ek",
+   "info": {
+    "male": "Humans are a young race, and thus highly versatile, mastering the arts of combat, craftsmanship, and magic with stunning efficiency. The humans’ valor and optimism have led them to build some of the world’s greatest kingdoms. In this troubled era, after generations of conflict, humanity seeks to rekindle its former glory and forge a shining new future.",
+    "female": "Humans are a young race, and thus highly versatile, mastering the arts of combat, craftsmanship, and magic with stunning efficiency. The humans’ valor and optimism have led them to build some of the world’s greatest kingdoms. In this troubled era, after generations of conflict, humanity seeks to rekindle its former glory and forge a shining new future."
+   },
+   "abilities": [
+    "- Stealth detection increased.",
+    "- Increased Spirit.",
+    "- Bonus to reputation gains.",
+    "- Increased expertise with Swords and Maces."
+   ],
+   "racials": [
+    "Perception",
+    "The Human Spirit",
+    "Diplomacy",
+    "Sword Specialization / Mace Specialization"
+   ],
+   "classes": [
+    "warrior",
+    "paladin",
+    "rogue",
+    "priest",
+    "mage",
+    "warlock"
+   ]
+  },
+  {
+   "key": "dwarf",
+   "raceId": 3,
+   "name": "Dwarf",
+   "faction": "alliance",
+   "zone": "dun-morogh",
+   "continent": "ek",
+   "info": {
+    "male": "In ages past the dwarves cared only for riches taken from the earth's depths. Then records surfaced of a god-like race said to have given the dwarves life... and an enchanted birthright. Driven to learn more, the dwarves devoted themselves to the pursuit of lost artifacts and ancient knowledge. Today dwarven archaeologists are scattered throughout the globe.",
+    "female": "In ages past, the dwarves cared only for riches taken from the earth's depths. Then records surfaced of a god-like race said to have given the dwarves life... and an enchanted birthright. Driven to learn more, the dwarves devoted themselves to the pursuit of lost artifacts and ancient knowledge. Today dwarven archaeologists are scattered throughout the globe."
+   },
+   "abilities": [
+    "- May take on a stone form.",
+    "- Increased expertise with Guns.",
+    "- Resistant to Frost.",
+    "- Treasure finding."
+   ],
+   "racials": [
+    "Stoneform",
+    "Gun Specialization",
+    "Frost Resistance",
+    "Find Treasure"
+   ],
+   "classes": [
+    "warrior",
+    "paladin",
+    "hunter",
+    "rogue",
+    "priest"
+   ]
+  },
+  {
+   "key": "nightelf",
+   "raceId": 4,
+   "name": "Night Elf",
+   "faction": "alliance",
+   "zone": "teldrassil",
+   "continent": "kal",
+   "info": {
+    "male": "Ten thousand years ago, the night elves founded a vast empire, but their reckless use of primal magic brought them to ruin. In grief, they withdrew to the forests and remained isolated there until the return of their ancient enemy, the Burning Legion. With no other choice, the night elves emerged at last from their seclusion to fight for their place in the new world.",
+    "female": "Ten thousand years ago, the night elves founded a vast empire, but their reckless use of primal magic brought them to ruin. In grief, they withdrew to the forests and remained isolated there until the return of their ancient enemy, the Burning Legion. With no other choice, the night elves emerged at last from their seclusion to fight for their place in the new world."
+   },
+   "abilities": [
+    "- May fade into the shadows.",
+    "- Dodge chance increased.",
+    "- Wisp form while dead.",
+    "- Resistant to Nature damage."
+   ],
+   "racials": [
+    "Shadowmeld",
+    "Quickness",
+    "Wisp Spirit",
+    "Nature Resistance"
+   ],
+   "classes": [
+    "warrior",
+    "hunter",
+    "rogue",
+    "priest",
+    "druid"
+   ]
+  },
+  {
+   "key": "gnome",
+   "raceId": 7,
+   "name": "Gnome",
+   "faction": "alliance",
+   "zone": "dun-morogh",
+   "continent": "ek",
+   "info": {
+    "male": "Though small in stature, the gnomes of Khaz Modan have used their great intellect to secure a place in history. Indeed, their subterranean kingdom, Gnomeregan, was once a marvel of steam-driven technology. Even so, due to a massive trogg invasion, the city was lost. Now its builders are vagabonds in the dwarven lands, aiding their allies as best they can.",
+    "female": "Though small in stature, the clever gnomes of Khaz Modan have used their great intellect to secure a place in history. Their subterranean kingdom of Gnomeregan is a marvel of steam-driven technology, and their skill at both engineering and the arcane arts has been a tremendous benefit to the Alliance across numerous campaigns."
+   },
+   "abilities": [
+    "- May escape from speed altering effects.",
+    "- Increased Intelligence.",
+    "- Resistant to Arcane damage.",
+    "- Engineering skill increased."
+   ],
+   "racials": [
+    "Escape Artist",
+    "Expansive Mind",
+    "Arcane Resistance",
+    "Engineering Specialization"
+   ],
+   "classes": [
+    "warrior",
+    "rogue",
+    "mage",
+    "warlock"
+   ]
+  },
+  {
+   "key": "draenei",
+   "raceId": 11,
+   "name": "Draenei",
+   "faction": "alliance",
+   "zone": null,
+   "continent": "kal",
+   "info": {
+    "male": "Driven from their home world of Argus, the honorable draenei fled the Burning Legion for eons before finding a remote planet to settle on. They shared this world with the shamanistic orcs and named it Draenor. In time the Legion corrupted the orcs, who waged war and nearly exterminated the peaceful draenei. A lucky few fled to Azeroth, where they now seek allies in their battle against the Burning Legion.",
+    "female": "Driven from their home world of Argus, the honorable draenei fled the Burning Legion for eons before finding a remote planet to settle on. They shared this world with the shamanistic orcs and named it Draenor. In time the Legion corrupted the orcs, who waged war and nearly exterminated the peaceful draenei. A lucky few fled to Azeroth, where they now seek allies in their battle against the Burning Legion."
+   },
+   "abilities": [
+    "- Jewelcrafting skill increased.",
+    "- May heal self or others over time.",
+    "- Party members' chance to hit with melee and spells increased.",
+    "- Resistant to Shadow damage."
+   ],
+   "racials": [
+    "Gemcutting",
+    "Gift of the Naaru",
+    "Heroic Presence",
+    "Shadow Resistance"
+   ],
+   "classes": [
+    "warrior",
+    "paladin",
+    "hunter",
+    "priest",
+    "shaman",
+    "mage"
+   ]
+  },
+  {
+   "key": "orc",
+   "raceId": 2,
+   "name": "Orc",
+   "faction": "horde",
+   "zone": "durotar",
+   "continent": "kal",
+   "info": {
+    "male": "The orc race originated on the planet Draenor. A peaceful people with shamanic beliefs, they were enslaved by the Burning Legion and forced into war with the humans of Azeroth. Although it took many years, the orcs finally escaped the demons' corruption and won their freedom. To this day they fight for honor in an alien world that hates and reviles them.",
+    "female": "The orc race originated on the planet Draenor. A peaceful people with shamanic beliefs, they were enslaved by the Burning Legion and forced into war with the humans of Azeroth. Although it took many years, the orcs finally escaped the demons' corruption and won their freedom. To this day they fight for honor in an alien world that hates and reviles them."
+   },
+   "abilities": [
+    "- May enrage, increasing damage but diminishing ability to be healed.",
+    "- Resistant to stun effects.",
+    "- Damage done by pets increased.",
+    "- Increased expertise with Axes."
+   ],
+   "racials": [
+    "Blood Fury",
+    "Hardiness",
+    "Command",
+    "Axe Specialization"
+   ],
+   "classes": [
+    "warrior",
+    "hunter",
+    "rogue",
+    "shaman",
+    "warlock"
+   ]
+  },
+  {
+   "key": "undead",
+   "raceId": 5,
+   "name": "Undead",
+   "faction": "horde",
+   "zone": "tirisfal-glades",
+   "continent": "ek",
+   "info": {
+    "male": "Free of the Lich King's grasp, the Forsaken seek to overthrow his rule. Led by the banshee Sylvanas, they hunger for vengeance against the Scourge. Humans, too, have become the enemy, relentless in their drive to purge all undead from the land. The Forsaken care little even for their allies; to them the Horde is merely a tool that may further their dark schemes.",
+    "female": "Once mindless slaves to the terrible Lich King, the gruesome Forsaken have overthrown his rule and now pledge loyalty to the wicked banshee queen Sylvanas. Under her reign Forsaken armies have reclaimed the ruined kingdom of Lordaeron. Every day is a struggle against vengeful humans who wish to wipe them out, and a constant battle of wills against Horde allies who distrust the sinister motives of the undead."
+   },
+   "abilities": [
+    "- May become immune to fear, sleep, and charm.",
+    "- May consume corpses to regain health.",
+    "- Underwater breathing increased.",
+    "- Resistant to Shadow damage."
+   ],
+   "racials": [
+    "Will of the Forsaken",
+    "Cannibalize",
+    "Underwater Breathing",
+    "Shadow Resistance"
+   ],
+   "classes": [
+    "warrior",
+    "rogue",
+    "priest",
+    "mage",
+    "warlock"
+   ]
+  },
+  {
+   "key": "tauren",
+   "raceId": 6,
+   "name": "Tauren",
+   "faction": "horde",
+   "zone": "mulgore",
+   "continent": "kal",
+   "info": {
+    "male": "Always the tauren strive to preserve the balance of nature and heed the will of their goddess, the Earth Mother. Recently attacked by murderous centaur, the tauren would have been wiped out, save for a chance encounter with the orcs, who helped defeat the interlopers. To honor this blood-debt, the tauren joined the Horde, solidifying the two races' friendship.",
+    "female": "Always the tauren strive to preserve the balance of nature and heed the will of their goddess, the Earth Mother. Many of the nomadic wandering tribes of tauren have gathered together under a single banner to settle in the fertile plains of Mulgore. Were it not for the timely intervention of the orcs, the whole race may have been wiped out by marauding centaur. The tauren honor their blood-debt to this day, fighting alongside the Horde to protect their land."
+   },
+   "abilities": [
+    "- May stomp, stunning nearby opponents.",
+    "- Maximum health increased.",
+    "- Herbalism skill increased.",
+    "- Resistant to Nature damage."
+   ],
+   "racials": [
+    "War Stomp",
+    "Endurance",
+    "Cultivation",
+    "Nature Resistance"
+   ],
+   "classes": [
+    "warrior",
+    "hunter",
+    "shaman",
+    "druid"
+   ]
+  },
+  {
+   "key": "troll",
+   "raceId": 8,
+   "name": "Troll",
+   "faction": "horde",
+   "zone": "durotar",
+   "continent": "kal",
+   "info": {
+    "male": "Once at home in the jungles of Stranglethorn Vale, the fierce trolls of the Darkspear tribe were pushed out by warring factions. Eventually the trolls befriended the orcish Horde, and Thrall, the orcs' young warchief, convinced the trolls to travel with him to Kalimdor. Though they cling to their shadowy heritage, the Darkspear trolls hold a place of honor in the Horde.",
+    "female": "Once at home in the jungles of Stranglethorn Vale, the fierce trolls of the Darkspear tribe were besieged on all sides by warring factions. The orcish Horde came to their aid, convincing the Darkspear to sail across the Great Sea and settle in the untamed lands of Kalimdor. Though they cling to their shadowy heritage, the Darkspear remain vocal advocates of a united Horde, lending the strength of their arms and powerful tribal magics to the common cause."
+   },
+   "abilities": [
+    "- Berserk, increasing attack and casting speed.",
+    "- Regeneration increased.",
+    "- Damage increased versus beasts.",
+    "- Increased expertise with Throwing and Bow Weapons."
+   ],
+   "racials": [
+    "Berserking",
+    "Regeneration",
+    "Beast Slaying",
+    "Throwing Specialization / Bow Specialization"
+   ],
+   "classes": [
+    "warrior",
+    "hunter",
+    "rogue",
+    "priest",
+    "shaman",
+    "mage"
+   ]
+  },
+  {
+   "key": "bloodelf",
+   "raceId": 10,
+   "name": "Blood Elf",
+   "faction": "horde",
+   "zone": null,
+   "continent": "ek",
+   "info": {
+    "male": "Long ago the exiled high elves founded Quel'Thalas, where they created a magical fount called the Sunwell. Though they were strengthened by its powers, they also grew increasingly dependent on them. Ages later the undead Scourge destroyed the Sunwell and most of the high elf population. Now called blood elves, these scattered refugees are rebuilding Quel'Thalas as they search for a new magic source to satisfy their painful addiction.",
+    "female": "Long ago the majestic high elves created the splendid golden city of Quel'Thalas, built around a magical fount of energy known as the Sunwell. When the Lich King destroyed their capital in the Third War, the survivors turned to the Horde for help.\\n\\nNow known as the blood elves, these refugees are all that remains of their glorious civilization. They strive to rebuild Quel'Thalas while struggling against a crippling addiction to the very magical energies that once built their empire."
+   },
+   "abilities": [
+    "- Enchanting skill increased.",
+    "- May drain mana from opponents.",
+    "- May silence nearby opponents.",
+    "- Resistant to magical damage."
+   ],
+   "racials": [
+    "Arcane Affinity",
+    "Mana Tap",
+    "Arcane Torrent",
+    "Magic Resistance"
+   ],
+   "classes": [
+    "paladin",
+    "hunter",
+    "rogue",
+    "priest",
+    "mage",
+    "warlock"
+   ]
+  }
+ ],
+ "classes": {
+  "warrior": {
+   "id": 1,
+   "blurb": "Warriors train constantly and strive for perfection in armed combat. Though they come from all walks of life, they are united by their singular commitment to engage in glorious battle. Many warriors serve as mercenary soldiers, while others become adventurers and danger-seeking fortune hunters. A typical warrior is strong, tough, and exceptionally violent.",
+   "lines": [
+    "- Role: Tank or Melee Damage",
+    "- Defend yourself and others with heavy armor and shields",
+    "- Charge quickly around the battlefield",
+    "- Unleash your rage to deliver devastating attacks"
+   ]
+  },
+  "paladin": {
+   "id": 2,
+   "blurb": "Paladins are champions who call upon the Light to heal wounds and combat evil. The draenei employed such holy warriors for millennia before arriving on Azeroth to find like-minded souls among the Alliance. Recently blood elves, too, began wielding paladin abilities. Yet these elves, having little in common with their counterparts, must bend the Light to their will.",
+   "lines": [
+    "-  Role: Tank, Healer, or Melee Damage",
+    "- Protect the weak with heavy armor, shields, and holy powers",
+    "- Wield melee weapons infused with holy magic",
+    "- Improve your group with powerful blessings"
+   ]
+  },
+  "hunter": {
+   "id": 3,
+   "blurb": "Hunters know the uncharted places of the world. Gifted with a deep empathy for all life, they have an uncanny knack for befriending wild animals and taming them as pets. In addition, hunters can use their finely honed senses to become master trackers. Wherever hunters go, they fight back the ravages of sickness, exploitation, and industrialization.",
+   "lines": [
+    "- Role: Ranged or Melee Damage",
+    "- Harness the power of the wilds to destroy foes",
+    "- Gain beasts of your choice as lifelong companions",
+    "- Track, disable, and kill your prey"
+   ]
+  },
+  "rogue": {
+   "id": 4,
+   "blurb": "Rogues are most successful when their deeds never come to light. Fond of poisons and silent projectile weapons, rogues rely on a blend of stealth and minor mysticism. Usually in the employ of rich nobles or local governments, the rogue redistributes wealth or eliminates designated targets. A rogue's allegiance lasts only as long as the latest contract.",
+   "lines": [
+    "- Role: Melee Damage",
+    "- Hide in plain sight with the stealth ability",
+    "- Control your enemies with underhanded attacks",
+    "- Combo melee abilities to deliver deadly finishing blows"
+   ]
+  },
+  "priest": {
+   "id": 5,
+   "blurb": "Priests guide the spiritual destiny of their people. Through their unique insight into the mind, they are able to shape an individual's beliefs, whether to inspire or terrify, soothe or dominate, heal or harm. Just as the heart can hold both darkness and light, priests wield powers of creation and devastation by channeling the potent forces underlying faith.",
+   "lines": [
+    "- Role: Healer or Ranged Damage",
+    "- Protect others with powerful shield and healing abilities",
+    "- Wield deadly shadow magic to destroy enemies",
+    "-  Instill fear and control the minds of others"
+   ]
+  },
+  "shaman": {
+   "id": 7,
+   "blurb": "Shaman commune directly with the elements. Their combination of wisdom and resilience makes them ideal as tribal advisors and leaders. In battle the shaman use totems and spells to manipulate the elements and provoke other fighters to untold heights of rage and might. Shaman exemplify the primal bond between the savage races and their environment.",
+   "lines": [
+    "- Role: Healer, Ranged Damage, or Melee Damage",
+    "-  Enchant your melee weapons with spells",
+    "- Call on spiritual power to restore injured allies",
+    "- Use totems to disable enemies, heal, or deal damage"
+   ]
+  },
+  "mage": {
+   "id": 8,
+   "blurb": "Magi are wizards of immense knowledge and skill. Their obvious physical frailty is deceptive, for they can call upon the cosmic energies of the Twisting Nether. Rarely do magi engage in melee combat. Instead, they prefer to attack from a distance, hurling powerful bolts of frost and flame at their unsuspecting enemies.",
+   "lines": [
+    "- Role: Ranged Damage",
+    "- Blast your enemies with powerful ranged attacks",
+    "- Wield powerful spells that can affect multiple targets",
+    "- Control the battlefield by freezing or polymorphing enemies"
+   ]
+  },
+  "warlock": {
+   "id": 9,
+   "blurb": "Warlocks are the bane of all life. Empowered by demonic blood, they can inflict great torment upon their foes. To replenish the dreadful energy their spells expend, warlocks drain vitality from their victims. The warlock can also summon and control terrifying demonic entities. Still, warlocks are feared above all else for their singular wickedness and cruelty.",
+   "lines": [
+    "- Role: Ranged Damage",
+    "- Summon powerful demon servants to do your bidding",
+    "- Curse, drain, and afflict your targets with corruption",
+    "- Burn your enemies with fire and shadow ranged magic"
+   ]
+  },
+  "druid": {
+   "id": 11,
+   "blurb": "Druids live in a state of unparalleled union with nature. Tightly bound to the plant and animal kingdoms, they are natural shapeshifters, and so they know firsthand the abuse visited on their wild brethren. In consequence, despite their numbers, druids tend to be wary, reclusive, and difficult to spot. Few outsiders have plumbed the depths of their secrets.",
+   "lines": [
+    "- Role: Tank, Healer, Ranged Damage, or Melee Damage",
+    "- Shape-shift into the ferocious cat, ranged owlkin, or resilient bear",
+    "- Call upon the powers of nature to heal yourself and others",
+    "- Be a true hybrid, able to assume any role"
+   ]
+  }
+ }
+}

@@ -3,7 +3,7 @@
 // Wired by ONE line in js/main.js. Server side: wowgoldfarms spires_live_app.py (POST /api/spires/ping -> 204).
 import { BUILD } from "../version.js";
 
-const ENDPOINT = "http<local path>", EVERY_MS = 30 * 1000;
+const ENDPOINT = "https://api.thewowdb.com/api/spires/ping", EVERY_MS = 30 * 1000;
 const sid = Array.from(crypto.getRandomValues(new Uint8Array(8)), (b) => b.toString(16).padStart(2, "0")).join("");
 
 export function installPresence(app) {

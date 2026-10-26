@@ -9,7 +9,7 @@ import { join, extname, resolve, dirname, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const site = process.env.WGF_ASSETS || join(root, "assets");
-const remote = (process.env.WGF_REMOTE || "http<local path>").replace(/\/$/, "");
+const remote = (process.env.WGF_REMOTE || "https://thewowdb.com").replace(/\/$/, "");
 const MAPPED = ["icons", "loading-screens", "fonts", "ui", "vendor", "wowdex"];
 const port = Number(process.argv[2]) || 8766;
 const M = { ".js": "text/javascript", ".mjs": "text/javascript", ".json": "application/json", ".css": "text/css", ".html": "text/html; charset=utf-8", ".svg": "image/svg+xml", ".jpg": "image/jpeg", ".png": "image/png", ".webp": "image/webp", ".woff2": "font/woff2", ".glb": "model/gltf-binary", ".ogg": "audio/ogg", ".mp3": "audio/mpeg" };
@@ -28,7 +28,7 @@ function proxy(p, res) {
   }).on("error", () => { res.writeHead(502); res.end("502 " + remote); });
 }
 http.createServer((req, res) => {
-  let p = decodeURIComponent(new URL(req.url, "htt<local path>").pathname);
+  let p = decodeURIComponent(new URL(req.url, "http://x").pathname);
   if (p.endsWith("/")) p += "index.html";
   if (p.startsWith("/media/sounds/") && process.env.WGF_SOUNDS) {
     const f = process.env.WGF_SOUNDS + "/" + p.slice(14).replace(/[^0-9a-z.]/gi, "");
@@ -40,4 +40,4 @@ http.createServer((req, res) => {
   if (!f.startsWith(resolve(base) + sep) && f !== resolve(base)) { res.writeHead(403); return res.end("403"); }
   try { sendFile(f, res); }
   catch { if (PROXY_OK(p)) proxy(p, res); else { res.writeHead(404); res.end("404"); } }
-}).listen(port, "127.0.0.1", () => console.log(`spires dev server on htt<local path>  (assets: ${site}, remote fallback: ${remote})`));
+}).listen(port, "127.0.0.1", () => console.log(`spires dev server on http://127.0.0.1:${port}/spiresofazeroth/  (assets: ${site}, remote fallback: ${remote})`));

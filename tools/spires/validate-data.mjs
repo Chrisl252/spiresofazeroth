@@ -294,7 +294,7 @@ async function main() {
       for (const k of ["claw", "bite", "steel", "slam", "spit"]) if (!ui.enemy || !ui.enemy[k]) FAIL("sounds", `ui.json enemy.${k} missing`);
       INFO("sounds", `${Object.keys(cs).length} card sound entries, ${bad} bad`);
       const urls = [...new Set([...Object.values(cs).flatMap((m) => [m.cast.url, m.impact.url]), ...Object.values(ui.ui || {}).map((s) => s.url), ...Object.values(ui.enemy || {}).flatMap((e) => [e.cast.url, e.impact.url])])];
-      const base = process.env.SPIRES_DEV_URL; // e.g. htt<local path> -> HEAD-sample 50 urls
+      const base = process.env.SPIRES_DEV_URL; // e.g. http://127.0.0.1:8766 -> HEAD-sample 50 urls
       if (base) { let ok = 0, n = 0; for (const u of urls.filter((_, j) => j % Math.max(1, Math.floor(urls.length / 50)) === 0).slice(0, 50)) { n++; try { const r = await fetch(base + u, { method: "HEAD" }); if (r.status === 200) ok++; else FAIL("sounds", `HEAD ${u} -> ${r.status}`); } catch (e) { FAIL("sounds", `HEAD ${u} failed`); } } INFO("sounds", `HEAD sample ${ok}/${n} ok of ${urls.length} distinct urls`); }
     } catch (e) { WARN("sounds", "cards.json/ui.json missing or unreadable: " + e.message); }
   }

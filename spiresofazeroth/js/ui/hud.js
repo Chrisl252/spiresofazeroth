@@ -9,6 +9,7 @@ import { gearStrip } from "./gearStrip.js";
 import { intentInfo } from "../engine/intents.js";
 import { isAlive } from "../engine/damage.js";
 import { immuneList } from "../engine/immunity.js";
+import { heroLabels } from "../engine/character.js";
 const HD = new URL("../../assets/icons-hd/", import.meta.url).href; // 256px upscaled icons, relative so dev + deploy both resolve
 
 const ico = (slug, cls = "") => {
@@ -239,7 +240,7 @@ export function createHud(host, app, o = {}) {
     const run = app.run, p = C.player, cls = C.cls || {};
     // top bar
     if (!portrait.firstChild || portrait.dataset.cls !== cls.id) { portrait.replaceChildren(ico(cls.icon || "inv_misc_questionmark")); portrait.dataset.cls = cls.id || ""; portrait.style.setProperty("--cc", cls.color || "#c9a24b"); }
-    heroName.textContent = cls.name || "Hero"; heroSub.textContent = `Act ${run.act} · Floor ${Math.max(0, run.floor + 1)}`;
+    { const lb = heroLabels(run, cls.name || "Hero"); heroName.textContent = lb.name; heroSub.textContent = `${lb.tag ? lb.tag + " · " : ""}Act ${run.act} · Floor ${Math.max(0, run.floor + 1)}`; }
     topHp.set(p); heroHp.set(p); { const pw = powerOf(cls, p); topPw.set(pw.cur, pw.max, pw.type); } heroLvl.textContent = run.act;
     for (const b of [topBlock, heroBlock]) { b.n.textContent = p.block; b.classList.toggle("is-on", p.block > 0); }
     gold.lastChild.textContent = run.gold;

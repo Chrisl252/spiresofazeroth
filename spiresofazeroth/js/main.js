@@ -11,6 +11,7 @@ import { zone as zoneAudio } from "./audio/zone.js";
 import { installPauseMenu } from "./ui/pauseMenu.js";
 import { installCardInspect } from "./ui/cardInspect.js";
 import { openGearBag } from "./ui/gearBag.js";
+import { characterOf } from "./engine/character.js";
 import { applyAutoEquip } from "./ui/autoEquip.js";
 import { installController } from "./controller.js";
 
@@ -20,7 +21,7 @@ const SCREENS = {
   zonepick: "choice", raidchoice: "choice", bosschoice: "choice", mechchoice: "choice",
 };
 
-const MENU_SCREENS = new Set(["title", "classSelect", "codex", "settings", "talents"]);
+const MENU_SCREENS = new Set(["title", "classSelect", "charSelect", "charCreate", "codex", "settings", "talents"]);
 const host = document.getElementById("app");
 let appReady = false; // the stage asks about motion before app exists
 const reducedNow = () => (appReady ? app.reduced() : matchMedia("(prefers-reduced-motion: reduce)").matches);
@@ -52,7 +53,7 @@ const app = {
     stage.setFluid(!mod.stageNative); // legacy screens are unscaled documents; stage-native screens get the 1920x1080 space
     if (!mod.stageNative) stage.setBackdrop(app.run && app.run.zoneId ? app.run.zoneId : "default");
     document.body.classList.toggle("sp-run", !!app.run);
-    if (name === "classSelect") armFullscreen();
+    if (name === "classSelect" || name === "charSelect" || name === "charCreate") armFullscreen();
     const el = await mod.render(app, name, props);
     app.groundOn = !MENU_SCREENS.has(name); // menus: no 3D ground plane over the art (combatKit re-applies this when it builds the actors late)
     stage.layers.root.classList.toggle("sp-ground-on", app.groundOn); // DOM floor plane (backdrop.js) follows the same rule
@@ -78,6 +79,7 @@ const app = {
       }
       for (const id of r.zonesVisited) await data.loadZone(id);
       if (r.zoneId) await data.loadZone(r.zoneId);
+      r.character = characterOf(r.character, r.classId); r.character.legacy = undefined; // pre-character saves: default race for the class, male, no name
       ensureGear(r, data); // gear: legacy relic ids -> gear slots
       app.run = r;
       return true;

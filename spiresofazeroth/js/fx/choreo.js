@@ -349,7 +349,7 @@ export function createFx(hostEl, o = {}) {
     await ready; await real.ready;
     let el, kind, enemy = null;
     if (typeof spec === "string") {
-      const s = spec.replace(/^enem<local path> "");
+      const s = spec.replace(/^enemy:/, "");
       if (spec.startsWith("enemy:") || (!spec.includes(":") && ENEMY_RECIPES.includes(s))) enemy = s;
       else { [el, kind] = spec.split(":"); }
     } else if (spec && spec.element && spec.kind) { el = spec.element; kind = spec.kind; }

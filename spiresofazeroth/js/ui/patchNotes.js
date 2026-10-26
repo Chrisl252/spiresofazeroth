@@ -6,16 +6,26 @@
 import { h, icon } from "./dom.js";
 import { BUILD } from "../version.js";
 
-const SEEN_KEY = "spires.notesSeen", NOTES_ID = "2026-10-24-c", POLL_MS = 4 * 60 * 1000;
+const SEEN_KEY = "spires.notesSeen", NOTES_ID = "2026-10-25-b", POLL_MS = 4 * 60 * 1000;
 
 // items: a plain string, or { ic: icon slug, name, text } for a picture row
 const NOTES = {
   title: "Patch Notes",
-  date: "October 24, 2026",
+  date: "October 25, 2026",
   intro: [
     "Big one: every class has new talents, spells look like they do in WoW, and the early game is friendlier. Thank you for every bug report.",
   ],
   sections: [
+    { head: "Create your character (25b)", items: [
+      "New character creation screen, just like the WoW client: pick any of the 10 races, male or female, and every class that race can be in Burning Crusade. Undead Rogue is in.",
+      "Real race and class text, a slowly turning character model, a name box with a Randomize button, and a saved character list you can Enter World from.",
+      "Your race, gender and name show in the top bar during a run. Old saves keep working.",
+      "Not done yet: skin, face and hair options, and your race in the fight scene.",
+    ] },
+    { head: "Warlock fixes (25a)", items: [
+      { ic: "spell_shadow_antimagicshell", name: "Ritual of Doom", text: "The Doomguard now does what the card says the moment you play it: Rain of Fire hits ALL enemies, War Stomp stuns one, Cripple applies 2 Weak. Then it keeps acting every turn." },
+      { ic: "spell_shadow_shadowbolt", name: "Shadow Bolt (upgraded)", text: "The upgraded Shadow Bolt now deals 12 damage (was 9, same as the base card)." },
+    ] },
     { head: "Legendaries feel legendary (24c)", items: [
       { ic: "inv_sword_39", name: "Thunderfury", text: "Now Legendary. Every fight opens with 1 Weak on all enemies, and attacks have a 30% chance (was 20%) to hit ALL enemies for 12 Nature damage and 2 Weak (was 10 to one enemy, 1 Weak)." },
       { ic: "inv_staff_20", name: "Atiesh", text: "Now Legendary. Still +1 Energy and +1 card each turn, and now draws 2 extra cards at the start of every fight." },

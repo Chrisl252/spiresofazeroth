@@ -5,18 +5,21 @@ import { newRun, prepareZonePick } from "../engine/run.js";
 import { newSeedString } from "../engine/rng.js";
 import { heroicName, MAX_HEROIC } from "../engine/heroic.js";
 import { cssReady, btn, tog, ico, banner, scroll } from "./kit.js";
+import { HOME } from "../engine/character.js";
+import { beginRun } from "./runStart.js";
 import { repairSpent, talentState, talentMods, talentSummary, classLevel, nextLevelXp, lockedCardIds } from "../engine/talents.js";
 
 export const stageNative = true;
 
 const RES_ICON = { rage: "ability_racial_bloodrage", mana: "spell_frost_manarecharge", energy: "spell_shadow_shadowworddominate", focus: "ability_hunter_focusedaim" };
 
-export async function render(app) {
+export async function render(app, _name, props = {}) {
+  const ch = props && props.character ? props.character : null; // opened from the character list: class locked to that character
   await cssReady;
   const { data, meta, stage } = app;
   stage.setBackdrop("classSelect");
   const ids = data.classIds;
-  const initialCls = ids.find((id) => isClassUnlocked(meta, ids, id)) || ids[0];
+  const initialCls = (ch && ids.includes(ch.classId) && ch.classId) || ids.find((id) => isClassUnlocked(meta, ids, id)) || ids[0];
   const st = { cls: initialCls, heroic: 0, continent: null, pet: null, seed: newSeedString() };
   await Promise.all([data.loadClass(st.cls), data.loadTalents(st.cls)]);
   Promise.all(ids.map((id) => data.loadTalents(id))).then(() => { if (host.isConnected) draw(); }); // talent sheets for the other plates
@@ -29,7 +32,7 @@ export async function render(app) {
     const cls = data.classObj(st.cls);
     const maxH = Math.min(MAX_HEROIC, meta.heroic[st.cls] || 0);
     st.heroic = Math.min(st.heroic, maxH);
-    st.continent = st.continent || cls.defaultContinent || "ek";
+    st.continent = st.continent || (ch ? HOME[ch.race] : null) || cls.defaultContinent || "ek";
     const petChoices = cls.resource && cls.resource.pet ? cls.resource.pet.choices : null;
     if (petChoices && !petChoices.includes(st.pet)) st.pet = cls.resource.pet.default || petChoices[0];
     if (!petChoices) st.pet = null;
@@ -39,7 +42,7 @@ export async function render(app) {
       const c = data.classObj(id);
       const open = isClassUnlocked(meta, ids, id);
       const sel = id === st.cls;
-      const p = h("button", { class: `sx-clsplate ${sel ? "sel" : ""}`.trim(), type: "button", style: { "--cc": c.color || "#c9a24b" }, "aria-pressed": String(sel), onClick: () => { st.cls = id; st.continent = null; draw(); } },
+      const p = h("button", { class: `sx-clsplate ${sel ? "sel" : ""}`.trim(), type: "button", disabled: !!ch && !sel, style: { "--cc": c.color || "#c9a24b" }, "aria-pressed": String(sel), onClick: () => { st.cls = id; st.continent = null; draw(); } },
         ico(c.icon, { size: "lg", alt: c.name }),
         h("div", { class: "sx-clsplate__t" }, h("b", {}, c.name),
           h("span", {}, h("em", {}, `${c.startingHp} HP`), `  ${(c.resource || {}).name || ""}`)),
@@ -94,19 +97,11 @@ export async function render(app) {
       maxH > 0 ? h("div", { class: "sx-field" }, h("h4", {}, "Difficulty"), heroicBtns) : null,
       h("label", { class: "sx-field sx-seed" }, h("h4", {}, "Seed"), seedIn, tog("Random", false, () => { st.seed = newSeedString(); draw(); }))),
       h("div", { class: "sx-cls__go" }, btn("Begin the climb", async () => {
-        const run = newRun(data, { classId: st.cls, continent: st.continent, seed: st.seed, heroic: st.heroic, pet: st.pet, talents: talentMods(meta, st.cls, data.talentDefs.get(st.cls) || null) });
-        data.setClass(st.cls);
-        app.run = run;
-        meta.lastClass = st.cls;
-        saveMeta(meta);
-        await prepareZonePick(run, data);
-        track("run_start", { class: st.cls, seed: run.seed, ascension: run.heroic });
-        saveRun(run);
-        app.route();
+        await beginRun(app, st, ch);
       }, { size: "lg", auto: true })));
 
     fill(host,
-      h("div", { class: "sx-cls__top" }, banner("Choose your class", "Nine classes. Each climbs with its own vanilla spells."), btn("Back", () => app.go("title"), { size: "sm", cls: "sx-cls__back" })),
+      h("div", { class: "sx-cls__top" }, banner("Choose your class", "Nine classes. Each climbs with its own vanilla spells."), btn("Back", () => app.go(ch ? "charSelect" : "title"), { size: "sm", cls: "sx-cls__back" })),
       h("div", { class: "sx-cls__body" }, grid, detail));
   };
   draw();

@@ -42,7 +42,7 @@ module map and `SPEC.md` for data shapes before touching anything.
     rogue human-f, priest undead-f, shaman orc-m, mage gnome-f, warlock undead-m, druid tauren-m. Gear
     assembly via `assets/wgf-model-assemble.js` is optional polish, not required for v2.
 - **Real VFX, not primitives.** Reuse Emberdeck's flipbook kit (owner-made, original):
-  `<local path>` (27 sheets, luminance+alpha, 256 px frames, `index.json` has
+  `C:\Code\cinderwake\assets\fx\*.png` (27 sheets, luminance+alpha, 256 px frames, `index.json` has
   frames/columns/fps/pivot/blend/hold_peak) + `particles.png` atlas. Copy into
   `spiresofazeroth/assets/fx/` as WebP q92 and ship `index.json`. A canvas-2D `fx` layer above the 3D
   canvas plays flipbooks (additive via `globalCompositeOperation: lighter`, tinted per element through an
@@ -124,14 +124,14 @@ tools/spires/map-models.mjs, tools/spires/fx-import.mjs (copies + converts Cinde
 - A fresh-profile Chrome (`chrome.exe --user-data-dir=<tmp>`), NOT the Claude-in-Chrome tab (Chris's
   profile stalls module loads): the static server pattern is in the session scratchpad `static.mjs`
   (node, port 8766, maps `/assets/icons/` + `/assets/wowdex/` + `/assets/loading-screens/` +
-  `/assets/vendor/` to the main checkout `<local path>` — extend the map when you
+  `/assets/vendor/` to the main checkout `C:\Code\04_gaming_seo\wowgoldfarms` — extend the map when you
   need another asset root). Capture real screenshots (full stage at 1920x1080 and at 390x844) and LOOK at
   them. Owner hates "AI slop": no generic gradients, no placeholder boxes, no lorem; if an asset is
   missing, say so in the report rather than faking it.
-- Icons: main checkout `<local path>` (gitignored, 35k).
+- Icons: main checkout `C:\Code\04_gaming_seo\wowgoldfarms\assets\icons\<slug>.jpg` (gitignored, 35k).
   Loading screens / ui / fonts / vendor / wowdex live in the same checkout under `assets\`.
 - Commit by explicit path on `lane/spires-of-azeroth-20261016`; never `git add -A`; never touch
-  `<production path>`; back up any existing file before editing (`backups/<name>.bak-YYYYMMDD-HHMMSS-<slug>`).
+  `/srv/wgf`; back up any existing file before editing (`backups/<name>.bak-YYYYMMDD-HHMMSS-<slug>`).
 
 ### Per-card spell looks (v2 spellfx)
 `data/fx/cards.json` (merged by `tools/merge-cardfx.mjs` from `data/fx/cards.<group>.json`, schema in `data/fx/MAPPER_BRIEF.md`) gives every card a real-WoW look

@@ -1,0 +1,13 @@
+{
+  "name": "spires-of-azeroth-desktop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tauri v2 desktop wrapper for Spires of Azeroth",
+  "scripts": {
+    "stage": "node stage.mjs",
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2"
+  }
+}

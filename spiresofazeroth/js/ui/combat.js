@@ -1,32 +1,45 @@
 // Combat screen (v2, stage-native). Mounts the HUD (hud.js) and the hand (hand.js) on the 1920x1080 stage and drives the engine exactly as v1 did.
 // v2 integration: 3D actors + VFX are mounted by combatKit.js, choreography (impact instants) lives in combatDirector.js; this file sequences turns.
-import { h, tip, esc, floatText, toast, sleep, modal, fill } from "./dom.js";
+import { sp, funnel, encKey } from "../analytics.js?v=20261028e";
+import { h, tip, esc, floatText, toast, sleep, modal, fill } from "./dom.js?v=20261028e";
 import {
   playCard, canPlayWhy, cardNeedsTarget, endPlayerTurn, enemyPhase, finishRound, usePotion, resolvePending, livingEnemies, canSpare, spareEnemy,
-} from "../engine/combat.js";
-import { cardCost } from "../engine/deck.js";
-import { beginCombat, afterCombat } from "../engine/run.js";
-import { gearLevel } from "../engine/gear.js";
-import { isAlive } from "../engine/damage.js";
-import { cardUselessOn } from "../engine/immunity.js";
-import { previewCardVs, cardAimsDamage } from "../engine/preview.js";
-import { cardEl, refreshCard, keywordLines, classColor } from "./card.js";
-import { createHud } from "./hud.js";
-import { createHand } from "./hand.js";
-import { getKit, clearStage, watchLeave, safe, speedMul, applySettings } from "./combatKit.js";
-import { createDirector } from "./combatDirector.js";
-import { cardSounds } from "./cardSounds.js";
+} from "../engine/combat.js?v=20261028e";
+import { cardCost } from "../engine/deck.js?v=20261028e";
+import { beginCombat, afterCombat } from "../engine/run.js?v=20261028e";
+import { gearLevel } from "../engine/gear.js?v=20261028e";
+import { isAlive } from "../engine/damage.js?v=20261028e";
+import { cardUselessOn } from "../engine/immunity.js?v=20261028e";
+import { previewCardVs, cardAimsDamage } from "../engine/preview.js?v=20261028e";
+import { cardEl, refreshCard, keywordLines, classColor } from "./card.js?v=20261028e";
+import { createHud } from "./hud.js?v=20261028e";
+import { createHand } from "./hand.js?v=20261028e";
+import { getKit, clearStage, watchLeave, safe, speedMul, applySettings } from "./combatKit.js?v=20261028e";
+import { createDirector } from "./combatDirector.js?v=20261028e";
+import { cardSounds } from "./cardSounds.js?v=20261028e";
+import { BUILD } from "../version.js?v=20261028e";
+import { coopStart, createCoopLink } from "./coopCombat.js?v=20261028e";
 
 export const stageNative = true;
 
-export function render(app) {
+export async function render(app) {
   const { run, data, stage } = app;
   if (!run || !run.pending || !run.pending.encounter) {
     if (run) run.screen = "map";
     return app.go("map");
   }
-  if (!app.C || app.C.run !== run) app.C = beginCombat(run, data, { interactive: true });
+  if (!app.C || app.C.run !== run) {
+    // co-op: a second go() while this one waits for the partner supersedes it (main.js drops the stale result). The stale render must not
+    // build a fight: it would claim the pack and leave a second link listening to the partner's moves (host stuck "waiting", 2026-10-28)
+    const tok = (app._combatTok = {});
+    const S0 = app.coop && app.coop.active() ? await coopStart(app, run) : null; // co-op: waits for the partner, then both heroes' combats share one pack
+    if (app._combatTok !== tok || app.screen !== "combat") return document.createElement("div");
+    app.coopS = S0;
+    app.C = S0 ? S0.Cs[S0.mySeat] : beginCombat(run, data, { interactive: true });
+  }
   const C = app.C;
+  const S = app.coopS && app.coopS.Cs[app.coopS.mySeat] === C ? app.coopS : null;
+  let CL = null; // co-op link (ui/coopCombat.js), set below when S
   const st = { pot: null, busy: false, booting: true, done: false, picks: new Set(), lastPlayed: null, prev: [] };
   let K = null, D = null; // kit (actors + fx) and director, set once the kit is loaded
   const wait = (ms) => new Promise((r) => setTimeout(r, Math.max(0, ms) / speedMul(app)));
@@ -36,7 +49,7 @@ export function render(app) {
   const pendingHost = h("div", { class: "sp-pending-host" });
   const unitEl = (uid) => root.querySelector(`[data-uid="${uid}"]`);
   const color = () => classColor(C, data);
-  const playerTurn = () => C.phase === "player" && !st.busy && !st.booting && !C.result && !C.pending.length;
+  const playerTurn = () => C.phase === "player" && !st.busy && !st.booting && !C.result && !C.pending.length && (!CL || CL.canAct());
 
   const hud = createHud(root, app, {
     stage, onEndTurn: () => endTurnFlow(),
@@ -46,7 +59,7 @@ export function render(app) {
     onPotion: (i, pot) => potClick(i, pot), onPotionAim: (i, pot, el, ev) => potAim(i, pot, el, ev),
     onEnemyClick: (uid) => enemyClick(C.enemies.find((e) => e.uid === uid)),
     onSpare: (uid) => spareFlow(uid),
-    onMap: () => modal("The Spire", h("div", { class: "sp-center" }, h("p", {}, `${(data.zone(run.zoneId) || {}).name || "The Spire"}`), h("p", {}, `Act ${run.act} of 6 - floor ${Math.max(0, run.floor + 1)} of 15`), h("p", { class: "sp-dim" }, "Finish the fight to return to the map."))),
+    onMap: () => import(`./map.js?v=${BUILD}`).then((m) => m.openMapOverlay(app)), // the real spire map, read-only, over the live fight
     onSettings: () => app.showMenu(),
   });
   const handCard = (inst) => cardEl(inst.def, { C, inst, cost: cardCost(C, inst), data, tag: "div", tips: false, color: color() });
@@ -56,7 +69,7 @@ export function render(app) {
     canPlay: (inst) => playerTurn() && !canPlayWhy(C, inst),
     needsTarget: (inst) => cardNeedsTarget(C, inst), // every enemy-targeted card aims, even with one enemy left (StS)
     // playable except that the previous card's fx is still running: the hand lets the drag start and plays it when unlocked
-    canQueue: (inst) => C.phase === "player" && !st.booting && !st.done && !C.result && !C.pending.length && !C.endTurnRequested && !canPlayWhy(C, inst),
+    canQueue: (inst) => C.phase === "player" && !st.booting && !st.done && !C.result && !C.pending.length && !C.endTurnRequested && (!CL || CL.canAct()) && !canPlayWhy(C, inst),
     defaultTarget: (inst) => { const l = livingEnemies(C); return l.length === 1 && cardNeedsTarget(C, inst) ? l[0].uid : null; }, // keyboard Enter only
     immuneOn: (inst, uid) => cardUselessOn(inst.def, C.enemies.find((e) => e.uid === uid), (data.schoolsData || {}).statusSchools),
     keywords: (inst) => keywordLines(inst.def, data),
@@ -103,7 +116,7 @@ export function render(app) {
     const src = pd.type === "scry" ? C.pile.draw.slice(-need) : C.pile.hand;
     const row = h("div", { class: "spc-grid sp-pending__row" });
     for (const inst of src) row.append(cardEl(inst.def, { C, inst, tag: "div", mini: true, data, color: color(), cls: st.picks.has(inst.uid) ? "is-sel" : "", onClick: () => { if (st.picks.has(inst.uid)) st.picks.delete(inst.uid); else if (st.picks.size < need) st.picks.add(inst.uid); update(); } }));
-    const ok = h("button", { class: "sp-wowbtn sp-wowbtn--sm", type: "button", disabled: pd.type !== "scry" && st.picks.size < Math.min(need, src.length), onClick: () => { resolvePending(C, [...st.picks]); st.picks.clear(); update(); } }, "Confirm");
+    const ok = h("button", { class: "sp-wowbtn sp-wowbtn--sm", type: "button", disabled: pd.type !== "scry" && st.picks.size < Math.min(need, src.length), onClick: () => { if (CL) CL.local({ k: "pending", uids: [...st.picks] }); else resolvePending(C, [...st.picks]); st.picks.clear(); update(); } }, "Confirm");
     pendingHost.replaceChildren(h("div", { class: "sp-pending" }, h("h3", {}, pd.type === "scry" ? `Scry: choose up to ${need} to discard` : `Choose ${need} card(s) to ${pd.type}`), row, ok));
   }
 
@@ -115,6 +128,7 @@ export function render(app) {
     const disc = removed.filter((c) => !exh.includes(c) && c.uid !== st.lastPlayed && C.pile.discard.includes(c));
     if (disc.length) hand.discard(disc.map((c) => c.uid));
     const prevIds = new Set(st.prev.map((c) => c.uid)), fresh = now.filter((c) => !prevIds.has(c.uid));
+    if (st.lastPlayed && nowIds.has(st.lastPlayed)) hand.bounce(st.lastPlayed);
     hand.set(now);
     if (fresh.length && K && K.fx && !app.reduced()) drawTrail(Math.min(fresh.length, 6));
     st.prev = now.slice(); st.lastPlayed = null;
@@ -129,7 +143,7 @@ export function render(app) {
     const hint = C.pending.length || C.result ? "" : st.pot !== null ? "Drag the arrow onto an enemy to throw the potion" : C.phase === "player" ? "" : "Enemies act...";
     return { potSel: st.pot, busy: st.busy && C.phase !== "player", lock: st.busy || st.booting, hint, spare: (e) => canSpare(C, e) };
   }
-  const paint = (cv) => hud.update(cv || (D ? D.viewC() : C), view());
+  const paint = (cv) => { hud.update(cv || (D ? D.viewC() : C), view()); if (CL) CL.paintPanel(); };
 
   // ---------- StS2 damage previews (hover / drag aim) ----------
   let aimKey = "";
@@ -175,7 +189,7 @@ export function render(app) {
   function doPlay(inst, targetUid) {
     if (st.busy || st.booting) return false;
     const pre = snapBefore();
-    const r = playCard(C, inst.uid, targetUid || undefined);
+    const r = CL ? CL.local({ k: "play", uid: inst.uid, target: targetUid || null }) || { ok: false, why: "Wait for your turn." } : playCard(C, inst.uid, targetUid || undefined);
     if (!r.ok) { toast(r.why || "Cannot play that."); update(); return false; }
     if (C.drawBlocked) { toast(C.drawBlocked === "hand" ? "Your hand is full (10 cards)." : "No more card draw this turn."); C.drawBlocked = null; } // player report 10-24: "unable to draw more than 8"
     if (C.classId === "druid" && K && K.actors && K.actors.setHeroForm) {
@@ -224,7 +238,7 @@ export function render(app) {
     if (st.busy || st.booting || !e || !canSpare(C, e)) return;
     st.busy = true;
     const pre = snapBefore();
-    spareEnemy(C, uid);
+    if (CL) CL.local({ k: "spare", uid }); else spareEnemy(C, uid);
     const evs = C.fx.splice(0);
     toast(`You spare ${e.name}.`);
     if (D) D.beginHold(pre);
@@ -234,7 +248,7 @@ export function render(app) {
   async function usePotionFlow(i, uid) {
     st.busy = true;
     const pre = snapBefore();
-    usePotion(C, i, uid);
+    if (CL) CL.local({ k: "potion", idx: i, target: uid || null }); else usePotion(C, i, uid);
     const evs = C.fx.splice(0);
     if (D) D.beginHold(pre);
     paint();
@@ -244,6 +258,7 @@ export function render(app) {
 
   async function endTurnFlow() {
     if (st.busy || st.booting || C.phase !== "player" || C.pending.length || C.result) return;
+    if (CL) { hand.cancel(); return CL.endTurn(); } // co-op: the round's enemy phase runs once BOTH heroes have ended (ui/coopCombat.js)
     st.busy = true; st.pot = null; hand.cancel();
     try {
       let pre = snapBefore();
@@ -286,7 +301,12 @@ export function render(app) {
     const lost = C.result === "lose" || (C.player && C.player.hp <= 0);
     if (lost && K && K.actors && K.actors.get("player")) await safe(K.actors.death("player"), "hero-death", 2500);
     if (C.result === "retreat" && K && K.fx) K.fx.banner("You hearth away");
+    if (CL) { CL.destroy(); CL = null; app.coopS = null; }
+    const encKeyNow = encKey(run.pending && run.pending.encounter);
     afterCombat(run, data, C);
+    sp("fight_end", { enc: encKeyNow, result: C.result === "win" ? "win" : C.result === "retreat" ? "retreat" : "lose", act: run.act, floor: run.floor + 1, hp: Math.max(0, Math.round(run.hp)), turns: C.turn | 0 });
+    if (C.result === "win" && run.stats.fights === 1) funnel("first_fight_won");
+    if (run.act >= 2) funnel("act" + Math.min(run.act, 3));
     app.C = null;
     app.save();
     const won = run.screen !== "end";
@@ -314,7 +334,7 @@ export function render(app) {
       K = await safe0(getKit(app), 9000);
       if (K && K.actors && K.fx) {
         applySettings(app, K); clearStage(K);
-        K.actors.setHero({ classId: run.classId, gearMask: gearLevel(run) });
+        K.actors.setHero({ classId: run.classId, race: (run.character || {}).race, gender: (run.character || {}).gender, gearMask: gearLevel(run) });
         if (K.actors.setHeroForm) K.actors.setHeroForm(C.player && C.player.form ? C.player.form : null);
         K.actors.setEnemies(C.enemies.map((e) => ({ uid: e.uid, id: e.id, name: e.name, tier: e.tier, icon: e.icon })));
         root.classList.add("sp-actors-on");
@@ -367,6 +387,7 @@ export function render(app) {
   function cleanup() {
     if (cleaned) return; cleaned = true;
     if (app._combat && app._combat.C === C) app._combat = null;
+    if (CL) { CL.destroy(); CL = null; }
     if (st.closeTips) st.closeTips();
     document.removeEventListener("keydown", keys); hand.destroy();
     if (mo) mo.disconnect();
@@ -376,6 +397,7 @@ export function render(app) {
   document.addEventListener("keydown", keys);
   if (kb() && kb().suspend) kb().suspend();
   hud.setTurn("player");
+  if (S) CL = createCoopLink(app, S, { st, update, paint: () => paint(), sync: syncHand, snapBefore, settle, wait, safe, getD: () => D, getK: () => K, hud, root, reduced: () => app.reduced() });
   update();
   watchLeave(app, root, cleanup);
   boot();

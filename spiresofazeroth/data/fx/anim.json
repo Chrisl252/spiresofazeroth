@@ -1,0 +1,3385 @@
+{
+ "_doc": "Cast-visual tuning layered on data/fx/real.json (real datamined spell art). schools: guaranteed school-tinted floor flare + hero windup per school, so no card is ever silent. cards: per-card overrides; floor=true marks cards whose real art measured weak in tools/spires/anim-audit.mjs (peak coverage < 40 px of 5184).",
+ "schools": {
+  "fire": {
+   "sheet": "ember_rise",
+   "cell": "ember",
+   "windup": 0.22,
+   "selfSheet": "ember_rise"
+  },
+  "frost": {
+   "sheet": "frost_bloom",
+   "cell": "shard",
+   "windup": 0.22,
+   "selfSheet": "shield_shimmer"
+  },
+  "arcane": {
+   "sheet": "impact_burst",
+   "cell": "star",
+   "windup": 0.2,
+   "selfSheet": "buff_glyph_rise"
+  },
+  "nature": {
+   "sheet": "leaf_whirl",
+   "cell": "leaf",
+   "windup": 0.22,
+   "selfSheet": "heal_sparkle"
+  },
+  "holy": {
+   "sheet": "holy_ray",
+   "cell": "star",
+   "windup": 0.2,
+   "selfSheet": "holy_ray"
+  },
+  "shadow": {
+   "sheet": "shadow_wisp",
+   "cell": "puff",
+   "windup": 0.24,
+   "selfSheet": "shadow_wisp"
+  },
+  "lightning": {
+   "sheet": "lightning_bolt_a",
+   "cell": "star",
+   "windup": 0.18,
+   "selfSheet": "spark_burst"
+  },
+  "steel": {
+   "sheet": "hit_star",
+   "cell": "dot",
+   "windup": 0.08,
+   "selfSheet": "shield_shimmer"
+  },
+  "blood": {
+   "sheet": "blood_mist",
+   "cell": "dot",
+   "windup": 0.1,
+   "selfSheet": "blood_mist"
+  },
+  "wind": {
+   "sheet": "wind_crescent",
+   "cell": "dot",
+   "windup": 0.12,
+   "selfSheet": "wind_crescent"
+  },
+  "stone": {
+   "sheet": "dust_ground",
+   "cell": "puff",
+   "windup": 0.12,
+   "selfSheet": "dust_ground"
+  }
+ },
+ "cards": {
+  "wrath": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "healing-touch": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "bear-form": {
+   "cls": "druid",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "cat-form": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "claw": {
+   "cls": "hunter",
+   "school": "nature",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "moonfire": {
+   "cls": "druid",
+   "school": "arcane",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "insect-swarm": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "entangling-roots": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "faerie-fire": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "natures-grasp": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "maul": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "swipe": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "growl": {
+   "cls": "druid",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "demoralizing-roar": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "rake": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "shred": {
+   "cls": "druid",
+   "school": "shadow",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "mark-of-the-wild": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "rejuvenation": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "regrowth": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "remove-curse": {
+   "cls": "druid",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "abolish-poison": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "cure-poison": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "starfire": {
+   "cls": "druid",
+   "school": "arcane",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "thorns": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "hibernate": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "soothe-animal": {
+   "cls": "druid",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "bash": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "enrage": {
+   "cls": "warrior",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "frenzied-regeneration": {
+   "cls": "druid",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "feral-charge": {
+   "cls": "druid",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "partial",
+   "floor": true
+  },
+  "dire-bear-form": {
+   "cls": "druid",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "ravage": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "pounce": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "prowl": {
+   "cls": "druid",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "dash": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "gift-of-the-wild": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "moonkin-form": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "hurricane": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "rip": {
+   "cls": "druid",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "ferocious-bite": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "tigers-fury": {
+   "cls": "druid",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "swiftmend": {
+   "cls": "druid",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "innervate": {
+   "cls": "druid",
+   "school": "lightning",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "natures-swiftness": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "barkskin": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "tranquility": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "rebirth": {
+   "cls": "druid",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "auto-shot": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "school",
+   "floor": true
+  },
+  "arcane-shot": {
+   "cls": "hunter",
+   "school": "arcane",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "raptor-strike": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "mend-pet": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "aspect-of-the-hawk": {
+   "cls": "hunter",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "call-pet": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "feed-pet": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "beast-lore": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "eyes-of-the-beast": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "revive-pet": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "scare-beast": {
+   "cls": "hunter",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "concussive-shot": {
+   "cls": "hunter",
+   "school": "frost",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "serpent-sting": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "hunters-mark": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "distracting-shot": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "wing-clip": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "mongoose-bite": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "aspect-of-the-monkey": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "flare": {
+   "cls": "hunter",
+   "school": "fire",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "disengage": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "feign-death": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "aspect-of-the-pack": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "aspect-of-the-wild": {
+   "cls": "hunter",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "aspect-of-the-beast": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "tranquilizing-shot": {
+   "cls": "hunter",
+   "school": "nature",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "tame-beast": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "multi-shot": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "scatter-shot": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "viper-sting": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "scorpid-sting": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "freezing-trap": {
+   "cls": "hunter",
+   "school": "frost",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "immolation-trap": {
+   "cls": "hunter",
+   "school": "fire",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "frost-trap": {
+   "cls": "hunter",
+   "school": "frost",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "counterattack": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "aspect-of-the-cheetah": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "aimed-shot": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "volley": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "rapid-fire": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "wyvern-sting": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "deterrence": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "explosive-trap": {
+   "cls": "hunter",
+   "school": "fire",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "intimidation": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "bestial-wrath": {
+   "cls": "hunter",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "trueshot-aura": {
+   "cls": "hunter",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "fireball": {
+   "cls": "mage",
+   "school": "fire",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "frostbolt": {
+   "cls": "mage",
+   "school": "frost",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "arcane-missiles": {
+   "cls": "mage",
+   "school": "arcane",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "mana-shield": {
+   "cls": "mage",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "blink": {
+   "cls": "mage",
+   "school": "arcane",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "fire-blast": {
+   "cls": "mage",
+   "school": "fire",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "scorch": {
+   "cls": "mage",
+   "school": "fire",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "arcane-explosion": {
+   "cls": "mage",
+   "school": "arcane",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "frost-nova": {
+   "cls": "mage",
+   "school": "frost",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "counterspell": {
+   "cls": "mage",
+   "school": "frost",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "frost-armor": {
+   "cls": "mage",
+   "school": "frost",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "ice-armor": {
+   "cls": "mage",
+   "school": "frost",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "arcane-intellect": {
+   "cls": "mage",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "conjure-water": {
+   "cls": "mage",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "conjure-food": {
+   "cls": "mage",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "fire-ward": {
+   "cls": "mage",
+   "school": "fire",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "remove-lesser-curse": {
+   "cls": "mage",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "dampen-magic": {
+   "cls": "mage",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "amplify-magic": {
+   "cls": "mage",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "slow-fall": {
+   "cls": "mage",
+   "school": "arcane",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "detect-magic": {
+   "cls": "mage",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "polymorph": {
+   "cls": "mage",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "blast-wave": {
+   "cls": "mage",
+   "school": "fire",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "flamestrike": {
+   "cls": "mage",
+   "school": "fire",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "mage-armor": {
+   "cls": "mage",
+   "school": "arcane",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "ice-barrier": {
+   "cls": "mage",
+   "school": "arcane",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "presence-of-mind": {
+   "cls": "mage",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "cold-snap": {
+   "cls": "mage",
+   "school": "frost",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "evocation": {
+   "cls": "mage",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "conjure-mana-gem": {
+   "cls": "mage",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "frost-ward": {
+   "cls": "mage",
+   "school": "frost",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "teleport-stormwind": {
+   "cls": "mage",
+   "school": "arcane",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "teleport-ironforge": {
+   "cls": "mage",
+   "school": "arcane",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "combustion": {
+   "cls": "mage",
+   "school": "fire",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "ice-block": {
+   "cls": "mage",
+   "school": "frost",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "arcane-power": {
+   "cls": "mage",
+   "school": "lightning",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "arcane-brilliance": {
+   "cls": "mage",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "blizzard": {
+   "cls": "mage",
+   "school": "frost",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "cone-of-cold": {
+   "cls": "mage",
+   "school": "frost",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "portal-ironforge": {
+   "cls": "mage",
+   "school": "arcane",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "pyroblast": {
+   "cls": "mage",
+   "school": "fire",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "seal-of-righteousness": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "judgement": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "holy-light": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "devotion-aura": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "flash-of-light": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "seal-of-the-crusader": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "seal-of-justice": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "blessing-of-might": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "blessing-of-wisdom": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "blessing-of-light": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "blessing-of-freedom": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "blessing-of-protection": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "blessing-of-salvation": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "divine-protection": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "hammer-of-justice": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "turn-undead": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "retribution-aura": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "sanctity-aura": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "concentration-aura": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "redemption": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "divine-intervention": {
+   "cls": "paladin",
+   "school": "nature",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "seal-of-command": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "seal-of-light": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "seal-of-wisdom": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "blessing-of-sanctuary": {
+   "cls": "paladin",
+   "school": "lightning",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "consecration": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "holy-wrath": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "exorcism": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "cleanse": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "righteous-fury": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "reckoning": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "vengeance": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "eye-for-an-eye": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "holy-shock": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "divine-favor": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "divine-shield": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "holy-shield": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "repentance": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "blessing-of-kings": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "hammer-of-wrath": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "lay-on-hands": {
+   "cls": "paladin",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "smite": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "shadow-word-pain": {
+   "cls": "priest",
+   "school": "shadow",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "power-word-shield": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "lesser-heal": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "mind-blast": {
+   "cls": "priest",
+   "school": "shadow",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "heal": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "flash-heal": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "renew": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "holy-fire": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "mind-flay": {
+   "cls": "priest",
+   "school": "shadow",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "inner-fire": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "power-word-fortitude": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "dispel-magic": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "abolish-disease": {
+   "cls": "priest",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "cure-disease": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "fade": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "touch-of-weakness": {
+   "cls": "priest",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "starshards": {
+   "cls": "priest",
+   "school": "arcane",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "hex-of-weakness": {
+   "cls": "priest",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "levitate": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "mind-vision": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "psychic-scream": {
+   "cls": "priest",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "silence": {
+   "cls": "priest",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "fear-ward": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "feedback": {
+   "cls": "priest",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "elunes-grace": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "shackle-undead": {
+   "cls": "priest",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "inner-focus": {
+   "cls": "priest",
+   "school": "frost",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "divine-spirit": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "prayer-of-fortitude": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "desperate-prayer": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "shadowguard": {
+   "cls": "priest",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "resurrection": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "lightwell": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "shadowform": {
+   "cls": "priest",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "vampiric-embrace": {
+   "cls": "priest",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "devouring-plague": {
+   "cls": "priest",
+   "school": "shadow",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "prayer-of-healing": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "greater-heal": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "power-infusion": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "mana-burn": {
+   "cls": "priest",
+   "school": "shadow",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "holy-nova": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "mind-control": {
+   "cls": "priest",
+   "school": "shadow",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "spirit-of-redemption": {
+   "cls": "priest",
+   "school": "holy",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "sinister-strike": {
+   "cls": "rogue",
+   "school": "shadow",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "backstab": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "eviscerate": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "evasion": {
+   "cls": "rogue",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "stealth": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "gouge": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "sap": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "sprint": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "kick": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "blind": {
+   "cls": "rogue",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "feint": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "distract": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "pick-pocket": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "throw": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "school",
+   "floor": true
+  },
+  "instant-poison": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "crippling-poison": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "mind-numbing-poison": {
+   "cls": "rogue",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "remorseless-attacks": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "school",
+   "floor": true
+  },
+  "vigor": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "school",
+   "floor": true
+  },
+  "opportunity": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "school",
+   "floor": true
+  },
+  "lethality": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "school",
+   "floor": true
+  },
+  "rupture": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "garrote": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "ambush": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "cheap-shot": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "slice-and-dice": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "vanish": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "riposte": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "ghostly-strike": {
+   "cls": "rogue",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "deadly-poison": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "wound-poison": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "expose-armor": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "premeditation": {
+   "cls": "rogue",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "school",
+   "floor": true
+  },
+  "blade-flurry": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "cold-blood": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "preparation": {
+   "cls": "rogue",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "school",
+   "floor": true
+  },
+  "kidney-shot": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "hemorrhage": {
+   "cls": "rogue",
+   "school": "shadow",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "seal-fate": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "ruthlessness": {
+   "cls": "rogue",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "school",
+   "floor": true
+  },
+  "adrenaline-rush": {
+   "cls": "rogue",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "lightning-bolt": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "earth-shock": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "healing-wave": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "stoneskin-totem": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "searing-totem": {
+   "cls": "shaman",
+   "school": "fire",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "flame-shock": {
+   "cls": "shaman",
+   "school": "fire",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "frost-shock": {
+   "cls": "shaman",
+   "school": "frost",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "purge": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "fire-nova-totem": {
+   "cls": "shaman",
+   "school": "fire",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "earthbind-totem": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "rockbiter-weapon": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "flametongue-weapon": {
+   "cls": "shaman",
+   "school": "fire",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "frostbrand-weapon": {
+   "cls": "shaman",
+   "school": "frost",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "lightning-shield": {
+   "cls": "shaman",
+   "school": "lightning",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "stoneclaw-totem": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "strength-of-earth-totem": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "ghost-wolf": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "lesser-healing-wave": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "healing-stream-totem": {
+   "cls": "shaman",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "mana-spring-totem": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "tremor-totem": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "chain-lightning": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "magma-totem": {
+   "cls": "shaman",
+   "school": "fire",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "flametongue-totem": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "windfury-weapon": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "grace-of-air-totem": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "poison-cleansing-totem": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "disease-cleansing-totem": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "fire-resistance-totem": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "frost-resistance-totem": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "nature-resistance-totem": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "sentry-totem": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "windfury-totem": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "grounding-totem": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "mana-tide-totem": {
+   "cls": "shaman",
+   "school": "frost",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "chain-heal": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "reincarnation": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "ancestral-spirit": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "stormstrike": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "elemental-mastery": {
+   "cls": "shaman",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "shadow-bolt": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "corruption": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "life-tap": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "demon-skin": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "summon-imp": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "immolate": {
+   "cls": "warlock",
+   "school": "fire",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "curse-of-agony": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "curse-of-weakness": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "drain-life": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "drain-soul": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "searing-pain": {
+   "cls": "warlock",
+   "school": "fire",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "fear": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "summon-voidwalker": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "health-funnel": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "curse-of-recklessness": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "curse-of-tongues": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "shadow-ward": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "create-healthstone": {
+   "cls": "warlock",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "create-soulstone": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "curse-of-exhaustion": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "curse-of-the-elements": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "summon-succubus": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "summon-felhunter": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "howl-of-terror": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "soul-fire": {
+   "cls": "warlock",
+   "school": "fire",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "siphon-life": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "drain-mana": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "rain-of-fire": {
+   "cls": "warlock",
+   "school": "fire",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "hellfire": {
+   "cls": "warlock",
+   "school": "fire",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "death-coil": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "dark-pact": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "demon-armor": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "banish": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "curse-of-shadow": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "shadowburn": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "conflagrate": {
+   "cls": "warlock",
+   "school": "fire",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "soul-link": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "demonic-sacrifice": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "fel-domination": {
+   "cls": "warlock",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "enslave-demon": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "amplify-curse": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "inferno": {
+   "cls": "warlock",
+   "school": "fire",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "curse-of-doom": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "ritual-of-doom": {
+   "cls": "warlock",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "heroic-strike": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "inner-rage": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "shield-block": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "charge": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "partial",
+   "floor": true
+  },
+  "rend": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "thunder-clap": {
+   "cls": "warrior",
+   "school": "nature",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "hamstring": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "cleave": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "sunder-armor": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "battle-shout": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "demoralizing-shout": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "bloodrage": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "pummel": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "shield-bash": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "revenge": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "taunt": {
+   "cls": "warrior",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "mocking-blow": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "piercing-howl": {
+   "cls": "warrior",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "disarm": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "intercept": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "partial",
+   "floor": true
+  },
+  "slam": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "overpower": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "execute": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "berserker-rage": {
+   "cls": "warrior",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "intimidating-shout": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "challenging-shout": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "retaliation": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "sweeping-strikes": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "whirlwind": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "concussion-blow": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "battle-stance": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "defensive-stance": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "berserker-stance": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "mortal-strike": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "bloodthirst": {
+   "cls": "warrior",
+   "school": "nature",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "shield-slam": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "melee",
+   "rel": 0.15,
+   "art": "real",
+   "floor": false
+  },
+  "shield-wall": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "last-stand": {
+   "cls": "warrior",
+   "school": "holy",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "death-wish": {
+   "cls": "warrior",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "flurry": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "recklessness": {
+   "cls": "warrior",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "goblin-sapper-charge": {
+   "cls": "neutral",
+   "school": "fire",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "thorium-grenade": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "iron-grenade": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "dense-dynamite": {
+   "cls": "neutral",
+   "school": "fire",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "heavy-runecloth-bandage": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "hearthstone": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "goblin-rocket-helmet": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "gnomish-death-ray": {
+   "cls": "neutral",
+   "school": "fire",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "partial",
+   "floor": true
+  },
+  "gnomish-net-o-matic-projector": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "goblin-mortar": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "flash-bomb": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "big-iron-bomb": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "target-dummy": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "gnomish-shrink-ray": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "goblin-jumper-cables": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "discombobulator-ray": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "skull-of-impending-doom": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "nifty-stopwatch": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "school",
+   "floor": true
+  },
+  "linkens-boomerang": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "cast",
+   "rel": 0.4,
+   "art": "real",
+   "floor": false
+  },
+  "furbolg-medicine-pouch": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "dense-sharpening-stone": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "brilliant-mana-oil": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "brilliant-wizard-oil": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "major-healing-potion-card": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "free-action-potion-card": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "elixir-of-the-mongoose-card": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "partial",
+   "floor": true
+  },
+  "flask-of-the-titans-card": {
+   "cls": "neutral",
+   "school": "steel",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "corrupted": {
+   "cls": "status",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "madness": {
+   "cls": "status",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "twilight-curse": {
+   "cls": "status",
+   "school": "shadow",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "real",
+   "floor": false
+  },
+  "mojache-insight": {
+   "cls": "status",
+   "school": "nature",
+   "anim": "gesture",
+   "rel": 0.32,
+   "art": "school",
+   "floor": true
+  }
+ }
+}

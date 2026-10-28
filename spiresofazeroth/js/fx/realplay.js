@@ -1,8 +1,8 @@
 // Choreography for cards that have REAL spell art (data/fx/real.json): precast + cast on the hero's hands, the real
 // missile flying caster -> target, the real impact at the target, the real aura on the hero. Same helper bag and
 // onImpact/resolve contract as cardfx.runLook, so choreo.play() can swap it in for the recipe look.
-import { createRealArt } from "./realart.js";
-import { spawnModel, killAll } from "./m2emit.js";
+import { createRealArt } from "./realart.js?v=20261028e";
+import { spawnModel, killAll } from "./m2emit.js?v=20261028e";
 
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 const HAND = new Set([1, 2, 21, 22, 35, 37, 38]), FEET = new Set([19, 26, 27, 28]), HEAD = new Set([11, 17, 18, 20]);
@@ -55,9 +55,16 @@ export function createRealPlayer(opts = {}) {
     const hand = attachPos(22, hero, heroFeet, dirX);
     const hasMissile = !!(R.missile && R.missile.length);
     const swing = kind === "attack" && targeted && !hasMissile && !R.cast && !R.precast && !!look && ["slash", "arc", "cleave", "whirl"].includes(look.shape);
-    const windup = (R.precast || R.cast) && targeted ? 0.22 : (R.cast ? 0.2 : 0.08);
+    // windup = seconds to the caster's release frame: animmap (data/fx/anim.json) when the director/choreo passed one, else the old defaults
+    const cardId = c.opts.cardId, arow = h.anim && cardId ? h.anim.card(cardId) : null;
+    const rel = typeof c.opts.release === "number" ? c.opts.release : null;
+    const windup = rel != null ? rel : ((R.precast || R.cast) && targeted ? 0.22 : (R.cast ? 0.2 : 0.08));
+    const floor = !!(h.anim && cardId && h.anim.needsFloor(cardId, true)), sch = h.anim ? h.anim.school(c.el) : null;
+    const schoolProj = arow && arow.anim === "cast" && kind === "attack" && targeted && !hasMissile && h.PROJ ? h.PROJ[c.el] : null;
     let tEnd = windup + 0.6;
 
+    // art that is partial/missing still gets the guaranteed school flare at the hands (hero side) so nothing is silent
+    if (floor && sch && !R.precast && !R.cast) at(Math.max(0, windup - 0.18), () => c.sheet(sch.selfSheet || "buff_glyph_rise", { x: hand.x, y: hand.y, scale: 0.7 * sc, tint: "main", hot: 0.4 }));
     // hero side: precast then cast at the hands (short, the card plays fast)
     if (R.precast) play("precast", hero, heroFeet, { maxEmit: Math.min(0.3, windup + 0.05) });
     at(windup * 0.8, () => { if (R.cast) play("cast", hero, heroFeet, { maxEmit: 0.4 }); });
@@ -68,6 +75,7 @@ export function createRealPlayer(opts = {}) {
         if (R.impact) play("impact", tgt, tgtFeet, swing ? { rate: 1.7, scale: sc * 1.3 } : {}, filt);
         // weapon strikes: the spell itself is only a hit-spark; keep the generic weapon-swing trail so the blow still reads
         if (swing) for (let i = 0; i < Math.min(3, Math.max(1, look.n || 1)); i++) c.sheet(["slash_arc_a", "slash_arc_b", "slash_arc_c"][i % 3], { x: tgt.x, y: tgt.y, scale: 1.25 * sc, tint: "main", hot: 0.5, alpha: 0.75, delay: i * 0.07, flipY: i % 2 === 1 });
+        if (floor && sch && !swing) c.sheet(sch.sheet, { x: tgt.x, y: tgt.y, scale: (kind === "attack" ? 1.0 : 0.85) * sc, tint: "main", hot: 0.45 });
         h.impactCore(c, { flashR: kind === "attack" ? 55 : 40, kick: kind === "attack" });
         if (kind === "attack") numbers.kick(clamp(3 + c.amount * 0.3, 3, 14)); else numbers.kick(2.5);
         // aura / state visuals live a moment on the target (or the hero when self-cast)
@@ -94,6 +102,11 @@ export function createRealPlayer(opts = {}) {
       at(windup + travel, () => inflight.forEach((i) => i && i.stop()));
       impact(windup + travel);
       tEnd = windup + travel + 0.65;
+    } else if (schoolProj) {
+      // ranged attack whose real art has no missile: the school projectile leaves on the release frame
+      at(windup, () => h.projectile(c, schoolProj, () => {}));
+      const trav = schoolProj.dur * 1.05;
+      impact(windup + trav); tEnd = windup + trav + 0.65;
     } else {
       const delay = targeted ? windup + 0.1 : windup + 0.04;
       impact(delay);

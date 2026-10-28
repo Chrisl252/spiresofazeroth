@@ -65,13 +65,13 @@
    "itemId": 20130,
    "zone": null,
    "class": null,
-   "text": "Start each combat with 3 Strength.",
+   "text": "Start each combat with 2 Strength.",
    "triggers": {
     "on_combat_start": [
      {
       "op": "apply",
       "status": "strength",
-      "stacks": 3,
+      "stacks": 2,
       "target": "self"
      }
     ]
@@ -322,12 +322,12 @@
    "itemId": 17774,
    "zone": null,
    "class": null,
-   "text": "Gain 7 max HP and 1 Strength on pickup.",
+   "text": "Gain 6 max HP and 1 Strength on pickup.",
    "triggers": {
     "on_pickup": [
      {
       "op": "max_hp",
-      "amount": 7
+      "amount": 6
      },
      {
       "op": "apply",
@@ -605,14 +605,14 @@
    "itemId": 19339,
    "zone": null,
    "class": null,
-   "text": "25% chance at turn start to gain 1 Energy.",
+   "text": "20% chance at turn start to gain 1 Energy.",
    "triggers": {
     "on_turn_start": [
      {
       "op": "conditional",
       "if": {
        "type": "chance",
-       "pct": 25
+       "pct": 20
       },
       "then": [
        {
@@ -727,14 +727,14 @@
    "itemId": 19288,
    "zone": null,
    "class": null,
-   "text": "20% chance at turn start to gain 1 Energy.",
+   "text": "15% chance at turn start to gain 1 Energy.",
    "triggers": {
     "on_turn_start": [
      {
       "op": "conditional",
       "if": {
        "type": "chance",
-       "pct": 20
+       "pct": 15
       },
       "then": [
        {
@@ -1070,13 +1070,13 @@
    "itemId": 23041,
    "zone": null,
    "class": null,
-   "text": "Start each combat with 4 Strength.",
+   "text": "Start each combat with 3 Strength.",
    "triggers": {
     "on_combat_start": [
      {
       "op": "apply",
       "status": "strength",
-      "stacks": 4,
+      "stacks": 3,
       "target": "self"
      }
     ]
@@ -1260,12 +1260,12 @@
    "itemId": 19948,
    "zone": null,
    "class": null,
-   "text": "Gain 10 max HP and 1 Strength on pickup.",
+   "text": "Gain 8 max HP and 1 Strength on pickup.",
    "triggers": {
     "on_pickup": [
      {
       "op": "max_hp",
-      "amount": 10
+      "amount": 8
      },
      {
       "op": "apply",

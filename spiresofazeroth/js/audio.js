@@ -1,7 +1,8 @@
 // Tiny sound player (GEAR_SPEC section 2): HTMLAudio, unlocked on the first user gesture, default ON, mute remembered in localStorage.
 // Files live in assets/sfx/ as .ogg + .mp3 (copied from the classic client: LootCoinLarge, LootCoinSmall, ChestOpen); the page never calls /sounds/.
 //   sfx.play("coin" | "coinSmall" | "chest")   sfx.playUrl(url, {volume, cut})   sfx.preload(urls)   sfx.muted   sfx.setMuted(bool)
-import { BUILD } from "./version.js";
+import { BUILD } from "./version.js?v=20261028e";
+import * as eng from "./audio/engine.js?v=20261028e";
 
 const BASE = new URL("../assets/sfx/", import.meta.url).href;
 const FILES = { coin: "loot-coin", coinSmall: "loot-coin-small", chest: "chest-open" };
@@ -28,6 +29,7 @@ function el(name) {
 function unlock() {
   if (unlocked) return;
   unlocked = true;
+  eng.resume();
   for (const n of Object.keys(FILES)) el(n); // warm the cache inside the gesture so later plays are allowed
   document.removeEventListener("pointerdown", unlock, true);
   document.removeEventListener("keydown", unlock, true);
@@ -79,8 +81,20 @@ function libEl(url) {
   return a;
 }
 
+const COOLDOWN_MS = 45, PER_URL = 3, MAX_SFX = 14, lastPlay = new Map();
+function htmlPlay(url, level, cut) {
+  const a = libEl(url); if (!a) return false;
+  try {
+    const t = cut || a.paused || a.ended ? a : a.cloneNode();
+    t.currentTime = 0; t.volume = level;
+    const p = t.play(); if (p && p.catch) p.catch(() => {});
+    return true;
+  } catch (e) { return false; }
+}
+
 // Muting also cuts anything already playing (long VO lines, clones) so nothing audible outlives the switch.
 function silence() {
+  for (const v of eng.allVoices()) if (v.kind === "sfx") v.stop(0.04);
   for (const a of lru.values()) { try { a.pause(); } catch (e) { /* ignore */ } }
   for (const a of cache.values()) { try { if (a) a.pause(); } catch (e) { /* ignore */ } }
 }
@@ -100,22 +114,38 @@ export const sfx = {
   // preload(urls): fetch ahead, never blocks (idle-time, in small batches); silent if muted/unavailable.
   preload(urls) {
     const list = [...new Set(urls)].filter(Boolean);
-    const step = () => { for (const u of list.splice(0, 4)) libEl(u); if (list.length) setTimeout(step, 120); };
+    const wa = eng.supported();
+    const step = () => { for (const u of list.splice(0, 4)) { if (wa) eng.loadBuffer(resolveSoundUrl(u)); else libEl(u); } if (list.length) setTimeout(step, 120); };
     setTimeout(step, 400);
   },
-  // playUrl(url, {volume, cut}): cut=true restarts a still-playing copy; otherwise overlapping plays use a clone.
+  // playUrl(url, {volume, cut}): Web Audio voices from pre-decoded buffers (no decode latency), 6 ms fade-in / tail fade-out (no clicks),
+  // per-url cooldown + 3 voices per url + 14 total (duplicate triggers can't machine-gun), all through the master limiter.
+  // cut=true fades out a still-playing copy of the same url first. Falls back to HTMLAudio if Web Audio / the buffer isn't ready yet.
   playUrl(url, { volume = 0.6, cut = false, label = "" } = {}) {
     if (!url || (muted && !FORCE_MUTE)) return false;
     if (FORCE_MUTE) { if (DEBUG()) console.log("[sfx]", label, url); return true; }
-    const a = libEl(url);
-    if (!a) return false;
-    try {
-      const t = cut || a.paused || a.ended ? a : a.cloneNode();
-      t.currentTime = 0; t.volume = Math.min(1, volume * gain / 100);
-      const p = t.play(); if (p && p.catch) p.catch(() => {});
-      if (DEBUG()) console.log("[sfx]", label, url);
-      return true;
-    } catch (e) { return false; }
+    const ru = resolveSoundUrl(url), now = performance.now();
+    if (!cut && now - (lastPlay.get(ru) || 0) < COOLDOWN_MS) { eng.trace("sfx-drop", { url: ru, why: "cooldown", label }); return false; }
+    lastPlay.set(ru, now);
+    if (lastPlay.size > 200) lastPlay.delete(lastPlay.keys().next().value);
+    const level = Math.min(1, volume * gain / 100);
+    if (eng.supported() && !eng.running()) { eng.resume(); eng.loadBuffer(ru); htmlPlay(ru, level, cut); return true; } // dead context: play via element, never into silence
+    if (eng.supported()) {
+      const same = eng.allVoices().filter((v) => v.kind === "sfx" && v.url === ru && !v.stopping);
+      if (cut) same.forEach((v) => v.stop(0.04));
+      else if (same.length >= PER_URL) same[0].stop(0.05);
+      const all = eng.allVoices().filter((v) => v.kind === "sfx" && !v.stopping);
+      if (all.length >= MAX_SFX) all[0].stop(0.05);
+      if (eng.hasBuffer(ru)) {
+        eng.loadBuffer(ru).then((buf) => { if (buf) { if (!(muted && !FORCE_MUTE)) eng.voice(buf, { gain: level, fadeIn: 0.006, fadeOut: 0.04, kind: "sfx", url: ru }); } else htmlPlay(ru, level, cut); });
+        if (DEBUG()) console.log("[sfx]", label, url);
+        return true;
+      }
+      eng.loadBuffer(ru);                                  // decode for next time; this first hit uses the element path
+    }
+    htmlPlay(ru, level, cut);
+    if (DEBUG()) console.log("[sfx]", label, url);
+    return true;
   },
   play(name, { volume = 0.7 } = {}) {
     if (muted || !FILES[name]) return false;

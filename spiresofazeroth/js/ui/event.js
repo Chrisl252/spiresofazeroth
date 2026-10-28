@@ -2,14 +2,14 @@
 // panel - morpheus title, typewriter flavour text (18 ms/char, click to finish, reduced motion = instant), option rows with a
 // consequence icon + coloured chips (eventChips.js), keys 1-9. Picking plays the outcome (eventScene.playOutcome), shows what
 // actually happened under the choice, then "Continue". Options may require gold / a relic / a flag (engine optionAvailable).
-import { h, fill } from "./dom.js";
-import { eventDef, optionAvailable, chooseEventOption, leaveNode, hasHearthstone, useHearthstone } from "../engine/run.js";
-import { cssReady, btn, ico } from "./kit.js";
-import { runBar } from "./runbar.js";
-import { chipsFor, optionIcon, optionTitle } from "./eventChips.js";
-import { mountScene, playOutcome } from "./eventScene.js";
-import { watchLeave } from "./combatKit.js";
-import { deckChanges, revealCards } from "./cardReveal.js";
+import { h, fill } from "./dom.js?v=20261028e";
+import { eventDef, optionAvailable, chooseEventOption, leaveNode, hasHearthstone, useHearthstone } from "../engine/run.js?v=20261028e";
+import { cssReady, btn, ico } from "./kit.js?v=20261028e";
+import { runBar } from "./runbar.js?v=20261028e";
+import { chipsFor, optionIcon, optionTitle } from "./eventChips.js?v=20261028e";
+import { mountScene, playOutcome } from "./eventScene.js?v=20261028e";
+import { watchLeave } from "./combatKit.js?v=20261028e";
+import { deckChanges, revealCards } from "./cardReveal.js?v=20261028e";
 
 export const stageNative = true;
 const TYPE_MS = 18;

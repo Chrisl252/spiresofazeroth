@@ -1,16 +1,16 @@
 // Combat loop: start, play card, end turn (player phase -> enemy phase generator -> round end -> next player turn), potions, finish.
-import { runEffects, evalCond, resolveTargets } from "./effects.js";
-import { fx, log, isAlive, gainBlock, checkDeaths } from "./damage.js";
+import { runEffects, evalCond, resolveTargets } from "./effects.js?v=20261028e";
+import { fx, log, isAlive, gainBlock, checkDeaths } from "./damage.js?v=20261028e";
 import {
   buildPiles, drawCards, endTurnCleanup, whyUnplayable, cardCost, toDiscard, toExhaust, hasFlag, removeFrom,
-} from "./deck.js";
-import { initResources, startOfTurn, endOfTurn, extraDraw, extraEnergy, armTrap, spendRes } from "./resources.js";
-import { buildEnemy, chooseMove, enemyAct, checkPhases } from "./intents.js";
-import { applyStatus, turnStart, turnEnd, roundEnd, modeOf } from "./status.js";
-import { fire } from "./relics.js";
-import { makeRng } from "./rng.js";
-import { heroicMods, noviceOf } from "./heroic.js";
-import { talentCarryBlock, talentNoExhaust, talentSweep } from "./talentHooks.js";
+} from "./deck.js?v=20261028e";
+import { initResources, startOfTurn, endOfTurn, extraDraw, extraEnergy, armTrap, spendRes } from "./resources.js?v=20261028e";
+import { buildEnemy, chooseMove, enemyAct, checkPhases } from "./intents.js?v=20261028e";
+import { applyStatus, turnStart, turnEnd, roundEnd, modeOf } from "./status.js?v=20261028e";
+import { fire } from "./relics.js?v=20261028e";
+import { makeRng } from "./rng.js?v=20261028e";
+import { heroicMods, noviceOf } from "./heroic.js?v=20261028e";
+import { talentCarryBlock, talentNoExhaust, talentSweep } from "./talentHooks.js?v=20261028e";
 
 // map-profile tuning (data/map-profiles.json combatMods) layered on the heroic modifiers: hp multiplies, strengths add
 function composeMods(h, z, tier, nov = 1) {
@@ -32,6 +32,8 @@ export function startCombat(o) {
     potions: run.potions, stats: { damageDealt: 0, damageTaken: 0, cardsPlayed: 0, kills: 0, turns: 0 }, pending: [], powers: [],
     lastSchool: null, lastCardId: null, lastTarget: null, coldDrain: 0, endTurnRequested: false,
   };
+  if (o.hpMul > 0) C.heroicMods = { ...C.heroicMods, enemyHpMult: C.heroicMods.enemyHpMult * o.hpMul }; // co-op (engine/coop.js): one pack for two heroes
+  if (o.uidBase > 0) C.uidSeq = o.uidBase; // co-op: the second hero's summons and cards never reuse the first hero's uids
   C.player = {
     kind: "player", uid: "player", name: cls ? cls.name : "Hero", icon: cls && cls.icon, hp: run.hp, maxHp: run.maxHp, block: 0,
     st: {}, fresh: {}, energy: 0, energyNext: 0, res: {}, traits: [], dblNext: false,
@@ -42,12 +44,13 @@ export function startCombat(o) {
   for (const [id, n] of Object.entries(carry)) applyStatus(C, C.player, id, n);
   run.carry = {};
   if (run.disease > 0) C.player.st.disease = run.disease;
-  for (const id of o.encounter) {
+  if (o.sharedEnemies) C.enemies = o.sharedEnemies; // co-op: the second hero fights the pack the first hero's combat built (same array)
+  else for (const id of o.encounter) {
     const def = C.enemyDefs[id];
     if (!def) continue;
     C.enemies.push(buildEnemy(C, def));
   }
-  if (o.nodeApplies) {
+  if (o.nodeApplies && !o.sharedEnemies) {
     for (const a of o.nodeApplies) {
       const t = C.enemies.find((e) => e.tier === "elite") || C.enemies[0];
       if (t) { applyStatus(C, t, a.status, a.stacks); t.bountyMark = true; }
@@ -57,7 +60,7 @@ export function startCombat(o) {
   C.phase = "player";
   applyTalentsStart(C, run.talents);
   fire(C, "on_combat_start", {});
-  for (const e of C.enemies) chooseMove(C, e);
+  if (!o.sharedEnemies) for (const e of C.enemies) chooseMove(C, e);
   startPlayerTurn(C, true);
   applyTalentsFirstTurn(C, run.talents);
   return C;
@@ -111,7 +114,7 @@ export function startPlayerTurn(C, first = false) {
   C.effectDraws = 0; C.drawBlocked = null; // per-turn cap on effect-driven draws (effects.js MAX_EFFECT_DRAWS_PER_TURN)
   p.windfuryUsed = false;
   if (p.st.retain_block > 0) { p.st.retain_block -= 1; if (p.st.retain_block <= 0) delete p.st.retain_block; }
-  else p.block = talentCarryBlock(C, p.block); // 0 unless Improved Shield Block (Talents V2)
+  else if (!first) p.block = talentCarryBlock(C, p.block); // 0 unless Improved Shield Block (Talents V2); turn 1 keeps combat-start block (gear/relics)
   p.tauntRound = false;
   const r = (C.cls && C.cls.resource) || {};
   const pre = { next: p.energyNext, en: p.st.energized, cold: C.coldDrain, ex: extraEnergy(C), stun: p.st.stun, fr: p.st.frozen };
@@ -126,11 +129,16 @@ export function startPlayerTurn(C, first = false) {
   if (p.st.frozen) { energy -= 1; delete p.st.frozen; }
   if ((stunned || frozenHit) && (r.energyPerTurn || 3) > 0) energy = Math.max(1, energy); // stun + frozen never push below 1
   if (p.st.fear) { draw -= 2; delete p.st.fear; }
+  // Sleep on the hero: this turn is lost (0 energy, cards unplayable, turn can still be ended). One stack is consumed per turn; damage wakes the hero early.
+  const asleep = p.st.sleep > 0;
+  p.asleep = asleep;
+  if (asleep) { p.st.sleep -= 1; if (p.st.sleep <= 0) delete p.st.sleep; energy = 0; }
   p.energy = Math.max(0, energy);
-  if (stunned) { log(C, "Stunned: -1 energy this turn."); fx(C, { t: "miss", uid: "player", text: "STUNNED -1", kind: "gold" }); }
+  if (asleep) { log(C, "Asleep: you cannot act this turn."); fx(C, { t: "miss", uid: "player", text: "ASLEEP", kind: "gold" }); }
+  else if (stunned) { log(C, "Stunned: -1 energy this turn."); fx(C, { t: "miss", uid: "player", text: "STUNNED -1", kind: "gold" }); }
   else if (frozenHit) log(C, "Frozen: -1 energy this turn.");
   if (p.energy <= 0) { // regression telemetry: 0 energy at turn start must be explained by a visible stun
-    if (!stunned) C.stats.zeroEnergyTurns = (C.stats.zeroEnergyTurns || 0) + 1;
+    if (!stunned && !asleep) C.stats.zeroEnergyTurns = (C.stats.zeroEnergyTurns || 0) + 1;
     if (globalThis.__spiresDbg) globalThis.__spiresDbg({ C, energy, pre, stunned });
   }
   turnStart(C, p);
@@ -147,7 +155,7 @@ export function canPlayWhy(C, inst) {
   if (why) return why;
   const req = inst.def.requires;
   if (req && !evalCond({ C, src: C.player, srcKind: "player", target: null }, req)) {
-    return req.type === "form_is" ? `Requires ${req.value} form` : "Requirement not met";
+    return req.type === "form_is" ? `Requires ${req.value} form` : req.type === "pet_alive" ? "Requires a demon" : "Requirement not met";
   }
   return null;
 }
@@ -238,7 +246,8 @@ export function playCard(C, uid, targetUid) {
   if (!C.pile.hand.includes(inst) && !C.pile.discard.includes(inst) && !C.pile.exhaust.includes(inst) && !C.pile.draw.includes(inst)) {
     if (def.type === "power" || def.type === "token_power") C.powers.push(inst);
     else if (hasFlag(inst, "exhaust") && !talentNoExhaust(C, def)) { toExhaust(C, inst); C.lastExhausted = inst; }
-    else toDiscard(C, inst);
+    else if (hasFlag(inst, "returns")) { inst.thrownTurn = C.turn; C.pile.hand.push(inst); } // Throw: back to hand, once per turn
+else toDiscard(C, inst);
   }
   if (!C.result) {
     fire(C, "on_card_played", { card: def, enemy: target });

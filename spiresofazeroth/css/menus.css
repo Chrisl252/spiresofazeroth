@@ -1,0 +1,111 @@
+/* Spires of Azeroth: shared MENU primitives, loaded LAST (kit.js cssReady) so they win over screens.css / talents.css / charcreate.css at equal specificity. */
+/* ======================================================================================================================================
+   MENU PRIMITIVES (out-of-run screens: title, class select, character list/create, talents, codex, settings/pause, Download, patch notes, bug report)
+   ONE frame  = .sx-wood + .sx-parch|.sx-dark (screens.css); ONE button = .sp-wowbtn (stage.css, sizes --sm/--lg); ONE modal = kit.js stageModal
+   (.sx-modal-back > .sx-modal); ONE Back/Close slot = top-right (.sx-page__back / .sx-cls__back) or the panel's own footer row.
+   Stage px throughout. `.sp-menuscr` is set on the stage root by main.js go() for MENU_SCREENS only, so none of this touches in-run screens.
+   Phone = the stage is scaled to ~0.36, so 124 stage px is the 44 css px tap minimum. */
+.sp-stage-host { --ink2: #2b1a0a; --parch-red: #5a1f0a; --wood-line: #8a6a2a; } /* parchment ink tokens were scoped to .sx-screen, so pause/settings, modals and the bug panel fell back to cream-on-parchment */
+.sx-modal-back, .pm-back, .sp-bugp { font-family: var(--f-ui); font-size: 28px; line-height: 1.3; color: var(--ink); }
+.sx-modal__head h3 { color: var(--parch-red); text-shadow: 0 1px 0 rgba(255,235,190,.4); }
+.sx-modal-back .sx-modal { padding: 44px 52px 40px; }
+.sp-dl { gap: 22px; } .sp-dl-note { font-size: 28px; line-height: 1.4; } .sp-dl-note b { color: var(--parch-red); font-weight: 400; }
+.sp-dl-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+.sp-dl-link { display: inline-flex; text-decoration: none; padding: 0 var(--cap); }
+.sp-dl-btn { margin-top: 0; }
+
+/* Settings / Escape menu: ONE panel = title row + scrolling body + button row (the buttons never cover the list) */
+.pm-panel { gap: 16px; padding: 44px 60px 40px; overflow: hidden; max-height: 94%; }
+.pm-title { flex: 0 0 auto; margin: 0; padding: 0 0 12px; color: var(--parch-red); text-shadow: 0 1px 0 rgba(255,235,190,.4); border-bottom: 3px solid rgba(90,31,10,.32); }
+.pm-body { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; gap: 18px; overflow-y: auto; overscroll-behavior: contain; padding: 4px 14px 4px 0; scrollbar-width: thin; scrollbar-color: #6b4a1c rgba(90,31,10,.15); }
+.pm-btns { flex: 0 0 auto; margin: 0; padding-top: 18px; border-top: 3px solid rgba(90,31,10,.32); }
+.pm-lab { color: var(--ink2); }
+.pm-select { min-height: 72px; color: var(--ink); background-color: #120d08; }
+.pm-range { height: 18px; }
+.pm-panel .sx-check, .sx-check { appearance: none; -webkit-appearance: none; display: inline-grid; place-content: center; width: 52px; height: 52px; margin: 0; cursor: pointer; background: #120d08; border: 3px solid #6b5220; border-radius: 6px; box-shadow: inset 0 2px 6px rgba(0,0,0,.7); }
+.sx-check::after { content: ""; width: 14px; height: 26px; margin-top: -5px; border: solid #ffd100; border-width: 0 6px 6px 0; transform: rotate(40deg) scale(0); transition: transform .1s; }
+.sx-check:checked { border-color: var(--gold); } .sx-check:checked::after { transform: rotate(40deg) scale(1); }
+.sx-check:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+/* floating bug button: out of the way of every menu panel (it sat on the Mage card, the talents footer and the name box) */
+.sp-stage.sp-menuscr .sp-bug { left: 14px !important; top: 14px !important; width: 52px; height: 52px; }
+.sp-stage.sp-menuscr .sp-bug svg { width: 28px; height: 28px; }
+
+/* bug report dialog: same parchment frame as the pause panel */
+.sp-bugp .sp-bugp__box { width: 760px; max-width: 94%; padding: 46px 54px 42px; border: 0; border-radius: 0; background-color: #c19a58; box-shadow: none; color: var(--ink2); }
+.sp-bugp .sp-bugp__box h3 { font-size: 56px; color: var(--parch-red); } .sp-bugp .sp-bugp__box p { font-size: 26px; }
+.sp-bugp .sp-bugp__box textarea, .sp-bugp .sp-bugp__box input[type=email] { min-height: 72px; font-size: 26px; }
+.sp-bugp__row { gap: 18px; }
+
+/* class select */
+.sx-chip b { right: 14px; top: -8px; }
+.sx-clsplate p { -webkit-line-clamp: 4; }
+.sx-cls__inner { -webkit-mask-image: linear-gradient(#000 calc(100% - 44px), transparent); mask-image: linear-gradient(#000 calc(100% - 44px), transparent); padding-bottom: 36px; }
+
+/* title: four equal buttons in one row */
+.sp-title-screen__row .sp-wowbtn { min-width: 250px; }
+
+/* ----- phones: tap targets >= 44 css px, nothing smaller than the stage allows ----- */
+@media (max-width: 900px), (max-height: 520px) {
+  .sp-stage.sp-menuscr .sp-wowbtn:not(.sp-wowbtn--lg), .sx-modal-back .sp-wowbtn, .pm-panel .sp-wowbtn, .sp-bugp .sp-wowbtn { --h: 124px !important; }
+  .sp-stage.sp-menuscr .sp-title-screen__row { gap: 28px; }
+  .sp-stage.sp-menuscr .sp-bug { width: 124px; height: 124px; } .sp-stage.sp-menuscr .sp-bug svg { width: 64px; height: 64px; }
+  .sp-stage.sp-menuscr .sx-tog, .sp-stage.sp-menuscr .cc-gender, .sx-modal-back .sx-tog { min-height: 124px; }
+  .sp-stage.sp-menuscr .sx-select, .sp-stage.sp-menuscr .sx-input, .pm-select { min-height: 124px; font-size: 40px; }
+  .sx-check { width: 84px; height: 84px; } .sx-check::after { width: 24px; height: 44px; }
+}
+
+/* landscape phone: the site masthead ate a ninth of 390px and shrank the whole stage; the page footer still links the site */
+@media (max-height: 520px) and (orientation: landscape) { body.sp-game .wgf-shell-topbar { display: none; } }
+
+/* class select: x4 badge sits on the icon corner, never on the label; the account hint is not faded by the scroll mask */
+.sx-chip b { right: 12px; top: -8px; }
+.sp-portrait .sx-chip b { top: -12px; right: 18px; }
+.sx-cls__talents { position: relative; }
+
+/* ----- phones (portrait stage, 1080 wide) ----- */
+/* the bug button (top-left, 124px) gets its own row above screen titles instead of sitting on them */
+.sp-stage.sp-portrait.sp-menuscr .sx-banner { margin-top: 128px; }
+.sp-stage.sp-portrait.sp-menuscr .sx-cls__top { padding-top: 0; }
+/* talents: trees keep their real height and the whole sheet scrolls (they were squeezed to one row each) */
+.sp-stage.sp-portrait .sx-tal { overflow-y: auto; overflow-x: hidden; padding-bottom: 40px; }
+.sp-stage.sp-portrait .sx-tal__body { flex: 0 0 auto; padding: 14px 24px 0; }
+.sp-stage.sp-portrait .sx-tal__tree { min-height: auto; }
+.sp-stage.sp-portrait .sx-tal__grid { flex: 0 0 auto; grid-auto-rows: 118px; }
+.sp-stage.sp-portrait .sx-tal__foot { flex-wrap: wrap; padding: 24px 28px 8px; }
+/* character create: Accept / Back stay in reach while the long phone column scrolls; the left column scrolls instead of clipping */
+.cc .cc-left { overflow-y: auto; scrollbar-width: thin; scrollbar-color: #6b5220 transparent; }
+.sp-stage.sp-portrait .cc .cc-foot { position: sticky; bottom: 0; z-index: 6; margin: 0 -24px; width: auto; padding: 18px 24px 22px; background: linear-gradient(rgba(10,7,4,0), rgba(10,7,4,.92) 30%); }
+
+/* bug report on phones: the dialog fills the width and its type is readable (it was 14px / 9px css) */
+.sp-portrait .sp-bugp .sp-bugp__box { width: 94%; padding: 64px 58px 52px; }
+.sp-portrait .sp-bugp .sp-bugp__box h3 { font-size: 80px; } .sp-portrait .sp-bugp .sp-bugp__box p { font-size: 40px; }
+.sp-portrait .sp-bugp .sp-bugp__box textarea, .sp-portrait .sp-bugp .sp-bugp__box input[type=email] { font-size: 40px; min-height: 124px; padding: 16px 20px; }
+.sp-portrait .sp-bugp .sp-bugp__box textarea { height: 300px; }
+.sp-portrait .sp-bugp__msg { font-size: 34px; flex: 1 0 100%; margin: 0 0 10px; } .sp-portrait .sp-bugp__row { gap: 20px; }
+
+/* character list: footer buttons size to their label (Delete Character was cut by its cap) */
+.cc .cc-foot--list .sp-wowbtn, .cc .cc-listbtns .sp-wowbtn { min-width: 0; flex: 1 1 auto; white-space: nowrap; }
+.cc .cc-foot--list { gap: 14px; }
+
+/* ======================================================================================================================================
+   IN-RUN SCREENS (run bar, reward / spoils, loot frame, deck viewer). Same buttons and tap sizes as the menus above. */
+.sx-bar .sx-bar__fs { min-width: 64px; padding: 0; font-size: 34px; line-height: 1; } /* the fullscreen glyph rendered as an empty red box at the small size */
+.sp-menuscr ~ * .sp-bug, .sp-stage:not(.sp-menuscr) .sp-bug { opacity: .55; } .sp-stage:not(.sp-menuscr) .sp-bug:hover, .sp-stage:not(.sp-menuscr) .sp-bug:focus-visible, .sp-stage:not(.sp-menuscr) .sp-bug.is-drag { opacity: 1; }
+.sp-modal .sp-btn--small { min-height: 44px; min-width: 88px; }
+/* phone run bar: one row of equal buttons at >= 44 css px, fullscreen is a square */
+.sp-stage.sp-portrait .sx-bar .sp-wowbtn { --h: 124px; --cap: 44px; min-width: max-content; flex: 1 1 auto; font-size: 32px; margin-left: 0; white-space: nowrap; }
+.sp-stage.sp-portrait .sx-bar .sx-bar__fs { flex: 0 0 124px; padding: 0; min-width: 124px; font-size: 64px; }
+/* phone reward: cards, spoils and Continue stack full width instead of two cramped columns (Spoils and Continue ran off the right edge) */
+.sp-stage.sp-portrait .sv-main { grid-template-columns: minmax(0, 1fr); grid-auto-rows: min-content; align-content: start; overflow-y: auto; gap: 28px; padding: 4px 24px 28px; }
+.sp-stage.sp-portrait .sv-right { align-items: stretch; }
+.sp-stage.sp-portrait .lf.lf--inline { margin: 52px 0 0 0; max-width: 100%; }
+.sp-stage.sp-portrait .lf .lf-name { font-size: 44px; } .sp-stage.sp-portrait .lf .lf-hint { font-size: 30px; } .sp-stage.sp-portrait .lf .lf-row { min-height: 120px; }
+.sp-stage.sp-portrait .lf .lf-all { --h: 124px; min-width: 260px; font-size: 38px; } .sp-stage.sp-portrait .lf .lf-x { width: 110px; height: 110px; font-size: 56px; }
+.sp-stage.sp-portrait .lf-foot { flex-wrap: wrap; gap: 14px; }
+/* phone combat HUD: Deck / Map / Settings / fullscreen reach the 44 css px tap size */
+.sp-stage.sp-portrait .sp-wowbtn--tb { --h: 124px; --cap: 44px; min-width: 0; font-size: 32px; }
+.sp-stage.sp-portrait .sp-wowbtn--tb.sp-wowbtn--fs { min-width: 124px; font-size: 60px; padding: 0; } .sp-stage.sp-portrait .sp-tb__right { gap: 14px; }
+/* landscape phone: the site masthead is hidden there, so the stage host must not keep its 40px offset (a dead black band) */
+@media (max-height: 520px) and (orientation: landscape) { body.sp-game.sp-stage-on main.spires-app.sp-stage-host { top: 0; } }
+.sp-stage.sp-portrait .lt-strip { bottom: 290px; }

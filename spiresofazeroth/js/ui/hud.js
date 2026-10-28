@@ -4,12 +4,12 @@
 //           onSpare(uid), onMap(), onSettings() }
 //   view: { potSel, busy, canEnd, hint, spare?(enemy) -> bool }
 // Enemy plates carry data-uid so the hand can drop cards on them; the actors agent plugs real anchors into opts.anchorFor.
-import { h, tip, esc, cap } from "./dom.js";
-import { gearStrip } from "./gearStrip.js";
-import { intentInfo } from "../engine/intents.js";
-import { isAlive } from "../engine/damage.js";
-import { immuneList } from "../engine/immunity.js";
-import { heroLabels } from "../engine/character.js";
+import { h, tip, esc, cap } from "./dom.js?v=20261028e";
+import { gearStrip } from "./gearStrip.js?v=20261028e";
+import { intentInfo } from "../engine/intents.js?v=20261028e";
+import { isAlive } from "../engine/damage.js?v=20261028e";
+import { immuneList } from "../engine/immunity.js?v=20261028e";
+import { heroLabels } from "../engine/character.js?v=20261028e";
 const HD = new URL("../../assets/icons-hd/", import.meta.url).href; // 256px upscaled icons, relative so dev + deploy both resolve
 
 const ico = (slug, cls = "") => {
@@ -121,7 +121,9 @@ export function createHud(host, app, o = {}) {
     if (!info) { wrap.append(h("span", { class: "sp-int__unk" }, "?")); return wrap; }
     if (info.dazed) { // risen undead: knocked out for a turn, no attack queued
       wrap.classList.add("is-dazed"); wrap.append(h("span", { class: "sp-int__zzz" }, h("i", {}, "Z"), h("i", {}, "z"), h("i", {}, "z")));
-      wrap.setAttribute("aria-label", `${e.name} is dazed`); tip(wrap, "<b>Dazed</b><br>It just rose again and skips its next action."); return wrap;
+      const WHY = { risen: ["Dazed", "It just rose again and skips its next action.", "dazed"], stun: ["Stunned", "Stunned: skips its next action.", "stunned"], fear: ["Feared", "Feared: skips its next action.", "feared"], frozen: ["Frozen", "Frozen: skips its next action.", "frozen"], sleep: ["Asleep", "Asleep: skips its action until it wakes.", "asleep"] };
+      const w = WHY[info.why] || WHY.risen;
+      wrap.setAttribute("aria-label", `${e.name} is ${w[2]}`); tip(wrap, `<b>${w[0]}</b><br>${w[1]}`); return wrap;
     }
     const parts = [];
     if (info.dmg > 0) {
@@ -295,8 +297,13 @@ export function createHud(host, app, o = {}) {
     if (orb._tip !== per) { orb._tip = per; orb.tabIndex = 0; if (!orb._tipOn) { orb._tipOn = 1; tip(orb, `<b>Energy</b><br>Spent to play cards. Refills to ${per} at the start of each of your turns.`); } }
     resRow.replaceChildren();
     const list = [r].concat(cls.extraResources || []).filter((x) => x && x.id && x.name && x.id !== "pet");
-    for (const x of list) { const rs = h("span", { class: "sp-res2", tabindex: "0" }, ico(x.icon), h("b", {}, p.res[x.id] || 0), x.max > 0 ? `/${x.max}` : ""); tip(rs, `<b>${esc(x.name)}</b><br>${esc(x.tip || x.rules || "")}`); resRow.append(rs); }
-    for (const k of ["form", "stance", "aspect", "seal"]) if (p[k]) resRow.append(h("span", { class: "sp-res2 sp-res2--tag" }, `${cap(k)}: ${cap(p[k])}`));
+    for (const x of list) {
+      // Seals live in p.seal (not p.res): the chip shows the active Seal (1/1 + its name) or 0/1, never a stale counter
+      const isSeal = x.id === "seal", val = isSeal ? (p.seal ? 1 : 0) : p.res[x.id] || 0;
+      const rs = h("span", { class: "sp-res2", tabindex: "0" }, ico(x.icon), h("b", {}, val), x.max > 0 ? `/${x.max}` : "", isSeal && p.seal ? ` ${cap(p.seal)}` : "");
+      tip(rs, `<b>${esc(x.name)}</b><br>${isSeal ? (p.seal ? `Active: Seal of ${esc(cap(p.seal))}. ` : "No Seal active. ") : ""}${esc(x.tip || x.rules || "")}`); resRow.append(rs);
+    }
+    for (const k of ["form", "stance", "aspect", "seal"]) if (p[k] && !(k === "seal" && list.some((x) => x.id === "seal"))) resRow.append(h("span", { class: "sp-res2 sp-res2--tag" }, `${cap(k)}: ${cap(p[k])}`));
     if (p.pet && !p.pet.down) resRow.append(h("span", { class: "sp-res2 sp-res2--tag" }, ico(p.pet.icon), `Pet ${p.pet.hp}/${p.pet.maxHp}`));
     for (const [slot, t] of Object.entries(p.totems || {})) if (t && t.hp > 0) resRow.append(h("span", { class: "sp-res2 sp-res2--tag" }, ico(t.icon), `${cap(slot)} ${t.hp}`));
 

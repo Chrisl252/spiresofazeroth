@@ -1,13 +1,13 @@
 // Class select (stage-native): nine class plates, details + starting deck, continent / heroic / seed / pet, Begin.
-import { h, icon, cap, track, fill, tip, esc } from "./dom.js";
-import { isClassUnlocked, unlockText, saveRun, saveMeta } from "../engine/save.js";
-import { newRun, prepareZonePick } from "../engine/run.js";
-import { newSeedString } from "../engine/rng.js";
-import { heroicName, MAX_HEROIC } from "../engine/heroic.js";
-import { cssReady, btn, tog, ico, banner, scroll } from "./kit.js";
-import { HOME } from "../engine/character.js";
-import { beginRun } from "./runStart.js";
-import { repairSpent, talentState, talentMods, talentSummary, classLevel, nextLevelXp, lockedCardIds } from "../engine/talents.js";
+import { h, icon, cap, track, fill, tip, esc } from "./dom.js?v=20261028e";
+import { isClassUnlocked, unlockText, saveRun, saveMeta } from "../engine/save.js?v=20261028e";
+import { newRun, prepareZonePick } from "../engine/run.js?v=20261028e";
+import { newSeedString } from "../engine/rng.js?v=20261028e";
+import { heroicName, heroicOpen, heroicBlurb } from "../engine/heroic.js?v=20261028e";
+import { cssReady, btn, tog, ico, banner, scroll } from "./kit.js?v=20261028e";
+import { HOME } from "../engine/character.js?v=20261028e";
+import { beginRun } from "./runStart.js?v=20261028e";
+import { repairSpent, talentState, talentMods, talentSummary, classLevel, nextLevelXp, lockedCardIds } from "../engine/talents.js?v=20261028e";
 
 export const stageNative = true;
 
@@ -30,7 +30,7 @@ export async function render(app, _name, props = {}) {
 
   const draw = () => {
     const cls = data.classObj(st.cls);
-    const maxH = Math.min(MAX_HEROIC, meta.heroic[st.cls] || 0);
+    const maxH = heroicOpen(meta, st.cls);
     st.heroic = Math.min(st.heroic, maxH);
     st.continent = st.continent || (ch ? HOME[ch.race] : null) || cls.defaultContinent || "ek";
     const petChoices = cls.resource && cls.resource.pet ? cls.resource.pet.choices : null;
@@ -61,7 +61,7 @@ export async function render(app, _name, props = {}) {
     }
 
     const heroicBtns = h("div", { class: "sx-pick", role: "group", "aria-label": "Heroic level" });
-    for (let i = 0; i <= maxH; i++) heroicBtns.append(tog(i === 0 ? "Normal" : `Heroic ${heroicName(i)}`, st.heroic === i, () => { st.heroic = i; draw(); }));
+    for (let i = 0; i <= maxH; i++) heroicBtns.append(tog(i === 0 ? "Normal" : heroicName(i), st.heroic === i, () => { st.heroic = i; draw(); }));
     const contBtns = h("div", { class: "sx-pick", role: "group", "aria-label": "Starting continent" },
       ...[["ek", "Eastern Kingdoms"], ["kal", "Kalimdor"]].map(([k, n]) => tog(n, st.continent === k, () => { st.continent = k; draw(); })));
     if (unbindPet) { unbindPet(); unbindPet = null; }
@@ -94,7 +94,7 @@ export async function render(app, _name, props = {}) {
       acct,
       petPick,
       h("div", { class: "sx-field" }, h("h4", {}, "Start continent"), contBtns),
-      maxH > 0 ? h("div", { class: "sx-field" }, h("h4", {}, "Difficulty"), heroicBtns) : null,
+      maxH > 0 ? h("div", { class: "sx-field" }, h("h4", {}, "Difficulty"), heroicBtns, h("p", { class: "sx-hint" }, heroicBlurb(st.heroic))) : null,
       h("label", { class: "sx-field sx-seed" }, h("h4", {}, "Seed"), seedIn, tog("Random", false, () => { st.seed = newSeedString(); draw(); }))),
       h("div", { class: "sx-cls__go" }, btn("Begin the climb", async () => {
         await beginRun(app, st, ch);

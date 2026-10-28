@@ -1,7 +1,7 @@
 // Data loader. Environment-neutral: you give it fetchJson(relPath) -> parsed JSON or null (404). The browser passes a fetch
 // wrapper that appends ?v=BUILD; node tools pass an fs reader. No DOM, no node imports here.
-import { setImmunityTable } from "./immunity.js";
-import { loadClassGear, loadLegacyMap, slotOf } from "./gear.js";
+import { setImmunityTable } from "./immunity.js?v=20261028e";
+import { loadClassGear, loadLegacyMap, slotOf } from "./gear.js?v=20261028e";
 const HD = new URL("../../assets/icons-hd/", import.meta.url).href; // 256px upscaled icons, relative so dev + deploy both resolve
 const arr = (o, key) => (Array.isArray(o) ? o : o && Array.isArray(o[key]) ? o[key] : []);
 
@@ -107,7 +107,8 @@ export function createData({ fetchJson }) {
   d.loadZone = async (id) => {
     if (d.zones.has(id)) return d.zones.get(id);
     if (d.zoneMissing.has(id)) return null;
-    const z = await get(`zones/${id}.json`);
+    let z = await get(`zones/${id}.json`);
+    if (!z) { await new Promise((r) => setTimeout(r, 400)); z = await get(`zones/${id}.json`); } // one retry: a network blip must not poison the zone as "missing" for the whole session
     if (!z) { d.zoneMissing.add(id); return null; }
     const zone = await resolveZone(z);
     d.zones.set(id, zone);

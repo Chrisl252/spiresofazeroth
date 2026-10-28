@@ -1,7 +1,7 @@
 // The "New gear" setting: one select, shown in the Escape menu (pauseExtras.js) and at the top of the Gear Bag (gearBag.js).
 // Persists in app.meta.settings.autoEquip and drives engine/gear.js goesToBag (fight drops, loot, shop, events). Player request 10-25.
-import { h } from "./dom.js";
-import { setAutoEquip } from "../engine/gear.js";
+import { h } from "./dom.js?v=20261028e";
+import { setAutoEquip } from "../engine/gear.js?v=20261028e";
 
 export const AUTO_EQUIP_LABELS = [
   ["smart", "Empty slots only"],

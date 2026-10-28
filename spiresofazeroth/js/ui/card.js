@@ -2,8 +2,8 @@
 // cardEl(def, opts) -> Element   opts: { C, inst, cost, data, color, mini, tag, cls, onClick, tips, state }
 // The WoW icon is 64 px (56 px of art inside a baked bevel), so the art is built from two layers: a blurred, saturated, scaled copy as
 // the painted backdrop, and a canvas-upscaled + unsharp-masked copy fading into it. Nothing here touches the engine.
-import { renderText } from "../engine/cardtext.js";
-import { tip, esc } from "./dom.js";
+import { renderText } from "../engine/cardtext.js?v=20261028e";
+import { tip, esc } from "./dom.js?v=20261028e";
 const HD = new URL("../../assets/icons-hd/", import.meta.url).href; // 256px upscaled icons, relative so dev + deploy both resolve
 
 export const CARD_W = 260, CARD_H = 380, MINI_W = 130, MINI_H = 190;
@@ -77,8 +77,16 @@ export function keywordLines(def, data) {
   const text = (def.text || "").toLowerCase();
   const word = (n) => new RegExp("(^|[^a-z])" + n.toLowerCase().replace(/[^a-z0-9 ]/g, "") + "([^a-z]|$)");
   for (const k of d.keywords.values()) if (word(k.name).test(text)) ids.add(k.id);
-  return [...ids].map((k) => d.status(k)).filter(Boolean).map((kw) => ({ name: kw.name, text: kw.text, icon: kw.icon }));
+  const out = [...ids].map((k) => d.status(k)).filter(Boolean).map((kw) => ({ name: kw.name, text: kw.text, icon: kw.icon }));
+  for (const x of EXTRA_TEXT) if (word(x.name).test(text) && !out.some((o) => o.name === x.name)) out.push(x); // bolded words that are not statuses
+  return out;
 }
+// Highlighted words (EXTRA_KW) with no status entry still get an explanation (Block / Rage had none, 2026-10-28 report)
+const EXTRA_TEXT = [
+  { name: "Block", icon: "ability_defend", text: "Absorbs that much damage this turn. Gone at the start of your next turn." },
+  { name: "Rage", icon: "ability_racial_bloodrage", text: "Warrior resource: gained when you deal or take damage, spent by heavy strikes and stance abilities." },
+  { name: "Energy", icon: "spell_holy_magicalsentry", text: "Spent to play cards. Refills at the start of each turn." },
+];
 export function classColor(C, data) {
   if (C && C.cls && C.cls.color) return C.cls.color;
   const a = window.__spires;

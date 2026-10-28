@@ -1,12 +1,12 @@
 // Vendor screen (stage-native) + the reusable goods table (the Moonglade hub embeds shopPanel).
 // A goblin merchant stands left (js/ui/shopVendor.js: model + classic voice lines); the stock lies on a dark wood table right.
 // No Buy buttons: clicking a ware buys it. Styling: css/shop.css.
-import { h, icon, qClass, toast, fill, esc } from "./dom.js";
-import { buy, buyRemoval, leaveNode } from "../engine/run.js";
-import { cssReady, btn, dark, ico, cardSlot, stageModal, tip } from "./kit.js";
-import { runBar } from "./runbar.js";
-import { mountVendor } from "./shopVendor.js";
-import { sfx } from "../audio.js";
+import { h, icon, qClass, toast, fill, esc } from "./dom.js?v=20261028e";
+import { buy, buyRemoval, leaveNode } from "../engine/run.js?v=20261028e";
+import { cssReady, btn, dark, ico, cardSlot, stageModal, tip } from "./kit.js?v=20261028e";
+import { runBar } from "./runbar.js?v=20261028e";
+import { mountVendor } from "./shopVendor.js?v=20261028e";
+import { sfx } from "../audio.js?v=20261028e";
 
 export const stageNative = true;
 

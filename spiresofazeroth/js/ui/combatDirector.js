@@ -8,11 +8,11 @@
 //     snap()                      { uid: {hp, block, st} } for the player and every enemy (call BEFORE the engine step)
 //     ensureActors()              adds actors for summons
 // Every awaited step goes through safe() (3 s) so a stalled rAF / hidden tab can never deadlock the turn.
-import { safe, logOnce } from "./combatKit.js";
-import { isAlive } from "../engine/damage.js";
-import { cardSounds as SND } from "./cardSounds.js";
-import { createPetStage } from "../stage/petStage.js";
-import { createTotemStage } from "../stage/totemStage.js";
+import { safe, logOnce } from "./combatKit.js?v=20261028e";
+import { isAlive } from "../engine/damage.js?v=20261028e";
+import { cardSounds as SND } from "./cardSounds.js?v=20261028e";
+import { createPetStage } from "../stage/petStage.js?v=20261028e";
+import { createTotemStage } from "../stage/totemStage.js?v=20261028e";
 
 const MELEE_EL = { steel: 110, blood: 110, wind: 90, stone: 40 };            // fx lead (ms) so the recipe impact lands as the lunge connects
 const ENEMY_LEAD = { claw: 160, bite: 120, steel: 160, slam: 80, spit: 0 };

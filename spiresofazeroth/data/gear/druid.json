@@ -147,13 +147,13 @@
    "tier": 1,
    "rarity": "epic",
    "stats": "Tier 1",
-   "text": "Start each combat: gain 6 Block.",
+   "text": "Start each combat: gain 5 Block.",
    "class": "druid",
    "triggers": {
     "on_combat_start": [
      {
       "op": "block",
-      "amount": 6,
+      "amount": 5,
       "target": "self"
      }
     ]
@@ -261,7 +261,7 @@
    "tier": 1,
    "rarity": "epic",
    "stats": "Tier 1",
-   "text": "At the start of each turn: 15% chance to gain 1 Energy.",
+   "text": "At the start of each turn: 12% chance to gain 1 Energy.",
    "class": "druid",
    "triggers": {
     "on_turn_start": [
@@ -269,7 +269,7 @@
       "op": "conditional",
       "if": {
        "type": "chance",
-       "pct": 15
+       "pct": 12
       },
       "then": [
        {

@@ -4,12 +4,12 @@
 //   taken(C, tgt, taken, src, o)      damage the player is about to take; return the new amount
 // Read values with tv(C, key, arg) from ../talentHooks.js; keep per-fight state on C.talmage (C is one combat).
 // Tooltips: mage.defs.js. Old-to-new table + sim numbers: docs/talents-v2/mage.md.
-import { tv } from "../talentHooks.js";
-import { applyStatus } from "../status.js";
-import { addRes, getRes } from "../resources.js";
-import { gainBlock, healEntity, isAlive, fx } from "../damage.js";
-import { drawCards } from "../deck.js";
-import { MAG } from "./mage.defs.js";
+import { tv } from "../talentHooks.js?v=20261028e";
+import { applyStatus } from "../status.js?v=20261028e";
+import { addRes, getRes } from "../resources.js?v=20261028e";
+import { gainBlock, healEntity, isAlive, fx } from "../damage.js?v=20261028e";
+import { drawCards } from "../deck.js?v=20261028e";
+import { MAG } from "./mage.defs.js?v=20261028e";
 
 const M = (C) => C.talmage || (C.talmage = { turn: -1, impact: new Set(), pom: 0, last: null, absorbed: false, snapDrew: false, ign: 0 });
 const isSpell = (o) => !!(o && o.card && o.card.type === "attack");

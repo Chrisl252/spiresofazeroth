@@ -3,10 +3,10 @@
 // Entities (player, enemy, pet, totem) all carry `st: { id: number }`.
 //  - duration statuses: number = turns left, tick down at ROUND END (fresh enemy->player debuffs skip the first tick).
 //  - intensity statuses: number = stacks.
-import { dealStatusDamage, healEntity, gainBlock, fx } from "./damage.js";
-import { immuneToStatus } from "./immunity.js";
-import { addRes } from "./resources.js";
-import { runEffects } from "./effects.js";
+import { dealStatusDamage, healEntity, gainBlock, fx } from "./damage.js?v=20261028e";
+import { immuneToStatus } from "./immunity.js?v=20261028e";
+import { addRes } from "./resources.js?v=20261028e";
+import { runEffects } from "./effects.js?v=20261028e";
 
 export const STATUS_DEFS = {
   // duration
@@ -36,6 +36,7 @@ export const STATUS_DEFS = {
   regen: { mode: "intensity", kind: "buff" },        // heal at turn start, then -1
   disease: { mode: "intensity", kind: "debuff" },    // heals -50%; carries into the next combat (-1 per combat)
   curse: { mode: "intensity", kind: "debuff" },      // deals -1 damage per stack; -1 per round
+  double_next: { mode: "intensity", kind: "buff" },  // indicator only: mirrors p.dblNext (Brilliant Wizard Oil etc.), cleared when the next attack consumes it
   enrage: { mode: "intensity", kind: "buff" },       // +1 damage per stack
   armor: { mode: "intensity", kind: "buff" },        // mechanical: each hit reduced by stacks (min 1)
   cold: { mode: "intensity", kind: "debuff" },       // at 5+ stacks: lose 1 energy next turn, -5 stacks; -1 per round
@@ -89,7 +90,7 @@ export function applyStatus(C, e, id, amount, o = {}) {
   if (!e.st) e.st = {};
   const def = STATUS_DEFS[id] || {};
   if (amount > 0 && (hasTrait(e, "immune:" + id) || immuneToStatus(e, id, o.school, C && C.data && C.data.schoolsData && C.data.schoolsData.statusSchools))) {
-    if (isEnemy(e)) fx(C, { t: "miss", uid: e.uid, text: "IMMUNE", kind: "gold" });
+    if (isEnemy(e)) fx(C, { t: "miss", uid: e.uid, text: "Immune: " + ((C && C.data && C.data.status && (C.data.status(id) || {}).name) || id.replace(/_/g, " ").replace(/^./, (c) => c.toUpperCase())), kind: "gold" });
     return false;
   }
   if (amount > 0 && isEnemy(e) && BOSS_TIERS.includes(e.tier) && (id === "fear" || id === "sleep")) return false;
@@ -123,7 +124,7 @@ export function packBonus(C, e) {
 export function modifyDealt(C, src, amount) {
   if (!src) return amount;
   const st = src.st || {};
-  let a = amount + (st.strength || 0) + (st.enrage || 0) + (st.feral || 0) + (st.worgen_curse || 0) - (st.curse || 0);
+  let a = amount + (st.strength || 0) + (st.enrage || 0) + (st.feral || 0) + (st.worgen_curse || 0) - (src.kind === "enemy" ? 0 : (st.curse || 0)); // Curse on an enemy ticks shadow damage (turnEnd); on the hero it saps outgoing damage
   if (src.kind === "enemy") a += packBonus(C, src);
   if (st.weak) a *= 0.75;
   return Math.max(0, Math.floor(a));
@@ -196,6 +197,7 @@ export function turnEnd(C, e) {
     st.burn -= 1;
     if (st.burn <= 0) delete st.burn;
   }
+  if (e.hp > 0 && e.kind === "enemy" && st.curse > 0) dealStatusDamage(C, e, st.curse, "shadow"); // Curse of Agony: ticks its stacks each turn, then -1 per round
   if (e.hp > 0 && st.corrupted > 0) dealStatusDamage(C, e, Math.ceil(st.corrupted / 2), "corrupted");
   if (e.hp > 0 && st.metallicize > 0) gainBlock(C, e, st.metallicize, { raw: true });
 }
@@ -232,6 +234,7 @@ export function roundEnd(C, e) {
 
 export function wakeOnDamage(e) {
   if (e.st && e.st.sleep) delete e.st.sleep;
+  if (e && e.kind === "player" && e.asleep) e.asleep = false; // hero woken mid-turn: may act again (energy stays 0 this turn)
 }
 
 export function statusEntries(e) {

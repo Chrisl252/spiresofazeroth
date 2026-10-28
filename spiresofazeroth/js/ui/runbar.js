@@ -1,7 +1,7 @@
 // Top bar for the non-combat screens: class plate, HP, gold, act/zone, relics, potions, deck. Stage-native.
-import { h, icon, tip, esc, qClass } from "./dom.js";
-import { btn } from "./kit.js";
-import { gearStrip } from "./gearStrip.js";
+import { h, icon, tip, esc, qClass } from "./dom.js?v=20261028e";
+import { btn } from "./kit.js?v=20261028e";
+import { gearStrip } from "./gearStrip.js?v=20261028e";
 
 export function runBar(app) {
   const { run, data } = app;

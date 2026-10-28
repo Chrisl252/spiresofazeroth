@@ -1,8 +1,8 @@
 // Codex (stage-native): everything you have met, with links to the matching TheWoWDB spell / NPC pages. Unseen entries are hidden.
-import { h, qClass, cap, fill } from "./dom.js";
-import { spellLink, npcLink } from "../engine/data.js";
-import { cssReady, btn, tog, ico, banner, scroll } from "./kit.js";
-import { SLOT_LABEL, classGear } from "../engine/gear.js";
+import { h, qClass, cap, fill } from "./dom.js?v=20261028e";
+import { spellLink, npcLink } from "../engine/data.js?v=20261028e";
+import { cssReady, btn, tog, ico, banner, scroll } from "./kit.js?v=20261028e";
+import { SLOT_LABEL, classGear } from "../engine/gear.js?v=20261028e";
 
 export const stageNative = true;
 

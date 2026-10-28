@@ -95,10 +95,15 @@ body.sp-stage-on main.spires-app.sp-stage-host > .sp-stage { z-index: 1; }
 .sp-title-screen__menu { margin-top: auto; margin-bottom: 96px; display: flex; flex-direction: column; align-items: center; gap: 22px; }
 .sp-title-screen__row { display: flex; gap: 36px; }
 .sp-title-screen__stats { font-family: var(--f-num); font-size: var(--t-sm); color: var(--gold-soft); text-shadow: 0 2px 4px #000; letter-spacing: .06em; margin: 6px 0 0; }
+.sp-title-screen__more { font-size: var(--t-sm); color: rgba(235, 222, 196, .62); text-shadow: 0 2px 4px #000; margin: 10px 0 0; }
+.sp-title-screen__more a { color: var(--gold-soft); text-decoration: none; border-bottom: 1px solid rgba(255, 209, 102, .35); }
+.sp-title-screen__more a:hover, .sp-title-screen__more a:focus-visible { color: #fff; border-bottom-color: currentColor; }
 .sp-title-screen__foot { position: absolute; left: 0; right: 0; bottom: 26px; margin: 0; font-family: var(--f-num); font-size: var(--t-xs); color: rgba(244,233,204,.7); text-shadow: 0 1px 3px #000; }
-.sp-stage.sp-portrait .sp-title-screen__logo { margin-top: 240px; }
-.sp-stage.sp-portrait .sp-title-screen__menu { margin-bottom: 190px; gap: 36px; }
-.sp-stage.sp-portrait .sp-title-screen__row { flex-direction: column; gap: 30px; }
+.sp-stage.sp-portrait .sp-title-screen__logo { margin-top: 150px; }
+.sp-stage.sp-portrait .sp-title-screen__menu { margin-bottom: 90px; gap: 26px; }
+/* 2x2, not a column of four: on a 411x664 phone the column pushed Settings + Download below the screen (title never scrolls) */
+.sp-stage.sp-portrait .sp-title-screen__row { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 26px; }
+.sp-stage.sp-portrait .sp-title-screen__more { max-width: 900px; padding: 0 40px; }
 .sp-stage.sp-portrait .sp-title-screen h1 { padding: 0 30px; }
 .sp-stage.sp-portrait .sp-title-screen__tag { font-size: 44px; }
 
@@ -109,6 +114,12 @@ body.sp-stage-on main.spires-app.sp-stage-host > .sp-stage { z-index: 1; }
 body.sp-stage-on .sp-reduce .sp-bd-slot { transition: none; }
 /* fullscreen: the stage host fills the screen on black */
 .sp-stage-host:fullscreen, .sp-stage-host:-webkit-full-screen { background: #000; width: 100vw; height: 100vh; overflow: visible; }
+/* the base host rule (top:40px under the masthead) outranks :fullscreen on specificity, so fullscreen stayed 40px low; and the blurred letterbox ::before
+   + per-image CSS filters + will-change layers made Firefox flash/jitter at 1920x1080 (stage already fills the screen there) */
+body.sp-stage-on main.spires-app.sp-stage-host:fullscreen { top: 0; }
+.sp-stage-host:fullscreen::before { display: none; }
+.sp-stage.sp-fs .sp-bd-slot img { filter: none; }
+.sp-stage.sp-fs .sp-bd-sky, .sp-stage.sp-fs .sp-bd-slot { will-change: auto; }
 /* pseudo-fullscreen (iPhone Safari has no element fullscreen; js/stage/stage.js setPseudo): the host covers the whole viewport,
    above the site masthead + cookie bar, page scroll locked, notch/home-bar insets kept clear */
 html.sp-pseudo-fs, html.sp-pseudo-fs body { overflow: hidden !important; overscroll-behavior: none; height: 100%; }
@@ -116,3 +127,15 @@ body.sp-stage-on main.spires-app.sp-stage-host.sp-pseudo-fs-host, .sp-stage-host
   position: fixed !important; inset: 0 !important; top: 0 !important; width: 100vw; height: 100vh; height: 100dvh; max-width: none; margin: 0;
   z-index: 2147483000; background: #000;
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); box-sizing: border-box; }
+/* phones: a full-screen 26px blur layer under the stage flickered on Android GPUs whenever anything above it repainted (2026-10-28) */
+/* and the zone art dropped out in rectangles (sky showing through, tablet screenshot 2026-10-28): the 1920x1080 stage's filtered / will-change /
+   blended full-size layers exhaust Android GPU tile memory. Phones + tablets get the same lite path as fullscreen (below), look kept with plain overlays. */
+@media (pointer: coarse) {
+  body.sp-stage-on main.spires-app.sp-stage-host::before { display: none; }
+  .sp-bd-slot img { filter: none; }
+  .sp-bd-slot::after { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, .24); pointer-events: none; }
+  .sp-bd-sky, .sp-bd-slot, .sp-bd-floor__tile { will-change: auto; }
+  .sp-bd-sky::after { filter: none; opacity: .25; }
+  .sp-bd-floor::after { mix-blend-mode: normal; opacity: .3; }
+  .sp-layer-fog { mix-blend-mode: normal; opacity: .55; }
+}

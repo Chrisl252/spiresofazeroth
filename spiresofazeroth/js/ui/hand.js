@@ -8,8 +8,8 @@
 // pointerdown, and a pointerdown during the fx window is never dropped: the drag starts as soon as the card is playable/queueable.
 //   -> { set(insts), draw(insts), discard(instIds), exhaust(instIds), lock(bool), select(instId), cancel(), anchorOf(instId), destroy() }
 // All coordinates are stage px (hostEl covers the stage). Card faces come from card.js.
-import { cardEl } from "./card.js";
-import { cardSounds } from "./cardSounds.js";
+import { cardEl } from "./card.js?v=20261028e";
+import { cardSounds } from "./cardSounds.js?v=20261028e";
 
 const CW = 260, CH = 380;
 // hud.js LANES start at 1180 with a 240px plate; HP sits under the feet. A raised card must stay left of that bar.
@@ -203,6 +203,11 @@ export function createHand(host, o) {
 
   // ---------------- play / select / aim ----------------
   const handLine = () => size().h - (portrait() ? 760 : 470);
+  // Untargeted (AoE / self) cards play when released anywhere over the battlefield, i.e. anywhere above the resting hand's body (its cards
+  // peek ~145 stage px above the bottom edge; the line sits 25 px inside that, so a release at the hand's top edge still casts). Only a
+  // drop back down onto the hand itself cancels. (The old line was h-470, so drops on the enemies and the lower field snapped back.)
+  // Portrait tucks a taller band (235 px), so its line sits just above that band instead.
+  const castLine = () => size().h - (portrait() ? 260 : 120);
   const enemyAt = (cx, cy) => {
     for (const e of document.elementsFromPoint(cx, cy)) {
       const t = e.closest && e.closest("[data-uid]");
@@ -354,7 +359,7 @@ export function createHand(host, o) {
       }
     } else {
       place(dr.it, p.x, p.y + 40, 0, 1.0, 90);
-      dr.it.el.classList.toggle("is-aim", p.y < handLine());
+      dr.it.el.classList.toggle("is-aim", p.y < castLine());
     }
   }
   function endGesture(e) {
@@ -373,7 +378,7 @@ export function createHand(host, o) {
       let played = false;
       // aimed: ONLY a release on an enemy plays it (on THAT enemy); anywhere else it snaps back. Never a random/default target.
       if (dr.targeted) { const en = enemyAt(e.clientX, e.clientY); if (en) played = playOrQueue(dr.it, en.dataset.uid); }
-      else if (p.y < handLine()) played = playOrQueue(dr.it, null);
+      else if (p.y < castLine()) played = playOrQueue(dr.it, null);
       if (!played) { S.sel = null; clearAim(); setEnemyMark(null, null); dr.it.el.classList.remove("is-aim"); layout(); }
       return;
     }
@@ -417,6 +422,7 @@ export function createHand(host, o) {
       return;
     }
     if (e.target.closest && e.target.closest("button, [data-keep-sel]")) return;
+    if (!needs) { tryPlay(it, null); e.stopPropagation(); e.preventDefault(); return; } // click-select an AoE/self card, then click the battlefield: it casts (no enemy needed)
     cancel();
   }
   function onKey(e) {
@@ -485,6 +491,7 @@ export function createHand(host, o) {
 
   const api = {
     set, draw, discard, exhaust, select, cancel, cancelSelection: cancel, layout, refresh: refreshAll,
+    bounce(id) { const it = byId(id); if (it) ghost(it); }, // a played card that returns to hand (Throw): play-out now, set() flies a fresh one back in
     lock(b) {
       const was = S.locked; S.locked = !!b; layer.classList.toggle("is-locked", S.locked);
       // locking must not kill a drag in progress or a queued card (the fx window); end-turn / victory call cancel() themselves

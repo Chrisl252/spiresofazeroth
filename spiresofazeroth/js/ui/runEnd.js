@@ -1,11 +1,12 @@
 // Run end (stage-native): victory / defeat banner, stat scroll, #end-hero host (class plate until the hero model lands), run_end analytics once per run.
-import { h, icon, track, toast } from "./dom.js";
-import { recordRunEnd, clearRun } from "../engine/save.js";
-import { summarize } from "../engine/run.js";
-import { cssReady, btn, ico, scroll } from "./kit.js";
-import { mountPortrait } from "./combatKit.js";
-import { gearLevel } from "../engine/gear.js";
-import { recordRunAggregate } from "./runTelemetry.js";
+import { h, icon, track, toast } from "./dom.js?v=20261028e";
+import { recordRunEnd, clearRun } from "../engine/save.js?v=20261028e";
+import { summarize } from "../engine/run.js?v=20261028e";
+import { cssReady, btn, ico, scroll } from "./kit.js?v=20261028e";
+import { mountPortrait } from "./combatKit.js?v=20261028e";
+import { gearLevel } from "../engine/gear.js?v=20261028e";
+import { sp, funnel, encKey } from "../analytics.js?v=20261028e";
+import { recordRunAggregate } from "./runTelemetry.js?v=20261028e";
 
 export const stageNative = true;
 
@@ -33,6 +34,8 @@ export async function render(app) {
     run.endRecorded = true;
     unlocked = recordRunEnd(meta, run, data.classIds, data.unlocks);
     recordRunAggregate(run, meta);
+    sp("run_end", { class: run.classId, result: run.result === "victory" ? "victory" : "defeat", act: run.act, floor: run.floor + 1, zone: run.zoneId || "", cause: run.result === "victory" ? "" : encKey(run.pending && run.pending.cause), deck: (run.deck || []).map((c) => c.id), secs: run.startedAt ? Math.round((Date.now() - run.startedAt) / 1000) : 0 });
+    funnel("run_end", false);
     if (app.refreshLocks) app.refreshLocks();
     run.unlocked = unlocked;
     track("run_end", { class: run.classId, act: run.act, victory: run.result === "victory" ? 1 : 0, floor: run.floor + 1 });
@@ -59,6 +62,6 @@ export async function render(app) {
         btn(unlocked.some((u) => u.type === "talent") ? "Spend talents" : "Talents", () => { app.run = null; app.hasSave = false; app.go("talents", { cls: run.classId, back: "classSelect" }); }, { size: "sm" }),
         btn("New run", () => { app.run = null; app.hasSave = false; app.go("charSelect"); }, { size: "lg", auto: true }),
         btn("Title", () => { app.run = null; app.hasSave = false; app.go("title"); }, { size: "sm" }))));
-  setTimeout(() => mountPortrait(app, screen.querySelector("#end-hero"), { classId: run.classId, gearMask: gearLevel(run), pose: win ? "idle" : "death", pad: 120, leaveEl: screen }), 160);
+  setTimeout(() => mountPortrait(app, screen.querySelector("#end-hero"), { classId: run.classId, race: (run.character || {}).race, gender: (run.character || {}).gender, gearMask: gearLevel(run), pose: win ? "idle" : "death", pad: 120, leaveEl: screen }), 160);
   return screen;
 }

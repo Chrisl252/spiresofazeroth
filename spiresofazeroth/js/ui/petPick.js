@@ -1,6 +1,6 @@
 // Pet pick (class select, hunter): "Choose your companion" plates. Icon, name, ONE role line, 2-3 stat chips; full text in a hover tooltip.
 // Presentation only: picking calls onPick(id) and the engine receives the same pet id as before. Keys 1-9 pick.
-import { h, icon, tip, esc } from "./dom.js";
+import { h, icon, tip, esc } from "./dom.js?v=20261028e";
 
 const maxHit = (u) => Math.max(0, ...(u.moves || []).flatMap((m) => (m.effects || []).filter((e) => e.op === "damage").map((e) => e.amount || 0)));
 

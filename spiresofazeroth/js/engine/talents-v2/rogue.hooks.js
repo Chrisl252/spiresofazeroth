@@ -3,10 +3,10 @@
 //   deal(C, src, tgt, amt, o, base)   any non-thorns hit on an enemy (o.card = card def; o.dry = preview, no side effects)
 //   taken(C, tgt, taken, src, o)      damage the player is about to take; return the new amount
 // Per-fight state lives on C.talrogue. Keys are all "rog_*" (defs in rogue.defs.js); the generic hooks (card_dmg, crit, ...) run in talentHooks.js.
-import { tv } from "../talentHooks.js";
-import { addRes, getRes } from "../resources.js";
-import { applyStatus } from "../status.js";
-import { gainBlock, healEntity, isAlive, fx } from "../damage.js";
+import { tv } from "../talentHooks.js?v=20261028e";
+import { addRes, getRes } from "../resources.js?v=20261028e";
+import { applyStatus } from "../status.js?v=20261028e";
+import { gainBlock, healEntity, isAlive, fx } from "../damage.js?v=20261028e";
 
 const PREP_MAX = 3; // Preparation: returns per fight
 const NO_RETURN = new Set(["sprint", "preparation", "adrenaline-rush", "vigor", "premeditation", "distract"]);

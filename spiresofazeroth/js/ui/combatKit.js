@@ -50,13 +50,18 @@ export function lanesFor(stage) {
 
 export async function getKit(app) {
   const stage = app.stage;
-  const key = `${stage.portrait ? "p" : "l"}${stage.size.w}x${stage.size.h}`;
+  // Portrait phones: stage height tracks the visual viewport, which changes every time the URL bar collapses. Keying the kit on the exact
+  // height rebuilt the WebGL renderer (new context, all GLBs re-uploaded) on nearly every screen change = flicker. Portrait kits are built
+  // 12% taller than the stage (it clips the spare canvas) and only rebuilt when the stage outgrows them, never when it shrinks.
   let kit = app.kit;
-  if (kit && kit.key === key) return kit;
+  const portrait = !!stage.portrait;
+  if (kit && kit.portrait === portrait && kit.W === stage.size.w && (portrait ? stage.size.h <= kit.H : kit.H === stage.size.h) && kit.key !== "stale") return kit;
+  const kH = portrait ? Math.round(stage.size.h * 1.12) : stage.size.h;
+  const key = `${portrait ? "p" : "l"}${stage.size.w}x${kH}`;
   if (kit) disposeKit(kit);
-  kit = app.kit = { actors: null, fx: null, key, W: stage.size.w, H: stage.size.h, portrait: stage.portrait, off: [] };
+  kit = app.kit = { actors: null, fx: null, key, W: stage.size.w, H: kH, portrait: stage.portrait, off: [] };
   try {
-    const [{ createActors }, { createFx }] = await Promise.all([import("../stage/actors3d.js"), import("../fx/choreo.js")]);
+    const [{ createActors }, { createFx }] = await Promise.all([import("../stage/actors3d.js?v=20261028e"), import("../fx/choreo.js?v=20261028e")]);
     const L = lanesFor(stage);
     const lanes = { hero: L.hero, enemy: L.enemy };
     kit.actors = createActors(stage.layers.actors, { designW: kit.W, designH: kit.H, lanes, groundY: stage.groundY });
@@ -71,8 +76,11 @@ export async function getKit(app) {
     await Promise.all([kit.actors.ready, kit.fx.ready]);
     const onPause = () => { kit.actors && kit.actors.pause(); };
     const onResume = () => { kit.actors && kit.actors.resume(); };
+    // GL context lost and never restored (iOS under memory pressure): mark the kit stale so the next screen rebuilds the renderer.
+    const onGone = () => { kit.key = "stale"; };
+    stage.layers.actors.addEventListener("actors:glgone", onGone);
     stage.root.addEventListener("stage:pause", onPause); stage.root.addEventListener("stage:resume", onResume);
-    kit.off.push(() => { stage.root.removeEventListener("stage:pause", onPause); stage.root.removeEventListener("stage:resume", onResume); });
+    kit.off.push(() => { stage.root.removeEventListener("stage:pause", onPause); stage.root.removeEventListener("stage:resume", onResume); stage.layers.actors.removeEventListener("actors:glgone", onGone); });
   } catch (e) {
     console.warn("[spires] actors/fx unavailable, plate-only combat:", e && e.message);
     try { if (kit.actors) kit.actors.dispose(); } catch (_) { /* noop */ }
@@ -117,7 +125,7 @@ export function watchLeave(app, el, fn) {
 
 // Shop merchant / run-end hero: a character body in a tiny scene slot positioned over a DOM host (#shop-vendor / #end-hero).
 // Uses the shared actors instance with one temporary hero actor; cleared when the screen leaves.
-export async function mountPortrait(app, hostEl, { classId, pose = "idle", scale = 1, pad = 40, leaveEl, gearMask } = {}) {
+export async function mountPortrait(app, hostEl, { classId, race, gender, pose = "idle", scale = 1, pad = 40, leaveEl, gearMask } = {}) {
   try {
     if (!hostEl || !classId) return null;
     const kit = await getKit(app);
@@ -127,7 +135,7 @@ export async function mountPortrait(app, hostEl, { classId, pose = "idle", scale
     const lane = kit.actors.lanes.hero;
     const saved = { ...lane };
     lane.x = (p0.x + p1.x) / 2; lane.y = p1.y - pad; lane.s = Math.max(0.5, Math.min(1.2, ((p1.y - p0.y) / 520) * scale));
-    kit.actors.setHero(gearMask == null ? { classId } : { classId, gearMask });
+    kit.actors.setHero(gearMask == null ? { classId, race, gender } : { classId, race, gender, gearMask });
     Object.assign(lane, saved);
     hostEl.classList.add("has-model");
     watchLeave(app, leaveEl || hostEl, () => { if (app.kit === kit) clearStage(kit); });

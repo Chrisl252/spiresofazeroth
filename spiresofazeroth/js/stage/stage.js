@@ -1,8 +1,8 @@
 // The #stage root. A 1920x1080 design space scaled with transform: scale() and letterboxed (portrait phones: 1080 wide, full-bleed).
 // Layer stack, bottom to top: backdrop, fog, vignette, actors (WebGL host), fx (canvas host), ui (DOM screens).
 // "Fluid" mode drops the scaling (design space = viewport px) for legacy screens that are laid out as normal documents.
-import { createBackdrop, GROUND_Y } from "./backdrop.js";
-import { zone as zoneAudio } from "../audio/zone.js";
+import { createBackdrop, GROUND_Y } from "./backdrop.js?v=20261028e";
+import { zone as zoneAudio } from "../audio/zone.js?v=20261028e";
 
 export const DESIGN = { w: 1920, h: 1080 };
 const PORTRAIT_GROUND_Y = 1010;
@@ -37,8 +37,19 @@ export function mountStage(appRoot, opts = {}) {
   });
   stage.backdrop = backdrop;
 
+  // Phones: the browser's URL bar slides in/out on taps and scrolls, and the fixed stage host follows the dynamic viewport, so every slide
+  // re-laid-out the whole stage and wiped its canvases = "the UI flickers any time I do anything" (Android, 2026-10-27/28 reports).
+  // On a touch screen a height-only GROWTH at the same width is ignored: the stage keeps the smallest height seen (never clipped, at
+  // worst a strip under it). Width changes (rotation), shrinking and fullscreen toggles still re-lay out.
+  const coarse = (() => { try { return matchMedia("(pointer: coarse)").matches; } catch (e) { return false; } })();
+  let vhFloor = null; // { w, h } while coarse
   function layout() {
-    const r = appRoot.getBoundingClientRect(), vw = Math.max(1, r.width), vh = Math.max(1, r.height);
+    const r = appRoot.getBoundingClientRect(), vw = Math.max(1, r.width);
+    let vh = Math.max(1, r.height);
+    if (coarse) {
+      if (vhFloor && Math.abs(vhFloor.w - vw) < 1 && vh > vhFloor.h && vh - vhFloor.h < 200) vh = vhFloor.h;
+      else vhFloor = { w: vw, h: vh };
+    }
     let w = DESIGN.w, h = DESIGN.h, s, left = 0, top = 0;
     stage.portrait = vw <= 600 && vh > vw;
     if (stage.fluid) { s = 1; w = vw; h = vh; }
@@ -100,7 +111,7 @@ export function mountStage(appRoot, opts = {}) {
       return setPseudo(true);
     } catch (_) { setPseudo(true); }
   };
-  const onFs = () => { root.classList.toggle("sp-fs", stage.isFullscreen()); scheduleLayout(); setTimeout(scheduleLayout, 120); setTimeout(scheduleLayout, 500); };
+  const onFs = () => { vhFloor = null; root.classList.toggle("sp-fs", stage.isFullscreen()); scheduleLayout(); setTimeout(scheduleLayout, 120); setTimeout(scheduleLayout, 500); };
   document.addEventListener("fullscreenchange", onFs);
   document.addEventListener("webkitfullscreenchange", () => document.dispatchEvent(new Event("fullscreenchange")));
   if (window.visualViewport) window.visualViewport.addEventListener("resize", scheduleLayout); // iOS URL bar / keyboard

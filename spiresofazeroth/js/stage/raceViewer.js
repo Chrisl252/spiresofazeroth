@@ -3,7 +3,7 @@
 // createRaceViewer(host, { reduced }) -> { show(slug) -> Promise<boolean>, dispose() }. Disposes itself when the host leaves the DOM.
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { BUILD } from "../version.js";
+import { BUILD } from "../version.js?v=20261028e";
 
 const BASE = new URL("../../assets/models/race/", import.meta.url).href;
 const FRONT = -Math.PI / 2; // the baked bodies face +X; turn them to face the camera
@@ -68,6 +68,7 @@ export function createRaceViewer(host, { reduced = () => false } = {}) {
   function free(obj) { // dispose geometry, every material texture slot, and the decoded bitmaps (ImageBitmaps are not GC'd with the GL texture)
     obj.traverse((o) => {
       if (o.geometry) o.geometry.dispose();
+      if (o.isSkinnedMesh && o.skeleton) { try { o.skeleton.dispose(); } catch (e) { /* noop */ } }
       if (o.material) [].concat(o.material).forEach((m) => {
         for (const k in m) { const t = m[k]; if (t && t.isTexture) { if (t.image && t.image.close) try { t.image.close(); } catch (e) { /* already closed */ } t.dispose(); } }
         m.dispose();

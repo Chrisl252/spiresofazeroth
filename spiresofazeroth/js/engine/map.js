@@ -1,7 +1,7 @@
 // Spire floor graph (StS style): one start node (zone inn) at the bottom centre, then `profile.floors` floors on 3 lanes (2-3 live per
 // floor), forks/merges, no crossings, deterministic from (seed, tag). Length and type budget come from data/map-profiles.json
 // (short = act 1, medium = act 2, full = the original 15). Pure.
-import { streamFor } from "./rng.js";
+import { streamFor } from "./rng.js?v=20261028e";
 
 export const FLOORS = 15; // the "full" profile; other lengths come from the profile passed to generateSpire
 export const FULL_PROFILE = {

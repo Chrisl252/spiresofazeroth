@@ -916,12 +916,8 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Gain 5 Block. Heal 6 HP.",
+      "text": "Heal 6 HP.",
       "effects": [
-        {
-          "op": "block",
-          "amount": 5
-        },
         {
           "op": "heal",
           "amount": 6
@@ -930,12 +926,8 @@
       "upgrade": {
         "name": "Healing Wave (Rank 2)",
         "cost": 1,
-        "text": "Gain 8 Block. Heal 9 HP.",
+        "text": "Heal 9 HP.",
         "effects": [
-          {
-            "op": "block",
-            "amount": 8
-          },
           {
             "op": "heal",
             "amount": 9
@@ -1547,12 +1539,8 @@
       "cost": 0,
       "target": "self",
       "flags": [],
-      "text": "Gain 4 Block. Heal 3 HP.",
+      "text": "Heal 3 HP.",
       "effects": [
-        {
-          "op": "block",
-          "amount": 4
-        },
         {
           "op": "heal",
           "amount": 3
@@ -1561,12 +1549,8 @@
       "upgrade": {
         "name": "Lesser Healing Wave (Rank 2)",
         "cost": 0,
-        "text": "Gain 6 Block. Heal 7 HP.",
+        "text": "Heal 7 HP.",
         "effects": [
-          {
-            "op": "block",
-            "amount": 6
-          },
           {
             "op": "heal",
             "amount": 7
@@ -2330,12 +2314,8 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Gain 8 Block. Heal 7 HP, then heal totems 5 HP.",
+      "text": "Heal 7 HP, then heal totems 5 HP.",
       "effects": [
-        {
-          "op": "block",
-          "amount": 8
-        },
         {
           "op": "heal",
           "amount": 7
@@ -2349,12 +2329,8 @@
       "upgrade": {
         "name": "Chain Heal (Rank 2)",
         "cost": 1,
-        "text": "Gain 11 Block. Heal 12 HP, then heal totems 8 HP.",
+        "text": "Heal 12 HP, then heal totems 8 HP.",
         "effects": [
-          {
-            "op": "block",
-            "amount": 11
-          },
           {
             "op": "heal",
             "amount": 12

@@ -173,7 +173,7 @@
    "tier": 1,
    "rarity": "epic",
    "stats": "Tier 1",
-   "text": "Whenever you play a card: 12% chance to draw 1 card.",
+   "text": "Whenever you play a card: 10% chance to draw 1 card.",
    "class": "rogue",
    "triggers": {
     "on_card_played": [
@@ -181,7 +181,7 @@
       "op": "conditional",
       "if": {
        "type": "chance",
-       "pct": 12
+       "pct": 10
       },
       "then": [
        {
@@ -263,7 +263,7 @@
    "tier": 1,
    "rarity": "epic",
    "stats": "Tier 1",
-   "text": "At the start of each turn: 15% chance to gain 1 Energy.",
+   "text": "At the start of each turn: 12% chance to gain 1 Energy.",
    "class": "rogue",
    "triggers": {
     "on_turn_start": [
@@ -271,7 +271,7 @@
       "op": "conditional",
       "if": {
        "type": "chance",
-       "pct": 15
+       "pct": 12
       },
       "then": [
        {

@@ -1,9 +1,9 @@
 // Rewards: gold, 1-of-3 card picks (common 60 / uncommon 30 / rare 9 / epic 1), potions, relics, shop stock. Seeded streams only.
-import { heroicMods } from "./heroic.js";
-import { resolveImmunity, cardUselessOn } from "./immunity.js";
+import { heroicMods } from "./heroic.js?v=20261028e";
+import { resolveImmunity, cardUselessOn } from "./immunity.js?v=20261028e";
 
 const CARD_WEIGHTS = { common: 60, uncommon: 30, rare: 9, epic: 1 };
-const RELIC_WEIGHTS = { common: 50, uncommon: 33, rare: 14, epic: 3, legendary: 1 }; // legendary = Thunderfury / Atiesh: rarer than epic
+const RELIC_WEIGHTS = { common: 50, uncommon: 33, rare: 12, epic: 2, legendary: 1 }; // legendary = Thunderfury / Atiesh: rarer than epic
 const POTION_WEIGHTS = { common: 65, uncommon: 25, rare: 10, epic: 2 };
 const CARD_PRICE = { common: 50, uncommon: 80, rare: 150, epic: 260 };
 const RELIC_PRICE = { common: 150, uncommon: 200, rare: 260, epic: 320, legendary: 450 };
@@ -76,8 +76,16 @@ export function rollRelics(run, data, rng, count = 1, { minRarity } = {}) {
   return out;
 }
 
+// a potion that grants a class resource (Rage) only drops for the class that has it (10-28 report: Rage Potion on a mage)
+function potionFits(p, run, data) {
+  const res = (p.effects || []).filter((e) => e && e.op === "gain_resource").map((e) => e.resource);
+  if (!res.length) return true;
+  const cls = data.classObj ? data.classObj(run.classId) : null;
+  const mine = cls && cls.resource && cls.resource.id;
+  return res.every((r) => r === mine);
+}
 export function rollPotion(run, data, rng) {
-  const list = [...data.potions.values()];
+  const list = [...data.potions.values()].filter((p) => potionFits(p, run, data));
   if (!list.length) return null;
   return rng.weighted(list, (p) => POTION_WEIGHTS[p.rarity] || 20).id;
 }

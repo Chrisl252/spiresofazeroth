@@ -1,7 +1,7 @@
 // Persistence: localStorage (always in try/catch, memory fallback), autosave, export/import string, meta progression.
 // Meta: unlocked classes (first 3 in classes/index.json; every victory unlocks the next), Heroic I-X per class, codex seen-sets.
-import { MAX_HEROIC } from "./heroic.js";
-import { awardProgress } from "./talents.js";
+import { MAX_HEROIC, MIN_HEROIC_OPEN } from "./heroic.js?v=20261028e";
+import { awardProgress } from "./talents.js?v=20261028e";
 
 const KEY_RUN = "spires.run.v1";
 const KEY_META = "spires.meta.v1";
@@ -81,7 +81,7 @@ export function recordRunEnd(meta, run, classIds, unlocks = null) {
     meta.stats.wins++;
     const next = classIds.find((id, i) => i >= 3 && !meta.unlocked.includes(id));
     if (next) { meta.unlocked.push(next); unlocked.push({ type: "class", id: next }); }
-    const cur = meta.heroic[run.classId] || 0;
+    const cur = Math.max(MIN_HEROIC_OPEN, meta.heroic[run.classId] || 0); // I-III are open from the start: a win at the top open level unlocks the next
     if ((run.heroic || 0) >= cur && cur < MAX_HEROIC) {
       meta.heroic[run.classId] = Math.min(MAX_HEROIC, (run.heroic || 0) + 1);
       unlocked.push({ type: "heroic", id: run.classId, level: meta.heroic[run.classId] });

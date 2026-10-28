@@ -1,8 +1,8 @@
 // Zone battle backdrops: loading-screen art cropped to its real picture band (the vista, dimmed and desaturated so the characters
 // read in front of it), a perspective floor plane under the actors built from the client's own ground tiles and tinted per biome,
 // a horizon haze that melts the vista into the floor, multi-speed parallax, fog canvas and vignette.
-import { createFog } from "./fog.js";
-import { getZoneVisuals } from "./zonePalette.js";
+import { createFog } from "./fog.js?v=20261028e";
+import { getZoneVisuals } from "./zonePalette.js?v=20261028e";
 
 const ART = "/assets/loading-screens/";
 export const GROUND_Y = 760; // stage px: where the actors stand (landscape)

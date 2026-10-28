@@ -5,7 +5,7 @@
 // The runtime that applies these lives in talentHooks.js; the roster + rules are documented in docs/TALENTS_V2.md.
 // text(v, E) renders the tooltip for the value at a rank, so the tooltip can never drift from the numbers in the JSON.
 
-import { CLASS_DEFS } from "./talents-v2/defs.js"; // per-class hook defs (pure data), merged into HOOKS below
+import { CLASS_DEFS } from "./talents-v2/defs.js?v=20261028e"; // per-class hook defs (pure data), merged into HOOKS below
 export const HEAVY_HIT = 8;       // heavy_hit: base damage a single hit needs
 export const ENRAGE_RAGE = 30;    // enrage_dmg: Rage needed
 export const GUARD_BLOCK = 8;     // guard_dmg: Block needed
@@ -39,7 +39,7 @@ export const HOOKS = {
   wounded_dmg: { label: "Executioner", text: (v) => `Attacks deal +${v} damage to enemies at ${WOUNDED_PCT}% HP or less.` },
   heavy_hit: { label: "Heavy Blows", text: (v) => `Hits of ${HEAVY_HIT} or more base damage deal +${v} damage.` },
   crit: { label: "Critical Strike", text: (v) => `Your Attacks have a ${v}% chance to hit for double damage.` },
-  first_aoe: { label: "Sweeping Strikes", text: (v) => (v > 0 ? `Your first Attack each turn also hits every other enemy, and grants ${SWEEP_RAGE} Rage.` : "") },
+  first_aoe: { label: "Sweeping Strikes", text: (v) => (v > 0 ? `Your first Attack each turn also hits one other enemy for half its damage, and grants ${SWEEP_RAGE} Rage.` : "") },
   attack_draw: { label: "Flurry", text: (v) => `After you play ${plural(v, "Attack")} in a turn, draw 1 card (once per turn).` },
   attack_ramp: { label: "Rampage", text: (v) => `Each Attack you play makes your later Attacks this turn deal +${v} damage (stacks).` },
   attack_heal: { label: "Bloodthirst", text: (v) => `Heal ${v} HP whenever you play an Attack.` },

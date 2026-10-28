@@ -1,11 +1,11 @@
 // Potion belt for non-combat screens: 3 fixed slots (empty classic slot art when unfilled).
 // Allows inspecting, drinking (out-of-combat applicable effects like heal/maxHp), and discarding potions.
 //   beltEl(app, { host, onChange }) -> { el, refresh(flash), close() }
-import { h, icon, tip, esc, toast, floatText } from "./dom.js";
-import { runEffects } from "../engine/effects.js";
-import { sfx } from "../audio.js";
-import { cardSounds } from "./cardSounds.js";
-import { runBar } from "./runbar.js";
+import { h, icon, tip, esc, toast, floatText } from "./dom.js?v=20261028e";
+import { runEffects } from "../engine/effects.js?v=20261028e";
+import { sfx } from "../audio.js?v=20261028e";
+import { cardSounds } from "./cardSounds.js?v=20261028e";
+import { runBar } from "./runbar.js?v=20261028e";
 
 export function canUsePotionOutOfCombat(pot) {
   if (!pot || !pot.effects) return false;

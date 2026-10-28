@@ -45,7 +45,7 @@
 .cc-status { position: absolute; left: 0; right: 0; bottom: 14px; margin: 0; text-align: center; font-size: 22px; color: #ff8a70; text-shadow: 0 2px 3px #000; min-height: 28px; }
 
 /* right: faction / race / class text */
-.cc-right { position: absolute; right: 36px; top: 28px; width: 500px; bottom: 120px; display: flex; flex-direction: column; gap: 12px; }
+.cc-right { position: absolute; right: 36px; top: 28px; width: 500px; bottom: 124px; display: flex; flex-direction: column; gap: 12px; }
 .cc-panel { flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; }
 .cc-panel--faction { flex: 0 0 24%; } .cc-panel--race { flex: 1.35 1 0; }
 .cc .cc-panel.sx-wood { padding: 22px 24px 18px; }
@@ -54,22 +54,24 @@
 .cc-p__ic img { display: block; width: 44px; height: 44px; border-radius: 4px; border: 2px solid #6b5220; }
 .cc-p__body { flex: 1 1 auto; min-height: 0; overflow-y: auto; font-size: 21px; line-height: 1.28; color: #f1e8d0; text-shadow: 0 1px 2px #000; scrollbar-width: thin; scrollbar-color: #8a6a2a #1b140c; }
 .cc-p__body p { margin: 0 0 8px; } .cc-trait { color: var(--gold2); } .cc-trait--cls { color: #d8c88a; }
-.cc-foot { position: absolute; right: 70px; bottom: 36px; width: 420px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.cc-foot .sp-wowbtn { --btn-h: 60px; min-width: 220px; }
+.cc-foot { position: absolute; right: 36px; bottom: 28px; width: 500px; display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 24px; }
+.cc-foot .sp-wowbtn { --btn-h: 104px; min-width: 230px; } /* sm = .72 x --btn-h = 75px: same size family as every other footer button */
 
 /* character select */
 .cc-model--list { inset: 20px 560px 190px 540px; }
 .cc-who { position: absolute; left: 540px; right: 560px; bottom: 150px; text-align: center; text-shadow: 0 2px 4px #000; } .cc-who b { display: block; font-weight: 400; font-size: 38px; color: #ffd100; } .cc-who span { font-size: 24px; color: #f1e8d0; }
 .cc-enter { position: absolute; left: 540px; right: 560px; bottom: 44px; display: grid; place-items: center; } .cc-enterbtn { --btn-h: 84px; }
-.cc-listpanel { position: absolute; right: 36px; top: 28px; width: 500px; bottom: 120px; display: flex; flex-direction: column; gap: 12px; overflow: hidden; }
+.cc-listpanel { position: absolute; right: 36px; top: 28px; width: 500px; bottom: 124px; display: flex; flex-direction: column; gap: 12px; overflow: hidden; }
 .cc-listpanel h3 { margin: 0; text-align: center; font-weight: 400; font-size: 32px; color: #f6d879; text-shadow: 0 2px 3px #000; }
 .cc-rows { flex: 1 1 auto; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
 .cc-row { display: flex; align-items: center; gap: 14px; width: 100%; padding: 8px 12px; text-align: left; cursor: pointer; border: 2px solid transparent; border-radius: 6px; background: rgba(0,0,0,.28); color: #f1e8d0; }
 .cc-row img { width: 56px; height: 56px; border-radius: 4px; border: 2px solid #6b5220; }
 .cc-row__t { display: flex; flex-direction: column; line-height: 1.15; } .cc-row__t b { font-weight: 400; font-size: 28px; color: #ffd100; } .cc-row__t em { font-style: normal; font-size: 20px; } .cc-row__t small { font-size: 18px; color: var(--cc-dim); }
 .cc-row:hover, .cc-row:focus-visible { border-color: #8a6a2a; outline: none; } .cc-row.sel { border-color: #ffd100; background: rgba(255,209,0,.16); }
+.cc-diff h4 { margin: 0 0 6px; text-align: center; color: #ffd100; font-size: 22px; letter-spacing: .05em; } .cc-diff__t { margin: 8px 6px 0; text-align: center; font-size: 17px; line-height: 1.25; color: #e8d9b0; }
+.sp-portrait .cc-diff h4 { font-size: 34px; } .sp-portrait .cc-diff__t { font-size: 28px; }
 .cc-runopts { display: flex; flex-direction: column; gap: 8px; } .cc-opt { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; } .cc-opt .sx-tog { min-height: 46px; padding: 4px 16px; font-size: 20px; }
-.cc-listbtns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; } .cc-listbtns .sp-wowbtn, .cc-foot--list .sp-wowbtn { --btn-h: 54px; min-width: 190px; }
+.cc-listbtns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; } .cc-listbtns .sp-wowbtn, .cc-foot--list .sp-wowbtn { --btn-h: 104px; min-width: 215px; }
 .cc-foot--list { flex-direction: row; justify-content: center; }
 
 /* phones (portrait stage is 1080 wide): one scrolling column */

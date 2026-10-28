@@ -718,9 +718,10 @@
       "cost": 0,
       "target": "enemy",
       "flags": [
-        "retain"
+        "retain",
+        "returns"
       ],
-      "text": "Deal 4 damage. Retain.",
+      "text": "Deal 4 damage. Returns to your hand (once per turn). Retain.",
       "effects": [
         {
           "op": "damage",
@@ -730,7 +731,7 @@
       "upgrade": {
         "name": "Throw (Rank 2)",
         "cost": 0,
-        "text": "Deal 6 damage. Retain.",
+        "text": "Deal 6 damage. Returns to your hand (once per turn). Retain.",
         "effects": [
           {
             "op": "damage",
@@ -1552,7 +1553,7 @@
           "op": "apply",
           "status": "poison",
           "stacks": {
-            "scale": "poison"
+            "scale": "poison", "of": "target"
           },
           "target": "enemy"
         }
@@ -1567,7 +1568,7 @@
             "op": "apply",
             "status": "poison",
             "stacks": {
-              "scale": "poison"
+              "scale": "poison", "of": "target"
             },
             "target": "enemy"
           }

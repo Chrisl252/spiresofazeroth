@@ -1,28 +1,36 @@
-/* Patch notes window + floating update pill (js/ui/patchNotes.js). Fixed to the viewport, above the stage. */
-.sp-notes-backdrop { position: fixed; inset: 0; z-index: 9000; display: flex; align-items: center; justify-content: center;
-  padding: 16px; background: rgba(0, 0, 0, 0.72); }
-.sp-notes { width: min(640px, 100%); max-height: calc(100vh - 32px); overflow-y: auto; overscroll-behavior: contain;
-  padding: 24px 28px; color: #e8dcc0; background: linear-gradient(#1d1610, #120d09); border: 2px solid #8a6a2e;
-  border-radius: 8px; box-shadow: 0 0 0 1px #000, 0 12px 40px rgba(0, 0, 0, 0.8); font-size: 16px; line-height: 1.5; }
-.sp-notes-title { margin: 0; color: #ffd100; font-size: 28px; text-shadow: 0 2px 0 #000; }
-.sp-notes-date { margin: 2px 0 14px; color: #a8987a; font-size: 13px; }
-.sp-notes-p { margin: 0 0 10px; }
-.sp-notes-sec h3 { margin: 16px 0 6px; color: #ffd100; font-size: 18px; }
-.sp-notes-sec ul { margin: 0; padding-left: 20px; }
-.sp-notes-sec li { margin: 3px 0; }
-.sp-notes-outro { margin-top: 16px; font-style: italic; }
-.sp-notes-close { display: block; margin: 18px auto 0; }
+/* Patch notes (js/ui/patchNotes.js): the body of a kit.js stageModal, so it shares the frame, close button and Escape/backdrop handling of every
+   other menu panel. Stage px, parchment ink. The floating "update available" pill lives on the page (it must show during a run too). */
+.sx-modal:has(.sp-notes) { width: min(1180px, 94%); }
+.sp-notes { font-family: var(--f-ui); font-size: 30px; line-height: 1.5; color: #1c1004; padding-right: 14px; max-width: 1040px; margin: 0 auto; overflow-wrap: anywhere; }
+.sp-notes-date { margin: 0 0 16px; font-size: 24px; color: #3b2a12; }
+.sp-notes-p { margin: 0 0 14px; }
+.sp-notes-build { margin: 0 0 14px; border: 2px solid #6b5220; border-radius: 8px; background: rgba(255,248,226,.55); }
+.sp-notes-build > summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; padding: 12px 18px; cursor: pointer; list-style: none; min-height: 44px; }
+.sp-notes-build > summary::-webkit-details-marker { display: none; }
+.sp-notes-build > summary::before { content: "\25B6"; font-size: 22px; color: var(--parch-red); transition: transform .15s; }
+.sp-notes-build[open] > summary::before { transform: rotate(90deg); }
+.sp-notes-build > summary:hover, .sp-notes-build > summary:focus-visible { background: rgba(139,26,26,.12); outline: 3px solid #8b1a1a; outline-offset: -3px; }
+.sp-notes-bid { font-family: var(--f-title); font-size: 38px; color: var(--parch-red); }
+.sp-notes-bdate { font-size: 24px; color: #3b2a12; }
+.sp-notes-btitle { font-weight: 700; flex: 1 1 320px; }
+.sp-notes-list { margin: 0; padding: 4px 18px 14px; list-style: none; }
+.sp-notes-li { display: flex; align-items: baseline; gap: 14px; margin: 0; padding: 9px 0; border-top: 1px solid rgba(107,82,32,.35); }
+.sp-notes-tag { flex: none; width: 130px; box-sizing: border-box; white-space: nowrap; text-align: center; font-size: 21px; line-height: 1.5; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; border-radius: 5px; padding: 0 8px; color: #fff; }
+.sp-tag-new { background: #1d6b2c; }
+.sp-tag-fix { background: #8b1a1a; }
+.sp-tag-bal { background: #8a5a00; }
+.sp-notes-txt { flex: 1 1 auto; min-width: 0; }
+.sp-notes-txt b { font-weight: 700; color: #6e1010; }
+.sp-notes-still { margin-top: 18px; color: #3b2a12; }
+.sp-notes-outro { margin-top: 10px; font-style: italic; }
+.sp-notes-foot { display: grid; place-items: center; margin-top: 18px; }
+@media (max-width: 520px) { .sp-notes-li { flex-direction: column; gap: 4px; } }
 
-.sp-update-pill { position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 8999;
-  display: flex; align-items: center; gap: 10px; padding: 10px 20px; cursor: pointer;
-  color: #1a1206; font: 700 16px/1.2 inherit; background: linear-gradient(#ffe066, #e0a800);
-  border: 2px solid #5a3c00; border-radius: 999px; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
-  animation: sp-update-bob 2.4s ease-in-out infinite; }
-.sp-update-pill:hover { filter: brightness(1.1); }
-.sp-update-dot { width: 10px; height: 10px; border-radius: 50%; background: #2fd24a; box-shadow: 0 0 8px #2fd24a; }
+.sp-update-pill { position: fixed; top: 56px; left: 50%; transform: translateX(-50%); z-index: 8999; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 22px; cursor: pointer;
+  color: #ffd100; font: 400 16px/1.2 var(--f-ui, Georgia, serif); text-shadow: 0 1px 2px #000; background: linear-gradient(180deg, #5a1d14, #2a0b08); border: 2px solid #c9a24b; border-radius: 5px;
+  box-shadow: inset 0 0 0 1px #000, 0 4px 14px rgba(0,0,0,.7); animation: sp-update-bob 2.4s ease-in-out infinite; }
+.sp-update-pill:hover, .sp-update-pill:focus-visible { filter: brightness(1.2); outline: none; border-color: #fff0a8; }
+.sp-update-dot { width: 10px; height: 10px; flex: none; border-radius: 50%; background: #2fd24a; box-shadow: 0 0 8px #2fd24a; }
 @keyframes sp-update-bob { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 3px); } }
 @media (prefers-reduced-motion: reduce) { .sp-update-pill { animation: none; } }
 @media (max-width: 520px) { .sp-update-pill { font-size: 14px; padding: 8px 14px; max-width: calc(100vw - 32px); } }
-.sp-notes-sec li.sp-notes-row { list-style: none; margin: 6px 0 6px -20px; display: flex; align-items: center; gap: 10px; }
-.sp-notes-ico { width: 36px; height: 36px; flex: none; border: 1px solid #7a5c2e; border-radius: 4px; box-shadow: 0 1px 3px #000; }
-.sp-notes-row b { color: #ffd100; }

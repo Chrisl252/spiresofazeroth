@@ -1,11 +1,12 @@
 // VFX choreography: recipe table (element x kind + enemy attacks) and the single rAF loop that drives
 // flipbooks + particles + numbers. Impact instant = onImpact() (UI applies damage + actor hit reaction there).
-import { loadSheets, createSheetPlayer, mix } from "./sheets.js";
-import { createParticles, mulberry32 } from "./particles.js";
-import { createNumbers } from "./numbers.js";
-import { PALETTE, ELEMENTS, KINDS, elementFor, kindFor } from "./elements.js";
-import { runLook, needsTarget } from "./cardfx.js";
-import { createRealPlayer } from "./realplay.js";   // real WoW spell art (data/fx/real.json); falls back to the recipe look
+import { loadSheets, createSheetPlayer, mix } from "./sheets.js?v=20261028e";
+import { createParticles, mulberry32 } from "./particles.js?v=20261028e";
+import { createNumbers } from "./numbers.js?v=20261028e";
+import { PALETTE, ELEMENTS, KINDS, elementFor, kindFor } from "./elements.js?v=20261028e";
+import { runLook, needsTarget } from "./cardfx.js?v=20261028e";
+import { createAnimMap } from "./animmap.js?v=20261028e";   // data-driven card -> cast anim/release/school-floor map (data/fx/anim.json)
+import { createRealPlayer } from "./realplay.js?v=20261028e";   // real WoW spell art (data/fx/real.json); falls back to the recipe look
 
 export { elementFor, kindFor, PALETTE, ELEMENTS, KINDS };
 export const ENEMY_RECIPES = ["claw", "bite", "steel", "spit", "slam"];
@@ -38,6 +39,7 @@ export function createFx(hostEl, o = {}) {
   const rng = mulberry32(o.seed || 20261017);
   const timers = [], actors = [], auras = new Map();
   const real = createRealPlayer({ root: o.root, v: o.v });
+  const anim = createAnimMap({ root: o.root, v: o.v });
   const stats = { frames: 0, msSum: 0, msMax: 0, peakParticles: 0, peakSheets: 0 };
 
   // DOM: canvas + dom layer (numbers/banner/flash) inside the host
@@ -346,7 +348,7 @@ export function createFx(hostEl, o = {}) {
   // ---- public API -----------------------------------------------------------------------------------------------------------------------
   /** play("fire:attack" | "enemy:claw" | "claw" | {element,kind} | card, {from,to,fromUid,toUid,amount,onImpact,scale,persist,key}) */
   async function play(spec, opts = {}) {
-    await ready; await real.ready;
+    await ready; await real.ready; await anim.ready;
     let el, kind, enemy = null;
     if (typeof spec === "string") {
       const s = spec.replace(/^enemy:/, "");
@@ -358,19 +360,24 @@ export function createFx(hostEl, o = {}) {
     if (!enemy && !PALETTE[el]) el = "steel";
     if (!enemy && !KINDS.includes(kind)) kind = "attack";
     const c = makeCtx(opts, enemy ? "steel" : el);
+    // cast -> travel -> impact -> number: ranged / gesture cards wait for the caster's RELEASE frame (animmap) before the missile / impact
+    const cid = !enemy && ((spec && spec.id) || opts.cardId), arow = cid && anim.card(cid);
+    const relS = opts.release != null ? opts.release : (arow && arow.anim !== "melee" ? arow.rel : null);
+    if (relS != null) opts.release = relS;
     // per-card spell look (data/fx/cards.json); element x kind recipes below stay as the fallback
     const lk = !enemy && looks[(spec && spec.id) || opts.cardId];
     const rl = !enemy && !opts.noReal && real.entryFor((spec && spec.id) || opts.cardId);
     if (rl && (kind === "attack" || kind === "skill" || kind === "power" || kind === "heal")) {
       await Promise.race([real.ensure(rl, 450), new Promise((r) => setTimeout(r, 500))]);
-      return new Promise((resolve) => { real.run({ c, L, P, at, actors, wake, numbers, impactCore, projectile, settle, mix, rng, state: fxState, clock: () => clock, aura, hitStop, setAura }, rl, kind, resolve, lk); wake(); });
+      return new Promise((resolve) => { real.run({ c, L, P, anim, PROJ, at, actors, wake, numbers, impactCore, projectile, settle, mix, rng, state: fxState, clock: () => clock, aura, hitStop, setAura }, rl, kind, resolve, lk); wake(); });
     }
+    const late = (fn) => (relS != null && relS > 0.02 ? at(relS, fn) : fn());
     if (lk && !(needsTarget(lk) && kind !== "attack" && !opts.to)) {
-      return new Promise((resolve) => { runLook({ c, L, P, at, actors, wake, numbers, impactCore, projectile, settle, mix, rng, state: fxState, clock: () => clock, aura, hitStop }, lk, kind, resolve); wake(); });
+      return new Promise((resolve) => { late(() => runLook({ c, L, P, at, actors, wake, numbers, impactCore, projectile, settle, mix, rng, state: fxState, clock: () => clock, aura, hitStop }, lk, kind, resolve)); wake(); });
     }
     return new Promise((resolve) => {
       if (enemy) return (ENEMY[enemy] || ENEMY.steel)(c, resolve);
-      ({ attack: runAttack, skill: runSkill, power: runPower, heal: runHeal })[kind](c, resolve);
+      late(() => ({ attack: runAttack, skill: runSkill, power: runPower, heal: runHeal })[kind](c, resolve));
       wake();
     });
   }

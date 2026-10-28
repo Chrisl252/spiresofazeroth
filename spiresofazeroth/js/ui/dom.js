@@ -1,7 +1,7 @@
 // Tiny DOM toolkit shared by every screen. No framework: h() builds elements, the rest are small widgets.
-import { renderText } from "../engine/cardtext.js";
-import { slugify } from "../engine/data.js";
-import { cardEl as cardElV2 } from "./card.js";
+import { renderText } from "../engine/cardtext.js?v=20261028e";
+import { slugify } from "../engine/data.js?v=20261028e";
+import { cardEl as cardElV2 } from "./card.js?v=20261028e";
 const HD = new URL("../../assets/icons-hd/", import.meta.url).href; // 256px upscaled icons, relative so dev + deploy both resolve
 const cardElMini = (def, inst) => cardElV2(def, { tag: "div", mini: true, inst });
 
@@ -37,7 +37,17 @@ export const cap = (s) => String(s || "").replace(/[-_]/g, " ").replace(/\b\w/g,
 export function track(name, params) { try { if (window.gtag) window.gtag("event", name, params); } catch (e) { /* ignore */ } }
 
 // ---- tooltip ----
-let tipEl = null, tipPoint = null, tipFullscreenListener = false;
+let tipEl = null, tipPoint = null, tipFullscreenListener = false, tipOwner = null, tipGuard = 0;
+// A tip whose owner left the DOM (map node clicked -> screen swapped) never gets pointerleave, so it stayed on screen over the next
+// screen's cards (2026-10-28 reports). While a tip is up, a light guard hides it once the owner is gone or no longer hovered.
+function hideTip() { if (tipEl) tipEl.style.display = "none"; tipOwner = null; if (tipGuard) { clearInterval(tipGuard); tipGuard = 0; } }
+function guardTip() {
+  if (tipGuard) return;
+  tipGuard = setInterval(() => {
+    const o = tipOwner;
+    if (!o || !o.isConnected || (!o.matches(":hover") && document.activeElement !== o)) hideTip();
+  }, 250);
+}
 function showTip(html, x, y) {
   if (!tipEl) tipEl = h("div", { class: "sp-tip", role: "tooltip" });
   const parent = document.fullscreenElement || document.body;
@@ -57,13 +67,14 @@ export function tip(el, html) {
     });
     tipFullscreenListener = true;
   }
-  const hide = () => { if (tipEl) tipEl.style.display = "none"; };
-  el.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") show(e.clientX, e.clientY); });
+  const hide = () => { if (tipOwner === el || !tipOwner) hideTip(); };
+  const own = () => { tipOwner = el; guardTip(); };
+  el.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") { show(e.clientX, e.clientY); own(); } });
   el.addEventListener("pointermove", (e) => { if (e.pointerType === "mouse" && tipEl && tipEl.style.display === "block") show(e.clientX, e.clientY); });
   el.addEventListener("pointerleave", hide);
-  el.addEventListener("focus", () => { const r = el.getBoundingClientRect(); show(r.left, r.bottom); });
+  el.addEventListener("focus", () => { const r = el.getBoundingClientRect(); show(r.left, r.bottom); own(); });
   el.addEventListener("blur", hide);
-  el.addEventListener("pointerdown", hide);
+  el.addEventListener("pointerdown", hideTip);
   return el;
 }
 export const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -89,7 +100,7 @@ export function cardCostLabel(def, cost) {
   return def.cost === "X" ? "X" : def.cost < 0 ? "-" : String(def.cost);
 }
 // v2: the card look lives in card.js (260x380 stage px, `mini: true` = 130x190). Same options as before: { C, inst, tag, cls, cost, onClick, data }.
-export { cardEl } from "./card.js";
+export { cardEl } from "./card.js?v=20261028e";
 export function codexLinks(def, kind) {
   const sl = slugify(def.name);
   if (kind === "spell" && def.spellId) return `/spell/${sl}-${def.spellId}/`;

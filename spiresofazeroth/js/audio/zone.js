@@ -3,10 +3,12 @@
 // Seam: stage.setBackdrop(zoneId) -> zone.enter(zoneId) (one call site, stage.js); router -> zone.screen(name, app) (one call site, main.js).
 // Browsers block audio until a gesture: enter() just records the zone; the first pointerdown/keydown starts everything.
 // Honours the Settings "Sound effects" toggle (sfx.muted) and a separate Music volume (0-100, localStorage spires.music.volume).
-import { resolveSoundUrl, soundsReady } from "../audio.js";
-import { sfx } from "../audio.js";
+import { resolveSoundUrl, soundsReady } from "../audio.js?v=20261028e";
+import { sfx } from "../audio.js?v=20261028e";
+import { ambience } from "./ambience.js?v=20261028e";
+import { resume as resumeEngine, trace, getCtx, bus } from "./engine.js?v=20261028e";
 
-const FADE = 1.2;            // seconds, crossfade both ways
+const FADE = 2.0;            // seconds, equal-power crossfade both ways (level = sin(g*pi/2) on both sides: no mid-fade dip)
 const DUCK_MUSIC = 0.75;     // music in combat (-2.5 dB: stays audible, avoids sudden silence)
 const DUCK_AMB = 0.35;       // ambience ducked heavily in combat so SFX & music lead
 const VKEY = "spires.music.volume";
@@ -25,8 +27,7 @@ let vol = (() => { const n = parseInt(store.get(VKEY), 10); return Number.isFini
 let ambVol = (() => { const n = parseInt(store.get(A_VOL_KEY), 10); return Number.isFinite(n) ? Math.max(0, Math.min(100, n)) : 30; })();
 let ambMode = (() => { const m = store.get(A_MODE_KEY); return ["occasional", "continuous", "off"].includes(m) ? m : "occasional"; })();
 let duck = false, bossOn = false, curKey = null, curAmb = null, lastMode = "";
-const music = [];                                  // voices: {el, g, t, kind}
-const amb = [];
+const music = [];                                  // voices: {el, g, t, kind}  (ambience beds live in ./ambience.js, Web Audio)
 let timer = 0, lastT = 0, ext = null, forced = null; // forced = a music url picked in the Escape menu (null = zone default)
 
 const canOgg = () => { if (ext === null) { try { ext = new Audio().canPlayType('audio/ogg; codecs="vorbis"') ? "ogg" : "mp3"; } catch (e) { ext = "mp3"; } } return ext === "ogg"; };
@@ -55,29 +56,19 @@ function level(kind) {
 
 function voice(list, url, kind, loop) {
   if (MUTE) return null;
-  if (kind === "amb" && (ambMode === "off" || ambVol <= 0)) return null;
   url = url ? fixUrl(url) : null;
   if (!url) return null;
   let el; try { el = new Audio(resolveSoundUrl(url)); } catch (e) { return null; }
   el.preload = "auto";
-  const v = { el, g: 0, t: 1, kind, url, queued: false, oneShot: false };
-  if (kind === "amb") {
-    if (ambMode === "continuous") {
-      el.addEventListener("loadedmetadata", () => {
-        if (el.duration >= 25) { el.loop = true; v.oneShot = false; }
-        else { el.loop = false; v.oneShot = true; }
-      });
-      el.loop = false;
-      v.oneShot = true;
-    } else {
-      el.loop = false;
-      v.oneShot = true;
-    }
-  } else {
-    el.loop = !!loop;
-  }
+  el.loop = !!loop;
+  // Route the track through the shared Web Audio engine (the same path sfx + ambience use). A bare <audio> element was silent for a
+  // player on desktop Chrome while sfx played (2026-10-27): one output path for everything. Element volume still drives the fades.
+  // only when the context is live: an element bound to a suspended context is muted for its whole life (it can never be unbound)
+  try { const c = getCtx(); if (c && c.state === "running" && c.createMediaElementSource) { el.crossOrigin = "anonymous"; c.createMediaElementSource(el).connect(bus()); resumeEngine(); } } catch (e) { /* direct output */ }
+  const v = { el, g: 0, t: 1, kind, url, queued: false, lastT: -1, stallMs: 0 };
   list.push(v);
   el.volume = 0;
+  trace("music-start", { url, playing: list.length });
   const p = el.play(); if (p && p.catch) p.catch(() => {
     v.t = 0; v.dead = true;
     if (kind === "music") retryMusic(); // a refused start (autoplay timing, load blip) must not silence the zone's music for good
@@ -96,34 +87,25 @@ function retryMusic() {
 function startTick() { if (!timer) { lastT = performance.now(); timer = setInterval(tick, 50); } }
 function tick() {
   const now = performance.now(), dt = Math.min(0.25, (now - lastT) / 1000); lastT = now;
-  for (const list of [music, amb]) {
-    for (let i = list.length - 1; i >= 0; i--) {
-      const v = list[i];
-      const step = dt / FADE;
-      v.g = v.t > v.g ? Math.min(v.t, v.g + step) : Math.max(v.t, v.g - step);
-      const d = (v.t > 0 && duck) ? (v.kind === "music" ? DUCK_MUSIC : DUCK_AMB) : 1;
-      try { v.el.volume = Math.max(0, Math.min(1, v.g * d * level(v.kind))); } catch (e) { /* ignore */ }
-      if (hidden && !v.el.paused) v.el.pause(); else if (!hidden && v.el.paused && v.t > 0 && !v.dead && unlocked && !v.el.ended) { const p = v.el.play(); if (p && p.catch) p.catch(() => {}); }
-      if (v.oneShot && v.t > 0 && v.el.ended && !hidden) {
-        if (ambMode === "off" || ambVol <= 0) {
-          v.t = 0;
-        } else {
-          const gapRange = (ambMode === "occasional") ? [25, 50] : [10, 18];
-          if (!v.next) v.next = now + (gapRange[0] + Math.random() * (gapRange[1] - gapRange[0])) * 1000;
-          else if (now >= v.next) {
-            v.next = 0;
-            try { v.el.currentTime = 0; } catch (e) { /* ignore */ }
-            const p = v.el.play();
-            if (p && p.catch) p.catch(() => {});
-          }
-        }
-      }
-      if (v.kind === "music" && v.t > 0 && !v.queued && v.el.duration && v.el.duration - v.el.currentTime < FADE + 0.15) { v.queued = true; nextTrack(); }
-      if (v.kind === "music" && v.t > 0 && !v.queued && v.el.ended) { v.queued = true; nextTrack(); }
-      if (v.g <= 0 && v.t <= 0) { try { v.el.pause(); v.el.removeAttribute("src"); v.el.load(); } catch (e) { /* ignore */ } list.splice(i, 1); }
+  const list = music;
+  for (let i = list.length - 1; i >= 0; i--) {
+    const v = list[i];
+    const step = dt / FADE;
+    v.g = v.t > v.g ? Math.min(v.t, v.g + step) : Math.max(v.t, v.g - step);
+    const d = (v.t > 0 && duck) ? DUCK_MUSIC : 1;
+    const eq = Math.sin(v.g * Math.PI / 2);          // equal-power curve
+    try { v.el.volume = Math.max(0, Math.min(1, eq * d * level("music"))); } catch (e) { /* ignore */ }
+    if (hidden && !v.el.paused) v.el.pause(); else if (!hidden && v.el.paused && v.t > 0 && !v.dead && unlocked && !v.el.ended) { const p = v.el.play(); if (p && p.catch) p.catch(() => {}); }
+    if (v.kind === "music" && v.t > 0 && !v.queued && v.el.duration && v.el.duration - v.el.currentTime < FADE + 0.15) { v.queued = true; nextTrack(); }
+    if (v.kind === "music" && v.t > 0 && !v.queued && v.el.ended) { v.queued = true; nextTrack(); }
+    // stall watchdog: a track that should be audible but whose clock hasn't moved for 8s is rebuilt (load blip / refused start)
+    if (v.kind === "music" && v.t > 0 && !v.queued && !hidden && unlocked && level("music") > 0) {
+      if (v.el.currentTime === v.lastT) { v.stallMs += dt * 1000; if (v.stallMs > 8000) { v.queued = true; v.t = 0; trace("music-stall", { url: v.url }); curKey = null; apply(); } }
+      else { v.stallMs = 0; v.lastT = v.el.currentTime; }
     }
+    if (v.g <= 0 && v.t <= 0) { try { v.el.pause(); v.el.removeAttribute("src"); v.el.load(); } catch (e) { /* ignore */ } list.splice(i, 1); trace("music-end", { playing: list.length }); }
   }
-  if (!music.length && !amb.length) { clearInterval(timer); timer = 0; }
+  if (!music.length) { clearInterval(timer); timer = 0; }
 }
 
 let playlist = [], pi = 0;
@@ -146,12 +128,21 @@ function nextTrackFirst() {
   pi = (pi + 1) % playlist.length;
   voice(music, playlist[pi], "music", false);
 }
-function setAmbience(url) {
-  url = url ? fixUrl(url) : null;
-  if (url === curAmb && amb.some((x) => x.t > 0)) return;
-  curAmb = url;
-  for (const v of amb) v.t = 0;
-  if (url && ambMode !== "off" && ambVol > 0) { voice(amb, url, "amb", true); }
+// Pool = this zone's day + night clips plus the other zones of the same biome set (more variety than the 2 clips a zone owns).
+function ambPool(z) {
+  if (!z || !z.ambience) return [];
+  const own = [z.ambience.day, z.ambience.night];
+  const sib = [];
+  if (z.set && table) for (const o of Object.values(table)) { if (o && o !== z && o.set === z.set && o.ambience) sib.push(o.ambience.day, o.ambience.night); }
+  return [...new Set(own.concat(sib).filter(Boolean).map(fixUrl))].slice(0, 6);
+}
+const ambLevel = () => (hidden || ambMode === "off" || ambVol <= 0) ? 0 : (ambVol / 100) * (duck ? DUCK_AMB : 1);
+function syncAmb() { ambience.configure({ vol: ambLevel(), m: ambMode }); }
+function setAmbience(pool) {
+  if (MUTE) return;
+  const k = pool && pool.length ? pool.slice().sort().join("|") : "";
+  syncAmb();
+  ambience.set(k, pool || []);
 }
 
 function resolveTarget() {
@@ -161,7 +152,7 @@ function resolveTarget() {
     return {
       key: "boss",
       music: table._stingers.boss,
-      ambience: baseZ.ambience ? baseZ.ambience.day : null,
+      ambience: ambPool(baseZ),
       ordered: false,
       zoneId: want
     };
@@ -214,7 +205,7 @@ function resolveTarget() {
     return {
       key,
       music: urls,
-      ambience: z.ambience ? z.ambience.day : null,
+      ambience: ambPool(z),
       ordered: true,
       zoneId: targetZoneId || want || null
     };
@@ -226,7 +217,7 @@ function resolveTarget() {
   return {
     key: z.set || (z.music || [])[0] || want,
     music: z.music || [],
-    ambience: z.ambience ? z.ambience.day : null,
+    ambience: ambPool(z),
     ordered: false,
     zoneId: want
   };
@@ -243,6 +234,7 @@ function apply() {
 function unlock() {
   if (unlocked) return;
   unlocked = true;
+  resumeEngine();
   document.removeEventListener("pointerdown", unlock, true);
   document.removeEventListener("keydown", unlock, true);
   load().then(apply);
@@ -250,7 +242,7 @@ function unlock() {
 if (typeof document !== "undefined") {
   document.addEventListener("pointerdown", unlock, true);
   document.addEventListener("keydown", unlock, true);
-  document.addEventListener("visibilitychange", () => { hidden = document.hidden; startTick(); });
+  document.addEventListener("visibilitychange", () => { hidden = document.hidden; syncAmb(); startTick(); });
 }
 
 function stinger(url) {
@@ -281,7 +273,7 @@ export const zone = {
       if (s && (name === "reward" || name === "treasure")) stinger(s.loot);
       if (s && name === "end" && app && app.run) stinger(app.run.result === "victory" ? s.victory : s.defeat);
     }
-    if (changed) apply();
+    if (changed) { syncAmb(); apply(); }
   },
   get volume() { return vol; },
   setVolume(v) { vol = Math.max(0, Math.min(100, Math.round(+v) || 0)); store.set(VKEY, vol); startTick(); },
@@ -289,36 +281,14 @@ export const zone = {
   setAmbienceVolume(v) {
     ambVol = Math.max(0, Math.min(100, Math.round(+v) || 0));
     store.set(A_VOL_KEY, ambVol);
-    if (ambVol === 0) {
-      for (const v of amb) v.t = 0;
-    } else if (!amb.some((x) => x.t > 0)) {
-      apply();
-    }
-    startTick();
+    syncAmb(); apply();
   },
   get ambienceMode() { return ambMode; },
   setAmbienceMode(m) {
     if (!["occasional", "continuous", "off"].includes(m)) m = "occasional";
     ambMode = m;
     store.set(A_MODE_KEY, ambMode);
-    if (ambMode === "off") {
-      for (const v of amb) { v.t = 0; try { v.el.pause(); } catch (e) {} }
-    } else {
-      if (!amb.some((x) => x.t > 0)) {
-        apply();
-      } else {
-        for (const v of amb) {
-          if (ambMode === "continuous" && v.el.duration >= 25) {
-            v.el.loop = true;
-            v.oneShot = false;
-          } else {
-            v.el.loop = false;
-            v.oneShot = true;
-          }
-        }
-      }
-    }
-    startTick();
+    syncAmb(); apply();
   },
   // Catalog of zones and their authentic audio for menus and selectors
   async catalog() {
@@ -362,7 +332,8 @@ export const zone = {
     startTick();
   },
   current() { const v = music.find((x) => x.t > 0); return v ? v.el.getAttribute("src") || v.url : null; },
-  currentAmbience() { const v = amb.find((x) => x.t > 0); return v ? v.el.getAttribute("src") || v.url : null; },
+  currentAmbience() { return ambience.key || null; },
+  ambienceVoices() { return ambience.voices; },
   currentZone() {
     const t = resolveTarget();
     return t ? t.zoneId : want;

@@ -146,18 +146,22 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Gain 5 Block. Heal 3 HP.",
+      "text": "Heal 4 HP.",
       "effects": [
-        {"op": "block", "amount": 5},
-        {"op": "heal", "amount": 3}
+        {
+          "op": "heal",
+          "amount": 4
+        }
       ],
       "upgrade": {
         "name": "Holy Light (Rank 2)",
         "cost": 1,
-        "text": "Gain 8 Block. Heal 5 HP.",
+        "text": "Heal 6 HP.",
         "effects": [
-          {"op": "block", "amount": 8},
-          {"op": "heal", "amount": 5}
+          {
+            "op": "heal",
+            "amount": 6
+          }
         ]
       }
     },
@@ -200,18 +204,22 @@
       "cost": 0,
       "target": "self",
       "flags": [],
-      "text": "Gain 4 Block. Heal 2 HP.",
+      "text": "Heal 3 HP.",
       "effects": [
-        {"op": "block", "amount": 4},
-        {"op": "heal", "amount": 2}
+        {
+          "op": "heal",
+          "amount": 3
+        }
       ],
       "upgrade": {
         "name": "Flash of Light (Rank 2)",
         "cost": 0,
-        "text": "Gain 6 Block. Heal 3 HP.",
+        "text": "Heal 4 HP.",
         "effects": [
-          {"op": "block", "amount": 6},
-          {"op": "heal", "amount": 3}
+          {
+            "op": "heal",
+            "amount": 4
+          }
         ]
       }
     },
@@ -349,18 +357,22 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Gain 7 Block. Heal 3 HP.",
+      "text": "Gain 7 Block.",
       "effects": [
-        {"op": "block", "amount": 7},
-        {"op": "heal", "amount": 3}
+        {
+          "op": "block",
+          "amount": 7
+        }
       ],
       "upgrade": {
         "name": "Blessing of Light (Rank 2)",
         "cost": 1,
-        "text": "Gain 10 Block. Heal 5 HP.",
+        "text": "Gain 10 Block.",
         "effects": [
-          {"op": "block", "amount": 10},
-          {"op": "heal", "amount": 5}
+          {
+            "op": "block",
+            "amount": 10
+          }
         ]
       }
     },
@@ -628,19 +640,25 @@
       "archetype": "holy",
       "cost": 1,
       "target": "self",
-      "flags": ["exhaust"],
-      "text": "Heal 10 HP. Gain 6 Block. Exhaust.",
+      "flags": [
+        "exhaust"
+      ],
+      "text": "Heal 10 HP. Exhaust.",
       "effects": [
-        {"op": "heal", "amount": 10},
-        {"op": "block", "amount": 6}
+        {
+          "op": "heal",
+          "amount": 10
+        }
       ],
       "upgrade": {
         "name": "Redemption (Rank 2)",
         "cost": 1,
-        "text": "Heal 14 HP. Gain 8 Block. Exhaust.",
+        "text": "Heal 14 HP. Exhaust.",
         "effects": [
-          {"op": "heal", "amount": 14},
-          {"op": "block", "amount": 8}
+          {
+            "op": "heal",
+            "amount": 14
+          }
         ]
       }
     },
@@ -716,26 +734,42 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Gain 6 Block. Heal 3 HP. Seal: Judgement heals 10 HP.",
+      "text": "Heal 3 HP. Seal: Judgement heals 10 HP.",
       "effects": [
-        {"op": "block", "amount": 6},
-        {"op": "heal", "amount": 3},
-        {"op": "set_seal", "value": "light"}
+        {
+          "op": "heal",
+          "amount": 3
+        },
+        {
+          "op": "set_seal",
+          "value": "light"
+        }
       ],
       "onJudge": [
-        {"op": "heal", "amount": 10}
+        {
+          "op": "heal",
+          "amount": 10
+        }
       ],
       "upgrade": {
         "name": "Seal of Light (Rank 2)",
         "cost": 1,
-        "text": "Gain 8 Block. Heal 5 HP. Seal: Judgement heals 14 HP.",
+        "text": "Heal 5 HP. Seal: Judgement heals 14 HP.",
         "effects": [
-          {"op": "block", "amount": 8},
-          {"op": "heal", "amount": 5},
-          {"op": "set_seal", "value": "light"}
+          {
+            "op": "heal",
+            "amount": 5
+          },
+          {
+            "op": "set_seal",
+            "value": "light"
+          }
         ],
         "onJudge": [
-          {"op": "heal", "amount": 14}
+          {
+            "op": "heal",
+            "amount": 14
+          }
         ]
       }
     },

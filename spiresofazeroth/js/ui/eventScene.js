@@ -4,9 +4,9 @@
 // no WebGL / no model / no fx layer => the plate variant and number-less feedback, never a broken screen.
 //   mountScene(app, ev, sceneEl) -> Promise<{ npc: boolean, kind: string }>
 //   playOutcome(app, host, parts)  parts = [{ k: "dmg"|"gold"|"heal"|"maxhp", n }]
-import { h, icon } from "./dom.js";
-import { ART, zoneArt } from "./kit.js";
-import { getKit, mountPortrait, clearStage, safe } from "./combatKit.js";
+import { h, icon } from "./dom.js?v=20261028e";
+import { ART, zoneArt } from "./kit.js?v=20261028e";
+import { getKit, mountPortrait, clearStage, safe } from "./combatKit.js?v=20261028e";
 
 const slug = (s) => "npc-" + String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 export const npcSlug = (npc) => slug(npc && (npc.model || npc.name));

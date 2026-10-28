@@ -33,8 +33,10 @@ export function createFog(canvas) {
     moteSprite = sprite(mix(a, [255, 255, 255], 0.35), 16, 0.9);
   }
   function resize(w, h) {
-    W = canvas.width = Math.max(120, Math.round(w / 4));
-    H = canvas.height = Math.max(120, Math.round(h / 4));
+    const nw = Math.max(120, Math.round(w / 4)), nh = Math.max(120, Math.round(h / 4));
+    if (nw === W && nh === H && canvas.width === nw && canvas.height === nh) return; // assigning canvas.width (even to the same value) wipes it: a blank frame on every layout pass = flicker on phones
+    W = canvas.width = nw;
+    H = canvas.height = nh;
   }
   function draw(t, dt) {
     g.clearRect(0, 0, W, H);

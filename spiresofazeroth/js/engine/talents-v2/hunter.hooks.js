@@ -5,11 +5,11 @@
 // Read values with tv(C, key, arg) from ../talentHooks.js; keep per-fight state on C.talhunter (C is one combat).
 // Seams used: traps are armed in C.traps ({name, effects}); on arming we append effect ops to the new trap (it springs through runEffects,
 // so Weak / damage land on the attacker). Pet hits reach deal() with src.kind === "pet" and no o.card. The pet acts at the end of the player turn.
-import { tv } from "../talentHooks.js";
-import { applyStatus } from "../status.js";
-import { gainBlock, healEntity, isAlive, fx } from "../damage.js";
-import { drawCards } from "../deck.js";
-import { revivePet, petAct } from "../resources.js";
+import { tv } from "../talentHooks.js?v=20261028e";
+import { applyStatus } from "../status.js?v=20261028e";
+import { gainBlock, healEntity, isAlive, fx } from "../damage.js?v=20261028e";
+import { drawCards } from "../deck.js?v=20261028e";
+import { revivePet, petAct } from "../resources.js?v=20261028e";
 
 const KEYS = ["hun_pet_hp", "hun_hawk_dmg", "hun_hawk_start", "hun_pet_block", "hun_open_block", "hun_pet_dmg", "hun_pet_revive", "hun_pet_crit", "hun_bond_heal",
   "hun_pet_swift", "hun_frenzy", "hun_pack_dmg", "hun_wrath", "hun_wrath_start", "hun_first_shot", "hun_shot_crit", "hun_crit_bonus", "hun_shot_block", "hun_shot_dmg",

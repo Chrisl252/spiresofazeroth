@@ -254,7 +254,7 @@
    "tier": 1,
    "rarity": "epic",
    "stats": "Tier 1",
-   "text": "At the start of each turn: 15% chance to gain 1 Energy.",
+   "text": "At the start of each turn: 12% chance to gain 1 Energy.",
    "class": "warlock",
    "triggers": {
     "on_turn_start": [
@@ -262,7 +262,7 @@
       "op": "conditional",
       "if": {
        "type": "chance",
-       "pct": 15
+       "pct": 12
       },
       "then": [
        {

@@ -1,6 +1,22 @@
 // Heroic I-X difficulty (ascension). Level 0 = Normal. Pure data -> modifier object.
 export const HEROIC_NAMES = ["Normal", "Heroic I", "Heroic II", "Heroic III", "Heroic IV", "Heroic V", "Heroic VI", "Heroic VII", "Heroic VIII", "Heroic IX", "Heroic X"];
 export const MAX_HEROIC = 10;
+export const MIN_HEROIC_OPEN = 3; // 2026-10-27: Heroic I-III are selectable from the start; higher levels still need the win-to-unlock
+/** Highest Heroic level a character may pick: max(3, earned), capped at X. */
+export function heroicOpen(meta, classId) { return Math.min(MAX_HEROIC, Math.max(MIN_HEROIC_OPEN, ((meta && meta.heroic && meta.heroic[classId]) | 0))); }
+/** One line for the difficulty picker. */
+export function heroicBlurb(level) {
+  const m = heroicMods(level);
+  if (!level) return "Normal: the standard climb.";
+  const bits = ["more elites", "+" + Math.round((m.enemyHpMult - heroicMods(0).enemyHpMult) * 100) + "% enemy HP"];
+  if (m.goldMult < 1) bits.push("less gold");
+  if (m.healMult < 1) bits.push("weaker rests");
+  if (level >= 6) bits.push("lower starting HP");
+  if (m.potionSlots < 3) bits.push("fewer potion slots");
+  if (level >= 7) bits.push("tougher normal foes");
+  if (level >= 3) bits.push(level >= 5 ? "elites and bosses hit harder" : "elites hit harder");
+  return `${heroicName(level)}: ${bits.join(", ")}.`;
+}
 
 export function heroicName(level) {
   return HEROIC_NAMES[Math.max(0, Math.min(MAX_HEROIC, level | 0))];
@@ -10,9 +26,9 @@ export function heroicMods(level) {
   const L = Math.max(0, Math.min(MAX_HEROIC, level | 0));
   return {
     level: L,
-    enemyHpMult: 1.15 + 0.04 * L,  // 2026-10-18: Normal base +15% (sim act-1 clear was 87%, act-2 96%)
+    enemyHpMult: 1.25 + 0.04 * L,  // 2026-10-27: Normal base +25% (was +15% from 10-18; players found Normal too easy)
     normalStrength: L >= 7 ? 1 : 0,
-    eliteStrength: L >= 3 ? (L >= 9 ? 2 : 1) : 0,
+    eliteStrength: L >= 9 ? 3 : L >= 3 ? 2 : 1, // 2026-10-27: elites hit +1 harder at every level (Normal was 0)
     bossStrength: L >= 5 ? (L >= 10 ? 2 : 1) : 0,
     goldMult: L >= 2 ? 0.9 : 1,
     healMult: L >= 4 ? 0.85 : 1,       // rest sites heal less

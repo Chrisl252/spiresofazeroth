@@ -1,18 +1,18 @@
 // Run state machine. The UI and the headless sim both drive the run through these functions, so routing lives in ONE place.
 // run.screen: map | combat | reward | vendor | rest | event | treasure | hub | healer | zonepick | raidchoice | bosschoice | end
 // Every random decision uses streamFor(seed, tag) with a node-specific tag, so a saved run resumes identically.
-import { enterHealer } from "./healer.js";
-import { streamFor } from "./rng.js";
-import { generateSpire, nextNodes, nodeAt } from "./map.js";
-import { startCombat, finishCombat } from "./combat.js";
-import { runEffects } from "./effects.js";
-import { fireRun } from "./relics.js";
-import { heroicMods, noviceOf } from "./heroic.js";
-import { limitTalentMods } from "./talents.js";
-import { addTalentGrants } from "./talentHooks.js";
-import { canUpgrade } from "./deck.js";
-import * as R from "./rewards.js";
-import * as G from "./gear.js";
+import { enterHealer } from "./healer.js?v=20261028e";
+import { streamFor } from "./rng.js?v=20261028e";
+import { generateSpire, nextNodes, nodeAt } from "./map.js?v=20261028e";
+import { startCombat, finishCombat } from "./combat.js?v=20261028e";
+import { runEffects } from "./effects.js?v=20261028e";
+import { fireRun } from "./relics.js?v=20261028e";
+import { heroicMods, noviceOf } from "./heroic.js?v=20261028e";
+import { limitTalentMods } from "./talents.js?v=20261028e";
+import { addTalentGrants } from "./talentHooks.js?v=20261028e";
+import { canUpgrade } from "./deck.js?v=20261028e";
+import * as R from "./rewards.js?v=20261028e";
+import * as G from "./gear.js?v=20261028e";
 
 export const RUN_VERSION = 1;
 export const TOTAL_ACTS = 6;
@@ -137,7 +137,18 @@ function pickEncounter(run, data, zone, tier, rng) {
   return enc;
 }
 
+// Map input -> what the UI must do. "entered": a node was taken, save + route. "resync": the run is already on another screen (a click on a stale
+// map, or a render that failed after enterNode moved the run on): save + route again so the UI shows run.screen and a dead click can never softlock
+// the run. null: nothing to do. A second click can never advance a floor: only run.screen === "map" reaches enterNode.
+export function stepFromMap(run, data, col) {
+  if (run.screen !== "map") return run.screen && run.screen !== "end" ? "resync" : null;
+  return enterNode(run, data, col) ? "entered" : null;
+}
+
 export function enterNode(run, data, col) {
+  // Only the map screen may advance the climb. A second click / held "1-3" key on the stale map re-ran enterNode from the NEW position
+  // (one floor per extra input, all the way to the boss) before the screen re-rendered.
+  if (run.screen !== "map") return null;
   const node = nextNodes(run.map, run.floor, run.col).find((n) => n.col === col);
   if (!node) return null;
   run.floor = node.floor;
@@ -206,7 +217,7 @@ export function chooseFinalBoss(run, data, bossId, o = {}) {
 }
 
 // ---- combat bridge --------------------------------------------------------------------------
-export function beginCombat(run, data, { interactive = false } = {}) {
+export function beginCombat(run, data, { interactive = false, coop = null } = {}) { // coop: { encounter, hpMul, uidBase, sharedEnemies } from engine/coop.js
   data.setClass(run.classId);
   const zone = data.zone(run.zoneId);
   const pd = run.pending;
@@ -215,6 +226,7 @@ export function beginCombat(run, data, { interactive = false } = {}) {
     data, run, zone, tier: pd.tier, encounter: pd.encounter, rng, interactive, nodeApplies: pd.marks && pd.marks.length ? pd.marks : null,
     enemyDefs: enemyDefsFor(run, data, zone),
     zoneMods: (data.mapProfile && (data.mapProfile(run.zoneId) || {}).combatMods) || null,
+    ...(coop || {}),
   });
 }
 
@@ -382,7 +394,14 @@ export async function prepareZonePick(run, data) {
     run.pending = { type: "end", note: "no further zones available" };
     return run.screen;
   }
-  await Promise.all(opts.map((id) => data.loadZone(id)));
+  const loaded = await Promise.all(opts.map((id) => data.loadZone(id)));
+  opts = opts.filter((id, i) => loaded[i]); // a zone that failed to load must never reach the pick screen (it rendered z.name of null and froze the hub)
+  if (!opts.length) {
+    run.screen = "end";
+    run.result = "victory";
+    run.pending = { type: "end", note: "no further zones available" };
+    return run.screen;
+  }
   run.pending = { type: "zonepick", options: opts };
   run.screen = "zonepick";
   return run.screen;

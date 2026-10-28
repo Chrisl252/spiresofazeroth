@@ -5,13 +5,13 @@
 //   deck.js cardCost      -> talentCost          combat.js playCard -> talentSweep, talentNoExhaust      combat.js startPlayerTurn -> talentCarryBlock
 //   effects.js apply/damage ops -> talentApplyBonus, talentSkipSelfHit                   run.js newRun -> addTalentGrants
 // Everything is a no-op when run.talents has no V2 key (headless sim without talents, legacy classes, old saves, mock runs).
-import { addRes, getRes } from "./resources.js";
-import { applyStatus } from "./status.js";
-import { gainBlock, healEntity, isAlive, fx, log, dealDamage } from "./damage.js";
-import { drawCards } from "./deck.js";
-import { runEffects } from "./effects.js";
-import { classFire, classDeal, classTaken } from "./talents-v2/hooks.js"; // per-class V2 runtimes
-import { HEAVY_HIT, ENRAGE_RAGE, GUARD_BLOCK, LAST_STAND, SWEEP_RAGE, RAGE_PER_DMG, WOUNDED_PCT } from "./talentHookDefs.js";
+import { addRes, getRes } from "./resources.js?v=20261028e";
+import { applyStatus } from "./status.js?v=20261028e";
+import { gainBlock, healEntity, isAlive, fx, log, dealDamage } from "./damage.js?v=20261028e";
+import { drawCards } from "./deck.js?v=20261028e";
+import { runEffects, num } from "./effects.js?v=20261028e";
+import { classFire, classDeal, classTaken } from "./talents-v2/hooks.js?v=20261028e"; // per-class V2 runtimes
+import { HEAVY_HIT, ENRAGE_RAGE, GUARD_BLOCK, LAST_STAND, SWEEP_RAGE, RAGE_PER_DMG, WOUNDED_PCT } from "./talentHookDefs.js?v=20261028e";
 
 const T = (C) => (C && C.run && C.run.talents) || null;
 /** value of a hook (0 when absent); `arg` = card id or "card:status" */
@@ -131,7 +131,9 @@ export function talentApplyBonus(ctx, status) {
   return tv(C, "card_apply", `${ctx.card.id}:${status}`);
 }
 export function talentSkipSelfHit(ctx) { return !!(ctx.C && T(ctx.C) && ctx.srcKind === "player" && ctx.card && tv(ctx.C, "card_nohurt", ctx.card.id) > 0); }
-/** Sweeping Strikes: the first single-target Attack each turn also hits every other enemy (called right after the card's effects) */
+/** Sweeping Strikes: the first single-target Attack each turn also hits ONE other enemy for half its base damage (called right after the
+ * card's effects). The splash carries no card, so card/bleed/Impale talent bonuses and on-attack procs don't repeat on it (2026-10-27:
+ * the old full-copy-to-every-enemy splash one-shot whole Act 1 packs with a single Heroic Strike). */
 export function talentSweep(C, ctx, def) {
   if (!T(C) || !isAttack(def) || tv(C, "first_aoe") <= 0) return;
   const S = st(C);
@@ -140,10 +142,10 @@ export function talentSweep(C, ctx, def) {
   if (usesRage(C)) addRes(C, "rage", SWEEP_RAGE);
   const dmg = (def.effects || []).filter((e) => e && (e.op === "damage" || e.op === "aoe") && e.target !== "self" && e.target !== "all_enemies" && e.op !== "aoe");
   if (!dmg.length) return;
-  for (const en of C.enemies) {
-    if (en === ctx.target || !isAlive(en) || C.result) continue;
-    runEffects({ ...ctx, target: en, isCardPrimary: false }, dmg.map((e) => ({ ...e, target: "target" })));
-  }
+  const en = C.enemies.find((x) => x !== ctx.target && isAlive(x));
+  if (!en || C.result) return;
+  const half = dmg.map((e) => ({ op: "damage", amount: Math.max(1, Math.floor(num(ctx, e.amount) / 2)), times: e.times, school: e.school || def.school, target: "target" }));
+  runEffects({ ...ctx, card: null, target: en, isCardPrimary: false }, half);
 }
 /** talent-learned cards added to a fresh run's deck (run.js newRun) */
 export function addTalentGrants(run, data) {

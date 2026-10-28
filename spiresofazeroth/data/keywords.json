@@ -142,7 +142,7 @@
    "icon": "spell_shadow_curseofsargeras",
    "kind": "debuff",
    "stackMode": "intensity",
-   "text": "Increases damage taken from your next hits by its stacks; cleared when it triggers."
+   "text": "On an enemy: takes shadow damage equal to its stacks at the end of its turn; loses 1 stack each round. On you: your attacks deal less damage by its stacks."
   },
   {
    "id": "enrage",
@@ -423,6 +423,14 @@
    "kind": "debuff",
    "stackMode": "duration",
    "text": "Enemy intents are hidden. Holy cards remove it."
+  },
+  {
+   "id": "double_next",
+   "name": "Empowered",
+   "icon": "inv_potion_105",
+   "kind": "buff",
+   "stackMode": "intensity",
+   "text": "Your next attack deals double damage."
   }
  ]
 }

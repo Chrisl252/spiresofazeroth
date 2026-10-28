@@ -1,6 +1,6 @@
 // actors3d.js - Spires of Azeroth 3D actors layer (VISUAL_SPEC v2).
 //
-//   import { createActors } from "./actors3d.js";
+//   import { createActors } from "./actors3d.js?v=20261028e";
 //   const actors = createActors(stage.layers.actors, { designW: 1920, designH: 1080 });
 //   actors.setHero({ classId: "mage", gearMask: 3 });  // gearMask (optional): n 0..8 or [slot ids] -> assets/models/hero/<class>-<n>.glb, crossfade swap on change
 //   actors.setEnemies([{ uid, id, name, tier }]);
@@ -14,17 +14,19 @@
 // model that fails all keep working (never invisible). GLB per actor is parsed fresh from a cached
 // ArrayBuffer (no SkeletonUtils on the site's vendored three), so materials/skeletons are per instance.
 // Render-on-demand: rAF runs only while tweens/mixers run (idle capped ~30 fps), pauses on hidden tab.
-import { BUILD } from "../version.js";
+import { BUILD } from "../version.js?v=20261028e";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { createFallbackActor } from "./actorFallback.js";
-import { dustPuff, motionScale } from "./actorMotion.js";
-import { getZoneVisuals } from "./zonePalette.js";
-import { createGround3d } from "./ground3d.js";
+import { createFallbackActor } from "./actorFallback.js?v=20261028e";
+import { dustPuff, motionScale } from "./actorMotion.js?v=20261028e";
+import { getZoneVisuals } from "./zonePalette.js?v=20261028e";
+import { createGround3d } from "./ground3d.js?v=20261028e";
 
 const PITCH = 12 * Math.PI / 180, COSP = Math.cos(PITCH);
 const HEIGHT = { hero: 360, normal: 280, elite: 360, boss: 520, totem: 160 };
 const MAXW = { hero: 260, normal: 270, elite: 330, boss: 600, totem: 140 };
+// Hero height relative to a human (the 360 px base): hero bodies are bbox-normalised, so without this a tauren/draenei/gnome all rendered the same height.
+const RACE_H = { human: 1, orc: 1.05, dwarf: 0.86, nightelf: 1.05, undead: 0.97, tauren: 1.24, gnome: 0.7, troll: 1.12, bloodelf: 1, draenei: 1.14 };
 const MODEL_BUDGET = 6, BUF_CACHE = 16;
 const PX_PER_YD = 147, FLOOR = { normal: 0.5, elite: 0.66, boss: 0.78, totem: 0.75 };   // in-game scale: a 1.9 yd human = 280 px; small beasts stay small (floored), huge ones cap at the tier height
 const CASTER_NAME = /mage|wizard|warlock|shaman|priest|acolyte|apprentice|neophyte|cultist|seer|witch|sorcer|conjur|necromanc|invoker|diviner|illusion|magus|oracle|summoner|enchant|druid|shade/i;
@@ -59,7 +61,7 @@ export function createActors(hostEl, opts = {}) {
   for (const l of [groundL, platesL, fxL]) l.style.cssText = `position:absolute;left:0;top:0;width:${W}px;height:${H}px;pointer-events:none`;
 
   // ---- renderer (null => everything stays on plates)
-  let renderer = null, scene = null, camera = null, glLost = false;
+  let renderer = null, scene = null, camera = null, glLost = false, lostTimer = 0, disposed = false;
   let hemiLight = null, keyLight = null, rimLight = null, sceneFog = null;
   let ground3d = null;
   try {
@@ -97,15 +99,17 @@ export function createActors(hostEl, opts = {}) {
     ground3d = createGround3d(scene, { designW: W, designH: H, groundY: opts.groundY || 758 });
     // Context loss (tab switch / GPU pressure / too many live contexts): preventDefault so the browser may restore it; while it is gone the
     // DOM plates are shown for every actor so the fight is never invisible, and once restored three re-uploads everything and the plates hide again.
-    renderer.domElement.addEventListener("webglcontextlost", (e) => { e.preventDefault(); glLost = true; for (const a of byUid.values()) a.setVisible(true); });
-    renderer.domElement.addEventListener("webglcontextrestored", () => { glLost = false; for (const a of byUid.values()) if (a.skin) a.setVisible(false); needRender = true; wake(); });
+    renderer.domElement.addEventListener("webglcontextlost", (e) => { e.preventDefault(); glLost = true; for (const a of byUid.values()) a.setVisible(true);
+      clearTimeout(lostTimer); lostTimer = setTimeout(() => { if (glLost && !disposed) hostEl.dispatchEvent(new CustomEvent("actors:glgone")); }, 3000); }); // not restored in 3s: ask the kit owner to re-init
+    renderer.domElement.addEventListener("webglcontextrestored", () => { glLost = false; clearTimeout(lostTimer); for (const a of byUid.values()) if (a.skin) a.setVisible(false); needRender = true; wake(); });
   } catch (err) { console.warn("[actors3d] WebGL unavailable, plates only:", err); renderer = null; }
 
+  const PR_MAX = (() => { try { return matchMedia("(pointer: coarse)").matches ? 1.5 : 2; } catch (e) { return 2; } })();
   let curPR = 0;
   function fitResolution() {
     if (!renderer) return;
     const r = hostEl.getBoundingClientRect(); const sc = r.width / W || 1;
-    const pr = Math.max(0.6, Math.min(2, sc * (window.devicePixelRatio || 1)));
+    const pr = Math.max(0.6, Math.min(PR_MAX, sc * (window.devicePixelRatio || 1))); // phones/tablets: <=1.5 (iOS tab memory + GPU fill)
     if (Math.abs(pr - curPR) > 0.02) { curPR = pr; renderer.setPixelRatio(pr); renderer.setSize(W, H, false); needRender = true; }
   }
 
@@ -168,13 +172,14 @@ export function createActors(hostEl, opts = {}) {
     const rec = spec.rec;
     const cls = sizeClass(kind, spec.tier, rec);
     const lane = spec.lane;
-    const h = Math.min(HEIGHT[cls] * lane.s, cls === "hero" ? 1e9 : Math.max(200, lane.y - 300)); // integration: tallest enemy top never above y 300
+    const raceK = kind === "hero" && !spec.glb ? (RACE_H[String(spec.raceSlug || HERO_BAKE[String(spec.id).replace("hero:", "")] || "").split("-")[0]] || 1) : 1;
+    const h = Math.min(HEIGHT[cls] * raceK * lane.s, cls === "hero" ? 1e9 : Math.max(200, lane.y - 300)); // integration: tallest enemy top never above y 300
     const facing = spec.facing != null ? spec.facing : kind === "hero" ? 1 : -1; // a friendly ally (hunter pet) is an enemy-class model facing right
     const cands = [];
     if (spec.glb) {
       const u = (spec.glb.startsWith("http") || spec.glb.startsWith("/")) ? spec.glb : (idxBase + spec.glb);
       cands.push({ url: u, tier: "classic", rec: {} });
-    } else if (kind === "hero") { const cid = String(spec.id).replace("hero:", ""); const h = cidx.heroes[cid]; for (const u of heroGearUrls(cid, spec.gearN)) cands.push({ url: u, tier: "classic", rec: {} }); cands.push({ url: idxBase + ((h && h.glb) || "hero-" + cid + ".glb"), tier: "classic", rec: {} }); }
+    } else if (kind === "hero") { const cid = String(spec.id).replace("hero:", ""); const h = cidx.heroes[cid]; for (const c of heroCands(cid, spec.raceSlug, spec.gearN)) cands.push(c); cands.push({ url: idxBase + ((h && h.glb) || "hero-" + cid + ".glb"), tier: "classic", rec: {} }); }
     else { const e = classicFor(spec.id, spec.name, rec && rec.npcId); if (e) cands.push({ url: idxBase + e.glb, tier: "classic", rec: {} }); }
     if (rec && rec.fdid) cands.push({ url: modelBase + rec.fdid + ".glb", tier: "retail", rec });
     const hasModel = !!renderer && cands.length > 0 && !(opts.forcePlate && kind !== "hero");
@@ -183,7 +188,7 @@ export function createActors(hostEl, opts = {}) {
       family: rec && rec.family, type: rec && rec.type, icon: spec.icon || (rec && rec.icon) || null, iconBase,
       shape: kind === "hero" ? "biped" : undefined,
     }, wake);
-    a.laneS = lane.s; a.kindOf = kind; a.cls = cls; a.skin = null; a.rec = rec; a.cands = cands; a.name = spec.name; a.dead = false;
+    a.raceK = raceK; a.laneS = lane.s; a.kindOf = kind; a.cls = cls; a.skin = null; a.rec = rec; a.cands = cands; a.name = spec.name; a.dead = false;
     const baseLunge = a.lunge, baseDeath = a.death, baseHit = a.hit, baseCastGesture = a.castGesture;
     // In-game clips: Stand loops, Attack / Cast / Hit play once over a faded idle, Death clamps.
     // Caster attacks stay planted and release spells, melee attacks spring forward dynamically.
@@ -198,14 +203,14 @@ export function createActors(hostEl, opts = {}) {
 
       if (!sk || !sk.mixer) return baseLunge(t, { ...o, cast: caster, spell: caster, ranged: caster });
 
-      const key = (o.ranged || o.shoot) ? (sk.clips.shoot || sk.clips.cast || sk.clips.attack)
+      const key = (o.ranged || o.shoot) ? (sk.clips.shoot ? "shoot" : sk.clips.cast ? "cast" : sk.clips.attack ? "attack" : null)   // a clip KEY (was the action object -> sk.clips[obj] undefined -> the cast clip never played)
         : (caster && sk.clips.cast) ? "cast"
         : (sk.clips.attack2 && Math.random() < 0.4 ? "attack2" : (sk.clips.attack ? "attack" : (sk.clips.cast ? "cast" : null)));
 
       if (caster) {
         // Caster / ranged stance: stay planted, windup gather, forward spell release recoil, recover
-        const IMPACT_MS = 380;
-        if (sk.clips.precast) { const pm = playOnce(sk, "precast", 2.2); await a.motion.wait(Math.min(200, pm)); }
+        const IMPACT_MS = 240;   // cast-clip peak lands 240 ms after the 160 ms precast gather = the 0.40 s RELEASE in js/fx/animmap.js (missile leaves then)
+        if (sk.clips.precast) { const pm = playOnce(sk, "precast", 2.2); await a.motion.wait(Math.min(160, pm)); }
         if (key && sk.clips[key]) playOnce(sk, key, 0, IMPACT_MS / 0.45);
         wake();
         await baseLunge(t, { ...o, cast: true, spell: true, ranged: true, onImpact: o.onImpact });
@@ -214,7 +219,7 @@ export function createActors(hostEl, opts = {}) {
 
       // Melee attack: Hero melee or Enemy melee
       if (kind === "hero") {
-        if (sk.clips.attack) setTimeout(() => { if (a.skin === sk && !a.dead) playOnce(sk, "attack", 1.15); }, 80);
+        if (sk.clips.attack) setTimeout(() => { if (a.skin === sk && !a.dead) playOnce(sk, "attack", 1.6); }, 40);   // strike frame (~35% of the clip) meets the lunge connect (~260 ms)
         return baseLunge(t, o);
       }
 
@@ -380,7 +385,8 @@ export function createActors(hostEl, opts = {}) {
     }
     const targetH = a.baseH();
     let k = targetH / (size.y * COSP);
-    const maxW = (a.form ? 420 : MAXW[cls]) * (targetH / HEIGHT[cls]);
+    const rk = a.raceK || 1, wK = cls !== "hero" ? 1 : a.form ? rk : rk > 1 ? rk * 1.6 : rk < 1 ? 0.95 : 1;   // tall races carry wider bboxes (hunched/horned): their width cap must not shrink the height
+    const maxW = (a.form ? 420 : MAXW[cls]) * (targetH / HEIGHT[cls]) / rk * wK;
     if (size.x * k > maxW) k = maxW / size.x;
     k *= rec.scale || 1;
     fit.scale.setScalar(k);
@@ -400,6 +406,24 @@ export function createActors(hostEl, opts = {}) {
     if (typeof mask === "number") return Math.max(0, Math.min(8, mask | 0));
     const has = Array.isArray(mask) ? (k) => mask.includes(k) : (k) => !!(mask && mask[k]);
     return HERO_SLOTS.filter((k) => has(k) || (k === "waist" && has("wrist"))).length;
+  }
+  // The baked animated/dressed hero bodies are ONE race+gender per class (tools/spires/gear_roster.py ROSTER). A character of any other race gets the
+  // static baked race body (assets/models/race/<race>-<gender>.glb, same one char create/select show) instead of silently being the class's bake race.
+  const HERO_BAKE = { warrior: "human-male", paladin: "dwarf-male", hunter: "nightelf-female", rogue: "human-female", priest: "undead-female", shaman: "orc-male", mage: "gnome-female", warlock: "undead-male", druid: "tauren-male" };
+  const RACES = ["human", "orc", "dwarf", "nightelf", "undead", "tauren", "gnome", "troll", "bloodelf", "draenei"];
+  function raceSlugFor(cid, race, gender) {
+    if (!RACES.includes(race)) return null;
+    const slug = race + "-" + (gender === "female" ? "female" : "male");
+    return HERO_BAKE[cid] === slug ? null : slug;
+  }
+  const raceBodyUrl = (slug) => idxBase + "race/" + slug + ".glb";
+  // Dressed race bakes (tools/spires/bake_hero_races.py): hero/<class>-<race>-<gender>-<n>.glb for n in RACE_STATES only; the nearest LOWER baked state wins.
+  const RACE_STATES = [8, 4, 0];
+  function raceGearUrls(cid, slug, n) { const o = []; if (n == null) return o; for (const st of RACE_STATES) if (st <= n) o.push(idxBase + "hero/" + cid + "-" + slug + "-" + st + ".glb"); return o; }
+  // candidate bodies for a hero: default race = class bake states n..0; other race = dressed race bakes, then the static race body (no armor) as the last resort
+  function heroCands(cid, raceSlug, n) {
+    const urls = raceSlug ? raceGearUrls(cid, raceSlug, n).concat([raceBodyUrl(raceSlug)]) : heroGearUrls(cid, n);
+    return urls.map((url) => ({ url, tier: "classic", rec: {} }));
   }
   function heroGearUrls(cid, n) { const o = []; if (n == null) return o; for (let i = n; i >= 0; i--) o.push(idxBase + "hero/" + cid + "-" + i + ".glb"); return o; }
   async function swapHeroSkin(a, cands) { // crossfade (300 ms) old -> new body with a gold flash; keeps the old body if the new one fails
@@ -429,6 +453,7 @@ export function createActors(hostEl, opts = {}) {
   function disposeTree(root) {
     root.traverse((o) => {
       if (o.geometry) o.geometry.dispose();
+      if (o.isSkinnedMesh && o.skeleton) { try { o.skeleton.dispose(); } catch (e) { /* noop */ } } // frees the bone DataTexture (16-24px): one leaked per skinned actor per fight otherwise
       if (o.material) (Array.isArray(o.material) ? o.material : [o.material]).forEach((m) => {
         for (const k in m) if (m[k] && m[k].isTexture) { if (m[k].image && m[k].image.close) try { m[k].image.close(); } catch (e) { /* noop */ } m[k].dispose(); }
         m.dispose();
@@ -489,10 +514,10 @@ export function createActors(hostEl, opts = {}) {
   }
 
   // ---- loop
-  function wake() { if (!raf && !paused && !document.hidden) raf = requestAnimationFrame(frame); }
+  function wake() { if (!raf && !paused && !disposed && !document.hidden) raf = requestAnimationFrame(frame); }
   function frame(now) {
     raf = 0;
-    if (paused || document.hidden) return;
+    if (paused || disposed || document.hidden) return;
     const dt = Math.min(0.1, last ? (now - last) / 1000 : 0.016);
     let tweening = false, hasSkin = false;
     for (const a of byUid.values()) {
@@ -515,14 +540,17 @@ export function createActors(hostEl, opts = {}) {
     } else if (!hasSkin) last = 0;
     if (tweening || hasSkin) raf = requestAnimationFrame(frame);
   }
-  document.addEventListener("visibilitychange", () => {
+  const onVis = () => {
     last = 0;
     if (document.hidden) return;
     try { if (renderer && !glLost && renderer.getContext().isContextLost()) { glLost = true; for (const a of byUid.values()) a.setVisible(true); } } catch (_) { /* noop */ }
     needRender = true; wake();
-  });
-  window.addEventListener("resize", () => { needRender = true; wake(); });
-  if (window.IntersectionObserver) new IntersectionObserver((en) => { onscreen = en[0].isIntersecting; if (onscreen) { needRender = true; wake(); } }).observe(hostEl);
+  };
+  const onWinResize = () => { needRender = true; wake(); };
+  document.addEventListener("visibilitychange", onVis);
+  window.addEventListener("resize", onWinResize); // both removed in dispose(): one pair leaked per kit rebuild otherwise, each pinning a dead renderer
+  const io = window.IntersectionObserver ? new IntersectionObserver((en) => { onscreen = en[0].isIntersecting; if (onscreen) { needRender = true; wake(); } }) : null;
+  if (io) io.observe(hostEl);
 
   // ---- public API
   function rec(key) { return models[key] || null; }
@@ -556,7 +584,7 @@ export function createActors(hostEl, opts = {}) {
     } else {
       const cid = hero.heroClass || "druid";
       const h = cidx.heroes[cid];
-      cands = heroGearUrls(cid, hero.gearN).map((url) => ({ url, tier: "classic", rec: {} }));
+      cands = heroCands(cid, hero.raceSlug, hero.gearN);
       cands.push({ url: idxBase + ((h && h.glb) || "hero-" + cid + ".glb"), tier: "classic", rec: {} });
     }
     swapHeroSkin(hero, cands);
@@ -566,19 +594,21 @@ export function createActors(hostEl, opts = {}) {
   // they queue and return null.
   function setHero(o = {}) { if (!loaded) { ready.then(() => setHero(o)); return null; } return doSetHero(o); }
   function setEnemies(l) { if (!loaded) { ready.then(() => setEnemies(l)); return null; } return doSetEnemies(l); }
-  function doSetHero({ classId, name, gearMask } = {}) {
+  function doSetHero({ classId, name, gearMask, race, gender } = {}) {
     const gearN = gearMask == null ? null : gearCount(gearMask);
-    if (hero && hero.heroClass === classId && hero.skin && gearN != null && hero.gearN !== gearN) { // same class, new gear: swap the body in place
+    const raceSlug = raceSlugFor(classId, race, gender);
+    if (hero && hero.heroClass === classId && hero.skin && hero.raceSlug === raceSlug && gearN != null && hero.gearN !== gearN) { // same class, new gear: swap the body in place
       hero.gearN = gearN;
-      if (!hero.form) {
-        swapHeroSkin(hero, heroGearUrls(classId, gearN).map((url) => ({ url, tier: "classic", rec: {} })).concat(hero.cands.slice(-1)));
+      if (!hero.form) { // other races swap between their baked states 0/4/8 (nearest lower), the default race through 0..8
+        const next = heroCands(classId, raceSlug, gearN);
+        if (!(raceSlug && hero.cands && hero.cands[0] && hero.cands[0].url === next[0].url)) swapHeroSkin(hero, next.concat(hero.cands.slice(-1))); // same baked state: no flash
       }
       return hero;
     }
     if (hero) destroy(hero);
     const lane = { ...lanes.hero };
-    const a = makeActor({ uid: "player", id: "hero:" + classId, name: name || classId, lane, rec: rec("hero:" + classId), gearN }, "hero");
-    a.heroClass = classId; a.gearN = gearN; a.form = null;
+    const a = makeActor({ uid: "player", id: "hero:" + classId, name: name || classId, lane, rec: rec("hero:" + classId), gearN, raceSlug }, "hero");
+    a.heroClass = classId; a.raceSlug = raceSlug; a.gearN = gearN; a.form = null;
     a.dead = false; hero = a;
     if (pendingHeroForm) {
       const pf = pendingHeroForm;
@@ -707,8 +737,8 @@ export function createActors(hostEl, opts = {}) {
     anchor(uid) { const a = byUid.get(uid); return a ? a.anchor() : null; },
     setTheme(t) { theme = t; for (const a of byUid.values()) a.setTheme(t); },
     pause() { paused = true; }, resume() { paused = false; needRender = true; wake(); },
-    stats: () => ({ ...stats, avgRenderMs: stats.frames ? stats.renderMs / stats.frames : 0, actors: byUid.size, distinctModels: distinctFdids().size, bufferCache: bufs.size, webgl: !!renderer }),
-    dispose() { for (const a of [...byUid.values()]) destroy(a); if (ground3d) ground3d.dispose(); if (renderer) { try { renderer.dispose(); renderer.forceContextLoss(); } catch (_) { /* noop */ } } for (const l of [groundL, canvasWrap, platesL, fxL]) l.remove(); },
+    stats: () => ({ ...stats, avgRenderMs: stats.frames ? stats.renderMs / stats.frames : 0, actors: byUid.size, distinctModels: distinctFdids().size, bufferCache: bufs.size, webgl: !!renderer, gpu: renderer ? { geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, programs: renderer.info.programs ? renderer.info.programs.length : 0, reach: (() => { const t = new Set(); scene.traverse((o) => { if (o.material) (Array.isArray(o.material) ? o.material : [o.material]).forEach((m) => { for (const k in m) if (m[k] && m[k].isTexture) t.add(m[k]); }); }); return t.size; })(), kids: scene.children.length, meshes: (() => { let n = 0; scene.traverse((o) => { if (o.isMesh) n++; }); return n; })() } : null }),
+    dispose() { disposed = true; clearTimeout(lostTimer); if (raf) cancelAnimationFrame(raf); raf = 0; document.removeEventListener("visibilitychange", onVis); window.removeEventListener("resize", onWinResize); if (io) io.disconnect(); for (const a of [...byUid.values()]) destroy(a); if (ground3d) ground3d.dispose(); if (renderer) { try { renderer.dispose(); renderer.forceContextLoss(); } catch (_) { /* noop */ } } for (const l of [groundL, canvasWrap, platesL, fxL]) l.remove(); },
   };
   fitResolution();
   setZone(currentZoneId);

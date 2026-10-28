@@ -1,6 +1,6 @@
 // Card instances, piles, draw/discard/exhaust, cost evaluation. No DOM.
-import { fx } from "./damage.js";
-import { talentCost } from "./talentHooks.js";
+import { fx } from "./damage.js?v=20261028e";
+import { talentCost } from "./talentHooks.js?v=20261028e";
 
 export const HAND_LIMIT = 10;
 const STUB = (id) => ({
@@ -52,7 +52,7 @@ export function cardCost(C, inst) {
   let c = d.cost;
   if (d.formCost !== undefined && d.formCost !== null) {
     const f = C.player.form;
-    if (typeof d.formCost === "object") { if (f && d.formCost[f] !== undefined) c = d.formCost[f]; }
+    if (typeof d.formCost === "object") { if (f && d.formCost[f] !== undefined) c += d.formCost[f]; } // DELTA (data: shadow -1 / holy +1), not an absolute cost
     else if (f) c = d.formCost;
   }
   if (inst.costSet !== undefined && inst.costSet !== null) c = inst.costSet;
@@ -66,10 +66,12 @@ export function whyUnplayable(C, inst) {
   const p = C.player;
   if (C.result || C.phase !== "player") return "Not your turn";
   if (d.cost === -1 || hasFlag(inst, "unplayable")) return "Unplayable";
+  if (hasFlag(inst, "returns") && inst.thrownTurn === C.turn) return "Already thrown this turn";
+  if (p.asleep) return "Asleep";
   if (p.st.silence && isSpellCard(inst)) return "Silenced";
   if (d.effects.some((e) => e && e.op === "retreat") && (C.tier === "boss" || C.tier === "raid" || C.enemies.some((e) => e.tier === "boss" || e.tier === "raid"))) return "No retreat from a boss";
   const cost = cardCost(C, inst);
-  if (cost !== "X" && cost > p.energy) return "Not enough energy";
+  if (cost !== "X" && cost > p.energy && !(p.st.free_cast > 0)) return "Not enough energy"; // a pending free cast (Nature's Swiftness, Clearcasting) pays it
   if (d.resourceCost) {
     for (const [rid, amt] of Object.entries(d.resourceCost)) if ((p.res[rid] || 0) < amt) return `Not enough ${rid}`;
   }

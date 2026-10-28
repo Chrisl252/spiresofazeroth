@@ -1,10 +1,10 @@
 // Talents (stage-native): the classic three-tree talent sheet per class, paid with points earned by climbing (engine/talents.js),
 // plus the card-unlock ladder (class level from XP; data/unlocks.json). Left click learns a rank, right click unlearns one.
-import { h, icon, tip, esc, fill, cap } from "./dom.js";
-import { saveMeta } from "../engine/save.js";
-import { cssReady, btn, tog, ico, banner, scroll, dark } from "./kit.js";
-import { talentEffects, valueAt } from "../engine/talentHookDefs.js";
-import { TALENT_LIMITS, SOFT_RATE, repairSpent, EFFECTS, TALENT_CAP, TIER_STEP, FLOORS_PER_POINT, POINTS_PER_ACT, VICTORY_BONUS, talentState, treeSpent, pointsBelow, canLearn, learn, unlearn, resetTalents, talentMods, talentSummary, classLevel, nextLevelXp, lockedCardIds } from "../engine/talents.js";
+import { h, icon, tip, esc, fill, cap } from "./dom.js?v=20261028e";
+import { saveMeta } from "../engine/save.js?v=20261028e";
+import { cssReady, btn, tog, ico, banner, scroll, dark } from "./kit.js?v=20261028e";
+import { talentEffects, valueAt } from "../engine/talentHookDefs.js?v=20261028e";
+import { TALENT_LIMITS, SOFT_RATE, repairSpent, EFFECTS, TALENT_CAP, TIER_STEP, FLOORS_PER_POINT, POINTS_PER_ACT, VICTORY_BONUS, talentState, treeSpent, pointsBelow, canLearn, learn, unlearn, resetTalents, talentMods, talentSummary, classLevel, nextLevelXp, lockedCardIds } from "../engine/talents.js?v=20261028e";
 
 export const stageNative = true;
 

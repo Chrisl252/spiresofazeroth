@@ -20,7 +20,17 @@ function setFlipbookFrame(tex, frameIndex) {
   const f = Math.abs(Math.floor(frameIndex)) % FLAME_FRAMES;
   const col = f % 8;
   const row = Math.floor(f / 8);
-  tex.offset.set(col / 8, 1 - (row + 1) / 8);
+  tex.offset.set(col / 8 + INSET, 1 - (row + 1) / 8 + INSET);
+}
+// Every cell's flame runs to its edges, so mip levels and linear filtering blended the neighbouring frames' white-hot cores into the
+// quad: a flickering white haze behind the fire (2026-10-28, Firefox). No mips, clamped, and each frame sampled half a texel inside.
+const INSET = 0.5 / 512;
+function flipbookTex(tex) {
+  tex.wrapS = tex.wrapT = THREE.ClampToEdgeWrapping;
+  tex.generateMipmaps = false;
+  tex.minFilter = THREE.LinearFilter;
+  tex.repeat.set(1 / 8 - 2 * INSET, 1 / 8 - 2 * INSET);
+  return tex;
 }
 
 function mount3DCampfire(canvas, { reduced = () => false, paused = () => false } = {}) {
@@ -59,13 +69,8 @@ function mount3DCampfire(canvas, { reduced = () => false, paused = () => false }
   let t = 0;
 
   const texLoader = new THREE.TextureLoader();
-  const fireTex = texLoader.load(FLAME_SHEET);
-  fireTex.wrapS = fireTex.wrapT = THREE.RepeatWrapping;
-  fireTex.repeat.set(1 / 8, 1 / 8);
-
-  const fireTex2 = fireTex.clone();
-  fireTex2.wrapS = fireTex2.wrapT = THREE.RepeatWrapping;
-  fireTex2.repeat.set(1 / 8, 1 / 8);
+  const fireTex = flipbookTex(texLoader.load(FLAME_SHEET));
+  const fireTex2 = flipbookTex(fireTex.clone());
 
   // Crossed billboard planes for fire volume
   const flameGroup = new THREE.Group();

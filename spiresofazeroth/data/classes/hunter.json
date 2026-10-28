@@ -384,19 +384,10 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Gain 6 Block. Your pet heals 6 HP and gains 6 Block.",
+      "text": "Your pet heals 6 HP.",
       "effects": [
         {
-          "op": "block",
-          "amount": 6
-        },
-        {
           "op": "heal",
-          "amount": 6,
-          "target": "pet"
-        },
-        {
-          "op": "block",
           "amount": 6,
           "target": "pet"
         }
@@ -404,20 +395,11 @@
       "upgrade": {
         "name": "Mend Pet (Rank 2)",
         "cost": 1,
-        "text": "Gain 9 Block. Your pet heals 10 HP and gains 9 Block.",
+        "text": "Your pet heals 10 HP.",
         "effects": [
-          {
-            "op": "block",
-            "amount": 9
-          },
           {
             "op": "heal",
             "amount": 10,
-            "target": "pet"
-          },
-          {
-            "op": "block",
-            "amount": 9,
             "target": "pet"
           }
         ]

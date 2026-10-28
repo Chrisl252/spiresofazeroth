@@ -1,7 +1,7 @@
 // Gear strip (GEAR_SPEC section 5): 16 sockets in paper-doll order (empty ones dim, filled ones show the icon + tooltip) and the set badge.
 // ONE call site per bar:  gearStrip(app)  -> element.   Shared bits for loot.js / codex.js / gearBag.js: gearCss, gearTip, compareTip, socket.
-import { h, icon, tip, esc, qClass } from "./dom.js";
-import { PAPERDOLL, SLOT_LABEL, worn, setInfo, isStarter, keysFor, slotOf } from "../engine/gear.js";
+import { h, icon, tip, esc, qClass } from "./dom.js?v=20261028e";
+import { PAPERDOLL, SLOT_LABEL, worn, setInfo, isStarter, keysFor, slotOf } from "../engine/gear.js?v=20261028e";
 
 export const gearCss = new Promise((res) => {
   const href = new URL("../../css/gear.css", import.meta.url).href;

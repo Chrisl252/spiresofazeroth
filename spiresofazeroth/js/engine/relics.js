@@ -1,8 +1,8 @@
 // Relic trigger bus. Names (SPEC section 5): on_pickup on_combat_start on_turn_start on_turn_end on_card_played on_attack
 // on_damage_taken on_kill on_combat_end on_rest on_shop on_floor on_hp_loss on_block_gained  (+ on_death, engine extra).
 // fire(C, name, extra) walks: owned relics -> zone mechanic hooks -> one-shot player triggers (apply ... trigger:"...").
-import { runEffects } from "./effects.js";
-import { talentFire } from "./talentHooks.js";
+import { runEffects } from "./effects.js?v=20261028e";
+import { talentFire } from "./talentHooks.js?v=20261028e";
 
 export const TRIGGERS = [
   "on_pickup", "on_combat_start", "on_turn_start", "on_turn_end", "on_card_played", "on_attack", "on_damage_taken", "on_kill",

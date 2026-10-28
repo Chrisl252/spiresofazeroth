@@ -393,6 +393,8 @@
 .sv-right .sx-reward__go { margin-top: auto; padding-top: 0; }
 .sv-right .sx-btn.is-ready, .sv-right .sp-wowbtn.is-ready { animation: sv-ready 1.4s ease-in-out infinite; }
 @keyframes sv-ready { 50% { filter: brightness(1.25) drop-shadow(0 0 14px #ffd34d); } }
+/* fullscreen (Firefox): endless/one-shot filter animations on the victory screen force full-surface repaints and flash; keep the screen static there */
+.sp-fs .sx-victory .sv-banner h2, .sp-fs .sv-right .sx-btn.is-ready, .sp-fs .sv-right .sp-wowbtn.is-ready { animation: none; }
 .sx-bar__deck.sv-pulse { animation: sv-deckpulse .6s ease-out 1; }
 @keyframes sv-deckpulse { 0% { filter: brightness(2.4) drop-shadow(0 0 16px #ffd34d); transform: scale(1.25); } 100% { filter: none; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .sx-victory .sv-banner, .sx-victory .sv-banner h2, .sx-victory .sv-banner::after, .sv-left, .sv-right { animation: none; } }

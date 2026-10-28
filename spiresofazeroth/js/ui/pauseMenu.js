@@ -1,12 +1,12 @@
 // Escape menu (owner report 2026-10-16): replaces the site's global keybinds + Game Menu inside /spiresofazeroth/.
 // installPauseMenu(app) is called once from main.js. It (1) swallows the site's keybinds, (2) builds the menu on Escape / the HUD Settings button,
 // (3) applies saved speed / volume / track settings at boot. All values persist in meta.settings (engine/save.js).
-import { h } from "./dom.js";
-import { cssReady, btn, scroll } from "./kit.js";
-import { sfx } from "../audio.js";
-import { zone as zoneAudio } from "../audio/zone.js";
-import { extraRows } from "./pauseExtras.js";
-import { isGamepadConnected, getActiveGamepadName } from "../controller.js";
+import { h } from "./dom.js?v=20261028e";
+import { cssReady, btn, scroll } from "./kit.js?v=20261028e";
+import { sfx } from "../audio.js?v=20261028e";
+import { zone as zoneAudio } from "../audio/zone.js?v=20261028e";
+import { extraRows } from "./pauseExtras.js?v=20261028e";
+import { isGamepadConnected, getActiveGamepadName } from "../controller.js?v=20261028e";
 
 const SPEED_MIN = 0.5, SPEED_MAX = 3;
 const ENUM_MUL = { slow: 1 / 1.6, normal: 1, fast: 1 / 0.45 };
@@ -18,6 +18,10 @@ export function attackMul(s) { return s.speedMul > 0 ? s.speedMul : (ENUM_MUL[s.
 export function installPauseMenu(app) {
   const s = app.meta.settings;
   let back = null, catalog = null, opening = false;
+
+  // closing the tab / browser Back / reload must never lose the run: persist it on pagehide (not mid-combat: the stored point stays the last safe one)
+  const flushRun = () => { try { if (app.run && app.run.screen && app.run.screen !== "end" && app.run.screen !== "combat") app.save(); } catch (e) { /* ignore */ } };
+  addEventListener("pagehide", flushRun);
 
   // boot: replay saved audio settings
   if (Number.isFinite(s.musicVolume)) zoneAudio.setVolume(s.musicVolume);
@@ -96,6 +100,7 @@ export function installPauseMenu(app) {
     const mul = Math.min(SPEED_MAX, Math.max(SPEED_MIN, attackMul(s)));
     const panel = scroll("pm-panel",
       h("h2", { class: "pm-title" }, "Settings"),
+      h("div", { class: "pm-body" },
       slider("Attack speed", SPEED_MIN, SPEED_MAX, 0.1, Math.round(mul * 10) / 10, (v) => `${(+v).toFixed(1)}x`, (v) => { s.speedMul = v; s.speed = v < 0.8 ? "slow" : v > 1.6 ? "fast" : "normal"; save(); if (app.kit && app.kit.fx) { app.kit.fx.speed = v; if (app.kit.actors) app.kit.actors.setSpeed(v); } }),
       slider("Music sounds", 0, 100, 5, zoneAudio.volume, pct, (v) => { s.musicVolume = v; zoneAudio.setVolume(v); save(); }),
       slider("Ambient sounds", 0, 100, 5, zoneAudio.ambienceVolume, pct, (v) => { s.ambienceVolume = v; zoneAudio.setAmbienceVolume(v); save(); }),
@@ -125,11 +130,11 @@ export function installPauseMenu(app) {
           checked: s.vibration !== false,
           onChange: (e) => { s.vibration = e.target.checked; save(); }
         })),
-      ...extraRows(app, save),
+      ...extraRows(app, save)),
       h("div", { class: "pm-btns" },
         btn("Resume", close, { cls: "pm-btn", auto: true }),
                 btn("Abandon run", () => { if (confirm("Abandon this run? Progress in the run is lost.")) { close(); app.abandon(); } }, { cls: "pm-btn", disabled: !app.run }),
-        btn("Return to title", () => { close(); app.go("title"); }, { cls: "pm-btn" })));
+        btn("Return to title", () => { if (app.run) app.save(); close(); app.go("title"); }, { cls: "pm-btn" })));
     back = h("div", { class: "pm-back sp-pause-menu", role: "dialog", "aria-modal": "true", "aria-label": "Settings", "data-pause-menu": "" }, panel);
     back.addEventListener("click", (e) => { if (e.target === back) close(); });
     (app.stage && app.stage.root ? app.stage.root : app.root).append(back);

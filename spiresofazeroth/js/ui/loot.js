@@ -4,17 +4,17 @@
 // shift-click / Loot all / X / Enter) to take it: the row slides out with the coin sound; the last row closes the frame and the reward step follows.
 // Gear rows show the item tooltip on hover. Also used by the map TREASURE node (pd.type === "treasure": chest portrait, gear + gold are the loot).
 //   needsLoot(pd) -> bool          showLoot(app, host, pd, done) -> Promise   (host = the reward screen section; done() runs on continue)
-import { h, icon, tip, esc, toast } from "./dom.js";
-import { banner, btn } from "./kit.js";
-import { compareTip, gearCss, gearStrip, gearTip } from "./gearStrip.js";
-import { equip, gearLevel, goesToBag, isStarter, SLOT_LABEL, syncSetBonuses } from "../engine/gear.js";
-import { takeRelic, takePotion } from "../engine/run.js";
-import { runEffects } from "../engine/effects.js";
-import { canUsePotionOutOfCombat } from "./belt.js";
-import { runBar } from "./runbar.js";
-import { heroicMods } from "../engine/heroic.js";
-import { sfx } from "../audio.js";
-import { getKit, clearStage, lanesFor, watchLeave } from "./combatKit.js";
+import { h, icon, tip, esc, toast } from "./dom.js?v=20261028e";
+import { banner, btn } from "./kit.js?v=20261028e";
+import { compareTip, gearCss, gearStrip, gearTip } from "./gearStrip.js?v=20261028e";
+import { equip, gearLevel, goesToBag, isStarter, SLOT_LABEL, syncSetBonuses } from "../engine/gear.js?v=20261028e";
+import { takeRelic, takePotion } from "../engine/run.js?v=20261028e";
+import { runEffects } from "../engine/effects.js?v=20261028e";
+import { canUsePotionOutOfCombat } from "./belt.js?v=20261028e";
+import { runBar } from "./runbar.js?v=20261028e";
+import { heroicMods } from "../engine/heroic.js?v=20261028e";
+import { sfx } from "../audio.js?v=20261028e";
+import { getKit, clearStage, lanesFor, watchLeave } from "./combatKit.js?v=20261028e";
 
 export const needsLoot = (pd) => !!(pd && !pd.lootSeen && (pd.gear || (pd.type === "treasure" && (pd.gold || pd.relic))));
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -231,7 +231,7 @@ export async function showLoot(app, host, pd, done) {
 
   let kitTimedOut = false;
   const kitPromise = getKit(app).then((loaded) => {
-    if (!kitTimedOut && loaded.actors) { clearStage(loaded); loaded.actors.setHero({ classId: run.classId, gearMask: gearLevel(run) }); }
+    if (!kitTimedOut && loaded.actors) { clearStage(loaded); loaded.actors.setHero({ classId: run.classId, race: (run.character || {}).race, gender: (run.character || {}).gender, gearMask: gearLevel(run) }); }
     return loaded;
   }).catch((e) => { console.warn("[spires] loot stage unavailable:", e && e.message); return null; });
   kit = await withTimeout(kitPromise, 2500, () => {
@@ -241,7 +241,7 @@ export async function showLoot(app, host, pd, done) {
   const fx = kit && kit.fx, P = fx && fx.particles;
   const chestSize = { fight: 330, elite: 380, boss: 440 }[pd.chest] || 330;
   let chestTimedOut = false;
-  const chestPromise = import("../stage/chest3d.js")
+  const chestPromise = import("../stage/chest3d.js?v=20261028e")
     .then(({ mountChest }) => mountChest(stage.layers.actors, { kind: pd.chest || "fight", x: cx, y: groundY, W, H, size: chestSize * (stage.portrait ? 0.8 : 1), reduced }))
     .catch((e) => { console.warn("[spires] 3d loot chest unavailable:", e && e.message); return null; });
   chest = await withTimeout(chestPromise, 4000, () => {

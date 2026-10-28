@@ -7,11 +7,11 @@
 //  - giant  : alternates a wind-up turn with a heavy action
 //  - humanoid casters: cast intents, interruptible (cast_interrupt op) and fizzled by Silence
 //  - summoner: summon moves are skipped while 5+ enemies live or this unit already has 2 minions
-import { runEffects } from "./effects.js";
-import { fireTraps } from "./resources.js";
-import { applyStatus, hasTrait, skipsAction, modifyDealt, modifyTaken, turnEnd } from "./status.js";
-import { isAlive, fx, log } from "./damage.js";
-import { resolveImmunity } from "./immunity.js";
+import { runEffects } from "./effects.js?v=20261028e";
+import { fireTraps } from "./resources.js?v=20261028e";
+import { applyStatus, hasTrait, skipsAction, modifyDealt, modifyTaken, turnEnd } from "./status.js?v=20261028e";
+import { isAlive, fx, log } from "./damage.js?v=20261028e";
+import { resolveImmunity } from "./immunity.js?v=20261028e";
 
 const FAMILY_TRAITS = { mechanical: ["immune:poison", "immune:bleed"], beast: ["pack"] };
 
@@ -137,7 +137,9 @@ export function intentInfo(C, e) {
   const it = e && e.intent;
   if (!it) return null;
   // just rose again (revive) / dazed: it will skip its next action, so it intends nothing (StS2 shows the sleep Zzz, not the old attack)
-  if (e.skipTurns > 0) return { kind: "dazed", name: "Dazed", dazed: true, dmg: 0, hits: 0, block: 0, statuses: [], debuff: null, summon: false, aoe: false, aim: e.aim, cast: null };
+  // also when a stun/fear/frozen/sleep will make it skip (same ids and order skipsAction consumes in status.js)
+  const skipWhy = e.skipTurns > 0 ? "risen" : ["stun", "fear", "frozen", "sleep"].find((id) => e.st && e.st[id] > 0);
+  if (skipWhy) return { kind: "dazed", name: "Dazed", dazed: true, why: skipWhy, dmg: 0, hits: 0, block: 0, statuses: [], debuff: null, summon: false, aoe: false, aim: e.aim, cast: null };
   const info = { kind: it.kind, name: it.name, dmg: 0, hits: 0, block: 0, statuses: [], debuff: null, summon: false, aoe: false, aim: e.aim, cast: null };
   const walk = (effs) => {
     for (const x of effs || []) {

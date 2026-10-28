@@ -263,12 +263,8 @@
       },
       "target": "self",
       "flags": [],
-      "text": "Gain 7 Block. Heal 5 HP.",
+      "text": "Heal 5 HP.",
       "effects": [
-        {
-          "op": "block",
-          "amount": 7
-        },
         {
           "op": "heal",
           "amount": 5,
@@ -278,12 +274,8 @@
       "upgrade": {
         "name": "Lesser Heal (Rank 2)",
         "cost": 1,
-        "text": "Gain 8 Block. Heal 6 HP.",
+        "text": "Heal 6 HP.",
         "effects": [
-          {
-            "op": "block",
-            "amount": 8
-          },
           {
             "op": "heal",
             "amount": 6,
@@ -344,12 +336,8 @@
       },
       "target": "self",
       "flags": [],
-      "text": "Gain 8 Block. Heal 14 HP.",
+      "text": "Heal 14 HP.",
       "effects": [
-        {
-          "op": "block",
-          "amount": 8
-        },
         {
           "op": "heal",
           "amount": 14,
@@ -359,12 +347,8 @@
       "upgrade": {
         "name": "Heal (Rank 2)",
         "cost": 2,
-        "text": "Gain 11 Block. Heal 19 HP.",
+        "text": "Heal 19 HP.",
         "effects": [
-          {
-            "op": "block",
-            "amount": 11
-          },
           {
             "op": "heal",
             "amount": 19,
@@ -390,12 +374,8 @@
       "flags": [
         "exhaust"
       ],
-      "text": "Gain 6 Block. Heal 9 HP. Exhaust.",
+      "text": "Heal 9 HP. Exhaust.",
       "effects": [
-        {
-          "op": "block",
-          "amount": 6
-        },
         {
           "op": "heal",
           "amount": 9,
@@ -405,12 +385,8 @@
       "upgrade": {
         "name": "Flash Heal (Rank 2)",
         "cost": 1,
-        "text": "Gain 9 Block. Heal 12 HP. Exhaust.",
+        "text": "Heal 12 HP. Exhaust.",
         "effects": [
-          {
-            "op": "block",
-            "amount": 9
-          },
           {
             "op": "heal",
             "amount": 12,
@@ -620,7 +596,7 @@
       "flags": [
         "exhaust"
       ],
-      "text": "Gain 6 Block, 3 max HP and heal 6. Exhaust.",
+      "text": "Gain 6 Block and 3 max HP. Exhaust.",
       "effects": [
         {
           "op": "block",
@@ -629,17 +605,12 @@
         {
           "op": "max_hp",
           "amount": 3
-        },
-        {
-          "op": "heal",
-          "amount": 6,
-          "target": "self"
         }
       ],
       "upgrade": {
         "name": "Power Word: Fortitude (Rank 2)",
         "cost": 1,
-        "text": "Gain 9 Block, 4 max HP and heal 8. Exhaust.",
+        "text": "Gain 9 Block and 4 max HP. Exhaust.",
         "effects": [
           {
             "op": "block",
@@ -648,11 +619,6 @@
           {
             "op": "max_hp",
             "amount": 4
-          },
-          {
-            "op": "heal",
-            "amount": 8,
-            "target": "self"
           }
         ]
       }
@@ -1860,12 +1826,8 @@
       },
       "target": "self",
       "flags": [],
-      "text": "Gain 10 Block. Heal 14 HP.",
+      "text": "Heal 14 HP.",
       "effects": [
-        {
-          "op": "block",
-          "amount": 10
-        },
         {
           "op": "heal",
           "amount": 14,
@@ -1875,12 +1837,8 @@
       "upgrade": {
         "name": "Prayer of Healing (Rank 2)",
         "cost": 2,
-        "text": "Gain 14 Block. Heal 18 HP.",
+        "text": "Heal 18 HP.",
         "effects": [
-          {
-            "op": "block",
-            "amount": 14
-          },
           {
             "op": "heal",
             "amount": 18,
@@ -1904,12 +1862,8 @@
       },
       "target": "self",
       "flags": [],
-      "text": "Gain 14 Block. Heal 26 HP.",
+      "text": "Heal 26 HP.",
       "effects": [
-        {
-          "op": "block",
-          "amount": 14
-        },
         {
           "op": "heal",
           "amount": 26,
@@ -1919,12 +1873,8 @@
       "upgrade": {
         "name": "Greater Heal (Rank 2)",
         "cost": 3,
-        "text": "Gain 18 Block. Heal 34 HP.",
+        "text": "Heal 34 HP.",
         "effects": [
-          {
-            "op": "block",
-            "amount": 18
-          },
           {
             "op": "heal",
             "amount": 34,

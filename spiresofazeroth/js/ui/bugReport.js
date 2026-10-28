@@ -1,12 +1,12 @@
 // Floating bug-report button (draggable, remembers where you left it) + a small report form.
 // "Email report" POSTs to /api/spires/bug, which emails Chris; mailto is the fallback if SMTP is down.
 // Starts bottom-left next to the draw pile. Lives on the stage root, so it scales with the 1920x1080 design space.
-import { h, clear } from "./dom.js";
-import { BUILD } from "../version.js";
+import { h, clear } from "./dom.js?v=20261028e";
+import { BUILD } from "../version.js?v=20261028e";
 
 const KEY = "spires.bugBtn", ENDPOINT = "/api/spires/bug", START = { x: 184, y: 1080 - 42 - 56 }, SIZE = 56, DESIGN = { w: 1920, h: 1080 };
 const BUG_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14" rx="5" ry="6.5"/><path d="M9.5 7.6 8 5M14.5 7.6 16 5M7 11H3.5M17 11h3.5M7.2 15.5H4M16.8 15.5H20M8 19.5l-2 2M16 19.5l2 2M12 7.5v13"/></svg>';
-const FALLBACK_EMAIL = "chrislucas252@gmail.com";
+const FALLBACK_EMAIL = "bugs@example.com";
 const SAY = {
   send: "Email report",
   sending: "Sending...",
@@ -80,7 +80,7 @@ export function mountBugReport(app, stage) {
     const hp = h("input", { class: "sp-bugp__hp", type: "text", name: "website", tabindex: "-1", autocomplete: "off", "aria-hidden": "true" });
     const send = h("button", { class: "sp-wowbtn sp-wowbtn--sm", type: "button" }, SAY.send);
     const cancel = h("button", { class: "sp-wowbtn sp-wowbtn--sm", type: "button" }, "Close");
-    const box = h("div", { class: "sp-bugp__box", role: "dialog", "aria-modal": "true", "aria-label": "Report a bug" },
+    const box = h("div", { class: "sp-bugp__box sx-wood sx-parch", role: "dialog", "aria-modal": "true", "aria-label": "Report a bug" },
       h("h3", {}, "Report a bug"), h("p", {}, "Tell us what went wrong. Your class, floor and build are attached automatically."), ta, em, hp, h("div", { class: "sp-bugp__row" }, msg, cancel, send));
     const wrap = h("div", { class: "sp-bugp" }, box);
     const close = () => { document.removeEventListener("keydown", onKey, true); wrap.remove(); };

@@ -2,7 +2,7 @@
 // slides open beside it. Pure DOM, one document-level listener; the hand keeps its own lift + arrow logic.
 // Glossary sources: data/keywords.json (statuses), class stance/seal/form/aspect/totem cards (their own text),
 // the class resource tip. Explanations chain one level (Berserker Stance text -> its keywords).
-import { iconUrl } from "../engine/data.js";
+import { iconUrl } from "../engine/data.js?v=20261028e";
 
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const SPECIAL = [ // rules words that are not statuses but players ask about
@@ -10,6 +10,7 @@ const SPECIAL = [ // rules words that are not statuses but players ask about
   { re: /\bethereal\b/i, name: "Ethereal", icon: "spell_arcane_blink", text: "Exhausts if it is still in your hand at the end of your turn." },
   { re: /\binnate\b/i, name: "Innate", icon: "spell_holy_borrowedtime", text: "Starts in your opening hand every fight." },
   { re: /\bretain\b/i, name: "Retain", icon: "inv_misc_book_09", text: "Stays in your hand at the end of your turn instead of being discarded." },
+  { re: /\breturns to your hand\b/i, name: "Returns", icon: "inv_throwingknife_04", text: "Comes back to your hand after you play it. Once per turn." },
   { re: /\bunplayable\b/i, name: "Unplayable", icon: "spell_shadow_curse", text: "Cannot be played. Clogs your hand until it leaves." },
   { re: /\bblock\b/i, name: "Block", icon: "ability_defend", text: "Absorbs that much damage this turn. Gone at the start of your next turn." },
   { re: /\bstrength\b/i, name: "Strength", icon: "spell_nature_strength", text: "Each stack adds +1 damage to every attack you make." },
@@ -55,9 +56,10 @@ export function installCardInspect(app) {
     out.push(...kwFor(text, seen));
     const r = app.data && app.data.classObj ? app.data.classObj(classOf(def)) : null;
     const res = r && r.resource;
-    if (res && new RegExp("\\b" + res.name + "\\b", "i").test(text) && !seen.has(res.id)) { seen.add(res.id); out.push({ name: res.name, icon: res.icon, text: res.tip || res.rules || "", kind: "resource" }); }
+    const resWord = res ? (res.name.split(/\s*[&(,]/)[0].trim() || res.id).replace(/[^\w ]/g, "") : ""; // "Rage & Stances" -> "Rage" (never matched before)
+    if (res && new RegExp("\\b(" + resWord + "|" + res.id + ")\\b", "i").test(text) && !seen.has(res.id)) { seen.add(res.id); out.push({ name: res.name, icon: res.icon, text: res.tip || res.rules || "", kind: "resource" }); }
     for (const e of out.slice()) if (e.kind && /^(stance|seal|form|aspect|totem)$/.test(e.kind)) out.push(...kwFor(e.text || "", seen)); // chain once
-    return out.slice(0, 6);
+    return out.slice(0, 8);
   };
   const defFor = (el) => {
     const id = el.dataset.card; if (!id) return null;

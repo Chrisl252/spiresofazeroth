@@ -1,10 +1,10 @@
 // Headless greedy auto-player. Zero DOM. Used by tools/spires/sim.mjs and the e2e tests.
 // Policy: play the highest value-per-energy card, target the lowest-HP enemy, drink a potion under 40% HP.
-import * as Run from "./run.js";
-import { playCard, endTurn, usePotion, livingEnemies, pickDefaultTarget, canPlayWhy } from "./combat.js";
-import { intentInfo } from "./intents.js";
-import { cardCost } from "./deck.js";
-import { isAlive } from "./damage.js";
+import * as Run from "./run.js?v=20261028e";
+import { playCard, endTurn, usePotion, livingEnemies, pickDefaultTarget, canPlayWhy } from "./combat.js?v=20261028e";
+import { intentInfo } from "./intents.js?v=20261028e";
+import { cardCost } from "./deck.js?v=20261028e";
+import { isAlive } from "./damage.js?v=20261028e";
 
 const DEBUFF_VALUE = { vulnerable: 3, weak: 2.5, poison: 1.2, bleed: 1, burn: 1, stun: 6, frozen: 5, fear: 4, sleep: 3, slow: 1.5, marked: 2, silence: 1, curse: 1 };
 const BUFF_VALUE = { strength: 4, dexterity: 3, thorns: 1.5, regen: 1.5, metallicize: 4, ritual: 5, stealth: 2, shield: 1, armor: 1, intangible: 6, energized: 3 };
@@ -34,7 +34,7 @@ function effValue(effs, ctx, depth = 0) {
       case "gain_resource": misc += 1; break;
       case "totem": case "summon": misc += 5; break;
       case "pet_action": misc += 3; break;
-      case "conditional": { const v = effValue(e.then, ctx, depth + 1); dmg += v.dmg * 0.5; blk += v.blk * 0.5; misc += v.misc * 0.5; break; }
+      case "conditional": { const v = effValue(e.then, ctx, depth + 1); if (e.else && e.if && e.if.resource === "soul_shards") { dmg += v.dmg; blk += v.blk; misc += v.misc; break; } /* shard sinks: a Soul Shard is almost always on hand, so rate them by the shard branch */ dmg += v.dmg * 0.5; blk += v.blk * 0.5; misc += v.misc * 0.5; break; }
       case "repeat": { const v = effValue(e.effects, ctx, depth + 1); const n = e.times || 1; dmg += v.dmg * n; blk += v.blk * n; misc += v.misc * n; break; }
       default: misc += 0.5;
     }

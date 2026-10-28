@@ -1,23 +1,23 @@
 // Character select (stage-native), like the client's list: saved characters (name, level, race + class, zone) on the right, the selected
 // character's model in the centre, Enter World / Create New Character / Delete Character / Back. A character is a saved race + gender +
 // name + class (meta.characters); Enter World starts a run with it. No characters yet -> straight to creation.
-import { h, cap, track, fill } from "./dom.js";
-import { btn, tog } from "./kit.js";
-import { saveMeta, isClassUnlocked } from "../engine/save.js";
-import { classLevel } from "../engine/talents.js";
-import { MAX_HEROIC, heroicName } from "../engine/heroic.js";
-import { newSeedString } from "../engine/rng.js";
-import { RACE_NAME, HOME, slugOf } from "../engine/character.js";
-import { loadCharData, charCss, portraitUrl } from "./charData.js";
-import { createRaceViewer } from "../stage/raceViewer.js";
-import { beginRun } from "./runStart.js";
+import { h, cap, track, fill } from "./dom.js?v=20261028e";
+import { btn, tog } from "./kit.js?v=20261028e";
+import { saveMeta, isClassUnlocked } from "../engine/save.js?v=20261028e";
+import { classLevel } from "../engine/talents.js?v=20261028e";
+import { heroicOpen, heroicName, heroicBlurb } from "../engine/heroic.js?v=20261028e";
+import { newSeedString } from "../engine/rng.js?v=20261028e";
+import { RACE_NAME, HOME, slugOf } from "../engine/character.js?v=20261028e";
+import { loadCharData, charCss, portraitUrl } from "./charData.js?v=20261028e";
+import { createRaceViewer } from "../stage/raceViewer.js?v=20261028e";
+import { beginRun } from "./runStart.js?v=20261028e";
 
 export const stageNative = true;
 
 export async function render(app, _name, props = {}) {
   const { data, meta, stage } = app;
   meta.characters = Array.isArray(meta.characters) ? meta.characters : [];
-  if (!meta.characters.length) { app.screen = "charCreate"; return (await import("./charCreate.js")).render(app, "charCreate", {}); } // first visit: straight to creation
+  if (!meta.characters.length) { app.screen = "charCreate"; return (await import("./charCreate.js?v=20261028e")).render(app, "charCreate", {}); } // first visit: straight to creation
   const [D] = await Promise.all([loadCharData(), charCss()]);
   stage.setBackdrop("classSelect");
   const th = (data.unlocks && data.unlocks.thresholds) || [];
@@ -33,7 +33,7 @@ export async function render(app, _name, props = {}) {
     const ch = cur(); st.sel = ch.id;
     const R = D.byKey[ch.race] || D.byKey.human, cid = ch.classId;
     const lvl = classLevel(meta, cid, th);
-    const maxH = Math.min(MAX_HEROIC, meta.heroic[cid] || 0);
+    const maxH = heroicOpen(meta, cid);
     st.heroic = Math.min(st.heroic, maxH);
     if (!st.continent) st.continent = HOME[ch.race] || "ek";
     const rows = list().map((c) => {
@@ -44,7 +44,9 @@ export async function render(app, _name, props = {}) {
         h("img", { src: portraitUrl(c.race, c.gender), alt: "", width: 56, height: 56 }),
         h("span", { class: "cc-row__t" }, h("b", {}, c.name), h("em", {}, `Level ${classLevel(meta, c.classId, th)} ${RACE_NAME[c.race]} ${cap(c.classId)}`), h("small", {}, zone)));
     });
-    const heroicBtns = maxH > 0 ? h("div", { class: "cc-opt", role: "group", "aria-label": "Difficulty" }, ...Array.from({ length: maxH + 1 }, (_, i) => tog(i === 0 ? "Normal" : `Heroic ${heroicName(i)}`, st.heroic === i, () => { st.heroic = i; draw(); }))) : null;
+    const heroicBtns = h("div", { class: "cc-diff" }, h("h4", {}, "Difficulty"),
+      h("div", { class: "cc-opt", role: "group", "aria-label": "Difficulty" }, ...Array.from({ length: maxH + 1 }, (_, i) => tog(i === 0 ? "Normal" : heroicName(i), st.heroic === i, () => { st.heroic = i; draw(); }))),
+      h("p", { class: "cc-diff__t" }, heroicBlurb(st.heroic)));
     const contBtns = h("div", { class: "cc-opt", role: "group", "aria-label": "Starting continent" }, ...[["ek", "Eastern Kingdoms"], ["kal", "Kalimdor"]].map(([k, n]) => tog(n, st.continent === k, () => { st.continent = k; draw(); })));
     const panel = h("div", { class: "cc-listpanel sx-wood sx-dark" }, h("h3", {}, "Spires of Azeroth"), h("div", { class: "cc-rows" }, ...rows),
       h("div", { class: "cc-runopts" }, contBtns, heroicBtns),

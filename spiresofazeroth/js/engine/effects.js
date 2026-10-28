@@ -4,15 +4,15 @@
 // ctx = { C, src, srcKind, target, attacker, card, cardInst, relic, event, run, rng, spent, X, trapFiring }
 //   srcKind: player | enemy | pet | totem | relic | potion | zone | event
 //   C is null in run-mode (events, shop, rest, pickup): only run-level ops take effect (hp, gold, deck, max hp).
-import { dealDamage, dealStatusDamage, gainBlock, healEntity, isAlive, fx, log } from "./damage.js";
-import { applyStatus, removeStatus, modeOf, STATUS_DEFS, hasTrait } from "./status.js";
-import { drawCards, addCards, toDiscard, toExhaust, makeInst, hasFlag, HAND_LIMIT } from "./deck.js";
+import { dealDamage, dealStatusDamage, gainBlock, healEntity, isAlive, fx, log } from "./damage.js?v=20261028e";
+import { applyStatus, removeStatus, modeOf, STATUS_DEFS, hasTrait } from "./status.js?v=20261028e";
+import { drawCards, addCards, toDiscard, toExhaust, makeInst, hasFlag, HAND_LIMIT } from "./deck.js?v=20261028e";
 import {
   addRes, spendRes, summonAlly, placeTotem, petAct, judge, revivePet, sacrificePet, randomPetId, petTargetable,
-} from "./resources.js";
-import { spawnEnemy } from "./intents.js";
-import { extraCond, installMoreOps } from "./effects-more.js";
-import { talentApplyBonus, talentSkipSelfHit } from "./talentHooks.js";
+} from "./resources.js?v=20261028e";
+import { spawnEnemy } from "./intents.js?v=20261028e";
+import { extraCond, installMoreOps } from "./effects-more.js?v=20261028e";
+import { talentApplyBonus, talentSkipSelfHit } from "./talentHooks.js?v=20261028e";
 
 const MUL_SCALES = new Set(["combo", "combo_points"]); // "N per point" reads as base + per * count; everything else base + floor(count / per)
 
@@ -51,7 +51,7 @@ export function num(ctx, v, dflt = 0) {
   if (typeof v === "object") {
     let n = v.base || 0;
     if (v.scale) {
-      const sv = scaleValue(ctx, v.scale);
+      const sv = v.of === "target" ? ((ctx.target && ctx.target.st && ctx.target.st[v.scale]) || 0) : scaleValue(ctx, v.scale);
       const per = v.per === undefined ? 1 : v.per;
       const isRes = ctx.C && ctx.C.player.res[v.scale] !== undefined;
       if (MUL_SCALES.has(v.scale) || !isRes) n += per * sv;
@@ -167,7 +167,8 @@ export function evalCond(ctx, c) {
     case "cards_in_hand": r = !!C && cmp(c.count !== undefined ? { eq: c.count } : c, C.pile.hand.length); break;
     case "enemy_intent": {
       const t = ctx.target || foe();
-      r = !!(t && t.intent && t.intent.kind === (c.intent ?? val)) && (!c.interrupted || !!t.wasInterrupted);
+      const want = c.intent ?? val, kind = t && t.intent && t.intent.kind;
+      r = !!kind && (kind === want || (want === "attack" && kind === "attack_multi")) && (!c.interrupted || !!t.wasInterrupted); // multi-hit attacks are attacks (Taunt)
       break;
     }
     case "turn_number": {
@@ -181,6 +182,7 @@ export function evalCond(ctx, c) {
       if (r && c.enemyType) r = !!C && liveEnemies(C).some((en) => en.type === c.enemyType || en.family === c.enemyType);
       break;
     }
+    case "pet_alive": r = !!C && !!C.player.pet && isAlive(C.player.pet); break;
     case "form_is": r = !!C && C.player.form === val; break;
     case "stance_is": r = !!C && C.player.stance === val; break;
     case "seal_is": r = !!C && (val === undefined || val === "any" ? !!C.player.seal : C.player.seal === val); break;
@@ -242,7 +244,7 @@ op(["damage", "aoe"], (ctx, e) => {
         if (loss > 0 && t === p) C.stats.selfDamage = (C.stats.selfDamage || 0) + loss;
         continue;
       }
-      if (ctx.srcKind === "player" && p.dblNext && t.kind === "enemy") { amt *= 2; p.dblNext = false; }
+      if (ctx.srcKind === "player" && p.dblNext && t.kind === "enemy") { amt *= 2; p.dblNext = false; if (p.st) delete p.st.double_next; }
       dealDamage(C, ctx.src || p, t, amt, {
         school: e.school || (ctx.card && ctx.card.school) || "physical",
         kind,
@@ -465,11 +467,18 @@ op("repeat", (ctx, e) => {
 op("set_form", (ctx, e) => { if (ctx.C) ctx.C.player.form = e.value === "none" || e.value === null ? null : e.value; });
 op("set_stance", (ctx, e) => { if (ctx.C) ctx.C.player.stance = e.value === "none" ? null : e.value; });
 op("set_aspect", (ctx, e) => { if (ctx.C) ctx.C.player.aspect = e.value === "none" ? null : e.value; });
+// A Seal granted by gear/relics/talents has no card in ctx, so it borrows the Judgement payload of the Seal card
+// that normally sets it (same id, same amounts). Without this the granted Seal was consumed for nothing.
+function defaultSealFx(C, seal) {
+  if (!seal || !C || !C.data || !C.data.allCards) return null;
+  const hit = C.data.allCards().find((c) => c && c.type === "seal" && c.onJudge && (c.effects || []).some((x) => x.op === "set_seal" && x.value === seal));
+  return hit ? hit.onJudge : null;
+}
 op("set_seal", (ctx, e) => {
   if (!ctx.C) return;
   const p = ctx.C.player;
   p.seal = e.value === "none" ? null : e.value;
-  p.sealFx = ctx.card && ctx.card.onJudge ? ctx.card.onJudge : null;
+  p.sealFx = ctx.card && ctx.card.onJudge ? ctx.card.onJudge : defaultSealFx(ctx.C, p.seal);
 });
 op("judgement", (ctx) => { if (ctx.C) judge(ctx.C, ctx); });
 op("pet_action", (ctx, e) => {
@@ -501,12 +510,15 @@ op("max_hp", (ctx, e) => {
 });
 
 op("double_block", (ctx) => { if (ctx.C) ctx.C.player.block *= 2; });
-op("double_damage_next", (ctx) => { if (ctx.C) ctx.C.player.dblNext = true; });
+op("double_damage_next", (ctx) => { if (ctx.C) { const pl = ctx.C.player; pl.dblNext = true; pl.st = pl.st || {}; pl.st.double_next = 1; } });
+// A cast bar, an explicitly interruptible move, or a caster's spell (heal / Polymorph-style debuff / buff / summon) can be interrupted.
+const interruptible = (t) => { const it = t.intent, mv = it.move || {}; return it.kind === "cast" || !!mv.interruptible || (hasTrait(t, "caster") && ["heal", "debuff", "buff", "summon"].includes(it.kind)); };
 op("cast_interrupt", (ctx, e) => {
   if (!ctx.C) return;
   const tg = ctx.trapFiring ? [ctx.attacker] : resolveTargets(ctx, e.target, "enemy");
   for (const t of tg) {
-    if (t && t.intent && (t.intent.kind === "cast" || ctx.trapFiring)) { t.interrupted = true; fx(ctx.C, { t: "interrupt", uid: t.uid }); }
+    if (t && t.intent && (interruptible(t) || ctx.trapFiring)) { t.interrupted = true; fx(ctx.C, { t: "interrupt", uid: t.uid }); }
+    else if (t && !ctx.trapFiring && isAlive(t)) fx(ctx.C, { t: "miss", uid: t.uid, text: "Nothing to interrupt", kind: "gold" });
   }
 });
 // Taunt: single-target enemy attacks this round go to you (default: Target Dummy, Growl) or, with to:"pet", to your pet/totems (Distracting Shot)
@@ -548,7 +560,8 @@ export function runEffects(ctx, effects) {
   if (!effects) return;
   const C = ctx.C;
   for (let i = 0; i < effects.length; i++) {
-    if (C && C.result) return;
+    // a killing blow ends the fight, but the rest of the card still pays out self-heals (Death Coil)
+    if (C && C.result && !(C.result === "win" && effects[i] && effects[i].op === "heal")) continue;
     const before = C && C.pending ? C.pending.length : 0;
     runEffect(ctx, effects[i]);
     // an interactive scry waits for the player's choice: the rest of the card (e.g. Detect Magic's draw) runs after it resolves

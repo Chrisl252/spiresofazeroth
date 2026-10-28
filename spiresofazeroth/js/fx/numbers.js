@@ -8,6 +8,16 @@ const KINDS = {
   grey: { color: "#b9bcc4", pop: "#e8eaee" },
 };
 
+/** Stack slot for a new popup: how many popups started at (about) this spot within the last `win` ms. Pure, so it is testable headless. */
+export function stackSlot(live, now, x, y, win = 900) {
+  for (let i = live.length - 1; i >= 0; i--) if (now - live[i].t > win) live.splice(i, 1);
+  let n = 0;
+  for (const l of live) if (Math.abs(l.x - x) < 110 && Math.abs(l.y - y) < 70) n++;
+  live.push({ x, y, t: now });
+  return n;
+}
+export const STACK_DY = 46, STACK_DELAY = 130; // px up / ms later per slot
+
 export function createNumbers(layer, { kickEl, getSpeed = () => 1, isReduced = () => false } = {}) {
   const rand = Math.random; // cosmetic only (jitter); the particle system is the deterministic part
   let kickAmp = 0, kickT = 0, kickDir = 1;
@@ -20,18 +30,25 @@ export function createNumbers(layer, { kickEl, getSpeed = () => 1, isReduced = (
     return e;
   }
   const run = (e, frames, ms, opts = {}) => {
-    const a = e.animate(frames, { duration: ms / getSpeed(), easing: "linear", fill: "forwards", ...opts });
-    a.onfinish = () => e.remove();
+    const a = e.animate(frames, { duration: ms / getSpeed(), easing: "linear", fill: "forwards", ...opts, recycle: undefined });
+    a.onfinish = () => { if (opts.recycle && opts.recycle.length < 24) { e.style.cssText = "display:none"; opts.recycle.push(e); } else e.remove(); };
     return a;
   };
 
-  /** kind: dmg|block|heal|gold|grey. pos = stage px. */
+  const live = [], pool = []; // live = recent popup spots (stacking); pool = recycled DOM nodes
+  const now = () => (typeof performance !== "undefined" ? performance.now() : Date.now());
+  /** kind: dmg|block|heal|gold|grey. pos = stage px. Popups that start on the same spot stack upward, each a beat later. */
   function number(kind, text, pos, o = {}) {
     const k = KINDS[kind] || KINDS.dmg, amount = typeof text === "number" ? text : o.amount || 0;
     const size = Math.round(o.size || (kind === "grey" ? 40 : 52 + Math.min(40, amount * 1.2)));
     const jx = (rand() - 0.5) * 56, drift = o.drift ?? 96;
-    const e = el("div", `left:${pos.x + jx}px;top:${pos.y}px;font:900 ${size}px/1 ${FONT};color:${k.color};white-space:nowrap;z-index:30;` +
-      "-webkit-text-stroke:3px rgba(10,6,4,.92);paint-order:stroke fill;text-shadow:0 3px 0 rgba(0,0,0,.55),0 0 18px " + k.color + "88;will-change:transform,opacity", String(text));
+    const slot = stackSlot(live, now(), pos.x, pos.y);
+    const css = `left:${pos.x + jx}px;top:${pos.y - slot * STACK_DY}px;font:900 ${size}px/1 ${FONT};color:${k.color};white-space:nowrap;z-index:30;` +
+      "-webkit-text-stroke:3px rgba(10,6,4,.92);paint-order:stroke fill;text-shadow:0 3px 0 rgba(0,0,0,.55),0 0 18px " + k.color + "88;will-change:transform,opacity";
+    const e = pool.pop() || el("div", "");
+    e.style.cssText = "position:absolute;pointer-events:none;" + css;
+    e.textContent = String(text);
+    if (!e.parentNode) layer.appendChild(e);
     const T = (y, s) => `translate(-50%,calc(-50% + ${y}px)) scale(${s})`;
     run(e, [
       { transform: T(8, 0.4), opacity: 0, color: k.pop, offset: 0 },
@@ -39,7 +56,7 @@ export function createNumbers(layer, { kickEl, getSpeed = () => 1, isReduced = (
       { transform: T(-14, 1.0), opacity: 1, color: k.color, offset: 0.26 },
       { transform: T(-drift * 0.6, 1.0), opacity: 1, color: k.color, offset: 0.7 },
       { transform: T(-drift, 0.92), opacity: 0, color: k.color, offset: 1 },
-    ], o.ms || 1050);
+    ], o.ms || 1050, { delay: (slot * STACK_DELAY) / getSpeed(), fill: "both", recycle: pool });
     return e;
   }
   const api = {
@@ -48,7 +65,7 @@ export function createNumbers(layer, { kickEl, getSpeed = () => 1, isReduced = (
     block: (pos, amount, o) => number("block", "+" + amount, pos, { ...o, amount }),
     heal: (pos, amount, o) => number("heal", "+" + amount, pos, { ...o, amount }),
     blocked: (pos, o) => number("grey", "Blocked", pos, o),
-    text: (pos, text, kind = "grey", o) => number(kind, text, pos, o),
+    text: (pos, text, kind = "grey", o) => number(kind, text, pos, /^(immune|resist)/i.test(String(text)) ? { size: 30, drift: 60, ...o } : o),
     /** classic immunity / resist callouts (yellow, StS style) */
     immune: (pos, o) => number("gold", "IMMUNE", pos, { size: 46, drift: 70, ...o }),
     resist: (pos, o) => number("gold", "RESIST", pos, { size: 38, drift: 60, ...o }),

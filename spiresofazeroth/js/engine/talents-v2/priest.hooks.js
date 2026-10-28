@@ -3,11 +3,11 @@
 //   deal(C, src, tgt, amt, o, base)   any non-thorns hit on an enemy (player, pet or totem source; o.card = card def; o.dry = preview, no side effects)
 //   taken(C, tgt, taken, src, o)      damage the player is about to take; return the new amount
 // Read values with tv(C, key, arg) from ../talentHooks.js; keep per-fight state on C.talpriest (C is one combat).
-import { tv } from "../talentHooks.js";
-import { applyStatus } from "../status.js";
-import { gainBlock, healEntity, isAlive, dealStatusDamage, dealDamage, fx } from "../damage.js";
-import { drawCards } from "../deck.js";
-import { PRI } from "./priest.defs.js";
+import { tv } from "../talentHooks.js?v=20261028e";
+import { applyStatus } from "../status.js?v=20261028e";
+import { gainBlock, healEntity, isAlive, dealStatusDamage, dealDamage, fx } from "../damage.js?v=20261028e";
+import { drawCards } from "../deck.js?v=20261028e";
+import { PRI } from "./priest.defs.js?v=20261028e";
 
 const S = (C) => C.talpriest || (C.talpriest = { first: false, silenced: false, healsTurn: 0, insp: 0, weave: 0 });
 const isHealSpell = (d) => !!d && d.type === "skill" && (d.effects || []).some((e) => e && e.op === "heal");
@@ -17,7 +17,7 @@ const dotted = (e) => !!e && !!e.st && (e.st.poison > 0 || e.st.disease > 0);
 function paid(C, d) {
   let c = typeof d.cost === "number" ? d.cost : 0;
   const f = C.player.form;
-  if (d.formCost && typeof d.formCost === "object" && f && d.formCost[f] !== undefined) c = d.formCost[f];
+  if (d.formCost && typeof d.formCost === "object" && f && d.formCost[f] !== undefined) c += d.formCost[f]; // delta, same as deck.js cardCost
   return Math.max(0, c);
 }
 

@@ -15,3 +15,10 @@
 .sp-portrait .pm-row, .sp-portrait .pm-row:has(.pm-select) { grid-template-columns: 1fr; gap: 10px; font-size: 44px; } .sp-portrait .pm-val { text-align: left; }
 @media (prefers-reduced-motion: reduce) { .pm-back { animation: none; } }
 .pm-row--save { display: flex; flex-wrap: wrap; gap: 14px 18px; } .pm-row--save .pm-lab { flex: 0 0 340px; } .sp-portrait .pm-row--save .pm-lab { flex-basis: 100%; }
+
+/* title-screen Download panel (js/ui/downloadPanel.js) */
+.sp-dl-btn { margin-top: -4px; }
+.sp-dl { display: flex; flex-direction: column; gap: 12px; }
+.sp-dl-note { margin: 0; line-height: 1.4; }
+.sp-dl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+.sp-dl-link { display: block; text-align: center; text-decoration: none; padding: 12px 10px; }

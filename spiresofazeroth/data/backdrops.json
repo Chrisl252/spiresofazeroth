@@ -2,10 +2,10 @@
  "_note": "built by tools/spires/build-backdrops.py; crop = [y0,y1] fraction of the jpg that is real art",
  "zones": {
   "elwynn-forest": {
-   "fdid": 7377860,
+   "fdid": 131870,
    "crop": [
-    0.018,
-    0.99
+    0.25,
+    0.8
    ],
    "theme": {
     "primary": "#3f6b2a",
@@ -14,10 +14,10 @@
    }
   },
   "dun-morogh": {
-   "fdid": 407226,
+   "fdid": 131841,
    "crop": [
-    0.31,
-    0.78
+    0.25,
+    0.8
    ],
    "theme": {
     "primary": "#a9c7e8",
@@ -26,7 +26,7 @@
    }
   },
   "tirisfal-glades": {
-   "fdid": 131849,
+   "fdid": 131852,
    "crop": [
     0.25,
     0.8
@@ -38,10 +38,10 @@
    }
   },
   "loch-modan": {
-   "fdid": 427941,
+   "fdid": 9131839,
    "crop": [
-    0.31,
-    0.78
+    0.25,
+    0.8
    ],
    "theme": {
     "primary": "#4a7fa0",
@@ -50,10 +50,10 @@
    }
   },
   "silverpine-forest": {
-   "fdid": 427941,
+   "fdid": 9131869,
    "crop": [
-    0.31,
-    0.78
+    0.25,
+    0.8
    ],
    "theme": {
     "primary": "#6a5a8a",
@@ -62,10 +62,10 @@
    }
   },
   "westfall": {
-   "fdid": 2820825,
+   "fdid": 131833,
    "crop": [
-    0.31,
-    0.78
+    0.25,
+    0.8
    ],
    "theme": {
     "primary": "#c8a24a",
@@ -74,10 +74,10 @@
    }
   },
   "redridge-mountains": {
-   "fdid": 411684,
+   "fdid": 9131839,
    "crop": [
-    0.31,
-    0.78
+    0.25,
+    0.8
    ],
    "theme": {
     "primary": "#a24a2a",
@@ -86,7 +86,7 @@
    }
   },
   "duskwood": {
-   "fdid": 405445,
+   "fdid": 131840,
    "crop": [
     0.25,
     0.8
@@ -98,10 +98,10 @@
    }
   },
   "wetlands": {
-   "fdid": 411683,
+   "fdid": 9131839,
    "crop": [
-    0.31,
-    0.78
+    0.25,
+    0.8
    ],
    "theme": {
     "primary": "#4c7a5a",
@@ -110,10 +110,10 @@
    }
   },
   "hillsbrad-foothills": {
-   "fdid": 411684,
+   "fdid": 9131839,
    "crop": [
-    0.31,
-    0.78
+    0.25,
+    0.8
    ],
    "theme": {
     "primary": "#7a8a3c",
@@ -122,7 +122,7 @@
    }
   },
   "alterac-mountains": {
-   "fdid": 236065,
+   "fdid": 9131839,
    "crop": [
     0.25,
     0.8
@@ -134,7 +134,7 @@
    }
   },
   "arathi-highlands": {
-   "fdid": 4731628,
+   "fdid": 131820,
    "crop": [
     0.25,
     0.8
@@ -146,7 +146,7 @@
    }
   },
   "stranglethorn-vale": {
-   "fdid": 131882,
+   "fdid": 131886,
    "crop": [
     0.25,
     0.8
@@ -158,7 +158,7 @@
    }
   },
   "badlands": {
-   "fdid": 535280,
+   "fdid": 131876,
    "crop": [
     0.25,
     0.8
@@ -170,7 +170,7 @@
    }
   },
   "swamp-of-sorrows": {
-   "fdid": 131885,
+   "fdid": 131872,
    "crop": [
     0.25,
     0.8
@@ -182,7 +182,7 @@
    }
   },
   "the-hinterlands": {
-   "fdid": 574578,
+   "fdid": 9131839,
    "crop": [
     0.25,
     0.8
@@ -194,7 +194,7 @@
    }
   },
   "searing-gorge": {
-   "fdid": 418218,
+   "fdid": 131824,
    "crop": [
     0.25,
     0.8
@@ -206,7 +206,7 @@
    }
   },
   "burning-steppes": {
-   "fdid": 514085,
+   "fdid": 131825,
    "crop": [
     0.25,
     0.8
@@ -218,7 +218,7 @@
    }
   },
   "blasted-lands": {
-   "fdid": 514270,
+   "fdid": 9131839,
    "crop": [
     0.25,
     0.8
@@ -230,7 +230,7 @@
    }
   },
   "western-plaguelands": {
-   "fdid": 535281,
+   "fdid": 131868,
    "crop": [
     0.25,
     0.8
@@ -242,7 +242,7 @@
    }
   },
   "eastern-plaguelands": {
-   "fdid": 131867,
+   "fdid": 131871,
    "crop": [
     0.25,
     0.8
@@ -254,7 +254,7 @@
    }
   },
   "deadwind-pass": {
-   "fdid": 131869,
+   "fdid": 9131839,
    "crop": [
     0.25,
     0.8
@@ -266,10 +266,10 @@
    }
   },
   "durotar": {
-   "fdid": 7490877,
+   "fdid": 131862,
    "crop": [
-    0.166,
-    0.834
+    0.25,
+    0.8
    ],
    "theme": {
     "primary": "#b5532b",
@@ -278,10 +278,10 @@
    }
   },
   "mulgore": {
-   "fdid": 4684456,
+   "fdid": 9131848,
    "crop": [
-    0.14,
-    0.9
+    0.25,
+    0.8
    ],
    "theme": {
     "primary": "#c98a3d",
@@ -290,10 +290,10 @@
    }
   },
   "teldrassil": {
-   "fdid": 1417745,
+   "fdid": 9131848,
    "crop": [
-    0.31,
-    0.78
+    0.25,
+    0.8
    ],
    "theme": {
     "primary": "#6a3f9c",
@@ -302,7 +302,7 @@
    }
   },
   "darkshore": {
-   "fdid": 4697004,
+   "fdid": 9131848,
    "crop": [
     0.25,
     0.8
@@ -314,10 +314,10 @@
    }
   },
   "the-barrens": {
-   "fdid": 7354407,
+   "fdid": 131882,
    "crop": [
-    0.14,
-    0.837
+    0.25,
+    0.8
    ],
    "theme": {
     "primary": "#c8a24a",
@@ -326,7 +326,7 @@
    }
   },
   "stonetalon-mountains": {
-   "fdid": 4731628,
+   "fdid": 9131848,
    "crop": [
     0.25,
     0.8
@@ -338,7 +338,7 @@
    }
   },
   "ashenvale": {
-   "fdid": 514758,
+   "fdid": 131823,
    "crop": [
     0.25,
     0.8
@@ -350,7 +350,7 @@
    }
   },
   "thousand-needles": {
-   "fdid": 4731628,
+   "fdid": 131865,
    "crop": [
     0.25,
     0.8
@@ -362,7 +362,7 @@
    }
   },
   "desolace": {
-   "fdid": 1017727,
+   "fdid": 131850,
    "crop": [
     0.25,
     0.8
@@ -374,7 +374,7 @@
    }
   },
   "dustwallow-marsh": {
-   "fdid": 131840,
+   "fdid": 131863,
    "crop": [
     0.25,
     0.8
@@ -386,7 +386,7 @@
    }
   },
   "feralas": {
-   "fdid": 131886,
+   "fdid": 131835,
    "crop": [
     0.25,
     0.8
@@ -398,7 +398,7 @@
    }
   },
   "tanaris": {
-   "fdid": 236063,
+   "fdid": 131885,
    "crop": [
     0.25,
     0.8
@@ -410,10 +410,10 @@
    }
   },
   "azshara": {
-   "fdid": 2125650,
+   "fdid": 9131848,
    "crop": [
-    0.31,
-    0.78
+    0.25,
+    0.8
    ],
    "theme": {
     "primary": "#4a7fbf",
@@ -422,7 +422,7 @@
    }
   },
   "felwood": {
-   "fdid": 131850,
+   "fdid": 131840,
    "crop": [
     0.25,
     0.8
@@ -434,10 +434,10 @@
    }
   },
   "un-goro-crater": {
-   "fdid": 1864572,
+   "fdid": 131829,
    "crop": [
-    0.31,
-    0.78
+    0.25,
+    0.8
    ],
    "theme": {
     "primary": "#d97a2b",
@@ -446,7 +446,7 @@
    }
   },
   "winterspring": {
-   "fdid": 535413,
+   "fdid": 9131848,
    "crop": [
     0.25,
     0.8
@@ -458,7 +458,7 @@
    }
   },
   "silithus": {
-   "fdid": 131866,
+   "fdid": 131819,
    "crop": [
     0.25,
     0.8
@@ -470,10 +470,10 @@
    }
   },
   "moonglade": {
-   "fdid": 1417745,
+   "fdid": 9131848,
    "crop": [
-    0.31,
-    0.78
+    0.25,
+    0.8
    ],
    "theme": {
     "primary": "#7a8fd8",
@@ -482,10 +482,10 @@
    }
   },
   "title": {
-   "src": "assets/azeroth-title.jpg",
+   "fdid": 1498773,
    "crop": [
-    0,
-    1
+    0.25,
+    0.8
    ]
   },
   "classSelect": {
@@ -503,10 +503,10 @@
    ]
   },
   "default": {
-   "fdid": 427941,
+   "fdid": 9131839,
    "crop": [
-    0.31,
-    0.78
+    0.25,
+    0.8
    ]
   }
  }

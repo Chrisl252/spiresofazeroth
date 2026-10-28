@@ -1,10 +1,10 @@
 // Damage / block / heal pipeline + death handling. Every HP change in the game goes through here.
-import { modifyDealt, modifyTaken, gainBlockAmount, hasTrait, wakeOnDamage } from "./status.js";
-import { damageBonus, damageMult, takenAdjust, blockBonus, onDealt, onTaken, onKillRes, petDown, modeThorns } from "./resources.js";
-import { fire } from "./relics.js";
-import { runEffects } from "./effects.js";
-import { immuneToSchool, resistMult } from "./immunity.js";
-import { talentDamage, talentTaken, talentThorns, talentBlocked, talentBlock } from "./talentHooks.js";
+import { modifyDealt, modifyTaken, gainBlockAmount, hasTrait, wakeOnDamage } from "./status.js?v=20261028e";
+import { damageBonus, damageMult, takenAdjust, blockBonus, onDealt, onTaken, onKillRes, petDown, modeThorns } from "./resources.js?v=20261028e";
+import { fire } from "./relics.js?v=20261028e";
+import { runEffects } from "./effects.js?v=20261028e";
+import { immuneToSchool, resistMult } from "./immunity.js?v=20261028e";
+import { talentDamage, talentTaken, talentThorns, talentBlocked, talentBlock } from "./talentHooks.js?v=20261028e";
 
 const ids = (e) => (e && (e.uid || e.kind)) || "?";
 export function fx(C, ev) {
@@ -34,7 +34,7 @@ export function dealDamage(C, src, tgt, amount, o = {}) {
   }
   let amt = Math.max(0, amount);
   if (tgt.kind === "enemy" && amt > 0 && immuneToSchool(tgt, school)) { // classic immunity: the hit does nothing (Block is not spent)
-    fx(C, { t: "miss", uid: ids(tgt), text: "IMMUNE", kind: "gold" });
+    fx(C, { t: "miss", uid: ids(tgt), text: "Immune: " + school.replace(/^./, (c) => c.toUpperCase()), kind: "gold" });
     return { dealt: 0, hpLoss: 0, blocked: 0, immune: true };
   }
   if (tgt.kind === "enemy" && amt > 0 && resistMult(tgt, school) < 1) fx(C, { t: "miss", uid: ids(tgt), text: "RESIST", kind: "gold" });

@@ -882,7 +882,7 @@
       "upgrade": {
         "name": "Drain Soul (Rank 2)",
         "cost": 1,
-        "text": "Deal 10 shadow damage. Gain 2 Soul Shards.",
+        "text": "Deal 10 shadow damage. Gain 1 Soul Shard.",
         "effects": [
           {
             "op": "damage",
@@ -892,7 +892,7 @@
           {
             "op": "gain_resource",
             "resource": "soul_shards",
-            "amount": 2
+            "amount": 1
           }
         ]
       }
@@ -972,7 +972,7 @@
       "flags": [
         "exhaust"
       ],
-      "text": "Apply 1 Fear for 2 turns. Exhaust.",
+      "text": "Apply 1 Fear for 2 turns (undead and mechanical enemies are immune). Exhaust.",
       "effects": [
         {
           "op": "apply",
@@ -985,7 +985,7 @@
       "upgrade": {
         "name": "Fear (Rank 2)",
         "cost": 1,
-        "text": "Apply 1 Fear for 3 turns. Exhaust.",
+        "text": "Apply 1 Fear for 3 turns (undead and mechanical enemies are immune). Exhaust.",
         "effects": [
           {
             "op": "apply",
@@ -1009,23 +1009,61 @@
       "cost": 1,
       "target": "none",
       "flags": [],
-      "text": "Summon a Voidwalker (taunts, soaks damage).",
+      "text": "Summon a Voidwalker (taunts, soaks damage). If you have a Soul Shard, spend 1 for 5 Block.",
       "effects": [
         {
           "op": "summon",
           "unit": "voidwalker",
           "count": 1
+        },
+        {
+          "op": "conditional",
+          "if": {
+            "type": "resource_at_least",
+            "resource": "soul_shards",
+            "amount": 1
+          },
+          "then": [
+            {
+              "op": "spend_resource",
+              "resource": "soul_shards",
+              "amount": 1
+            },
+            {
+              "op": "block",
+              "amount": 5
+            }
+          ]
         }
       ],
       "upgrade": {
         "name": "Summon Voidwalker (Rank 2)",
         "cost": 0,
-        "text": "Summon a Voidwalker (taunts, soaks damage). Costs 0.",
+        "text": "Summon a Voidwalker (taunts, soaks damage). If you have a Soul Shard, spend 1 for 5 Block. Costs 0.",
         "effects": [
           {
             "op": "summon",
             "unit": "voidwalker",
             "count": 1
+          },
+          {
+            "op": "conditional",
+            "if": {
+              "type": "resource_at_least",
+              "resource": "soul_shards",
+              "amount": 1
+            },
+            "then": [
+              {
+                "op": "spend_resource",
+                "resource": "soul_shards",
+                "amount": 1
+              },
+              {
+                "op": "block",
+                "amount": 5
+              }
+            ]
           }
         ]
       }
@@ -1042,7 +1080,7 @@
       "cost": 0,
       "target": "none",
       "flags": [],
-      "text": "Lose 2 HP. Heal your demon 12 HP. Gain 6 Block.",
+      "text": "Lose 2 HP. Heal your demon 12 HP.",
       "effects": [
         {
           "op": "damage",
@@ -1054,16 +1092,12 @@
           "op": "heal",
           "amount": 12,
           "target": "pet"
-        },
-        {
-          "op": "block",
-          "amount": 6
         }
       ],
       "upgrade": {
         "name": "Health Funnel (Rank 2)",
         "cost": 0,
-        "text": "Lose 2 HP. Heal your demon 18 HP. Gain 9 Block.",
+        "text": "Lose 2 HP. Heal your demon 18 HP.",
         "effects": [
           {
             "op": "damage",
@@ -1075,10 +1109,6 @@
             "op": "heal",
             "amount": 18,
             "target": "pet"
-          },
-          {
-            "op": "block",
-            "amount": 9
           }
         ]
       }
@@ -1421,23 +1451,59 @@
       "cost": 1,
       "target": "none",
       "flags": [],
-      "text": "Summon a Felhunter (Spell Lock, Devour Magic).",
+      "text": "Summon a Felhunter (Spell Lock, Devour Magic). If you have 2+ Soul Shards, spend 2 and it acts right away.",
       "effects": [
         {
           "op": "summon",
           "unit": "felhunter",
           "count": 1
+        },
+        {
+          "op": "conditional",
+          "if": {
+            "type": "resource_at_least",
+            "resource": "soul_shards",
+            "amount": 2
+          },
+          "then": [
+            {
+              "op": "spend_resource",
+              "resource": "soul_shards",
+              "amount": 2
+            },
+            {
+              "op": "pet_action"
+            }
+          ]
         }
       ],
       "upgrade": {
         "name": "Summon Felhunter (Rank 2)",
         "cost": 0,
-        "text": "Summon a Felhunter (Spell Lock, Devour Magic). Costs 0.",
+        "text": "Summon a Felhunter (Spell Lock, Devour Magic). If you have 2+ Soul Shards, spend 2 and it acts right away. Costs 0.",
         "effects": [
           {
             "op": "summon",
             "unit": "felhunter",
             "count": 1
+          },
+          {
+            "op": "conditional",
+            "if": {
+              "type": "resource_at_least",
+              "resource": "soul_shards",
+              "amount": 2
+            },
+            "then": [
+              {
+                "op": "spend_resource",
+                "resource": "soul_shards",
+                "amount": 2
+              },
+              {
+                "op": "pet_action"
+              }
+            ]
           }
         ]
       }
@@ -1493,33 +1559,67 @@
       "cost": 2,
       "target": "enemy",
       "flags": [],
-      "text": "Deal 18 fire damage. Gain 1 Soul Shard.",
+      "text": "Deal 12 fire damage. If you have 2+ Soul Shards, spend 2 to deal 17 instead.",
       "effects": [
         {
-          "op": "damage",
-          "amount": 18,
-          "school": "fire"
-        },
-        {
-          "op": "gain_resource",
-          "resource": "soul_shards",
-          "amount": 1
+          "op": "conditional",
+          "if": {
+            "type": "resource_at_least",
+            "resource": "soul_shards",
+            "amount": 2
+          },
+          "then": [
+            {
+              "op": "spend_resource",
+              "resource": "soul_shards",
+              "amount": 2
+            },
+            {
+              "op": "damage",
+              "amount": 17,
+              "school": "fire"
+            }
+          ],
+          "else": [
+            {
+              "op": "damage",
+              "amount": 12,
+              "school": "fire"
+            }
+          ]
         }
       ],
       "upgrade": {
         "name": "Soul Fire (Rank 2)",
         "cost": 2,
-        "text": "Deal 24 fire damage. Gain 2 Soul Shards.",
+        "text": "Deal 18 fire damage. If you have 2+ Soul Shards, spend 2 to deal 23 instead.",
         "effects": [
           {
-            "op": "damage",
-            "amount": 24,
-            "school": "fire"
-          },
-          {
-            "op": "gain_resource",
-            "resource": "soul_shards",
-            "amount": 2
+            "op": "conditional",
+            "if": {
+              "type": "resource_at_least",
+              "resource": "soul_shards",
+              "amount": 2
+            },
+            "then": [
+              {
+                "op": "spend_resource",
+                "resource": "soul_shards",
+                "amount": 2
+              },
+              {
+                "op": "damage",
+                "amount": 23,
+                "school": "fire"
+              }
+            ],
+            "else": [
+              {
+                "op": "damage",
+                "amount": 18,
+                "school": "fire"
+              }
+            ]
           }
         ]
       }
@@ -1779,6 +1879,7 @@
       "cost": 0,
       "target": "self",
       "flags": [],
+      "requires": { "type": "pet_alive" },
       "text": "Your demon loses 3 HP. Gain 2 energy. Draw 1 card.",
       "effects": [
         {
@@ -2003,33 +2104,67 @@
       "cost": 1,
       "target": "enemy",
       "flags": [],
-      "text": "Deal 18 shadow damage. Gain 1 Soul Shard.",
+      "text": "Deal 12 shadow damage. If you have 2+ Soul Shards, spend 2 to deal 17 instead.",
       "effects": [
         {
-          "op": "damage",
-          "amount": 18,
-          "school": "shadow"
-        },
-        {
-          "op": "gain_resource",
-          "resource": "soul_shards",
-          "amount": 1
+          "op": "conditional",
+          "if": {
+            "type": "resource_at_least",
+            "resource": "soul_shards",
+            "amount": 2
+          },
+          "then": [
+            {
+              "op": "spend_resource",
+              "resource": "soul_shards",
+              "amount": 2
+            },
+            {
+              "op": "damage",
+              "amount": 17,
+              "school": "shadow"
+            }
+          ],
+          "else": [
+            {
+              "op": "damage",
+              "amount": 12,
+              "school": "shadow"
+            }
+          ]
         }
       ],
       "upgrade": {
         "name": "Shadowburn (Rank 2)",
         "cost": 1,
-        "text": "Deal 24 shadow damage. Gain 2 Soul Shards.",
+        "text": "Deal 18 shadow damage. If you have 2+ Soul Shards, spend 2 to deal 23 instead.",
         "effects": [
           {
-            "op": "damage",
-            "amount": 24,
-            "school": "shadow"
-          },
-          {
-            "op": "gain_resource",
-            "resource": "soul_shards",
-            "amount": 2
+            "op": "conditional",
+            "if": {
+              "type": "resource_at_least",
+              "resource": "soul_shards",
+              "amount": 2
+            },
+            "then": [
+              {
+                "op": "spend_resource",
+                "resource": "soul_shards",
+                "amount": 2
+              },
+              {
+                "op": "damage",
+                "amount": 23,
+                "school": "shadow"
+              }
+            ],
+            "else": [
+              {
+                "op": "damage",
+                "amount": 18,
+                "school": "shadow"
+              }
+            ]
           }
         ]
       }
@@ -2213,7 +2348,7 @@
       "flags": [
         "exhaust"
       ],
-      "text": "Gain 2 Soul Shards. Draw 2 cards. Exhaust.",
+      "text": "Gain 1 Soul Shard. Draw 2 cards. Exhaust.",
       "effects": [
         {
           "op": "gain_resource",
@@ -2228,7 +2363,7 @@
       "upgrade": {
         "name": "Fel Domination (Rank 2)",
         "cost": 0,
-        "text": "Gain 3 Soul Shards. Draw 2 cards. Exhaust.",
+        "text": "Gain 2 Soul Shards. Draw 2 cards. Exhaust.",
         "effects": [
           {
             "op": "gain_resource",

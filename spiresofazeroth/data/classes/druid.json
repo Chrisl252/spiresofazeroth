@@ -165,13 +165,9 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Gain 5 Block. Heal 4 HP.",
+      "text": "Heal 4 HP.",
       "breaksForm": true,
       "effects": [
-        {
-          "op": "block",
-          "amount": 5
-        },
         {
           "op": "heal",
           "amount": 4
@@ -180,12 +176,8 @@
       "upgrade": {
         "name": "Healing Touch (Rank 2)",
         "cost": 1,
-        "text": "Gain 8 Block. Heal 7 HP.",
+        "text": "Heal 7 HP.",
         "effects": [
-          {
-            "op": "block",
-            "amount": 8
-          },
           {
             "op": "heal",
             "amount": 7
@@ -1502,7 +1494,7 @@
       "flags": [
         "exhaust"
       ],
-      "text": "Bear Form only. Heal 8 HP and gain 5 Block. Exhaust.",
+      "text": "Bear Form only. Heal 8 HP. Exhaust.",
       "requires": {
         "type": "form_is",
         "value": "bear"
@@ -1511,24 +1503,16 @@
         {
           "op": "heal",
           "amount": 8
-        },
-        {
-          "op": "block",
-          "amount": 5
         }
       ],
       "upgrade": {
         "name": "Frenzied Regeneration (Rank 2)",
         "cost": 1,
-        "text": "Bear Form only. Heal 14 HP and gain 8 Block. Exhaust.",
+        "text": "Bear Form only. Heal 14 HP. Exhaust.",
         "effects": [
           {
             "op": "heal",
             "amount": 14
-          },
-          {
-            "op": "block",
-            "amount": 8
           }
         ]
       }

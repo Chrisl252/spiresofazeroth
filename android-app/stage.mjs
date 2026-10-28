@@ -15,5 +15,6 @@ const boot = `<script>if("serviceWorker"in navigator){navigator.serviceWorker.re
 const html = readFileSync(join(game, "index.html"), "utf8").replace(/<head>/i, "<head>" + boot);
 writeFileSync(join(dest, "index.html"), html);
 cpSync(join(here, "sw.js"), join(out, "sw.js"));
-writeFileSync(join(out, "index.html"), '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=/spiresofazeroth/"><a href="/spiresofazeroth/">Spires of Azeroth</a>');
+// Capacitor html5mode serves www/index.html for ANY path whose last segment has no ".", so redirecting to "/spiresofazeroth/" loops forever (blank screen). Point at the explicit file.
+writeFileSync(join(out, "index.html"), '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=/spiresofazeroth/index.html"><a href="/spiresofazeroth/index.html">Spires of Azeroth</a>');
 console.log("staged ->", out);

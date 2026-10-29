@@ -4,12 +4,12 @@
 //           onSpare(uid), onMap(), onSettings() }
 //   view: { potSel, busy, canEnd, hint, spare?(enemy) -> bool }
 // Enemy plates carry data-uid so the hand can drop cards on them; the actors agent plugs real anchors into opts.anchorFor.
-import { h, tip, esc, cap } from "./dom.js?v=20261028e";
-import { gearStrip } from "./gearStrip.js?v=20261028e";
-import { intentInfo } from "../engine/intents.js?v=20261028e";
-import { isAlive } from "../engine/damage.js?v=20261028e";
-import { immuneList } from "../engine/immunity.js?v=20261028e";
-import { heroLabels } from "../engine/character.js?v=20261028e";
+import { h, tip, esc, cap } from "./dom.js?v=20261029a";
+import { gearStrip } from "./gearStrip.js?v=20261029a";
+import { intentInfo } from "../engine/intents.js?v=20261029a";
+import { isAlive } from "../engine/damage.js?v=20261029a";
+import { immuneList } from "../engine/immunity.js?v=20261029a";
+import { heroLabels } from "../engine/character.js?v=20261029a";
 const HD = new URL("../../assets/icons-hd/", import.meta.url).href; // 256px upscaled icons, relative so dev + deploy both resolve
 
 const ico = (slug, cls = "") => {
@@ -269,6 +269,7 @@ export function createHud(host, app, o = {}) {
       if (!el) { el = mkPlate(e); plates.set(e.uid, el); region.append(el); }
       const P = el.parts, alive = isAlive(e);
       el.classList.toggle("dead", !alive);
+      el.classList.toggle("is-stealth", alive && !!e.st.stealth); // untargetable by click / drag while a visible enemy remains; the CSS cue reads "Stealthed"
       el.classList.toggle("is-elite", e.tier === "elite"); el.classList.toggle("is-boss", e.tier === "boss");
       el.classList.toggle("targetable", !!(view.potSel !== null && view.potSel !== undefined && alive));
       P.nm.textContent = dispName(e, live);

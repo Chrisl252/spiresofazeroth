@@ -1,6 +1,6 @@
 // Co-op lobby: host a game (shows a 6-letter code) or join one by code; once connected, both players pick a hero and start.
 // Session + rules: js/coop/session.js. Reached from the title screen's Co-op button.
-import { h, toast } from "./dom.js?v=20261028e";
+import { h, toast } from "./dom.js?v=20261029a";
 
 export function render(app) {
   const coop = app.coop;

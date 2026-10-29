@@ -1,12 +1,12 @@
 // Floating bug-report button (draggable, remembers where you left it) + a small report form.
 // "Email report" POSTs to /api/spires/bug, which emails Chris; mailto is the fallback if SMTP is down.
 // Starts bottom-left next to the draw pile. Lives on the stage root, so it scales with the 1920x1080 design space.
-import { h, clear } from "./dom.js?v=20261028e";
-import { BUILD } from "../version.js?v=20261028e";
+import { h, clear } from "./dom.js?v=20261029a";
+import { BUILD } from "../version.js?v=20261029a";
 
 const KEY = "spires.bugBtn", ENDPOINT = "/api/spires/bug", START = { x: 184, y: 1080 - 42 - 56 }, SIZE = 56, DESIGN = { w: 1920, h: 1080 };
 const BUG_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14" rx="5" ry="6.5"/><path d="M9.5 7.6 8 5M14.5 7.6 16 5M7 11H3.5M17 11h3.5M7.2 15.5H4M16.8 15.5H20M8 19.5l-2 2M16 19.5l2 2M12 7.5v13"/></svg>';
-const FALLBACK_EMAIL = "bugs@example.com";
+const FALLBACK_EMAIL = "chrislucas252@gmail.com";
 const SAY = {
   send: "Email report",
   sending: "Sending...",

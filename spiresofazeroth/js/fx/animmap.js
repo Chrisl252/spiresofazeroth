@@ -7,7 +7,7 @@
 // `rel` = seconds from cast start to the RELEASE frame; the missile leaves / the impact lands relative to it, and the
 // damage number is released at the impact (fx onImpact), so cast -> travel -> impact -> number stays in order.
 // Pure data + lookups, no DOM / GL. realplay.js, choreo.js and combatDirector.js ask; nothing else knows the table layout.
-import { elementFor, kindFor } from "./elements.js?v=20261028e";
+import { elementFor, kindFor } from "./elements.js?v=20261029a";
 
 const DEFAULT_SCHOOL = { sheet: "impact_burst", cell: "star", windup: 0.2, selfSheet: "buff_glyph_rise" };
 /** seconds to the release frame per anim kind. actors3d.js CAST_RELEASE_MS / gesture timing is tuned to these. */

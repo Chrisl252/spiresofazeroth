@@ -8,8 +8,8 @@
 // pointerdown, and a pointerdown during the fx window is never dropped: the drag starts as soon as the card is playable/queueable.
 //   -> { set(insts), draw(insts), discard(instIds), exhaust(instIds), lock(bool), select(instId), cancel(), anchorOf(instId), destroy() }
 // All coordinates are stage px (hostEl covers the stage). Card faces come from card.js.
-import { cardEl } from "./card.js?v=20261028e";
-import { cardSounds } from "./cardSounds.js?v=20261028e";
+import { cardEl } from "./card.js?v=20261029a";
+import { cardSounds } from "./cardSounds.js?v=20261029a";
 
 const CW = 260, CH = 380;
 // hud.js LANES start at 1180 with a 240px plate; HP sits under the feet. A raised card must stay left of that bar.
@@ -208,14 +208,16 @@ export function createHand(host, o) {
   // drop back down onto the hand itself cancels. (The old line was h-470, so drops on the enemies and the lower field snapped back.)
   // Portrait tucks a taller band (235 px), so its line sits just above that band instead.
   const castLine = () => size().h - (portrait() ? 260 : 120);
+  const hidden = (t) => t.classList.contains("is-stealth") && !!document.querySelector(".sp-eplate[data-uid]:not(.dead):not(.is-stealth)"); // stealthed plates are not targets while a visible enemy exists (the engine enforces the same)
   const enemyAt = (cx, cy) => {
     for (const e of document.elementsFromPoint(cx, cy)) {
       const t = e.closest && e.closest("[data-uid]");
-      if (t && t.dataset.uid !== "player" && !t.classList.contains("dead") && !t.closest(".sp-hand")) return t;
+      if (t && t.dataset.uid !== "player" && !t.classList.contains("dead") && !t.closest(".sp-hand") && !hidden(t)) return t;
     }
     // generous fallback: the whole plate column (intent + body + bars) grown by ~80 stage px, so the 3D actor's silhouette gaps never miss
     const pad = 80 * (stage ? stage.scale : 1); let best = null, bd = 1e9;
     for (const t of document.querySelectorAll(".sp-eplate[data-uid]:not(.dead)")) {
+      if (hidden(t)) continue;
       const r = t.getBoundingClientRect();
       if (cx < r.left - pad || cx > r.right + pad || cy < r.top - pad || cy > r.bottom + pad * 0.5) continue;
       const d = Math.abs(cx - (r.left + r.right) / 2);

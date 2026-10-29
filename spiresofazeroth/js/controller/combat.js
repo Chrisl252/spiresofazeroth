@@ -37,7 +37,8 @@ export function handleCombatInput(action, app, setFocusFn, rumbleFn, updateHudFn
 
   const C = combat.C;
   const hand = combat.hand;
-  const living = getCombatEnemies(app);
+  const all = getCombatEnemies(app);
+  const living = all.some((e) => !e.st.stealth) ? all.filter((e) => !e.st.stealth) : all; // stealthed enemies are skipped while a visible one remains
 
   // Scry / Discard selection
   if (C.pending && C.pending.length > 0) {

@@ -1,692 +1,692 @@
 {
 "shadow-bolt":{
 "cast":{
-"fdid":2068314,
-"url":"/media/sounds/2068314.mp3",
-"name":"Wl Revamp Shadow Bolt Cast 04",
-"via":"exact"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
 "fdid":1488056,
 "url":"/media/sounds/1488056.mp3",
-"name":"Wl Shadow Impact 01",
-"via":"exact"
+"name":"Spell Wl Shadow Impact 01",
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "corruption":{
 "cast":{
-"fdid":2101388,
-"url":"/media/sounds/2101388.mp3",
-"name":"Wl Revamp Corruption Cast 03",
-"via":"exact"
+"fdid":2101386,
+"url":"/media/sounds/2101386.mp3",
+"name":"Spell Wl Revamp Corruption Cast 01",
+"via":"hand"
 },
 "impact":{
-"fdid":2101391,
-"url":"/media/sounds/2101391.mp3",
-"name":"Wl Revamp Corruption Impact 03",
-"via":"name"
+"fdid":2101389,
+"url":"/media/sounds/2101389.mp3",
+"name":"Spell Wl Revamp Corruption Impact 01",
+"via":"hand"
 },
-"via":"name"
+"via":"hand"
 },
 "life-tap":{
 "cast":{
-"fdid":2114953,
-"url":"/media/sounds/2114953.mp3",
-"name":"Wl Revamp Soul Harvest Cast 03",
-"via":"school"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
-"fdid":2101391,
-"url":"/media/sounds/2101391.mp3",
-"name":"Wl Revamp Corruption Impact 03",
-"via":"school"
+"fdid":2114951,
+"url":"/media/sounds/2114951.mp3",
+"name":"Spell Wl Revamp Soul Harvest Cast 01",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "demon-skin":{
 "cast":{
-"fdid":2068333,
-"url":"/media/sounds/2068333.mp3",
-"name":"Wl Revamp Shadow Mortal Coil Cast 03",
-"via":"school"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
 "fdid":568355,
 "url":"/media/sounds/568355.mp3",
-"name":"Demon Armor Impact",
-"via":"school"
+"name":"Demonarmor",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "summon-imp":{
 "cast":{
-"fdid":639164,
-"url":"/media/sounds/639164.mp3",
-"name":"VO_DEMON_FELIMP_SUMMON",
-"via":"exact"
+"fdid":551168,
+"url":"/media/sounds/551168.mp3",
+"name":"Grellaggroa",
+"via":"hand"
 },
 "impact":{
 "fdid":2068352,
 "url":"/media/sounds/2068352.mp3",
 "name":"Wl Revamp Summon Demon 02",
-"via":"school"
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "immolate":{
 "cast":{
-"fdid":2066557,
-"url":"/media/sounds/2066557.mp3",
-"name":"Fire Magic Cast Medium 01",
-"via":"exact"
+"fdid":569764,
+"url":"/media/sounds/569764.mp3",
+"name":"Firecast",
+"via":"hand"
 },
 "impact":{
-"fdid":2068301,
-"url":"/media/sounds/2068301.mp3",
-"name":"Wl Revamp Immolate Impact 04",
-"via":"exact"
+"fdid":569153,
+"url":"/media/sounds/569153.mp3",
+"name":"Immolate",
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "curse-of-agony":{
 "cast":{
-"fdid":2068251,
-"url":"/media/sounds/2068251.mp3",
-"name":"Wl Revamp Agony Cast 05",
-"via":"exact"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
-"fdid":2068256,
-"url":"/media/sounds/2068256.mp3",
-"name":"Wl Revamp Agony Impact 05",
-"via":"exact"
+"fdid":2068252,
+"url":"/media/sounds/2068252.mp3",
+"name":"Spell Wl Revamp Agony Impact 01",
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "curse-of-weakness":{
 "cast":{
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
+},
+"impact":{
 "fdid":569079,
 "url":"/media/sounds/569079.mp3",
 "name":"Curse",
-"via":"exact"
+"via":"hand"
 },
-"impact":{
-"fdid":2068298,
-"url":"/media/sounds/2068298.mp3",
-"name":"Wl Revamp Immolate Impact 01",
-"via":"exact"
-},
-"via":"exact"
+"via":"hand"
 },
 "drain-life":{
 "cast":{
-"fdid":2068283,
-"url":"/media/sounds/2068283.mp3",
-"name":"Wl Revamp Drain Life Cast 03",
-"via":"name"
+"fdid":2068281,
+"url":"/media/sounds/2068281.mp3",
+"name":"Spell Wl Revamp Drain Life Cast 01",
+"via":"hand"
 },
 "impact":{
 "fdid":2467090,
 "url":"/media/sounds/2467090.mp3",
 "name":"Necromancy Impact Med 01",
-"via":"school"
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "drain-soul":{
 "cast":{
-"fdid":2140432,
-"url":"/media/sounds/2140432.mp3",
-"name":"Wl Deathbolt Cast 01",
-"via":"school"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
 "fdid":1488056,
 "url":"/media/sounds/1488056.mp3",
 "name":"Wl Shadow Impact 01",
-"via":"school"
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "searing-pain":{
 "cast":{
-"fdid":2066557,
-"url":"/media/sounds/2066557.mp3",
-"name":"Fire Magic Cast Medium 01",
-"via":"school"
+"fdid":2125621,
+"url":"/media/sounds/2125621.mp3",
+"name":"Spell Wl Incinerate Cast 01",
+"via":"hand"
 },
 "impact":{
-"fdid":2066582,
-"url":"/media/sounds/2066582.mp3",
-"name":"Fire Magic Impact Medium 07",
-"via":"school"
+"fdid":2125625,
+"url":"/media/sounds/2125625.mp3",
+"name":"Spell Wl Incinerate Impact 01",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "fear":{
 "cast":{
-"fdid":2068327,
-"url":"/media/sounds/2068327.mp3",
-"name":"Wl Revamp Shadow Fear Cast 05",
-"via":"exact"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
 "fdid":567950,
 "url":"/media/sounds/567950.mp3",
 "name":"Fear",
-"via":"name"
+"via":"hand"
 },
-"via":"name"
+"via":"hand"
 },
 "summon-voidwalker":{
 "cast":{
-"fdid":985236,
-"url":"/media/sounds/985236.mp3",
-"name":"Voidmagic Cast 06",
-"via":"exact"
+"fdid":563817,
+"url":"/media/sounds/563817.mp3",
+"name":"Void Summon04",
+"via":"hand"
 },
 "impact":{
 "fdid":2068352,
 "url":"/media/sounds/2068352.mp3",
 "name":"Wl Revamp Summon Demon 02",
-"via":"school"
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "health-funnel":{
 "cast":{
-"fdid":2068283,
-"url":"/media/sounds/2068283.mp3",
-"name":"Wl Revamp Drain Life Cast 03",
-"via":"school"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
-"fdid":569698,
-"url":"/media/sounds/569698.mp3",
-"name":"Invisibility_Impact_Chest",
-"via":"school"
+"fdid":2114952,
+"url":"/media/sounds/2114952.mp3",
+"name":"Spell Wl Revamp Soul Harvest Cast 02",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "curse-of-recklessness":{
 "cast":{
-"fdid":3092201,
-"url":"/media/sounds/3092201.mp3",
-"name":"Maut Devouredabyss State Cast 01",
-"via":"school"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
 "fdid":569079,
 "url":"/media/sounds/569079.mp3",
-"name":"CurseOF",
-"via":"name"
+"name":"Curse",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "curse-of-tongues":{
 "cast":{
-"fdid":1684459,
-"url":"/media/sounds/1684459.mp3",
-"name":"Voidmagic Cast Medium Npc 04",
-"via":"exact"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
-"fdid":569079,
-"url":"/media/sounds/569079.mp3",
-"name":"CurseOF",
-"via":"name"
+"fdid":567957,
+"url":"/media/sounds/567957.mp3",
+"name":"Curseoftounges",
+"via":"hand"
 },
-"via":"name"
+"via":"hand"
 },
 "shadow-ward":{
 "cast":{
-"fdid":2068333,
-"url":"/media/sounds/2068333.mp3",
-"name":"Wl Revamp Shadow Mortal Coil Cast 03",
-"via":"school"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
-"fdid":1120207,
-"url":"/media/sounds/1120207.mp3",
-"name":"Corruption Impact01",
-"via":"school"
+"fdid":569668,
+"url":"/media/sounds/569668.mp3",
+"name":"Shadowward",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "create-healthstone":{
 "cast":{
-"fdid":2114953,
-"url":"/media/sounds/2114953.mp3",
-"name":"Wl Revamp Soul Harvest Cast 03",
-"via":"exact"
+"fdid":567574,
+"url":"/media/sounds/567574.mp3",
+"name":"Putdowngems",
+"via":"hand"
 },
 "impact":{
 "fdid":568859,
 "url":"/media/sounds/568859.mp3",
 "name":"Soulstoneresurrection Base",
-"via":"school"
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "create-soulstone":{
 "cast":{
-"fdid":2068347,
-"url":"/media/sounds/2068347.mp3",
-"name":"Wl Revamp Siphon Life Cast 03",
-"via":"name"
+"fdid":567574,
+"url":"/media/sounds/567574.mp3",
+"name":"Putdowngems",
+"via":"hand"
 },
 "impact":{
 "fdid":568859,
 "url":"/media/sounds/568859.mp3",
 "name":"Soulstoneresurrection Base",
-"via":"name"
+"via":"hand"
 },
-"via":"name"
+"via":"hand"
 },
 "curse-of-exhaustion":{
 "cast":{
-"fdid":1454145,
-"url":"/media/sounds/1454145.mp3",
-"name":"Dh Fel Barrage Cast 05",
-"via":"name"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
 "fdid":569079,
 "url":"/media/sounds/569079.mp3",
-"name":"CurseOF",
-"via":"name"
+"name":"Curse",
+"via":"hand"
 },
-"via":"name"
+"via":"hand"
 },
 "curse-of-the-elements":{
 "cast":{
-"fdid":2068283,
-"url":"/media/sounds/2068283.mp3",
-"name":"Wl Revamp Drain Life Cast 03",
-"via":"school"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
 "fdid":569079,
 "url":"/media/sounds/569079.mp3",
-"name":"CurseOF",
-"via":"name"
+"name":"Curse",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "summon-succubus":{
 "cast":{
-"fdid":2114953,
-"url":"/media/sounds/2114953.mp3",
-"name":"Wl Revamp Soul Harvest Cast 03",
-"via":"school"
+"fdid":561154,
+"url":"/media/sounds/561154.mp3",
+"name":"Succubus Summon04",
+"via":"hand"
 },
 "impact":{
-"fdid":569424,
-"url":"/media/sounds/569424.mp3",
-"name":"Precastshadowmagiclow",
-"via":"name"
+"fdid":1488057,
+"url":"/media/sounds/1488057.mp3",
+"name":"Spell Wl Shadow Impact 02",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "summon-felhunter":{
 "cast":{
-"fdid":3092201,
-"url":"/media/sounds/3092201.mp3",
-"name":"Maut Devouredabyss State Cast 01",
-"via":"exact"
+"fdid":548858,
+"url":"/media/sounds/548858.mp3",
+"name":"Felhoundaggroa",
+"via":"hand"
 },
 "impact":{
 "fdid":548858,
 "url":"/media/sounds/548858.mp3",
 "name":"SummonFelBeast",
-"via":"exact"
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "howl-of-terror":{
 "cast":{
-"fdid":1345026,
-"url":"/media/sounds/1345026.mp3",
-"name":"Nightmaremagic Cast Med 02",
-"via":"exact"
+"fdid":2068324,
+"url":"/media/sounds/2068324.mp3",
+"name":"Spell Wl Revamp Shadow Fear Cast 01",
+"via":"hand"
 },
 "impact":{
-"fdid":2068298,
-"url":"/media/sounds/2068298.mp3",
-"name":"Wl Revamp Immolate Impact 01",
-"via":"school"
+"fdid":2068288,
+"url":"/media/sounds/2068288.mp3",
+"name":"Spell Wl Revamp Fear Impact 01",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "soul-fire":{
 "cast":{
-"fdid":1306190,
-"url":"/media/sounds/1306190.mp3",
-"name":"Dh Chaos Nova Cast 01",
-"via":"exact"
+"fdid":569764,
+"url":"/media/sounds/569764.mp3",
+"name":"Firecast",
+"via":"hand"
 },
 "impact":{
-"fdid":1494232,
-"url":"/media/sounds/1494232.mp3",
-"name":"Wl Shadowfire Impact 10",
-"via":"exact"
+"fdid":593908,
+"url":"/media/sounds/593908.mp3",
+"name":"Spell Wl Soulfire Impact01",
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "siphon-life":{
 "cast":{
-"fdid":569766,
-"url":"/media/sounds/569766.mp3",
-"name":"SPELL_Shadow_Cast",
-"via":"school"
+"fdid":2068345,
+"url":"/media/sounds/2068345.mp3",
+"name":"Spell Wl Revamp Siphon Life Cast 01",
+"via":"hand"
 },
 "impact":{
-"fdid":1467553,
-"url":"/media/sounds/1467553.mp3",
-"name":"Wl Channel Demofire Missile Impact 01",
-"via":"school"
+"fdid":2068348,
+"url":"/media/sounds/2068348.mp3",
+"name":"Spell Wl Revamp Siphon Life Impact 01",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "drain-mana":{
 "cast":{
-"fdid":2068347,
-"url":"/media/sounds/2068347.mp3",
-"name":"Wl Revamp Siphon Life Cast 03",
-"via":"school"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
 "fdid":1488056,
 "url":"/media/sounds/1488056.mp3",
 "name":"Wl Shadow Impact 01",
-"via":"school"
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "rain-of-fire":{
 "cast":{
 "fdid":2114944,
 "url":"/media/sounds/2114944.mp3",
-"name":"Wl Rainfire Cast 01",
-"via":"exact"
+"name":"Spell Wl Rainfire Cast 01",
+"via":"hand"
 },
 "impact":{
-"fdid":1533688,
-"url":"/media/sounds/1533688.mp3",
-"name":"Meteor Impact Loop 02",
-"via":"exact"
+"fdid":2114948,
+"url":"/media/sounds/2114948.mp3",
+"name":"Spell Wl Fire Impact Sweet Nested 03",
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "hellfire":{
 "cast":{
-"fdid":569257,
-"url":"/media/sounds/569257.mp3",
-"name":"Spell_MA_Talent_BlastWave_Cast",
-"via":"school"
+"fdid":569583,
+"url":"/media/sounds/569583.mp3",
+"name":"Spell Wl Immolationaura Cast",
+"via":"hand"
 },
 "impact":{
-"fdid":2068280,
-"url":"/media/sounds/2068280.mp3",
-"name":"Wl Revamp Conflagrate Impact 04",
-"via":"school"
+"fdid":2114950,
+"url":"/media/sounds/2114950.mp3",
+"name":"Spell Wl Fire Impact Sweet Nested 01",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "death-coil":{
 "cast":{
-"fdid":2068333,
-"url":"/media/sounds/2068333.mp3",
-"name":"Wl Revamp Shadow Mortal Coil Cast 03",
-"via":"exact"
+"fdid":2068331,
+"url":"/media/sounds/2068331.mp3",
+"name":"Spell Wl Revamp Shadow Mortal Coil Cast 01",
+"via":"hand"
 },
 "impact":{
-"fdid":2068336,
-"url":"/media/sounds/2068336.mp3",
-"name":"Wl Revamp Shadow Mortal Coil Impact 03",
-"via":"exact"
+"fdid":568670,
+"url":"/media/sounds/568670.mp3",
+"name":"Deathcoiltarget",
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "dark-pact":{
 "cast":{
-"fdid":2138642,
-"url":"/media/sounds/2138642.mp3",
-"name":"Wl Demonicgateway Transport Cast 03",
-"via":"name"
+"fdid":1488071,
+"url":"/media/sounds/1488071.mp3",
+"name":"Spell Wl Shadow Cast 01",
+"via":"hand"
 },
 "impact":{
-"fdid":2066582,
-"url":"/media/sounds/2066582.mp3",
-"name":"Fire Magic Impact Medium 07",
-"via":"name"
+"fdid":593904,
+"url":"/media/sounds/593904.mp3",
+"name":"Spell Wl Embertap Cast",
+"via":"hand"
 },
-"via":"name"
+"via":"hand"
 },
 "demon-armor":{
 "cast":{
-"fdid":2068347,
-"url":"/media/sounds/2068347.mp3",
-"name":"Wl Revamp Siphon Life Cast 03",
-"via":"school"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
 "fdid":568355,
 "url":"/media/sounds/568355.mp3",
-"name":"Demon Armor Impact",
-"via":"name"
+"name":"Demonarmor",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "banish":{
 "cast":{
-"fdid":2068347,
-"url":"/media/sounds/2068347.mp3",
-"name":"Wl Revamp Siphon Life Cast 03",
-"via":"exact"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
-"fdid":569407,
-"url":"/media/sounds/569407.mp3",
-"name":"Shadowwordfumble",
-"via":"exact"
+"fdid":1488058,
+"url":"/media/sounds/1488058.mp3",
+"name":"Spell Wl Shadow Impact 03",
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "curse-of-shadow":{
 "cast":{
-"fdid":2068283,
-"url":"/media/sounds/2068283.mp3",
-"name":"Wl Revamp Drain Life Cast 03",
-"via":"school"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
 "fdid":569079,
 "url":"/media/sounds/569079.mp3",
-"name":"CurseOF",
-"via":"name"
+"name":"Curse",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "shadowburn":{
 "cast":{
 "fdid":2114940,
 "url":"/media/sounds/2114940.mp3",
-"name":"Wl Shadowburn Cast 01",
-"via":"exact"
+"name":"Spell Wl Shadowburn Cast 01",
+"via":"hand"
 },
 "impact":{
-"fdid":1714485,
-"url":"/media/sounds/1714485.mp3",
-"name":"Pr Revamp Shadow Mindblast Impact 06",
-"via":"exact"
+"fdid":1494223,
+"url":"/media/sounds/1494223.mp3",
+"name":"Spell Wl Shadowfire Impact 01",
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "conflagrate":{
 "cast":{
-"fdid":2068276,
-"url":"/media/sounds/2068276.mp3",
-"name":"Wl Revamp Conflagrate Cast 04",
-"via":"exact"
+"fdid":2068273,
+"url":"/media/sounds/2068273.mp3",
+"name":"Spell Wl Revamp Conflagrate Cast 01",
+"via":"hand"
 },
 "impact":{
-"fdid":2068280,
-"url":"/media/sounds/2068280.mp3",
-"name":"Wl Revamp Conflagrate Impact 04",
-"via":"exact"
+"fdid":593894,
+"url":"/media/sounds/593894.mp3",
+"name":"Spell Wl Conflagrate Impact01",
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "soul-link":{
 "cast":{
-"fdid":2068314,
-"url":"/media/sounds/2068314.mp3",
-"name":"Wl Revamp Shadow Bolt Cast 04",
-"via":"school"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
-"fdid":2068364,
-"url":"/media/sounds/2068364.mp3",
-"name":"Wl Revamp Unstable Affliction Target Impact 03",
-"via":"school"
+"fdid":1488059,
+"url":"/media/sounds/1488059.mp3",
+"name":"Spell Wl Shadow Impact 04",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "demonic-sacrifice":{
 "cast":{
-"fdid":2128688,
-"url":"/media/sounds/2128688.mp3",
-"name":"Wl Enslave Demon Cast 03",
-"via":"school"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
-"fdid":569698,
-"url":"/media/sounds/569698.mp3",
-"name":"Invisibility_Impact_Chest",
-"via":"school"
+"fdid":615023,
+"url":"/media/sounds/615023.mp3",
+"name":"Spell Wl Sacrificialpact Cast",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "fel-domination":{
 "cast":{
-"fdid":2068352,
-"url":"/media/sounds/2068352.mp3",
-"name":"Wl Revamp Summon Demon 02",
-"via":"name"
+"fdid":1488047,
+"url":"/media/sounds/1488047.mp3",
+"name":"Spell Wl Shadow Cast 02",
+"via":"hand"
 },
 "impact":{
-"fdid":2068266,
-"url":"/media/sounds/2068266.mp3",
-"name":"Wl Revamp Chaosbolt Impact 04",
-"via":"school"
+"fdid":2068351,
+"url":"/media/sounds/2068351.mp3",
+"name":"Spell Wl Revamp Summon Demon 01",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "enslave-demon":{
 "cast":{
-"fdid":2128688,
-"url":"/media/sounds/2128688.mp3",
-"name":"Wl Enslave Demon Cast 03",
-"via":"exact"
+"fdid":2128686,
+"url":"/media/sounds/2128686.mp3",
+"name":"Spell Wl Enslave Demon Cast 01",
+"via":"hand"
 },
 "impact":{
 "fdid":2128691,
 "url":"/media/sounds/2128691.mp3",
 "name":"Wl Enslave Demon Impact 03",
-"via":"exact"
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "amplify-curse":{
 "cast":{
-"fdid":2068347,
-"url":"/media/sounds/2068347.mp3",
-"name":"Wl Revamp Siphon Life Cast 03",
-"via":"school"
+"fdid":1488048,
+"url":"/media/sounds/1488048.mp3",
+"name":"Spell Wl Shadow Cast 03",
+"via":"hand"
 },
 "impact":{
 "fdid":2068364,
 "url":"/media/sounds/2068364.mp3",
 "name":"Wl Revamp Unstable Affliction Target Impact 03",
-"via":"school"
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "inferno":{
 "cast":{
-"fdid":1716530,
-"url":"/media/sounds/1716530.mp3",
-"name":"Pr Revamp Shadow Crash Cast 01",
-"via":"exact"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
-"fdid":2068355,
-"url":"/media/sounds/2068355.mp3",
-"name":"SPELL_WL_Summon_Infernal_Impact",
-"via":"exact"
+"fdid":569601,
+"url":"/media/sounds/569601.mp3",
+"name":"Infernalimpactbase",
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "curse-of-doom":{
 "cast":{
 "fdid":569766,
 "url":"/media/sounds/569766.mp3",
-"name":"SPELL_Shadow_Cast",
-"via":"name"
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
-"fdid":569198,
-"url":"/media/sounds/569198.mp3",
-"name":"SPELL_DoomBolt_Impact",
-"via":"name"
+"fdid":569079,
+"url":"/media/sounds/569079.mp3",
+"name":"Curse",
+"via":"hand"
 },
-"via":"name"
+"via":"hand"
 },
 "ritual-of-doom":{
 "cast":{
-"fdid":547320,
-"url":"/media/sounds/547320.mp3",
-"name":"SummonDoomGuard",
-"via":"name"
+"fdid":569766,
+"url":"/media/sounds/569766.mp3",
+"name":"Shadowcast",
+"via":"hand"
 },
 "impact":{
 "fdid":569198,
 "url":"/media/sounds/569198.mp3",
 "name":"SPELL_DoomBolt_Impact",
-"via":"name"
+"via":"hand"
 },
-"via":"name"
+"via":"hand"
 },
 "healthstone":{
 "cast":{
-"fdid":2068262,
-"url":"/media/sounds/2068262.mp3",
-"name":"Wl Revamp Chaosbolt Cast 06",
-"via":"school"
+"fdid":567574,
+"url":"/media/sounds/567574.mp3",
+"name":"Putdowngems",
+"via":"hand"
 },
 "impact":{
-"fdid":2068364,
-"url":"/media/sounds/2068364.mp3",
-"name":"Wl Revamp Unstable Affliction Target Impact 03",
-"via":"school"
+"fdid":568859,
+"url":"/media/sounds/568859.mp3",
+"name":"Soulstoneresurrection Base",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "soulstone":{
 "cast":{
-"fdid":2068347,
-"url":"/media/sounds/2068347.mp3",
-"name":"Wl Revamp Siphon Life Cast 03",
-"via":"name"
+"fdid":567574,
+"url":"/media/sounds/567574.mp3",
+"name":"Putdowngems",
+"via":"hand"
 },
 "impact":{
-"fdid":1120207,
-"url":"/media/sounds/1120207.mp3",
-"name":"Corruption Impact01",
-"via":"school"
+"fdid":568859,
+"url":"/media/sounds/568859.mp3",
+"name":"Soulstoneresurrection Base",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 }
 }

@@ -1,92 +1,92 @@
 {
 "nefarian-class-call":{
 "cast":{
-"fdid":1302605,
-"url":"/media/sounds/1302605.mp3",
-"name":"SPELL_7.3_Argus_GrandmotherLaglath_MatronsRage_Impact",
-"via":"class"
+"fdid":1488049,
+"url":"/media/sounds/1488049.mp3",
+"name":"Spell Wl Shadow Cast 04",
+"via":"hand"
 },
 "impact":{
-"fdid":1417616,
-"url":"/media/sounds/1417616.mp3",
-"name":"SPELL_7.2_ClassMounts_Priest_Trash_TitanicEmpowerment_Impact",
-"via":"class"
+"fdid":1494224,
+"url":"/media/sounds/1494224.mp3",
+"name":"Spell Wl Shadowfire Impact 02",
+"via":"hand"
 },
-"via":"class"
+"via":"hand"
 },
 "wrath-ember":{
 "cast":{
-"fdid":1302596,
-"url":"/media/sounds/1302596.mp3",
-"name":"ClientScene_72_ClassMounts_Mage_DiscCircling_Distant",
-"via":"class"
+"fdid":1686528,
+"url":"/media/sounds/1686528.mp3",
+"name":"Spell Ma Revamp Fireblast Cast 02",
+"via":"hand"
 },
 "impact":{
-"fdid":1099814,
-"url":"/media/sounds/1099814.mp3",
-"name":"SPELL_WR_WhirlWind_Proto_3Impact",
-"via":"school"
+"fdid":2114949,
+"url":"/media/sounds/2114949.mp3",
+"name":"Spell Wl Fire Impact Sweet Nested 02",
+"via":"hand"
 },
-"via":"class"
+"via":"hand"
 },
 "whisper-of-cthun":{
 "cast":{
-"fdid":1305198,
-"url":"/media/sounds/1305198.mp3",
-"name":"Spell_HungerForMana_Jump_Whoosh",
-"via":"class"
+"fdid":1713568,
+"url":"/media/sounds/1713568.mp3",
+"name":"Spell Pr Revamp Shadow Whipser Cast 02",
+"via":"hand"
 },
 "impact":{
-"fdid":1417584,
-"url":"/media/sounds/1417584.mp3",
-"name":"SPELL_GuardiaSentry_PowerDrain_State_Cast (7.2 TOS)",
-"via":"class"
+"fdid":1712529,
+"url":"/media/sounds/1712529.mp3",
+"name":"Spell Pr Revamp Shadow Impact Large 01",
+"via":"hand"
 },
-"via":"class"
+"via":"hand"
 },
 "digestive-acid":{
 "cast":{
-"fdid":1305198,
-"url":"/media/sounds/1305198.mp3",
-"name":"FX_Whoosh_Large_Creature",
-"via":"class"
+"fdid":569096,
+"url":"/media/sounds/569096.mp3",
+"name":"Spell Acidcloud Cast 01",
+"via":"hand"
 },
 "impact":{
-"fdid":3500740,
-"url":"/media/sounds/3500740.mp3",
-"name":"Defile Impact Oneshot 3500740",
-"via":"school"
+"fdid":568280,
+"url":"/media/sounds/568280.mp3",
+"name":"Spell Acidcloud Cast 03",
+"via":"hand"
 },
-"via":"class"
+"via":"hand"
 },
 "chains-of-kelthuzad":{
 "cast":{
-"fdid":1349045,
-"url":"/media/sounds/1349045.mp3",
-"name":"SPELL_DH_Shear_Cast",
-"via":"school"
+"fdid":1488050,
+"url":"/media/sounds/1488050.mp3",
+"name":"Spell Wl Shadow Cast 05",
+"via":"hand"
 },
 "impact":{
-"fdid":1308030,
-"url":"/media/sounds/1308030.mp3",
-"name":"7lg Legionmagic Impact Small 01",
-"via":"school"
+"fdid":4181058,
+"url":"/media/sounds/4181058.mp3",
+"name":"Deathchain Impact Oneshot 4181058",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "frost-blast-shard":{
 "cast":{
-"fdid":1365179,
-"url":"/media/sounds/1365179.mp3",
-"name":"Dh Tank Metamorph Cast 03",
-"via":"school"
+"fdid":1672846,
+"url":"/media/sounds/1672846.mp3",
+"name":"Spell Ma Revamp Frost Cast 01",
+"via":"hand"
 },
 "impact":{
 "fdid":1672855,
 "url":"/media/sounds/1672855.mp3",
 "name":"SPELL_MA_Revamp_Ice_Nova_Impact",
-"via":"school"
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 }
 }

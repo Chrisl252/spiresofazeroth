@@ -1,24 +1,24 @@
 // Combat screen (v2, stage-native). Mounts the HUD (hud.js) and the hand (hand.js) on the 1920x1080 stage and drives the engine exactly as v1 did.
 // v2 integration: 3D actors + VFX are mounted by combatKit.js, choreography (impact instants) lives in combatDirector.js; this file sequences turns.
-import { sp, funnel, encKey } from "../analytics.js?v=20261028e";
-import { h, tip, esc, floatText, toast, sleep, modal, fill } from "./dom.js?v=20261028e";
+import { sp, funnel, encKey } from "../analytics.js?v=20261029a";
+import { h, tip, esc, floatText, toast, sleep, modal, fill } from "./dom.js?v=20261029a";
 import {
   playCard, canPlayWhy, cardNeedsTarget, endPlayerTurn, enemyPhase, finishRound, usePotion, resolvePending, livingEnemies, canSpare, spareEnemy,
-} from "../engine/combat.js?v=20261028e";
-import { cardCost } from "../engine/deck.js?v=20261028e";
-import { beginCombat, afterCombat } from "../engine/run.js?v=20261028e";
-import { gearLevel } from "../engine/gear.js?v=20261028e";
-import { isAlive } from "../engine/damage.js?v=20261028e";
-import { cardUselessOn } from "../engine/immunity.js?v=20261028e";
-import { previewCardVs, cardAimsDamage } from "../engine/preview.js?v=20261028e";
-import { cardEl, refreshCard, keywordLines, classColor } from "./card.js?v=20261028e";
-import { createHud } from "./hud.js?v=20261028e";
-import { createHand } from "./hand.js?v=20261028e";
-import { getKit, clearStage, watchLeave, safe, speedMul, applySettings } from "./combatKit.js?v=20261028e";
-import { createDirector } from "./combatDirector.js?v=20261028e";
-import { cardSounds } from "./cardSounds.js?v=20261028e";
-import { BUILD } from "../version.js?v=20261028e";
-import { coopStart, createCoopLink } from "./coopCombat.js?v=20261028e";
+} from "../engine/combat.js?v=20261029a";
+import { cardCost } from "../engine/deck.js?v=20261029a";
+import { beginCombat, afterCombat } from "../engine/run.js?v=20261029a";
+import { gearLevel } from "../engine/gear.js?v=20261029a";
+import { isAlive } from "../engine/damage.js?v=20261029a";
+import { cardUselessOn } from "../engine/immunity.js?v=20261029a";
+import { previewCardVs, cardAimsDamage } from "../engine/preview.js?v=20261029a";
+import { cardEl, refreshCard, keywordLines, classColor } from "./card.js?v=20261029a";
+import { createHud } from "./hud.js?v=20261029a";
+import { createHand } from "./hand.js?v=20261029a";
+import { getKit, clearStage, watchLeave, safe, speedMul, applySettings } from "./combatKit.js?v=20261029a";
+import { createDirector } from "./combatDirector.js?v=20261029a";
+import { cardSounds } from "./cardSounds.js?v=20261029a";
+import { BUILD } from "../version.js?v=20261029a";
+import { coopStart, createCoopLink } from "./coopCombat.js?v=20261029a";
 
 export const stageNative = true;
 
@@ -191,7 +191,7 @@ export async function render(app) {
     const pre = snapBefore();
     const r = CL ? CL.local({ k: "play", uid: inst.uid, target: targetUid || null }) || { ok: false, why: "Wait for your turn." } : playCard(C, inst.uid, targetUid || undefined);
     if (!r.ok) { toast(r.why || "Cannot play that."); update(); return false; }
-    if (C.drawBlocked) { toast(C.drawBlocked === "hand" ? "Your hand is full (10 cards)." : "No more card draw this turn."); C.drawBlocked = null; } // player report 10-24: "unable to draw more than 8"
+    if (C.drawBlocked) { toast(C.drawBlocked === "hand" ? "Your hand is full (10 cards)." : C.drawBlocked === "empty" ? "No cards left to draw: your draw and discard piles are empty." : "Card draw limit reached (10 extra draws per turn). It resets next turn."); C.drawBlocked = null; } // player report 10-24: "unable to draw more than 8"
     if (C.classId === "druid" && K && K.actors && K.actors.setHeroForm) {
       K.actors.setHeroForm(C.player.form);
     }
@@ -290,6 +290,7 @@ export async function render(app) {
       }
     } catch (e) { console.warn("[spires] turn flow", e && e.message); }
     st.busy = false;
+    if (D && !C.result) { try { D.ensureActors(); } catch (e) { console.warn("[spires] summon sync", e && e.message); } } // any summon this round (re-summons included) has its model + plate lane before the next turn
     if (!C.result) { hud.setTurn("player"); if (K && K.fx) K.fx.banner("Your turn"); }
     update();
   }

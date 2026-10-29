@@ -4,614 +4,614 @@
 "fdid":568274,
 "url":"/media/sounds/568274.mp3",
 "name":"Sealofmight",
-"via":"school"
+"via":"hand"
 },
 "impact":{
-"fdid":569769,
-"url":"/media/sounds/569769.mp3",
-"name":"Holyimpactddmedium",
-"via":"school"
+"fdid":2066690,
+"url":"/media/sounds/2066690.mp3",
+"name":"Fx Holy Magic Impact Small 01",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "judgement":{
 "cast":{
-"fdid":1376082,
-"url":"/media/sounds/1376082.mp3",
-"name":"Pa Blessedhammer Cast 04",
-"via":"exact"
+"fdid":1264934,
+"url":"/media/sounds/1264934.mp3",
+"name":"Spell Pa Judgement Revamp Cast 01",
+"via":"hand"
 },
 "impact":{
-"fdid":1260561,
-"url":"/media/sounds/1260561.mp3",
-"name":"2h Macehit Mtl Stone Crit 01",
-"via":"exact"
+"fdid":569768,
+"url":"/media/sounds/569768.mp3",
+"name":"Holyimpactddlow",
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "holy-light":{
 "cast":{
-"fdid":2066670,
-"url":"/media/sounds/2066670.mp3",
-"name":"Holy Magic Cast Medium 01",
-"via":"name"
+"fdid":568915,
+"url":"/media/sounds/568915.mp3",
+"name":"Precastholymagiclow",
+"via":"hand"
 },
 "impact":{
-"fdid":1888690,
-"url":"/media/sounds/1888690.mp3",
-"name":"Pa Revamp Holylight Impact 02",
-"via":"name"
+"fdid":569383,
+"url":"/media/sounds/569383.mp3",
+"name":"Holylight Low Head",
+"via":"hand"
 },
-"via":"name"
+"via":"hand"
 },
 "devotion-aura":{
 "cast":{
 "fdid":569679,
 "url":"/media/sounds/569679.mp3",
 "name":"Devotionaura",
-"via":"exact"
+"via":"hand"
 },
 "impact":{
-"fdid":1955774,
-"url":"/media/sounds/1955774.mp3",
-"name":"Pa Revamp Heal Impact 01",
-"via":"school"
+"fdid":569679,
+"url":"/media/sounds/569679.mp3",
+"name":"Devotionaura",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "flash-of-light":{
 "cast":{
-"fdid":2066675,
-"url":"/media/sounds/2066675.mp3",
-"name":"Holy Magic Cast Small 01",
-"via":"exact"
+"fdid":568915,
+"url":"/media/sounds/568915.mp3",
+"name":"Precastholymagiclow",
+"via":"hand"
 },
 "impact":{
-"fdid":1965755,
-"url":"/media/sounds/1965755.mp3",
-"name":"Pa Revamp Lightofthemartyr Heal Impact 01",
-"via":"exact"
+"fdid":1936458,
+"url":"/media/sounds/1936458.mp3",
+"name":"Spell Pa Revamp Flashoflight Imapct 01",
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "seal-of-the-crusader":{
 "cast":{
 "fdid":568274,
 "url":"/media/sounds/568274.mp3",
 "name":"Sealofmight",
-"via":"school"
+"via":"hand"
 },
 "impact":{
-"fdid":569769,
-"url":"/media/sounds/569769.mp3",
-"name":"Holyimpactddmedium",
-"via":"school"
+"fdid":568504,
+"url":"/media/sounds/568504.mp3",
+"name":"Sealofcrusader Impact",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "seal-of-justice":{
 "cast":{
 "fdid":568274,
 "url":"/media/sounds/568274.mp3",
 "name":"Sealofmight",
-"via":"school"
+"via":"hand"
 },
 "impact":{
-"fdid":569769,
-"url":"/media/sounds/569769.mp3",
-"name":"Holyimpactddmedium",
-"via":"school"
+"fdid":2066685,
+"url":"/media/sounds/2066685.mp3",
+"name":"Fx Holy Magic Impact Medium 01",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "blessing-of-might":{
 "cast":{
-"fdid":2066679,
-"url":"/media/sounds/2066679.mp3",
-"name":"Holy Magic Cast Small 05",
-"via":"school"
+"fdid":2066675,
+"url":"/media/sounds/2066675.mp3",
+"name":"Fx Holy Magic Cast Small 01",
+"via":"hand"
 },
 "impact":{
-"fdid":1955774,
-"url":"/media/sounds/1955774.mp3",
-"name":"Pa Revamp Heal Impact 01",
-"via":"school"
+"fdid":2066692,
+"url":"/media/sounds/2066692.mp3",
+"name":"Fx Holy Magic Impact Small 03",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "blessing-of-wisdom":{
 "cast":{
-"fdid":1696829,
-"url":"/media/sounds/1696829.mp3",
-"name":"Pr Revamp Holy Cast 01",
-"via":"school"
+"fdid":2066676,
+"url":"/media/sounds/2066676.mp3",
+"name":"Fx Holy Magic Cast Small 02",
+"via":"hand"
 },
 "impact":{
-"fdid":1955774,
-"url":"/media/sounds/1955774.mp3",
-"name":"Pa Revamp Heal Impact 01",
-"via":"school"
+"fdid":2066693,
+"url":"/media/sounds/2066693.mp3",
+"name":"Fx Holy Magic Impact Small 04",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "blessing-of-light":{
 "cast":{
-"fdid":569763,
-"url":"/media/sounds/569763.mp3",
-"name":"Holycast",
-"via":"school"
+"fdid":2066677,
+"url":"/media/sounds/2066677.mp3",
+"name":"Fx Holy Magic Cast Small 03",
+"via":"hand"
 },
 "impact":{
-"fdid":2818300,
-"url":"/media/sounds/2818300.mp3",
-"name":"Pa Revamp Holy Shock Heal Impact 01",
-"via":"school"
+"fdid":2066686,
+"url":"/media/sounds/2066686.mp3",
+"name":"Fx Holy Magic Impact Medium 02",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "blessing-of-freedom":{
 "cast":{
 "fdid":1888306,
 "url":"/media/sounds/1888306.mp3",
-"name":"Pa Revamp Blessingoffreedom Cast 01",
-"via":"exact"
+"name":"Spell Pa Revamp Blessingoffreedom Cast 01",
+"via":"hand"
 },
 "impact":{
-"fdid":2818302,
-"url":"/media/sounds/2818302.mp3",
-"name":"Pa Revamp Holy Shock Heal Impact 03",
-"via":"school"
+"fdid":603761,
+"url":"/media/sounds/603761.mp3",
+"name":"Spell Pa Speedoflight",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "blessing-of-protection":{
 "cast":{
-"fdid":2066679,
-"url":"/media/sounds/2066679.mp3",
-"name":"Holy Magic Cast Small 05",
-"via":"exact"
+"fdid":1888307,
+"url":"/media/sounds/1888307.mp3",
+"name":"Spell Pa Revamp Blessingofprotection Cast 01",
+"via":"hand"
 },
 "impact":{
-"fdid":2818300,
-"url":"/media/sounds/2818300.mp3",
-"name":"Pa Revamp Holy Shock Heal Impact 01",
-"via":"exact"
+"fdid":2066687,
+"url":"/media/sounds/2066687.mp3",
+"name":"Fx Holy Magic Impact Medium 03",
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "blessing-of-salvation":{
 "cast":{
-"fdid":1888307,
-"url":"/media/sounds/1888307.mp3",
-"name":"Pa Revamp Blessingofprotection Cast 01",
-"via":"school"
+"fdid":2066670,
+"url":"/media/sounds/2066670.mp3",
+"name":"Fx Holy Magic Cast Medium 01",
+"via":"hand"
 },
 "impact":{
-"fdid":2818300,
-"url":"/media/sounds/2818300.mp3",
-"name":"Pa Revamp Holy Shock Heal Impact 01",
-"via":"school"
+"fdid":2066688,
+"url":"/media/sounds/2066688.mp3",
+"name":"Fx Holy Magic Impact Medium 04",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "divine-protection":{
 "cast":{
-"fdid":2066679,
-"url":"/media/sounds/2066679.mp3",
-"name":"Holy Magic Cast Small 05",
-"via":"school"
+"fdid":2066671,
+"url":"/media/sounds/2066671.mp3",
+"name":"Fx Holy Magic Cast Medium 02",
+"via":"hand"
 },
 "impact":{
 "fdid":1708159,
 "url":"/media/sounds/1708159.mp3",
 "name":"SPELL_PA_Revamp_Divine_Protection_Impact",
-"via":"exact"
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "hammer-of-justice":{
 "cast":{
-"fdid":1264934,
-"url":"/media/sounds/1264934.mp3",
-"name":"Spell_PA_Judgement_Revamp_Cast",
-"via":"exact"
+"fdid":1250591,
+"url":"/media/sounds/1250591.mp3",
+"name":"Spell Pa Hammerofjustice Cast 01",
+"via":"hand"
 },
 "impact":{
-"fdid":1250596,
-"url":"/media/sounds/1250596.mp3",
-"name":"Pa Hammerofjustice Impact 01",
-"via":"exact"
+"fdid":569344,
+"url":"/media/sounds/569344.mp3",
+"name":"Fistofjustice",
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "turn-undead":{
 "cast":{
-"fdid":1696829,
-"url":"/media/sounds/1696829.mp3",
-"name":"Pr Revamp Holy Cast 01",
-"via":"school"
+"fdid":2066672,
+"url":"/media/sounds/2066672.mp3",
+"name":"Fx Holy Magic Cast Medium 03",
+"via":"hand"
 },
 "impact":{
-"fdid":569769,
-"url":"/media/sounds/569769.mp3",
-"name":"Holyimpactddmedium",
-"via":"school"
+"fdid":568253,
+"url":"/media/sounds/568253.mp3",
+"name":"Turnundeadtarget",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "retribution-aura":{
 "cast":{
-"fdid":568744,
-"url":"/media/sounds/568744.mp3",
-"name":"RetributionAura",
-"via":"name"
+"fdid":569679,
+"url":"/media/sounds/569679.mp3",
+"name":"Devotionaura",
+"via":"hand"
 },
 "impact":{
-"fdid":1955774,
-"url":"/media/sounds/1955774.mp3",
-"name":"Pa Revamp Heal Impact 01",
-"via":"school"
+"fdid":568744,
+"url":"/media/sounds/568744.mp3",
+"name":"Retributionaura",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "sanctity-aura":{
 "cast":{
 "fdid":569679,
 "url":"/media/sounds/569679.mp3",
 "name":"Devotionaura",
-"via":"school"
+"via":"hand"
 },
 "impact":{
-"fdid":1955774,
-"url":"/media/sounds/1955774.mp3",
-"name":"Pa Revamp Heal Impact 01",
-"via":"school"
-},
-"via":"school"
-},
-"concentration-aura":{
-"cast":{
 "fdid":568326,
 "url":"/media/sounds/568326.mp3",
 "name":"Resistanceaura",
-"via":"name"
+"via":"hand"
+},
+"via":"hand"
+},
+"concentration-aura":{
+"cast":{
+"fdid":569679,
+"url":"/media/sounds/569679.mp3",
+"name":"Devotionaura",
+"via":"hand"
 },
 "impact":{
 "fdid":1955774,
 "url":"/media/sounds/1955774.mp3",
 "name":"Pa Revamp Heal Impact 01",
-"via":"school"
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "redemption":{
 "cast":{
-"fdid":1696829,
-"url":"/media/sounds/1696829.mp3",
-"name":"Pr Revamp Holy Cast 01",
-"via":"exact"
+"fdid":569763,
+"url":"/media/sounds/569763.mp3",
+"name":"Holycast",
+"via":"hand"
 },
 "impact":{
 "fdid":568667,
 "url":"/media/sounds/568667.mp3",
 "name":"Resurrection",
-"via":"name"
+"via":"hand"
 },
-"via":"name"
+"via":"hand"
 },
 "divine-intervention":{
 "cast":{
-"fdid":569763,
-"url":"/media/sounds/569763.mp3",
-"name":"Holycast",
-"via":"school"
+"fdid":2066666,
+"url":"/media/sounds/2066666.mp3",
+"name":"Fx Holy Magic Cast Large 02",
+"via":"hand"
 },
 "impact":{
 "fdid":2818300,
 "url":"/media/sounds/2818300.mp3",
 "name":"Pa Revamp Holy Shock Heal Impact 01",
-"via":"school"
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "seal-of-command":{
 "cast":{
 "fdid":568274,
 "url":"/media/sounds/568274.mp3",
 "name":"Sealofmight",
-"via":"school"
+"via":"hand"
 },
 "impact":{
-"fdid":569769,
-"url":"/media/sounds/569769.mp3",
-"name":"Holyimpactddmedium",
-"via":"school"
+"fdid":568337,
+"url":"/media/sounds/568337.mp3",
+"name":"Sealofvengeance Impact Base",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "seal-of-light":{
 "cast":{
 "fdid":568274,
 "url":"/media/sounds/568274.mp3",
 "name":"Sealofmight",
-"via":"school"
+"via":"hand"
 },
 "impact":{
-"fdid":2818302,
-"url":"/media/sounds/2818302.mp3",
-"name":"Pa Revamp Holy Shock Heal Impact 03",
-"via":"school"
+"fdid":569017,
+"url":"/media/sounds/569017.mp3",
+"name":"Sealoflight Impact Base",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "seal-of-wisdom":{
 "cast":{
 "fdid":568274,
 "url":"/media/sounds/568274.mp3",
 "name":"Sealofmight",
-"via":"school"
+"via":"hand"
 },
 "impact":{
-"fdid":1955774,
-"url":"/media/sounds/1955774.mp3",
-"name":"Pa Revamp Heal Impact 01",
-"via":"school"
+"fdid":2066691,
+"url":"/media/sounds/2066691.mp3",
+"name":"Fx Holy Magic Impact Small 02",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "blessing-of-sanctuary":{
 "cast":{
 "fdid":614999,
 "url":"/media/sounds/614999.mp3",
-"name":"Pa Sacredshield Cast",
-"via":"name"
+"name":"Spell Pa Sacredshield Cast",
+"via":"hand"
 },
 "impact":{
-"fdid":1955774,
-"url":"/media/sounds/1955774.mp3",
-"name":"Pa Revamp Heal Impact 01",
-"via":"school"
+"fdid":2066694,
+"url":"/media/sounds/2066694.mp3",
+"name":"Fx Holy Magic Impact Small 05",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "consecration":{
 "cast":{
-"fdid":5211621,
-"url":"/media/sounds/5211621.mp3",
-"name":"Stoneofthehearth Precast Oneshot 5211621",
-"via":"exact"
-},
-"impact":{
 "fdid":1258133,
 "url":"/media/sounds/1258133.mp3",
-"name":"SPELL_PA_Consecration_Revamp",
-"via":"exact"
+"name":"Spell Pa Consecration Revamp 01",
+"via":"hand"
 },
-"via":"exact"
+"impact":{
+"fdid":569768,
+"url":"/media/sounds/569768.mp3",
+"name":"Holyimpactddlow",
+"via":"hand"
+},
+"via":"hand"
 },
 "holy-wrath":{
 "cast":{
-"fdid":569763,
-"url":"/media/sounds/569763.mp3",
-"name":"Holycast",
-"via":"exact"
+"fdid":1377110,
+"url":"/media/sounds/1377110.mp3",
+"name":"Spell Pa Holywrath Cast 01",
+"via":"hand"
 },
 "impact":{
-"fdid":569771,
-"url":"/media/sounds/569771.mp3",
-"name":"Holyimpactddhigh",
-"via":"exact"
+"fdid":1377116,
+"url":"/media/sounds/1377116.mp3",
+"name":"Spell Pa Holywrath Impact 01",
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "exorcism":{
 "cast":{
-"fdid":2066679,
-"url":"/media/sounds/2066679.mp3",
-"name":"SPELL_PA_Revamp_HolyShock_Cast",
-"via":"school"
+"fdid":2066673,
+"url":"/media/sounds/2066673.mp3",
+"name":"Fx Holy Magic Cast Medium 04",
+"via":"hand"
 },
 "impact":{
 "fdid":568618,
 "url":"/media/sounds/568618.mp3",
 "name":"Exorcism",
-"via":"name"
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "cleanse":{
 "cast":{
-"fdid":2066679,
-"url":"/media/sounds/2066679.mp3",
-"name":"Holy Magic Cast Small 05",
-"via":"exact"
+"fdid":568915,
+"url":"/media/sounds/568915.mp3",
+"name":"Precastholymagiclow",
+"via":"hand"
 },
 "impact":{
 "fdid":568392,
 "url":"/media/sounds/568392.mp3",
 "name":"Dispel Low Base",
-"via":"exact"
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "righteous-fury":{
 "cast":{
-"fdid":2066679,
-"url":"/media/sounds/2066679.mp3",
-"name":"Holy Magic Cast Small 05",
-"via":"school"
+"fdid":568213,
+"url":"/media/sounds/568213.mp3",
+"name":"Righteousfury",
+"via":"hand"
 },
 "impact":{
-"fdid":1955774,
-"url":"/media/sounds/1955774.mp3",
-"name":"Pa Revamp Heal Impact 01",
-"via":"school"
+"fdid":2066693,
+"url":"/media/sounds/2066693.mp3",
+"name":"Fx Holy Magic Impact Small 04",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "reckoning":{
 "cast":{
 "fdid":2066679,
 "url":"/media/sounds/2066679.mp3",
 "name":"Holy Magic Cast Small 05",
-"via":"school"
+"via":"hand"
 },
 "impact":{
-"fdid":569769,
-"url":"/media/sounds/569769.mp3",
-"name":"Holyimpactddmedium",
-"via":"school"
+"fdid":569272,
+"url":"/media/sounds/569272.mp3",
+"name":"Hammeroftherighteousimpact",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "vengeance":{
 "cast":{
-"fdid":2066670,
-"url":"/media/sounds/2066670.mp3",
-"name":"Holy Magic Cast Medium 01",
-"via":"school"
+"fdid":568213,
+"url":"/media/sounds/568213.mp3",
+"name":"Righteousfury",
+"via":"hand"
 },
 "impact":{
 "fdid":1955774,
 "url":"/media/sounds/1955774.mp3",
 "name":"Pa Revamp Heal Impact 01",
-"via":"school"
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "eye-for-an-eye":{
 "cast":{
 "fdid":569763,
 "url":"/media/sounds/569763.mp3",
 "name":"Holycast",
-"via":"school"
+"via":"hand"
 },
 "impact":{
-"fdid":2818300,
-"url":"/media/sounds/2818300.mp3",
-"name":"Pa Revamp Holy Shock Heal Impact 01",
-"via":"school"
+"fdid":569402,
+"url":"/media/sounds/569402.mp3",
+"name":"Holybolt",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "holy-shock":{
 "cast":{
-"fdid":2066679,
-"url":"/media/sounds/2066679.mp3",
-"name":"SPELL_PA_Revamp_HolyShock_Cast",
-"via":"exact"
+"fdid":569763,
+"url":"/media/sounds/569763.mp3",
+"name":"Holycast",
+"via":"hand"
 },
 "impact":{
-"fdid":569769,
-"url":"/media/sounds/569769.mp3",
-"name":"Holyimpactddmedium",
-"via":"name"
+"fdid":569402,
+"url":"/media/sounds/569402.mp3",
+"name":"Holybolt",
+"via":"hand"
 },
-"via":"name"
+"via":"hand"
 },
 "divine-favor":{
 "cast":{
-"fdid":569763,
-"url":"/media/sounds/569763.mp3",
-"name":"Holy Cast",
-"via":"school"
+"fdid":2066674,
+"url":"/media/sounds/2066674.mp3",
+"name":"Fx Holy Magic Cast Medium 05",
+"via":"hand"
 },
 "impact":{
-"fdid":1955774,
-"url":"/media/sounds/1955774.mp3",
-"name":"Pa Revamp Heal Impact 01",
-"via":"school"
+"fdid":2066689,
+"url":"/media/sounds/2066689.mp3",
+"name":"Fx Holy Magic Impact Medium 05",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "divine-shield":{
 "cast":{
 "fdid":1267362,
 "url":"/media/sounds/1267362.mp3",
-"name":"Pa Divineshield Revamp Cast 01",
-"via":"exact"
+"name":"Spell Pa Divineshield Revamp Cast 01",
+"via":"hand"
 },
 "impact":{
 "fdid":2818300,
 "url":"/media/sounds/2818300.mp3",
 "name":"Pa Revamp Holy Shock Heal Impact 01",
-"via":"exact"
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "holy-shield":{
 "cast":{
-"fdid":1377115,
-"url":"/media/sounds/1377115.mp3",
-"name":"Pa Holywrath Cast 06",
-"via":"school"
+"fdid":1413281,
+"url":"/media/sounds/1413281.mp3",
+"name":"Spell Pa Shieldofvengeance Cast 01",
+"via":"hand"
 },
 "impact":{
 "fdid":1413278,
 "url":"/media/sounds/1413278.mp3",
 "name":"Pa Shieldofvengeance Aoe Impact 01",
-"via":"school"
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "repentance":{
 "cast":{
-"fdid":2066666,
-"url":"/media/sounds/2066666.mp3",
-"name":"Holy Magic Cast Large 02",
-"via":"school"
+"fdid":569763,
+"url":"/media/sounds/569763.mp3",
+"name":"Holycast",
+"via":"hand"
 },
 "impact":{
-"fdid":569769,
-"url":"/media/sounds/569769.mp3",
-"name":"Holyimpactddmedium",
-"via":"school"
+"fdid":2066681,
+"url":"/media/sounds/2066681.mp3",
+"name":"Fx Holy Magic Impact Large 02",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "blessing-of-kings":{
 "cast":{
-"fdid":1452933,
-"url":"/media/sounds/1452933.mp3",
-"name":"Spell_PA_AF_EyeofTyr_Cast",
-"via":"school"
+"fdid":2066664,
+"url":"/media/sounds/2066664.mp3",
+"name":"Fx Holy Magic Cast Large 01",
+"via":"hand"
 },
 "impact":{
-"fdid":1955774,
-"url":"/media/sounds/1955774.mp3",
-"name":"Pa Revamp Heal Impact 01",
-"via":"school"
+"fdid":2066680,
+"url":"/media/sounds/2066680.mp3",
+"name":"Fx Holy Magic Impact Large 01",
+"via":"hand"
 },
-"via":"school"
+"via":"hand"
 },
 "hammer-of-wrath":{
 "cast":{
 "fdid":1377115,
 "url":"/media/sounds/1377115.mp3",
 "name":"Pa Holywrath Cast 06",
-"via":"exact"
+"via":"hand"
 },
 "impact":{
-"fdid":1376084,
-"url":"/media/sounds/1376084.mp3",
-"name":"Pa Blessedhammer Impact 01",
-"via":"exact"
+"fdid":615641,
+"url":"/media/sounds/615641.mp3",
+"name":"Spell Pa Lightshammer Impact01",
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 },
 "lay-on-hands":{
 "cast":{
-"fdid":2066678,
-"url":"/media/sounds/2066678.mp3",
-"name":"Holy Magic Cast Small 04",
-"via":"exact"
+"fdid":569763,
+"url":"/media/sounds/569763.mp3",
+"name":"Holycast",
+"via":"hand"
 },
 "impact":{
-"fdid":1709502,
-"url":"/media/sounds/1709502.mp3",
-"name":"Pr Revamp Shining Force Impact 02",
-"via":"exact"
+"fdid":568145,
+"url":"/media/sounds/568145.mp3",
+"name":"Layonhands Low Chest",
+"via":"hand"
 },
-"via":"exact"
+"via":"hand"
 }
 }

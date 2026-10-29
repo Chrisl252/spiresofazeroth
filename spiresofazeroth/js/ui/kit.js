@@ -1,7 +1,7 @@
 // Stage-native widgets shared by the non-combat screens (map, class select, reward, shop, rest, event, run end, codex, settings).
 // Look lives in css/screens.css (.sx-*). Nothing here touches the engine.
-import { h, icon, cardEl, tip, esc } from "./dom.js?v=20261028e";
-import { BUILD } from "../version.js?v=20261028e";
+import { h, icon, cardEl, tip, esc } from "./dom.js?v=20261029a";
+import { BUILD } from "../version.js?v=20261029a";
 
 export const ART = "/assets/loading-screens/";
 

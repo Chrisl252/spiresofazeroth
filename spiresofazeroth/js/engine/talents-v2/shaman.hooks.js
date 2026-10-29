@@ -6,9 +6,9 @@
 // Keys (defs in shaman.defs.js): Elemental = sha_crit / sha_fury / sha_focus / sha_mastery (spell crits), sha_shock_ramp, sha_fire_totem,
 // sha_earth_block; Enhancement = sha_imbue_dmg, sha_wcrit, sha_windfury; Restoration = sha_heal, sha_tidal, sha_grace, sha_surge,
 // sha_purify, sha_totem_block, sha_totem_place, sha_water_heal, sha_ankh.
-import { tv } from "../talentHooks.js?v=20261028e";
-import { gainBlock, healEntity, isAlive, fx, dealDamage } from "../damage.js?v=20261028e";
-import { applyStatus } from "../status.js?v=20261028e";
+import { tv } from "../talentHooks.js?v=20261029a";
+import { gainBlock, healEntity, isAlive, fx, dealDamage } from "../damage.js?v=20261029a";
+import { applyStatus } from "../status.js?v=20261029a";
 
 const SHOCKS = new Set(["earth-shock", "flame-shock", "frost-shock"]);
 const HEALS = new Set(["healing-wave", "lesser-healing-wave", "chain-heal", "ancestral-spirit"]);

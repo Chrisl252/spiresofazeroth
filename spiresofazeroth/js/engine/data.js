@@ -1,7 +1,7 @@
 // Data loader. Environment-neutral: you give it fetchJson(relPath) -> parsed JSON or null (404). The browser passes a fetch
 // wrapper that appends ?v=BUILD; node tools pass an fs reader. No DOM, no node imports here.
-import { setImmunityTable } from "./immunity.js?v=20261028e";
-import { loadClassGear, loadLegacyMap, slotOf } from "./gear.js?v=20261028e";
+import { setImmunityTable } from "./immunity.js?v=20261029a";
+import { loadClassGear, loadLegacyMap, slotOf } from "./gear.js?v=20261029a";
 const HD = new URL("../../assets/icons-hd/", import.meta.url).href; // 256px upscaled icons, relative so dev + deploy both resolve
 const arr = (o, key) => (Array.isArray(o) ? o : o && Array.isArray(o[key]) ? o[key] : []);
 

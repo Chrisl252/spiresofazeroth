@@ -2,8 +2,8 @@
 //   const v = await mountVendor(app, hostEl, leaveEl);   v.say("greeting" | "farewell" | "pissed")   v.dispose()
 // Lines come from data/sounds/goblin-vendor.json (Sound/Creature/GoblinVendorM VO, served at /media/sounds/<fdid>.mp3).
 // The model is static (no baked clips): "Talk" is a squash/hop tween on the actor motion for the length of the line.
-import { getKit, clearStage, watchLeave } from "./combatKit.js?v=20261028e";
-import { sfx } from "../audio.js?v=20261028e";
+import { getKit, clearStage, watchLeave } from "./combatKit.js?v=20261029a";
+import { sfx } from "../audio.js?v=20261029a";
 
 const VOICE_URL = new URL("../../data/sounds/goblin-vendor.json", import.meta.url).href;
 const UID = "shop-vendor";

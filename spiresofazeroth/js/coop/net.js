@@ -1,12 +1,19 @@
 // Co-op transport: one WebRTC data channel between two browsers (PeerJS, vendored at js/vendor/peerjs.min.js, MIT).
 // Signalling goes through the free PeerJS cloud broker (0.peerjs.com) and NAT traversal through its STUN/TURN defaults; game traffic is
 // browser to browser. Nothing here knows the game: link.send(obj) / link.onMessage(fn) / link.onClose(fn) / link.close().
-import { BUILD } from "../version.js?v=20261028e";
+import { BUILD } from "../version.js?v=20261029a";
 
 const PREFIX = "spires-azeroth-v1-";
 const ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no 0/O/1/I: codes are read aloud
 export const newCode = () => Array.from({ length: 6 }, () => ALPHABET[Math.floor(Math.random() * ALPHABET.length)]).join("");
 export const cleanCode = (s) => String(s || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6);
+
+// 10-29 report "join via code times out every time": signalling worked, the data channel never opened (strict NAT / UDP blocked).
+// PeerJS's default TURN is UDP 3478 only; add its TCP transport and a second STUN so more networks can relay.
+const PEER_OPTS = { debug: 1, config: { iceServers: [
+  { urls: ["stun:stun.l.google.com:19302", "stun:stun.cloudflare.com:3478"] },
+  { urls: ["turn:eu-0.turn.peerjs.com:3478", "turn:us-0.turn.peerjs.com:3478", "turn:eu-0.turn.peerjs.com:3478?transport=tcp", "turn:us-0.turn.peerjs.com:3478?transport=tcp"], username: "peerjs", credential: "peerjsp" },
+] } };
 
 let loading = null;
 function loadPeer() {
@@ -51,9 +58,10 @@ function peerError(e) {
 export async function host(code, onJoin, onError) {
   const Peer = await loadPeer();
   return new Promise((res, rej) => {
-    const peer = new Peer(PREFIX + code, { debug: 1 });
+    const peer = new Peer(PREFIX + code, PEER_OPTS);
     let taken = false, ready = false;
     peer.on("open", () => { ready = true; res({ code, cancel: () => { try { peer.destroy(); } catch { /* gone */ } } }); });
+    peer.on("disconnected", () => { if (!taken && !peer.destroyed) try { peer.reconnect(); } catch { /* broker gone */ } }); // an idle lobby lost its room on the broker, so the code stopped resolving
     peer.on("connection", (conn) => {
       if (taken) { conn.on("open", () => { conn.send({ t: "full" }); setTimeout(() => conn.close(), 300); }); return; }
       taken = true;
@@ -67,10 +75,10 @@ export async function host(code, onJoin, onError) {
 export async function join(code) {
   const Peer = await loadPeer();
   return new Promise((res, rej) => {
-    const peer = new Peer(undefined, { debug: 1 });
+    const peer = new Peer(undefined, PEER_OPTS);
     let done = false;
     const fail = (m) => { if (done) return; done = true; try { peer.destroy(); } catch { /* gone */ } rej(new Error(m)); };
-    const timer = setTimeout(() => fail("Timed out reaching that game. Check the code and try again."), 20000);
+    const timer = setTimeout(() => fail("Timed out reaching that game. Check the code; if it is right, one of your networks blocks peer-to-peer (try another network or have the other player host)."), 35000);
     peer.on("open", () => {
       const conn = peer.connect(PREFIX + code, { reliable: true, serialization: "json" });
       conn.on("open", () => { if (done) return; done = true; clearTimeout(timer); res(wrap(peer, conn)); });

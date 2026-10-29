@@ -1,6 +1,6 @@
 // Rewards: gold, 1-of-3 card picks (common 60 / uncommon 30 / rare 9 / epic 1), potions, relics, shop stock. Seeded streams only.
-import { heroicMods } from "./heroic.js?v=20261028e";
-import { resolveImmunity, cardUselessOn } from "./immunity.js?v=20261028e";
+import { heroicMods } from "./heroic.js?v=20261029a";
+import { resolveImmunity, cardUselessOn } from "./immunity.js?v=20261029a";
 
 const CARD_WEIGHTS = { common: 60, uncommon: 30, rare: 9, epic: 1 };
 const RELIC_WEIGHTS = { common: 50, uncommon: 33, rare: 12, epic: 2, legendary: 1 }; // legendary = Thunderfury / Atiesh: rarer than epic
@@ -64,8 +64,9 @@ function relicEligible(run, data, r) {
 }
 export function relicPool(run, data) { return data.allRelics().filter((r) => relicEligible(run, data, r)); }
 
-export function rollRelics(run, data, rng, count = 1, { minRarity } = {}) {
-  const pool = relicPool(run, data).filter((r) => !minRarity || ["rare", "epic", "legendary"].includes(r.rarity));
+const paysGold = (r) => ((r.triggers && r.triggers.on_pickup) || []).some((e) => e && e.op === "gold");
+export function rollRelics(run, data, rng, count = 1, { minRarity, shop } = {}) {
+  const pool = relicPool(run, data).filter((r) => (!minRarity || ["rare", "epic", "legendary"].includes(r.rarity)) && !(shop && paysGold(r))); // 10-29 report: a vendor sold Gaily Wrapped Present (gold on pickup) for more than it pays
   const out = [];
   const bag = pool.slice();
   while (out.length < count && bag.length) {
@@ -116,7 +117,7 @@ export function buildShop(run, data, rng) {
   };
   for (let i = 0; i < 4; i++) take(classCards, 0);
   take(neutral.length ? neutral : classCards, 0);
-  const relics = rollRelics(run, data, rng, 2).map( // shop.relics = jewellery/cloaks/trinkets (GEAR_SPEC "shop.gear"; key kept so shop.js keeps working)
+  const relics = rollRelics(run, data, rng, 2, { shop: true }).map( // shop.relics = jewellery/cloaks/trinkets (GEAR_SPEC "shop.gear"; key kept so shop.js keeps working)
     (id) => ({ id, price: Math.round(RELIC_PRICE[(data.relic(id) || {}).rarity] * (0.9 + rng.next() * 0.2) * (1 - disc)) }));
   const potions = [];
   for (let i = 0; i < 3; i++) { const id = rollPotion(run, data, rng); if (id) potions.push({ id, price: Math.round(POTION_PRICE[(data.potion(id) || {}).rarity] * (0.9 + rng.next() * 0.2) * (1 - disc)) }); }

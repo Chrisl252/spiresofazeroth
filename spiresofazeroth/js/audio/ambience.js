@@ -3,8 +3,8 @@
 // in a row, each pass with a random start offset and +-3 % pitch, equal-power overlapped (continuous) or sprinkled with random gaps
 // (occasional). One bed per pool key: re-entering the same zone/pool (screen or fight changes) never restarts it; a different pool
 // crossfades (old voices fade out while new ones fade in). Volume / mode / duck changes are smooth gain ramps on a single bus.
-import { resolveSoundUrl } from "../audio.js?v=20261028e";
-import { bus, getCtx, loadBuffer, voice, ramp, voiceCount, trace } from "./engine.js?v=20261028e";
+import { resolveSoundUrl } from "../audio.js?v=20261029a";
+import { bus, getCtx, loadBuffer, voice, ramp, voiceCount, trace } from "./engine.js?v=20261029a";
 
 const X = 1.6;                 // seconds, voice fade in / out and continuous overlap
 const MAX_VOICES = 3;          // hard cap on simultaneous ambience voices (incl. fading-out ones)

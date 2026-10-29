@@ -1,9 +1,9 @@
 // Extra rows of the ONE settings menu (pauseMenu.js): display / motion / progress options that used to live on the separate Settings screen,
 // plus save export / import / erase. Everything persists in app.meta.settings (same keys as before: speed, reducedMotion, unlockAll, fullscreen).
-import { h, toast } from "./dom.js?v=20261028e";
-import { btn } from "./kit.js?v=20261028e";
-import { autoEquipSelect } from "./autoEquip.js?v=20261028e";
-import { exportSave, importSave, clearRun, defaultMeta, saveMeta } from "../engine/save.js?v=20261028e";
+import { h, toast } from "./dom.js?v=20261029a";
+import { btn } from "./kit.js?v=20261029a";
+import { autoEquipSelect } from "./autoEquip.js?v=20261029a";
+import { exportSave, importSave, clearRun, defaultMeta, saveMeta } from "../engine/save.js?v=20261029a";
 
 export function extraRows(app, save) {
   const s = app.meta.settings;

@@ -1,10 +1,10 @@
 // Damage / block / heal pipeline + death handling. Every HP change in the game goes through here.
-import { modifyDealt, modifyTaken, gainBlockAmount, hasTrait, wakeOnDamage } from "./status.js?v=20261028e";
-import { damageBonus, damageMult, takenAdjust, blockBonus, onDealt, onTaken, onKillRes, petDown, modeThorns } from "./resources.js?v=20261028e";
-import { fire } from "./relics.js?v=20261028e";
-import { runEffects } from "./effects.js?v=20261028e";
-import { immuneToSchool, resistMult } from "./immunity.js?v=20261028e";
-import { talentDamage, talentTaken, talentThorns, talentBlocked, talentBlock } from "./talentHooks.js?v=20261028e";
+import { modifyDealt, modifyTaken, gainBlockAmount, hasTrait, wakeOnDamage } from "./status.js?v=20261029a";
+import { damageBonus, damageMult, takenAdjust, blockBonus, onDealt, onTaken, onKillRes, petDown, modeThorns } from "./resources.js?v=20261029a";
+import { fire } from "./relics.js?v=20261029a";
+import { runEffects } from "./effects.js?v=20261029a";
+import { immuneToSchool, resistMult } from "./immunity.js?v=20261029a";
+import { talentDamage, talentTaken, talentThorns, talentBlocked, talentBlock } from "./talentHooks.js?v=20261029a";
 
 const ids = (e) => (e && (e.uid || e.kind)) || "?";
 export function fx(C, ev) {

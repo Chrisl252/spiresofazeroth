@@ -1,18 +1,18 @@
 // Run state machine. The UI and the headless sim both drive the run through these functions, so routing lives in ONE place.
 // run.screen: map | combat | reward | vendor | rest | event | treasure | hub | healer | zonepick | raidchoice | bosschoice | end
 // Every random decision uses streamFor(seed, tag) with a node-specific tag, so a saved run resumes identically.
-import { enterHealer } from "./healer.js?v=20261028e";
-import { streamFor } from "./rng.js?v=20261028e";
-import { generateSpire, nextNodes, nodeAt } from "./map.js?v=20261028e";
-import { startCombat, finishCombat } from "./combat.js?v=20261028e";
-import { runEffects } from "./effects.js?v=20261028e";
-import { fireRun } from "./relics.js?v=20261028e";
-import { heroicMods, noviceOf } from "./heroic.js?v=20261028e";
-import { limitTalentMods } from "./talents.js?v=20261028e";
-import { addTalentGrants } from "./talentHooks.js?v=20261028e";
-import { canUpgrade } from "./deck.js?v=20261028e";
-import * as R from "./rewards.js?v=20261028e";
-import * as G from "./gear.js?v=20261028e";
+import { enterHealer } from "./healer.js?v=20261029a";
+import { streamFor } from "./rng.js?v=20261029a";
+import { generateSpire, nextNodes, nodeAt } from "./map.js?v=20261029a";
+import { startCombat, finishCombat } from "./combat.js?v=20261029a";
+import { runEffects } from "./effects.js?v=20261029a";
+import { fireRun } from "./relics.js?v=20261029a";
+import { heroicMods, noviceOf } from "./heroic.js?v=20261029a";
+import { limitTalentMods } from "./talents.js?v=20261029a";
+import { addTalentGrants } from "./talentHooks.js?v=20261029a";
+import { canUpgrade } from "./deck.js?v=20261029a";
+import * as R from "./rewards.js?v=20261029a";
+import * as G from "./gear.js?v=20261029a";
 
 export const RUN_VERSION = 1;
 export const TOTAL_ACTS = 6;

@@ -1600,6 +1600,7 @@
         },
         {
           "op": "max_hp",
+          "combat": true,
           "amount": 10
         }
       ],
@@ -1624,6 +1625,7 @@
           },
           {
             "op": "max_hp",
+            "combat": true,
             "amount": 15
           }
         ]
@@ -1939,6 +1941,7 @@
         },
         {
           "op": "max_hp",
+          "combat": true,
           "amount": 10
         }
       ],
@@ -1961,6 +1964,7 @@
           },
           {
             "op": "max_hp",
+            "combat": true,
             "amount": 15
           }
         ]

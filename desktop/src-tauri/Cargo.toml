@@ -1,6 +1,6 @@
 [package]
 name = "spires-of-azeroth"
-version = "1.0.2"
+version = "1.0.3"
 description = "Spires of Azeroth desktop"
 authors = ["Chrisl252"]
 license = "MIT"

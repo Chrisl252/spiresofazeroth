@@ -1,16 +1,16 @@
 // Combat loop: start, play card, end turn (player phase -> enemy phase generator -> round end -> next player turn), potions, finish.
-import { runEffects, evalCond, resolveTargets } from "./effects.js?v=20261028e";
-import { fx, log, isAlive, gainBlock, checkDeaths } from "./damage.js?v=20261028e";
+import { runEffects, evalCond, resolveTargets } from "./effects.js?v=20261029a";
+import { fx, log, isAlive, gainBlock, checkDeaths } from "./damage.js?v=20261029a";
 import {
   buildPiles, drawCards, endTurnCleanup, whyUnplayable, cardCost, toDiscard, toExhaust, hasFlag, removeFrom,
-} from "./deck.js?v=20261028e";
-import { initResources, startOfTurn, endOfTurn, extraDraw, extraEnergy, armTrap, spendRes } from "./resources.js?v=20261028e";
-import { buildEnemy, chooseMove, enemyAct, checkPhases } from "./intents.js?v=20261028e";
-import { applyStatus, turnStart, turnEnd, roundEnd, modeOf } from "./status.js?v=20261028e";
-import { fire } from "./relics.js?v=20261028e";
-import { makeRng } from "./rng.js?v=20261028e";
-import { heroicMods, noviceOf } from "./heroic.js?v=20261028e";
-import { talentCarryBlock, talentNoExhaust, talentSweep } from "./talentHooks.js?v=20261028e";
+} from "./deck.js?v=20261029a";
+import { initResources, startOfTurn, endOfTurn, extraDraw, extraEnergy, armTrap, spendRes } from "./resources.js?v=20261029a";
+import { buildEnemy, chooseMove, enemyAct, checkPhases } from "./intents.js?v=20261029a";
+import { applyStatus, turnStart, turnEnd, roundEnd, modeOf } from "./status.js?v=20261029a";
+import { fire } from "./relics.js?v=20261029a";
+import { makeRng } from "./rng.js?v=20261029a";
+import { heroicMods, noviceOf } from "./heroic.js?v=20261029a";
+import { talentCarryBlock, talentNoExhaust, talentSweep } from "./talentHooks.js?v=20261029a";
 
 // map-profile tuning (data/map-profiles.json combatMods) layered on the heroic modifiers: hp multiplies, strengths add
 function composeMods(h, z, tier, nov = 1) {
@@ -196,6 +196,13 @@ export function pickDefaultTarget(C) {
   return pool.length ? pool.reduce((a, b) => (b.hp < a.hp ? b : a)) : null;
 }
 
+// A clicked/dragged target is honoured unless it is stealthed while a visible enemy exists (same rule as auto-target; co-op seats resolve it identically).
+function chooseTarget(C, targetUid) {
+  const t = targetUid && C.enemies.find((e) => e.uid === targetUid && isAlive(e));
+  if (t && !(t.st.stealth && livingEnemies(C).some((e) => !e.st.stealth))) return t;
+  return pickDefaultTarget(C);
+}
+
 export function playCard(C, uid, targetUid) {
   const p = C.player;
   const inst = C.pile.hand.find((c) => c.uid === uid);
@@ -205,7 +212,7 @@ export function playCard(C, uid, targetUid) {
   const def = inst.def;
   let target = null;
   if (def.target === "enemy" || def.target === undefined) {
-    target = (targetUid && C.enemies.find((e) => e.uid === targetUid && isAlive(e))) || pickDefaultTarget(C);
+    target = chooseTarget(C, targetUid);
   }
   // pay
   let cost = cardCost(C, inst);
@@ -283,7 +290,7 @@ export function usePotion(C, idx, targetUid) {
   const pot = id && C.data.potion(id);
   if (!pot || C.result || C.phase !== "player") return { ok: false };
   let target = null;
-  if (pot.target === "enemy") target = (targetUid && C.enemies.find((e) => e.uid === targetUid && isAlive(e))) || pickDefaultTarget(C);
+  if (pot.target === "enemy") target = chooseTarget(C, targetUid);
   C.potions.splice(idx, 1);
   C.actionId++;
   runEffects({ C, src: C.player, srcKind: "potion", target }, pot.effects);
@@ -351,8 +358,8 @@ export function finishCombat(C) {
   const run = C.run;
   if (C.result === "win") fire(C, "on_combat_end", {});
   const p = C.player;
-  run.hp = Math.max(0, Math.min(p.maxHp, p.hp));
-  run.maxHp = p.maxHp;
+  run.maxHp = Math.max(1, p.maxHp - (C.tempMaxHp || 0)); // combat-only max HP (max_hp {combat:true}) ends with the fight
+  run.hp = Math.max(0, Math.min(run.maxHp, p.hp));
   run.disease = Math.max(0, (p.st.disease || 0) - 1);
   { // zone-scope resources (e.g. tribute) persist for the whole spire
     const own = new Set([(C.cls && C.cls.resource && C.cls.resource.id), ...(((C.cls && C.cls.extraResources) || []).map((x) => x.id))]);

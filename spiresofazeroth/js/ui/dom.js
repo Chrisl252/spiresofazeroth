@@ -1,7 +1,7 @@
 // Tiny DOM toolkit shared by every screen. No framework: h() builds elements, the rest are small widgets.
-import { renderText } from "../engine/cardtext.js?v=20261028e";
-import { slugify } from "../engine/data.js?v=20261028e";
-import { cardEl as cardElV2 } from "./card.js?v=20261028e";
+import { renderText } from "../engine/cardtext.js?v=20261029a";
+import { slugify } from "../engine/data.js?v=20261029a";
+import { cardEl as cardElV2 } from "./card.js?v=20261029a";
 const HD = new URL("../../assets/icons-hd/", import.meta.url).href; // 256px upscaled icons, relative so dev + deploy both resolve
 const cardElMini = (def, inst) => cardElV2(def, { tag: "div", mini: true, inst });
 
@@ -50,7 +50,7 @@ function guardTip() {
 }
 function showTip(html, x, y) {
   if (!tipEl) tipEl = h("div", { class: "sp-tip", role: "tooltip" });
-  const parent = document.fullscreenElement || document.body;
+  const parent = overlayHost();
   if (tipEl.parentElement !== parent) parent.append(tipEl);
   tipPoint = { x, y };
   tipEl.innerHTML = html;
@@ -100,7 +100,7 @@ export function cardCostLabel(def, cost) {
   return def.cost === "X" ? "X" : def.cost < 0 ? "-" : String(def.cost);
 }
 // v2: the card look lives in card.js (260x380 stage px, `mini: true` = 130x190). Same options as before: { C, inst, tag, cls, cost, onClick, data }.
-export { cardEl } from "./card.js?v=20261028e";
+export { cardEl } from "./card.js?v=20261029a";
 export function codexLinks(def, kind) {
   const sl = slugify(def.name);
   if (kind === "spell" && def.spellId) return `/spell/${sl}-${def.spellId}/`;
@@ -109,6 +109,8 @@ export function codexLinks(def, kind) {
 }
 
 // ---- floating text / feedback ----
+// Real fullscreen only shows the fullscreen element's subtree, so anything mounted on document.body vanishes there: mount overlays here instead.
+export function overlayHost() { return document.fullscreenElement || document.body; }
 export function floatText(host, text, kind) {
   if (!host) return;
   const f = h("div", { class: `sp-float ${kind || "dmg"}` }, text);
@@ -117,7 +119,7 @@ export function floatText(host, text, kind) {
 }
 export function toast(msg, ms = 2200) {
   const t = h("div", { class: "sp-toast sp-frame", role: "status" }, msg);
-  document.body.append(t);
+  overlayHost().append(t);
   setTimeout(() => t.remove(), ms);
 }
 export function modal(title, body, { onClose } = {}) {
@@ -128,7 +130,7 @@ export function modal(title, body, { onClose } = {}) {
   const box = h("div", { class: "sp-modal sp-frame" }, h("div", { class: "sp-row" }, h("h2", { class: "sp-title sp-grow" }, title), h("button", { class: "sp-btn sp-btn--small", type: "button", onClick: close }, "Close")), body);
   back.append(box);
   back.addEventListener("click", (e) => { if (e.target === back) close(); });
-  document.body.append(back);
+  overlayHost().append(back);
   box.querySelector("button").focus();
   return close;
 }

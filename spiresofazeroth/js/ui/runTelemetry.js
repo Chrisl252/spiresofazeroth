@@ -1,4 +1,4 @@
-import { BUILD } from "../version.js?v=20261028e";
+import { BUILD } from "../version.js?v=20261029a";
 
 const ENDPOINT = "https://api.thewowdb.com/api/spires/run-end";
 

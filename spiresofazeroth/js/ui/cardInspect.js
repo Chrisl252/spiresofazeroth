@@ -2,7 +2,8 @@
 // slides open beside it. Pure DOM, one document-level listener; the hand keeps its own lift + arrow logic.
 // Glossary sources: data/keywords.json (statuses), class stance/seal/form/aspect/totem cards (their own text),
 // the class resource tip. Explanations chain one level (Berserker Stance text -> its keywords).
-import { iconUrl } from "../engine/data.js?v=20261028e";
+import { iconUrl } from "../engine/data.js?v=20261029a";
+import { overlayHost } from "./dom.js?v=20261029a";
 
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const SPECIAL = [ // rules words that are not statuses but players ask about
@@ -12,6 +13,7 @@ const SPECIAL = [ // rules words that are not statuses but players ask about
   { re: /\bretain\b/i, name: "Retain", icon: "inv_misc_book_09", text: "Stays in your hand at the end of your turn instead of being discarded." },
   { re: /\breturns to your hand\b/i, name: "Returns", icon: "inv_throwingknife_04", text: "Comes back to your hand after you play it. Once per turn." },
   { re: /\bunplayable\b/i, name: "Unplayable", icon: "spell_shadow_curse", text: "Cannot be played. Clogs your hand until it leaves." },
+  { re: /\benergy\b/i, name: "Energy", icon: "spell_arcane_arcane01", text: "Spent to play cards. Refills at the start of each turn." },
   { re: /\bblock\b/i, name: "Block", icon: "ability_defend", text: "Absorbs that much damage this turn. Gone at the start of your next turn." },
   { re: /\bstrength\b/i, name: "Strength", icon: "spell_nature_strength", text: "Each stack adds +1 damage to every attack you make." },
   { re: /\bdexterity\b/i, name: "Dexterity", icon: "ability_rogue_sprint", text: "Each stack adds +1 to every Block you gain." },
@@ -22,7 +24,8 @@ const SPECIAL = [ // rules words that are not statuses but players ask about
 export function installCardInspect(app) {
   const panel = document.createElement("aside");
   panel.className = "spi"; panel.hidden = true; panel.setAttribute("aria-live", "polite");
-  document.body.appendChild(panel);
+  overlayHost().appendChild(panel);
+  document.addEventListener("fullscreenchange", () => overlayHost().appendChild(panel)); // true fullscreen only paints its own subtree: follow it in and out
   let cur = null, raf = 0;
 
   const kwFor = (text, seen) => { // statuses + special words mentioned in text

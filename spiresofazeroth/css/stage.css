@@ -103,6 +103,7 @@ body.sp-stage-on main.spires-app.sp-stage-host > .sp-stage { z-index: 1; }
 .sp-stage.sp-portrait .sp-title-screen__menu { margin-bottom: 90px; gap: 26px; }
 /* 2x2, not a column of four: on a 411x664 phone the column pushed Settings + Download below the screen (title never scrolls) */
 .sp-stage.sp-portrait .sp-title-screen__row { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 26px; }
+.sp-stage.sp-portrait .sp-title-screen__row > :last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; }
 .sp-stage.sp-portrait .sp-title-screen__more { max-width: 900px; padding: 0 40px; }
 .sp-stage.sp-portrait .sp-title-screen h1 { padding: 0 30px; }
 .sp-stage.sp-portrait .sp-title-screen__tag { font-size: 44px; }

@@ -1,7 +1,7 @@
 // Card / enemy / UI sounds from the thewowdb library (data/sounds/cards.json, ui.json, built by tools/spires/sound-map.py).
 // Loaded lazily after first paint; every call is a silent no-op until the JSON is in. Honours sfx.muted (Settings -> Sound effects).
 //   cast(def) at the card-ghost moment, impact(def) at the fx impact instant, enemy(kind, "cast"|"impact"), ui(name), preload(deckIds, classId)
-import { sfx } from "../audio.js?v=20261028e";
+import { sfx } from "../audio.js?v=20261029a";
 
 const BASE = new URL("../../data/sounds/", import.meta.url).href;
 let cards = null, ui = null, loading = null;

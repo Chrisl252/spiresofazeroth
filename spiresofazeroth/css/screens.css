@@ -198,7 +198,7 @@
 .sx-rest__fire { position: absolute; left: 50%; bottom: 56px; width: 900px; height: 560px; margin-left: -450px; z-index: 1; pointer-events: none; }
 .sx-rest__body { position: relative; z-index: 2; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; align-items: center; gap: 28px; padding: 6px 70px 0; overflow-y: auto; }
 .sx-rest__opts { display: flex; gap: 34px; justify-content: center; width: 100%; } .sx-rest__opts .sx-plate { width: 480px; min-height: 330px; justify-content: center; }
-.sx-rest__go { position: absolute; z-index: 3; right: 64px; bottom: 80px; } .sx-rest__go--flow { position: static; display: grid; place-items: center; padding: 10px 0 120px; }
+.sx-rest__go { position: absolute; z-index: 3; right: 64px; bottom: 80px; } .sx-rest__go--flow { position: sticky; bottom: 0; display: grid; place-items: center; padding: 14px 0 28px; margin-top: auto; background: linear-gradient(transparent, rgba(0,0,0,.55) 45%); } /* 10-29 "stuck on this screen": Continue sat below the vendor, off screen */
 .sx-rest__vendor { width: min(1560px, 100%); display: grid; gap: 14px; } .sx-rest__vendor > p { margin: 0 auto; text-align: center; text-shadow: 0 2px 6px #000; }
 .sx-rest--hub .sx-rest__fire { opacity: .55; }
 .sp-portrait .sx-rest__opts { flex-direction: column; align-items: center; gap: 20px; } .sp-portrait .sx-rest__opts .sx-plate { width: 880px; min-height: 0; flex-direction: row; text-align: left; padding: 26px 30px; } .sp-portrait .sx-rest__opts .sx-plate .sx-plate__body { justify-items: start; }

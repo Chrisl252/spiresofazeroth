@@ -1,12 +1,12 @@
 // Run end (stage-native): victory / defeat banner, stat scroll, #end-hero host (class plate until the hero model lands), run_end analytics once per run.
-import { h, icon, track, toast } from "./dom.js?v=20261028e";
-import { recordRunEnd, clearRun } from "../engine/save.js?v=20261028e";
-import { summarize } from "../engine/run.js?v=20261028e";
-import { cssReady, btn, ico, scroll } from "./kit.js?v=20261028e";
-import { mountPortrait } from "./combatKit.js?v=20261028e";
-import { gearLevel } from "../engine/gear.js?v=20261028e";
-import { sp, funnel, encKey } from "../analytics.js?v=20261028e";
-import { recordRunAggregate } from "./runTelemetry.js?v=20261028e";
+import { h, icon, track, toast } from "./dom.js?v=20261029a";
+import { recordRunEnd, clearRun } from "../engine/save.js?v=20261029a";
+import { summarize } from "../engine/run.js?v=20261029a";
+import { cssReady, btn, ico, scroll } from "./kit.js?v=20261029a";
+import { mountPortrait } from "./combatKit.js?v=20261029a";
+import { gearLevel } from "../engine/gear.js?v=20261029a";
+import { sp, funnel, encKey } from "../analytics.js?v=20261029a";
+import { recordRunAggregate } from "./runTelemetry.js?v=20261029a";
 
 export const stageNative = true;
 

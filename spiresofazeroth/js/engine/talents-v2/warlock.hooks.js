@@ -4,11 +4,11 @@
 //   taken(C, tgt, taken, src, o)      damage the player is about to take; return the new amount
 // Read values with tv(C, key, arg) from ../talentHooks.js; keep per-fight state on C.talwarlock (C is one combat).
 // Keys (all "wlk_", text in warlock.defs.js): Affliction pulse/drain/spread/Nightfall, Demonology shards/demon/Soul Link, Destruction crit/burn.
-import { tv } from "../talentHooks.js?v=20261028e";
-import { applyStatus } from "../status.js?v=20261028e";
-import { gainBlock, healEntity, isAlive, fx, dealDamage, dealStatusDamage } from "../damage.js?v=20261028e";
-import { drawCards } from "../deck.js?v=20261028e";
-import { addRes, getRes } from "../resources.js?v=20261028e";
+import { tv } from "../talentHooks.js?v=20261029a";
+import { applyStatus } from "../status.js?v=20261029a";
+import { gainBlock, healEntity, isAlive, fx, dealDamage, dealStatusDamage } from "../damage.js?v=20261029a";
+import { drawCards } from "../deck.js?v=20261029a";
+import { addRes, getRes } from "../resources.js?v=20261029a";
 
 const BOLT = "shadow-bolt", NIGHTFALL_CARDS = ["corruption", "drain-life", "drain-soul"];
 const DRAINS = ["drain-life", "drain-soul", "drain-mana", "siphon-life"];

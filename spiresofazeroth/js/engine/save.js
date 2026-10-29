@@ -1,7 +1,7 @@
 // Persistence: localStorage (always in try/catch, memory fallback), autosave, export/import string, meta progression.
 // Meta: unlocked classes (first 3 in classes/index.json; every victory unlocks the next), Heroic I-X per class, codex seen-sets.
-import { MAX_HEROIC, MIN_HEROIC_OPEN } from "./heroic.js?v=20261028e";
-import { awardProgress } from "./talents.js?v=20261028e";
+import { MAX_HEROIC, MIN_HEROIC_OPEN } from "./heroic.js?v=20261029a";
+import { awardProgress } from "./talents.js?v=20261029a";
 
 const KEY_RUN = "spires.run.v1";
 const KEY_META = "spires.meta.v1";

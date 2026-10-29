@@ -1,11 +1,11 @@
 // Campfire (one action) and the Moonglade hub (all actions: rest, trainer upgrade, vendor, zone well). Stage-native, fire on a canvas.
-import { h, icon, toast, fill } from "./dom.js?v=20261028e";
-import { restHeal, upgradeableCards, upgradeCard, restZoneAction, trainerUpgrade, openHubShop, leaveScreen } from "../engine/run.js?v=20261028e";
-import { shopPanel } from "./shop.js?v=20261028e";
-import { upgradeOverlay, restOverlay } from "./restOverlay.js?v=20261028e";
-import { cssReady, btn, banner, plate } from "./kit.js?v=20261028e";
-import { runBar } from "./runbar.js?v=20261028e";
-import { mountCampfire } from "./campfire.js?v=20261028e";
+import { h, icon, toast, fill } from "./dom.js?v=20261029a";
+import { restHeal, upgradeableCards, upgradeCard, restZoneAction, trainerUpgrade, openHubShop, leaveScreen } from "../engine/run.js?v=20261029a";
+import { shopPanel } from "./shop.js?v=20261029a";
+import { upgradeOverlay, restOverlay } from "./restOverlay.js?v=20261029a";
+import { cssReady, btn, banner, plate } from "./kit.js?v=20261029a";
+import { runBar } from "./runbar.js?v=20261029a";
+import { mountCampfire } from "./campfire.js?v=20261029a";
 
 export const stageNative = true;
 

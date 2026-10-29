@@ -3,10 +3,10 @@
 // Entities (player, enemy, pet, totem) all carry `st: { id: number }`.
 //  - duration statuses: number = turns left, tick down at ROUND END (fresh enemy->player debuffs skip the first tick).
 //  - intensity statuses: number = stacks.
-import { dealStatusDamage, healEntity, gainBlock, fx } from "./damage.js?v=20261028e";
-import { immuneToStatus } from "./immunity.js?v=20261028e";
-import { addRes } from "./resources.js?v=20261028e";
-import { runEffects } from "./effects.js?v=20261028e";
+import { dealStatusDamage, healEntity, gainBlock, fx } from "./damage.js?v=20261029a";
+import { immuneToStatus } from "./immunity.js?v=20261029a";
+import { addRes } from "./resources.js?v=20261029a";
+import { runEffects } from "./effects.js?v=20261029a";
 
 export const STATUS_DEFS = {
   // duration
@@ -93,7 +93,7 @@ export function applyStatus(C, e, id, amount, o = {}) {
     if (isEnemy(e)) fx(C, { t: "miss", uid: e.uid, text: "Immune: " + ((C && C.data && C.data.status && (C.data.status(id) || {}).name) || id.replace(/_/g, " ").replace(/^./, (c) => c.toUpperCase())), kind: "gold" });
     return false;
   }
-  if (amount > 0 && isEnemy(e) && BOSS_TIERS.includes(e.tier) && (id === "fear" || id === "sleep")) return false;
+  if (amount > 0 && isEnemy(e) && BOSS_TIERS.includes(e.tier) && (id === "fear" || id === "sleep")) { fx(C, { t: "miss", uid: e.uid, text: "Immune: " + (id === "fear" ? "Fear" : "Sleep"), kind: "gold" }); return false; } // 10-29 report "Sheep doesnt work": bosses shrugged it off silently
   if (amount > 0 && isEnemy(e) && BOSS_TIERS.includes(e.tier) && (id === "stun" || id === "frozen")) amount = Math.min(amount, 1);
   const mode = modeOf(C, id);
   if (mode === "duration") {
@@ -163,7 +163,7 @@ export function skipsAction(C, e) {
       return id;
     }
   }
-  if (e.st.sleep > 0) return "sleep";
+  if (e.st.sleep > 0) { e.st.sleep -= 1; if (e.st.sleep <= 0) delete e.st.sleep; return "sleep"; } // "Sleep for 2 turns" = 2 skipped actions (it never counted down before)
   return null;
 }
 

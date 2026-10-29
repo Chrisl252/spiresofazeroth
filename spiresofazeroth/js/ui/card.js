@@ -2,8 +2,8 @@
 // cardEl(def, opts) -> Element   opts: { C, inst, cost, data, color, mini, tag, cls, onClick, tips, state }
 // The WoW icon is 64 px (56 px of art inside a baked bevel), so the art is built from two layers: a blurred, saturated, scaled copy as
 // the painted backdrop, and a canvas-upscaled + unsharp-masked copy fading into it. Nothing here touches the engine.
-import { renderText } from "../engine/cardtext.js?v=20261028e";
-import { tip, esc } from "./dom.js?v=20261028e";
+import { renderText } from "../engine/cardtext.js?v=20261029a";
+import { tip, esc } from "./dom.js?v=20261029a";
 const HD = new URL("../../assets/icons-hd/", import.meta.url).href; // 256px upscaled icons, relative so dev + deploy both resolve
 
 export const CARD_W = 260, CARD_H = 380, MINI_W = 130, MINI_H = 190;

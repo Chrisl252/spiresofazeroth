@@ -2,10 +2,10 @@
 // The host LEADS: zone, map node, dungeon floor and final boss are the host's picks; the guest's game follows them (lead -> follow).
 // Everything else (rewards, shops, events, rest, talents) stays personal. Fights are joint: see ui/coopCombat.js + engine/coop.js.
 // Wire messages: hello, status, lead, cready, act, hash, bye.
-import { h, toast } from "../ui/dom.js?v=20261028e";
-import { newSeedString } from "../engine/rng.js?v=20261028e";
-import { enterNode, chooseZone, enterRaidFloor, proceedAfterSpire, chooseFinalBoss } from "../engine/run.js?v=20261028e";
-import * as net from "./net.js?v=20261028e";
+import { h, toast } from "../ui/dom.js?v=20261029a";
+import { newSeedString } from "../engine/rng.js?v=20261029a";
+import { enterNode, chooseZone, enterRaidFloor, proceedAfterSpire, chooseFinalBoss } from "../engine/run.js?v=20261029a";
+import * as net from "./net.js?v=20261029a";
 
 const LEAD_SCREENS = new Set(["map", "zonepick", "raidchoice", "bosschoice"]);
 const SCREEN_NAMES = { map: "the map", zonepick: "zone select", raidchoice: "the dungeon choice", bosschoice: "the boss choice", combat: "a fight", reward: "rewards",

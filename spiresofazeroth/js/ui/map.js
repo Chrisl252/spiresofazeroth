@@ -1,12 +1,12 @@
 // Spire map (stage-native, StS2 style): parchment scroll, ONE tavern start at the bottom centre, 2-3 inked lanes, big plates.
 // Engine calls kept as they were: reachableNodes / enterNode, abandon sets run.screen = "end".
-import { h, icon, tip, toast } from "./dom.js?v=20261028e";
-import { stepFromMap, reachableNodes, prepareZonePick } from "../engine/run.js?v=20261028e";
-import { generateSpire } from "../engine/map.js?v=20261028e";
-import { heroicMods } from "../engine/heroic.js?v=20261028e";
-import { cssReady, ico, btn, dark } from "./kit.js?v=20261028e";
-import { runBar } from "./runbar.js?v=20261028e";
-import { drawPath } from "./mapPath.js?v=20261028e";
+import { h, icon, tip, toast } from "./dom.js?v=20261029a";
+import { stepFromMap, reachableNodes, prepareZonePick } from "../engine/run.js?v=20261029a";
+import { generateSpire } from "../engine/map.js?v=20261029a";
+import { heroicMods } from "../engine/heroic.js?v=20261029a";
+import { cssReady, ico, btn, dark } from "./kit.js?v=20261029a";
+import { runBar } from "./runbar.js?v=20261029a";
+import { drawPath } from "./mapPath.js?v=20261029a";
 
 export const stageNative = true;
 

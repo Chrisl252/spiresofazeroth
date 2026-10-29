@@ -1144,7 +1144,7 @@
       "flags": [
         "exhaust"
       ],
-      "text": "Put an enemy to Sleep for 2 turns (damage wakes it). Exhaust.",
+      "text": "Put an enemy to Sleep for 2 turns (damage wakes it; bosses are immune). Exhaust.",
       "effects": [
         {
           "op": "apply",
@@ -1157,7 +1157,7 @@
       "upgrade": {
         "name": "Polymorph (Rank 2)",
         "cost": 1,
-        "text": "Put an enemy to Sleep for 2 turns (damage wakes it). Exhaust. Costs 1.",
+        "text": "Put an enemy to Sleep for 2 turns (damage wakes it; bosses are immune). Exhaust. Costs 1.",
         "effects": [
           {
             "op": "apply",

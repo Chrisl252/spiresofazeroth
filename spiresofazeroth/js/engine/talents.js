@@ -6,7 +6,7 @@
 // FLOORS_PER_POINT floors cleared + per act + victory, so the 51-point cap takes several runs; TALENT_LIMITS caps what talents can
 // add to a fight (one home: limitTalentMods, applied by talentMods and newRun). Measure with tools/spires/sim.mjs --talents.
 
-import { HOOKS, valueAt, modKey, talentEffects, cardList } from "./talentHookDefs.js?v=20261028e";
+import { HOOKS, valueAt, modKey, talentEffects, cardList } from "./talentHookDefs.js?v=20261029a";
 
 export const TALENT_CAP = 51;            // a level-60 character has 51 points
 export const TIER_STEP = 5;              // points in a tree needed per tier, like the client

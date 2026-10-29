@@ -1,86 +1,110 @@
 {
  "boss": {
+  "spell": 0,
+  "hand": 6,
   "exact": 0,
   "name": 0,
-  "school": 2,
-  "class": 4,
+  "school": 0,
+  "class": 0,
   "total": 6
  },
  "druid": {
-  "exact": 16,
-  "name": 9,
-  "school": 22,
+  "spell": 0,
+  "hand": 47,
+  "exact": 0,
+  "name": 0,
+  "school": 0,
   "class": 0,
   "total": 47
  },
  "hunter": {
-  "exact": 3,
-  "name": 13,
-  "school": 28,
+  "spell": 0,
+  "hand": 44,
+  "exact": 0,
+  "name": 0,
+  "school": 0,
   "class": 0,
   "total": 44
  },
  "mage": {
-  "exact": 12,
-  "name": 9,
-  "school": 23,
+  "spell": 0,
+  "hand": 44,
+  "exact": 0,
+  "name": 0,
+  "school": 0,
   "class": 0,
   "total": 44
  },
  "neutral": {
+  "spell": 0,
+  "hand": 27,
   "exact": 0,
-  "name": 2,
-  "school": 21,
-  "class": 4,
+  "name": 0,
+  "school": 0,
+  "class": 0,
   "total": 27
  },
  "paladin": {
-  "exact": 10,
-  "name": 3,
-  "school": 28,
+  "spell": 0,
+  "hand": 41,
+  "exact": 0,
+  "name": 0,
+  "school": 0,
   "class": 0,
   "total": 41
  },
  "priest": {
-  "exact": 15,
-  "name": 8,
-  "school": 21,
+  "spell": 0,
+  "hand": 44,
+  "exact": 0,
+  "name": 0,
+  "school": 0,
   "class": 0,
   "total": 44
  },
  "rogue": {
-  "exact": 14,
-  "name": 2,
-  "school": 25,
+  "spell": 11,
+  "hand": 28,
+  "exact": 2,
+  "name": 0,
+  "school": 0,
   "class": 0,
   "total": 41
  },
  "shaman": {
-  "exact": 5,
-  "name": 9,
-  "school": 29,
+  "spell": 0,
+  "hand": 43,
+  "exact": 0,
+  "name": 0,
+  "school": 0,
   "class": 0,
   "total": 43
  },
  "status": {
+  "spell": 0,
+  "hand": 4,
   "exact": 0,
   "name": 0,
-  "school": 4,
+  "school": 0,
   "class": 0,
   "total": 4
  },
  "warlock": {
-  "exact": 13,
-  "name": 8,
-  "school": 25,
+  "spell": 0,
+  "hand": 46,
+  "exact": 0,
+  "name": 0,
+  "school": 0,
   "class": 0,
   "total": 46
  },
  "warrior": {
-  "exact": 9,
-  "name": 5,
-  "school": 21,
-  "class": 6,
-  "total": 41
+  "spell": 0,
+  "hand": 42,
+  "exact": 0,
+  "name": 0,
+  "school": 0,
+  "class": 0,
+  "total": 42
  }
 }

@@ -1,7 +1,7 @@
 // Co-op fight glue for ui/combat.js: the handshake that starts a joint fight, the partner-action queue, the shared enemy phase with
 // choreography for hits on YOUR hero, the partner panel, enemy target tags and the desync probe. Rules live in engine/coop.js.
-import { h, toast } from "./dom.js?v=20261028e";
-import * as Coop from "../engine/coop.js?v=20261028e";
+import { h, toast } from "./dom.js?v=20261029a";
+import * as Coop from "../engine/coop.js?v=20261029a";
 
 // Waits (with a "Fight solo" escape) for the partner to reach the same fight, then builds both heroes' combats. null = solo.
 export async function coopStart(app, run) {

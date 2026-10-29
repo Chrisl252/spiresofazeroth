@@ -1,12 +1,12 @@
 // Vendor screen (stage-native) + the reusable goods table (the Moonglade hub embeds shopPanel).
 // A goblin merchant stands left (js/ui/shopVendor.js: model + classic voice lines); the stock lies on a dark wood table right.
 // No Buy buttons: clicking a ware buys it. Styling: css/shop.css.
-import { h, icon, qClass, toast, fill, esc } from "./dom.js?v=20261028e";
-import { buy, buyRemoval, leaveNode } from "../engine/run.js?v=20261028e";
-import { cssReady, btn, dark, ico, cardSlot, stageModal, tip } from "./kit.js?v=20261028e";
-import { runBar } from "./runbar.js?v=20261028e";
-import { mountVendor } from "./shopVendor.js?v=20261028e";
-import { sfx } from "../audio.js?v=20261028e";
+import { h, icon, qClass, toast, fill, esc, overlayHost } from "./dom.js?v=20261029a";
+import { buy, buyRemoval, leaveNode } from "../engine/run.js?v=20261029a";
+import { cssReady, btn, dark, ico, cardSlot, stageModal, tip } from "./kit.js?v=20261029a";
+import { runBar } from "./runbar.js?v=20261029a";
+import { mountVendor } from "./shopVendor.js?v=20261029a";
+import { sfx } from "../audio.js?v=20261029a";
 
 export const stageNative = true;
 
@@ -21,7 +21,7 @@ function fly(from, slug, toSel) {
     const sz = Math.max(36, Math.min(a.width, a.height, 90));
     const el = h("div", { class: "sx-fly" }, icon(slug, "", ""));
     Object.assign(el.style, { left: `${a.left + a.width / 2 - sz / 2}px`, top: `${a.top + a.height / 2 - sz / 2}px`, width: `${sz}px`, height: `${sz}px` });
-    document.body.append(el);
+    overlayHost().append(el);
     const dx = b.left + b.width / 2 - (a.left + a.width / 2), dy = b.top + b.height / 2 - (a.top + a.height / 2);
     const an = el.animate([{ transform: "translate(0,0) scale(1)", opacity: 1 }, { transform: `translate(${dx * 0.5}px,${dy * 0.5 - 70}px) scale(1.15)`, opacity: 1, offset: 0.45 }, { transform: `translate(${dx}px,${dy}px) scale(.3)`, opacity: 0.2 }], { duration: 650, easing: "cubic-bezier(.4,.1,.3,1)" });
     an.onfinish = () => el.remove(); setTimeout(() => el.remove(), 900);

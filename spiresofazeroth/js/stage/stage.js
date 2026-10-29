@@ -1,8 +1,8 @@
 // The #stage root. A 1920x1080 design space scaled with transform: scale() and letterboxed (portrait phones: 1080 wide, full-bleed).
 // Layer stack, bottom to top: backdrop, fog, vignette, actors (WebGL host), fx (canvas host), ui (DOM screens).
 // "Fluid" mode drops the scaling (design space = viewport px) for legacy screens that are laid out as normal documents.
-import { createBackdrop, GROUND_Y } from "./backdrop.js?v=20261028e";
-import { zone as zoneAudio } from "../audio/zone.js?v=20261028e";
+import { createBackdrop, GROUND_Y } from "./backdrop.js?v=20261029a";
+import { zone as zoneAudio } from "../audio/zone.js?v=20261029a";
 
 export const DESIGN = { w: 1920, h: 1080 };
 const PORTRAIT_GROUND_Y = 1010;

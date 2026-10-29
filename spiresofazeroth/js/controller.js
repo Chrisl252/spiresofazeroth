@@ -3,16 +3,16 @@
 import {
   BTN, setAppRef, isGamepadConnected, getActiveGamepadName, rumble,
   setGamepadMode, onGamepadModeChange, isGamepadMode, startPolling
-} from "./controller/input.js?v=20261028e";
-import { updateHudPrompts } from "./controller/hud.js?v=20261028e";
+} from "./controller/input.js?v=20261029a";
+import { updateHudPrompts } from "./controller/hud.js?v=20261029a";
 import {
   isModalOpen, getActiveModalContainer, getFocusedElement,
   clearControllerFocus, setControllerFocus, autoFocusPrimary,
   spatialNavigate, handleMapInput
-} from "./controller/nav.js?v=20261028e";
+} from "./controller/nav.js?v=20261029a";
 import {
   combatCtrl, syncCombatHandSelection, handleCombatInput
-} from "./controller/combat.js?v=20261028e";
+} from "./controller/combat.js?v=20261029a";
 
 export { BTN, isGamepadConnected, getActiveGamepadName, rumble };
 

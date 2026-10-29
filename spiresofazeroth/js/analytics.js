@@ -1,7 +1,7 @@
 // Gameplay analytics (anonymous, consent-gated, aggregate-only). One home for every Spires event the admin "Spires play" page counts.
 // No ids of any kind leave the browser: events are batched and the server only increments daily counters (spires_events_app.py).
 // Off unless the player accepted analytics consent AND the page is served over http(s) (the desktop / Android builds never send).
-import { BUILD } from "./version.js?v=20261028e";
+import { BUILD } from "./version.js?v=20261029a";
 
 const ENDPOINT = "https://api.thewowdb.com/api/spires/events";
 const FLUSH_AT = 12, FLUSH_MS = 20000, MAX_QUEUE = 80;

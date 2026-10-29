@@ -3,11 +3,11 @@
 //   deal(C, src, tgt, amt, o, base)   any non-thorns hit on an enemy (player, pet or totem source; o.card = card def; o.dry = preview, no side effects)
 //   taken(C, tgt, taken, src, o)      damage the player is about to take; return the new amount
 // Read values with tv(C, key, arg) from ../talentHooks.js; keep per-fight state on C.talpriest (C is one combat).
-import { tv } from "../talentHooks.js?v=20261028e";
-import { applyStatus } from "../status.js?v=20261028e";
-import { gainBlock, healEntity, isAlive, dealStatusDamage, dealDamage, fx } from "../damage.js?v=20261028e";
-import { drawCards } from "../deck.js?v=20261028e";
-import { PRI } from "./priest.defs.js?v=20261028e";
+import { tv } from "../talentHooks.js?v=20261029a";
+import { applyStatus } from "../status.js?v=20261029a";
+import { gainBlock, healEntity, isAlive, dealStatusDamage, dealDamage, fx } from "../damage.js?v=20261029a";
+import { drawCards } from "../deck.js?v=20261029a";
+import { PRI } from "./priest.defs.js?v=20261029a";
 
 const S = (C) => C.talpriest || (C.talpriest = { first: false, silenced: false, healsTurn: 0, insp: 0, weave: 0 });
 const isHealSpell = (d) => !!d && d.type === "skill" && (d.effects || []).some((e) => e && e.op === "heal");

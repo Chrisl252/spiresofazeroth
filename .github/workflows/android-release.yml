@@ -36,7 +36,22 @@ jobs:
           node stage.mjs
           npx cap sync android
 
-      - name: Build debug APK (Gradle debug signing, sideload only)
+      - name: Prepare stable signing key (optional)
+        env:
+          KS_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+        run: |
+          if [ -n "$KS_B64" ]; then
+            echo "$KS_B64" | base64 -d > "$RUNNER_TEMP/spires-release.jks"
+            echo "ANDROID_KEYSTORE_PATH=$RUNNER_TEMP/spires-release.jks" >> "$GITHUB_ENV"
+            echo "ANDROID_KEYSTORE_PASSWORD=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" >> "$GITHUB_ENV"
+            echo "ANDROID_KEY_ALIAS=${{ secrets.ANDROID_KEY_ALIAS }}" >> "$GITHUB_ENV"
+            echo "ANDROID_KEY_PASSWORD=${{ secrets.ANDROID_KEY_PASSWORD }}" >> "$GITHUB_ENV"
+            echo "Signing with the stable keystore"
+          else
+            echo "ANDROID_KEYSTORE_B64 not set: falling back to the per-run debug key (updates will need an uninstall)"
+          fi
+
+      - name: Build APK (stable key if provided, else Gradle debug key; sideload only)
         working-directory: android-app/android
         run: ./gradlew assembleDebug --no-daemon
 

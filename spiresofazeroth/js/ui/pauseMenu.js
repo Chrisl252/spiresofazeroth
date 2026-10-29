@@ -1,12 +1,12 @@
 // Escape menu (owner report 2026-10-16): replaces the site's global keybinds + Game Menu inside /spiresofazeroth/.
 // installPauseMenu(app) is called once from main.js. It (1) swallows the site's keybinds, (2) builds the menu on Escape / the HUD Settings button,
 // (3) applies saved speed / volume / track settings at boot. All values persist in meta.settings (engine/save.js).
-import { h } from "./dom.js?v=20261028e";
-import { cssReady, btn, scroll } from "./kit.js?v=20261028e";
-import { sfx } from "../audio.js?v=20261028e";
-import { zone as zoneAudio } from "../audio/zone.js?v=20261028e";
-import { extraRows } from "./pauseExtras.js?v=20261028e";
-import { isGamepadConnected, getActiveGamepadName } from "../controller.js?v=20261028e";
+import { h } from "./dom.js?v=20261029a";
+import { cssReady, btn, scroll } from "./kit.js?v=20261029a";
+import { sfx } from "../audio.js?v=20261029a";
+import { zone as zoneAudio } from "../audio/zone.js?v=20261029a";
+import { extraRows } from "./pauseExtras.js?v=20261029a";
+import { isGamepadConnected, getActiveGamepadName } from "../controller.js?v=20261029a";
 
 const SPEED_MIN = 0.5, SPEED_MAX = 3;
 const ENUM_MUL = { slow: 1 / 1.6, normal: 1, fast: 1 / 0.45 };

@@ -1,9 +1,9 @@
 // Per-class resource layer. Data-driven: class.resource carries ids/amounts, class.resource.modes can override the
 // mode table below. Mechanics covered: rage, combo points, mana, seals + judgement, totems (4 slots), druid forms,
 // stance/aspect switches, priest shadowform (card.formCost), soul shards + pet, hunter pet + traps, mage schools.
-import { runEffects } from "./effects.js?v=20261028e";
-import { applyStatus } from "./status.js?v=20261028e";
-import { fx, log, isAlive } from "./damage.js?v=20261028e";
+import { runEffects } from "./effects.js?v=20261029a";
+import { applyStatus } from "./status.js?v=20261029a";
+import { fx, log, isAlive } from "./damage.js?v=20261029a";
 
 // Default mode semantics (stance/aspect/form values). A class can override via class.resource.modes = { value: {...} }.
 //   atkBonus: +flat damage on player attack-kind hits    spellBonus: +flat on non-physical hits

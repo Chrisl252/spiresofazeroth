@@ -1,13 +1,13 @@
 // Class select (stage-native): nine class plates, details + starting deck, continent / heroic / seed / pet, Begin.
-import { h, icon, cap, track, fill, tip, esc } from "./dom.js?v=20261028e";
-import { isClassUnlocked, unlockText, saveRun, saveMeta } from "../engine/save.js?v=20261028e";
-import { newRun, prepareZonePick } from "../engine/run.js?v=20261028e";
-import { newSeedString } from "../engine/rng.js?v=20261028e";
-import { heroicName, heroicOpen, heroicBlurb } from "../engine/heroic.js?v=20261028e";
-import { cssReady, btn, tog, ico, banner, scroll } from "./kit.js?v=20261028e";
-import { HOME } from "../engine/character.js?v=20261028e";
-import { beginRun } from "./runStart.js?v=20261028e";
-import { repairSpent, talentState, talentMods, talentSummary, classLevel, nextLevelXp, lockedCardIds } from "../engine/talents.js?v=20261028e";
+import { h, icon, cap, track, fill, tip, esc } from "./dom.js?v=20261029a";
+import { isClassUnlocked, unlockText, saveRun, saveMeta } from "../engine/save.js?v=20261029a";
+import { newRun, prepareZonePick } from "../engine/run.js?v=20261029a";
+import { newSeedString } from "../engine/rng.js?v=20261029a";
+import { heroicName, heroicOpen, heroicBlurb } from "../engine/heroic.js?v=20261029a";
+import { cssReady, btn, tog, ico, banner, scroll } from "./kit.js?v=20261029a";
+import { HOME } from "../engine/character.js?v=20261029a";
+import { beginRun } from "./runStart.js?v=20261029a";
+import { repairSpent, talentState, talentMods, talentSummary, classLevel, nextLevelXp, lockedCardIds } from "../engine/talents.js?v=20261029a";
 
 export const stageNative = true;
 

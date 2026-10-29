@@ -448,3 +448,6 @@ button.sp-pot2 {
 .sp-int__zzz i:nth-child(1) { font-size: 26px; } .sp-int__zzz i:nth-child(2) { font-size: 34px; animation-delay: .3s; } .sp-int__zzz i:nth-child(3) { font-size: 44px; animation-delay: .6s; }
 @keyframes sp-zzz { 0%, 100% { transform: translateY(0); opacity: .55; } 50% { transform: translateY(-8px); opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .sp-int__zzz i { animation: none; opacity: .9; } }
+
+/* stealthed enemy: dimmed, not a click / drag target while a visible enemy remains */
+.sp-eplate.is-stealth { opacity: .6; } .sp-eplate.is-stealth .sp-ep__name::after { content: " (Stealthed)"; font-size: .8em; color: #9fb4d6; }

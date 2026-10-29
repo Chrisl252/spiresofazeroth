@@ -4,15 +4,15 @@
 // ctx = { C, src, srcKind, target, attacker, card, cardInst, relic, event, run, rng, spent, X, trapFiring }
 //   srcKind: player | enemy | pet | totem | relic | potion | zone | event
 //   C is null in run-mode (events, shop, rest, pickup): only run-level ops take effect (hp, gold, deck, max hp).
-import { dealDamage, dealStatusDamage, gainBlock, healEntity, isAlive, fx, log } from "./damage.js?v=20261028e";
-import { applyStatus, removeStatus, modeOf, STATUS_DEFS, hasTrait } from "./status.js?v=20261028e";
-import { drawCards, addCards, toDiscard, toExhaust, makeInst, hasFlag, HAND_LIMIT } from "./deck.js?v=20261028e";
+import { dealDamage, dealStatusDamage, gainBlock, healEntity, isAlive, fx, log } from "./damage.js?v=20261029a";
+import { applyStatus, removeStatus, modeOf, STATUS_DEFS, hasTrait } from "./status.js?v=20261029a";
+import { drawCards, addCards, toDiscard, toExhaust, makeInst, hasFlag, HAND_LIMIT } from "./deck.js?v=20261029a";
 import {
   addRes, spendRes, summonAlly, placeTotem, petAct, judge, revivePet, sacrificePet, randomPetId, petTargetable,
-} from "./resources.js?v=20261028e";
-import { spawnEnemy } from "./intents.js?v=20261028e";
-import { extraCond, installMoreOps } from "./effects-more.js?v=20261028e";
-import { talentApplyBonus, talentSkipSelfHit } from "./talentHooks.js?v=20261028e";
+} from "./resources.js?v=20261029a";
+import { spawnEnemy } from "./intents.js?v=20261029a";
+import { extraCond, installMoreOps } from "./effects-more.js?v=20261029a";
+import { talentApplyBonus, talentSkipSelfHit } from "./talentHooks.js?v=20261029a";
 
 const MUL_SCALES = new Set(["combo", "combo_points"]); // "N per point" reads as base + per * count; everything else base + floor(count / per)
 
@@ -74,6 +74,7 @@ export function enemyAim(C, e) {
   if (p.pet && isAlive(p.pet) && petTargetable(C)) abs.push(p.pet);
   for (const t of Object.values(p.totems || {})) if (t && t.hp > 0) abs.push(t);
   if (p.tauntRound === "self") return p;
+  if (typeof p.tauntRound === "string" && p.tauntRound.startsWith("totem-")) { const t = abs.find((a) => a.uid === p.tauntRound); if (t) return t; } // Stoneclaw: its own uid, while it stands
   if (p.tauntRound && abs.length) return C.rng.pick(abs);
   if (e.aim && e.aim !== "player") {
     const found = abs.find((a) => a.uid === e.aim);
@@ -342,6 +343,7 @@ op("draw", (ctx, e) => {
     const before = C.pile.hand.length;
     drawCards(C, n);
     if (ctx.srcKind !== "enemy" && C.pile.hand.length - before < n && C.pile.hand.length >= HAND_LIMIT) C.drawBlocked = "hand";
+    else if (ctx.srcKind !== "enemy" && C.pile.hand.length - before < n && !C.pile.draw.length && !C.pile.discard.length) C.drawBlocked = "empty"; // 10-29 report: draws "stopped working" silently
   }
 });
 
@@ -505,6 +507,9 @@ op("gold", (ctx, e) => {
 op("max_hp", (ctx, e) => {
   const run = ctx.C ? ctx.C.run : ctx.run;
   const amt = Math.floor(num(ctx, e.amount));
+  if (ctx.C && e.combat) { // "+N max HP this combat" (Dire Bear Form): the hero only; finishCombat takes it back (10-29 report: it stuck for the run)
+    const p = ctx.C.player; p.maxHp = Math.max(1, p.maxHp + amt); p.hp = Math.min(p.maxHp, p.hp + (amt > 0 ? amt : 0)); ctx.C.tempMaxHp = (ctx.C.tempMaxHp || 0) + amt; return;
+  }
   if (run) { run.maxHp = Math.max(1, run.maxHp + amt); run.hp = Math.min(run.maxHp, Math.max(1, run.hp + (amt > 0 ? amt : 0))); }
   if (ctx.C) { const p = ctx.C.player; p.maxHp = Math.max(1, p.maxHp + amt); p.hp = Math.min(p.maxHp, p.hp + (amt > 0 ? amt : 0)); }
 });
@@ -522,7 +527,10 @@ op("cast_interrupt", (ctx, e) => {
   }
 });
 // Taunt: single-target enemy attacks this round go to you (default: Target Dummy, Growl) or, with to:"pet", to your pet/totems (Distracting Shot)
-op("taunt", (ctx, x) => { if (ctx.C && ctx.srcKind !== "enemy") ctx.C.player.tauntRound = x && x.to === "pet" ? "pet" : "self"; });
+op("taunt", (ctx, x) => { // a totem's taunt (Stoneclaw) pulls attacks onto THAT totem; it used to set "self" and send every hit to the hero (10-29 report)
+  if (!ctx.C || ctx.srcKind === "enemy") return;
+  ctx.C.player.tauntRound = ctx.srcKind === "totem" && ctx.src && ctx.src.uid ? ctx.src.uid : x && x.to === "pet" ? "pet" : "self";
+});
 op("revive", (ctx, e) => {
   const C = ctx.C;
   if (!C) return;

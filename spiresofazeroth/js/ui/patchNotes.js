@@ -3,19 +3,34 @@
 // Update check: polls version.js (no-store) every few minutes and on tab focus; when the server BUILD differs from the
 // BUILD this page loaded, a pill floats at the top of the screen. Clicking it reloads onto the new build.
 // Wired by ONE line in js/main.js.
-import { h, icon } from "./dom.js?v=20261028e";
-import { btn, stageModal } from "./kit.js?v=20261028e";
-import { BUILD } from "../version.js?v=20261028e";
+import { h, icon, overlayHost } from "./dom.js?v=20261029a";
+import { btn, stageModal } from "./kit.js?v=20261029a";
+import { BUILD } from "../version.js?v=20261029a";
 
 let appRef = null; // set by installPatchNotes: the window is a stage modal (stage px, same frame as every other menu panel)
 
-const SEEN_KEY = "spires.notesSeen", NOTES_ID = "2026-10-28-e", POLL_MS = 4 * 60 * 1000;
+const SEEN_KEY = "spires.notesSeen", NOTES_ID = "2026-10-28-i", POLL_MS = 4 * 60 * 1000;
 
 // Newest build first. Each entry: [tag, text] where tag is "new" | "fix" | "bal"; a leading "Name: " in the text is bolded.
 // OPEN_BUILDS: how many of the newest builds start expanded; the rest are collapsed <details>.
 const OPEN_BUILDS = 2;
 const TAGS = { new: "New", fix: "Fix", bal: "Balance" };
 const BUILDS = [
+  { id: "28i", date: "Oct 28", title: "Fullscreen, stealth, summons", entries: [
+    ["fix", "Fullscreen: card tips, the deck view, the shop and messages now show in fullscreen"],
+    ["fix", "Stealth: a stealthed enemy can no longer be picked with a click or drag while another enemy is visible"],
+    ["fix", "Summons: re-summoned enemies, like Hogger's Riverpaws, now always get a model, nameplate and health bar"],
+    ["fix", "Cards: Energy is now explained in the card tooltip"],
+  ] },
+  { id: "28h", date: "Oct 28", title: "Every class sounds", entries: [
+    ["new", "Sound: every class now plays real spell sounds. Druid, Hunter, Mage, Paladin, Priest, Shaman, Warlock and Warrior cards were checked one by one, so shapeshifts, stings, traps, blessings, totems, curses and shouts each have their own cast and impact."],
+  ] },
+  { id: "28g", date: "Oct 28", title: "Rogue sounds", entries: [
+    ["new", "Rogue: every card now plays real rogue sounds. Throw uses the shuriken toss, Kick and Gouge have their own hits, the poisons, Blade Flurry, Preparation and the rest sound like the abilities they are."],
+  ] },
+  { id: "28f", date: "Oct 28", title: "Real spell sounds", entries: [
+    ["new", "Sound: every class's cards now play their real spell sounds from the game. Fireball, Frostbolt, Polymorph, Smite, Lightning Bolt and the rest use the casting and impact sounds the game itself assigns to those spells."],
+  ] },
   { id: "28e", date: "Oct 28", title: "Phone title screen", entries: [
     ["fix", "Phones: Settings and Download were below the bottom of the title screen and couldn't be tapped. The small buttons now sit two by two so everything fits."],
   ] },
@@ -204,7 +219,7 @@ function showUpdatePill(latest) {
   const pill = h("button", { class: "sp-update-pill", title: `You're on ${BUILD}, the latest is ${latest}`,
     onClick: () => { pill.textContent = "Updating..."; location.reload(); } },
     h("span", { class: "sp-update-dot" }), "New update available: click to update");
-  document.body.append(pill);
+  overlayHost().append(pill);
 }
 
 export function installPatchNotes(app) {

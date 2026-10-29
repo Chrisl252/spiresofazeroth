@@ -1,7 +1,7 @@
 // Live-player heartbeat: while the tab is visible, ping every 30s so the WoWDex console can count players right now.
 // Anonymous by design: a random id that lives only in this tab's memory (no cookie, no storage), plus build / screen / class.
 // Wired by ONE line in js/main.js. Server side: wowgoldfarms spires_live_app.py (POST /api/spires/ping -> 204).
-import { BUILD } from "../version.js?v=20261028e";
+import { BUILD } from "../version.js?v=20261029a";
 
 const ENDPOINT = "https://api.thewowdb.com/api/spires/ping", EVERY_MS = 30 * 1000;
 const sid = Array.from(crypto.getRandomValues(new Uint8Array(8)), (b) => b.toString(16).padStart(2, "0")).join("");

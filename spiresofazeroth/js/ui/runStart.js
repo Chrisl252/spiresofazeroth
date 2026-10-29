@@ -1,11 +1,11 @@
 // Starts a run (shared by the class-details screen and Enter World): newRun + the account-talent mods, remembers the character on the run.
-import { sp, funnel } from "../analytics.js?v=20261028e";
-import { track } from "./dom.js?v=20261028e";
-import { saveRun, saveMeta, loadRun } from "../engine/save.js?v=20261028e";
-import { newRun, prepareZonePick } from "../engine/run.js?v=20261028e";
-import { newSeedString } from "../engine/rng.js?v=20261028e";
-import { repairSpent, talentMods } from "../engine/talents.js?v=20261028e";
-import { characterOf } from "../engine/character.js?v=20261028e";
+import { sp, funnel } from "../analytics.js?v=20261029a";
+import { track } from "./dom.js?v=20261029a";
+import { saveRun, saveMeta, loadRun } from "../engine/save.js?v=20261029a";
+import { newRun, prepareZonePick } from "../engine/run.js?v=20261029a";
+import { newSeedString } from "../engine/rng.js?v=20261029a";
+import { repairSpent, talentMods } from "../engine/talents.js?v=20261029a";
+import { characterOf } from "../engine/character.js?v=20261029a";
 
 // st: { cls, continent, seed, heroic, pet }; character: a saved character (or null for a nameless default)
 export async function beginRun(app, st, character) {

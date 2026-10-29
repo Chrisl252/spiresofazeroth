@@ -7,8 +7,8 @@ android {
         applicationId "com.thewowdb.spiresofazeroth"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 4
+        versionName "1.0.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -16,7 +16,22 @@ android {
             ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    // Stable signing: when the workflow decodes a keystore from GitHub secrets it exports ANDROID_KEYSTORE_PATH + passwords/alias.
+    // Without them the build falls back to the runner's throwaway debug key (every release then has a different signature).
+    signingConfigs {
+        stable {
+            if (System.getenv("ANDROID_KEYSTORE_PATH")) {
+                storeFile file(System.getenv("ANDROID_KEYSTORE_PATH"))
+                storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
+                keyAlias System.getenv("ANDROID_KEY_ALIAS")
+                keyPassword System.getenv("ANDROID_KEY_PASSWORD")
+            }
+        }
+    }
     buildTypes {
+        debug {
+            if (System.getenv("ANDROID_KEYSTORE_PATH")) signingConfig signingConfigs.stable
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

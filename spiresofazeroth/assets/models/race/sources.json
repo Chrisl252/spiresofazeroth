@@ -1,0 +1,22 @@
+{
+ "human-male": 1011653,
+ "human-female": 1000764,
+ "orc-male": 917116,
+ "orc-female": 949470,
+ "dwarf-male": 878772,
+ "dwarf-female": 950080,
+ "nightelf-male": 974343,
+ "nightelf-female": 921844,
+ "undead-male": 959310,
+ "undead-female": 997378,
+ "tauren-male": 968705,
+ "tauren-female": 986648,
+ "gnome-male": 900914,
+ "gnome-female": 940356,
+ "troll-male": 1022938,
+ "troll-female": 1018060,
+ "bloodelf-male": 1100087,
+ "bloodelf-female": 1100258,
+ "draenei-male": 1005887,
+ "draenei-female": 1022598
+}

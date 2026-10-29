@@ -1,0 +1,376 @@
+/* Google Fonts are loaded via <link> in each page's <head> to avoid a render-blocking CSS @import chain. */
+
+:root {
+  /* BLIZZARD PALETTE (owner directive 2026-09-02: no green chrome, sitewide). The game
+     client's own colors: near-black slate panels, bronze/gold frame edges, gold #ffd100
+     headings, parchment text. The "--wgf-gold-*" token NAMES are unchanged (renaming would
+     touch every consuming sheet) and carry gold again. Item-quality green (--q-uncommon) and
+     market up-green (--wgf-up) are Blizzard semantics and stay. Navy remains owner-condemned
+     (surfaces are near-neutral: B-R <= 12 on every surface hex).
+     See docs/ui-ux/17-blizzard-palette.md (supersedes 15-ithildin-reskin.md). */
+  --wgf-bg-base: #0a0b0f;
+  --wgf-bg: var(--wgf-bg-base);
+  --wgf-bg-2: #0d0f14;
+  --wgf-bg-hero:
+    linear-gradient(135deg, rgba(26, 28, 36, 0.92), rgba(9, 10, 14, 0.96)),
+    radial-gradient(circle at top right, rgba(var(--wgf-gold-rgb), 0.10), transparent 24rem);
+
+  --wgf-panel: #14161c;
+  --wgf-border: rgba(var(--wgf-gold-rgb), 0.20);
+  --wgf-border-strong: rgba(var(--wgf-gold-rgb), 0.38);
+
+  --wgf-gold-primary: #ffd100;
+  --wgf-gold: var(--wgf-gold-primary);
+  --wgf-gold-bright: #ffe375;
+  --wgf-gold-link: #ffe375;
+  --wgf-gold-hover: #e8b923;
+  --wgf-gold-accent: #b7912f;
+  --wgf-gold-muted: #b5a06a;  /* also the lore voice color (.wgf-lore) */
+  --wgf-gold-soft: #d4ad3d;
+  --wgf-gold-dim: #8a7440;    /* DECORATIVE ONLY (4.0:1), never text */
+  --wgf-gold-dark: #4a3c1c;
+  --wgf-gold-shadow: #2a2210;
+  --coin-gold: #f5c300;
+  --coin-silver: #c0c0c0;
+  --coin-copper: #c8602c;
+
+  /* WoW item-quality scale (standard client palette). Single token home — the gear grid,
+     item identity header, item index and cheapest-realm sheets all consume these; the
+     page-scoped copies in item-index.css / cheapest-realm.css predate this block. */
+  --q-poor: #9d9d9d;
+  --q-common: #ffffff;
+  --q-uncommon: #1eff00;
+  --q-rare: #0070dd;
+  --q-epic: #a335ee;
+  --q-legendary: #ff8000;
+  --q-artifact: #e6cc80;
+  --q-heirloom: #00ccff;
+
+  --wgf-text: #f4ecd8;   /* parchment */
+  --wgf-muted: #b3a88f;  /* never in item-name cells (q-poor ambiguity) */
+  --wgf-link: var(--wgf-gold-link);
+
+  --font-display: 'Cinzel', 'Palatino Linotype', 'Trajan Pro', serif;
+  --font-ui: 'Crimson Text', Georgia, 'Times New Roman', serif;
+  --font-serif: var(--font-display); /* DEPRECATED alias — do not use at call sites; pick --font-display (headings) or --font-ui (body) by role */
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* The game client's own faces (first-party, CASC-extracted 2026-07-03 — see
+     docs/ui-ux/11-blizzard-assets.md §2 fonts lane). Friz Quadrata is what every name,
+     number and label in the client renders in; Morpheus is the quest/dialog display face.
+     Use --font-game on in-game-skinned data surfaces (leaderboards, tooltips, AH) so one
+     face carries identity AND numbers — the client never mixes faces on one panel. */
+  --font-game: 'FrizQuadrata', 'Cinzel', 'Palatino Linotype', serif;
+  --font-game-display: 'Morpheus', 'Cinzel', serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 96px;
+
+  --radius-control: 4px;   /* inputs, buttons-square, small chips (in-game plate: squared) */
+  --radius-card: 5px;      /* cards, panels, tables shells (in-game plate: squared) */
+  --radius-hero: 6px;      /* hero blocks, large feature panels (in-game plate: squared) */
+  --radius-pill: 999px;    /* pills, toggles, nav active state */
+
+  /* RGB channels for alpha compositing (replaces scattered rgba literals).
+     Canonical brand = #ffd100 (Blizzard gold, 2026-09-02); this channel matches it. */
+  --wgf-gold-rgb: 255, 209, 0;
+
+  /* Text that sits on a gold fill (dark bronze ink) */
+  --wgf-on-gold: #1a1200;
+
+  /* Canonical neutral panel/border ramp shared by all surfaces (near-black slate) */
+  --wgf-panel-1: #14161c;
+  --wgf-panel-2: #1a1d24;
+  --wgf-panel-3: #22252d;
+  --wgf-border-neutral: #2e313a;
+  --wgf-border-neutral-soft: #202229;
+
+  /* Chrome-kit structural tokens (single home, 2026-07-04 uiux-standardization).
+     Previously defined twice: wgf-chrome.css :root + a mirror copy in ah-deals.css
+     for pages that load deals without the full kit. Every page loads this file
+     first, so the kit numbers live here and only here.
+     --wgf-plate  window body = the near-black inset well (owner round 3, image 84)
+     --wgf-metal  frame edge tone; --wgf-well the recessed table surface (ig-63/64).
+     Blizzard materials: metal = bronze frame edge (NEVER a text color),
+     well = the near-black inset (quality colors live here). */
+  --wgf-metal: #6e5a2a;
+  --wgf-metal-soft: #3a3120;
+  --wgf-well: #08090c;
+  --wgf-well-edge: #040507;
+  --wgf-plate: var(--wgf-well);
+  --wgf-plate-hi: var(--wgf-panel);      /* header/tab raised warm-stone */
+  /* Guides reference, extended sitewide by the owner on 2026-09-06. */
+  --wgf-guide-surface: linear-gradient(180deg, rgba(12, 12, 30, 0.97), rgba(5, 5, 16, 0.97));
+  --wgf-guide-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.55);
+  --wgf-btn-h: 34px;                     /* logical red-button height */
+  --wgf-btn-cap: 15px;                   /* true 56px edge caps at 34px height (owner fix 2026-07-04) */
+  --wgf-input-h: 36px;
+  --wgf-dropdown-h: 34px;
+
+  /* Shell aliases (moved from wgf-site-shell.css :root, 2026-07-04) */
+  --wgf-gold-2: var(--wgf-gold-link);
+  --wgf-focus: #ffe375;                  /* keyboard focus ring color */
+
+  /* Semantic market colors — the SAME across every tool */
+  --wgf-up: #3fcf6b;        /* price went up / good */
+  --wgf-down: #e5564b;      /* price went down / bad */
+  --wgf-neutral-text: #9b9384;
+
+  /* Text-legibility (Hall, Tier 2) — dark ink outline so class/quality-coloured text
+     stays readable on class-coloured washes and dungeon art. One home; never a per-row
+     guess. See docs/ui-ux/01-foundations.md (legibility contract). */
+  --text-ink-outline: 0 1px 2px rgba(0,0,0,.92), 0 0 4px rgba(0,0,0,.6);
+
+  /* Faction identity (M09) — realm taxonomy ONLY, never price direction.
+     --fc-* are in-game brand colors for Alliance / Horde metadata.
+     Do NOT use these where --wgf-up / --wgf-down are appropriate. */
+  --fc-alliance: #3a6fd8;   /* Alliance blue (identity) */
+  --fc-horde:    #c8403a;   /* Horde red    (identity) */
+
+  /* RGB channels of the semantic colors for alpha compositing (same pattern as --wgf-gold-rgb) */
+  --wgf-up-rgb: 63, 207, 107;
+  --wgf-down-rgb: 229, 86, 75;
+
+  /* ── Step 1 additions (2026-06-20) — additive only; nothing consumes these yet,
+        so no current page changes until components adopt them. See docs/ui-ux/01-foundations.md. ── */
+
+  /* Container widths (max content widths + gutter) */
+  --container-prose: 720px;   /* guides / long-form reading width */
+  --container-tool: 1100px;   /* discovery & detail tool surfaces */
+  --container-wide: 1320px;   /* dense tables / leaderboards */
+  --container-pad: var(--space-4);  /* gutter (use --space-3 on mobile) */
+
+  /* Elevation — the entire shadow vocabulary (depth comes from panel layers + these) */
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);    /* resting card */
+  --shadow-2: 0 4px 16px rgba(0, 0, 0, 0.5);   /* popover / menu / tooltip */
+
+  /* Motion — functional only, 120–180ms. No decorative/keyframed/glow motion. */
+  --motion-fast: 120ms;   /* hover, focus, color/opacity */
+  --motion-base: 180ms;   /* menus, disclosure, dropdowns */
+  --ease-standard: cubic-bezier(.2, 0, 0, 1);
+
+  /* Focus ring — one visible gold ring for every interactive element (:focus-visible) */
+  --focus-ring: 0 0 0 2px var(--wgf-bg), 0 0 0 4px var(--wgf-gold-primary);
+}
+
+h2 {
+  color: var(--wgf-gold-primary);
+}
+
+.section-heading {
+  /* Window-chrome headings (2026-07-02): the display face is reserved for the masthead/h1 —
+     ALL-CAPS Cinzel at every size was the "AI fantasy template" tell. */
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  color: var(--wgf-gold-primary);
+  letter-spacing: 0.01em;
+}
+
+/* First-party game-client faces — extracted from CASC (fonts/frizqt__.ttf, fonts/morpheus.ttf,
+   fonts/arialn.ttf, fonts/skurri.ttf) via the TACTTool lane, converted to woff2. One weight per
+   face (the client has no bold cuts; the browser synthesizes 600/700 where asked). */
+@font-face {
+  font-family: 'FrizQuadrata';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(/assets/fonts/frizqt.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Morpheus';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(/assets/fonts/morpheus.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'ArialNarrowWoW';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(/assets/fonts/arialn.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'SkurriWoW';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(/assets/fonts/skurri.woff2) format('woff2');
+}
+
+/* Self-hosted Google Fonts (latin + latin-ext) — generated 2026-06-18 for perf:
+   removes the 2 cross-origin handshakes (fonts.googleapis.com + fonts.gstatic.com). */
+
+/* latin-ext */
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/assets/fonts/8vIJ7ww63mVu7gt7-GT7LEc.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/assets/fonts/8vIJ7ww63mVu7gt79mT7.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* latin-ext */
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/assets/fonts/8vIJ7ww63mVu7gt7-GT7LEc.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/assets/fonts/8vIJ7ww63mVu7gt79mT7.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* latin-ext */
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/assets/fonts/8vIJ7ww63mVu7gt7-GT7LEc.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/assets/fonts/8vIJ7ww63mVu7gt79mT7.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* latin-ext */
+@font-face {
+  font-family: 'Crimson Text';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/assets/fonts/wlpogwHKFkZgtmSR3NB0oRJfajhfK_Zt3Q.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+  font-family: 'Crimson Text';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/assets/fonts/wlpogwHKFkZgtmSR3NB0oRJfajhRK_Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* latin-ext */
+@font-face {
+  font-family: 'Crimson Text';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/assets/fonts/wlp2gwHKFkZgtmSR3NB0oRJfYQhTM_I.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+  font-family: 'Crimson Text';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/assets/fonts/wlp2gwHKFkZgtmSR3NB0oRJfbwhT.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* latin-ext */
+@font-face {
+  font-family: 'Crimson Text';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/assets/fonts/wlppgwHKFkZgtmSR3NB0oRJXsCxGAtNQ5LE.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+  font-family: 'Crimson Text';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/assets/fonts/wlppgwHKFkZgtmSR3NB0oRJXsCxGDNNQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/assets/fonts/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx7cwhsk.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/assets/fonts/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/assets/fonts/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx7cwhsk.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/assets/fonts/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}

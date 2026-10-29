@@ -12,5 +12,7 @@ mkdirSync(dest, { recursive: true });
 for (const f of ["index.html", "LICENSE"]) cpSync(join(game, f), join(dest, f));
 for (const d of ["js", "css", "data", "assets"]) if (existsSync(join(game, d))) cpSync(join(game, d), join(dest, d), { recursive: true });
 // the game lives under /spiresofazeroth/ (it uses ../../assets and /assets paths); the root just forwards there
+// offline runtime: three.js + wgf CSS/fonts the page loads from absolute /assets and /static paths (no network needed to render or reach class select)
+cpSync(join(here, "..", "offline"), out, { recursive: true });
 writeFileSync(join(out, "index.html"), '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=/spiresofazeroth/"><a href="/spiresofazeroth/">Spires of Azeroth</a>');
 console.log("staged ->", out);

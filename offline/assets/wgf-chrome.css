@@ -1,0 +1,1688 @@
+/* =============================================================================
+   wgf-chrome.css - THE in-game chrome kit
+   -----------------------------------------------------------------------------
+   Owner law: docs/ui-ux/13-ingame-reference.md
+     - Sec 0.4  the container standard (ig-38 charcoal plate + beveled frame)
+     - Sec 0.6  the red button standard (ig-43/44/48 red plate, gold Friz text)
+     - Sec 0.9  THE chrome kit ("we need these buttons and containers and
+                stylizing done site wide") - this file is that kit.
+
+   The look is NOT hand-drawn: every metal/red texture here is the client's OWN
+   UI atlas art, sliced by tools/slice_ui_atlas.py into /assets/ui/*.png. Flat
+   colors, gold text and spacing come from the design tokens in
+   static/css/_tokens.css - never a raw value a token already covers. No AI art.
+
+   Consume the tokens: load static/css/_tokens.css BEFORE this file.
+
+   Components:
+     .wgf-btn-red        client red action button (left/center/right slices)
+     .wgf-window         client metal-frame window (UIFrameMetal NineSlice + stone)
+     .wgf-window__title  window title band (metal edge-top slice)
+     .wgf-well/.wgf-inset client inset frame (UI-Frame-Inner rims + marble)
+     .wgf-ftab           client frame tab (uiframe-tab slices)
+     .wgf-window__x      red X close affordance (exit icon slice)
+     .wgf-window__tabs   tab strip on the plate edge
+     .wgf-tab            one squared tab (active = lit gold)
+     .wgf-plate-row      Warband character plate row (ig-49), --selected = gold
+     .wgf-dialog-banner  NPC dialog banner (ig-50)
+   ============================================================================= */
+
+/* Chrome-kit structural tokens (--wgf-plate/-hi, --wgf-metal/-soft, --wgf-well/-edge,
+   --wgf-btn-h/-cap, --wgf-input-h, --wgf-dropdown-h) live in /static/css/_tokens.css
+   (single home, 2026-07-04 uiux-standardization; slice art root: /assets/ui). The
+   window-plate history (owner rounds 2/3, image 84: plate = the near-black well) is
+   documented there with the values. */
+
+/* -----------------------------------------------------------------------------
+   .wgf-btn-red - the client red action button.
+   Built from three real slices layered as backgrounds (text always paints
+   above the backgrounds, so long labels never clip):
+     left cap   (128-redbutton-left)   anchored left
+     right cap  (128-redbutton-right)  anchored right
+     center     (_128-redbutton-center) tiled horizontally to fill
+   All slices are 128px tall hi-res art rendered at 100% of the button height
+   (~34px), so they stay crisp. Label = yellow-gold Friz (--font-game).
+   States: default / :hover (brightness lift) / :active (pressed slices) /
+   [disabled] and .is-disabled (disabled slices, no pointer).
+
+   Usage:
+     <button class="wgf-btn-red">Enter World</button>
+     <a class="wgf-btn-red" href="...">Track item</a>
+   --------------------------------------------------------------------------- */
+.wgf-btn-red {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: var(--wgf-btn-h);
+  min-width: 96px;
+  padding: 0 var(--space-4);
+  border: 0;
+  border-radius: 0;
+  /* True 56px edge caps + the center tile CLIPPED to the content box between
+     them (padding MUST equal the cap width exactly: wider leaves a transparent
+     gap, narrower re-creates the doubled edge under a cap's alpha - the glitch
+     the owner circled 2026-07-04). min-width + flex centering keep labels clear. */
+  background:
+    url(/assets/ui/128-redbutton-left-cap.png) left center / auto 100% no-repeat border-box,
+    url(/assets/ui/128-redbutton-right-cap.png) right center / auto 100% no-repeat border-box,
+    url(/assets/ui/_128-redbutton-center.png) left center / auto 100% repeat-x content-box;
+  padding: 0 var(--wgf-btn-cap);
+  background-color: transparent;
+  color: var(--wgf-gold-bright);
+  font-family: var(--font-game);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: var(--text-ink-outline);
+  cursor: pointer;
+  user-select: none;
+  transition: filter var(--motion-fast) var(--ease-standard);
+}
+
+.wgf-btn-red:hover {
+  /* The atlas ships a soft glow overlay (128-redbutton-highlight); a brightness
+     lift reads the same across every button width and stays crisp. */
+  filter: brightness(1.12);
+}
+
+.wgf-btn-red:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.wgf-btn-red:active {
+  background:
+    url(/assets/ui/128-redbutton-left-cap-pressed.png) left center / auto 100% no-repeat border-box,
+    url(/assets/ui/128-redbutton-right-cap-pressed.png) right center / auto 100% no-repeat border-box,
+    url(/assets/ui/_128-redbutton-center-pressed.png) left center / auto 100% repeat-x content-box;
+  /* Pressed reads as a real push (owner 2026-07-04: "the force action should be
+     a little bit better"): the pressed slices plus a 1px sink and a slight dim. */
+  transform: translateY(1px);
+  filter: brightness(0.92);
+}
+
+.wgf-btn-red[disabled],
+.wgf-btn-red.is-disabled {
+  background:
+    url(/assets/ui/128-redbutton-left-cap-disabled.png) left center / auto 100% no-repeat border-box,
+    url(/assets/ui/128-redbutton-right-cap-disabled.png) right center / auto 100% no-repeat border-box,
+    url(/assets/ui/_128-redbutton-center-disabled.png) left center / auto 100% repeat-x content-box;
+  color: var(--wgf-gold-dim);
+  cursor: default;
+  pointer-events: none;
+  filter: none;
+}
+
+/* Larger primary CTA (ig-48 "Enter World" scale). Cap scales with height:
+   56px source at 44px height = 19px logical. */
+.wgf-btn-red.wgf-btn-red--lg {
+  --wgf-btn-h: 44px;
+  --wgf-btn-cap: 19px;
+  min-width: 200px;
+  font-size: var(--text-md);
+}
+
+/* Small red button (owner review round 2, verdict 5): the pagination controls and
+   other compact actions. The caps SCALE with the button height via `auto 100%`, so
+   at 26px tall the 56px source cap renders ~11px wide; the padding==cap-width rule
+   still holds (--wgf-btn-cap MUST equal that scaled cap width, or the center tile
+   gaps under a cap's alpha - the same glitch the base button guards against). */
+.wgf-btn-red.wgf-btn-red--sm {
+  --wgf-btn-h: 26px;
+  --wgf-btn-cap: 11px;
+  min-width: 30px;
+  font-size: var(--text-xs);
+}
+/* the current page reads as PRESSED (the pressed cap slices + 1px sink), the same
+   language as .wgf-btn-red:active, but persistent via aria-current. */
+.wgf-btn-red[aria-current="page"] {
+  background:
+    url(/assets/ui/128-redbutton-left-cap-pressed.png) left center / auto 100% no-repeat border-box,
+    url(/assets/ui/128-redbutton-right-cap-pressed.png) right center / auto 100% no-repeat border-box,
+    url(/assets/ui/_128-redbutton-center-pressed.png) left center / auto 100% repeat-x content-box;
+  transform: translateY(1px);
+  filter: brightness(0.92);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* The sanctioned "new feature" flag (ig-56): a tiny purple NEW mini-badge that
+   rides a button's LEFT edge - the ONLY new-feature idiom (owner 2026-07-04).
+   Put it on a positioned wrapper around the button.
+   Usage:  <span class="wgf-has-new"><button class="wgf-btn-red">...</button>
+             <span class="wgf-badge-new">New</span></span> */
+.wgf-has-new { position: relative; display: inline-flex; }
+.wgf-badge-new {
+  position: absolute;
+  top: -6px;
+  left: -8px;
+  z-index: 1;
+  padding: 1px 5px;
+  /* NEW badge: bright gold text on dark bronze, ramp tokens only
+     (docs/ui-ux/17-blizzard-palette.md). */
+  border: 1px solid var(--wgf-gold);
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--wgf-gold-dark), var(--wgf-gold-shadow));
+  color: var(--wgf-gold-bright);
+  font-family: var(--font-game);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+/* -----------------------------------------------------------------------------
+   .wgf-iconbtn - the square red icon buttons (ig-44 X + the +/- / refresh
+   family). Each uses a real sliced icon (128-redbutton-<icon>) with pressed /
+   disabled state slices. The highlight slice is the shared hover overlay, so a
+   brightness lift stands in (same as the main button).
+   Usage:  <button class="wgf-iconbtn wgf-iconbtn--plus" aria-label="Add"></button>
+   --------------------------------------------------------------------------- */
+.wgf-iconbtn {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: center / contain no-repeat transparent;
+  cursor: pointer;
+  transition: filter var(--motion-fast) var(--ease-standard);
+}
+.wgf-iconbtn:hover { filter: brightness(1.12); }
+.wgf-iconbtn:active { transform: translateY(1px); filter: brightness(0.92); }
+.wgf-iconbtn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.wgf-iconbtn[disabled] { cursor: default; pointer-events: none; filter: none; }
+.wgf-iconbtn--x       { background-image: url(/assets/ui/128-redbutton-exit.png); }
+.wgf-iconbtn--x:active,
+.wgf-iconbtn--x.is-pressed { background-image: url(/assets/ui/128-redbutton-exit-pressed.png); }
+.wgf-iconbtn--x[disabled] { background-image: url(/assets/ui/128-redbutton-exit-disabled.png); }
+.wgf-iconbtn--plus    { background-image: url(/assets/ui/128-redbutton-plus.png); }
+.wgf-iconbtn--plus[disabled] { background-image: url(/assets/ui/128-redbutton-plus-disabled.png); }
+.wgf-iconbtn--minus   { background-image: url(/assets/ui/128-redbutton-minus.png); }
+.wgf-iconbtn--minus[disabled] { background-image: url(/assets/ui/128-redbutton-minus-disabled.png); }
+.wgf-iconbtn--refresh { background-image: url(/assets/ui/128-redbutton-refresh.png); }
+.wgf-iconbtn--refresh[disabled] { background-image: url(/assets/ui/128-redbutton-refresh-disabled.png); }
+
+/* -----------------------------------------------------------------------------
+   .wgf-window - the client METAL FRAME window, assembled from the client's own
+   NineSlice pieces (owner Ready Check 2026-10-06: "use Blizzard assets here only,
+   to create all cards across all sites" - the flat navy plate + 1px gold outline
+   is retired). Every visible line, bevel and title band below is a real slice
+   from the UIFrameMetal atlas in /assets/ui; no CSS gradient or border stands in
+   for frame art. The 2x art renders at 0.8 (corners 120px, bottom corners 51px).
+
+   How the slices map to the box (same layout as the client's ButtonFrame NineSlice):
+     ::before  TL + TR corner (ui-frame-metal-cornertop{left,right}-2x, 150 -> 120px,
+               each carries its end of the title band) + BL + BR corner (64 -> 51px)
+               + left/right edge (!ui-frame-metal-edge{left,right}-2x, tiled down).
+               Painted UNDER the title text (title is position:relative).
+     __title   the title band = _ui-frame-metal-edgetop-2x tiled across, clipped
+               between the corners by transparent inline borders.
+     ::after   bottom edge = _ui-frame-metal-edgebottom-2x tiled across, between
+               the bottom corners.
+     body      Class Hall stone tile under a dark wash (owner tone law 2026-07-04),
+               the client's own classhallbackground.blp.
+   Pieces are positioned with negative offsets so their transparent margins fall
+   OUTSIDE the box and are clipped: nothing ever paints past the window's edges
+   (no horizontal scroll at 375px, safe under overflow:hidden).
+
+   Usage:
+     <section class="wgf-window">
+       <header class="wgf-window__title">Delves: Season 1
+         <button class="wgf-window__x" aria-label="Close"></button>
+       </header>
+       <div class="wgf-window__body"> ... </div>
+       <nav class="wgf-window__tabs"> ...tabs... </nav>
+     </section>
+   --------------------------------------------------------------------------- */
+:root {
+  /* the window body: client Class Hall stone under the owner's dark wash */
+  --wgf-window-bg:
+    linear-gradient(rgba(0, 0, 0, 0.44), rgba(0, 0, 0, 0.44)),
+    url(/assets/ui/classhall-stone-tile.png) left top / 256px 256px repeat,
+    var(--wgf-plate);
+  /* the title band: UIFrameMetal edge-top slice, 0.8 scale, band solid at y 3..35 */
+  --wgf-window-band: url(/assets/ui/_ui-frame-metal-edgetop-2x.png) left top -26px / 51.2px 120px repeat-x;
+}
+.wgf-window {
+  position: relative;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 0;
+  background: var(--wgf-window-bg);
+  box-shadow: var(--shadow-2);
+  color: var(--wgf-text);
+}
+.wgf-window::before,
+.wgf-window::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+.wgf-window::before {
+  inset: 0;
+  background:
+    url(/assets/ui/ui-frame-metal-cornertopleft-2x.png)      left  -19px top    -26px / 120px 120px no-repeat,
+    url(/assets/ui/ui-frame-metal-cornertopright-2x.png)     right  -9px top    -26px / 120px 120px no-repeat,
+    url(/assets/ui/ui-frame-metal-cornerbottomleft-2x.png)   left  -19px bottom  -7px / 51.2px 51.2px no-repeat,
+    url(/assets/ui/ui-frame-metal-cornerbottomright-2x.png)  right  -9px bottom  -7px / 51.2px 51.2px no-repeat,
+    url("/assets/ui/!ui-frame-metal-edgeleft-2x.png")        left  -19px top 0 / 120px 25.6px repeat-y,
+    url("/assets/ui/!ui-frame-metal-edgeright-2x.png")       right  -9px top 0 / 120px 25.6px repeat-y;
+  /* the side edges stop under the corners (they would otherwise poke a stub of
+     line above the title band / below the bottom rail): the corners own those ends */
+  background-clip: border-box, border-box, border-box, border-box, padding-box, padding-box;
+  background-origin: border-box;
+  border-style: solid;
+  border-color: transparent;
+  border-width: 30px 0 30px 0;
+}
+.wgf-window::after {
+  left: 32px;
+  right: 26px;
+  bottom: 0;
+  height: 51.2px;
+  background: url(/assets/ui/_ui-frame-metal-edgebottom-2x.png) left bottom -7px / 25.6px 51.2px repeat-x;
+}
+/* A window with no title bar still wears the band (the client never ships a
+   frame without its top rail); the content steps below it. */
+.wgf-window:not(:has(> .wgf-window__title)) {
+  padding-top: 36px;
+  background: var(--wgf-window-band), var(--wgf-window-bg);
+}
+
+/* The title bar IS the metal frame's title band (UIFrameMetal edge-top slice), not
+   a CSS bar. The band is a fixed 32px rail; the text is centred on it. A title
+   that wraps (long h1s on narrow phones) keeps the rail on its first line and
+   spills onto the stone below - still gold Friz with the ink outline. */
+.wgf-window__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  min-height: 42px;
+  margin: 0;
+  padding: 1px var(--space-2) 8px;
+  /* transparent inline borders clip the band art between the two corner pieces
+     (which carry the band's bevelled ends); they also inset the text off the rail ends */
+  border: 0 solid transparent;
+  border-inline-width: 30px 24px;
+  background: var(--wgf-window-band);
+  background-clip: padding-box;
+  background-origin: padding-box;
+  box-shadow: none;
+  color: var(--wgf-gold);
+  font-family: var(--font-game);
+  font-size: var(--text-md);
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.03em;
+  line-height: 1.25;
+  text-align: center;
+  text-shadow: var(--text-ink-outline);
+}
+.wgf-window__body {
+  padding: var(--space-4);
+}
+
+/* The X close: the client's square red exit icon slice; hover brightens,
+   active shows the pressed slice. Honest art (a real member was sliced). */
+.wgf-window__x {
+  position: absolute;
+  top: 19px;                                       /* centre of the 32px title band */
+  right: var(--space-3);
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: url(/assets/ui/128-redbutton-exit.png) center / contain no-repeat transparent;
+  cursor: pointer;
+  transition: filter var(--motion-fast) var(--ease-standard);
+}
+.wgf-window__x:hover { filter: brightness(1.15); }
+.wgf-window__x:active { background-image: url(/assets/ui/128-redbutton-exit-pressed.png); filter: none; }
+.wgf-window__x:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
+/* -----------------------------------------------------------------------------
+   .wgf-window__tabs / .wgf-tab - the tab strip on the plate edge
+   (ig-38 bottom row / ig-47 top strip). Squared tabs, gold text; the active
+   tab is pulled brighter with a gold top edge. Add .wgf-window__tabs--top to
+   sit the strip above the plate instead of below.
+
+   Usage:
+     <nav class="wgf-window__tabs">
+       <button class="wgf-tab is-active">Traveler's Log</button>
+       <button class="wgf-tab">Suggested Content</button>
+     </nav>
+   --------------------------------------------------------------------------- */
+.wgf-window__tabs {
+  display: flex;
+  gap: var(--space-1);
+  padding: 0 var(--space-3);
+  margin-top: -1px;
+  border-top: 1px solid var(--wgf-metal-soft);
+  background: linear-gradient(var(--wgf-plate), var(--wgf-plate-hi));
+}
+.wgf-window__tabs--top {
+  margin-top: 0;
+  margin-bottom: -1px;
+  border-top: 0;
+  border-bottom: 1px solid var(--wgf-metal-soft);
+  background: linear-gradient(var(--wgf-plate-hi), var(--wgf-plate));
+}
+
+/* Window tabs wear the RED BUTTON language (owner review round 2, verdict 2):
+   the gold tab highlight is OUT. Each tab IS the client red button (the same
+   128-redbutton cap slices + yellow Friz text as .wgf-btn-red). Selected = the
+   PRESSED red state; unselected = a DIMMED red button. Same padding==cap-width
+   rule as .wgf-btn-red: at 30px tall the 56px source cap renders ~13px wide, so
+   horizontal padding is 13px exactly (wider gaps, narrower doubles the edge). */
+.wgf-tab {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  padding: 0 13px;                                 /* == cap width at this height */
+  border: 0;
+  border-radius: 0;
+  background:
+    url(/assets/ui/128-redbutton-left-cap.png) left center / auto 100% no-repeat border-box,
+    url(/assets/ui/128-redbutton-right-cap.png) right center / auto 100% no-repeat border-box,
+    url(/assets/ui/_128-redbutton-center.png) left center / auto 100% repeat-x content-box;
+  background-color: transparent;
+  color: var(--wgf-gold-dim);
+  font-family: var(--font-game);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-shadow: var(--text-ink-outline);
+  cursor: pointer;
+  filter: brightness(0.66) saturate(0.9);          /* dimmed = unselected */
+  transition: filter var(--motion-fast) var(--ease-standard),
+              color var(--motion-fast) var(--ease-standard);
+}
+.wgf-tab:hover { filter: brightness(0.9) saturate(1); color: var(--wgf-gold-bright); }
+.wgf-tab:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.wgf-tab.is-active {
+  /* selected = the pressed/active red state (pressed cap slices + a 1px sink) */
+  background:
+    url(/assets/ui/128-redbutton-left-cap-pressed.png) left center / auto 100% no-repeat border-box,
+    url(/assets/ui/128-redbutton-right-cap-pressed.png) right center / auto 100% no-repeat border-box,
+    url(/assets/ui/_128-redbutton-center-pressed.png) left center / auto 100% repeat-x content-box;
+  background-color: transparent;
+  color: var(--wgf-gold-bright);
+  filter: none;
+  transform: translateY(1px);
+}
+/* The active tab carries a
+   lit 2px underline. Additive: the pressed red art is untouched. */
+.wgf-tab.is-active,
+.wgf-tab[aria-current="page"] {
+  box-shadow: inset 0 -2px 0 var(--wgf-gold-bright);
+}
+/* keep the focus ring when the active tab is keyboard-focused (the underline
+   rule above would otherwise out-cascade .wgf-tab:focus-visible) */
+.wgf-tab.is-active:focus-visible,
+.wgf-tab[aria-current="page"]:focus-visible {
+  box-shadow: var(--focus-ring), inset 0 -2px 0 var(--wgf-gold-bright);
+}
+
+/* -----------------------------------------------------------------------------
+   .wgf-plate-row - the Warband character plate (ig-49): near-black rounded
+   plate, thin dark border, a gold name over a meta line (class word in its
+   class color), room for a crest on the right. --selected (.is-selected) is
+   the gold-lit plate with dark text - a flat gradient (sanctioned here because
+   there is no texture for it and a gradient is flat color, not art).
+
+   Usage:
+     <div class="wgf-plate-row">
+       <div class="wgf-plate-row__body">
+         <div class="wgf-plate-row__name">Crypticelf</div>
+         <div class="wgf-plate-row__meta">Level 90
+           <span style="color:#ff7c0a">Druid</span></div>   <!-- class color inline -->
+         <div class="wgf-plate-row__sub">Silvermoon City</div>
+       </div>
+       <div class="wgf-plate-row__crest"> ...crest... </div>
+     </div>
+     <div class="wgf-plate-row is-selected"> ... </div>
+   --------------------------------------------------------------------------- */
+.wgf-plate-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  box-sizing: border-box;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--wgf-metal-soft);
+  border-radius: var(--radius-card);
+  /* Near-black slate top (#090a0e, from the --wgf-bg-hero ramp;
+     docs/ui-ux/17-blizzard-palette.md). */
+  background: linear-gradient(180deg, #090a0e, var(--wgf-bg-base));
+  color: var(--wgf-text);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.55);
+}
+.wgf-plate-row__body { flex: 1 1 auto; min-width: 0; }
+.wgf-plate-row__name {
+  font-family: var(--font-game);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--wgf-gold-bright);
+  text-shadow: var(--text-ink-outline);
+}
+.wgf-plate-row__meta {
+  font-family: var(--font-game);
+  font-size: var(--text-md);
+  color: var(--wgf-text);
+}
+.wgf-plate-row__sub {
+  font-family: var(--font-game);
+  font-size: var(--text-sm);
+  color: var(--wgf-muted);
+}
+.wgf-plate-row__crest {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  opacity: 0.55;
+}
+
+.wgf-plate-row.is-selected {
+  border-color: var(--wgf-gold-dark);
+  background: linear-gradient(180deg, var(--wgf-gold-bright), var(--wgf-gold-accent));
+  box-shadow:
+    inset 0 0 0 1px var(--wgf-gold),
+    0 0 10px rgba(var(--wgf-gold-rgb), 0.35);
+}
+.wgf-plate-row.is-selected .wgf-plate-row__name,
+.wgf-plate-row.is-selected .wgf-plate-row__meta,
+.wgf-plate-row.is-selected .wgf-plate-row__sub {
+  color: var(--wgf-on-gold);
+  text-shadow: none;
+}
+.wgf-plate-row.is-selected .wgf-plate-row__crest { opacity: 0.85; }
+
+/* -----------------------------------------------------------------------------
+   .wgf-dialog-banner - the NPC dialog banner (ig-50). Translucent dark wide
+   banner, a gold-framed square portrait slot on the left, a gold Morpheus
+   display title, white body text and an X in the top-right. Reuse for tips,
+   system messages and guide callouts.
+
+   Usage:
+     <aside class="wgf-dialog-banner">
+       <div class="wgf-dialog-banner__portrait"> <img ...> </div>
+       <div class="wgf-dialog-banner__text">
+         <div class="wgf-dialog-banner__title">Grand Magister Rommath</div>
+         <p class="wgf-dialog-banner__body">Catalogue every newcomer...</p>
+       </div>
+       <button class="wgf-dialog-banner__x" aria-label="Dismiss"></button>
+     </aside>
+   --------------------------------------------------------------------------- */
+.wgf-dialog-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  box-sizing: border-box;
+  padding: var(--space-3) var(--space-5) var(--space-3) var(--space-3);
+  border: 1px solid var(--wgf-border-strong);
+  border-radius: var(--radius-card);
+  /* Near-black slate, derived from the token surfaces (#08090c well, #0d0f14 bg-2). */
+  background: linear-gradient(90deg, rgba(8, 9, 12, 0.92), rgba(13, 15, 20, 0.86));
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5), var(--shadow-2);
+  color: var(--wgf-text);
+}
+.wgf-dialog-banner__portrait {
+  flex: 0 0 auto;
+  width: 64px;
+  height: 64px;
+  border: 2px solid var(--wgf-gold);
+  border-radius: var(--radius-control);
+  background: var(--wgf-bg-base);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+.wgf-dialog-banner__portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.wgf-dialog-banner__text { flex: 1 1 auto; min-width: 0; }
+.wgf-dialog-banner__title {
+  font-family: var(--font-game-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.02em;
+  color: var(--wgf-gold);
+  text-shadow: var(--text-ink-outline);
+}
+.wgf-dialog-banner__body {
+  margin: var(--space-1) 0 0;
+  font-family: var(--font-ui);
+  font-size: var(--text-md);
+  line-height: 1.35;
+  color: var(--wgf-text);
+}
+.wgf-dialog-banner__x {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  background: url(/assets/ui/128-redbutton-exit.png) center / contain no-repeat transparent;
+  cursor: pointer;
+  transition: filter var(--motion-fast) var(--ease-standard);
+}
+.wgf-dialog-banner__x:hover { filter: brightness(1.15); }
+.wgf-dialog-banner__x:active { background-image: url(/assets/ui/128-redbutton-exit-pressed.png); }
+.wgf-dialog-banner__x:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
+/* =============================================================================
+   THE AUCTION HOUSE FAMILY (owner 2026-07-04, OWNER_REVIEW addenda 17-20;
+   ig-61/62/63/64). The Browse Auctions window IS the grey-container standard in
+   situ: an inset search field, a collapsed dropdown with the red-tabbed arrow,
+   raised column-header tabs, a near-black inset content WELL for the table,
+   zebra rowstripes, quality icon borders, and the left-rail category nav. Every
+   texture below is a real slice from the committed AH sheets (3046538/3054898)
+   cropped by tools/slice_ui_atlas.py - no hand-drawn edges, no AI art.
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   .wgf-input - the AH inset search field (ig-62). The client's 3-slice field
+   (auctionhouse-ui-inputfield left/middle/right) as layered backgrounds: the
+   caps anchor left/right and the middle tiles between them, all rendered at the
+   control height so the inset bevel stays crisp. The real <input> sits inside,
+   transparent, so the art shows through; focus adds the gold ring.
+
+   Usage:
+     <div class="wgf-input">
+       <input type="text" placeholder="Search items...">
+     </div>
+   --------------------------------------------------------------------------- */
+.wgf-input {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: var(--wgf-input-h);
+  padding: 0 12px;
+  background:
+    url(/assets/ui/auctionhouse-ui-inputfield-left.png) left center / auto 100% no-repeat,
+    url(/assets/ui/auctionhouse-ui-inputfield-right.png) right center / auto 100% no-repeat,
+    url(/assets/ui/auctionhouse-ui-inputfield-middle.png) left center / auto 100% repeat-x;
+  border-radius: 0;
+}
+.wgf-input > input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--wgf-text);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+}
+.wgf-input > input::placeholder { color: var(--wgf-muted); }
+.wgf-input > input:focus { outline: none; }
+.wgf-input:focus-within { box-shadow: var(--focus-ring); border-radius: 4px; }
+
+/* -----------------------------------------------------------------------------
+   .wgf-dropdown - the client's select/menu standard (ig-51, ig-55).
+   COLLAPSED: the 3-slice dropdown control (auctionhouse-ui-dropdown left/middle/
+   right) with the real red-tabbed arrow (auctionhouse-ui-dropdown-arrow-down)
+   riding the right edge. OPEN: a near-black rounded panel of radio-dot rows -
+   the selected row shows a gold ring dot, the hovered row lights with a gold
+   gradient bar, group breaks are quiet separators. A tiny JS toggle flips
+   .is-open on the wrapper (preview-acceptable per the brief).
+
+   Usage:
+     <div class="wgf-dropdown">
+       <button class="wgf-dropdown__control" aria-haspopup="listbox">
+         <span class="wgf-dropdown__value">All Realms</span>
+       </button>
+       <ul class="wgf-dropdown__menu" role="listbox">
+         <li class="wgf-dropdown__opt is-selected">All Realms</li>
+         <li class="wgf-dropdown__opt">Area 52</li>
+         <li class="wgf-dropdown__sep" role="separator"></li>
+         <li class="wgf-dropdown__opt">Stormrage</li>
+       </ul>
+     </div>
+   --------------------------------------------------------------------------- */
+.wgf-dropdown { position: relative; display: inline-block; }
+.wgf-dropdown__control {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: var(--wgf-dropdown-h);
+  min-width: 160px;
+  padding: 0 40px 0 12px;                 /* right pad clears the arrow */
+  border: 0;
+  background:
+    url(/assets/ui/auctionhouse-ui-dropdown-arrow-down.png) right 6px center / auto 20px no-repeat,
+    url(/assets/ui/auctionhouse-ui-dropdown-left.png) left center / auto 100% no-repeat,
+    url(/assets/ui/auctionhouse-ui-dropdown-right.png) right center / auto 100% no-repeat,
+    url(/assets/ui/auctionhouse-ui-dropdown-middle.png) left center / auto 100% repeat-x;
+  color: var(--wgf-gold);
+  font-family: var(--font-game);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+.wgf-dropdown__control:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.wgf-dropdown__value { flex: 1 1 auto; white-space: nowrap; }
+/* disabled control uses the greyed arrow slice */
+.wgf-dropdown__control[disabled] {
+  background-image:
+    url(/assets/ui/auctionhouse-ui-dropdown-arrow-disabled.png),
+    url(/assets/ui/auctionhouse-ui-dropdown-left.png),
+    url(/assets/ui/auctionhouse-ui-dropdown-right.png),
+    url(/assets/ui/auctionhouse-ui-dropdown-middle.png);
+  color: var(--wgf-gold-dim);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* OPEN menu: near-black rounded panel (ig-51). Hidden until .is-open. */
+.wgf-dropdown__menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 40;
+  display: none;
+  min-width: 100%;
+  margin: 0;
+  padding: var(--space-1);
+  list-style: none;
+  border: 1px solid var(--wgf-metal);
+  border-radius: 6px;
+  background: linear-gradient(180deg, #0c0c0f, #050507);
+  box-shadow: var(--shadow-2), inset 0 0 0 1px rgba(0, 0, 0, 0.7);
+}
+.wgf-dropdown.is-open .wgf-dropdown__menu { display: block; }
+
+.wgf-dropdown__opt {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-3) var(--space-2) 30px;
+  border-radius: 0;
+  color: var(--wgf-text);
+  font-family: var(--font-game);
+  font-size: var(--text-sm);
+  line-height: 1.2;
+  cursor: pointer;
+}
+/* the radio dot (ig-51): a ring, gold-filled when selected */
+.wgf-dropdown__opt::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin-top: -5px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.5px var(--wgf-metal);
+}
+.wgf-dropdown__opt.is-selected::before {
+  box-shadow: inset 0 0 0 1.5px var(--wgf-gold);
+  background: radial-gradient(circle, var(--wgf-gold-bright) 0 45%, transparent 55%);
+}
+/* hovered row lit with the gold gradient bar */
+.wgf-dropdown__opt:hover {
+  background: linear-gradient(180deg, var(--wgf-gold-bright), var(--wgf-gold-accent));
+  color: var(--wgf-on-gold);
+}
+.wgf-dropdown__opt:hover::before { box-shadow: inset 0 0 0 1.5px rgba(0, 0, 0, 0.5); }
+/* quiet group separator */
+.wgf-dropdown__sep {
+  height: 1px;
+  margin: var(--space-1) var(--space-2);
+  background: var(--wgf-metal-soft);
+  list-style: none;
+}
+
+/* -----------------------------------------------------------------------------
+   .wgf-well / .wgf-inset - the client INSET frame (InsetFrameTemplate): the
+   recessed panel a list, table or inner card sits in, inside a window. Built
+   only from client art (owner Ready Check 2026-10-06): the four 3px UI-Frame-Inner
+   rim tiles (top/bottom tiled across, left/right tiled down) over the client's
+   UI-Background-Marble. --wgf-inset-art is the whole layer stack as ONE token, so a
+   bespoke card (home Game Menu cards, pulse rows, gold cards...) wears the identical
+   art with `background: var(--wgf-inset-art)` instead of its own navy + gold border.
+   Hover/selected = a brightness lift (no invented highlight art).
+
+   Usage:
+     <div class="wgf-well"> <table class="wgf-table"> ... </table> </div>
+     <a class="wgf-inset" href="..."> ...inner card... </a>
+   --------------------------------------------------------------------------- */
+:root {
+  --wgf-inset-art:
+    url(/assets/ui/_UI-Frame-InnerTopTile.png)   left top    / 256px 3px repeat-x,
+    url(/assets/ui/_UI-Frame-InnerBotTile.png)   left bottom / 256px 3px repeat-x,
+    url("/assets/ui/!UI-Frame-InnerLeftTile.png")  left top  / 3px 256px repeat-y,
+    url("/assets/ui/!UI-Frame-InnerRightTile.png") right top / 3px 256px repeat-y,
+    url(/assets/ui/blizzard/background-marble.png) left top / 256px 256px repeat,
+    #0a0b0a;                                       /* fallback fill while art loads */
+}
+.wgf-well,
+.wgf-inset {
+  box-sizing: border-box;
+  padding: var(--space-2);
+  border: 0;
+  border-radius: 0;
+  background: var(--wgf-inset-art);
+  box-shadow: none;
+}
+.wgf-inset { padding: var(--space-2) var(--space-3); color: var(--wgf-text); }
+a.wgf-inset { display: block; text-decoration: none; transition: filter var(--motion-fast) var(--ease-standard); }
+a.wgf-inset:hover, a.wgf-inset:focus-visible { filter: brightness(1.35); }
+
+/* -----------------------------------------------------------------------------
+   .wgf-ftab - the client FRAME TAB (CharacterFrameTab art: uiframe-tab-left /
+   _uiframe-tab-center / uiframe-tab-right). The client hangs these tabs off a
+   frame's bottom rail; a strip ABOVE a panel wears the same art flipped, which is
+   what the ::before transform does (the label never flips). Unselected = the art
+   dimmed; selected (.is-active / [aria-selected="true"]) = full art + bright gold.
+   --wgf-ftab-art is the layer stack, so a CSS-only tab (e.g. a radio label) can
+   paint it on its own ::before.
+   --------------------------------------------------------------------------- */
+:root {
+  --wgf-ftab-art:
+    url(/assets/ui/uiframe-tab-left.png)  left  top / auto 100% no-repeat border-box,
+    url(/assets/ui/uiframe-tab-right.png) right top / auto 100% no-repeat border-box,
+    url(/assets/ui/_uiframe-tab-center.png) left top / auto 100% repeat-x content-box;
+}
+.wgf-ftab {
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  padding: 2px 16px 0;
+  border: 0;
+  background: none;
+  color: var(--wgf-gold-muted);
+  font-family: var(--font-game);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-shadow: var(--text-ink-outline);
+  cursor: pointer;
+}
+.wgf-ftab::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  padding-inline: 24px;                            /* centre tile stops under the caps */
+  background: var(--wgf-ftab-art);
+  transform: scaleY(-1);                           /* rail at the bottom = tab on top of a panel */
+  filter: brightness(0.62);
+  transition: filter var(--motion-fast) var(--ease-standard);
+}
+.wgf-ftab:hover { color: var(--wgf-gold-bright); }
+.wgf-ftab:hover::before { filter: brightness(0.85); }
+.wgf-ftab.is-active,
+.wgf-ftab[aria-selected="true"] { color: var(--wgf-gold-bright); }
+.wgf-ftab.is-active::before,
+.wgf-ftab[aria-selected="true"]::before { filter: none; }
+
+/* -----------------------------------------------------------------------------
+   .wgf-colhead - the column-header tabs (ig-62). The Price / Name / Available
+   header row of the AH table renders as small RAISED tabs on the well's top
+   edge: grey gradient plate, gold small-caps label, a sort caret that lights on
+   the active column. Numeric columns right-align. Add .is-num to a cell to
+   right-align it; .is-active + .is-desc/.is-asc drives the caret.
+
+   Usage:
+     <div class="wgf-colhead">
+       <span class="wgf-colhead__cell is-num is-active is-desc">Price</span>
+       <span class="wgf-colhead__cell">Name</span>
+       <span class="wgf-colhead__cell is-num">Available</span>
+     </div>
+   --------------------------------------------------------------------------- */
+.wgf-colhead {
+  display: flex;
+  gap: 2px;
+  padding: 0 var(--space-1);
+}
+.wgf-colhead__cell {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--wgf-metal-soft);
+  border-bottom: 0;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(180deg, var(--wgf-plate-hi), var(--wgf-plate));
+  color: var(--wgf-gold-muted);
+  font-family: var(--font-game);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  text-shadow: var(--text-ink-outline);
+  cursor: pointer;
+}
+.wgf-colhead__cell.is-num { justify-content: flex-end; }
+.wgf-colhead__cell:hover { color: var(--wgf-gold-bright); }
+.wgf-colhead__cell.is-active {
+  border-color: var(--wgf-metal);
+  color: var(--wgf-gold-bright);
+}
+/* sort caret (raised-tab affordance): only on the active column */
+.wgf-colhead__cell.is-active::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+}
+.wgf-colhead__cell.is-active.is-desc::after { border-top: 5px solid var(--wgf-gold); }
+.wgf-colhead__cell.is-active.is-asc::after { border-bottom: 5px solid var(--wgf-gold); }
+
+/* -----------------------------------------------------------------------------
+   .wgf-rowstripe - the zebra helper (ig-15/ig-26 alternating bands). Applies the
+   real rowstripe slices (auctionhouse-rowstripe-1/2, tiny 16x18 tiles) as a
+   subtle tiled band on alternating rows. Put .wgf-rowstripe on a container and
+   its direct children auto-zebra; or apply --1 / --2 to a single row.
+
+   Usage:
+     <div class="wgf-rowstripe">
+       <div>row</div><div>row</div><div>row</div>
+     </div>
+   --------------------------------------------------------------------------- */
+.wgf-rowstripe > :nth-child(odd),
+.wgf-rowstripe--1 {
+  background: url(/assets/ui/auctionhouse-rowstripe-1.png) left top / auto 100% repeat-x;
+}
+.wgf-rowstripe > :nth-child(even),
+.wgf-rowstripe--2 {
+  background: url(/assets/ui/auctionhouse-rowstripe-2.png) left top / auto 100% repeat-x;
+}
+
+/* -----------------------------------------------------------------------------
+   .wgf-qborder--{quality} - the quality icon borders (ig-26/27). The real
+   auctionhouse-itemicon-border-* frames (136x136, transparent centre) wrap an
+   item icon: the frame paints as the box background, the icon sits inset. 32px
+   demo. Names map to WoW quality: gray/white/green/blue/purple/orange/artifact.
+
+   Usage:
+     <span class="wgf-qborder wgf-qborder--purple">
+       <img class="wgf-qborder__icon" src="..." alt="">
+     </span>
+   --------------------------------------------------------------------------- */
+.wgf-qborder {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+/* The frame art (auctionhouse-itemicon-border-*) is a ROUND metal ring, so the icon it
+   seats must be round too: a square icon inside a round frame reads as a silver disc
+   bleeding out from behind the icon (owner report, fixed 2026-08-02). Styles whatever
+   image the frame wraps: the kit passes .wgf-qborder__icon, the AH rows pass an
+   <img class="wgf-ah-fpicon"> straight in. */
+.wgf-qborder__icon,
+.wgf-qborder > img {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  margin: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #000;
+}
+.wgf-qborder--gray     { background-image: url(/assets/ui/auctionhouse-itemicon-border-gray.png); }
+.wgf-qborder--white    { background-image: url(/assets/ui/auctionhouse-itemicon-border-white.png); }
+.wgf-qborder--green    { background-image: url(/assets/ui/auctionhouse-itemicon-border-green.png); }
+.wgf-qborder--blue     { background-image: url(/assets/ui/auctionhouse-itemicon-border-blue.png); }
+.wgf-qborder--purple   { background-image: url(/assets/ui/auctionhouse-itemicon-border-purple.png); }
+.wgf-qborder--orange   { background-image: url(/assets/ui/auctionhouse-itemicon-border-orange.png); }
+.wgf-qborder--artifact { background-image: url(/assets/ui/auctionhouse-itemicon-border-artifact.png); }
+
+/* -----------------------------------------------------------------------------
+   .wgf-navbtn - the AH left-rail category button (ig-66), the retail twin of the
+   category rail idiom. The real slices: auctionhouse-nav-button (base plate),
+   -highlight (hover), -select (selected). Gold small-caps label, left-aligned.
+   States: default / :hover (highlight slice) / .is-selected (select slice).
+
+   Usage:
+     <nav class="wgf-navrail">
+       <button class="wgf-navbtn is-selected">Weapons</button>
+       <button class="wgf-navbtn">Armor</button>
+     </nav>
+   --------------------------------------------------------------------------- */
+.wgf-navrail { display: flex; flex-direction: column; gap: var(--space-1); max-width: 220px; }
+/* Nav rail defect fix (owner review round 2, verdict 3): the resting state read as
+   a HALF plate with clipped text. Cause: the base slice (auctionhouse-nav-button.png,
+   272x64) carries its plate art in the top ~86% of its canvas with a transparent
+   bottom strip, so `100% 100%` stretch left the plate short. Fix: pin the slice to
+   the top and scale it 118% so the opaque plate band fills the button (the hover /
+   select slices are already tight-cropped at 42px, so they keep `100% 100%`); a warm
+   plate fallback colour guarantees a complete surface at rest; explicit line-height +
+   vertical padding keep the label from ever looking clipped. */
+.wgf-navbtn {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 40px;
+  padding: var(--space-2) var(--space-4);
+  border: 0;
+  border-radius: var(--radius-control);
+  background-image: url(/assets/ui/auctionhouse-nav-button.png);
+  background-position: center top;
+  background-size: 100% 118%;
+  background-repeat: no-repeat;
+  background-color: var(--wgf-panel-2);            /* fallback plate: resting state always complete */
+  color: var(--wgf-gold-muted);
+  font-family: var(--font-game);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.03em;
+  line-height: 1.15;
+  text-align: left;
+  text-shadow: var(--text-ink-outline);
+  cursor: pointer;
+}
+.wgf-navbtn:hover {
+  background-image: url(/assets/ui/auctionhouse-nav-button-highlight.png);
+  background-position: center;
+  background-size: 100% 100%;
+  color: var(--wgf-gold-bright);
+}
+.wgf-navbtn.is-selected {
+  background-image: url(/assets/ui/auctionhouse-nav-button-select.png);
+  background-position: center;
+  background-size: 100% 100%;
+  color: var(--wgf-gold-bright);
+}
+.wgf-navbtn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+/* secondary (sub-category) variant - the slimmer indented slices */
+.wgf-navbtn--secondary {
+  min-height: 34px;
+  margin-left: var(--space-4);
+  background-image: url(/assets/ui/auctionhouse-nav-button-secondary.png);
+  background-position: center top;
+  background-size: 100% 118%;
+  font-variant: normal;
+  font-weight: 600;
+}
+.wgf-navbtn--secondary:hover {
+  background-image: url(/assets/ui/auctionhouse-nav-button-secondary-highlight.png);
+  background-position: center;
+  background-size: 100% 100%;
+}
+.wgf-navbtn--secondary.is-selected {
+  background-image: url(/assets/ui/auctionhouse-nav-button-secondary-select.png);
+  background-position: center;
+  background-size: 100% 100%;
+}
+
+/* -----------------------------------------------------------------------------
+   .wgf-tooltip-surface - kit override (owner review round 2, verdict 4). The
+   muted-brown component surface is BANNED inside components: any cold component
+   dropped on it wears the first-party item-tooltip plate instead - the EXACT
+   inline-hero variant surface from wgf-item-tooltip.css (near-black blue-tinted
+   plate + thin light border). This is a preview/kit-level override only; the
+   sitewide adoption into wgf-freshness.css / wgf-item-card.css is a separate
+   brick. Compound selectors (.wgf-tooltip-surface.<component>) out-rank the
+   components' own later-loaded surface rules without needing !important.
+   --------------------------------------------------------------------------- */
+.wgf-tooltip-surface,
+.wgf-tooltip-surface.wgf-snapshot,
+.wgf-tooltip-surface.wgf-item-row {
+  background: linear-gradient(180deg, rgba(12, 12, 30, 0.97), rgba(5, 5, 16, 0.97));
+  border: 1px solid #7a7a96;
+  border-radius: 5px;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
+}
+/* the freshness badge keeps its verification seal + trust wording; only the brown
+   plate + gold left-accent are swapped for the tooltip plate. */
+.wgf-tooltip-surface.wgf-snapshot { border-left: 1px solid #7a7a96; }
+/* the item row's warm hover/focus wash also drops on the tooltip plate. */
+.wgf-tooltip-surface.wgf-item-row:hover,
+.wgf-tooltip-surface.wgf-item-row:focus-within {
+  background: linear-gradient(180deg, rgba(22, 22, 44, 0.97), rgba(8, 8, 22, 0.97));
+  border-color: #9a9ab5;
+}
+
+/* -----------------------------------------------------------------------------
+   .wgf-favbtn / .wgf-tracked-head - the AH "favorite / track" control (owner
+   review round 2, verdict 9). The real client favorite star
+   (auctionhouse-icon-favorite.png) as a small icon button at a row's end: quiet
+   by default, lit when tracked. .wgf-tracked-head is the table-header "Tracked
+   items" affordance. Visual demo only - no behaviour is wired in the kit.
+   --------------------------------------------------------------------------- */
+.wgf-favbtn {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  background: url(/assets/ui/auctionhouse-icon-favorite.png) center / contain no-repeat transparent;
+  opacity: 0.4;
+  cursor: pointer;
+  transition: opacity var(--motion-fast) var(--ease-standard),
+              filter var(--motion-fast) var(--ease-standard);
+}
+.wgf-favbtn:hover { opacity: 0.85; filter: brightness(1.1); }
+.wgf-favbtn.is-tracked {
+  opacity: 1;
+  filter: brightness(1.15) drop-shadow(0 0 2px rgba(var(--wgf-gold-rgb), 0.6));
+}
+.wgf-favbtn:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: 3px; }
+
+.wgf-tracked-head {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  color: var(--wgf-gold-muted);
+  font-family: var(--font-game);
+  font-size: var(--text-xs);
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.wgf-tracked-head:hover { color: var(--wgf-gold-bright); }
+.wgf-tracked-head .wgf-favbtn { cursor: inherit; }
+
+/* =============================================================================
+   THE PARCHMENT CANVAS CANDIDATE (owner 2026-07-04, OWNER_REVIEW addendum 19;
+   ig-65/66). The achievement parchment + gilt family as an ALTERNATE page
+   surface to the warm-stone canvas. This is a token-pass candidate: the owner
+   approves it in Chrome BEFORE any shipped canvas change. Textures are the real
+   slices - questbg-parchment (the paper) and the achievement-wood-nineslice
+   9-slice (the gilt frame). On parchment the legibility contract INVERTS: dark
+   text on the light surface, so the pane re-scopes the text tokens.
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   .wgf-canvas--parchment - the PAGE surface. A body/section class that tiles the
+   real questbg-parchment paper with a warm gilt wash on top, instead of the warm
+   stone canvas. Fixed so it never scrolls (the load-screen-background idiom).
+
+   Usage:  <body class="wgf-canvas--parchment"> ...  (toggle live in the preview)
+   --------------------------------------------------------------------------- */
+.wgf-canvas--parchment {
+  background:
+    linear-gradient(180deg, rgba(60, 38, 12, 0.10), rgba(40, 24, 6, 0.16)),
+    url(/assets/ui/questbg-parchment.png) top center / 512px auto repeat;
+  background-attachment: fixed, fixed;
+}
+
+/* -----------------------------------------------------------------------------
+   .wgf-parchment-pane - a content pane wearing the achievement-wood 9-slice gilt
+   frame over parchment. Composed from the real slices as layered backgrounds:
+   four corners anchored, four edges tiled edge-to-edge along each side, the
+   parchment paper filling the centre. Text tokens are re-scoped DARK here (the
+   legibility contract inverts on the light surface); section headers read
+   red-brown, the archival "records" voice of the parchment family
+   (13-ingame-reference sec 1).
+
+   The four edge slices are PRE-TRIMMED to their pure wood band (19px on the
+   rail's cross axis; see tools/slice_ui_atlas.py EDGE_TRIM), so tiling them at
+   34px across the frame border fills it with real gilt wood grain. (Before the
+   trim the slices were a 64px tile with the band buried in transparent inner
+   padding, so `34px` rendered a thin dark sliver flanked by paper - the "flat
+   black edge strip" the owner circled 2026-07-04.)
+
+   The parchment-canvas page hero and the collection-checker panel wear this
+   same frame (one-canvas composition, owner 2026-07-04: the whole achievement
+   page reads as one journal, not dark plates floating on paper), scoped to the
+   parchment surface so no other page is touched.
+
+   Usage:
+     <section class="wgf-parchment-pane">
+       <h3 class="wgf-parchment-pane__title">Recent Achievements</h3>
+       ... dark text on parchment ...
+     </section>
+   --------------------------------------------------------------------------- */
+.wgf-parchment-pane,
+.wgf-canvas--parchment .wgf-seo-hero,
+.wgf-canvas--parchment .wgf-cc {
+  /* legibility contract inverts: dark ink on a light surface */
+  --wgf-text: #2c1d0b;
+  --wgf-muted: #6a5334;
+  --wgf-gold: #7a3f10;                     /* red-brown header voice on parchment */
+
+  position: relative;
+  box-sizing: border-box;
+  padding: 34px;
+  color: #2c1d0b;
+  background:
+    url(/assets/ui/achievement-wood-nineslice-cornertopleft.png) top left / 34px auto no-repeat,
+    url(/assets/ui/achievement-wood-nineslice-cornertopright.png) top right / 34px auto no-repeat,
+    url(/assets/ui/achievement-wood-nineslice-cornerbottomleft.png) bottom left / 34px auto no-repeat,
+    url(/assets/ui/achievement-wood-nineslice-cornerbottomright.png) bottom right / 34px auto no-repeat,
+    url("/assets/ui/_achievement-wood-nineslice-edgetop.png") top center / auto 34px repeat-x,
+    url("/assets/ui/_achievement-wood-nineslice-edgebottom.png") bottom center / auto 34px repeat-x,
+    url("/assets/ui/!achievement-wood-nineslice-edgeleft.png") left center / 34px auto repeat-y,
+    url("/assets/ui/!achievement-wood-nineslice-edgeright.png") right center / 34px auto repeat-y,
+    url(/assets/ui/questbg-parchment.png) center / cover no-repeat;
+}
+.wgf-parchment-pane__title {
+  margin: 0 0 var(--space-3);
+  color: #7a3f10;
+  font-family: var(--font-game-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+/* records-style rows on parchment (ig-65): warm alternating bands, dark label
+   left / value right, a thin rule between - the statistics-ledger voice. */
+.wgf-parchment-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid rgba(90, 60, 24, 0.28);
+  color: #2c1d0b;
+  font-family: var(--font-ui);
+  font-size: var(--text-md);
+}
+.wgf-parchment-row:nth-child(even) { background: rgba(120, 84, 36, 0.10); }
+.wgf-parchment-row__label { color: #4a3316; }
+.wgf-parchment-row__value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: #2c1d0b;
+}
+
+/* -----------------------------------------------------------------------------
+   DIVIDER MOTIFS (kept from the 2026-08-21 reskin; palette is now
+   docs/ui-ux/17-blizzard-palette.md). Two
+   additive utility classes, no art and no motion:
+
+     .wgf-rune-seam    the lit-rune seam. A 1px hairline divider that fades
+                       transparent to lit-brand to transparent: the vein of
+                       gold in the stone. Use on an <hr> or an empty <div>
+                       between sections.
+     .wgf-ledger-rule  the ledger double-rule (Verdigris graft): two neutral
+                       1px rules 2px apart, the accountant ruling off a tally.
+                       Use under stat blocks and closed tables. Built as a
+                       standalone divider: a 1px-tall box (the top rule) whose
+                       hard 2px-dropped shadow paints the second rule.
+   --------------------------------------------------------------------------- */
+.wgf-rune-seam {
+  height: 1px;
+  margin: var(--space-3) 0;
+  border: 0;
+  background: linear-gradient(90deg, transparent, rgba(var(--wgf-gold-rgb), 0.45), transparent);
+}
+.wgf-ledger-rule {
+  height: 0;
+  margin: var(--space-3) 0;
+  border: 0;
+  border-top: 1px solid var(--wgf-border-neutral);
+  box-shadow: 0 2px 0 var(--wgf-border-neutral-soft);
+}
+
+/* -----------------------------------------------------------------------------
+   reduced-motion (docs/ui-ux/04-*: every animation/transition must respect
+   prefers-reduced-motion; same approach as assets/ah-game-ui.css) - neutralize
+   the filter/color/opacity transitions on every animated control in this kit.
+   --------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .wgf-btn-red { transition: none; }
+  .wgf-iconbtn { transition: none; }
+  .wgf-window__x { transition: none; }
+  .wgf-tab { transition: none; }
+  .wgf-dialog-banner__x { transition: none; }
+  .wgf-favbtn { transition: none; }
+}
+
+/* =============================================================================
+   THE CONTROL ROSTER - every form control on the site wears client art
+   (owner ruling 2026-08-14, live-fire in-game reskin)
+   -----------------------------------------------------------------------------
+   Owner: "it is like it is almost going to be a screenshot on EVERY single page of
+   the ENTIRE site... if a player searches for other things the search should be
+   uniform... we are going for near 1:1 for ALL types in game."
+
+   WHY THIS SHAPE. The kit already had .wgf-input / .wgf-dropdown / .wgf-btn-red,
+   and a first pass tried to catch "unstyled" controls generically. That was wrong:
+   a crawl of 53 hubs found ZERO class-less controls. Every control on the site is
+   a NAMED component (.rd-find__input, .wgf-cc__input, .rd-type-btn, .catchip, ...)
+   whose own stylesheet paints it flat. So the defect is not templates opting out of
+   the kit - it is a bounded roster of ~20 component classes that never adopted it.
+
+   Listing that roster HERE, once, is the Rule 11 answer. The alternative - editing
+   ten component stylesheets - would copy the same 3-slice art ten times, which is
+   exactly the per-page fork the rule forbids. One home, one treatment, and adding a
+   new component to the site means adding its class to a list rather than restyling.
+
+   Specificity is deliberately (0,2,0) - .wgf-shell-page plus one :is() class - so
+   this DOES win over a component's own single-class rule. That is the point here,
+   unlike a defaults layer.
+
+   Deliberately NOT in the roster (already correct, must not be touched):
+     .wgf-shell-search__btn / .wgf-shell-nav-toggle - header icon affordances
+     .wgf-cc__btn                                   - already the red plate
+     .wgf-btn-red .wgf-tab .wgf-navbtn .wgf-iconbtn .wgf-window__x - kit already
+     .wgf-ii-showmore                               - already recut squared
+
+   No new art: every texture below is a slice already shipped in /assets/ui/.
+   ============================================================================= */
+
+/* -- Every search / text field -> the client 3-slice input field -------------
+   This is the "search should be uniform" ruling: the header search (52 pages),
+   the database-family find box, the collection-checker name + realm fields, the
+   deals filter and the PvP search all become one control. .wgf-input stays the
+   WRAPPER form of the same art for markup that has the extra <span>; these are
+   the bare-element twins, same height, same padding, same slices. */
+/* THE roster of search/text fields. Owner 2026-08-14 supplied the header bar as the single
+   reference every one of these must match: squared, dark inset interior, a thin warm gold
+   hairline, gold game-font placeholder, and the magnifier INSIDE at the right.
+
+   Additions after the first pass was audited against that reference:
+     - the gold hairline (the 3-slice art alone has only a metal bevel),
+     - the magnifier as a right-hand background layer,
+     - placeholder in --wgf-gold-muted, matching wgf-search-bar.css:68. The first pass used
+       --wgf-muted, which OUTCASCADED the approved header band and cooled its placeholder -
+       a regression this rule caused and now repairs,
+     - NO font-size. The first pass forced --text-sm and shrank the approved band from 16px
+       and the collection-checker hero from --text-lg. Each surface owns its own size. */
+.wgf-shell-page :is(
+    .wgf-shell-search__input,
+    .rd-find__input,
+    .deals-input,
+    .wgf-cc__input,
+    .wgf-pvp-search,
+    .search__input,
+    .wgf-search-input,
+    /* Added after the audit found these seven live search fields the roster missed. */
+    .gsh-filter-search,
+    .wgf-rec-search,
+    .wgf-wb-search,
+    .wgf-jrnl__search,
+    .wgf-rp-search,
+    .wgf-rsel__input
+  ) {
+  box-sizing: border-box;
+  height: var(--wgf-input-h);
+  /* Right pad clears the magnifier layer below; never 0 12px, which is what removed the
+     room the .search__input pages reserved for their glyph and left it over the text. */
+  padding: 0 34px 0 12px;
+  border: 0;
+  border-radius: 0;
+  background:
+    /* The magnifier, inline so it needs no asset and cannot 404. Gold, right-aligned. */
+    url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23ffd100' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='6.8' cy='6.8' r='4.4'/%3E%3Cpath d='M10.2 10.2 14 14'/%3E%3C/svg%3E") right 11px center / 15px 15px no-repeat,
+    url(/assets/ui/auctionhouse-ui-inputfield-left.png) left center / auto 100% no-repeat,
+    url(/assets/ui/auctionhouse-ui-inputfield-right.png) right center / auto 100% no-repeat,
+    url(/assets/ui/auctionhouse-ui-inputfield-middle.png) left center / auto 100% repeat-x;
+  /* The reference's warm gold hairline, mirroring wgf-search-bar.css:61-63. */
+  box-shadow: 0 0 0 1px rgba(var(--wgf-gold-rgb), 0.32);
+  color: var(--wgf-text);
+  font-family: var(--font-ui);
+}
+.wgf-shell-page :is(
+    .wgf-shell-search__input,
+    .rd-find__input,
+    .deals-input,
+    .wgf-cc__input,
+    .wgf-pvp-search,
+    .search__input,
+    .wgf-search-input,
+    .gsh-filter-search,
+    .wgf-rec-search,
+    .wgf-wb-search,
+    .wgf-jrnl__search,
+    .wgf-rp-search,
+    .wgf-rsel__input
+  )::placeholder {
+  color: var(--wgf-gold-muted);
+}
+
+/* The three .search__input surfaces (/, /item/, /cheapest-realm/) position their own
+   magnifier absolutely on the LEFT. The reference puts it on the right and the roster now
+   paints one there, so the page glyph is moved out of the text and hidden. One home here
+   rather than the same edit in wgf-home.css, item-index.css and cheapest-realm.css. */
+.wgf-shell-page .search__icon {
+  display: none;
+}
+
+/* The shell/nav search is the ONE field in the roster that already ships its own magnifier:
+   a real <button class="wgf-shell-search__btn"> holding an inline SVG, absolutely positioned
+   at right 6px, 40x40 (wgf-search-bar.css:92-112). The roster paints its background glyph at
+   right 11px center / 15px, which lands directly on top of that button - the sitewide DOUBLE
+   MAGNIFIER. The .search__icon pages above were handled by hiding their glyph; this field was
+   missed because its glyph is a <button>, not a .search__icon span.
+
+   Drop the background layer rather than the button: the button is clickable and carries
+   aria-label="Search", the background layer is decoration that cannot be clicked or focused.
+   `background` is a shorthand, so the 3-slice field art is restated to keep the skin intact.
+
+   padding-right is restored to the 52px wgf-search-bar.css:57 asks for. The roster's
+   `padding: 0 34px 0 12px` shorthand outcascaded it down to 34px, which is less than the
+   button's 46px footprint (40px wide + right:6px) - so a long query slid underneath the
+   button on narrow viewports. Nothing else in the roster owns a submit button, so this
+   clearance belongs here with the field that does. */
+.wgf-shell-page .wgf-shell-search__input {
+  padding-right: 52px;
+  background:
+    url(/assets/ui/auctionhouse-ui-inputfield-left.png) left center / auto 100% no-repeat,
+    url(/assets/ui/auctionhouse-ui-inputfield-right.png) right center / auto 100% no-repeat,
+    url(/assets/ui/auctionhouse-ui-inputfield-middle.png) left center / auto 100% repeat-x;
+}
+.wgf-shell-page :is(
+    .wgf-shell-search__input,
+    .rd-find__input,
+    .deals-input,
+    .wgf-cc__input,
+    .wgf-pvp-search,
+    .search__input,
+    .wgf-search-input
+  ):focus {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* -- Every <select> -> the client dropdown control ---------------------------
+   appearance:none so the OS widget stops overpainting the slice art; the real
+   red-tabbed arrow rides the right edge exactly as .wgf-dropdown__control does.
+   (The popup list itself is already dark site-wide via color-scheme on the shell.) */
+.wgf-shell-page :is(
+    .wgf-select,
+    .wgf-cc__region,
+    .wgf-pvp-sel,
+    .gsh-select,
+    .ah-sort-select,
+    .ah-realm-select
+  ) {
+  box-sizing: border-box;
+  height: var(--wgf-dropdown-h);
+  padding: 0 40px 0 12px;
+  border: 0;
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  background:
+    url(/assets/ui/auctionhouse-ui-dropdown-arrow-down.png) right 6px center / auto 20px no-repeat,
+    url(/assets/ui/auctionhouse-ui-dropdown-left.png) left center / auto 100% no-repeat,
+    url(/assets/ui/auctionhouse-ui-dropdown-right.png) right center / auto 100% no-repeat,
+    url(/assets/ui/auctionhouse-ui-dropdown-middle.png) left center / auto 100% repeat-x;
+  color: var(--wgf-gold);
+  font-family: var(--font-game);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+.wgf-shell-page :is(
+    .wgf-select, .wgf-cc__region, .wgf-pvp-sel,
+    .gsh-select, .ah-sort-select, .ah-realm-select
+  ):focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* -- Every filter chip / small action -> the dimmed red plate ----------------
+   In the client every small control is this plate (AddOn List: Enable All /
+   Disable All / Okay / Cancel; Realm Selection sort heads). Dimmed at rest and lit
+   when active, so a row of source filters reads as in-game tabs instead of the
+   browser-grey boxes the owner circled on /mounts/ and /toys/.
+   .rd-type-btn alone is 74 instances across the database family. */
+.wgf-shell-page :is(
+    .rd-type-btn,
+    .rd-region-btn,
+    .catchip,
+    .deals-type-btn,
+    .hp-rbtn,
+    .wtd-sort,
+    .linkbtn,
+    .ah-filter-button,
+    .wgf-pvp-applybtn,
+    .gsh-btn
+  ) {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 0 13px;                                 /* == cap width at this height */
+  border: 0;
+  border-radius: 0;
+  background:
+    url(/assets/ui/128-redbutton-left-cap.png) left center / auto 100% no-repeat border-box,
+    url(/assets/ui/128-redbutton-right-cap.png) right center / auto 100% no-repeat border-box,
+    url(/assets/ui/_128-redbutton-center.png) left center / auto 100% repeat-x content-box;
+  background-color: transparent;
+  color: var(--wgf-gold-dim);
+  font-family: var(--font-game);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-shadow: var(--text-ink-outline);
+  cursor: pointer;
+  filter: brightness(0.66) saturate(0.9);
+  transition: filter var(--motion-fast) var(--ease-standard),
+              color var(--motion-fast) var(--ease-standard);
+}
+.wgf-shell-page :is(
+    .rd-type-btn, .rd-region-btn, .catchip, .deals-type-btn, .hp-rbtn,
+    .wtd-sort, .linkbtn, .ah-filter-button, .wgf-pvp-applybtn, .gsh-btn
+  ):hover {
+  filter: brightness(0.9) saturate(1);
+  color: var(--wgf-gold-bright);
+}
+.wgf-shell-page :is(
+    .rd-type-btn, .rd-region-btn, .catchip, .deals-type-btn, .hp-rbtn,
+    .wtd-sort, .linkbtn, .ah-filter-button, .wgf-pvp-applybtn, .gsh-btn
+  ):focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+/* The selected chip lights fully - the client active-tab state. Both conventions
+   in use on the site (.is-active and aria-pressed) are honoured. */
+.wgf-shell-page :is(
+    .rd-type-btn, .rd-region-btn, .catchip, .deals-type-btn, .hp-rbtn,
+    .wtd-sort, .linkbtn, .ah-filter-button, .gsh-btn
+  ):is(.is-active, [aria-pressed="true"]) {
+  filter: none;
+  color: var(--wgf-gold-bright);
+}
+
+/* -- Bare <table> -> the Realm Selection ledger ------------------------------
+   Gold small-caps column heads on a plate gradient over a near-black well, which
+   is the client sortable-list idiom. Kit and AH tables keep their own treatment.
+   Low specificity via :where() here on purpose: this one IS a defaults layer, for
+   prose tables that were never designed at all. */
+.wgf-shell-page :where(table:not([class*="wgf-"]):not([class*="ah-"])) {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--wgf-well);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.75),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.6);
+}
+.wgf-shell-page :where(table:not([class*="wgf-"]):not([class*="ah-"])) th {
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--wgf-metal-soft);
+  border-bottom: 0;
+  background: linear-gradient(180deg, var(--wgf-plate-hi), var(--wgf-plate));
+  color: var(--wgf-gold-muted);
+  font-family: var(--font-game);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  text-align: left;
+  text-shadow: var(--text-ink-outline);
+}
+.wgf-shell-page :where(table:not([class*="wgf-"]):not([class*="ah-"])) td {
+  padding: var(--space-1) var(--space-3);
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+}
+.wgf-shell-page :where(table:not([class*="wgf-"]):not([class*="ah-"])) tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.022);
+}
+.wgf-shell-page :where(table:not([class*="wgf-"]):not([class*="ah-"])) tbody tr:hover {
+  background: rgba(var(--wgf-gold-rgb), 0.06);
+}
+
+/* -- Reference lists -> gold-marker in-game lists, never browser bullets -----
+   .wgf-ref-list is the A-Z item directory the owner circled: 400 <li><a> per page
+   rendering as default discs with underlined links. The marker becomes a small
+   gold diamond and the underline only appears on hover. */
+.wgf-shell-page :where(.wgf-ref-list) {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.wgf-shell-page :where(.wgf-ref-list) > li {
+  position: relative;
+  padding-left: 14px;
+}
+.wgf-shell-page :where(.wgf-ref-list) > li::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 0.55em;
+  width: 4px;
+  height: 4px;
+  background: var(--wgf-gold-dim);
+  transform: rotate(45deg);
+}
+.wgf-shell-page :where(.wgf-ref-list) > li > a { text-decoration: none; }
+.wgf-shell-page :where(.wgf-ref-list) > li > a:hover { text-decoration: underline; }
+
+@media (prefers-reduced-motion: reduce) {
+  .wgf-shell-page :is(
+      .rd-type-btn, .rd-region-btn, .catchip, .deals-type-btn, .hp-rbtn,
+      .wtd-sort, .linkbtn, .ah-filter-button, .wgf-pvp-applybtn, .gsh-btn
+    ) { transition: none; }
+}
+
+/* ===== Wiki page standard blocks (2026-10-10, wiki_blocks.py; docs/standards/WIKI_PAGE_STANDARD.md §2).
+   The frame is the shared .wgf-window kit above (client metal NineSlice); these rules only lay
+   out the CONTENT inside it. Palette tokens only (docs/ui-ux/17-blizzard-palette.md): gold
+   headings, parchment text, bronze hairlines, recessed wells. No green, no new card style.
+   Readable at 360px: tables scroll inside their own well, lists wrap, nothing fixed-width. */
+.wgf-wiki-block { margin: 0 0 var(--space-4); min-width: 0; }
+/* Page wrapper some families put around the block stack (sounds lane): no frame, just flow. */
+.wgf-wiki-page { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
+.wgf-wiki-page > .wgf-wiki-block { margin: 0; }
+/* Free prose and lists a family renders inside a wiki window (wiki_blocks.window()). */
+.wgf-wiki-block .wgf-window__body > p { margin: 0 0 var(--space-2); color: var(--wgf-text); line-height: 1.55; }
+.wgf-wiki-block .wgf-window__body > p:last-child { margin-bottom: 0; }
+.wgf-wiki-block .wgf-window__body { overflow-wrap: anywhere; }
+
+.wgf-wiki-downloads,
+.wgf-wiki-versions,
+.wgf-wiki-related {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+.wgf-wiki-downloads { grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+.wgf-wiki-related   { grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); }
+.wgf-wiki-versions  { grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); }
+.wgf-wiki-downloads > li,
+.wgf-wiki-versions > li,
+.wgf-wiki-related > li {
+  min-width: 0;
+  padding: var(--space-2);
+  background: var(--wgf-well);
+  border: 1px solid var(--wgf-border-neutral);
+  color: var(--wgf-text);
+}
+.wgf-wiki-downloads a,
+.wgf-wiki-versions a,
+.wgf-wiki-related a { color: var(--wgf-gold-bright); text-decoration: none; }
+.wgf-wiki-downloads a:hover,
+.wgf-wiki-versions a:hover,
+.wgf-wiki-related a:hover { text-decoration: underline; }
+.wgf-wiki-downloads a:focus-visible,
+.wgf-wiki-versions a:focus-visible,
+.wgf-wiki-related a:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
+.wgf-wiki-fmt {
+  display: inline-block;
+  margin-left: var(--space-1);
+  color: var(--wgf-neutral-text);
+  font-size: 0.85em;
+  white-space: nowrap;
+}
+
+/* Where it comes from: a recessed table that scrolls sideways on its own at 360px. */
+.wgf-wiki-block .wgf-window__body:has(> .wgf-wiki-table) { overflow-x: auto; }
+.wgf-wiki-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--wgf-well);
+  color: var(--wgf-text);
+  font-size: 0.95em;
+}
+.wgf-wiki-table th,
+.wgf-wiki-table td {
+  padding: var(--space-2);
+  border-bottom: 1px solid var(--wgf-border-neutral);
+  text-align: left;
+  vertical-align: top;
+}
+.wgf-wiki-table th[scope="row"] {
+  color: var(--wgf-gold);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.wgf-wiki-table td:last-child { color: var(--wgf-muted); }
+.wgf-wiki-table tr:last-child > * { border-bottom: 0; }
+
+/* Build history: first-seen line, then a dated diff list (newest first). */
+.wgf-wiki-first { margin: 0 0 var(--space-2); color: var(--wgf-text); }
+.wgf-wiki-history {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-left: 2px solid var(--wgf-metal);
+}
+.wgf-wiki-history > li {
+  padding: var(--space-1) 0 var(--space-1) var(--space-3);
+  color: var(--wgf-text);
+}
+.wgf-wiki-build {
+  display: inline-block;
+  min-width: 9ch;
+  margin-right: var(--space-2);
+  color: var(--wgf-gold-muted);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.9em;
+}
+.wgf-wiki-more { margin: var(--space-2) 0 0; color: var(--wgf-muted); font-size: 0.9em; }
+
+@media (max-width: 480px) {
+  .wgf-wiki-table th[scope="row"] { white-space: normal; }
+  .wgf-wiki-build { display: block; min-width: 0; margin: 0; }
+}

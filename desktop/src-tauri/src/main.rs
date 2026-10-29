@@ -34,7 +34,7 @@ fn mime_for(path: &str) -> &'static str {
 }
 
 fn proxyable(p: &str) -> bool {
-    p.starts_with("/assets/") || p.starts_with("/spiresofazeroth/assets/") || p.starts_with("/media/sounds/")
+    p.starts_with("/assets/") || p.starts_with("/static/") || p.starts_with("/spiresofazeroth/assets/") || p.starts_with("/media/sounds/")
 }
 
 fn respond(req: Request, status: u16, ctype: &str, body: Vec<u8>) {

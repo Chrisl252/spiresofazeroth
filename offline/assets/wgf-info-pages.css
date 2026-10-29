@@ -1,0 +1,244 @@
+/* =============================================================================
+   wgf-info-pages.css - the in-game window treatment for the site INFO pages
+   (/about/, /contact/, /sitemap/, /terms/, /privacy/).
+
+   Owner law (docs/vision/OWNER_REVIEW_2026-07-04 + docs/ui-ux/13-ingame-reference
+   sec 0.4): the old navy `.wgf-article` floating panel was SLOP. These pages now
+   wear the chrome kit - a `.wgf-window` on the site's stone canvas, each content
+   section a near-black `.wgf-well`, headings in the game display/Friz faces.
+
+   Load AFTER assets/wgf-chrome.css (this file consumes its components + locals:
+   .wgf-window / .wgf-well / .wgf-input / .wgf-btn-red and --wgf-well, --wgf-metal-*,
+   --wgf-dropdown-h). Tokens come from static/css/_tokens.css (loaded first).
+   No AI art; the only textures referenced are the committed AH-chrome slices.
+   ============================================================================= */
+
+/* The window sits centered at reading width on the stone canvas (the page body
+   keeps its wgf-shell-page stone background - we only re-cut the content plate). */
+.wgf-info {
+  max-width: 920px;
+  margin: var(--space-3) auto 0;
+}
+.wgf-info .wgf-window__body {
+  padding: var(--space-5);
+}
+
+/* Lead paragraph + "last updated" meta line under the title strip. */
+.wgf-info__lead {
+  margin: 0 0 var(--space-4);
+  color: var(--wgf-text);
+  font-family: var(--font-ui);
+  font-size: var(--text-lg);
+  line-height: 1.5;
+}
+.wgf-info__meta {
+  margin: 0 0 var(--space-4);
+  color: var(--wgf-muted);
+  font-family: var(--font-game);
+  font-size: var(--text-sm);
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+}
+
+/* Each content block = a near-black inset well with a gold display heading. */
+.wgf-info-section {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-4);
+}
+.wgf-info-section:last-child { margin-bottom: 0; }
+.wgf-info-section > h2 {
+  margin: 0 0 var(--space-3);
+  color: var(--wgf-gold);
+  font-family: var(--font-game-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  text-shadow: var(--text-ink-outline);
+}
+.wgf-info-section h3 {
+  margin: var(--space-3) 0 var(--space-2);
+  color: var(--wgf-gold-bright);
+  font-family: var(--font-game);
+  font-size: var(--text-md);
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.02em;
+}
+.wgf-info-section p,
+.wgf-info-section li {
+  color: var(--wgf-text);
+  font-family: var(--font-ui);
+  font-size: var(--text-md);
+  line-height: 1.55;
+}
+.wgf-info-section p { margin: 0 0 var(--space-2); }
+.wgf-info-section p:last-child { margin-bottom: 0; }
+.wgf-info-section ul {
+  margin: 0 0 var(--space-2);
+  padding-left: 1.2em;
+}
+.wgf-info-section li { margin: 0 0 var(--space-1); }
+.wgf-info-section a,
+.wgf-info__lead a { color: var(--wgf-gold-link); }
+.wgf-info-section a:hover,
+.wgf-info__lead a:hover { color: var(--wgf-gold-bright); }
+
+/* Solo-dev credit line (/about/): the character name links to the on-site lookup. */
+.wgf-info__dev {
+  color: var(--wgf-gold-bright);
+  font-family: var(--font-game);
+  font-variant: small-caps;
+  letter-spacing: 0.02em;
+}
+
+/* -----------------------------------------------------------------------------
+   Site-map link groups: clean two-column lists inside each .wgf-well section.
+   --------------------------------------------------------------------------- */
+.wgf-info__linklist {
+  columns: 2;
+  column-gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.wgf-info__linklist li {
+  break-inside: avoid;
+  padding: var(--space-1) 0;
+  border-bottom: 1px solid var(--wgf-metal-soft);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: var(--wgf-muted);
+}
+.wgf-info__linklist li a {
+  color: var(--wgf-gold-link);
+  font-weight: 600;
+}
+@media (max-width: 700px) {
+  .wgf-info__linklist { columns: 1; }
+}
+
+/* -----------------------------------------------------------------------------
+   The contact form (/contact/). Kit controls only: .wgf-input single-line fields,
+   a native <select> dressed as the kit dropdown, a .wgf-well textarea, and the
+   red action button. A honeypot + hidden render-time field back the anti-spam
+   guards on POST /api/contact/submit (contact_form_app.py).
+   --------------------------------------------------------------------------- */
+.wgf-form { display: grid; gap: var(--space-3); }
+.wgf-form__field { display: grid; gap: var(--space-1); }
+.wgf-form__label {
+  font-family: var(--font-game);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.03em;
+  color: var(--wgf-gold);
+}
+.wgf-form__req { color: var(--wgf-gold-bright); }
+.wgf-form__hint {
+  color: var(--wgf-muted);
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+}
+
+/* Native <select> dressed as the kit dropdown control (real, submittable, no-JS ok). */
+.wgf-select { position: relative; display: block; }
+.wgf-select select {
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--wgf-dropdown-h);
+  padding: 0 40px 0 12px;
+  border: 0;
+  border-radius: 4px;
+  background:
+    url(/assets/ui/auctionhouse-ui-dropdown-arrow-down.png) right 6px center / auto 20px no-repeat,
+    url(/assets/ui/auctionhouse-ui-dropdown-left.png) left center / auto 100% no-repeat,
+    url(/assets/ui/auctionhouse-ui-dropdown-right.png) right center / auto 100% no-repeat,
+    url(/assets/ui/auctionhouse-ui-dropdown-middle.png) left center / auto 100% repeat-x;
+  color: var(--wgf-gold);
+  font-family: var(--font-game);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+.wgf-select select:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.wgf-select select option { background: #0c0c0f; color: var(--wgf-text); }
+
+/* Multi-line message field = the near-black inset well surface. */
+.wgf-textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 168px;
+  resize: vertical;
+  padding: 10px 12px;
+  border: 1px solid var(--wgf-well-edge);
+  border-radius: 4px;
+  background: var(--wgf-well);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.75),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.6);
+  color: var(--wgf-text);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+.wgf-textarea:focus { outline: none; box-shadow: var(--focus-ring); }
+.wgf-textarea::placeholder { color: var(--wgf-muted); }
+
+/* Honeypot: off-screen, hidden from tabbing + assistive tech. Bots fill it. */
+.wgf-hp {
+  position: absolute !important;
+  left: -9999px !important;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.wgf-form__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.wgf-form__fallback {
+  color: var(--wgf-muted);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+}
+.wgf-form__fallback a { color: var(--wgf-gold-link); }
+
+/* Inline result note (JS path) + the swapped-in success confirmation. */
+.wgf-form__note {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+}
+.wgf-form__note--err { color: #ff6a6a; }
+.wgf-form__success {
+  color: var(--wgf-text);
+  font-family: var(--font-ui);
+}
+.wgf-form__success h3 {
+  margin: 0 0 var(--space-2);
+  color: var(--q-uncommon);
+  font-family: var(--font-game-display);
+  font-size: var(--text-lg);
+  font-variant: small-caps;
+  letter-spacing: 0.02em;
+}
+
+/* THE WORLD BEHIND THE WINDOW (owner, 2026-07-04, contact-page review): the page canvas
+   behind the kit window is the open game world, like standing in Goldshire with a window
+   up - not a flat plain fill. PLACEHOLDER ART: the Dreamgrove wide loading screen
+   (first-party, already committed). The real lane: the owner captures alt-Z HD in-game
+   screenshots (Moon Guard Goldshire etc.) on the main PC and they replace this as
+   crystal-clear easter-egg backgrounds per page. Scrim keeps the window readable. */
+body {
+  background:
+    linear-gradient(180deg, rgba(10, 8, 5, 0.68), rgba(10, 8, 5, 0.84)),
+    url(/assets/loading-screens/1417745.jpg) center 30% / cover no-repeat fixed;
+}

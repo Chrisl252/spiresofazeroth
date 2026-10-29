@@ -1,0 +1,159 @@
+/* wgf-search-bar.css - the "prime" command search band: THE most prominent control
+   in the site nav (owner mandate 2026-08-06: it must read as the way to find ANY
+   tool or ANY data on the site, on every page, never collapsed behind a magnifier).
+
+   Layout: seo_kit.py renders the form inside <div class="wgf-shell-searchband">, a
+   full-width row of the <header> directly under the topbar nav. This file owns that
+   band completely; wgf-shell.js skips its 2026-08-01 collapsible re-cut when the
+   form carries --prime.
+
+   Scope law: every rule is anchored to .wgf-shell-searchband or
+   .wgf-shell-search--prime, so this file is a pure no-op elsewhere. It NEVER edits
+   assets/wgf-site-shell.css - it wins by cascade (loaded after) and specificity.
+
+   Skin law: the in-game AH 3-slice input texture (assets/wgf-search-ingame.css,
+   lazy-loaded by wgf-search-suggest.js) still paints the input's background and
+   border. This file sets NO background/border on the input - only geometry, type,
+   and box-shadow glow - so the AH skin survives.
+
+   Palette law: existing tokens (--wgf-gold-rgb, --wgf-gold, --wgf-gold-bright,
+   --wgf-gold-muted, --wgf-focus) plus the moon-stone panel ramp already used by
+   the shell's own expanded-search row (--wgf-panel-1 over --wgf-bg, --wgf-metal-soft
+   edge; gold ramp 2026-09-02). No new colors. */
+
+/* -- The band: a full-width kit row under the nav -------------------------- */
+
+.wgf-shell-searchband {
+  display: flex;
+  justify-content: center;
+  padding: 10px clamp(16px, 4vw, 48px) 12px;
+  background: linear-gradient(180deg, var(--wgf-panel-1, #14161c), var(--wgf-bg, #0a0b0f));
+  border-bottom: 1px solid var(--wgf-metal-soft, #3a3120);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* -- The form: wide, centred, the suggest dropdown's anchor ---------------- */
+
+.wgf-shell-search--prime {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  max-width: 860px;
+  margin: 0;
+}
+
+/* -- The input: tall, loud, unmistakably the primary control --------------- */
+
+.wgf-shell-search--prime .wgf-shell-search__input {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 48px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding-right: 52px; /* room for the submit button */
+  /* Rest-state contrast: a faint gold ring + drop depth so it reads as THE
+     control even before focus. box-shadow only - never border - so the AH
+     3-slice texture keeps its own edges. */
+  box-shadow:
+    0 0 0 1px rgba(var(--wgf-gold-rgb), 0.32),
+    0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+/* Placeholder carries the "search ANYTHING" promise - lift it from muted grey
+   to the muted gold tone so the copy is actually read. */
+.wgf-shell-search--prime .wgf-shell-search__input::placeholder {
+  color: var(--wgf-gold-muted);
+  opacity: 1;
+}
+
+/* Focus: strong gold ring + subtle glow, same anatomy as the AH skin's focus
+   (wgf-search-ingame.css) but stronger - this selector outweighs it, so restate
+   the ring here with the same tokens. */
+.wgf-shell-search--prime .wgf-shell-search__input:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgba(var(--wgf-gold-rgb), 0.55),
+    0 0 16px rgba(var(--wgf-gold-rgb), 0.30),
+    0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+/* Keyboard focus-visible keeps a token ring for a11y parity with the site rule. */
+.wgf-shell-search--prime .wgf-shell-search__input:focus-visible {
+  outline: 2px solid var(--wgf-focus);
+  outline-offset: 1px;
+}
+
+/* -- The submit button: inside the input's right edge, gold at rest -------- */
+
+.wgf-shell-search--prime .wgf-shell-search__btn {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  color: var(--wgf-gold);
+}
+
+.wgf-shell-search--prime .wgf-shell-search__btn:hover {
+  color: var(--wgf-gold-bright);
+}
+
+.wgf-shell-search--prime .wgf-shell-search__btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* -- The suggest dropdown (wgf-search-suggest.js appends it inside the form):
+      span the full band form, sit above page content ------------------------ */
+
+.wgf-shell-search--prime .wgf-suggest {
+  left: 0;
+  right: 0;
+  z-index: 70;
+}
+
+/* -- Scope toggle (legacy, injected by wgf-shell.js on non-prime pages only;
+      harmless guard should it ever appear here) ----------------------------- */
+
+.wgf-shell-search--prime .wgf-scope-btn {
+  height: 48px;
+}
+
+/* -- Narrow screens: the band stays - that is the point - just tighter ------ */
+
+@media (max-width: 899px) {  /* the PHONE tier - same number as wgf-site-shell.css HEADER BREAKPOINTS */
+  .wgf-shell-searchband {
+    padding: 8px 12px 10px;
+  }
+
+  .wgf-shell-search--prime .wgf-shell-search__input {
+    min-height: 44px;
+    font-size: 16px; /* 16px floor also stops iOS focus-zoom */
+  }
+
+  .wgf-shell-search--prime .wgf-shell-search__btn {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+/* -- Pages that carry their OWN search surface (the home hero search, the AH toolbar)
+      hide the band's form: wgf-home.css and ah/base.css, "one search per page". Hide
+      the WHOLE band there, not just the form. Until 2026-08-27 the baked statics had no
+      .wgf-shell-right, so wgf-shell.js dropped Enter World beside this (hidden) form and
+      the selector followed it: the two chips sat alone, centred, on an orphan second
+      header row (owner screenshot of /wow-auction-house/ at 1920). With the cluster
+      stamped into every static, this row is empty on those two pages - and an empty
+      49px plate is the same bug in a quieter coat. */
+body[data-wgf-page="home"] .wgf-shell-searchband,
+body[data-wgf-page="auction-house"] .wgf-shell-searchband {
+  display: none;
+}

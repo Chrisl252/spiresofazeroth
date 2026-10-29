@@ -1,0 +1,322 @@
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R5 V4 (subjective design review).
+   Hallmark · genre: game reference · macrostructure: Catalogue / Ecosystem Index /
+   Long Document · design-system: design.md · designed-as-app
+   Audience: WoW players. Use: research and market tools. Tone: Warcraft field guide.
+   The owner's /guides/ reference, extended across existing public page families.
+   All layout/data/interaction ownership remains with the page modules. */
+
+/* One restrained frame for page sections, cards and tool panels. Scope to main so
+   the directory overlay, consent dialog and native game widgets keep their skins. */
+/* .wgf-window is NOT in this list: it wears the client metal frame from the kit
+   (wgf-chrome.css, owner Ready Check 2026-10-06: Blizzard frame art only). */
+.wgf-shell-page main :is(.wgf-section, .wgf-card,
+  .wgf-sitemap-card, .wgf-page-hero, .hm-plate, .gsh-auth-card,
+  .gsh-guide-detail, .wgf-rec-strip, .wgf-rec-profcard,
+  .wtd-chart-panel, .wtd-history-panel, .wtd-region-compare) {
+  background: var(--wgf-guide-surface);
+  border: 1px solid var(--wgf-metal);
+  border-radius: var(--radius-card);
+  box-shadow: var(--wgf-guide-shadow);
+  color: var(--wgf-text);
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* A heading sits within the frame, matching the Guides title hierarchy. */
+.wgf-shell-page main :is(.wgf-section > h2, .wgf-section > .section-heading) {
+  justify-content: flex-start;
+  min-height: 0;
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  text-align: left;
+  font-family: var(--font-game);
+  font-size: var(--text-lg);
+  line-height: 1.35;
+}
+.wgf-shell-page main :is(h1.wgf-window__title, .wgf-seo-h1, .gsh-auth-title) {
+  font-family: var(--font-game);
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-variant: small-caps;
+  letter-spacing: .03em;
+  color: var(--wgf-gold);
+  line-height: 1.2;
+}
+.wgf-shell-page main .wgf-seo-hero:not(:has(.wgf-item-hero)) {
+  box-sizing: border-box;
+  background: var(--wgf-guide-surface);
+  border: 1px solid var(--wgf-metal);
+  border-radius: var(--radius-card);
+  box-shadow: var(--wgf-guide-shadow);
+}
+.wgf-shell-page main :is(.wgf-seo-sub, .wgf-seo-lead, .rd-section-caption) {
+  line-height: 1.65;
+}
+
+/* Never frame a section twice inside an existing window. */
+.wgf-shell-page main .wgf-window .wgf-section {
+  border: 0;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+/* Catalogue tiles keep real art; row variants keep their compact density. */
+.wgf-shell-page main :is(.wgf-ag-card, .wgf-guide-card, .hm-door,
+  .hm-token-tile, .wgf-cat-tile, .wgf-cls-card) {
+  border: 1px solid var(--wgf-metal);
+  border-radius: var(--radius-card);
+  box-shadow: var(--wgf-guide-shadow);
+  min-width: 0;
+  transition: border-color var(--motion-fast) var(--ease-standard);
+}
+/* Catalogue tiles are client INSET frames (UI-Frame-Inner rims + marble, the kit's
+   --wgf-inset-art in wgf-chrome.css; owner Ready Check 2026-10-06: Blizzard art only,
+   no flat navy + gold outline). The art is the rim, so the CSS border goes. */
+.wgf-shell-page main :is(.wgf-guide-card, .hm-door, .hm-token-tile, .wgf-cat-tile) {
+  background: var(--wgf-inset-art);
+  border: 0;
+  box-shadow: none;
+  transition: filter var(--motion-fast) var(--ease-standard);
+}
+.wgf-shell-page main :is(.wgf-guide-card, .hm-door, .hm-token-tile, .wgf-cat-tile):is(:hover, :focus-within) {
+  filter: brightness(1.3);
+}
+.wgf-shell-page main .wgf-ag-card {
+  background: var(--wgf-guide-surface), var(--agc-art, none);
+  background-size: cover;
+  background-position: center;
+}
+.wgf-shell-page main .wgf-ag-card::before,
+.wgf-shell-page main .wgf-ag-card::after { content: none; }
+.wgf-shell-page main .wgf-ag-card__body { gap: var(--space-3); padding: var(--space-3); }
+.wgf-shell-page main .wgf-ag-card--row .wgf-ag-card__body { padding: var(--space-2) var(--space-3); }
+.wgf-shell-page main :is(.wgf-ag-card__name, .wgf-guide-card__title,
+  .wgf-guide-card__title a, .hm-door__name, .wgf-cat-tile__name) {
+  font-family: var(--font-game);
+  letter-spacing: .01em;
+  line-height: 1.35;
+}
+.wgf-shell-page main :is(.wgf-ag-card, .wgf-guide-card, .hm-door, .hm-token-tile,
+  .wgf-cat-tile, .wgf-db-row):is(:hover, :focus-within) {
+  border-color: var(--wgf-gold);
+}
+.wgf-shell-page main .wgf-ag-card__body > div { min-width: 0; }
+
+/* Database chapter windows no longer carry a second, heavy wooden frame; they are
+   plain kit windows (client metal frame, wgf-chrome.css). */
+.wgf-shell-page main .wgf-dbj .wgf-dbj-entry {
+  padding: 0;
+  background: var(--wgf-window-bg);
+  box-shadow: var(--shadow-2);
+}
+.wgf-shell-page main .wgf-dbj .wgf-dbj-entry .wgf-window__title {
+  min-height: 42px;
+  border-bottom: 0;
+  background: var(--wgf-window-band);
+  background-clip: padding-box;
+  background-origin: padding-box;
+  box-shadow: none;
+}
+.wgf-shell-page main .wgf-dbj .wgf-db-row {
+  background: var(--wgf-well);
+  border: 1px solid var(--wgf-metal-soft);
+  border-radius: var(--radius-control);
+  padding: var(--space-3);
+  min-width: 0;
+}
+.wgf-shell-page main .wgf-dbj :is(.wgf-db-window__desc, .wgf-seo-lead) {
+  color: var(--wgf-muted);
+  line-height: 1.65;
+}
+
+/* Home: bring the reading panels into the same dark family as the guide cards.
+   Existing client icons and the market-hall backdrop remain in their own homes. */
+.wgf-shell-page main :is(.hm-profbook, .hm-about, .hm-brief-pane) {
+  /* .wgf-parchment-pane (wgf-chrome.css) rescopes --wgf-text to parchment ink #2c1d0b.
+     These panes are dark now, so restore the light token or the copy is ink on night. */
+  --wgf-text: #f4ecd8;
+  background: var(--wgf-guide-surface);
+  border: 1px solid var(--wgf-metal);
+  border-radius: var(--radius-card);
+  box-shadow: var(--wgf-guide-shadow);
+  padding: var(--space-4);
+  color: var(--wgf-text);
+}
+.wgf-shell-page main :is(.hm-profbook, .hm-about, .hm-brief-pane)::before,
+.wgf-shell-page main :is(.hm-profbook, .hm-about, .hm-brief-pane)::after { content: none; }
+.wgf-shell-page main :is(.hm-profbook, .hm-about, .hm-brief-pane)
+  :is(p, li, strong, .hm-brief__foot, .hm-fresh, .hm-fresh__t) { color: var(--wgf-text); }
+.wgf-shell-page main :is(.hm-profbook, .hm-about, .hm-brief-pane)
+  :is(h2, h3, .wgf-parchment-pane__title, a, .catchip) { color: var(--wgf-gold-link); }
+.wgf-shell-page main .hm-h1 { color: var(--wgf-gold); }
+.wgf-shell-page main .hm-door { padding: var(--space-4); }
+
+/* Tables and charts stay tools. Only their containing frame changes. */
+.wgf-shell-page main :is(.ah-table-shell, .wgf-rec-tblwrap, .wtd-table-wrap,
+  .wgf-seo-table-wrap, .wgf-ahm__shell) {
+  position: relative;
+  box-sizing: border-box;
+  contain: inline-size;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  border-color: var(--wgf-metal-soft);
+  background-color: var(--wgf-well);
+}
+.wgf-shell-page main :is(.wtd-item-card, .wtd-source-list > li,
+  .wtd-region-quote, .wgf-info-section, .wgf-cmt-src-card) {
+  border-color: var(--wgf-metal-soft);
+  border-radius: var(--radius-control);
+  background-color: var(--wgf-well);
+}
+.wgf-shell-page main .wgf-info-section > h2 {
+  font-family: var(--font-game);
+  font-size: var(--text-lg);
+}
+.wgf-shell-page main .wgf-info-section :is(p, li) { line-height: 1.7; }
+.wgf-shell-page main .gsh-auth-card { padding: var(--space-4); }
+
+/* The two legacy menu pages use their own body instead of .wgf-shell-page. */
+main.menu-window { width: calc(100% - var(--space-5)); }
+main.menu-window .menu-plate {
+  background: var(--wgf-guide-surface);
+  border: 1px solid var(--wgf-metal);
+  border-radius: var(--radius-card);
+  box-shadow: var(--wgf-guide-shadow);
+  color: var(--wgf-text);
+  font-family: var(--font-ui);
+}
+main.menu-window .menu-head {
+  background: var(--wgf-bg-base);
+  border: 1px solid var(--wgf-metal);
+  border-radius: var(--radius-control);
+  color: var(--wgf-gold);
+}
+/* Keep the PvP header's decorative wash inside its own frame on phones. */
+.wgf-shell-page main .wgf-pvp-hero::before { inset-inline: 0; width: auto; }
+
+/* Visible keyboard focus, without changing selected/disabled or quality states. */
+.wgf-shell-page main :is(a, button, input, select, summary, textarea):focus-visible {
+  outline: 2px solid var(--wgf-focus);
+  outline-offset: 3px;
+}
+.wgf-shell-page main :is(.wgf-window__title, .wgf-ag-card__name,
+  .wgf-guide-card__title, .gsh-guide-card__title, .wgf-seo-h1) { overflow-wrap: anywhere; }
+
+/* Shrink grids to a real phone width, rather than hiding overflowing content. */
+.wgf-shell-page main :is(.wgf-ag-grid, .wgf-guide-cards, .gsh-guide-grid) {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+}
+.wgf-shell-page main :is(.wgf-seo-main, .wgf-seo-aside, .wgf-window__body,
+  .wgf-zonebg-wrap, .ah-main) { min-width: 0; }
+@media (max-width: 767px) {
+  .wgf-shell-page main :is(.wgf-section, .wgf-seo-hero, .wgf-window__body,
+    .wgf-info .wgf-window__body, .gsh-guide-detail) { padding: var(--space-3); }
+  .wgf-shell-page main .wgf-window .wgf-section { padding: 0; }
+  .wgf-shell-page main .wgf-dbj .wgf-db-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .wgf-shell-page main :is(.wgf-dbj .wgf-db-row, .wgf-dbh-groupicon) { gap: var(--space-2); }
+  .wgf-shell-page main .wgf-dbj .wgf-db-row { flex-wrap: wrap; }
+  .wgf-shell-page main .wgf-info { margin-top: var(--space-3); }
+  .wgf-shell-page main :is(.gsh-page-wrap, .gsh-guide-detail-wrap) { padding-inline: var(--space-3); }
+  .wgf-shell-page main .gsh-guide-card { padding: var(--space-3); }
+  .wgf-shell-page main .wtd-item-grid { grid-template-columns: minmax(0, 1fr); }
+  .wgf-shell-page main .wtd-quote-move { white-space: normal; overflow-wrap: anywhere; }
+  .wgf-shell-page main .ah-toolbar {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .wgf-shell-page main :is(.ah-realm-wrap, .ah-toolbar > *) { min-width: 0; }
+}
+@media (max-width: 420px) {
+  .wgf-shell-page main .hm-profbook__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wgf-shell-page main .wgf-info-section { padding: var(--space-3); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wgf-shell-page main :is(.wgf-ag-card, .wgf-guide-card, .hm-door,
+    .hm-token-tile, .wgf-cat-tile) { transition: none; }
+}
+
+/* =============================================================================
+   OWNER RULING 2026-10-10: NO BLUE CARDS. "Every page needs to look like it came straight
+   out of the game." The 2026-09-06 Guides surface (a navy gradient with a 1px gold-metal
+   outline) is retired sitewide. Every frame it painted now wears the client's own art:
+   Class Hall stone under the dark wash (the window kit body) and the UIFrameMetal frame.
+   html:root beats _tokens.css's :root, which loads after this file.
+   ============================================================================= */
+html:root {
+  --wgf-guide-surface:
+    linear-gradient(rgba(0, 0, 0, 0.44), rgba(0, 0, 0, 0.44)),
+    url(/assets/ui/classhall-stone-tile.png) left top / 256px 256px repeat;
+}
+/* The real window kit is never repainted by the theme: stone body, metal frame, title band. */
+.wgf-shell-page main .wgf-window {
+  background: var(--wgf-window-bg);
+  border: 0;
+  border-radius: 0;
+  box-shadow: var(--shadow-2);
+}
+.wgf-shell-page main .wgf-window:not(:has(> .wgf-window__title)) {
+  background: var(--wgf-window-band), var(--wgf-window-bg);
+}
+.wgf-shell-page main .wgf-window__title {
+  justify-content: center;
+  border: 0 solid transparent;
+  border-inline-width: 30px 24px;
+  border-radius: 0;
+  background: var(--wgf-window-band);
+  background-clip: padding-box;
+  background-origin: padding-box;
+  padding: 1px var(--space-2) 8px;
+  text-align: center;
+}
+/* Page headers (.wgf-seo-hero, .wgf-page-hero) become windows: stone body + the UIFrameMetal
+   frame drawn by the same corner/edge slices as .wgf-window (no CSS outline). */
+.wgf-shell-page main :is(.wgf-seo-hero:not(:has(.wgf-item-hero)), .wgf-page-hero, .wgf-hero) {
+  position: relative;
+  background: var(--wgf-window-band), var(--wgf-window-bg);
+  border: 0;
+  border-radius: 0;
+  box-shadow: var(--shadow-2);
+  padding-top: calc(36px + var(--space-3));
+}
+.wgf-shell-page main :is(.wgf-seo-hero:not(:has(.wgf-item-hero)), .wgf-page-hero, .wgf-hero)::before,
+.wgf-shell-page main :is(.wgf-seo-hero:not(:has(.wgf-item-hero)), .wgf-page-hero, .wgf-hero)::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+.wgf-shell-page main :is(.wgf-seo-hero:not(:has(.wgf-item-hero)), .wgf-page-hero, .wgf-hero)::before {
+  inset: 0;
+  background:
+    url(/assets/ui/ui-frame-metal-cornertopleft-2x.png)      left  -19px top    -26px / 120px 120px no-repeat,
+    url(/assets/ui/ui-frame-metal-cornertopright-2x.png)     right  -9px top    -26px / 120px 120px no-repeat,
+    url(/assets/ui/ui-frame-metal-cornerbottomleft-2x.png)   left  -19px bottom  -7px / 51.2px 51.2px no-repeat,
+    url(/assets/ui/ui-frame-metal-cornerbottomright-2x.png)  right  -9px bottom  -7px / 51.2px 51.2px no-repeat,
+    url("/assets/ui/!ui-frame-metal-edgeleft-2x.png")        left  -19px top 0 / 120px 25.6px repeat-y,
+    url("/assets/ui/!ui-frame-metal-edgeright-2x.png")       right  -9px top 0 / 120px 25.6px repeat-y;
+  background-clip: border-box, border-box, border-box, border-box, padding-box, padding-box;
+  background-origin: border-box;
+  border-style: solid;
+  border-color: transparent;
+  border-width: 30px 0 30px 0;
+}
+.wgf-shell-page main :is(.wgf-seo-hero:not(:has(.wgf-item-hero)), .wgf-page-hero, .wgf-hero)::after {
+  left: 32px;
+  right: 26px;
+  bottom: 0;
+  height: 51.2px;
+  background: url(/assets/ui/_ui-frame-metal-edgebottom-2x.png) left bottom -7px / 25.6px 51.2px repeat-x;
+}
+/* Cards and sections that kept the navy fill keep their layout but lose the gold CSS
+   outline; the stone surface above replaces the fill. */
+.wgf-shell-page main :is(.wgf-section, .wgf-card, .wgf-sitemap-card, .hm-plate,
+  .gsh-auth-card, .gsh-guide-detail, .wgf-rec-strip, .wgf-rec-profcard,
+  .wtd-chart-panel, .wtd-history-panel, .wtd-region-compare, .wgf-guide-card, .hm-door,
+  .hm-token-tile, .wgf-cat-tile, .hm-profbook, .hm-about, .hm-brief-pane) {
+  border-color: var(--wgf-metal-soft);
+  border-radius: 0;
+}

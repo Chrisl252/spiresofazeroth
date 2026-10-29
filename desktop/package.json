@@ -1,6 +1,6 @@
 {
   "name": "spires-of-azeroth-desktop",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "private": true,
   "description": "Tauri v2 desktop wrapper for Spires of Azeroth",
   "scripts": {

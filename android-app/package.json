@@ -1,6 +1,6 @@
 {
   "name": "spires-of-azeroth-android",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "private": true,
   "description": "Capacitor Android wrapper for Spires of Azeroth",
   "scripts": { "stage": "node stage.mjs" },

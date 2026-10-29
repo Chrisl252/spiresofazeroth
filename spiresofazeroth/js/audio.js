@@ -1,8 +1,8 @@
 // Tiny sound player (GEAR_SPEC section 2): HTMLAudio, unlocked on the first user gesture, default ON, mute remembered in localStorage.
 // Files live in assets/sfx/ as .ogg + .mp3 (copied from the classic client: LootCoinLarge, LootCoinSmall, ChestOpen); the page never calls /sounds/.
 //   sfx.play("coin" | "coinSmall" | "chest")   sfx.playUrl(url, {volume, cut})   sfx.preload(urls)   sfx.muted   sfx.setMuted(bool)
-import { BUILD } from "./version.js?v=20261029a";
-import * as eng from "./audio/engine.js?v=20261029a";
+import { BUILD } from "./version.js?v=20261029d";
+import * as eng from "./audio/engine.js?v=20261029d";
 
 const BASE = new URL("../assets/sfx/", import.meta.url).href;
 const FILES = { coin: "loot-coin", coinSmall: "loot-coin-small", chest: "chest-open" };

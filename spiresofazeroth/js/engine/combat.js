@@ -1,16 +1,16 @@
 // Combat loop: start, play card, end turn (player phase -> enemy phase generator -> round end -> next player turn), potions, finish.
-import { runEffects, evalCond, resolveTargets } from "./effects.js?v=20261029a";
-import { fx, log, isAlive, gainBlock, checkDeaths } from "./damage.js?v=20261029a";
+import { runEffects, evalCond, resolveTargets } from "./effects.js?v=20261029d";
+import { fx, log, isAlive, gainBlock, checkDeaths } from "./damage.js?v=20261029d";
 import {
   buildPiles, drawCards, endTurnCleanup, whyUnplayable, cardCost, toDiscard, toExhaust, hasFlag, removeFrom,
-} from "./deck.js?v=20261029a";
-import { initResources, startOfTurn, endOfTurn, extraDraw, extraEnergy, armTrap, spendRes } from "./resources.js?v=20261029a";
-import { buildEnemy, chooseMove, enemyAct, checkPhases } from "./intents.js?v=20261029a";
-import { applyStatus, turnStart, turnEnd, roundEnd, modeOf } from "./status.js?v=20261029a";
-import { fire } from "./relics.js?v=20261029a";
-import { makeRng } from "./rng.js?v=20261029a";
-import { heroicMods, noviceOf } from "./heroic.js?v=20261029a";
-import { talentCarryBlock, talentNoExhaust, talentSweep } from "./talentHooks.js?v=20261029a";
+} from "./deck.js?v=20261029d";
+import { initResources, startOfTurn, endOfTurn, extraDraw, extraEnergy, armTrap, spendRes } from "./resources.js?v=20261029d";
+import { buildEnemy, chooseMove, enemyAct, checkPhases } from "./intents.js?v=20261029d";
+import { applyStatus, turnStart, turnEnd, roundEnd, modeOf } from "./status.js?v=20261029d";
+import { fire } from "./relics.js?v=20261029d";
+import { makeRng } from "./rng.js?v=20261029d";
+import { heroicMods, noviceOf } from "./heroic.js?v=20261029d";
+import { talentCarryBlock, talentNoExhaust, talentSweep } from "./talentHooks.js?v=20261029d";
 
 // map-profile tuning (data/map-profiles.json combatMods) layered on the heroic modifiers: hp multiplies, strengths add
 function composeMods(h, z, tier, nov = 1) {

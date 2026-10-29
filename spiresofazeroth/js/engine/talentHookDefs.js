@@ -5,7 +5,7 @@
 // The runtime that applies these lives in talentHooks.js; the roster + rules are documented in docs/TALENTS_V2.md.
 // text(v, E) renders the tooltip for the value at a rank, so the tooltip can never drift from the numbers in the JSON.
 
-import { CLASS_DEFS } from "./talents-v2/defs.js?v=20261029a"; // per-class hook defs (pure data), merged into HOOKS below
+import { CLASS_DEFS } from "./talents-v2/defs.js?v=20261029d"; // per-class hook defs (pure data), merged into HOOKS below
 export const HEAVY_HIT = 8;       // heavy_hit: base damage a single hit needs
 export const ENRAGE_RAGE = 30;    // enrage_dmg: Rage needed
 export const GUARD_BLOCK = 8;     // guard_dmg: Block needed

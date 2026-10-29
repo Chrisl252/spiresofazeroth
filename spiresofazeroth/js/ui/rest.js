@@ -1,17 +1,22 @@
 // Campfire (one action) and the Moonglade hub (all actions: rest, trainer upgrade, vendor, zone well). Stage-native, fire on a canvas.
-import { h, icon, toast, fill } from "./dom.js?v=20261029a";
-import { restHeal, upgradeableCards, upgradeCard, restZoneAction, trainerUpgrade, openHubShop, leaveScreen } from "../engine/run.js?v=20261029a";
-import { shopPanel } from "./shop.js?v=20261029a";
-import { upgradeOverlay, restOverlay } from "./restOverlay.js?v=20261029a";
-import { cssReady, btn, banner, plate } from "./kit.js?v=20261029a";
-import { runBar } from "./runbar.js?v=20261029a";
-import { mountCampfire } from "./campfire.js?v=20261029a";
+import { h, icon, toast, fill } from "./dom.js?v=20261029d";
+import { restHeal, upgradeableCards, upgradeCard, restZoneAction, trainerUpgrade, openHubShop, leaveScreen } from "../engine/run.js?v=20261029d";
+import { shopPanel } from "./shop.js?v=20261029d";
+import { upgradeOverlay, restOverlay } from "./restOverlay.js?v=20261029d";
+import { cssReady, btn, banner, plate } from "./kit.js?v=20261029d";
+import { runBar } from "./runbar.js?v=20261029d";
+import { mountCampfire } from "./campfire.js?v=20261029d";
 
 export const stageNative = true;
 
 export async function render(app, name) {
   await cssReady;
   const { run, data, stage } = app;
+  if (name === "hub" && !(run.pending && run.pending.hub && run.pending.hubZone)) { // 10-29 report: a saved hub with no pending state crashed "Continue run" (null.hubZone)
+    const hz = data.zoneIndex.find((z) => z.isHub);
+    if (hz) await data.loadZone(hz.id);
+    run.pending = Object.assign({}, run.pending, { type: "rest", hub: true, hubZone: hz ? hz.id : run.zoneId, used: (run.pending && run.pending.used) || {} });
+  }
   if (name !== "hub" && !(run.pending && run.pending.hub) && (!run.pending || !run.pending.used)) run.pending = Object.assign({}, run.pending, { type: "rest", used: {} }); // a saved/stuck rest with no pending state still opens
   const pd = run.pending;
   const hub = name === "hub" || pd.hub;

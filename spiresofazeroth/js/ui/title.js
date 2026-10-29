@@ -1,8 +1,8 @@
 // Title screen (stage-native): zone backdrop, morpheus logo, WoW red-button menu.
-import { h } from "./dom.js?v=20261029a";
-import { talentState } from "../engine/talents.js?v=20261029a";
-import { downloadButton } from "./downloadPanel.js?v=20261029a";
-import { saveRun, loadRun } from "../engine/save.js?v=20261029a";
+import { h } from "./dom.js?v=20261029d";
+import { talentState } from "../engine/talents.js?v=20261029d";
+import { downloadButton } from "./downloadPanel.js?v=20261029d";
+import { saveRun, loadRun } from "../engine/save.js?v=20261029d";
 
 export const stageNative = true;
 

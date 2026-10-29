@@ -1,23 +1,23 @@
 // Character select (stage-native), like the client's list: saved characters (name, level, race + class, zone) on the right, the selected
 // character's model in the centre, Enter World / Create New Character / Delete Character / Back. A character is a saved race + gender +
 // name + class (meta.characters); Enter World starts a run with it. No characters yet -> straight to creation.
-import { h, cap, track, fill } from "./dom.js?v=20261029a";
-import { btn, tog } from "./kit.js?v=20261029a";
-import { saveMeta, isClassUnlocked } from "../engine/save.js?v=20261029a";
-import { classLevel } from "../engine/talents.js?v=20261029a";
-import { heroicOpen, heroicName, heroicBlurb } from "../engine/heroic.js?v=20261029a";
-import { newSeedString } from "../engine/rng.js?v=20261029a";
-import { RACE_NAME, HOME, slugOf } from "../engine/character.js?v=20261029a";
-import { loadCharData, charCss, portraitUrl } from "./charData.js?v=20261029a";
-import { createRaceViewer } from "../stage/raceViewer.js?v=20261029a";
-import { beginRun } from "./runStart.js?v=20261029a";
+import { h, cap, track, fill } from "./dom.js?v=20261029d";
+import { btn, tog } from "./kit.js?v=20261029d";
+import { saveMeta, isClassUnlocked } from "../engine/save.js?v=20261029d";
+import { classLevel } from "../engine/talents.js?v=20261029d";
+import { heroicOpen, heroicName, heroicBlurb } from "../engine/heroic.js?v=20261029d";
+import { newSeedString } from "../engine/rng.js?v=20261029d";
+import { RACE_NAME, HOME, slugOf } from "../engine/character.js?v=20261029d";
+import { loadCharData, charCss, portraitUrl } from "./charData.js?v=20261029d";
+import { createRaceViewer } from "../stage/raceViewer.js?v=20261029d";
+import { beginRun } from "./runStart.js?v=20261029d";
 
 export const stageNative = true;
 
 export async function render(app, _name, props = {}) {
   const { data, meta, stage } = app;
   meta.characters = Array.isArray(meta.characters) ? meta.characters : [];
-  if (!meta.characters.length) { app.screen = "charCreate"; return (await import("./charCreate.js?v=20261029a")).render(app, "charCreate", {}); } // first visit: straight to creation
+  if (!meta.characters.length) { app.screen = "charCreate"; return (await import("./charCreate.js?v=20261029d")).render(app, "charCreate", {}); } // first visit: straight to creation
   const [D] = await Promise.all([loadCharData(), charCss()]);
   stage.setBackdrop("classSelect");
   const th = (data.unlocks && data.unlocks.thresholds) || [];

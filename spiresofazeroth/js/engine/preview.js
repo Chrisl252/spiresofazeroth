@@ -1,11 +1,11 @@
 // StS2-style damage previews: pure projections of a player card against a living enemy,
 // mirroring damage.dealDamage's arithmetic (dealt -> bonus -> mult -> taken -> adjust -> block/shield).
 // NO mutations, NO fx. Keep in sync with damage.js when the pipeline changes.
-import { modifyDealt, modifyTaken } from "./status.js?v=20261029a";
-import { damageBonus, damageMult, takenAdjust } from "./resources.js?v=20261029a";
-import { immuneToSchool, resistMult } from "./immunity.js?v=20261029a";
-import { num } from "./effects.js?v=20261029a";
-import { talentDamage } from "./talentHooks.js?v=20261029a";
+import { modifyDealt, modifyTaken } from "./status.js?v=20261029d";
+import { damageBonus, damageMult, takenAdjust } from "./resources.js?v=20261029d";
+import { immuneToSchool, resistMult } from "./immunity.js?v=20261029d";
+import { num } from "./effects.js?v=20261029d";
+import { talentDamage } from "./talentHooks.js?v=20261029d";
 
 // -> { hits, perHit, total, blocked, hpLoss, immune, resist, lethal } | null
 export function previewCardVs(C, inst, tgt) {

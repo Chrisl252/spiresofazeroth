@@ -2,8 +2,8 @@
 // slides open beside it. Pure DOM, one document-level listener; the hand keeps its own lift + arrow logic.
 // Glossary sources: data/keywords.json (statuses), class stance/seal/form/aspect/totem cards (their own text),
 // the class resource tip. Explanations chain one level (Berserker Stance text -> its keywords).
-import { iconUrl } from "../engine/data.js?v=20261029a";
-import { overlayHost } from "./dom.js?v=20261029a";
+import { iconUrl } from "../engine/data.js?v=20261029d";
+import { overlayHost } from "./dom.js?v=20261029d";
 
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const SPECIAL = [ // rules words that are not statuses but players ask about

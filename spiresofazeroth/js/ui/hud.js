@@ -4,12 +4,12 @@
 //           onSpare(uid), onMap(), onSettings() }
 //   view: { potSel, busy, canEnd, hint, spare?(enemy) -> bool }
 // Enemy plates carry data-uid so the hand can drop cards on them; the actors agent plugs real anchors into opts.anchorFor.
-import { h, tip, esc, cap } from "./dom.js?v=20261029a";
-import { gearStrip } from "./gearStrip.js?v=20261029a";
-import { intentInfo } from "../engine/intents.js?v=20261029a";
-import { isAlive } from "../engine/damage.js?v=20261029a";
-import { immuneList } from "../engine/immunity.js?v=20261029a";
-import { heroLabels } from "../engine/character.js?v=20261029a";
+import { h, tip, esc, cap } from "./dom.js?v=20261029d";
+import { gearStrip } from "./gearStrip.js?v=20261029d";
+import { intentInfo } from "../engine/intents.js?v=20261029d";
+import { isAlive } from "../engine/damage.js?v=20261029d";
+import { immuneList } from "../engine/immunity.js?v=20261029d";
+import { heroLabels } from "../engine/character.js?v=20261029d";
 const HD = new URL("../../assets/icons-hd/", import.meta.url).href; // 256px upscaled icons, relative so dev + deploy both resolve
 
 const ico = (slug, cls = "") => {

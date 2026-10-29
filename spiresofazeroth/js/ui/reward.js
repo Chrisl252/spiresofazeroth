@@ -1,14 +1,14 @@
 // Post-combat rewards (stage-native): gold / potion / relic plates, then cards fanned out under a gold banner. Also the treasure chest.
-import { sp } from "../analytics.js?v=20261029a";
-import { h, icon, qClass, esc, toast, fill } from "./dom.js?v=20261029a";
-import { takeCard, takePotion, takeRelic, leaveNode } from "../engine/run.js?v=20261029a";
-import { cssReady, btn, banner, plate, cardSlot, ico, tip } from "./kit.js?v=20261029a";
-import { runBar } from "./runbar.js?v=20261029a";
-import { needsLoot, showLoot, buildLootFrame } from "./loot.js?v=20261029a";
-import { getKit, clearStage } from "./combatKit.js?v=20261029a";
-import { gearLevel } from "../engine/gear.js?v=20261029a";
-import { goesToBag, SLOT_LABEL, wouldReplace } from "../engine/gear.js?v=20261029a";
-import { beltEl } from "./belt.js?v=20261029a";
+import { sp } from "../analytics.js?v=20261029d";
+import { h, icon, qClass, esc, toast, fill } from "./dom.js?v=20261029d";
+import { takeCard, takePotion, takeRelic, leaveNode } from "../engine/run.js?v=20261029d";
+import { cssReady, btn, banner, plate, cardSlot, ico, tip } from "./kit.js?v=20261029d";
+import { runBar } from "./runbar.js?v=20261029d";
+import { needsLoot, showLoot, buildLootFrame } from "./loot.js?v=20261029d";
+import { getKit, clearStage } from "./combatKit.js?v=20261029d";
+import { gearLevel } from "../engine/gear.js?v=20261029d";
+import { goesToBag, SLOT_LABEL, wouldReplace } from "../engine/gear.js?v=20261029d";
+import { beltEl } from "./belt.js?v=20261029d";
 
 export const stageNative = true;
 

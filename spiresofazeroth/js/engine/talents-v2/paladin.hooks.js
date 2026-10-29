@@ -3,9 +3,9 @@
 //   deal(C, src, tgt, amt, o, base)   any non-thorns hit on an enemy (player, pet or totem source; o.card = card def; o.dry = preview, no side effects)
 //   taken(C, tgt, taken, src, o)      damage the player is about to take; return the new amount
 // Read values with tv(C, key, arg) from ../talentHooks.js; keep per-fight state on C.talpaladin (C is one combat).
-import { tv } from "../talentHooks.js?v=20261029a";
-import { gainBlock, healEntity, isAlive, dealDamage, fx, log } from "../damage.js?v=20261029a";
-import { PAL_LOW_HP } from "./paladin.defs.js?v=20261029a";
+import { tv } from "../talentHooks.js?v=20261029d";
+import { gainBlock, healEntity, isAlive, dealDamage, fx, log } from "../damage.js?v=20261029d";
+import { PAL_LOW_HP } from "./paladin.defs.js?v=20261029d";
 
 const st = (C) => C.talpaladin || (C.talpaladin = { seal: null, fx: null, hb: 0, pend: 0 });
 const hasHeal = (list) => Array.isArray(list) && list.some((e) => e && ((e.op === "heal" && (e.amount | 0) > 0) || hasHeal(e.then) || hasHeal(e.else)));

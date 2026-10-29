@@ -5,13 +5,13 @@
 //   deck.js cardCost      -> talentCost          combat.js playCard -> talentSweep, talentNoExhaust      combat.js startPlayerTurn -> talentCarryBlock
 //   effects.js apply/damage ops -> talentApplyBonus, talentSkipSelfHit                   run.js newRun -> addTalentGrants
 // Everything is a no-op when run.talents has no V2 key (headless sim without talents, legacy classes, old saves, mock runs).
-import { addRes, getRes } from "./resources.js?v=20261029a";
-import { applyStatus } from "./status.js?v=20261029a";
-import { gainBlock, healEntity, isAlive, fx, log, dealDamage } from "./damage.js?v=20261029a";
-import { drawCards } from "./deck.js?v=20261029a";
-import { runEffects, num } from "./effects.js?v=20261029a";
-import { classFire, classDeal, classTaken } from "./talents-v2/hooks.js?v=20261029a"; // per-class V2 runtimes
-import { HEAVY_HIT, ENRAGE_RAGE, GUARD_BLOCK, LAST_STAND, SWEEP_RAGE, RAGE_PER_DMG, WOUNDED_PCT } from "./talentHookDefs.js?v=20261029a";
+import { addRes, getRes } from "./resources.js?v=20261029d";
+import { applyStatus } from "./status.js?v=20261029d";
+import { gainBlock, healEntity, isAlive, fx, log, dealDamage } from "./damage.js?v=20261029d";
+import { drawCards } from "./deck.js?v=20261029d";
+import { runEffects, num } from "./effects.js?v=20261029d";
+import { classFire, classDeal, classTaken } from "./talents-v2/hooks.js?v=20261029d"; // per-class V2 runtimes
+import { HEAVY_HIT, ENRAGE_RAGE, GUARD_BLOCK, LAST_STAND, SWEEP_RAGE, RAGE_PER_DMG, WOUNDED_PCT } from "./talentHookDefs.js?v=20261029d";
 
 const T = (C) => (C && C.run && C.run.talents) || null;
 /** value of a hook (0 when absent); `arg` = card id or "card:status" */

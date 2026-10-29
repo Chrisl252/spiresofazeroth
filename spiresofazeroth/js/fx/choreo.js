@@ -1,12 +1,12 @@
 // VFX choreography: recipe table (element x kind + enemy attacks) and the single rAF loop that drives
 // flipbooks + particles + numbers. Impact instant = onImpact() (UI applies damage + actor hit reaction there).
-import { loadSheets, createSheetPlayer, mix } from "./sheets.js?v=20261029a";
-import { createParticles, mulberry32 } from "./particles.js?v=20261029a";
-import { createNumbers } from "./numbers.js?v=20261029a";
-import { PALETTE, ELEMENTS, KINDS, elementFor, kindFor } from "./elements.js?v=20261029a";
-import { runLook, needsTarget } from "./cardfx.js?v=20261029a";
-import { createAnimMap } from "./animmap.js?v=20261029a";   // data-driven card -> cast anim/release/school-floor map (data/fx/anim.json)
-import { createRealPlayer } from "./realplay.js?v=20261029a";   // real WoW spell art (data/fx/real.json); falls back to the recipe look
+import { loadSheets, createSheetPlayer, mix } from "./sheets.js?v=20261029d";
+import { createParticles, mulberry32 } from "./particles.js?v=20261029d";
+import { createNumbers } from "./numbers.js?v=20261029d";
+import { PALETTE, ELEMENTS, KINDS, elementFor, kindFor } from "./elements.js?v=20261029d";
+import { runLook, needsTarget } from "./cardfx.js?v=20261029d";
+import { createAnimMap } from "./animmap.js?v=20261029d";   // data-driven card -> cast anim/release/school-floor map (data/fx/anim.json)
+import { createRealPlayer } from "./realplay.js?v=20261029d";   // real WoW spell art (data/fx/real.json); falls back to the recipe look
 
 export { elementFor, kindFor, PALETTE, ELEMENTS, KINDS };
 export const ENEMY_RECIPES = ["claw", "bite", "steel", "spit", "slam"];

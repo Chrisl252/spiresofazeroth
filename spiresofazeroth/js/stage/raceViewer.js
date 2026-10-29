@@ -3,7 +3,7 @@
 // createRaceViewer(host, { reduced }) -> { show(slug) -> Promise<boolean>, dispose() }. Disposes itself when the host leaves the DOM.
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { BUILD } from "../version.js?v=20261029a";
+import { BUILD } from "../version.js?v=20261029d";
 
 const BASE = new URL("../../assets/models/race/", import.meta.url).href;
 const FRONT = -Math.PI / 2; // the baked bodies face +X; turn them to face the camera

@@ -3,10 +3,10 @@
 // Entities (player, enemy, pet, totem) all carry `st: { id: number }`.
 //  - duration statuses: number = turns left, tick down at ROUND END (fresh enemy->player debuffs skip the first tick).
 //  - intensity statuses: number = stacks.
-import { dealStatusDamage, healEntity, gainBlock, fx } from "./damage.js?v=20261029a";
-import { immuneToStatus } from "./immunity.js?v=20261029a";
-import { addRes } from "./resources.js?v=20261029a";
-import { runEffects } from "./effects.js?v=20261029a";
+import { dealStatusDamage, healEntity, gainBlock, fx } from "./damage.js?v=20261029d";
+import { immuneToStatus } from "./immunity.js?v=20261029d";
+import { addRes } from "./resources.js?v=20261029d";
+import { runEffects } from "./effects.js?v=20261029d";
 
 export const STATUS_DEFS = {
   // duration

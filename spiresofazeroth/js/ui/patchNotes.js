@@ -3,9 +3,9 @@
 // Update check: polls version.js (no-store) every few minutes and on tab focus; when the server BUILD differs from the
 // BUILD this page loaded, a pill floats at the top of the screen. Clicking it reloads onto the new build.
 // Wired by ONE line in js/main.js.
-import { h, icon, overlayHost } from "./dom.js?v=20261029a";
-import { btn, stageModal } from "./kit.js?v=20261029a";
-import { BUILD } from "../version.js?v=20261029a";
+import { h, icon, overlayHost } from "./dom.js?v=20261029d";
+import { btn, stageModal } from "./kit.js?v=20261029d";
+import { BUILD } from "../version.js?v=20261029d";
 
 let appRef = null; // set by installPatchNotes: the window is a stage modal (stage px, same frame as every other menu panel)
 

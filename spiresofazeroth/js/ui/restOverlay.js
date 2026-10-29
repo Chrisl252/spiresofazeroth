@@ -1,9 +1,9 @@
 // Campfire overlays, Slay-the-Spire style: full-screen dim, the whole deck as a grid of real cards, hover = upgraded version beside it, click = confirm (before -> after), then the fire flares.
 //   upgradeOverlay(app, host, { title, ups:[{c,i}], onConfirm(i)->bool, flare(ms) })   restOverlay(app, host, { onConfirm()->amt, flare(ms) })
 // Both append one .sx-up layer to `host` (the rest screen) and remove it on Back / Esc / after the flare.
-import { h, icon } from "./dom.js?v=20261029a";
-import { btn, cardSlot, banner } from "./kit.js?v=20261029a";
-import { heroicMods } from "../engine/heroic.js?v=20261029a";
+import { h, icon } from "./dom.js?v=20261029d";
+import { btn, cardSlot, banner } from "./kit.js?v=20261029d";
+import { heroicMods } from "../engine/heroic.js?v=20261029d";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 

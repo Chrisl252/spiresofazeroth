@@ -5,7 +5,7 @@
 // A plate is a zone-tinted silhouette (quadruped / biped / flyer / blob by family+type) with eyes, a
 // fabric-grain texture, a rim glow and the enemy icon in a gold round frame, so it reads as a creature
 // card standing in the lane rather than a placeholder box.
-import { createMotion, choreography, dustPuff } from "./actorMotion.js?v=20261029a";
+import { createMotion, choreography, dustPuff } from "./actorMotion.js?v=20261029d";
 
 const SHAPES = {
   biped: "M100 10 C118 10 130 24 130 42 C130 54 124 62 118 66 C146 70 170 86 176 116 L190 158 L174 164 L160 134 L156 196 L132 188 L124 196 L112 186 L100 196 L88 186 L76 196 L68 188 L44 196 L40 134 L26 164 L10 158 L24 116 C30 86 54 70 82 66 C76 62 70 54 70 42 C70 24 82 10 100 10 Z",

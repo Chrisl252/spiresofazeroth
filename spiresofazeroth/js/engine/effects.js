@@ -4,15 +4,15 @@
 // ctx = { C, src, srcKind, target, attacker, card, cardInst, relic, event, run, rng, spent, X, trapFiring }
 //   srcKind: player | enemy | pet | totem | relic | potion | zone | event
 //   C is null in run-mode (events, shop, rest, pickup): only run-level ops take effect (hp, gold, deck, max hp).
-import { dealDamage, dealStatusDamage, gainBlock, healEntity, isAlive, fx, log } from "./damage.js?v=20261029a";
-import { applyStatus, removeStatus, modeOf, STATUS_DEFS, hasTrait } from "./status.js?v=20261029a";
-import { drawCards, addCards, toDiscard, toExhaust, makeInst, hasFlag, HAND_LIMIT } from "./deck.js?v=20261029a";
+import { dealDamage, dealStatusDamage, gainBlock, healEntity, isAlive, fx, log } from "./damage.js?v=20261029d";
+import { applyStatus, removeStatus, modeOf, STATUS_DEFS, hasTrait } from "./status.js?v=20261029d";
+import { drawCards, addCards, toDiscard, toExhaust, makeInst, hasFlag, HAND_LIMIT } from "./deck.js?v=20261029d";
 import {
   addRes, spendRes, summonAlly, placeTotem, petAct, judge, revivePet, sacrificePet, randomPetId, petTargetable,
-} from "./resources.js?v=20261029a";
-import { spawnEnemy } from "./intents.js?v=20261029a";
-import { extraCond, installMoreOps } from "./effects-more.js?v=20261029a";
-import { talentApplyBonus, talentSkipSelfHit } from "./talentHooks.js?v=20261029a";
+} from "./resources.js?v=20261029d";
+import { spawnEnemy } from "./intents.js?v=20261029d";
+import { extraCond, installMoreOps } from "./effects-more.js?v=20261029d";
+import { talentApplyBonus, talentSkipSelfHit } from "./talentHooks.js?v=20261029d";
 
 const MUL_SCALES = new Set(["combo", "combo_points"]); // "N per point" reads as base + per * count; everything else base + floor(count / per)
 

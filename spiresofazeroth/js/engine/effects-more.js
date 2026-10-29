@@ -1,8 +1,8 @@
 // Extension ops and conditions (zone/event/run-level shapes). Installed into the effects.js dispatch table by installMoreOps().
 // Kept separate so effects.js stays under the size cap; each op is one function.
-import { isAlive } from "./damage.js?v=20261029a";
-import { equip, goesToBag, stow } from "./gear.js?v=20261029a";
-import { makeInst, canUpgrade } from "./deck.js?v=20261029a";
+import { isAlive } from "./damage.js?v=20261029d";
+import { equip, goesToBag, stow } from "./gear.js?v=20261029d";
+import { makeInst, canUpgrade } from "./deck.js?v=20261029d";
 
 const runOf = (ctx) => ctx.run || (ctx.C && ctx.C.run) || null;
 const flagsOf = (ctx) => { const r = runOf(ctx); return r ? (r.flags || (r.flags = {})) : {}; };

@@ -1,6 +1,6 @@
 // actors3d.js - Spires of Azeroth 3D actors layer (VISUAL_SPEC v2).
 //
-//   import { createActors } from "./actors3d.js?v=20261029a";
+//   import { createActors } from "./actors3d.js?v=20261029d";
 //   const actors = createActors(stage.layers.actors, { designW: 1920, designH: 1080 });
 //   actors.setHero({ classId: "mage", gearMask: 3 });  // gearMask (optional): n 0..8 or [slot ids] -> assets/models/hero/<class>-<n>.glb, crossfade swap on change
 //   actors.setEnemies([{ uid, id, name, tier }]);
@@ -14,13 +14,13 @@
 // model that fails all keep working (never invisible). GLB per actor is parsed fresh from a cached
 // ArrayBuffer (no SkeletonUtils on the site's vendored three), so materials/skeletons are per instance.
 // Render-on-demand: rAF runs only while tweens/mixers run (idle capped ~30 fps), pauses on hidden tab.
-import { BUILD } from "../version.js?v=20261029a";
+import { BUILD } from "../version.js?v=20261029d";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { createFallbackActor } from "./actorFallback.js?v=20261029a";
-import { dustPuff, motionScale } from "./actorMotion.js?v=20261029a";
-import { getZoneVisuals } from "./zonePalette.js?v=20261029a";
-import { createGround3d } from "./ground3d.js?v=20261029a";
+import { createFallbackActor } from "./actorFallback.js?v=20261029d";
+import { dustPuff, motionScale } from "./actorMotion.js?v=20261029d";
+import { getZoneVisuals } from "./zonePalette.js?v=20261029d";
+import { createGround3d } from "./ground3d.js?v=20261029d";
 
 const PITCH = 12 * Math.PI / 180, COSP = Math.cos(PITCH);
 const HEIGHT = { hero: 360, normal: 280, elite: 360, boss: 520, totem: 160 };

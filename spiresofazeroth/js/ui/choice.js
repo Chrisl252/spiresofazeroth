@@ -1,8 +1,8 @@
 // Decision screens (stage-native): next zone (three art cards), raid floor, final boss, zone-mechanic (pylon) choice.
-import { h, icon, cap, toast } from "./dom.js?v=20261029a";
-import { chooseZone, enterRaidFloor, proceedAfterSpire, chooseFinalBoss, chooseMechanic } from "../engine/run.js?v=20261029a";
-import { cssReady, banner, plate, ico, zoneArt, ART, scroll } from "./kit.js?v=20261029a";
-import { runBar } from "./runbar.js?v=20261029a";
+import { h, icon, cap, toast } from "./dom.js?v=20261029d";
+import { chooseZone, enterRaidFloor, proceedAfterSpire, chooseFinalBoss, chooseMechanic } from "../engine/run.js?v=20261029d";
+import { cssReady, banner, plate, ico, zoneArt, ART, scroll } from "./kit.js?v=20261029d";
+import { runBar } from "./runbar.js?v=20261029d";
 
 export const stageNative = true;
 const CONT = { ek: "Eastern Kingdoms", kal: "Kalimdor" };

@@ -1,24 +1,24 @@
 // Combat screen (v2, stage-native). Mounts the HUD (hud.js) and the hand (hand.js) on the 1920x1080 stage and drives the engine exactly as v1 did.
 // v2 integration: 3D actors + VFX are mounted by combatKit.js, choreography (impact instants) lives in combatDirector.js; this file sequences turns.
-import { sp, funnel, encKey } from "../analytics.js?v=20261029a";
-import { h, tip, esc, floatText, toast, sleep, modal, fill } from "./dom.js?v=20261029a";
+import { sp, funnel, encKey } from "../analytics.js?v=20261029d";
+import { h, tip, esc, floatText, toast, sleep, modal, fill } from "./dom.js?v=20261029d";
 import {
   playCard, canPlayWhy, cardNeedsTarget, endPlayerTurn, enemyPhase, finishRound, usePotion, resolvePending, livingEnemies, canSpare, spareEnemy,
-} from "../engine/combat.js?v=20261029a";
-import { cardCost } from "../engine/deck.js?v=20261029a";
-import { beginCombat, afterCombat } from "../engine/run.js?v=20261029a";
-import { gearLevel } from "../engine/gear.js?v=20261029a";
-import { isAlive } from "../engine/damage.js?v=20261029a";
-import { cardUselessOn } from "../engine/immunity.js?v=20261029a";
-import { previewCardVs, cardAimsDamage } from "../engine/preview.js?v=20261029a";
-import { cardEl, refreshCard, keywordLines, classColor } from "./card.js?v=20261029a";
-import { createHud } from "./hud.js?v=20261029a";
-import { createHand } from "./hand.js?v=20261029a";
-import { getKit, clearStage, watchLeave, safe, speedMul, applySettings } from "./combatKit.js?v=20261029a";
-import { createDirector } from "./combatDirector.js?v=20261029a";
-import { cardSounds } from "./cardSounds.js?v=20261029a";
-import { BUILD } from "../version.js?v=20261029a";
-import { coopStart, createCoopLink } from "./coopCombat.js?v=20261029a";
+} from "../engine/combat.js?v=20261029d";
+import { cardCost } from "../engine/deck.js?v=20261029d";
+import { beginCombat, afterCombat } from "../engine/run.js?v=20261029d";
+import { gearLevel } from "../engine/gear.js?v=20261029d";
+import { isAlive } from "../engine/damage.js?v=20261029d";
+import { cardUselessOn } from "../engine/immunity.js?v=20261029d";
+import { previewCardVs, cardAimsDamage } from "../engine/preview.js?v=20261029d";
+import { cardEl, refreshCard, keywordLines, classColor } from "./card.js?v=20261029d";
+import { createHud } from "./hud.js?v=20261029d";
+import { createHand } from "./hand.js?v=20261029d";
+import { getKit, clearStage, watchLeave, safe, speedMul, applySettings } from "./combatKit.js?v=20261029d";
+import { createDirector } from "./combatDirector.js?v=20261029d";
+import { cardSounds } from "./cardSounds.js?v=20261029d";
+import { BUILD } from "../version.js?v=20261029d";
+import { coopStart, createCoopLink } from "./coopCombat.js?v=20261029d";
 
 export const stageNative = true;
 

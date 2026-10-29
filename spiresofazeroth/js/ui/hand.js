@@ -8,8 +8,8 @@
 // pointerdown, and a pointerdown during the fx window is never dropped: the drag starts as soon as the card is playable/queueable.
 //   -> { set(insts), draw(insts), discard(instIds), exhaust(instIds), lock(bool), select(instId), cancel(), anchorOf(instId), destroy() }
 // All coordinates are stage px (hostEl covers the stage). Card faces come from card.js.
-import { cardEl } from "./card.js?v=20261029a";
-import { cardSounds } from "./cardSounds.js?v=20261029a";
+import { cardEl } from "./card.js?v=20261029d";
+import { cardSounds } from "./cardSounds.js?v=20261029d";
 
 const CW = 260, CH = 380;
 // hud.js LANES start at 1180 with a 240px plate; HP sits under the feet. A raised card must stay left of that bar.

@@ -1,21 +1,21 @@
 // Boot + router only. Screens live in js/ui/*, rules in js/engine/*. A screen module exports render(app, name) -> Element.
 const { BUILD } = await import(`./version.js${new URL(import.meta.url).search}`);
-import { funnel } from "./analytics.js?v=20261029a";
-import { createData, browserFetcher } from "./engine/data.js?v=20261029a";
-import { cardDef } from "./engine/deck.js?v=20261029a";
-import { ensureGear } from "./engine/gear.js?v=20261029a";
-import { loadMeta, saveMeta, saveRun, loadRun, clearRun } from "./engine/save.js?v=20261029a";
-import { lockedCardIds, grantLegacyProgress } from "./engine/talents.js?v=20261029a";
-import { clear, h, modal, deckView, toast } from "./ui/dom.js?v=20261029a";
-import { mountStage } from "./stage/stage.js?v=20261029a";
-import { zone as zoneAudio } from "./audio/zone.js?v=20261029a";
-import { installPauseMenu } from "./ui/pauseMenu.js?v=20261029a";
-import { installCardInspect } from "./ui/cardInspect.js?v=20261029a";
-import { openGearBag } from "./ui/gearBag.js?v=20261029a";
-import { characterOf } from "./engine/character.js?v=20261029a";
-import { applyAutoEquip } from "./ui/autoEquip.js?v=20261029a";
-import { installController } from "./controller.js?v=20261029a";
-import { registerOffline } from "./pwa.js?v=20261029a";
+import { funnel } from "./analytics.js?v=20261029d";
+import { createData, browserFetcher } from "./engine/data.js?v=20261029d";
+import { cardDef } from "./engine/deck.js?v=20261029d";
+import { ensureGear } from "./engine/gear.js?v=20261029d";
+import { loadMeta, saveMeta, saveRun, loadRun, clearRun } from "./engine/save.js?v=20261029d";
+import { lockedCardIds, grantLegacyProgress } from "./engine/talents.js?v=20261029d";
+import { clear, h, modal, deckView, toast } from "./ui/dom.js?v=20261029d";
+import { mountStage } from "./stage/stage.js?v=20261029d";
+import { zone as zoneAudio } from "./audio/zone.js?v=20261029d";
+import { installPauseMenu } from "./ui/pauseMenu.js?v=20261029d";
+import { installCardInspect } from "./ui/cardInspect.js?v=20261029d";
+import { openGearBag } from "./ui/gearBag.js?v=20261029d";
+import { characterOf } from "./engine/character.js?v=20261029d";
+import { applyAutoEquip } from "./ui/autoEquip.js?v=20261029d";
+import { installController } from "./controller.js?v=20261029d";
+import { registerOffline } from "./pwa.js?v=20261029d";
 
 const SCREENS = {
   title: "title", classSelect: "classSelect", codex: "codex", settings: "settings", talents: "talents",

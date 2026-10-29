@@ -2,12 +2,12 @@
 // race x class combos dimmed + unselectable, class auto-switches on race change), customization rows, the race model in the centre on its
 // starting-zone art, a Name field, and faction / race / class text panels (real client strings, data/charcreate.json). Accept saves the
 // character to meta.characters and opens the character list. Text, matrix and names are data; rules live in engine/character.js.
-import { h, icon, cap, esc, tip, track, fill } from "./dom.js?v=20261029a";
-import { btn, dark } from "./kit.js?v=20261029a";
-import { saveMeta } from "../engine/save.js?v=20261029a";
-import { RACE_ORDER, GENDERS, RACE_NAME, NO_LOOKS, factionOf, canBe, classAfterRaceChange, cleanName, newCharacterId, slugOf } from "../engine/character.js?v=20261029a";
-import { loadCharData, charCss, portraitUrl, crestUrl, randomName } from "./charData.js?v=20261029a";
-import { createRaceViewer } from "../stage/raceViewer.js?v=20261029a";
+import { h, icon, cap, esc, tip, track, fill } from "./dom.js?v=20261029d";
+import { btn, dark } from "./kit.js?v=20261029d";
+import { saveMeta } from "../engine/save.js?v=20261029d";
+import { RACE_ORDER, GENDERS, RACE_NAME, NO_LOOKS, factionOf, canBe, classAfterRaceChange, cleanName, newCharacterId, slugOf } from "../engine/character.js?v=20261029d";
+import { loadCharData, charCss, portraitUrl, crestUrl, randomName } from "./charData.js?v=20261029d";
+import { createRaceViewer } from "../stage/raceViewer.js?v=20261029d";
 
 export const stageNative = true;
 const LOOKS = ["Skin Color", "Face", "Hair Style", "Hair Color", "Facial Hair"];

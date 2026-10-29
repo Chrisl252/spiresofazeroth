@@ -1,10 +1,10 @@
 // Headless greedy auto-player. Zero DOM. Used by tools/spires/sim.mjs and the e2e tests.
 // Policy: play the highest value-per-energy card, target the lowest-HP enemy, drink a potion under 40% HP.
-import * as Run from "./run.js?v=20261029a";
-import { playCard, endTurn, usePotion, livingEnemies, pickDefaultTarget, canPlayWhy } from "./combat.js?v=20261029a";
-import { intentInfo } from "./intents.js?v=20261029a";
-import { cardCost } from "./deck.js?v=20261029a";
-import { isAlive } from "./damage.js?v=20261029a";
+import * as Run from "./run.js?v=20261029d";
+import { playCard, endTurn, usePotion, livingEnemies, pickDefaultTarget, canPlayWhy } from "./combat.js?v=20261029d";
+import { intentInfo } from "./intents.js?v=20261029d";
+import { cardCost } from "./deck.js?v=20261029d";
+import { isAlive } from "./damage.js?v=20261029d";
 
 const DEBUFF_VALUE = { vulnerable: 3, weak: 2.5, poison: 1.2, bleed: 1, burn: 1, stun: 6, frozen: 5, fear: 4, sleep: 3, slow: 1.5, marked: 2, silence: 1, curse: 1 };
 const BUFF_VALUE = { strength: 4, dexterity: 3, thorns: 1.5, regen: 1.5, metallicize: 4, ritual: 5, stealth: 2, shield: 1, armor: 1, intangible: 6, energized: 3 };

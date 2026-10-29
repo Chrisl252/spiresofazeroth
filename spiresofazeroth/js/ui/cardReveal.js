@@ -2,8 +2,8 @@
 // screen so the player sees what they got. Click / Enter / Space / Esc closes it. Wired by ONE call in js/ui/event.js.
 //   deckChanges(before, after) -> [{ id, up, kind: "added" | "upgraded" }]   (before/after = run.deck copies)
 //   revealCards(app, changes) -> Promise resolved when the player closes it
-import { h, overlayHost } from "./dom.js?v=20261029a";
-import { cardEl } from "./card.js?v=20261029a";
+import { h, overlayHost } from "./dom.js?v=20261029d";
+import { cardEl } from "./card.js?v=20261029d";
 
 export function deckChanges(before, after) {
   const out = [];

@@ -3,11 +3,11 @@
 //   deal(C, src, tgt, amt, o, base)   any non-thorns hit on an enemy (player, pet or totem source; o.card = card def; o.dry = preview, no side effects)
 //   taken(C, tgt, taken, src, o)      damage the player is about to take; return the new amount
 // Read values with tv(C, key, arg) from ../talentHooks.js; keep per-fight state on C.taldruid (C is one combat).
-import { tv } from "../talentHooks.js?v=20261029a";
-import { addRes, getRes } from "../resources.js?v=20261029a";
-import { applyStatus } from "../status.js?v=20261029a";
-import { gainBlock, healEntity, isAlive, fx, log } from "../damage.js?v=20261029a";
-import { DRU } from "./druid.defs.js?v=20261029a";
+import { tv } from "../talentHooks.js?v=20261029d";
+import { addRes, getRes } from "../resources.js?v=20261029d";
+import { applyStatus } from "../status.js?v=20261029d";
+import { gainBlock, healEntity, isAlive, fx, log } from "../damage.js?v=20261029d";
+import { DRU } from "./druid.defs.js?v=20261029d";
 
 const S = (C) => C.taldruid || (C.taldruid = { turn: -1, omen: false, wild: false, next: 0, pend: 0, swift: false });
 const isSpellHit = (o) => !!o && !!o.card && o.card.type === "attack" && (o.school === "nature" || o.school === "arcane");

@@ -61,7 +61,7 @@ export async function getKit(app) {
   if (kit) disposeKit(kit);
   kit = app.kit = { actors: null, fx: null, key, W: stage.size.w, H: kH, portrait: stage.portrait, off: [] };
   try {
-    const [{ createActors }, { createFx }] = await Promise.all([import("../stage/actors3d.js?v=20261029a"), import("../fx/choreo.js?v=20261029a")]);
+    const [{ createActors }, { createFx }] = await Promise.all([import("../stage/actors3d.js?v=20261029d"), import("../fx/choreo.js?v=20261029d")]);
     const L = lanesFor(stage);
     const lanes = { hero: L.hero, enemy: L.enemy };
     kit.actors = createActors(stage.layers.actors, { designW: kit.W, designH: kit.H, lanes, groundY: stage.groundY });

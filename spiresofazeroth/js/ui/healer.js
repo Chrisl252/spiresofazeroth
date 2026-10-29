@@ -2,13 +2,13 @@
 // (the heal itself already happened in engine/healer.js enterHealer; this only shows it) and one Continue goes on to the next map/hub/zone pick.
 // Reload-safe: run.screen "healer" is saved, the scene just re-renders and the heal flag (run.healerAct) blocks a second heal.
 // Overhauled to Uther the Lightbringer Guardian Room (Slay the Spire 2 Guardian / Neow sanctuary aesthetic).
-import { h, icon } from "./dom.js?v=20261029a";
-import { cssReady, btn, banner, scroll } from "./kit.js?v=20261029a";
-import { runBar } from "./runbar.js?v=20261029a";
-import { playOutcome } from "./eventScene.js?v=20261029a";
-import { getKit, clearStage, watchLeave } from "./combatKit.js?v=20261029a";
-import { healerFor } from "../engine/healer.js?v=20261029a";
-import { proceedAfterSpire } from "../engine/run.js?v=20261029a";
+import { h, icon } from "./dom.js?v=20261029d";
+import { cssReady, btn, banner, scroll } from "./kit.js?v=20261029d";
+import { runBar } from "./runbar.js?v=20261029d";
+import { playOutcome } from "./eventScene.js?v=20261029d";
+import { getKit, clearStage, watchLeave } from "./combatKit.js?v=20261029d";
+import { healerFor } from "../engine/healer.js?v=20261029d";
+import { proceedAfterSpire } from "../engine/run.js?v=20261029d";
 
 export const stageNative = true;
 

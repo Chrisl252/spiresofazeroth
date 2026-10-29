@@ -1,6 +1,6 @@
 // Rewards: gold, 1-of-3 card picks (common 60 / uncommon 30 / rare 9 / epic 1), potions, relics, shop stock. Seeded streams only.
-import { heroicMods } from "./heroic.js?v=20261029a";
-import { resolveImmunity, cardUselessOn } from "./immunity.js?v=20261029a";
+import { heroicMods } from "./heroic.js?v=20261029d";
+import { resolveImmunity, cardUselessOn } from "./immunity.js?v=20261029d";
 
 const CARD_WEIGHTS = { common: 60, uncommon: 30, rare: 9, epic: 1 };
 const RELIC_WEIGHTS = { common: 50, uncommon: 33, rare: 12, epic: 2, legendary: 1 }; // legendary = Thunderfury / Atiesh: rarer than epic

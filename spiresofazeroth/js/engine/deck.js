@@ -1,6 +1,6 @@
 // Card instances, piles, draw/discard/exhaust, cost evaluation. No DOM.
-import { fx } from "./damage.js?v=20261029a";
-import { talentCost } from "./talentHooks.js?v=20261029a";
+import { fx } from "./damage.js?v=20261029d";
+import { talentCost } from "./talentHooks.js?v=20261029d";
 
 export const HAND_LIMIT = 10;
 const STUB = (id) => ({

@@ -1,8 +1,8 @@
 // Choreography for cards that have REAL spell art (data/fx/real.json): precast + cast on the hero's hands, the real
 // missile flying caster -> target, the real impact at the target, the real aura on the hero. Same helper bag and
 // onImpact/resolve contract as cardfx.runLook, so choreo.play() can swap it in for the recipe look.
-import { createRealArt } from "./realart.js?v=20261029a";
-import { spawnModel, killAll } from "./m2emit.js?v=20261029a";
+import { createRealArt } from "./realart.js?v=20261029d";
+import { spawnModel, killAll } from "./m2emit.js?v=20261029d";
 
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 const HAND = new Set([1, 2, 21, 22, 35, 37, 38]), FEET = new Set([19, 26, 27, 28]), HEAD = new Set([11, 17, 18, 20]);

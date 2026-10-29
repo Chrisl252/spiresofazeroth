@@ -1,7 +1,7 @@
 // Tiny DOM toolkit shared by every screen. No framework: h() builds elements, the rest are small widgets.
-import { renderText } from "../engine/cardtext.js?v=20261029a";
-import { slugify } from "../engine/data.js?v=20261029a";
-import { cardEl as cardElV2 } from "./card.js?v=20261029a";
+import { renderText } from "../engine/cardtext.js?v=20261029d";
+import { slugify } from "../engine/data.js?v=20261029d";
+import { cardEl as cardElV2 } from "./card.js?v=20261029d";
 const HD = new URL("../../assets/icons-hd/", import.meta.url).href; // 256px upscaled icons, relative so dev + deploy both resolve
 const cardElMini = (def, inst) => cardElV2(def, { tag: "div", mini: true, inst });
 
@@ -100,7 +100,7 @@ export function cardCostLabel(def, cost) {
   return def.cost === "X" ? "X" : def.cost < 0 ? "-" : String(def.cost);
 }
 // v2: the card look lives in card.js (260x380 stage px, `mini: true` = 130x190). Same options as before: { C, inst, tag, cls, cost, onClick, data }.
-export { cardEl } from "./card.js?v=20261029a";
+export { cardEl } from "./card.js?v=20261029d";
 export function codexLinks(def, kind) {
   const sl = slugify(def.name);
   if (kind === "spell" && def.spellId) return `/spell/${sl}-${def.spellId}/`;

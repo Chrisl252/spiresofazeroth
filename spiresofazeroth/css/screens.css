@@ -91,7 +91,7 @@
 .sx-bar__act { white-space: nowrap; } .sx-bar__who small .sx-bar__act b { font-size: inherit; color: var(--ink); font-weight: 400; } /* act + floor sit in the class plate subtitle, after the zone name */
 .sx-bar__sep { flex: 0 0 2px; align-self: stretch; margin: 6px 0; background: linear-gradient(180deg, transparent, #6b5220 20%, #c9a24b 50%, #6b5220 80%, transparent); }
 .sx-bar__n { display: inline-grid; place-items: center; margin-left: 10px; min-width: 30px; height: 28px; padding: 0 8px; box-sizing: border-box; border: 1px solid #c9a24b; border-radius: 14px; background: #1a120a; color: #ffe27a; font: 20px/1 var(--f-num); text-shadow: none; position: relative; z-index: 1; }
-.sx-bar .sx-bar__ico { min-width: 0; width: var(--h); padding: 0; flex: 0 0 auto; }
+.sx-bar .sx-bar__ico { min-width: 0; width: var(--h); padding: 0 var(--cap); flex: 0 0 auto; } /* keep the cap padding: the centre tile is clipped to the content box, with 0 padding it shows red slices outside the caps */
 .sx-bar__glyph { position: relative; z-index: 1; display: grid; place-items: center; } .sx-bar__glyph svg { width: 26px; height: 26px; }
 .sx-bar__strip { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .sx-bar__slot { width: 52px; height: 52px; border: 2px solid var(--q, #6b5220); border-radius: 6px; overflow: hidden; background: #0c0905; box-shadow: 0 0 8px var(--q, transparent); }

@@ -94,7 +94,7 @@
 .sp-modal .sp-btn--small { min-height: 44px; min-width: 88px; }
 /* phone run bar: one row of equal buttons at >= 44 css px, fullscreen is a square */
 .sp-stage.sp-portrait .sx-bar .sp-wowbtn { --h: 124px; --cap: 44px; min-width: max-content; flex: 1 1 auto; font-size: 32px; margin-left: 0; white-space: nowrap; }
-.sp-stage.sp-portrait .sx-bar .sx-bar__ico { flex: 0 0 124px; padding: 0; min-width: 124px; } .sp-stage.sp-portrait .sx-bar__glyph svg { width: 56px; height: 56px; }
+.sp-stage.sp-portrait .sx-bar .sx-bar__ico { flex: 0 0 124px; padding: 0 var(--cap); min-width: 124px; } .sp-stage.sp-portrait .sx-bar__glyph svg { width: 56px; height: 56px; }
 .sp-stage.sp-portrait .sx-bar__sep { display: none; } .sp-stage.sp-portrait .sx-bar__n { font-size: 30px; line-height: 40px; height: 42px; min-width: 44px; border-radius: 21px; }
 /* phone reward: cards, spoils and Continue stack full width instead of two cramped columns (Spoils and Continue ran off the right edge) */
 .sp-stage.sp-portrait .sv-main { grid-template-columns: minmax(0, 1fr); grid-auto-rows: min-content; align-content: start; overflow-y: auto; gap: 28px; padding: 4px 24px 28px; }

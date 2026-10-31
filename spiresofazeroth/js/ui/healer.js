@@ -4,7 +4,7 @@
 // Overhauled to Uther the Lightbringer Guardian Room (Slay the Spire 2 Guardian / Neow sanctuary aesthetic).
 import { h, icon } from "./dom.js?v=20261029d";
 import { cssReady, btn, banner, scroll } from "./kit.js?v=20261029d";
-import { runBar } from "./runbar.js?v=20261029d";
+import { runBar, paintHp } from "./runbar.js?v=20261029d";
 import { playOutcome } from "./eventScene.js?v=20261029d";
 import { getKit, clearStage, watchLeave } from "./combatKit.js?v=20261029d";
 import { healerFor } from "../engine/healer.js?v=20261029d";
@@ -142,16 +142,13 @@ export async function render(app) {
   }
 
   // show the climb: the bar starts at the pre-heal value, then the existing heal fx/number play as it fills
-  const fill = bar && bar.querySelector(".sx-bar__hp i"),
-    txt = bar && bar.querySelector(".sx-bar__hp span");
+  const hpEl = bar && bar.querySelector(".sx-bar__hp");
 
-  if (healed > 0 && fill && txt) {
-    fill.style.width = `${Math.round((before / Math.max(1, full)) * 100)}%`;
-    txt.textContent = `${before} / ${full}`;
+  if (healed > 0 && hpEl) {
+    paintHp(hpEl, before, full);
     setTimeout(() => {
       if (!host.isConnected) return;
-      fill.style.width = `${Math.round((run.hp / Math.max(1, full)) * 100)}%`;
-      txt.textContent = `${run.hp} / ${full}`;
+      paintHp(hpEl, run.hp, full);
       playOutcome(app, host, [{ k: "heal", n: healed }]);
       if (utherActor) {
         if (utherActor.castGesture) utherActor.castGesture({ color: "#ffe080" });

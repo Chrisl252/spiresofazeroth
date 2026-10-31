@@ -6,7 +6,7 @@
 .gs-row { display: grid; grid-template-columns: repeat(8, 44px); gap: 5px; }
 .gs-sock { position: relative; display: block; width: 44px; height: 44px; border: 2px solid var(--q, #6b5220); border-radius: 6px; overflow: hidden; background: #0c0905; box-shadow: 0 0 8px var(--q, transparent); }
 .gs-sock img { width: 100%; height: 100%; display: block; object-fit: cover; margin: 0; }
-.gs-sock--off { border-color: #3a2f1c; box-shadow: none; } .gs-sock--off img { filter: grayscale(1) brightness(.55); opacity: .32; }
+.gs-sock--off { border-color: #3a2f1c; box-shadow: none; } .gs-sock--off img { filter: grayscale(1) brightness(.8); opacity: .45; } /* readable slot silhouette (helmet, boots...), still clearly empty */
 .gs-sock--on:focus-visible { outline: 2px solid var(--gold, #ffd100); outline-offset: 2px; }
 .gs-sock--up::after { content: "+"; position: absolute; right: 2px; bottom: -2px; font: 22px/1 var(--f-ui, serif); color: var(--q-uncommon); text-shadow: 0 1px 2px #000, 0 0 4px #000; }
 .gs-sock--flash { animation: gs-pulse 1.4s ease-out 1; }

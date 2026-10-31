@@ -3,7 +3,7 @@ import { sp } from "../analytics.js?v=20261029d";
 import { h, icon, qClass, esc, toast, fill } from "./dom.js?v=20261029d";
 import { takeCard, takePotion, takeRelic, leaveNode } from "../engine/run.js?v=20261029d";
 import { cssReady, btn, banner, plate, cardSlot, ico, tip } from "./kit.js?v=20261029d";
-import { runBar } from "./runbar.js?v=20261029d";
+import { runBar, setBarCount } from "./runbar.js?v=20261029d";
 import { needsLoot, showLoot, buildLootFrame } from "./loot.js?v=20261029d";
 import { getKit, clearStage } from "./combatKit.js?v=20261029d";
 import { gearLevel } from "../engine/gear.js?v=20261029d";
@@ -98,7 +98,7 @@ export async function render(app, name) {
     function pick(id, slot, fan) {
       if (fan.dataset.busy) return; fan.dataset.busy = "1";
       fan.querySelectorAll(".sx-cardslot").forEach((c) => { if (c !== slot) { c.style.pointerEvents = "none"; if (c.animate && !reduced) c.animate([{ opacity: 1 }, { opacity: 0, translate: "0 40px" }], { duration: 320, fill: "forwards" }); else c.style.opacity = 0; } });
-      const fin = () => { logPick(pd, run, id); takeCard(run, id); pd.pickedCard = id; app.save(); const dk = host.querySelector(".sx-bar__deck"); if (dk) { dk.textContent = `Deck ${run.deck.length}`; dk.classList.remove("sv-pulse"); void dk.offsetWidth; dk.classList.add("sv-pulse"); } paintLeft(); sync(); };
+      const fin = () => { logPick(pd, run, id); takeCard(run, id); pd.pickedCard = id; app.save(); const dk = host.querySelector(".sx-bar__deck"); if (dk) { setBarCount(dk, run.deck.length); dk.classList.remove("sv-pulse"); void dk.offsetWidth; dk.classList.add("sv-pulse"); } paintLeft(); sync(); };
       const tgt = host.querySelector(".sx-bar__deck");
       if (reduced || !tgt || !slot.animate) return fin();
       const a = slot.getBoundingClientRect(), t = tgt.getBoundingClientRect(), sc = app.stage.scale || 1;

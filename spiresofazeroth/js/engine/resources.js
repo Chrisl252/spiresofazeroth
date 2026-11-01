@@ -1,9 +1,9 @@
 // Per-class resource layer. Data-driven: class.resource carries ids/amounts, class.resource.modes can override the
 // mode table below. Mechanics covered: rage, combo points, mana, seals + judgement, totems (4 slots), druid forms,
 // stance/aspect switches, priest shadowform (card.formCost), soul shards + pet, hunter pet + traps, mage schools.
-import { runEffects } from "./effects.js?v=20261029d";
-import { applyStatus } from "./status.js?v=20261029d";
-import { fx, log, isAlive } from "./damage.js?v=20261029d";
+import { runEffects } from "./effects.js";
+import { applyStatus } from "./status.js";
+import { fx, log, isAlive } from "./damage.js";
 
 // Default mode semantics (stance/aspect/form values). A class can override via class.resource.modes = { value: {...} }.
 //   atkBonus: +flat damage on player attack-kind hits    spellBonus: +flat on non-physical hits
@@ -210,6 +210,7 @@ export function damageBonus(C, src, school, o) {
     }
     const st = C.player.st;
     if (school !== "physical") b += st.spell_power || 0;
+    if (school === "fire" || school === "nature") { const ft = C.player.totems && C.player.totems.fire; if (ft && ft.hp > 0 && /^flametongue/.test(ft.id)) b += ft.id === "flametongue_2" ? 3 : 2; } // Flametongue Totem: flat +2/+3 fire & nature while it stands; it used to stack spell_power on the TOTEM itself (target "self"), so the hero never got it (10-30 report)
     if (st.weapon_imbue_rockbiter && o.kind === "attack") b += 2;
     if (C.mech.schools) {
       if (school === "fire") b += C.player.res.ignite || 0;

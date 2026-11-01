@@ -2,12 +2,13 @@
 // race x class combos dimmed + unselectable, class auto-switches on race change), customization rows, the race model in the centre on its
 // starting-zone art, a Name field, and faction / race / class text panels (real client strings, data/charcreate.json). Accept saves the
 // character to meta.characters and opens the character list. Text, matrix and names are data; rules live in engine/character.js.
-import { h, icon, cap, esc, tip, track, fill } from "./dom.js?v=20261029d";
-import { btn, dark } from "./kit.js?v=20261029d";
-import { saveMeta } from "../engine/save.js?v=20261029d";
-import { RACE_ORDER, GENDERS, RACE_NAME, NO_LOOKS, factionOf, canBe, classAfterRaceChange, cleanName, newCharacterId, slugOf } from "../engine/character.js?v=20261029d";
-import { loadCharData, charCss, portraitUrl, crestUrl, randomName } from "./charData.js?v=20261029d";
-import { createRaceViewer } from "../stage/raceViewer.js?v=20261029d";
+import { h, icon, cap, esc, tip, track, fill } from "./dom.js";
+import { btn, dark } from "./kit.js";
+import { saveMeta } from "../engine/save.js";
+import { RACE_ORDER, GENDERS, RACE_NAME, NO_LOOKS, factionOf, canBe, classAfterRaceChange, cleanName, newCharacterId, slugOf } from "../engine/character.js";
+import { loadCharData, charCss, portraitUrl, crestUrl, randomName } from "./charData.js";
+import { racialInfo } from "../engine/racials.js";
+import { createRaceViewer } from "../stage/raceViewer.js";
 
 export const stageNative = true;
 const LOOKS = ["Skin Color", "Face", "Hair Style", "Hair Color", "Facial Hair"];
@@ -93,7 +94,8 @@ export async function render(app, _name, props = {}) {
     const fac = factionOf(st.race);
     pF.t.textContent = cap(fac); pF.ic.replaceChildren(h("img", { src: crestUrl(fac), alt: "", width: 56, height: 56 })); pF.body.replaceChildren(h("p", {}, D.factions[fac]));
     pR.t.textContent = R.name; pR.ic.replaceChildren(h("img", { src: portraitUrl(st.race, st.gender), alt: "", width: 56, height: 56 }));
-    pR.body.replaceChildren(h("p", {}, R.info[st.gender]), ...R.abilities.map((a, i) => h("p", { class: "cc-trait", title: R.racials[i] || "" }, a)));
+    pR.body.replaceChildren(h("p", {}, R.info[st.gender]), ...R.abilities.map((a, i) => h("p", { class: "cc-trait", title: R.racials[i] || "" }, a)),
+      ...(() => { const ri = racialInfo(data, st.race); return ri ? [h("p", { class: "cc-trait cc-trait--racial", title: ri.text }, icon(ri.icon, "cc-racial__ic", ri.name), h("b", {}, ` ${ri.name}: `), `in a run this race adds the ${ri.name} card to your starting deck. ${ri.text.replace(/^Racial\.\s*/, "")}`)] : []; })());
     pC.t.textContent = cap(st.cls); pC.ic.replaceChildren(icon(`classicon_${st.cls}`, "", cap(st.cls)));
     pC.body.replaceChildren(h("p", {}, C.blurb), ...C.lines.map((l) => h("p", { class: "cc-trait cc-trait--cls" }, l)));
     for (const p of [pF, pR, pC]) p.body.scrollTop = 0;

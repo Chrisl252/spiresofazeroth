@@ -286,7 +286,9 @@
 .sp-hp--totem .sp-hp__fill { --bar: #2f86ff; }
 .sp-eplate--totem { width: var(--pw, 140px); z-index: 5; }
 .sp-eplate--totem .sp-ep__name { font-size: 14px; color: #72b6ff; text-shadow: 1px 1px 0 #000, 0 0 3px #000; }
-.sp-eplate--totem .sp-np { height: 16px; }
+/* [totem-spread] drop the 16px height clamp: the nameplate keeps its 128:32 ratio (~44px) so the bar is ~15px tall and the number fits */
+.sp-eplate--totem .sp-np { height: auto; }
+.sp-eplate--totem .sp-np .sp-hp__txt { font-size: 13px; line-height: 1; overflow: visible; }
 
 /* intent status chip: the real status icon + a small up/down badge (replaces the bare purple arrow) */
 .sp-int__st { position: relative; display: block; width: 100%; height: 100%; }

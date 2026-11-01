@@ -1,12 +1,12 @@
 // VFX choreography: recipe table (element x kind + enemy attacks) and the single rAF loop that drives
 // flipbooks + particles + numbers. Impact instant = onImpact() (UI applies damage + actor hit reaction there).
-import { loadSheets, createSheetPlayer, mix } from "./sheets.js?v=20261029d";
-import { createParticles, mulberry32 } from "./particles.js?v=20261029d";
-import { createNumbers } from "./numbers.js?v=20261029d";
-import { PALETTE, ELEMENTS, KINDS, elementFor, kindFor } from "./elements.js?v=20261029d";
-import { runLook, needsTarget } from "./cardfx.js?v=20261029d";
-import { createAnimMap } from "./animmap.js?v=20261029d";   // data-driven card -> cast anim/release/school-floor map (data/fx/anim.json)
-import { createRealPlayer } from "./realplay.js?v=20261029d";   // real WoW spell art (data/fx/real.json); falls back to the recipe look
+import { loadSheets, createSheetPlayer, mix } from "./sheets.js";
+import { createParticles, mulberry32 } from "./particles.js";
+import { createNumbers } from "./numbers.js";
+import { PALETTE, ELEMENTS, KINDS, elementFor, kindFor } from "./elements.js";
+import { runLook, needsTarget } from "./cardfx.js";
+import { createAnimMap } from "./animmap.js";   // data-driven card -> cast anim/release/school-floor map (data/fx/anim.json)
+import { createRealPlayer } from "./realplay.js";   // real WoW spell art (data/fx/real.json); falls back to the recipe look
 
 export { elementFor, kindFor, PALETTE, ELEMENTS, KINDS };
 export const ENEMY_RECIPES = ["claw", "bite", "steel", "spit", "slam"];
@@ -23,7 +23,7 @@ const PROJ = {
   frost: { dur: 0.21, head: 64, trail: ["shard", "hot", 20], dot: true },
   arcane: { dur: 0.22, head: 66, trail: ["star", "warm", 22], dot: true },
   nature: { dur: 0.24, head: 52, trail: ["leaf", "main", 26], dot: true },
-  holy: { dur: 0.19, head: 70, trail: ["star", "hot", 20], dot: true },
+  holy: { dur: 0.19, head: 46, trail: ["star", "warm", 20], dot: true },   // smaller + warmer: 70/hot read as a white blob on the hand
   shadow: { dur: 0.24, head: 74, trail: ["puff", "dark", 34], dark: true },
   lightning: null,
   blood: { dur: 0.2, head: 56, trail: ["puff", "main", 26], dark: true },
@@ -131,8 +131,8 @@ export function createFx(hostEl, o = {}) {
   function impactCore(c, { flashR = 90, kick = true } = {}) {
     const { to, s, amount, pal } = c, tone = mix(pal.main, "#ffffff", 0.3);
     hitStop(clamp(0.04 + amount * 0.0024, 0.045, 0.115));
-    glowActor(to, tone, flashR * Math.min(s, 1.3), 0.07, 0.7);          // small element-tinted flash, under the flipbooks
-    glowActor(to, pal.main, Math.min(160, 120 * s), 0.2, 0.32);         // soft halo, fades within 200 ms
+    glowActor(to, tone, flashR * Math.min(s, 1.2), 0.07, 0.42);         // element-tinted flash under the flipbooks (0.7 stacked with the body flash into a white disc)
+    glowActor(to, pal.main, Math.min(150, 110 * s), 0.2, 0.26);         // soft halo, fades within 200 ms
     if (kick) numbers.kick(clamp(3 + amount * 0.34, 3, 15));
     if (amount >= 24) numbers.flashAll({ alpha: 0.22 });
   }
@@ -253,7 +253,8 @@ export function createFx(hostEl, o = {}) {
     at(0.12, () => { if (c.opts.onImpact) c.opts.onImpact(); }); at(1.05, resolve);
   }
 
-  // ---- ENEMY attacks -------------------------------------------------------------------------------------------------------
+  // ---- ENEMY attacks (combat-feel 20261029j: arcs tinted to the wound palette, hot <= 0.4, sheets ~25% smaller; the stacked pure-white
+  // additive arcs + hit_star + impact_burst used to merge into one hero-sized white disc that hid the body at the impact frame) -------------------------------------------------------------------------------------------------------
   function enemyHit(c, resolve, delay, body) {
     at(delay, () => {
       impactCore(c, { flashR: 90 }); body(); settle(c, 0.3);
@@ -265,9 +266,9 @@ export function createFx(hostEl, o = {}) {
     claw(c, res) { // three staggered diagonal rakes
       const { to, s } = c; c.pal = PALETTE.blood;
       enemyHit(c, res, 0.12, () => {
-        for (let i = 0; i < 3; i++) c.sheet(ARCS[1], { x: to.x - 62 + i * 62, y: to.y - 34 + i * 38, scale: 1.35 * s, rotation: 0.95, tint: i === 1 ? "#ffffff" : "#ffb0a0", delay: i * 0.05, hot: 0.7, flipY: true });
+        for (let i = 0; i < 3; i++) c.sheet(ARCS[1], { x: to.x - 50 + i * 50, y: to.y - 30 + i * 32, scale: 1.1 * s, rotation: 0.95, tint: i === 1 ? "#ffd0c0" : "#ff9a86", delay: i * 0.05, hot: 0.38, alpha: 0.62, flipY: true });
         c.sheet("blood_mist", { x: to.x, y: to.y, scale: 1.35 * s, tint: "#d03a30", blend: "alpha", hot: 0.3, rotation: 3.14, delay: 0.04 });
-        c.sheet("hit_star", { x: to.x, y: to.y, scale: 1.0 * s, tint: "#ffd8c8", delay: 0.05, hot: 0.6 });
+        c.sheet("hit_star", { x: to.x, y: to.y, scale: 0.7 * s, tint: "#ffb8a4", delay: 0.05, hot: 0.3, alpha: 0.7 });
         sparks(c, { color: "#ff8a70", count: 16 });
         numbers.kick(5);
       });
@@ -275,10 +276,10 @@ export function createFx(hostEl, o = {}) {
     bite(c, res) { // two jaws converging
       const { to, s } = c;
       enemyHit(c, res, 0.16, () => {
-        c.sheet(ARCS[2], { x: to.x, y: to.y - 55, scale: 1.55 * s, rotation: Math.PI / 2 + 0.1, tint: "#ffffff", hot: 0.75 });
-        c.sheet(ARCS[2], { x: to.x, y: to.y + 55, scale: 1.55 * s, rotation: -Math.PI / 2 - 0.1, tint: "#ffffff", hot: 0.75 });
-        c.sheet("impact_burst", { x: to.x, y: to.y, scale: 1.1 * s, tint: "#ffb8a8", delay: 0.06, hot: 0.5 });
-        c.sheet("hit_star", { x: to.x, y: to.y, scale: 0.9 * s, tint: "#ffe8dc", delay: 0.06, hot: 0.6 });
+        c.sheet(ARCS[2], { x: to.x, y: to.y - 48, scale: 1.2 * s, rotation: Math.PI / 2 + 0.1, tint: "#ffd4c4", hot: 0.38, alpha: 0.62 });
+        c.sheet(ARCS[2], { x: to.x, y: to.y + 48, scale: 1.2 * s, rotation: -Math.PI / 2 - 0.1, tint: "#ffd4c4", hot: 0.38, alpha: 0.62 });
+        c.sheet("blood_mist", { x: to.x, y: to.y, scale: 1.1 * s, tint: "#c83a30", blend: "alpha", hot: 0.25, delay: 0.05 });
+        c.sheet("impact_burst", { x: to.x, y: to.y, scale: 0.8 * s, tint: "#ffb8a8", delay: 0.06, hot: 0.3, alpha: 0.7 });
         sparks(c, { color: "#ffc0a8", count: 14 });
         numbers.kick(5.5);
       });
@@ -286,10 +287,10 @@ export function createFx(hostEl, o = {}) {
     steel(c, res) {
       const { to, s } = c; c.pal = PALETTE.steel;
       enemyHit(c, res, 0.12, () => {
-        arc(c, { rot: 0.5, scale: 1.5 });
-        arc(c, { delay: 0.05, scale: 1.2, tint: "main" });
-        c.sheet("spark_burst", { x: to.x, y: to.y, scale: 1.3 * s, tint: "warm", hot: 0.6 });
-        c.sheet("hit_star", { x: to.x, y: to.y, scale: 1.05 * s, tint: "hot", hot: 0.65 });
+        arc(c, { rot: 0.5, scale: 1.25 });
+        arc(c, { delay: 0.05, scale: 1.0, tint: "main" });
+        c.sheet("spark_burst", { x: to.x, y: to.y, scale: 1.05 * s, tint: "warm", hot: 0.4 });
+        c.sheet("hit_star", { x: to.x, y: to.y, scale: 0.8 * s, tint: "hot", hot: 0.35, alpha: 0.75 });
         sparks(c, { count: 24 });
         shards(c, { color: c.pal.main, additive: true, count: 6 });
         numbers.kick(5);
@@ -298,8 +299,8 @@ export function createFx(hostEl, o = {}) {
     slam(c, res) {
       const { to, s } = c; c.pal = PALETTE.stone;
       enemyHit(c, res, 0.2, () => {
-        c.sheet("impact_burst", { x: to.x, y: to.y, scale: 1.6 * s, tint: "warm", hot: 0.5 });
-        c.sheet("shockwave_ring", { x: c.feet.x, y: c.feet.y - 4, scale: 2.4 * s, tint: "warm", hot: 0.5 });
+        c.sheet("impact_burst", { x: to.x, y: to.y, scale: 1.25 * s, tint: "warm", hot: 0.35, alpha: 0.8 });
+        c.sheet("shockwave_ring", { x: c.feet.x, y: c.feet.y - 4, scale: 2.1 * s, tint: "warm", hot: 0.35 });
         shards(c, { count: 16 });
         dust(c, 2.2);
         numbers.kick(9);

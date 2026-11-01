@@ -1,12 +1,12 @@
 // Escape menu (owner report 2026-10-16): replaces the site's global keybinds + Game Menu inside /spiresofazeroth/.
 // installPauseMenu(app) is called once from main.js. It (1) swallows the site's keybinds, (2) builds the menu on Escape / the HUD Settings button,
 // (3) applies saved speed / volume / track settings at boot. All values persist in meta.settings (engine/save.js).
-import { h } from "./dom.js?v=20261029d";
-import { cssReady, btn, scroll } from "./kit.js?v=20261029d";
-import { sfx } from "../audio.js?v=20261029d";
-import { zone as zoneAudio } from "../audio/zone.js?v=20261029d";
-import { extraRows } from "./pauseExtras.js?v=20261029d";
-import { isGamepadConnected, getActiveGamepadName } from "../controller.js?v=20261029d";
+import { h } from "./dom.js";
+import { cssReady, btn, scroll } from "./kit.js";
+import { sfx } from "../audio.js";
+import { zone as zoneAudio } from "../audio/zone.js";
+import { extraRows } from "./pauseExtras.js";
+import { isGamepadConnected, getActiveGamepadName } from "../controller.js";
 
 const SPEED_MIN = 0.5, SPEED_MAX = 3;
 const ENUM_MUL = { slow: 1 / 1.6, normal: 1, fast: 1 / 0.45 };
@@ -71,6 +71,12 @@ export function installPauseMenu(app) {
       onChange: (e) => {
         const u = e.target.value || null;
         s.musicTrack = u;
+        // picking a zone / track with Music at 0% played nothing and looked broken (owner, 2026-10-29): a pick means "I want to hear it"
+        if (u && zoneAudio.volume === 0) {
+          s.musicVolume = 60; zoneAudio.setVolume(60);
+          const r = back && back.querySelector('input[aria-label="Music sounds"]');
+          if (r) { r.value = "60"; const v = r.parentNode && r.parentNode.querySelector(".pm-val"); if (v) v.textContent = pct(60); }
+        }
         zoneAudio.setTrack(u);
         save();
       }

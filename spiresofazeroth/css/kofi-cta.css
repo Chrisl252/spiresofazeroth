@@ -1,0 +1,12 @@
+/* Title-screen Ko-fi support button (js/ui/kofiButton.js): a round gold-rimmed button holding one beating heart. */
+.sp-kofibtn { --h: calc(var(--btn-h, 96px) * .72); position: relative; flex: none; width: var(--h); height: var(--h); padding: 0; border-radius: 50%; cursor: pointer; -webkit-tap-highlight-color: transparent;
+  border: 2px solid #ffd36b; background: radial-gradient(circle at 35% 30%, #4a1020 0%, #2a0810 60%, #14040a 100%);
+  box-shadow: 0 0 0 1px #000, 0 0 14px 2px rgba(255,94,91,.55), inset 0 0 12px rgba(255,211,107,.3); transition: transform .15s ease, filter .15s ease; }
+.sp-kofibtn:hover, .sp-kofibtn:focus-visible { transform: scale(1.08); filter: brightness(1.2); outline: none; }
+.sp-kofibtn:active { transform: scale(.94); }
+.sp-kofibtn__heart { position: absolute; left: 50%; top: 50%; width: calc(var(--h) * .28); height: calc(var(--h) * .28); background: #ff5e5b; filter: drop-shadow(0 0 6px rgba(255,94,91,.8));
+  transform: translate(-50%, -35%) rotate(45deg); animation: sp-kofi-beat 1.3s ease-in-out infinite; }
+.sp-kofibtn__heart::before, .sp-kofibtn__heart::after { content: ""; position: absolute; width: 100%; height: 100%; border-radius: 50%; background: #ff5e5b; }
+.sp-kofibtn__heart::before { left: -50%; } .sp-kofibtn__heart::after { top: -50%; }
+@keyframes sp-kofi-beat { 0%, 60%, 100% { transform: translate(-50%, -35%) rotate(45deg) scale(1); } 30% { transform: translate(-50%, -35%) rotate(45deg) scale(1.2); } }
+@media (prefers-reduced-motion: reduce) { .sp-kofibtn__heart { animation: none; } }

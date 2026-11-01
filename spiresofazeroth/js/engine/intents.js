@@ -7,11 +7,11 @@
 //  - giant  : alternates a wind-up turn with a heavy action
 //  - humanoid casters: cast intents, interruptible (cast_interrupt op) and fizzled by Silence
 //  - summoner: summon moves are skipped while 5+ enemies live or this unit already has 2 minions
-import { runEffects } from "./effects.js?v=20261029d";
-import { fireTraps } from "./resources.js?v=20261029d";
-import { applyStatus, hasTrait, skipsAction, modifyDealt, modifyTaken, turnEnd } from "./status.js?v=20261029d";
-import { isAlive, fx, log } from "./damage.js?v=20261029d";
-import { resolveImmunity } from "./immunity.js?v=20261029d";
+import { runEffects } from "./effects.js";
+import { fireTraps } from "./resources.js";
+import { applyStatus, hasTrait, skipsAction, modifyDealt, modifyTaken, turnEnd } from "./status.js";
+import { isAlive, fx, log } from "./damage.js";
+import { resolveImmunity } from "./immunity.js";
 
 const FAMILY_TRAITS = { mechanical: ["immune:poison", "immune:bleed"], beast: ["pack"] };
 

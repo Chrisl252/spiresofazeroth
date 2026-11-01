@@ -1,0 +1,57 @@
+/* Title-screen "Play Emberdeck" cross-promo (js/ui/emberdeckButton.js): a burning card-table button.
+   Flames lick up behind the body, sparks drift off the top, the body glows like a forge. Pure CSS, no images but the logo. */
+.sp-emberbtn { --h: calc(var(--btn-h, 96px) * .72); position: relative; isolation: isolate; display: inline-flex; height: var(--h); padding: 0; border: 0; background: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.sp-emberbtn__body { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: calc(var(--h) * .16); height: 100%; padding: 0 calc(var(--h) * .42) 0 calc(var(--h) * .14); box-sizing: border-box; border-radius: calc(var(--h) * .18);
+  border: 2px solid #ffb347; color: #fff3d6;
+  background: radial-gradient(120% 140% at 50% 120%, rgba(255,140,40,.55), transparent 60%), linear-gradient(100deg, #2a0d05 0%, #5a1606 30%, #8e2a08 50%, #5a1606 70%, #2a0d05 100%);
+  background-size: 100% 100%, 260% 100%; animation: sp-ember-lava 4.5s linear infinite, sp-ember-glow 1.6s ease-in-out infinite alternate;
+  box-shadow: 0 0 0 1px #3a0f02, 0 0 14px 2px rgba(255,120,30,.75), 0 0 34px 6px rgba(255,70,0,.45), inset 0 0 18px rgba(255,170,60,.45), inset 0 -6px 14px rgba(255,90,0,.5);
+  transition: transform .15s ease, filter .15s ease; }
+.sp-emberbtn__logo { width: calc(var(--h) * .78); height: calc(var(--h) * .78); flex: none; filter: drop-shadow(0 0 6px rgba(255,150,40,.9)); animation: sp-ember-bob 2.4s ease-in-out infinite; }
+.sp-emberbtn__label { display: flex; flex-direction: column; align-items: flex-start; line-height: 1; white-space: nowrap; font-family: "IM Fell English", var(--f-ui, "frizqt"), Georgia, serif; font-size: calc(var(--h) * .36); letter-spacing: .02em;
+  background: linear-gradient(180deg, #fffbe6 0%, #ffd36b 45%, #ff8a1f 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 1px #000) drop-shadow(0 0 6px rgba(255,120,20,.8)); }
+.sp-emberbtn__label small { font-family: var(--f-ui, "frizqt"), serif; font-size: .42em; letter-spacing: .28em; text-transform: uppercase; margin-bottom: .22em; opacity: .95; }
+
+/* flames: blurred radial tongues rising off the top edge, behind the body */
+.sp-emberbtn__fire { position: absolute; z-index: 1; left: 4%; right: 4%; bottom: 30%; height: 120%; pointer-events: none; filter: blur(3px); mix-blend-mode: screen; }
+.sp-emberbtn__tongue { position: absolute; bottom: 0; width: 22%; height: 100%; border-radius: 50% 50% 35% 35% / 70% 70% 30% 30%; transform-origin: 50% 100%;
+  background: radial-gradient(ellipse 50% 60% at 50% 95%, #fff6c2 0%, #ffcf4a 22%, #ff7a1a 48%, rgba(220,40,0,.7) 66%, transparent 80%);
+  animation: sp-ember-lick 1.1s ease-in-out infinite alternate; }
+.sp-emberbtn__tongue--1 { left: -2%; height: 70%; animation-duration: .9s; }
+.sp-emberbtn__tongue--2 { left: 12%; height: 95%; animation-duration: 1.2s; animation-delay: -.3s; }
+.sp-emberbtn__tongue--3 { left: 27%; height: 80%; animation-duration: .8s; animation-delay: -.6s; }
+.sp-emberbtn__tongue--4 { left: 40%; height: 110%; animation-duration: 1.05s; animation-delay: -.2s; }
+.sp-emberbtn__tongue--5 { left: 54%; height: 85%; animation-duration: .95s; animation-delay: -.5s; }
+.sp-emberbtn__tongue--6 { left: 67%; height: 100%; animation-duration: 1.25s; animation-delay: -.8s; }
+.sp-emberbtn__tongue--7 { left: 80%; height: 72%; animation-duration: .85s; animation-delay: -.4s; }
+
+/* sparks: tiny embers drifting up and out */
+.sp-emberbtn__sparks { position: absolute; z-index: 3; inset: 0; pointer-events: none; }
+.sp-emberbtn__spark { position: absolute; bottom: 60%; width: 4px; height: 4px; border-radius: 50%; background: #ffe08a; box-shadow: 0 0 6px 2px rgba(255,140,30,.9); opacity: 0; animation: sp-ember-spark 2.2s ease-out infinite; }
+.sp-emberbtn__spark--1 { left: 10%; animation-delay: 0s; --dx: -14px; }
+.sp-emberbtn__spark--2 { left: 22%; animation-delay: -.9s; --dx: 10px; }
+.sp-emberbtn__spark--3 { left: 35%; animation-delay: -1.6s; --dx: -8px; }
+.sp-emberbtn__spark--4 { left: 47%; animation-delay: -.4s; --dx: 16px; }
+.sp-emberbtn__spark--5 { left: 58%; animation-delay: -1.3s; --dx: -12px; }
+.sp-emberbtn__spark--6 { left: 70%; animation-delay: -.2s; --dx: 8px; }
+.sp-emberbtn__spark--7 { left: 82%; animation-delay: -1.9s; --dx: -6px; }
+.sp-emberbtn__spark--8 { left: 92%; animation-delay: -1.1s; --dx: 14px; }
+
+.sp-emberbtn:hover .sp-emberbtn__body { transform: translateY(-2px) scale(1.04); filter: brightness(1.18) saturate(1.15); }
+.sp-emberbtn:hover .sp-emberbtn__fire { height: 150%; }
+.sp-emberbtn:active .sp-emberbtn__body { transform: translateY(1px) scale(.98); filter: brightness(.95); }
+.sp-emberbtn:focus-visible { outline: 3px solid var(--gold, #ffd100); outline-offset: 6px; border-radius: 12px; }
+
+@keyframes sp-ember-lava { to { background-position: 0 0, -260% 0; } }
+@keyframes sp-ember-glow { to { box-shadow: 0 0 0 1px #3a0f02, 0 0 20px 4px rgba(255,150,40,.9), 0 0 50px 12px rgba(255,80,0,.55), inset 0 0 22px rgba(255,190,80,.6), inset 0 -6px 16px rgba(255,110,0,.6); } }
+@keyframes sp-ember-bob { 50% { transform: translateY(-2px) rotate(-3deg); } }
+@keyframes sp-ember-lick { 0% { transform: scale(1, .82) skewX(3deg); opacity: .85; } 50% { transform: scale(.9, 1.05) skewX(-4deg); opacity: 1; } 100% { transform: scale(1.06, .92) skewX(2deg); opacity: .9; } }
+@keyframes sp-ember-spark { 0% { opacity: 0; transform: translate(0, 0) scale(1); } 15% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--dx, 0), -60px) scale(.3); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-emberbtn__body, .sp-emberbtn__logo, .sp-emberbtn__tongue, .sp-emberbtn__spark { animation: none; }
+  .sp-emberbtn__spark { display: none; }
+}
+body.sp-stage-on .sp-reduce .sp-emberbtn__body, body.sp-stage-on .sp-reduce .sp-emberbtn__tongue, body.sp-stage-on .sp-reduce .sp-emberbtn__logo { animation: none; }
+body.sp-stage-on .sp-reduce .sp-emberbtn__spark { display: none; }

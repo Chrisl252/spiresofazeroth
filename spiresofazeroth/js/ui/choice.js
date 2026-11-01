@@ -1,8 +1,8 @@
 // Decision screens (stage-native): next zone (three art cards), raid floor, final boss, zone-mechanic (pylon) choice.
-import { h, icon, cap, toast } from "./dom.js?v=20261029d";
-import { chooseZone, enterRaidFloor, proceedAfterSpire, chooseFinalBoss, chooseMechanic } from "../engine/run.js?v=20261029d";
-import { cssReady, banner, plate, ico, zoneArt, ART, scroll } from "./kit.js?v=20261029d";
-import { runBar } from "./runbar.js?v=20261029d";
+import { h, icon, cap, toast, tip, esc } from "./dom.js";
+import { chooseZone, enterRaidFloor, proceedAfterSpire, chooseFinalBoss, chooseMechanic } from "../engine/run.js";
+import { cssReady, banner, plate, ico, zoneArt, ART, scroll } from "./kit.js";
+import { runBar } from "./runbar.js";
 
 export const stageNative = true;
 const CONT = { ek: "Eastern Kingdoms", kal: "Kalimdor" };
@@ -21,6 +21,7 @@ async function zoneCard(app, id, i, go) {
       h("h3", {}, z.name), h("b", {}, sp.name || ""),
       h("p", {}, firstSentence(sp.lore)),
       h("div", { class: "sx-zone__foot" }, mech.icon ? ico(mech.icon, { size: "xs" }) : null, h("span", {}, mech.name ? `Mechanic: ${mech.name}` : ""))));
+  if (mech.name && mech.text) { tip(c, `<b>${esc(mech.name)}</b><br>${esc(mech.text)}`); c.title = `${mech.name}: ${mech.text}`; } // 10-30 report: hovering "Mechanic:" never said what it does
   return c;
 }
 
@@ -35,6 +36,7 @@ export async function render(app, name) {
 
   if (name === "zonepick") {
     stage.setBackdrop("map", { tint: { primary: "#d9b25c", secondary: "#241708", accent: "#f0d68a" } });
+    await Promise.all(pd.options.map((id) => data.loadZone(id))); // 10-30 report: a resumed run only reloads visited zones, so the pick cards lost their spire lore, mechanic and dungeon
     const cards = await Promise.all(pd.options.map((id, i) => zoneCard(app, id, i, async () => { try { if (app.coop && !app.coop.lead("zone", id)) return; if (!(await chooseZone(run, data, id))) throw new Error("zone unavailable: " + id); go(); } catch (err) { console.error("[spires] choose zone failed:", err); toast("Could not enter that zone - pick again."); } })));
     host.append(runBar(app), head(`Act ${run.act + 1}: choose your next spire`, "Each zone has its own enemies, events and mechanic."), h("div", { class: "sx-zones" }, ...cards));
     return host;
@@ -48,7 +50,7 @@ export async function render(app, name) {
       const f = zone.raidFloors.find((x) => x.id === fid);
       list.append(plate({ ic: "achievement_dungeon_ulduar77_25man", title: f.name, text: `${f.lore || "An optional dungeon floor."}${f.optional ? " (Optional, dangerous)" : ""} Bonus rewards.`.slice(0, 220), onClick: () => { if (app.coop && !app.coop.lead("raid", fid)) return; if (enterRaidFloor(run, data, fid)) go(); }, auto: i === 0, size: "lg", cls: "sx-plate--big" }));
     });
-    list.append(plate({ ic: "spell_holy_divineintervention", title: "Skip the dungeon", text: "Move on to the next zone.", onClick: async () => { if (app.coop && !app.coop.lead("skipraid")) return; await proceedAfterSpire(run, data); go(); }, size: "lg", cls: "sx-plate--big" }));
+    list.append(plate({ ic: "spell_holy_divineintervention", title: "Skip the dungeon", text: "Move on to the next zone.", onClick: async () => { if (app.coop && !app.coop.lead("skipraid")) return; try { await proceedAfterSpire(run, data); go(); } catch (err) { console.error("[spires] skip dungeon failed:", err); toast("Could not continue - tap again."); } }, size: "lg", cls: "sx-plate--big" }));
     title = "An optional dungeon floor"; sub = "Clear it for a boss reward, but your HP carries over.";
   } else if (name === "bosschoice") {
     pd.options.forEach((id, i) => {

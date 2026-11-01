@@ -3,11 +3,11 @@
 // Round: seat 0 plays, then seat 1 plays, then the enemies act (each enemy hits one hero), then both heroes start a new turn.
 // A hero at 0 HP is DOWN (skipped by turns and enemies); the fight is won when the pack dies (downed heroes stand back up at 20% HP)
 // and lost only when every hero still in the fight is down. A Hearthstone retreat takes that hero out of the fight (GONE).
-import { beginCombat } from "./run.js?v=20261029d";
-import { playCard, usePotion, spareEnemy, resolvePending, endPlayerTurn, startPlayerTurn, livingEnemies } from "./combat.js?v=20261029d";
-import { isAlive, checkDeaths } from "./damage.js?v=20261029d";
-import { enemyAct } from "./intents.js?v=20261029d";
-import { turnStart, roundEnd } from "./status.js?v=20261029d";
+import { beginCombat } from "./run.js";
+import { playCard, usePotion, spareEnemy, resolvePending, endPlayerTurn, startPlayerTurn, livingEnemies } from "./combat.js";
+import { isAlive, checkDeaths } from "./damage.js";
+import { enemyAct } from "./intents.js";
+import { turnStart, roundEnd } from "./status.js";
 
 export const COOP_HP_MUL = 1.6; // enemy HP for two heroes (one hero's damage alone would make every fight half as long)
 export const COOP_UID_BASE = 50000;

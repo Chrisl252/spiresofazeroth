@@ -1,17 +1,27 @@
 // Co-op fight glue for ui/combat.js: the handshake that starts a joint fight, the partner-action queue, the shared enemy phase with
 // choreography for hits on YOUR hero, the partner panel, enemy target tags and the desync probe. Rules live in engine/coop.js.
-import { h, toast } from "./dom.js?v=20261029d";
-import * as Coop from "../engine/coop.js?v=20261029d";
+import { h, toast } from "./dom.js";
+import * as Coop from "../engine/coop.js";
 
 // Waits (with a "Fight solo" escape) for the partner to reach the same fight, then builds both heroes' combats. null = solo.
 export async function coopStart(app, run) {
   const coop = app.coop;
   let cancelled = false;
-  const wait = h("div", { class: "sp-coop-wait" }, h("div", {}, `Waiting for ${coop.partnerName()} to reach the fight...`),
+  const line = h("div", {}), sub = h("div", { class: "sp-coop-wait__sub" });
+  const wait = h("div", { class: "sp-coop-wait" }, line, sub,
     h("button", { class: "sp-wowbtn", type: "button", onClick: () => { cancelled = true; } }, "Fight solo"));
+  // live: the partner may still be on rewards / the healer / the Sanctuary (personal screens) or the channel may be reconnecting
+  const tick = () => {
+    const ps = coop.partnerStatus, name = coop.partnerName();
+    if (coop.state === "reconnecting") { line.textContent = `Reconnecting to ${name}...`; sub.textContent = "Their game rejoins yours when the connection is back."; return; }
+    line.textContent = `Waiting for ${name} to reach the fight...`;
+    sub.textContent = ps && ps.screen && ps.screen !== "combat" && coop.where ? `They are on ${coop.where(ps.screen)}. Your pick is already on its way to them.` : "";
+  };
+  tick();
+  const iv = setInterval(tick, 500);
   app.root.append(wait);
   let m = null;
-  try { m = await coop.combatReady(run, () => cancelled); } finally { wait.remove(); }
+  try { m = await coop.combatReady(run, () => cancelled); } finally { clearInterval(iv); wait.remove(); }
   if (!m || !m.run) { if (!cancelled) toast("Co-op fight unavailable, fighting solo."); return null; }
   const { data } = app;
   await data.loadClass(m.run.classId);
@@ -133,6 +143,7 @@ export function createCoopLink(app, S, hooks) {
       if (S.over) return;
       const pre = hooks.snapBefore(); P.fx.length = 0;
       const r = Coop.applyAction(S, a);
+      if (r === null) console.warn("[coop] partner action rejected here (the two games differ):", JSON.stringify({ k: a.k, uid: a.uid, idx: a.idx, uids: a.uids, active: S.active, phase: S.phase, ended: S.ended, pending: P.pending.length }));
       const pevs = P.fx.splice(0); C.fx.length = 0;
       if (a.k === "play" && r && r.ok) { const inst = P.pile.discard.concat(P.pile.exhaust, P.powers || []).find((c) => c && c.uid === a.uid); lastCard = inst && inst.def ? inst.def.name : "a card"; }
       else if (a.k === "potion") lastCard = "a potion";

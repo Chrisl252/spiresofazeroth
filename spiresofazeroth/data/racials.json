@@ -1,0 +1,389 @@
+{
+ "_note": "One racial per race: a 0-cost Exhaust card added to the starter deck by engine/racials.js grantRacial(). token:true keeps it out of reward pools. Never easier: each carries a drawback or is situational.",
+ "cards": [
+  {
+   "id": "racial-perception",
+   "name": "Perception",
+   "icon": "spell_nature_sleep",
+   "spellId": null,
+   "rank": 1,
+   "type": "skill",
+   "rarity": "basic",
+   "archetype": null,
+   "cost": 0,
+   "target": "self",
+   "flags": [
+    "exhaust"
+   ],
+   "racial": "human",
+   "token": true,
+   "text": "Racial. Remove Veiled. Scry 3. Draw 1. Exhaust.",
+   "effects": [
+    {
+     "op": "remove",
+     "status": "veiled",
+     "target": "self"
+    },
+    {
+     "op": "scry",
+     "count": 3
+    },
+    {
+     "op": "draw",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "id": "racial-stoneform",
+   "name": "Stoneform",
+   "icon": "spell_shadow_unholystrength",
+   "spellId": null,
+   "rank": 1,
+   "type": "skill",
+   "rarity": "basic",
+   "archetype": null,
+   "cost": 0,
+   "target": "self",
+   "flags": [
+    "exhaust"
+   ],
+   "racial": "dwarf",
+   "token": true,
+   "text": "Racial. Remove Poison, Bleed and Disease from you. Gain 8 Block. Gain 2 Weak. Exhaust.",
+   "effects": [
+    {
+     "op": "remove",
+     "status": "poison",
+     "target": "self"
+    },
+    {
+     "op": "remove",
+     "status": "bleed",
+     "target": "self"
+    },
+    {
+     "op": "remove",
+     "status": "disease",
+     "target": "self"
+    },
+    {
+     "op": "block",
+     "amount": 8
+    },
+    {
+     "op": "apply",
+     "status": "weak",
+     "stacks": 2,
+     "target": "self"
+    }
+   ]
+  },
+  {
+   "id": "racial-shadowmeld",
+   "name": "Shadowmeld",
+   "icon": "ability_ambush",
+   "spellId": null,
+   "rank": 1,
+   "type": "skill",
+   "rarity": "basic",
+   "archetype": null,
+   "cost": 0,
+   "target": "self",
+   "flags": [
+    "exhaust"
+   ],
+   "racial": "nightelf",
+   "token": true,
+   "text": "Racial. Gain 1 Stealth (single-target attacks miss you). End your turn. Exhaust.",
+   "effects": [
+    {
+     "op": "apply",
+     "status": "stealth",
+     "stacks": 1,
+     "target": "self"
+    },
+    {
+     "op": "end_turn"
+    }
+   ]
+  },
+  {
+   "id": "racial-escape-artist",
+   "name": "Escape Artist",
+   "icon": "ability_rogue_trip",
+   "spellId": null,
+   "rank": 1,
+   "type": "skill",
+   "rarity": "basic",
+   "archetype": null,
+   "cost": 0,
+   "target": "self",
+   "flags": [
+    "exhaust"
+   ],
+   "racial": "gnome",
+   "token": true,
+   "text": "Racial. Remove Frozen, Cold, Stun, Fear and Taunted from you. Gain 3 Block. Draw 1. Exhaust.",
+   "effects": [
+    {
+     "op": "remove",
+     "status": "frozen",
+     "target": "self"
+    },
+    {
+     "op": "remove",
+     "status": "cold",
+     "target": "self"
+    },
+    {
+     "op": "remove",
+     "status": "stun",
+     "target": "self"
+    },
+    {
+     "op": "remove",
+     "status": "fear",
+     "target": "self"
+    },
+    {
+     "op": "remove",
+     "status": "taunted",
+     "target": "self"
+    },
+    {
+     "op": "block",
+     "amount": 3
+    },
+    {
+     "op": "draw",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "id": "racial-gift-of-the-naaru",
+   "name": "Gift of the Naaru",
+   "icon": "spell_holy_holyprotection",
+   "spellId": null,
+   "rank": 1,
+   "type": "skill",
+   "rarity": "basic",
+   "archetype": null,
+   "cost": 0,
+   "target": "self",
+   "flags": [
+    "exhaust"
+   ],
+   "racial": "draenei",
+   "token": true,
+   "text": "Racial. Gain 3 Regen. Exhaust.",
+   "effects": [
+    {
+     "op": "apply",
+     "status": "regen",
+     "stacks": 3,
+     "target": "self"
+    }
+   ]
+  },
+  {
+   "id": "racial-blood-fury",
+   "name": "Blood Fury",
+   "icon": "racial_orc_berserkerstrength",
+   "spellId": null,
+   "rank": 1,
+   "type": "skill",
+   "rarity": "basic",
+   "archetype": null,
+   "cost": 0,
+   "target": "self",
+   "flags": [
+    "exhaust"
+   ],
+   "racial": "orc",
+   "token": true,
+   "text": "Racial. Gain 2 Strength. Gain 2 Disease (you are healed 50% less). Exhaust.",
+   "effects": [
+    {
+     "op": "apply",
+     "status": "strength",
+     "stacks": 2,
+     "target": "self"
+    },
+    {
+     "op": "apply",
+     "status": "disease",
+     "stacks": 2,
+     "target": "self"
+    }
+   ]
+  },
+  {
+   "id": "racial-will-of-the-forsaken",
+   "name": "Will of the Forsaken",
+   "icon": "spell_shadow_raisedead",
+   "spellId": null,
+   "rank": 1,
+   "type": "skill",
+   "rarity": "basic",
+   "archetype": null,
+   "cost": 0,
+   "target": "self",
+   "flags": [
+    "exhaust"
+   ],
+   "racial": "undead",
+   "token": true,
+   "text": "Racial. Remove Fear, Sleep, Madness and Silence from you. Gain 4 Block. Exhaust.",
+   "effects": [
+    {
+     "op": "remove",
+     "status": "fear",
+     "target": "self"
+    },
+    {
+     "op": "remove",
+     "status": "sleep",
+     "target": "self"
+    },
+    {
+     "op": "remove",
+     "status": "madness",
+     "target": "self"
+    },
+    {
+     "op": "remove",
+     "status": "silence",
+     "target": "self"
+    },
+    {
+     "op": "block",
+     "amount": 4
+    }
+   ]
+  },
+  {
+   "id": "racial-war-stomp",
+   "name": "War Stomp",
+   "icon": "ability_warstomp",
+   "spellId": null,
+   "rank": 1,
+   "type": "skill",
+   "rarity": "basic",
+   "archetype": null,
+   "cost": 0,
+   "target": "all_enemies",
+   "flags": [
+    "exhaust"
+   ],
+   "racial": "tauren",
+   "token": true,
+   "text": "Racial. Deal 3 damage and apply 1 Stun to all enemies. Lose 4 HP. Next turn you have 1 less Energy. Exhaust.",
+   "effects": [
+    {
+     "op": "damage",
+     "amount": 3,
+     "target": "all_enemies"
+    },
+    {
+     "op": "apply",
+     "status": "stun",
+     "stacks": 1,
+     "target": "all_enemies"
+    },
+    {
+     "op": "damage",
+     "amount": 4,
+     "target": "self"
+    },
+    {
+     "op": "energy_next_turn",
+     "amount": -1
+    }
+   ]
+  },
+  {
+   "id": "racial-berserking",
+   "name": "Berserking",
+   "icon": "racial_troll_berserk",
+   "spellId": null,
+   "rank": 1,
+   "type": "skill",
+   "rarity": "basic",
+   "archetype": null,
+   "cost": 0,
+   "target": "self",
+   "flags": [
+    "exhaust"
+   ],
+   "racial": "troll",
+   "token": true,
+   "text": "Racial. Gain 1 Energy and 1 Vulnerable. Below 50% HP: gain 1 more Energy and draw 1. Exhaust.",
+   "effects": [
+    {
+     "op": "gain_energy",
+     "amount": 1
+    },
+    {
+     "op": "apply",
+     "status": "vulnerable",
+     "stacks": 1,
+     "target": "self"
+    },
+    {
+     "op": "conditional",
+     "if": {
+      "type": "hp_below_pct",
+      "value": 50
+     },
+     "then": [
+      {
+       "op": "gain_energy",
+       "amount": 1
+      },
+      {
+       "op": "draw",
+       "count": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "racial-arcane-torrent",
+   "name": "Arcane Torrent",
+   "icon": "spell_shadow_teleport",
+   "spellId": null,
+   "rank": 1,
+   "type": "skill",
+   "rarity": "basic",
+   "archetype": null,
+   "cost": 0,
+   "target": "enemy",
+   "flags": [
+    "exhaust"
+   ],
+   "racial": "bloodelf",
+   "token": true,
+   "text": "Racial. Silence an enemy for 1 turn and interrupt its cast. Lose 3 HP. Exhaust.",
+   "effects": [
+    {
+     "op": "apply",
+     "status": "silence",
+     "stacks": 1,
+     "target": "enemy"
+    },
+    {
+     "op": "cast_interrupt",
+     "target": "enemy"
+    },
+    {
+     "op": "damage",
+     "amount": 3,
+     "target": "self"
+    }
+   ]
+  }
+ ]
+}

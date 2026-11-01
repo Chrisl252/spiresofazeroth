@@ -1,6 +1,6 @@
 // Shared loaders for the character screens: the real client text/matrix (data/charcreate.json), the client's random-name lists
 // (data/charcreate-names.json, lazy), and the stylesheet. Art paths for portraits/crests live here so both screens agree.
-import { BUILD } from "../version.js?v=20261029d";
+import { BUILD } from "../version.js";
 
 const url = (rel) => `${new URL(rel, import.meta.url).href}?v=${BUILD}`;
 let dataP = null, namesP = null, cssP = null;

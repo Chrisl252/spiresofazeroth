@@ -1,11 +1,11 @@
 // Campfire (one action) and the Moonglade hub (all actions: rest, trainer upgrade, vendor, zone well). Stage-native, fire on a canvas.
-import { h, icon, toast, fill } from "./dom.js?v=20261029d";
-import { restHeal, upgradeableCards, upgradeCard, restZoneAction, trainerUpgrade, openHubShop, leaveScreen } from "../engine/run.js?v=20261029d";
-import { shopPanel } from "./shop.js?v=20261029d";
-import { upgradeOverlay, restOverlay } from "./restOverlay.js?v=20261029d";
-import { cssReady, btn, banner, plate } from "./kit.js?v=20261029d";
-import { runBar } from "./runbar.js?v=20261029d";
-import { mountCampfire } from "./campfire.js?v=20261029d";
+import { h, icon, toast, fill } from "./dom.js";
+import { restHeal, upgradeableCards, upgradeCard, restZoneAction, trainerUpgrade, openHubShop, leaveScreen } from "../engine/run.js";
+import { shopPanel } from "./shop.js";
+import { upgradeOverlay, restOverlay } from "./restOverlay.js";
+import { cssReady, btn, banner, plate } from "./kit.js";
+import { runBar } from "./runbar.js";
+import { mountCampfire } from "./campfire.js";
 
 export const stageNative = true;
 
@@ -20,6 +20,7 @@ export async function render(app, name) {
   if (name !== "hub" && !(run.pending && run.pending.hub) && (!run.pending || !run.pending.used)) run.pending = Object.assign({}, run.pending, { type: "rest", used: {} }); // a saved/stuck rest with no pending state still opens
   const pd = run.pending;
   const hub = name === "hub" || pd.hub;
+  if (hub && pd.hubZone && !data.zone(pd.hubZone)) await data.loadZone(pd.hubZone); // 10-30 reports: "Continue run" on a saved Sanctuary crashed (resume loads visited zones, not the hub) -> "Could not open that screen"
   const zone = data.zone(hub ? pd.hubZone : run.zoneId);
   stage.setBackdrop((zone && zone.id) || run.zoneId || "default");
   const host = h("section", { class: `sx-screen sx-rest ${hub ? "sx-rest--hub" : ""}` });

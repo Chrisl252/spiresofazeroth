@@ -287,13 +287,15 @@ export function getZoneVisuals(zoneId, overrides = {}) {
   const fogColor = sky.fog || sky.haze || "#4d788f";
 
   // Light intensities tuned for distinct mood
-  let hemiIntensity = 1.15;
-  let sunIntensity = 2.1;
-  let rimIntensity = 1.4;
-  if (biomeKey === "snow") { hemiIntensity = 1.35; sunIntensity = 2.3; rimIntensity = 1.6; }
-  else if (biomeKey === "desert") { hemiIntensity = 1.10; sunIntensity = 2.5; rimIntensity = 1.3; }
-  else if (biomeKey === "graveyard") { hemiIntensity = 0.90; sunIntensity = 1.7; rimIntensity = 1.8; }
-  else if (biomeKey === "volcanic") { hemiIntensity = 0.85; sunIntensity = 1.9; rimIntensity = 1.9; }
+  // combat-feel 20261029j: key-to-fill ratio raised (hemi down, sun up) so bodies get real form shading instead of the flat
+  // ambient wash; the renderer now tone-maps (ACES) so the stronger key rolls off instead of clipping.
+  let hemiIntensity = 0.78;
+  let sunIntensity = 2.7;
+  let rimIntensity = 1.25;
+  if (biomeKey === "snow") { hemiIntensity = 0.95; sunIntensity = 2.9; rimIntensity = 1.4; }
+  else if (biomeKey === "desert") { hemiIntensity = 0.75; sunIntensity = 3.1; rimIntensity = 1.15; }
+  else if (biomeKey === "graveyard") { hemiIntensity = 0.6; sunIntensity = 2.2; rimIntensity = 1.6; }
+  else if (biomeKey === "volcanic") { hemiIntensity = 0.55; sunIntensity = 2.4; rimIntensity = 1.7; }
 
   return {
     zoneId: p === ZONE_PROFILES.default && !ZONE_PROFILES[zoneId] ? "default" : zoneId,

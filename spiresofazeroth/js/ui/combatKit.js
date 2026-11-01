@@ -48,20 +48,25 @@ export function lanesFor(stage) {
   };
 }
 
+let building = null; // the build in flight: the title prewarm (main.js) or a resize / stale rebuild racing a screen's own getKit
 export async function getKit(app) {
+  // 2026-10-29: app.kit was assigned BEFORE the actors/fx awaits, so a second caller passed the fit check and got the half-built kit
+  // (actors null, fx null) -> combat drew HUD and bars with no hero and no enemies, silently ("character and mobs are invisible").
+  if (building) { try { await building; } catch (_) { /* the fit check below decides */ } }
   const stage = app.stage;
   // Portrait phones: stage height tracks the visual viewport, which changes every time the URL bar collapses. Keying the kit on the exact
   // height rebuilt the WebGL renderer (new context, all GLBs re-uploaded) on nearly every screen change = flicker. Portrait kits are built
   // 12% taller than the stage (it clips the spare canvas) and only rebuilt when the stage outgrows them, never when it shrinks.
   let kit = app.kit;
   const portrait = !!stage.portrait;
-  if (kit && kit.portrait === portrait && kit.W === stage.size.w && (portrait ? stage.size.h <= kit.H : kit.H === stage.size.h) && kit.key !== "stale") return kit;
+  if (kit && kit.portrait === portrait && kit.W === stage.size.w && (portrait ? stage.size.h <= kit.H : kit.H === stage.size.h) && kit.key !== "stale" && kit.ready) return kit;
   const kH = portrait ? Math.round(stage.size.h * 1.12) : stage.size.h;
   const key = `${portrait ? "p" : "l"}${stage.size.w}x${kH}`;
   if (kit) disposeKit(kit);
-  kit = app.kit = { actors: null, fx: null, key, W: stage.size.w, H: kH, portrait: stage.portrait, off: [] };
+  kit = app.kit = { actors: null, fx: null, key, W: stage.size.w, H: kH, portrait: stage.portrait, off: [], ready: false };
+  building = (async () => {
   try {
-    const [{ createActors }, { createFx }] = await Promise.all([import("../stage/actors3d.js?v=20261029d"), import("../fx/choreo.js?v=20261029d")]);
+    const [{ createActors }, { createFx }] = await Promise.all([import("../stage/actors3d.js"), import("../fx/choreo.js")]);
     const L = lanesFor(stage);
     const lanes = { hero: L.hero, enemy: L.enemy };
     kit.actors = createActors(stage.layers.actors, { designW: kit.W, designH: kit.H, lanes, groundY: stage.groundY });
@@ -89,7 +94,10 @@ export async function getKit(app) {
     kit.actors = null; kit.fx = null;
   }
   applySettings(app, kit);
+  kit.ready = true;
   return kit;
+  })();
+  try { return await building; } finally { building = null; }
 }
 
 export function disposeKit(kit) {

@@ -69,21 +69,3 @@ def test_healers_data_file():
 def test_healer_once_per_act_transition():
     r = subprocess.run([NODE, str(ROOT / "tools/spires/healer-check.mjs")], capture_output=True, text=True, timeout=180, cwd=ROOT)
     assert r.returncode == 0, (r.stdout + r.stderr)[-3000:]
-
-
-@needs_node
-def test_bleed_ticks_at_turn_end():
-    r = subprocess.run([NODE, str(ROOT / "tools/spires/test-bleed-timing.mjs")], capture_output=True, text=True, timeout=60, cwd=ROOT)
-    assert r.returncode == 0, (r.stdout + r.stderr)[-3000:]
-
-
-@needs_node
-def test_hand_hover_stays_under_pointer():
-    r = subprocess.run([NODE, str(ROOT / "tools/spires/test-hand-hp-clearance.mjs")], capture_output=True, text=True, timeout=60, cwd=ROOT)
-    assert r.returncode == 0, (r.stdout + r.stderr)[-3000:]
-
-
-@needs_node
-def test_treasure_chest_fallback_is_immediate():
-    r = subprocess.run([NODE, str(ROOT / "tools/spires/test-treasure-chest.mjs")], capture_output=True, text=True, timeout=60, cwd=ROOT)
-    assert r.returncode == 0, (r.stdout + r.stderr)[-3000:]

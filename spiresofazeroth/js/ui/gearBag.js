@@ -1,8 +1,8 @@
-import { equip, isStarter, keysFor, slotOf, SLOT_LABEL, syncSetBonuses } from "../engine/gear.js?v=20261029d";
-import { esc, h, icon, qClass, tip } from "./dom.js?v=20261029d";
-import { btn, cssReady, stageModal } from "./kit.js?v=20261029d";
-import { compareTip } from "./gearStrip.js?v=20261029d";
-import { autoEquipSelect, AUTO_EQUIP_HINT } from "./autoEquip.js?v=20261029d";
+import { equip, isStarter, keysFor, slotOf, SLOT_LABEL, syncSetBonuses } from "../engine/gear.js";
+import { esc, h, icon, qClass, tip } from "./dom.js";
+import { btn, cssReady, stageModal } from "./kit.js";
+import { compareTip } from "./gearStrip.js";
+import { autoEquipSelect, AUTO_EQUIP_HINT } from "./autoEquip.js";
 
 export async function openGearBag(app) {
   await cssReady;

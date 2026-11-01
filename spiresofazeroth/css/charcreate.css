@@ -91,3 +91,4 @@
 .sp-portrait .cc-wrap--list .cc-center, .sp-portrait .cc-wrap--list .cc-model--list { height: auto; }
 .sp-portrait .cc-wrap--list .cc-model--list { position: relative; height: 900px; inset: auto; width: 100%; }
 @media (prefers-reduced-motion: reduce) { .cc-race, .cc-class { transition: none; } }
+.cc-trait--racial { color: #f0d890; border-top: 1px solid rgba(201,162,75,.35); padding-top: 6px; } .cc-racial__ic { width: 22px; height: 22px; vertical-align: middle; border-radius: 3px; }

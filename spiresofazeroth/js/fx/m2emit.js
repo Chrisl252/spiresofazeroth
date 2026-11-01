@@ -134,12 +134,12 @@ export function spawnModel(art, rng, model, o, actors, wake) {
     if (model.r && trail.length > 1 && o.ribbons !== false) {
       const rb = model.r[0], col = rb.c || [1, 1, 1], w = (rb.up + rb.dn) * sc * 0.55;
       setMode(true);
-      g.lineCap = "butt";
+      g.lineCap = "round"; g.lineJoin = "round";
       for (let i = 1; i < trail.length; i++) {
         const u = i / trail.length, p0 = trail[i - 1], p1 = trail[i], lifeF = 1 - p1.a / ((rb.l || 0.4) * 1.1);
-        g.globalAlpha = Math.max(0, Math.min(1, (rb.a || 0.5) * 1.4 * u * lifeF)) * a0;
+        g.globalAlpha = Math.max(0, Math.min(1, (rb.a || 0.5) * 0.9 * u * u * lifeF)) * a0;
         g.strokeStyle = `rgb(${(col[0] <= 1 ? col[0] * 255 : col[0]) | 0},${(col[1] <= 1 ? col[1] * 255 : col[1]) | 0},${(col[2] <= 1 ? col[2] * 255 : col[2]) | 0})`;
-        g.lineWidth = Math.max(2, w * u);
+        g.lineWidth = Math.max(2, w * 0.7 * u);
         g.beginPath(); g.moveTo(p0.x, p0.y); g.lineTo(p1.x, p1.y); g.stroke();
       }
     }
@@ -148,19 +148,25 @@ export function spawnModel(art, rng, model, o, actors, wake) {
       const tmx = inst.t, env = loop ? Math.min(1, tmx / 0.12) : Math.min(1, tmx / 0.1, Math.max(0, (spriteEnd - tmx) / 0.18 + 0.0001));
       for (const s of model.m) {
         art.tex(s.t);
-        const img = art.tinted(s.t, 255, 255, 255);
+        const img = art.opaque(s.t) ? art.soft(s.t) : art.tinted(s.t, 255, 255, 255);
         if (!img) continue;
         const flat = s.h < 0.18 * Math.max(s.w, s.d), add = s.b >= 3 || art.opaque(s.t);
         let w = Math.max(Math.max(s.w, s.d) * sc * 1.1, flat ? 190 * (o.scale || 1) : 0), h = (flat ? Math.max(s.w, s.d) * 0.42 : Math.max(s.h, s.d, 0.1)) * sc;
         if (!flat && s.w > s.h * 1.4) { w = s.w * sc; h = Math.max(s.h, 0.12) * sc * 1.2; }
+        // side camera: an additive ring/halo lying in the model's XY plane (frostbolt ring) shows its z-extent tall, not a full-face disc
+        else if (!flat && add && s.d > s.h * 1.2) h = Math.max(s.h, 0.1) * sc * 0.75;
+        const tall = !flat && s.h > 2 * Math.max(s.w, s.d, 0.05);  // upright spike (frostbolt shard): lay it along the flight line
+        if (tall) { w = s.h * sc * 0.55; h = Math.max(s.w, s.d, 0.12) * sc * 0.8; }
         w = Math.min(w * 0.8, 460); h = Math.min(h * 0.8, 460);
         setMode(add);
-        g.globalAlpha = Math.max(0, env) * a0 * (add ? 0.85 : 1);
+        g.globalAlpha = Math.max(0, env) * a0 * (add ? 0.5 : 1);   // precast+cast stack the same hand glow: keep it coloured, not white
         g.save(); g.translate(inst.origin.x, inst.origin.y - (s.cz || 0) * sc * 0.4);
-        if (!flat && (hx !== 1 || hy !== 0) && s.w > s.h * 1.4) g.rotate(Math.atan2(hy, hx));
-        if (!add && !flat) {          // opaque 3D batch (fireball core, shadow orb): a slowly turning clipped disc reads as a lit sphere
+        if (!flat && (hx !== 1 || hy !== 0) && (tall || s.w > s.h * 1.4)) g.rotate(Math.atan2(hy, hx));
+        if (!add && !flat && !tall) {          // opaque 3D batch (fireball core, shadow orb): a slowly turning clipped disc reads as a lit sphere
           g.beginPath(); g.ellipse(0, 0, w / 2, h / 2, 0, 0, 6.2832); g.clip(); g.rotate(inst.t * 2.2);
           g.drawImage(img, -w * 0.75, -h * 0.75, w * 1.5, h * 1.5);
+        } else if (tall && !add) {    // opaque shard laid flat: soft ellipse clip, no rectangle edges
+          g.beginPath(); g.ellipse(0, 0, w / 2, h / 2, 0, 0, 6.2832); g.clip(); g.drawImage(img, -w / 2, -h / 2, w, h);
         } else g.drawImage(img, -w / 2, -h / 2, w, h);
         g.restore();
       }
@@ -176,7 +182,8 @@ export function spawnModel(art, rng, model, o, actors, wake) {
         const al = samp(d.a, u) ?? 1;
         const s2 = samp(d.s, u, sv) || [0.1, 0.1];
         const size = Math.min(360, Math.max(2, s2[0] * sc * SIZE_MUL * p.sv));
-        const alpha = Math.min(1, Math.max(0, al)) * a0 * (add ? ADD_GAIN : 1);
+        // big additive sheets are glows, not solids: fade them with size so stacked white flares (smite) don't blow out
+        const alpha = Math.min(1, Math.max(0, al)) * a0 * (add ? ADD_GAIN * Math.min(1, 150 / size) : 1);
         if (alpha < 0.02) continue;
         art.tex(d.t);
         const img = art.tinted(d.t, col[0], col[1], col[2]);

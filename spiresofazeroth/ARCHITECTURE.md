@@ -9,13 +9,10 @@ Data is JSON under `data/` (written by the data agents); the client never edits 
 index.html            thin shell (site masthead/footer, <main id="app">, one module script). NO ad code.
 js/main.js            boot + router (<150 lines). app = { data, meta, run, C, go(), route(), save(), cardDef(), reduced(), delay() }
 js/version.js         BUILD string = cache-buster for data and module URLs
-js/controller.js      gamepad & controller coordinator entrypoint wired in main.js
-js/controller/*       input.js (polling/rumble), combat.js (StS console controls), nav.js (spatial UI), hud.js (prompts)
 js/ui/*               one file per screen; render(app, name) -> Element. Touch only DOM + engine public functions.
 js/engine/*           rules. No DOM. Deterministic given (seed, choices).
 css/wow-ui.css        chrome: gold-trim frames, buttons, bars, tooltip, quality colours (CSS only)
 css/game.css          screen layout (mobile-first portrait, widens at 760px). transform/opacity animations only
-css/controller.css    controller focus rings, button glyphs, HUD action bar
 data/*                content JSON (classes, zones, relics, potions, events, bosses, keywords, status cards)
 tools/spires/         validate-data.mjs, sim.mjs, fixtures/ (fallback data)
 tests/test_spires_static.py
@@ -43,6 +40,7 @@ tests/test_spires_static.py
 | save.js | localStorage (try/catch + memory fallback), export/import string, meta progression |
 | cardtext.js | `{damage}` style token rendering |
 | sim.js | headless greedy auto-player (used by tools/spires/sim.mjs) |
+| racials.js | one racial per race = a 0-cost Exhaust card (data/racials.json, token) added to the starter deck by `grantRacial(run, data)`; run starter calls it after `run.character` is set; `sim.mjs --race X` |
 
 Dependency direction: ui -> engine. Inside the engine, the cycles effects/status/damage/resources/relics/intents/deck are function-reference only (no module-eval-time use), which ESM allows.
 
@@ -119,7 +117,7 @@ Add an element = one `PALETTE` row + one `IMPACT[el]` function (+ optional `PROJ
 
 ## v2 screens (map and non-combat)
 
-All stage-native (`export const stageNative = true`, 1920x1080 design space; `.sp-portrait` overrides for phones). Shared kit and CSS are injected from JS (`cssReady` in `js/ui/kit.js` loads `css/screens.css` + `css/map.css`), so `index.html` is untouched.
+All stage-native (`export const stageNative = true`, 1920x1080 design space; `.sp-portrait` overrides for phones). Shared kit and CSS are injected from JS (`cssReady` in `js/ui/kit.js` loads `css/screens.css` + `css/map.css` + ... + `css/menus.css` LAST), so `index.html` is untouched. `css/menus.css` is the ONE home for shared menu/modal/phone-tap-size primitives (it loads after every screen sheet so it wins at equal specificity; main.js puts `sp-menuscr` on the stage root for menu screens only; do not name a class `.sp-menu`, game.css owns it).
 
 - `js/ui/kit.js`: wood/parchment panels, `btn`, `tog`, `ico`, `banner`, `plate`, `cardSlot` (fixed 260x380 box scaled by `--cs`, so card restyles do not break layouts), `coin`, `stageModal`, `zoneArt`.
 - `js/ui/runbar.js`: top bar (class, HP, gold, act/floor, relics, potions, Deck).
@@ -197,14 +195,3 @@ Layout (integration pass 2, StS2): landscape ground band y=700 (`stage.js` LANDS
 Data: any event (common or zone) may carry `npc: { name, npcId?, displayId?, model?, scale? }`. `model` names a different baked body (e.g. Steamwheedle Merchant wears "Gaxim Rustfizzle"). The slug is `npc-` + lowercase(model || name). No baked body => plate fallback (validate-data lists it as INFO). New speaker = Wowhead classic npc page -> displayId, then `roster-displays.py resolve` + `dev/bake_roster.py` (output keyed by displayId) and add `displays[id]`, `byName[name]`, `heroes[slug]` to index.json. Plate kind comes from the event name (`plateKind`), no data field.
 | js/engine/healer.js | act-transition healer: `healerFor(data, act)`, `enterHealer(run, data)` (heals half the missing HP once per act via `run.healerAct`, sets screen "healer"); called from `proceedAfterSpire` in run.js. |
 | js/ui/healer.js (+ css/healer.css, data/healers.json) | the healer scene (screen "healer" in main.js SCREENS): portrait card from an existing icon, dialogue, heal fx via `playOutcome`, Continue (Enter/Space). |
-
-## Controller subsystem (js/controller)
-
-| file | concern |
-|---|---|
-| js/controller.js | Coordinator entrypoint: wired in `main.js`, handles action dispatching and screen change sync |
-| js/controller/input.js | Hardware Gamepad API polling, deadzones, button debounce, auto-repeat timers, haptic rumble |
-| js/controller/combat.js | Slay the Spire-style console combat scheme: hand navigation, keyword inspect, enemy aiming, potion belt, end turn |
-| js/controller/nav.js | Universal 2D spatial UI navigation, Spire map node selection, modal dialog handling |
-| js/controller/hud.js | Dynamic on-screen controller button prompts bar and glyph rendering |
-| css/controller.css | Golden glowing focus ring animation, Xbox/PS/Nintendo button glyphs, HUD action bar |

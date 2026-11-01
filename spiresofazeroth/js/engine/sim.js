@@ -1,10 +1,11 @@
 // Headless greedy auto-player. Zero DOM. Used by tools/spires/sim.mjs and the e2e tests.
 // Policy: play the highest value-per-energy card, target the lowest-HP enemy, drink a potion under 40% HP.
-import * as Run from "./run.js?v=20261029d";
-import { playCard, endTurn, usePotion, livingEnemies, pickDefaultTarget, canPlayWhy } from "./combat.js?v=20261029d";
-import { intentInfo } from "./intents.js?v=20261029d";
-import { cardCost } from "./deck.js?v=20261029d";
-import { isAlive } from "./damage.js?v=20261029d";
+import * as Run from "./run.js";
+import { grantRacial } from "./racials.js";
+import { playCard, endTurn, usePotion, livingEnemies, pickDefaultTarget, canPlayWhy } from "./combat.js";
+import { intentInfo } from "./intents.js";
+import { cardCost } from "./deck.js";
+import { isAlive } from "./damage.js";
 
 const DEBUFF_VALUE = { vulnerable: 3, weak: 2.5, poison: 1.2, bleed: 1, burn: 1, stun: 6, frozen: 5, fear: 4, sleep: 3, slow: 1.5, marked: 2, silence: 1, curse: 1 };
 const BUFF_VALUE = { strength: 4, dexterity: 3, thorns: 1.5, regen: 1.5, metallicize: 4, ritual: 5, stealth: 2, shield: 1, armor: 1, intangible: 6, energized: 3 };
@@ -109,10 +110,11 @@ function nodeWeight(run, n) {
   return w[n.type] || 1;
 }
 
-export async function simRun(data, { classId, seed, heroic = 0, continent, maxSteps = 900, firstZone = null, stopAfterAct = 0, talents = null } = {}) {
+export async function simRun(data, { classId, seed, heroic = 0, continent, maxSteps = 900, firstZone = null, stopAfterAct = 0, talents = null, onMap = null, race = null } = {}) {
   await data.loadClass(classId);
   data.setClass(classId);
   const run = Run.newRun(data, { classId, continent, seed, heroic, talents });
+  if (race) { run.character = { race }; grantRacial(run, data); } // balance tooling: --race X adds that race's racial card
   await Run.prepareZonePick(run, data);
   let steps = 0;
   run.actLog = [];
@@ -131,6 +133,7 @@ export async function simRun(data, { classId, seed, heroic = 0, continent, maxSt
         break;
       }
       case "map": {
+        if (onMap) onMap(run); // balance tooling: mid-run talent spending (tools/spires/sim.mjs --midrun)
         const opts = Run.reachableNodes(run);
         const n = rng.weighted(opts, (x) => nodeWeight(run, x));
         Run.enterNode(run, data, n.col);

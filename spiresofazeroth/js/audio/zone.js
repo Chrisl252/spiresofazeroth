@@ -3,10 +3,10 @@
 // Seam: stage.setBackdrop(zoneId) -> zone.enter(zoneId) (one call site, stage.js); router -> zone.screen(name, app) (one call site, main.js).
 // Browsers block audio until a gesture: enter() just records the zone; the first pointerdown/keydown starts everything.
 // Honours the Settings "Sound effects" toggle (sfx.muted) and a separate Music volume (0-100, localStorage spires.music.volume).
-import { resolveSoundUrl, soundsReady } from "../audio.js?v=20261029d";
-import { sfx } from "../audio.js?v=20261029d";
-import { ambience } from "./ambience.js?v=20261029d";
-import { resume as resumeEngine, trace, getCtx, bus } from "./engine.js?v=20261029d";
+import { resolveSoundUrl, soundsReady } from "../audio.js";
+import { sfx } from "../audio.js";
+import { ambience } from "./ambience.js";
+import { resume as resumeEngine, trace, getCtx, bus } from "./engine.js";
 
 const FADE = 2.0;            // seconds, equal-power crossfade both ways (level = sin(g*pi/2) on both sides: no mid-fade dip)
 const DUCK_MUSIC = 0.75;     // music in combat (-2.5 dB: stays audible, avoids sudden silence)
@@ -99,7 +99,9 @@ function tick() {
     if (v.kind === "music" && v.t > 0 && !v.queued && v.el.duration && v.el.duration - v.el.currentTime < FADE + 0.15) { v.queued = true; nextTrack(); }
     if (v.kind === "music" && v.t > 0 && !v.queued && v.el.ended) { v.queued = true; nextTrack(); }
     // stall watchdog: a track that should be audible but whose clock hasn't moved for 8s is rebuilt (load blip / refused start)
-    if (v.kind === "music" && v.t > 0 && !v.queued && !hidden && unlocked && level("music") > 0) {
+    // only a track that has data and is not paused can stall: a first uncached 3-5 MB mp3 on a slow link sat at 0 for >8 s and the
+    // watchdog rebuilt it into another uncached track, forever (2026-10-29)
+    if (v.kind === "music" && v.t > 0 && !v.queued && !hidden && unlocked && level("music") > 0 && v.el.readyState >= 3 && !v.el.paused) {
       if (v.el.currentTime === v.lastT) { v.stallMs += dt * 1000; if (v.stallMs > 8000) { v.queued = true; v.t = 0; trace("music-stall", { url: v.url }); curKey = null; apply(); } }
       else { v.stallMs = 0; v.lastT = v.el.currentTime; }
     }

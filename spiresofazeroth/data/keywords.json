@@ -206,7 +206,7 @@
    "icon": "spell_shadow_mindsteal",
    "kind": "debuff",
    "stackMode": "intensity",
-   "text": "At 5 stacks take shadow damage and discard a card."
+   "text": "Each card you play has a 5% chance per stack (max 75%) to fizzle and do nothing."
   },
   {
    "id": "sleep",
@@ -383,6 +383,14 @@
    "kind": "buff",
    "stackMode": "stack",
    "text": "Your next cards cost 0."
+  },
+  {
+   "id": "free_spell",
+   "name": "Free Spell",
+   "icon": "spell_nature_ravenform",
+   "kind": "buff",
+   "stackMode": "stack",
+   "text": "Your next spell costs 0. Attacks still cost Energy."
   },
   {
    "id": "retain_block",

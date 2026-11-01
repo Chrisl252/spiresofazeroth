@@ -938,7 +938,7 @@
       "cost": 1,
       "target": "self",
       "flags": [],
-      "text": "Gain Regen 3: heal 2 HP at the end of each turn for 4 turns.",
+      "text": "Gain Regen 3: heal 3 HP at the start of your turn, fading by 1 each turn.",
       "breaksForm": true,
       "effects": [
         {
@@ -951,7 +951,7 @@
       "upgrade": {
         "name": "Rejuvenation (Rank 2)",
         "cost": 1,
-        "text": "Gain Regen 6: heal 2 HP at the end of each turn for 6 turns.",
+        "text": "Gain Regen 6: heal 6 HP at the start of your turn, fading by 1 each turn.",
         "effects": [
           {
             "op": "apply",
@@ -2341,7 +2341,7 @@
       "effects": [
         {
           "op": "apply",
-          "status": "free_cast",
+          "status": "free_spell",
           "stacks": 1,
           "target": "self"
         },
@@ -2357,7 +2357,7 @@
         "effects": [
           {
             "op": "apply",
-            "status": "free_cast",
+            "status": "free_spell",
             "stacks": 1,
             "target": "self"
           },
@@ -2438,7 +2438,7 @@
       "flags": [
         "exhaust"
       ],
-      "text": "Gain Regen 8 and take 25% less damage for 4 turns. Exhaust.",
+      "text": "Gain Regen 8. Every enemy gains Weak 4: they deal 25% less damage for 4 turns. Exhaust.",
       "breaksForm": true,
       "effects": [
         {
@@ -2449,15 +2449,15 @@
         },
         {
           "op": "apply",
-          "status": "armor",
+          "status": "weak",
           "stacks": 4,
-          "target": "self"
+          "target": "all_enemies"
         }
       ],
       "upgrade": {
         "name": "Tranquility (Rank 2)",
         "cost": 2,
-        "text": "Gain Regen 12 and take 25% less damage for 5 turns. Exhaust.",
+        "text": "Gain Regen 12. Every enemy gains Weak 5: they deal 25% less damage for 5 turns. Exhaust.",
         "effects": [
           {
             "op": "apply",
@@ -2467,9 +2467,9 @@
           },
           {
             "op": "apply",
-            "status": "armor",
+            "status": "weak",
             "stacks": 5,
-            "target": "self"
+            "target": "all_enemies"
           }
         ]
       }

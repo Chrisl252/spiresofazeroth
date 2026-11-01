@@ -1,12 +1,13 @@
 // Spire map (stage-native, StS2 style): parchment scroll, ONE tavern start at the bottom centre, 2-3 inked lanes, big plates.
 // Engine calls kept as they were: reachableNodes / enterNode, abandon sets run.screen = "end".
-import { h, icon, tip, toast } from "./dom.js?v=20261029d";
-import { stepFromMap, reachableNodes, prepareZonePick } from "../engine/run.js?v=20261029d";
-import { generateSpire } from "../engine/map.js?v=20261029d";
-import { heroicMods } from "../engine/heroic.js?v=20261029d";
-import { cssReady, ico, btn, dark } from "./kit.js?v=20261029d";
-import { runBar } from "./runbar.js?v=20261029d";
-import { drawPath } from "./mapPath.js?v=20261029d";
+import { h, icon, tip, toast } from "./dom.js";
+import { stepFromMap, reachableNodes, prepareZonePick } from "../engine/run.js";
+import { generateSpire } from "../engine/map.js";
+import { heroicMods } from "../engine/heroic.js";
+import { cssReady, ico, btn, dark } from "./kit.js";
+import { runBar } from "./runbar.js";
+import { payMidRun } from "../engine/talentsMidRun.js";
+import { drawPath } from "./mapPath.js";
 
 export const stageNative = true;
 
@@ -47,6 +48,10 @@ export async function render(app, _name, props) {
     run.map = generateSpire(run.seed, `${run.act}:${run.zoneId}`, { eliteBonus: mods.eliteBonus, profile: data.mapProfile ? data.mapProfile(run.zoneId) : null });
   }
   if (!ro) stage.setBackdrop(run.zoneId || "default", { tint: { primary: "#d9b25c", secondary: "#2b1c0a", accent: "#f0d68a" } });
+  if (!ro) { // mid-run talents (engine/talentsMidRun.js): points are paid the moment they are earned, and can be spent from the run bar
+    const got = payMidRun(app.meta, run);
+    if (got) { app.save(); toast(`+${got} talent point${got === 1 ? "" : "s"} earned. Open Talents on the top bar to spend ${got === 1 ? "it" : "them"}.`, 3200); }
+  }
   const zone = data.zone(run.zoneId);
   const map = run.map;
   const portrait = !!stage.portrait;

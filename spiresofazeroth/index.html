@@ -50,15 +50,17 @@
   <script src="/assets/wgf-gtag.js?v=20260612" defer></script>
   <script src="/assets/wgf-shell.js?v=20260911enrich1" defer></script>
   <link rel="stylesheet" href="/assets/wgf-site-theme.css?v=20260906guides1">
-  <link rel="stylesheet" href="css/wow-ui.css?v=20261029d">
-  <link rel="stylesheet" href="css/game.css?v=20261029d">
-  <link rel="stylesheet" href="css/patchnotes.css?v=20261029d">
-  <link rel="stylesheet" href="css/stage.css?v=20261029d">
-  <link rel="stylesheet" href="css/cards.css?v=20261029d">
-  <link rel="stylesheet" href="css/hud.css?v=20261029d">
-  <link rel="stylesheet" href="css/menu.css?v=20261029d">
-  <link rel="stylesheet" href="css/shop.css?v=20261029d">
-  <link rel="stylesheet" href="css/controller.css?v=20261029d">
+  <link rel="stylesheet" href="css/wow-ui.css?v=20261029j">
+  <link rel="stylesheet" href="css/game.css?v=20261029j">
+  <link rel="stylesheet" href="css/patchnotes.css?v=20261029j">
+  <link rel="stylesheet" href="css/stage.css?v=20261029j">
+  <link rel="stylesheet" href="css/cards.css?v=20261029j">
+  <link rel="stylesheet" href="css/hud.css?v=20261030g">
+  <link rel="stylesheet" href="css/menu.css?v=20261029j">
+  <link rel="stylesheet" href="css/shop.css?v=20261029j">
+  <link rel="stylesheet" href="css/controller.css?v=20261029j">
+  <link rel="stylesheet" href="css/emberdeck-cta.css?v=20261030b">
+  <link rel="stylesheet" href="css/kofi-cta.css?v=20261030g">
 </head>
 <body class="wgf-shell-page sp-game" data-wgf-page="spiresofazeroth">
   <a class="wgf-skip-link" href="#app">Skip to content</a>
@@ -113,12 +115,13 @@
     try { im = !(window.HTMLScriptElement && HTMLScriptElement.supports) || HTMLScriptElement.supports("importmap"); } catch (e) { im = true; }
     window.__spiresBootOk = function () { window.__spiresBooted = true; try { if (box && box.parentNode) box.parentNode.removeChild(box); } catch (e) { /* ignore */ } };
     if (!im) { show("This browser is too old for Spires of Azeroth", "It needs Safari 16.4 / iOS 16.4 or newer (or a current Chrome, Firefox or Edge). Updating iOS or opening this page in a current browser fixes it.", "no-importmap"); return; }
-    window.addEventListener("error", function (e) { if (!window.__spiresBooted) show("The game failed to start", String((e && e.message) || "script error") + (e && e.filename ? " (" + String(e.filename).split("/").pop() + ":" + e.lineno + ")" : ""), "error"); });
+    // only our own scripts count: browser-injected code (Brave/Firefox iOS window.__firefox__, opaque "Script error." with no file) is not a boot failure (10-30 reports); a real hang still trips the watchdog
+    window.addEventListener("error", function (e) { if (!window.__spiresBooted && e && e.filename && String(e.filename).indexOf(location.origin) === 0) show("The game failed to start", String((e && e.message) || "script error") + (e && e.filename ? " (" + String(e.filename).split("/").pop() + ":" + e.lineno + ")" : ""), "error"); });
     window.addEventListener("unhandledrejection", function (e) { if (!window.__spiresBooted) show("The game failed to start", String(e && e.reason && (e.reason.message || e.reason)), "rejection"); });
     setTimeout(function () { show("The game is taking too long to start", "Your connection may be slow, or this browser may not support a feature the game needs. Reloading often helps.", "watchdog-25s"); }, 25000);
   })();
   </script>
   <script type="importmap">{"imports":{"three":"/assets/vendor/three/three.module.min.js","three/addons/":"/assets/vendor/three/addons/"}}</script>
-  <script type="module" src="js/main.js?v=20261029d"></script>
+  <script type="module" src="js/main.js?v=20261030g"></script>
 </body>
 </html>

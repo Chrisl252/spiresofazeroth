@@ -44,17 +44,17 @@ function mount3DCampfire(canvas, { reduced = () => false, paused = () => false }
   const scene = new THREE.Scene();
 
   // Warm ambient + directional lighting so stones and firewood are clearly lit
-  scene.add(new THREE.HemisphereLight(0xffecd0, 0x332211, 1.5));
-  const key = new THREE.DirectionalLight(0xfffaed, 1.8);
+  scene.add(new THREE.HemisphereLight(0xffecd0, 0x332211, 0.7));
+  const key = new THREE.DirectionalLight(0xfffaed, 0.9);
   key.position.set(2, 6, 4);
   scene.add(key);
 
   // Warm fire point light right above the logs casting light on the stones
-  const fireLight = new THREE.PointLight(0xff7a14, 3.4, 10, 1.5);
+  const fireLight = new THREE.PointLight(0xff7a14, 1.6, 10, 1.5);
   fireLight.position.set(0, 0.45, 0);
   scene.add(fireLight);
 
-  const coreLight = new THREE.PointLight(0xffdf88, 2.2, 5, 2.0);
+  const coreLight = new THREE.PointLight(0xffdf88, 1.0, 5, 2.0);
   coreLight.position.set(0, 0.25, 0);
   scene.add(coreLight);
 
@@ -69,7 +69,11 @@ function mount3DCampfire(canvas, { reduced = () => false, paused = () => false }
   let t = 0;
 
   const texLoader = new THREE.TextureLoader();
-  const fireTex = flipbookTex(texLoader.load(FLAME_SHEET));
+  // 10-30 reports ("white flickering", "white sprite"): an additive quad whose texture has not loaded yet draws as a solid white
+  // shape for a few frames. Flames and embers stay hidden until both images are in.
+  let texReady = 0;
+  const onTex = () => { if (++texReady >= 2) { flameGroup.visible = true; for (const e of embers) e.sprite.visible = true; } };
+  const fireTex = flipbookTex(texLoader.load(FLAME_SHEET, onTex));
   const fireTex2 = flipbookTex(fireTex.clone());
 
   // Crossed billboard planes for fire volume
@@ -110,10 +114,11 @@ function mount3DCampfire(canvas, { reduced = () => false, paused = () => false }
   coreFlame.rotation.y = Math.PI / 4;
   flameGroup.add(coreFlame);
 
+  flameGroup.visible = false;
   scene.add(flameGroup);
 
   // Floating WoW ember particles
-  const emberTex = texLoader.load(EMBER_URL);
+  const emberTex = texLoader.load(EMBER_URL, onTex);
   const emberMat = new THREE.SpriteMaterial({
     map: emberTex,
     blending: THREE.AdditiveBlending,
@@ -125,6 +130,7 @@ function mount3DCampfire(canvas, { reduced = () => false, paused = () => false }
   const embers = [];
   function makeEmber(initial = false) {
     const sp = new THREE.Sprite(emberMat.clone());
+    sp.visible = texReady >= 2;
     const s = 0.08 + Math.random() * 0.12;
     sp.scale.set(s, s, 1);
     const life = initial ? Math.random() : 0;
@@ -196,7 +202,7 @@ function mount3DCampfire(canvas, { reduced = () => false, paused = () => false }
 
     // Warm fire light flickering
     const flicker = 0.86 + 0.14 * Math.sin(t * 12.5) * Math.cos(t * 7.1);
-    fireLight.intensity = 3.4 * flicker;
+    fireLight.intensity = 1.6 * flicker;
     coreLight.intensity = 2.2 * flicker;
 
     // Embers

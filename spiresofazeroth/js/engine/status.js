@@ -3,10 +3,10 @@
 // Entities (player, enemy, pet, totem) all carry `st: { id: number }`.
 //  - duration statuses: number = turns left, tick down at ROUND END (fresh enemy->player debuffs skip the first tick).
 //  - intensity statuses: number = stacks.
-import { dealStatusDamage, healEntity, gainBlock, fx } from "./damage.js?v=20261029d";
-import { immuneToStatus } from "./immunity.js?v=20261029d";
-import { addRes } from "./resources.js?v=20261029d";
-import { runEffects } from "./effects.js?v=20261029d";
+import { dealStatusDamage, healEntity, gainBlock, fx } from "./damage.js";
+import { immuneToStatus } from "./immunity.js";
+import { addRes } from "./resources.js";
+import { runEffects } from "./effects.js";
 
 export const STATUS_DEFS = {
   // duration
@@ -62,6 +62,7 @@ export const STATUS_DEFS = {
   spell_power: { mode: "intensity", kind: "buff" },  // +1 non-physical damage per stack
   reincarnation: { mode: "intensity", kind: "buff" },// at 0 HP return at 30% once (damage.js)
   free_cast: { mode: "intensity", kind: "buff" },    // next card(s) cost 0 (combat.js)
+  free_spell: { mode: "intensity", kind: "buff" },   // next SPELL costs 0 (Nature's Swiftness); attacks like Stormstrike pay full price
   retain_block: { mode: "intensity", kind: "buff" }, // Block is kept into next turn (combat.js)
   resist_fire: { mode: "duration", kind: "buff" },   // each fire hit reduced by stacks... see modifyTaken (value = flat reduction)
   resist_frost: { mode: "duration", kind: "buff" },
@@ -82,6 +83,8 @@ export function modeOf(C, id) {
   return (STATUS_DEFS[id] && STATUS_DEFS[id].mode) || "intensity";
 }
 
+export const ENEMY_ARMOR_CAP = 20;
+
 export function applyStatus(C, e, id, amount, o = {}) {
   if (!e || !id) return false;
   if (amount === undefined || amount === null) amount = 1;
@@ -95,6 +98,10 @@ export function applyStatus(C, e, id, amount, o = {}) {
   }
   if (amount > 0 && isEnemy(e) && BOSS_TIERS.includes(e.tier) && (id === "fear" || id === "sleep")) { fx(C, { t: "miss", uid: e.uid, text: "Immune: " + (id === "fear" ? "Fear" : "Sleep"), kind: "gold" }); return false; } // 10-29 report "Sheep doesnt work": bosses shrugged it off silently
   if (amount > 0 && isEnemy(e) && BOSS_TIERS.includes(e.tier) && (id === "stun" || id === "frozen")) amount = Math.min(amount, 1);
+  if (id === "armor" && amount > 0 && isEnemy(e)) {   // enemy Armor caps at 20 so stacking foes (Westfall +2/turn) stay killable (Chris 10-31)
+    amount = Math.min(amount, ENEMY_ARMOR_CAP - (e.st.armor || 0));
+    if (amount <= 0) return false;
+  }
   const mode = modeOf(C, id);
   if (mode === "duration") {
     const add = o.duration !== undefined && o.duration !== null ? o.duration : amount;

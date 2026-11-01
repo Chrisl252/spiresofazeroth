@@ -353,6 +353,12 @@
 .sp-stage:not(.sp-portrait) .sx-bar__deck { --h: 52px; min-width: 150px; flex: 0 0 auto; }
 .sp-stage:not(.sp-portrait) .sx-bar__set { --h: 52px; min-width: 130px; font-size: 24px; flex: 0 0 auto; }
 .sp-stage:not(.sp-portrait) .sx-bar__act, .sp-stage:not(.sp-portrait) .sx-bar__who, .sp-stage:not(.sp-portrait) .sx-bar__gold { flex: 0 0 auto; white-space: nowrap; }
+/* mid-run talents button (ui/runbar.js): glows while points are unspent */
+.sx-bar__tal { --h: 52px; min-width: 96px; flex: 0 0 auto; } /* base cap padding kept: a smaller one slides the caps over the label */ .sp-portrait .sx-bar__tal { --h: 84px; min-width: 200px; font-size: 34px; }
+.sx-bar__tal--new { box-shadow: 0 0 14px rgba(255, 210, 90, .75); animation: sx-talglow 1.6s ease-in-out infinite alternate; }
+@keyframes sx-talglow { from { box-shadow: 0 0 6px rgba(255, 210, 90, .45); } to { box-shadow: 0 0 18px rgba(255, 210, 90, .9); } }
+.sp-reduce .sx-bar__tal--new { animation: none; }
+.sp-stage:not(.sp-portrait) .sx-bar:has(.sx-bar__tal) .sx-bar__hp { width: 180px; } /* room for the Talents button on the one-row landscape bar */
 .sx-bar__fs { --h: 52px; min-width: 64px; padding: 0 14px; font-size: 30px; flex: 0 0 auto; }
 .sp-stage:not(.sp-portrait) .sx-bar .sx-bar__deck { margin-left: auto; }
 /* class select: detail panel compaction */

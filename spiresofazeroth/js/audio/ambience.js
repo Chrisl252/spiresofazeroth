@@ -3,8 +3,8 @@
 // in a row, each pass with a random start offset and +-3 % pitch, equal-power overlapped (continuous) or sprinkled with random gaps
 // (occasional). One bed per pool key: re-entering the same zone/pool (screen or fight changes) never restarts it; a different pool
 // crossfades (old voices fade out while new ones fade in). Volume / mode / duck changes are smooth gain ramps on a single bus.
-import { resolveSoundUrl } from "../audio.js?v=20261029d";
-import { bus, getCtx, loadBuffer, voice, ramp, voiceCount, trace } from "./engine.js?v=20261029d";
+import { resolveSoundUrl } from "../audio.js";
+import { bus, getCtx, loadBuffer, voice, ramp, voiceCount, trace } from "./engine.js";
 
 const X = 1.6;                 // seconds, voice fade in / out and continuous overlap
 const MAX_VOICES = 3;          // hard cap on simultaneous ambience voices (incl. fading-out ones)
@@ -56,11 +56,15 @@ export const ambience = {
   },
   // configure({level 0..1, mode, duck}) : smooth bus ramp, starts/stops the scheduler as needed.
   configure({ vol, m }) {
+    const modeChanged = m !== mode;
     mode = m; level = vol;
     const c = getCtx(); if (!c) return;
     const b = outBus();
     if (mode === "off" || level <= 0) { token++; clearTimeout(timer); timer = 0; fadeAll(0.6); ramp(b.gain, b.gain.value, 0, 0.6); return; }
     ramp(b.gain, b.gain.value, level, 0.5);
+    // a mode switch reschedules now: occasional -> continuous used to wait out the pending 14-38 s gap (bed "stayed silent"), and
+    // continuous -> occasional kept the tight overlap running until its timer fired (2026-10-29)
+    if (modeChanged && urls.length) { token++; clearTimeout(timer); timer = setTimeout(() => step(token), rand(200, 800)); return; }
     if (!timer && !active.length && urls.length) { token++; timer = setTimeout(() => step(token), rand(200, 800)); }
   },
   get key() { return key; },

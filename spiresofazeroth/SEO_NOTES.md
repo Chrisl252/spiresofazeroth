@@ -54,5 +54,3 @@ track('run_start', { class: classId, seed: seedStr, ascension: asc || 0 });
 track('run_end',   { class: classId, act: actReached, victory: won ? 1 : 0, floor: floorReached });
 ```
 Event names: `run_start` and `run_end` (params: class, act, victory; run_end also carries floor). Fire run_end once per run, on victory or defeat screen entry (not on page unload). Do not send gold/deck contents or any user identifier.
-
-The admin balance panel also receives a first-party run-end event only after analytics consent is granted. It stores daily aggregates by build, class, difficulty, and broad talent-point band; it does not retain individual runs, player IDs, seeds, or decks.

@@ -1,11 +1,12 @@
 // Starts a run (shared by the class-details screen and Enter World): newRun + the account-talent mods, remembers the character on the run.
-import { sp, funnel } from "../analytics.js?v=20261029d";
-import { track } from "./dom.js?v=20261029d";
-import { saveRun, saveMeta, loadRun } from "../engine/save.js?v=20261029d";
-import { newRun, prepareZonePick } from "../engine/run.js?v=20261029d";
-import { newSeedString } from "../engine/rng.js?v=20261029d";
-import { repairSpent, talentMods } from "../engine/talents.js?v=20261029d";
-import { characterOf } from "../engine/character.js?v=20261029d";
+import { sp, funnel } from "../analytics.js";
+import { track } from "./dom.js";
+import { saveRun, saveMeta, loadRun } from "../engine/save.js";
+import { newRun, prepareZonePick } from "../engine/run.js";
+import { newSeedString } from "../engine/rng.js";
+import { repairSpent, talentMods } from "../engine/talents.js";
+import { characterOf } from "../engine/character.js";
+import { grantRacial } from "../engine/racials.js";
 
 // st: { cls, continent, seed, heroic, pet }; character: a saved character (or null for a nameless default)
 export async function beginRun(app, st, character) {
@@ -19,6 +20,7 @@ export async function beginRun(app, st, character) {
   const run = newRun(data, { classId: st.cls, continent: st.continent || cls.defaultContinent || "ek", seed: (app.coop && app.coop.seedForRun()) || st.seed || newSeedString(), heroic: st.heroic || 0, pet: st.pet || null, talents: talentMods(meta, st.cls, tdef) });
   const ch = characterOf(character, st.cls);
   run.character = { id: ch.id, race: ch.race, gender: ch.gender, name: ch.name, looks: ch.looks }; // additive field: old saves have none, characterOf() defaults it
+  grantRacial(run, data); // the race's racial card joins the starter deck (engine/racials.js)
   data.setClass(st.cls);
   app.run = run;
   meta.lastClass = st.cls;

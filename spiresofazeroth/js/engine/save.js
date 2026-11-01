@@ -1,7 +1,7 @@
 // Persistence: localStorage (always in try/catch, memory fallback), autosave, export/import string, meta progression.
 // Meta: unlocked classes (first 3 in classes/index.json; every victory unlocks the next), Heroic I-X per class, codex seen-sets.
-import { MAX_HEROIC, MIN_HEROIC_OPEN } from "./heroic.js?v=20261029d";
-import { awardProgress } from "./talents.js?v=20261029d";
+import { MAX_HEROIC, MIN_HEROIC_OPEN } from "./heroic.js";
+import { awardProgress } from "./talents.js";
 
 const KEY_RUN = "spires.run.v1";
 const KEY_META = "spires.meta.v1";
@@ -73,6 +73,8 @@ export function mergeSeen(meta, run) {
 // and card-unlock level from engine/talents.js (unlocks = data.unlocks; may be null).
 export function recordRunEnd(meta, run, classIds, unlocks = null) {
   mergeSeen(meta, run);
+  const rc = run.character; // 10-30 report: a stale tab / update reload saved an older meta and the hero vanished from the list; the run still carries it, so put it back
+  if (rc && rc.id && !(meta.characters = Array.isArray(meta.characters) ? meta.characters : []).some((c) => c.id === rc.id)) meta.characters.push({ id: rc.id, name: rc.name, race: rc.race, gender: rc.gender, classId: run.classId, looks: rc.looks || {}, created: run.startedAt || Date.now(), lastPlayed: Date.now() });
   meta.stats.runs++;
   meta.stats.bestAct = Math.max(meta.stats.bestAct, run.act);
   meta.lastSeed = run.seed;

@@ -1,8 +1,10 @@
 // Title screen (stage-native): zone backdrop, morpheus logo, WoW red-button menu.
-import { h } from "./dom.js?v=20261029d";
-import { talentState } from "../engine/talents.js?v=20261029d";
-import { downloadButton } from "./downloadPanel.js?v=20261029d";
-import { saveRun, loadRun } from "../engine/save.js?v=20261029d";
+import { h } from "./dom.js";
+import { talentState } from "../engine/talents.js";
+import { downloadButton } from "./downloadPanel.js";
+import { emberdeckButton } from "./emberdeckButton.js";
+import { kofiButton } from "./kofiButton.js";
+import { saveRun, loadRun } from "../engine/save.js";
 
 export const stageNative = true;
 
@@ -15,7 +17,8 @@ export function render(app) {
   const live = app.run && app.run.screen && app.run.screen !== "end" && app.run.screen !== "combat" ? app.run : null;
   if (live) saveRun(live);
   app.hasSave = !!live || !!loadRun();
-  if (app.hasSave) {
+  const coopLive = !!(app.coop && app.coop.active && app.coop.active()); // co-op shares one seed: a continued solo run would put the two players on different maps (10-30 report)
+  if (app.hasSave && !coopLive) {
     menu.append(btn("Continue run", async () => {
       try {
         if (live || (await app.resume())) {
@@ -25,7 +28,17 @@ export function render(app) {
         }
       } catch (err) {
         console.error("[spires] Continue run error:", err); // never clear the save on an error: the run stays on disk
-        await app.go("charSelect");
+        // never fall through to class select: one "New run" click there overwrote the save (10-30 report: "clicked the update and now I can't continue my run").
+        // Try the map instead; if even that fails, stay on the title with Continue still offered.
+        const was = app.run && app.run.screen;
+        try {
+          if (app.run && was !== "map") { app.run.screen = "map"; await app.go("map"); }
+          else throw err;
+        } catch (e2) {
+          console.error("[spires] Continue run map fallback failed:", e2);
+          if (app.run && was) app.run.screen = was; // the save keeps the screen it was on
+          await app.go("title");
+        }
       }
     }, { "data-autofocus": "" }, "sp-wowbtn--lg"));
   }
@@ -34,7 +47,8 @@ export function render(app) {
   const unspent = (app.data.classIds || []).reduce((n, id) => n + talentState(app.meta, id).available, 0);
   const row = h("div", { class: "sp-title-screen__row" }, btn(unspent > 0 ? `Talents (${unspent})` : "Talents", () => app.go("talents", { back: "title" }), {}, "sp-wowbtn--sm"), btn("Codex", () => app.go("codex"), {}, "sp-wowbtn--sm"), btn("Settings", () => app.showMenu(), {}, "sp-wowbtn--sm"));
   const dl = downloadButton(app); if (dl) row.append(dl); // one row, not a lone button on its own line
-  row.append(btn("Other Games", () => window.open("https://emberdeck.app/?ref=spires", "_blank", "noopener"), { title: "Emberdeck, our free deckbuilder" }, "sp-wowbtn--sm"));
+  row.append(emberdeckButton()); // js/ui/emberdeckButton.js: the burning cross-promo
+  row.append(kofiButton()); // js/ui/kofiButton.js: support link
   menu.append(row);
   const m = app.meta.stats;
   if (m.runs) menu.append(h("p", { class: "sp-title-screen__stats" }, `Runs ${m.runs}  |  Wins ${m.wins}  |  Best act ${m.bestAct}`));

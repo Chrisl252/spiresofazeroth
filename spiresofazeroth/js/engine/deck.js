@@ -1,6 +1,6 @@
 // Card instances, piles, draw/discard/exhaust, cost evaluation. No DOM.
-import { fx } from "./damage.js?v=20261029d";
-import { talentCost } from "./talentHooks.js?v=20261029d";
+import { fx } from "./damage.js";
+import { talentCost } from "./talentHooks.js";
 
 export const HAND_LIMIT = 10;
 const STUB = (id) => ({
@@ -44,6 +44,9 @@ export function isSpellCard(inst) {
   return walk(inst.def.effects);
 }
 
+// Nature's Swiftness / Clearcasting "next spell": any spell-school card OR a non-attack, non-totem card (heals, buffs, Rejuvenation...). 10-30 report: "doesn't reduce the cost of any spells"
+export const freeSpellApplies = (inst) => isSpellCard(inst) || !["attack", "totem"].includes(inst.def.type);
+
 export function cardCost(C, inst) {
   const d = inst.def;
   if (d.cost === "X") return "X";
@@ -71,7 +74,7 @@ export function whyUnplayable(C, inst) {
   if (p.st.silence && isSpellCard(inst)) return "Silenced";
   if (d.effects.some((e) => e && e.op === "retreat") && (C.tier === "boss" || C.tier === "raid" || C.enemies.some((e) => e.tier === "boss" || e.tier === "raid"))) return "No retreat from a boss";
   const cost = cardCost(C, inst);
-  if (cost !== "X" && cost > p.energy && !(p.st.free_cast > 0)) return "Not enough energy"; // a pending free cast (Nature's Swiftness, Clearcasting) pays it
+  if (cost !== "X" && cost > p.energy && !(p.st.free_cast > 0) && !(p.st.free_spell > 0 && freeSpellApplies(inst))) return "Not enough energy"; // a pending free cast (Nature's Swiftness, Clearcasting) pays it
   if (d.resourceCost) {
     for (const [rid, amt] of Object.entries(d.resourceCost)) if ((p.res[rid] || 0) < amt) return `Not enough ${rid}`;
   }

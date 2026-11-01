@@ -3,19 +3,40 @@
 // Update check: polls version.js (no-store) every few minutes and on tab focus; when the server BUILD differs from the
 // BUILD this page loaded, a pill floats at the top of the screen. Clicking it reloads onto the new build.
 // Wired by ONE line in js/main.js.
-import { h, icon, overlayHost } from "./dom.js?v=20261029d";
-import { btn, stageModal } from "./kit.js?v=20261029d";
-import { BUILD } from "../version.js?v=20261029d";
+import { h, icon, overlayHost } from "./dom.js";
+import { btn, stageModal } from "./kit.js";
+import { BUILD } from "../version.js";
 
 let appRef = null; // set by installPatchNotes: the window is a stage modal (stage px, same frame as every other menu panel)
 
-const SEEN_KEY = "spires.notesSeen", NOTES_ID = "2026-10-28-i", POLL_MS = 4 * 60 * 1000;
+const SEEN_KEY = "spires.notesSeen", NOTES_ID = "2026-10-30-a", POLL_MS = 4 * 60 * 1000;
 
 // Newest build first. Each entry: [tag, text] where tag is "new" | "fix" | "bal"; a leading "Name: " in the text is bolded.
 // OPEN_BUILDS: how many of the newest builds start expanded; the rest are collapsed <details>.
 const OPEN_BUILDS = 2;
 const TAGS = { new: "New", fix: "Fix", bal: "Balance" };
 const BUILDS = [
+  { id: "30a", date: "Oct 30", title: "Overnight bug reports", entries: [
+    ["fix", "Continue run: a saved run resting at the Sanctuary no longer fails with \"Could not open that screen\" after an update."],
+    ["fix", "Card draw: Goblin Jumper, Sprint and other draw effects no longer stop at 10 extra draws a turn (the cap is now 30 and only guards against infinite loops)."],
+    ["fix", "Nature's Swiftness now makes your next heal or skill free too (Rejuvenation, Healing Touch), not only damage spells. Stormstrike still pays full price."],
+    ["fix", "Energy gained outside your turn is kept: Heart of the Wild (Cenarion 8-set) stacks with Kiss of the Spider, Mana Spring Totem's energy arrives on your next turn."],
+    ["bal", "Opportunity (Rogue, Subtlety) gives +1 damage per point to Backstab, Ambush and Cheap Shot (was +5 per point: +25 one-shots)."],
+    ["fix", "Tranquility really makes you take 25% less damage (every enemy gets Weak) instead of a few points of flat armor."],
+    ["fix", "Rejuvenation's text now says what it does: heal 3 at the start of your turn, fading by 1 each turn."],
+    ["fix", "Strength of Earth Totem and Earthbind Totem had each other's icons."],
+    ["fix", "Campfire: the flames and embers no longer flash as white shapes while their textures load."],
+    ["fix", "Stalvan Mistmantle uses his own model instead of a worgen. C'Thun's tentacles no longer borrow the imp model."],
+    ["fix", "Co-op: continuing a solo run while in a party is no longer offered (both players need the shared run), and you are told when your run is not the shared one."],
+  ] },
+  { id: "29j", date: "Oct 29", title: "Combat looks like WoW", entries: [
+    ["new", "Fight scene is tone-mapped and lit like the client: real form shading on every body, a stronger key light and a crisper contact shadow."],
+    ["fix", "Hits no longer turn your hero or an enemy into a solid white or purple silhouette. The body stays visible with a short lit tint, the way a wound reads in the client."],
+    ["fix", "Rigged models no longer squash and stretch during a lunge or a hit. Translation, the flinch and the real Attack / Hit clips only."],
+    ["fix", "Enemy claw, bite and weapon hits are smaller and wound-coloured instead of a hero-sized white starburst."],
+    ["fix", "Attack and cast clips blend back into Stand over a quarter second instead of snapping to the first idle frame."],
+    ["fix", "Death animations play at their own pace (up to 1.5 s) instead of being rushed into one second."],
+  ] },
   { id: "28i", date: "Oct 28", title: "Fullscreen, stealth, summons", entries: [
     ["fix", "Fullscreen: card tips, the deck view, the shop and messages now show in fullscreen"],
     ["fix", "Stealth: a stealthed enemy can no longer be picked with a click or drag while another enemy is visible"],
@@ -217,7 +238,7 @@ async function serverBuild() {
 function showUpdatePill(latest) {
   if (document.querySelector(".sp-update-pill")) return;
   const pill = h("button", { class: "sp-update-pill", title: `You're on ${BUILD}, the latest is ${latest}`,
-    onClick: () => { pill.textContent = "Updating..."; location.reload(); } },
+    onClick: () => { pill.textContent = "Updating..."; try { if (appRef && appRef.save) appRef.save(); } catch (e) { /* the last autosave stands */ } location.reload(); } }, // persist the run first: an update must never cost progress (10-30 report)
     h("span", { class: "sp-update-dot" }), "New update available: click to update");
   overlayHost().append(pill);
 }

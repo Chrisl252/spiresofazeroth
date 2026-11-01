@@ -1,16 +1,16 @@
 // Combat loop: start, play card, end turn (player phase -> enemy phase generator -> round end -> next player turn), potions, finish.
-import { runEffects, evalCond, resolveTargets } from "./effects.js?v=20261029d";
-import { fx, log, isAlive, gainBlock, checkDeaths } from "./damage.js?v=20261029d";
+import { runEffects, evalCond, resolveTargets } from "./effects.js";
+import { fx, log, isAlive, gainBlock, checkDeaths } from "./damage.js";
 import {
-  buildPiles, drawCards, endTurnCleanup, whyUnplayable, cardCost, toDiscard, toExhaust, hasFlag, removeFrom,
-} from "./deck.js?v=20261029d";
-import { initResources, startOfTurn, endOfTurn, extraDraw, extraEnergy, armTrap, spendRes } from "./resources.js?v=20261029d";
-import { buildEnemy, chooseMove, enemyAct, checkPhases } from "./intents.js?v=20261029d";
-import { applyStatus, turnStart, turnEnd, roundEnd, modeOf } from "./status.js?v=20261029d";
-import { fire } from "./relics.js?v=20261029d";
-import { makeRng } from "./rng.js?v=20261029d";
-import { heroicMods, noviceOf } from "./heroic.js?v=20261029d";
-import { talentCarryBlock, talentNoExhaust, talentSweep } from "./talentHooks.js?v=20261029d";
+  buildPiles, drawCards, endTurnCleanup, whyUnplayable, cardCost, toDiscard, toExhaust, hasFlag, removeFrom, isSpellCard, freeSpellApplies } from "./deck.js";
+import { initResources, startOfTurn, endOfTurn, extraDraw, extraEnergy, armTrap, spendRes } from "./resources.js";
+import { buildEnemy, chooseMove, enemyAct, checkPhases } from "./intents.js";
+import { applyStatus, turnStart, turnEnd, roundEnd, modeOf } from "./status.js";
+import { fire } from "./relics.js";
+import { makeRng } from "./rng.js";
+import { heroicMods, noviceOf } from "./heroic.js";
+import { midRunHpMult } from "./talentsMidRun.js";
+import { talentCarryBlock, talentNoExhaust, talentSweep } from "./talentHooks.js";
 
 // map-profile tuning (data/map-profiles.json combatMods) layered on the heroic modifiers: hp multiplies, strengths add
 function composeMods(h, z, tier, nov = 1) {
@@ -32,6 +32,7 @@ export function startCombat(o) {
     potions: run.potions, stats: { damageDealt: 0, damageTaken: 0, cardsPlayed: 0, kills: 0, turns: 0 }, pending: [], powers: [],
     lastSchool: null, lastCardId: null, lastTarget: null, coldDrain: 0, endTurnRequested: false,
   };
+  if (run.midTalents > 0) C.heroicMods = { ...C.heroicMods, enemyHpMult: C.heroicMods.enemyHpMult * midRunHpMult(run) }; // Hardened Foes (engine/talentsMidRun.js)
   if (o.hpMul > 0) C.heroicMods = { ...C.heroicMods, enemyHpMult: C.heroicMods.enemyHpMult * o.hpMul }; // co-op (engine/coop.js): one pack for two heroes
   if (o.uidBase > 0) C.uidSeq = o.uidBase; // co-op: the second hero's summons and cards never reuse the first hero's uids
   C.player = {
@@ -222,6 +223,11 @@ export function playCard(C, uid, targetUid) {
     cost = 0;
     p.st.free_cast -= 1;
     if (p.st.free_cast <= 0) delete p.st.free_cast;
+  }
+  if (cost > 0 && p.st.free_spell > 0 && freeSpellApplies(inst)) { // Nature's Swiftness: only a spell rides free; Stormstrike (physical) still costs 2
+    cost = 0;
+    p.st.free_spell -= 1;
+    if (p.st.free_spell <= 0) delete p.st.free_spell;
   }
   p.energy -= cost;
   if (def.resourceCost) for (const [rid, amt] of Object.entries(def.resourceCost)) spendRes(C, rid, amt);

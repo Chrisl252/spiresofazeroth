@@ -1,7 +1,9 @@
 // Top bar for the non-combat screens: class plate, HP, gold, act/zone, relics, potions, deck. Stage-native.
-import { h, icon, tip, esc, qClass } from "./dom.js?v=20261029d";
-import { btn } from "./kit.js?v=20261029d";
-import { gearStrip } from "./gearStrip.js?v=20261029d";
+import { h, icon, tip, esc, qClass } from "./dom.js";
+import { btn } from "./kit.js";
+import { gearStrip } from "./gearStrip.js";
+import { talentState } from "../engine/talents.js";
+import { BUILD } from "../version.js";
 
 export function runBar(app) {
   const { run, data } = app;
@@ -28,6 +30,10 @@ export function runBar(app) {
     relics, pots,
     btn(`Gear Bag ${run.gearBag ? run.gearBag.length : 0}`, () => app.showGear(), { size: "sm", cls: "sx-bar__gear" }),
     btn(`Deck ${run.deck.length}`, () => app.showDeck(), { size: "sm", cls: "sx-bar__deck" }),
+    // mid-run talents (engine/talentsMidRun.js): solo only (a co-op partner would wait on a menu), and only from the map so no node is half-resolved
+    !(app.coop && app.coop.active && app.coop.active()) && run.screen === "map" && app.meta ? (() => { const n = talentState(app.meta, run.classId).available;
+      return btn(n > 0 ? `Talents ${n}` : "Talents", () => app.go("talents", { cls: run.classId, midRun: true, back: "map" }), { size: "sm", cls: `sx-bar__tal${n > 0 ? " sx-bar__tal--new" : ""}`, title: "Spend talent points (learned ranks make this run's enemies tougher)" }); })() : null,
+    run.screen !== "map" && run.screen !== "end" ? btn("Map", () => import(`./map.js?v=${BUILD}`).then((m) => m.openMapOverlay(app)), { size: "sm", cls: "sx-bar__map", title: "View the spire map" }) : null, // 10-30 report: no Map at the campfire
     btn("Settings", () => app.showMenu(), { size: "sm", cls: "sx-bar__set", title: "Settings" }),
     btn("⛶", () => app.stage.toggleFullscreen(), { size: "sm", cls: "sx-bar__fs", title: "Fullscreen (F)" }));
 }

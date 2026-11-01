@@ -4,12 +4,13 @@
 //           onSpare(uid), onMap(), onSettings() }
 //   view: { potSel, busy, canEnd, hint, spare?(enemy) -> bool }
 // Enemy plates carry data-uid so the hand can drop cards on them; the actors agent plugs real anchors into opts.anchorFor.
-import { h, tip, esc, cap } from "./dom.js?v=20261029d";
-import { gearStrip } from "./gearStrip.js?v=20261029d";
-import { intentInfo } from "../engine/intents.js?v=20261029d";
-import { isAlive } from "../engine/damage.js?v=20261029d";
-import { immuneList } from "../engine/immunity.js?v=20261029d";
-import { heroLabels } from "../engine/character.js?v=20261029d";
+import { h, tip, esc, cap } from "./dom.js";
+import { gearStrip } from "./gearStrip.js";
+import { intentInfo } from "../engine/intents.js";
+import { isAlive } from "../engine/damage.js";
+import { immuneList } from "../engine/immunity.js";
+import { heroLabels } from "../engine/character.js";
+import { racialInfo } from "../engine/racials.js";
 const HD = new URL("../../assets/icons-hd/", import.meta.url).href; // 256px upscaled icons, relative so dev + deploy both resolve
 
 const ico = (slug, cls = "") => {
@@ -124,6 +125,10 @@ export function createHud(host, app, o = {}) {
       const WHY = { risen: ["Dazed", "It just rose again and skips its next action.", "dazed"], stun: ["Stunned", "Stunned: skips its next action.", "stunned"], fear: ["Feared", "Feared: skips its next action.", "feared"], frozen: ["Frozen", "Frozen: skips its next action.", "frozen"], sleep: ["Asleep", "Asleep: skips its action until it wakes.", "asleep"] };
       const w = WHY[info.why] || WHY.risen;
       wrap.setAttribute("aria-label", `${e.name} is ${w[2]}`); tip(wrap, `<b>${w[0]}</b><br>${w[1]}`); return wrap;
+    }
+    if (e.interrupted) { // 10-30 reports: after a Kick the cast icon stayed up, so the interrupt looked like it failed
+      wrap.classList.add("is-dazed"); wrap.append(ico("ability_kick", "sp-int__ico"), h("b", { class: "sp-int__n" }, "X"));
+      wrap.setAttribute("aria-label", `${e.name} is interrupted`); tip(wrap, "<b>Interrupted</b><br>Its cast is broken: it loses its next action."); return wrap;
     }
     const parts = [];
     if (info.dmg > 0) {
@@ -242,7 +247,8 @@ export function createHud(host, app, o = {}) {
     const run = app.run, p = C.player, cls = C.cls || {};
     // top bar
     if (!portrait.firstChild || portrait.dataset.cls !== cls.id) { portrait.replaceChildren(ico(cls.icon || "inv_misc_questionmark")); portrait.dataset.cls = cls.id || ""; portrait.style.setProperty("--cc", cls.color || "#c9a24b"); }
-    { const lb = heroLabels(run, cls.name || "Hero"); heroName.textContent = lb.name; heroSub.textContent = `${lb.tag ? lb.tag + " · " : ""}Act ${run.act} · Floor ${Math.max(0, run.floor + 1)}`; }
+    { const lb = heroLabels(run, cls.name || "Hero"); heroName.textContent = lb.name; heroSub.textContent = `${lb.tag ? lb.tag + " · " : ""}Act ${run.act} · Floor ${Math.max(0, run.floor + 1)}`;
+      const ri = run.character ? racialInfo(data, run.character.race) : null; heroSub.title = ri && run.deck.some((c) => c.id === ri.id) ? `Racial: ${ri.name}. ${ri.text.replace(/^Racial\.\s*/, "")}` : ""; }
     topHp.set(p); heroHp.set(p); { const pw = powerOf(cls, p); topPw.set(pw.cur, pw.max, pw.type); } heroLvl.textContent = run.act;
     for (const b of [topBlock, heroBlock]) { b.n.textContent = p.block; b.classList.toggle("is-on", p.block > 0); }
     gold.lastChild.textContent = run.gold;

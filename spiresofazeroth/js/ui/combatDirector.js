@@ -8,11 +8,11 @@
 //     snap()                      { uid: {hp, block, st} } for the player and every enemy (call BEFORE the engine step)
 //     ensureActors()              adds actors for summons
 // Every awaited step goes through safe() (3 s) so a stalled rAF / hidden tab can never deadlock the turn.
-import { safe, logOnce } from "./combatKit.js?v=20261029d";
-import { isAlive } from "../engine/damage.js?v=20261029d";
-import { cardSounds as SND } from "./cardSounds.js?v=20261029d";
-import { createPetStage } from "../stage/petStage.js?v=20261029d";
-import { createTotemStage } from "../stage/totemStage.js?v=20261029d";
+import { safe, logOnce } from "./combatKit.js";
+import { isAlive } from "../engine/damage.js";
+import { cardSounds as SND } from "./cardSounds.js";
+import { createPetStage } from "../stage/petStage.js";
+import { createTotemStage } from "../stage/totemStage.js";
 
 const MELEE_EL = { steel: 110, blood: 110, wind: 90, stone: 40 };            // fx lead (ms) so the recipe impact lands as the lunge connects
 const ENEMY_LEAD = { claw: 160, bite: 120, steel: 160, slam: 80, spit: 0 };
@@ -175,6 +175,8 @@ export function createDirector(o) {
     else if (ev.t === "heal") { if (d) d.hp += ev.amount; if (F) F.numbers.heal(pos(ev.uid), ev.amount); else o.legacy(ev); }
     else if (ev.t === "block") { SND.ui("blockGain"); if (d) d.block += ev.amount; if (F) { F.numbers.block(pos(ev.uid), ev.amount); if (!gone(ev.uid)) A.block(ev.uid); } else o.legacy(ev); }
     else if (ev.t === "miss") { if (F) F.numbers.text(pos(ev.uid), ev.text || "Miss", ev.kind || "grey"); else o.legacy(ev); }
+    else if (ev.t === "interrupt" || ev.t === "interrupted") { if (F && !gone(ev.uid)) F.numbers.text(pos(ev.uid, "top"), "Interrupted!", "gold", { size: 40 }); } // 10-30 reports: Kick worked but showed nothing
+    else if (ev.t === "fizzle") { if (F) F.numbers.text(pos("player", "top"), "Fizzled (Madness)", "grey", { size: 36 }); } // 10-30 report: "my spells sometimes do nothing"
     else if (ev.t === "summon") ensureActors();
     else if (ev.t === "revive") { // Undying: it was killed and rose at 25% HP; say so loudly or the kill looks like missing damage
       const u = unit(ev.uid); if (d && u) d.hp = u.hp;
@@ -286,7 +288,7 @@ export function createDirector(o) {
       cardHits = hits.filter((h) => h.uid === tgt);
       procHits = hits.filter((h) => h.uid !== tgt);
     }
-    const rest = evs.filter((e) => !cardHits.includes(e) && !procHits.includes(e) && ["dmg", "heal", "block", "miss", "summon"].includes(e.t));
+    const rest = evs.filter((e) => !cardHits.includes(e) && !procHits.includes(e) && ["dmg", "heal", "block", "miss", "summon", "interrupt", "fizzle"].includes(e.t));
     if (!cardHits.length && kind === "attack" && tgt && !evs.some((e) => e.t === "fizzle")) cardHits = [{ t: "dmg", uid: tgt, amount: 0, blocked: 0, synthetic: true }];
     const sideFx = () => { SND.impact(def); rest.forEach(ambientEv); paintNow(); statusFx(pre, ["player", ...C.enemies.map((e) => e.uid)]); };
     SND.cast(def); SND.ui("cardPlay");
@@ -329,7 +331,7 @@ export function createDirector(o) {
   async function enemyAct(e, evs, pre, moveName) {
     begin(pre);
     const hits = evs.filter((x) => x.t === "dmg" && !x.status && x.from === e.uid && x.uid !== e.uid && !noActor(x.uid));
-    const rest = evs.filter((x) => !hits.includes(x) && ["dmg", "heal", "block", "miss", "summon"].includes(x.t));
+    const rest = evs.filter((x) => !hits.includes(x) && ["dmg", "heal", "block", "miss", "summon", "interrupted"].includes(x.t));
     const rec0 = enemyRecipe(e, moveName);
     const sideFx = () => { if (hits.length) SND.enemy(rec0, "impact", moveName); rest.forEach(ambientEv); paintNow(); statusFx(pre, ["player", ...C.enemies.map((x) => x.uid)]); };
     if (hits.length) SND.enemy(rec0, "cast", moveName);

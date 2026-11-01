@@ -1,23 +1,23 @@
 // Character select (stage-native), like the client's list: saved characters (name, level, race + class, zone) on the right, the selected
 // character's model in the centre, Enter World / Create New Character / Delete Character / Back. A character is a saved race + gender +
 // name + class (meta.characters); Enter World starts a run with it. No characters yet -> straight to creation.
-import { h, cap, track, fill } from "./dom.js?v=20261029d";
-import { btn, tog } from "./kit.js?v=20261029d";
-import { saveMeta, isClassUnlocked } from "../engine/save.js?v=20261029d";
-import { classLevel } from "../engine/talents.js?v=20261029d";
-import { heroicOpen, heroicName, heroicBlurb } from "../engine/heroic.js?v=20261029d";
-import { newSeedString } from "../engine/rng.js?v=20261029d";
-import { RACE_NAME, HOME, slugOf } from "../engine/character.js?v=20261029d";
-import { loadCharData, charCss, portraitUrl } from "./charData.js?v=20261029d";
-import { createRaceViewer } from "../stage/raceViewer.js?v=20261029d";
-import { beginRun } from "./runStart.js?v=20261029d";
+import { h, cap, track, fill } from "./dom.js";
+import { btn, tog } from "./kit.js";
+import { saveMeta, isClassUnlocked } from "../engine/save.js";
+import { classLevel } from "../engine/talents.js";
+import { heroicOpen, heroicName, heroicBlurb } from "../engine/heroic.js";
+import { newSeedString } from "../engine/rng.js";
+import { RACE_NAME, HOME, slugOf } from "../engine/character.js";
+import { loadCharData, charCss, portraitUrl } from "./charData.js";
+import { createRaceViewer } from "../stage/raceViewer.js";
+import { beginRun } from "./runStart.js";
 
 export const stageNative = true;
 
 export async function render(app, _name, props = {}) {
   const { data, meta, stage } = app;
   meta.characters = Array.isArray(meta.characters) ? meta.characters : [];
-  if (!meta.characters.length) { app.screen = "charCreate"; return (await import("./charCreate.js?v=20261029d")).render(app, "charCreate", {}); } // first visit: straight to creation
+  if (!meta.characters.length) { app.screen = "charCreate"; return (await import("./charCreate.js")).render(app, "charCreate", {}); } // first visit: straight to creation
   const [D] = await Promise.all([loadCharData(), charCss()]);
   stage.setBackdrop("classSelect");
   const th = (data.unlocks && data.unlocks.thresholds) || [];
@@ -42,7 +42,7 @@ export async function render(app, _name, props = {}) {
       const zone = live && live.zoneId && data.zone(live.zoneId) ? data.zone(live.zoneId).name : (r && r.zone ? cap(r.zone) : "Azeroth");
       return h("button", { class: `cc-row ${on ? "sel" : ""}`.trim(), type: "button", "data-char": c.id, "aria-pressed": String(on), onClick: () => { st.sel = c.id; st.continent = null; st.heroic = 0; st.armed = false; draw(); } },
         h("img", { src: portraitUrl(c.race, c.gender), alt: "", width: 56, height: 56 }),
-        h("span", { class: "cc-row__t" }, h("b", {}, c.name), h("em", {}, `Level ${classLevel(meta, c.classId, th)} ${RACE_NAME[c.race]} ${cap(c.classId)}`), h("small", {}, zone)));
+        h("span", { class: "cc-row__t" }, h("b", {}, c.name), h("em", {}, `Level ${classLevel(meta, c.classId, th) + 1} ${RACE_NAME[c.race]} ${cap(c.classId)}`), h("small", {}, zone)));
     });
     const heroicBtns = h("div", { class: "cc-diff" }, h("h4", {}, "Difficulty"),
       h("div", { class: "cc-opt", role: "group", "aria-label": "Difficulty" }, ...Array.from({ length: maxH + 1 }, (_, i) => tog(i === 0 ? "Normal" : heroicName(i), st.heroic === i, () => { st.heroic = i; draw(); }))),
@@ -62,7 +62,7 @@ export async function render(app, _name, props = {}) {
     }, { size: "sm", cls: "cc-del" });
     fill(host, h("div", { class: "cc-wrap cc-wrap--list" },
       modelEl,
-      h("div", { class: "cc-who" }, h("b", {}, ch.name), h("span", {}, `Level ${lvl} ${RACE_NAME[ch.race]} ${cap(cid)}`)),
+      h("div", { class: "cc-who" }, h("b", {}, ch.name), h("span", {}, `Level ${lvl + 1} ${RACE_NAME[ch.race]} ${cap(cid)}`)),
       h("div", { class: "cc-enter" }, btn("Enter World", enter, { size: "lg", auto: true, cls: "cc-enterbtn" })),
       panel,
       h("div", { class: "cc-foot cc-foot--list" }, del, btn("Back", () => app.go("title"), { size: "sm", cls: "cc-back" }))));

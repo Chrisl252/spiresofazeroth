@@ -1,6 +1,6 @@
 // Title-screen "Download" entry: a small panel linking to the free desktop / Android builds. Hidden inside those apps.
-import { h } from "./dom.js?v=20261029d";
-import { btn, stageModal } from "./kit.js?v=20261029d";
+import { h } from "./dom.js";
+import { btn, stageModal } from "./kit.js";
 
 const RELEASES = "https://github.com/Chrisl252/spiresofazeroth/releases/latest";
 

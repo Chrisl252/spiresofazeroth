@@ -12,7 +12,7 @@ export const TOTEM_MODELS = {
 };
 
 const SLOTS = ["earth", "fire", "water", "air"];
-const PLATE_W = 140;
+const PLATE_W = 160;
 
 // Lane relative to the hero lane (A.lanes.hero):
 // Earth: Front-left of the hero
@@ -23,10 +23,11 @@ function laneForSlot(A, slot) {
   const h = (A && A.lanes && A.lanes.hero) || { x: 420, y: 760, s: 1 };
   const s = h.s || 1;
   switch (slot) {
-    case "earth": return { x: h.x + 95 * s, y: h.y + 12 * s, s: 0.65 * s };
-    case "fire": return { x: h.x + 175 * s, y: h.y - 8 * s, s: 0.65 * s };
-    case "water": return { x: h.x - 90 * s, y: h.y - 18 * s, s: 0.62 * s };
-    case "air": return { x: h.x - 165 * s, y: h.y - 34 * s, s: 0.60 * s };
+    // staggered: each neighbour sits ~70px higher so the 160px plates never overlap
+    case "earth": return { x: h.x + 100 * s, y: h.y + 16 * s, s: 0.65 * s };
+    case "fire": return { x: h.x + 240 * s, y: h.y - 64 * s, s: 0.65 * s };
+    case "water": return { x: h.x - 100 * s, y: h.y - 44 * s, s: 0.62 * s };
+    case "air": return { x: h.x - 240 * s, y: h.y - 120 * s, s: 0.60 * s };
     default: return { x: h.x + 80 * s, y: h.y, s: 0.65 * s };
   }
 }

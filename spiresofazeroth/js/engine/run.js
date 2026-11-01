@@ -1,18 +1,18 @@
 // Run state machine. The UI and the headless sim both drive the run through these functions, so routing lives in ONE place.
 // run.screen: map | combat | reward | vendor | rest | event | treasure | hub | healer | zonepick | raidchoice | bosschoice | end
 // Every random decision uses streamFor(seed, tag) with a node-specific tag, so a saved run resumes identically.
-import { enterHealer } from "./healer.js?v=20261029d";
-import { streamFor } from "./rng.js?v=20261029d";
-import { generateSpire, nextNodes, nodeAt } from "./map.js?v=20261029d";
-import { startCombat, finishCombat } from "./combat.js?v=20261029d";
-import { runEffects } from "./effects.js?v=20261029d";
-import { fireRun } from "./relics.js?v=20261029d";
-import { heroicMods, noviceOf } from "./heroic.js?v=20261029d";
-import { limitTalentMods } from "./talents.js?v=20261029d";
-import { addTalentGrants } from "./talentHooks.js?v=20261029d";
-import { canUpgrade } from "./deck.js?v=20261029d";
-import * as R from "./rewards.js?v=20261029d";
-import * as G from "./gear.js?v=20261029d";
+import { enterHealer } from "./healer.js";
+import { streamFor } from "./rng.js";
+import { generateSpire, nextNodes, nodeAt } from "./map.js";
+import { startCombat, finishCombat } from "./combat.js";
+import { runEffects } from "./effects.js";
+import { fireRun } from "./relics.js";
+import { heroicMods, noviceOf } from "./heroic.js";
+import { limitTalentMods } from "./talents.js";
+import { addTalentGrants } from "./talentHooks.js";
+import { canUpgrade } from "./deck.js";
+import * as R from "./rewards.js";
+import * as G from "./gear.js";
 
 export const RUN_VERSION = 1;
 export const TOTAL_ACTS = 6;
@@ -285,12 +285,12 @@ export function takePotion(run, data, id) {
   if (run.pending && run.pending.taken) run.pending.taken.potion = true;
   return true;
 }
-export function takeRelic(run, data, id) {
+export function takeRelic(run, data, id, opts = null) { // opts.wear = the player deliberately picked this piece (choose-one boss/elite loot): it is worn, the old piece goes to the Gear Bag
   if (run.relics.includes(id)) return false;
   const twin = data.gear && data.gear.legacy && data.gear.legacy[id];
   if (twin && twin !== id && (run.relics.includes(twin) || run.relics.includes(`${twin}+`))) return false; // already worn under its gear name
   const r = data.relic(id);
-  const bag = r && r.slot && G.goesToBag(run, data, id);
+  const bag = r && r.slot && !(opts && opts.wear) && G.goesToBag(run, data, id); // 10-30 report: a boss cloak picked from the choose-one frame landed in the bag and the worn cloak stayed (no Gear Bag button on the loot frame)
   const eq = bag ? G.stow(run, id) : r && r.slot ? G.equip(run, data, id) : null; // gear: a free/starter socket equips; worn gear is never displaced (-> Gear Bag)
   if (!eq) run.relics.push(id);
   if (run.pending) run.pending.equipped = eq;
@@ -346,6 +346,7 @@ export function enterRaidFloor(run, data, floorId) {
 }
 
 export async function proceedAfterSpire(run, data) {
+  const prev = run.pending;
   run.pending = null;
   if (run.act >= TOTAL_ACTS) {
     run.screen = "end";
@@ -361,7 +362,7 @@ export async function proceedAfterSpire(run, data) {
     run.screen = "hub";
     return run.screen;
   }
-  return prepareZonePick(run, data);
+  try { return await prepareZonePick(run, data); } catch (err) { run.pending = prev; throw err; } // a failed zone load leaves the raid-skip / healer screen intact for the retry
 }
 
 export async function prepareZonePick(run, data) {
@@ -396,12 +397,7 @@ export async function prepareZonePick(run, data) {
   }
   const loaded = await Promise.all(opts.map((id) => data.loadZone(id)));
   opts = opts.filter((id, i) => loaded[i]); // a zone that failed to load must never reach the pick screen (it rendered z.name of null and froze the hub)
-  if (!opts.length) {
-    run.screen = "end";
-    run.result = "victory";
-    run.pending = { type: "end", note: "no further zones available" };
-    return run.screen;
-  }
+  if (!opts.length) throw new Error("zone data did not load"); // 10-30 reports: a network blip ended the run as a "victory" and wiped the save; throw so Continue toasts and the next tap retries
   run.pending = { type: "zonepick", options: opts };
   run.screen = "zonepick";
   return run.screen;

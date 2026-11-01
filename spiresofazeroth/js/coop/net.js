@@ -1,7 +1,7 @@
 // Co-op transport: one WebRTC data channel between two browsers (PeerJS, vendored at js/vendor/peerjs.min.js, MIT).
 // Signalling goes through the free PeerJS cloud broker (0.peerjs.com) and NAT traversal through its STUN/TURN defaults; game traffic is
 // browser to browser. Nothing here knows the game: link.send(obj) / link.onMessage(fn) / link.onClose(fn) / link.close().
-import { BUILD } from "../version.js?v=20261029d";
+import { BUILD } from "../version.js";
 
 const PREFIX = "spires-azeroth-v1-";
 const ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no 0/O/1/I: codes are read aloud
@@ -35,7 +35,8 @@ function loadPeer() {
   return loading;
 }
 
-function wrap(peer, conn) {
+// keepPeer: the host keeps its room (the Peer) open after this connection dies so the same guest can rejoin with the same code
+function wrap(peer, conn, { keepPeer = false } = {}) {
   const msgL = new Set(), closeL = new Set();
   let closed = false;
   const fireClose = (why) => { if (closed) return; closed = true; for (const f of closeL) try { f(why); } catch (e) { console.warn("[coop] close listener", e); } };
@@ -47,8 +48,9 @@ function wrap(peer, conn) {
     send(obj) { if (!closed && conn.open) conn.send(obj); },
     onMessage(f) { msgL.add(f); return () => msgL.delete(f); },
     onClose(f) { closeL.add(f); return () => closeL.delete(f); },
-    close() { fireClose("left"); try { conn.close(); } catch { /* already gone */ } try { peer.destroy(); } catch { /* already gone */ } },
+    close() { fireClose("left"); try { conn.close(); } catch { /* already gone */ } if (!keepPeer) try { peer.destroy(); } catch { /* already gone */ } },
     get open() { return !closed && conn.open; },
+    simulateLoss() { try { conn.close(); } catch { /* already gone */ } }, // test hook (tools/spires/coop-drive.mjs): the channel dies as if the network dropped, no "left"
   };
 }
 
@@ -68,11 +70,16 @@ export async function host(code, onJoin, onError) {
     const peer = new Peer(PREFIX + code, opts);
     let taken = false, ready = false;
     peer.on("open", () => { ready = true; res({ code, cancel: () => { try { peer.destroy(); } catch { /* gone */ } } }); });
-    peer.on("disconnected", () => { if (!taken && !peer.destroyed) try { peer.reconnect(); } catch { /* broker gone */ } }); // an idle lobby lost its room on the broker, so the code stopped resolving
+    peer.on("disconnected", () => { if (!peer.destroyed) try { peer.reconnect(); } catch { /* broker gone */ } }); // an idle lobby lost its room on the broker, so the code stopped resolving (and a rejoin needs it back)
     peer.on("connection", (conn) => {
       if (taken) { conn.on("open", () => { conn.send({ t: "full" }); setTimeout(() => conn.close(), 300); }); return; }
       taken = true;
-      conn.on("open", () => onJoin(wrap(peer, conn)));
+      // the seat frees up when this connection dies (dropped Wi-Fi, laptop lid, relay blip) so the guest can rejoin with the same code;
+      // the room stays registered on the broker (10-29: before this a rejoin was refused as "full" and both players fell back to solo)
+      const freeSeat = () => { taken = false; if (!peer.destroyed && peer.disconnected) try { peer.reconnect(); } catch { /* broker gone */ } };
+      conn.on("close", freeSeat);
+      conn.on("error", freeSeat);
+      conn.on("open", () => onJoin(wrap(peer, conn, { keepPeer: true })));
     });
     peer.on("error", (e) => { const m = peerError(e); if (!ready) rej(new Error(m)); else if (onError) onError(m); });
   });

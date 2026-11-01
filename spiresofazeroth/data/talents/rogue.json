@@ -460,7 +460,7 @@
      "max": 5,
      "effect": {
       "key": "card_dmg",
-      "per": 5,
+      "per": 1,
       "arg": "backstab,ambush,opportunity,cheap-shot"
      }
     },

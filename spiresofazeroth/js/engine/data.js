@@ -1,7 +1,7 @@
 // Data loader. Environment-neutral: you give it fetchJson(relPath) -> parsed JSON or null (404). The browser passes a fetch
 // wrapper that appends ?v=BUILD; node tools pass an fs reader. No DOM, no node imports here.
-import { setImmunityTable } from "./immunity.js?v=20261029d";
-import { loadClassGear, loadLegacyMap, slotOf } from "./gear.js?v=20261029d";
+import { setImmunityTable } from "./immunity.js";
+import { loadClassGear, loadLegacyMap, slotOf } from "./gear.js";
 const HD = new URL("../../assets/icons-hd/", import.meta.url).href; // 256px upscaled icons, relative so dev + deploy both resolve
 const arr = (o, key) => (Array.isArray(o) ? o : o && Array.isArray(o[key]) ? o[key] : []);
 
@@ -31,7 +31,7 @@ export function createData({ fetchJson }) {
   d.load = async () => {
     d.index = (await get("index.json")) || {};
     const path = (key, dflt) => d.index[key] || dflt;
-    const [kw, rl, po, nc, ev, bf, ci, zi, sc, legacyM, schoolsD, immunitiesD, mapProf, heal, unl] = await Promise.all([
+    const [kw, rl, po, nc, ev, bf, ci, zi, sc, legacyM, schoolsD, immunitiesD, mapProf, heal, unl, racD] = await Promise.all([
       get(path("keywords", "keywords.json")), get(path("relics", "relics.json")), get(path("potions", "potions.json")),
       get(path("neutralCards", path("neutral-cards", "neutral-cards.json"))), get(path("eventsCommon", path("events", "events-common.json"))),
       get(path("bosses", path("bossesFinal", "bosses-final.json"))), get(path("classes", "classes/index.json")), get(path("zones", "zones/index.json")),
@@ -42,6 +42,7 @@ export function createData({ fetchJson }) {
       get(path("mapProfiles", "map-profiles.json")),
       get(path("healers", "healers.json")),
       get(path("unlocks", "unlocks.json")),
+      get(path("racials", "racials.json")), // racial cards (engine/racials.js)
     ]);
     for (const c of arr(sc, "cards").concat(arr(bf, "cards"))) if (!d.neutralCards.has(c.id)) d.neutralCards.set(c.id, { ...c, class: null, token: true });
     d.finalSummons = arr(bf, "summons");
@@ -52,6 +53,7 @@ export function createData({ fetchJson }) {
     for (const r of d.globalRelics) d.relicMap.set(r.id, r);
     for (const p of arr(po, "potions")) d.potions.set(p.id, p);
     for (const c of arr(nc, "cards")) d.neutralCards.set(c.id, { ...c, class: null });
+    for (const c of arr(racD, "cards")) d.neutralCards.set(c.id, { ...c, class: null, token: true });
     // (status/curse/boss cards are added after this loop, below)
     d.schoolsData = schoolsD || { cards: {}, statusSchools: {}, icons: {} };
     d.immunities = immunitiesD || { families: {}, types: {} };
@@ -109,7 +111,7 @@ export function createData({ fetchJson }) {
     if (d.zoneMissing.has(id)) return null;
     let z = await get(`zones/${id}.json`);
     if (!z) { await new Promise((r) => setTimeout(r, 400)); z = await get(`zones/${id}.json`); } // one retry: a network blip must not poison the zone as "missing" for the whole session
-    if (!z) { d.zoneMissing.add(id); return null; }
+    if (!z) { if (!d.zoneIndex.some((x) => x.id === id)) d.zoneMissing.add(id); return null; } // 10-30 reports: an outage poisoned every listed zone for the session -> hub/healer Continue dead for good; only unlisted ids are truly missing
     const zone = await resolveZone(z);
     d.zones.set(id, zone);
     for (const r of zone.relics || []) d.relicMap.set(r.id, { ...r, zone: r.zone || id, slot: slotOf(r) });

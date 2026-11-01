@@ -128,7 +128,7 @@
           "effects": [
             {
               "op": "damage",
-              "amount": 2,
+              "amount": 3,
               "school": "fire",
               "target": "random_enemy"
             }
@@ -149,7 +149,7 @@
           "effects": [
             {
               "op": "damage",
-              "amount": 4,
+              "amount": 5,
               "school": "fire",
               "target": "random_enemy"
             }
@@ -253,14 +253,7 @@
           "id": "tick",
           "name": "Flametongue Totem",
           "intent": "buff",
-          "effects": [
-            {
-              "op": "apply",
-              "status": "spell_power",
-              "stacks": 2,
-              "target": "self"
-            }
-          ],
+          "effects": [],
           "weight": 1
         }
       ]
@@ -274,14 +267,7 @@
           "id": "tick",
           "name": "Flametongue Totem",
           "intent": "buff",
-          "effects": [
-            {
-              "op": "apply",
-              "status": "spell_power",
-              "stacks": 3,
-              "target": "self"
-            }
-          ],
+          "effects": [],
           "weight": 1
         }
       ]
@@ -298,7 +284,7 @@
           "effects": [
             {
               "op": "block",
-              "amount": 2,
+              "amount": 3,
               "target": "player"
             }
           ],
@@ -318,7 +304,7 @@
           "effects": [
             {
               "op": "block",
-              "amount": 4,
+              "amount": 5,
               "target": "player"
             }
           ],
@@ -374,7 +360,7 @@
     },
     "strength_of_earth": {
       "name": "Strength of Earth Totem",
-      "icon": "spell_nature_strengthofearthtotem02",
+      "icon": "spell_nature_earthbindtotem",
       "hp": 6,
       "moves": [
         {
@@ -396,7 +382,7 @@
     },
     "strength_of_earth_2": {
       "name": "Strength of Earth Totem",
-      "icon": "spell_nature_strengthofearthtotem02",
+      "icon": "spell_nature_earthbindtotem",
       "hp": 8,
       "moves": [
         {
@@ -418,7 +404,7 @@
     },
     "earthbind": {
       "name": "Earthbind Totem",
-      "icon": "spell_nature_earthbindtotem",
+      "icon": "spell_nature_strengthofearthtotem02",
       "hp": 5,
       "moves": [
         {
@@ -479,7 +465,7 @@
           "effects": [
             {
               "op": "heal",
-              "amount": 2,
+              "amount": 3,
               "target": "player"
             }
           ],
@@ -1216,7 +1202,7 @@
     {
       "id": "earthbind-totem",
       "name": "Earthbind Totem",
-      "icon": "spell_nature_earthbindtotem",
+      "icon": "spell_nature_strengthofearthtotem02",
       "spellId": 2484,
       "rank": 1,
       "type": "totem",
@@ -1456,7 +1442,7 @@
     {
       "id": "strength-of-earth-totem",
       "name": "Strength of Earth Totem",
-      "icon": "spell_nature_strengthofearthtotem02",
+      "icon": "spell_nature_earthbindtotem",
       "spellId": 8075,
       "rank": 1,
       "type": "totem",
@@ -2238,7 +2224,7 @@
       "effects": [
         {
           "op": "apply",
-          "status": "free_cast",
+          "status": "free_spell",
           "stacks": 1,
           "target": "self"
         },
@@ -2254,7 +2240,7 @@
         "effects": [
           {
             "op": "apply",
-            "status": "free_cast",
+            "status": "free_spell",
             "stacks": 1,
             "target": "self"
           },

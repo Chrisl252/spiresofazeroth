@@ -1,6 +1,6 @@
 // actors3d.js - Spires of Azeroth 3D actors layer (VISUAL_SPEC v2).
 //
-//   import { createActors } from "./actors3d.js?v=20261029d";
+//   import { createActors } from "./actors3d.js";
 //   const actors = createActors(stage.layers.actors, { designW: 1920, designH: 1080 });
 //   actors.setHero({ classId: "mage", gearMask: 3 });  // gearMask (optional): n 0..8 or [slot ids] -> assets/models/hero/<class>-<n>.glb, crossfade swap on change
 //   actors.setEnemies([{ uid, id, name, tier }]);
@@ -14,13 +14,13 @@
 // model that fails all keep working (never invisible). GLB per actor is parsed fresh from a cached
 // ArrayBuffer (no SkeletonUtils on the site's vendored three), so materials/skeletons are per instance.
 // Render-on-demand: rAF runs only while tweens/mixers run (idle capped ~30 fps), pauses on hidden tab.
-import { BUILD } from "../version.js?v=20261029d";
+import { BUILD } from "../version.js";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { createFallbackActor } from "./actorFallback.js?v=20261029d";
-import { dustPuff, motionScale } from "./actorMotion.js?v=20261029d";
-import { getZoneVisuals } from "./zonePalette.js?v=20261029d";
-import { createGround3d } from "./ground3d.js?v=20261029d";
+import { createFallbackActor } from "./actorFallback.js";
+import { dustPuff, motionScale } from "./actorMotion.js";
+import { getZoneVisuals } from "./zonePalette.js";
+import { createGround3d } from "./ground3d.js";
 
 const PITCH = 12 * Math.PI / 180, COSP = Math.cos(PITCH);
 const HEIGHT = { hero: 360, normal: 280, elite: 360, boss: 520, totem: 160 };
@@ -68,6 +68,10 @@ export function createActors(hostEl, opts = {}) {
     renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
     renderer.setClearColor(0x000000, 0);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
+    // combat-feel 20261029j: filmic tone mapping. Without it every emissive flash and bright key clipped straight to white
+    // (the "white blob" hit) and the warm key read flat; ACES keeps the highlights coloured and rolls the mids like the client.
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.18;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.domElement.style.cssText = `position:absolute;left:0;top:0;width:${W}px;height:${H}px;display:block`;
@@ -81,8 +85,9 @@ export function createActors(hostEl, opts = {}) {
     keyLight = new THREE.DirectionalLight(0xffd7a0, 2.1);
     keyLight.position.set(-700, 1000, 800);
     keyLight.castShadow = true;
-    keyLight.shadow.mapSize.width = 1024;
-    keyLight.shadow.mapSize.height = 1024;
+    keyLight.shadow.mapSize.width = 2048;   // 1024 blurred the contact shadow into a grey smudge at the feet
+    keyLight.shadow.mapSize.height = 2048;
+    keyLight.shadow.radius = 3;
     keyLight.shadow.camera.near = 100;
     keyLight.shadow.camera.far = 4000;
     keyLight.shadow.camera.left = -1400;
@@ -104,6 +109,7 @@ export function createActors(hostEl, opts = {}) {
     renderer.domElement.addEventListener("webglcontextrestored", () => { glLost = false; clearTimeout(lostTimer); for (const a of byUid.values()) if (a.skin) a.setVisible(false); needRender = true; wake(); });
   } catch (err) { console.warn("[actors3d] WebGL unavailable, plates only:", err); renderer = null; }
 
+  const maxAniso = renderer ? Math.max(4, renderer.capabilities.getMaxAnisotropy() || 4) : 4;
   const PR_MAX = (() => { try { return matchMedia("(pointer: coarse)").matches ? 1.5 : 2; } catch (e) { return 2; } })();
   let curPR = 0;
   function fitResolution() {
@@ -250,10 +256,13 @@ export function createActors(hostEl, opts = {}) {
         sk.dying = true;
         for (const k of ["idle", ...ONESHOT]) if (sk.clips[k]) sk.clips[k].fadeOut(0.1);
         if (c) {
-          c.reset().setEffectiveTimeScale(Math.max(1, c.getClip().duration / 1.05) * (motionScale.v || 1)).setEffectiveWeight(1).fadeIn(0.08).play();
+          // Death plays at its own pace (floor 0.85x, fitted into 1.5 s): ">= 1x, fit to 1.05 s" rushed every corpse fall; the director
+          // budgets 3.5 s for the step (combatDirector safe(..., "death", 3500)).
+          const dts = Math.max(0.85, c.getClip().duration / 1.5);
+          c.reset().setEffectiveTimeScale(dts * (motionScale.v || 1)).setEffectiveWeight(1).fadeIn(0.1).play();
           c.clampWhenFinished = true;
           wake();
-          await a.motion.wait(Math.min(1100, c.getClip().duration * 1000));
+          await a.motion.wait(Math.min(1500, c.getClip().duration * 1000 / dts));
         } else {
           // Model has no dedicated death clip: tip onto ground as a corpse
           const sg = a.kindOf === "hero" ? -1 : 1;
@@ -342,7 +351,7 @@ export function createActors(hostEl, opts = {}) {
         }
         if (mats.some((x) => x.m === m)) return;
         mats.push({ m, op: m.opacity, tr: m.transparent, col: m.color ? m.color.clone() : null, em: m.emissive ? m.emissive.clone() : null });
-        if (m.map) m.map.anisotropy = 4;
+        if (m.map) m.map.anisotropy = maxAniso;   // 4 smeared the skin/armour texels on the 12-degree pitch; full anisotropy keeps them crisp
         if (cand.tier === "classic" || rec.type === "goblin") m.side = THREE.DoubleSide; // baked Classic meshes or goblins
         if (m.transparent) {
           m.depthWrite = true;
@@ -370,7 +379,9 @@ export function createActors(hostEl, opts = {}) {
       }
       mixer.addEventListener("finished", (e) => {
         if (sk0.dying || e.action === clips.death) return;
-        if (ONESHOT.some((k) => clips[k] === e.action) && clips.idle) { e.action.fadeOut(0.14); clips.idle.reset().fadeIn(0.16).play(); if (sk0.cur === e.action) sk0.cur = null; }
+        // Back to Stand WITHOUT reset(): reset() snapped the idle to frame 0 under a 0.14 s blend (a visible pop out of every strike pose).
+        // The idle keeps the time it had when it was faded out, so the body eases back into mid-breath like the client's 0.2-0.3 s blends.
+        if (ONESHOT.some((k) => clips[k] === e.action) && clips.idle) { e.action.fadeOut(0.24); const id = clips.idle; id.enabled = true; id.paused = false; id.setEffectiveTimeScale(1); id.setEffectiveWeight(1); id.fadeIn(0.24).play(); if (sk0.cur === e.action) sk0.cur = null; }
       });
       mixer.update(0);
     }
@@ -490,18 +501,24 @@ export function createActors(hostEl, opts = {}) {
     if (sk.clips.idle2 && !sk.cur && !sk.dying && !a.dead && now > sk.nextVar) playOnce(sk, "idle2", 1); // Stand variation every few seconds
     if (sk.mixer) sk.mixer.update(dt);
     const t = now / 1000 + sk.phase;
-    let sy = s.sy * (1 + s.hover * 0.03), sx = s.sx * (1 + s.hover * 0.03), sway = 0, rz = 0;
-    if (!sk.hasClip && !a.dead) { const br = Math.sin(t * Math.PI * 2 / 1.6); sy *= 1 + 0.012 * br; sx *= 1 - 0.004 * br; sway = Math.sin(t * Math.PI * 2 / 4.2) * 2.5; rz = Math.sin(t * Math.PI * 2 / 4.2) * 0.012; }
+    // combat-feel 20261029j: a rigged body never squashes or stretches. The lunge/hit tweens' sx/sy are the 2D plate's cartoon
+    // anticipation; applied to a skinned WoW model they rubber-banded the human mid-swing. Clip-driven skins keep translation,
+    // the small flinch tilt and hover only; the static (no-clip) bakes keep the breathing pulse so they are not statues.
+    let sy = 1 + s.hover * 0.03, sx = 1 + s.hover * 0.03, sway = 0, rz = 0;
+    if (!sk.hasClip && !a.dead) { sy = s.sy * sy; sx = s.sx * sx; const br = Math.sin(t * Math.PI * 2 / 1.6); sy *= 1 + 0.012 * br; sx *= 1 - 0.004 * br; sway = Math.sin(t * Math.PI * 2 / 4.2) * 2.5; rz = Math.sin(t * Math.PI * 2 / 4.2) * 0.012; }
     sk.group.position.set(b.x + s.x + sway - W / 2, (H / 2 - (b.y + s.y)) / COSP, (b.y - 700) * 0.5);
     sk.pivot.rotation.z = -s.rot * Math.PI / 180 + rz;
     sk.pivot.scale.set(sx, sy, sx);
     const fade = Math.min(1, (now - sk.born) / 260);
     const alpha = s.alpha * fade;
     // flash / glow / hover as emissive (or colour boost on basic materials)
-    const fl = Math.min(1, s.flash), gl = s.glow, hv = s.hover * 0.1;
+    // Hit flash / status glow as a TINT, never a blowout: flash 1.0 used to add +1 white emissive (the whole body became a flat
+    // white silhouette for 100 ms; a status pulse turned it solid purple). Capped at 0.34 the body reads as lit from the impact
+    // while its texture stays visible, the way a CombatWound reads in the client. Crit keeps its red through glowColor.
+    const fl = Math.min(1, s.flash) * 0.34, gl = s.glow, hv = s.hover * 0.1;
     tmp.set(s.glowColor);
-    const gk = gl * 0.4; // glow stays a tint, flash is the full white pop
-    const er = Math.min(1, fl + tmp.r * gk + hv), eg = Math.min(1, fl + tmp.g * gk + hv * 0.85), eb = Math.min(1, fl + tmp.b * gk + hv * 0.6);
+    const gk = gl * 0.16; // glow stays a faint tint
+    const er = Math.min(1, fl * (0.6 + tmp.r * 0.4) + tmp.r * gk + hv), eg = Math.min(1, fl * (0.6 + tmp.g * 0.4) + tmp.g * gk + hv * 0.85), eb = Math.min(1, fl * (0.6 + tmp.b * 0.4) + tmp.b * gk + hv * 0.6);
     for (const e of sk.mats) {
       const m = e.m;
       if (m.emissive) { m.emissive.setRGB(e.em.r + er, e.em.g + eg, e.em.b + eb); m.emissiveIntensity = 1; }

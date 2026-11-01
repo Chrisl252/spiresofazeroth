@@ -4,15 +4,15 @@
 // ctx = { C, src, srcKind, target, attacker, card, cardInst, relic, event, run, rng, spent, X, trapFiring }
 //   srcKind: player | enemy | pet | totem | relic | potion | zone | event
 //   C is null in run-mode (events, shop, rest, pickup): only run-level ops take effect (hp, gold, deck, max hp).
-import { dealDamage, dealStatusDamage, gainBlock, healEntity, isAlive, fx, log } from "./damage.js?v=20261029d";
-import { applyStatus, removeStatus, modeOf, STATUS_DEFS, hasTrait } from "./status.js?v=20261029d";
-import { drawCards, addCards, toDiscard, toExhaust, makeInst, hasFlag, HAND_LIMIT } from "./deck.js?v=20261029d";
+import { dealDamage, dealStatusDamage, gainBlock, healEntity, isAlive, fx, log } from "./damage.js";
+import { applyStatus, removeStatus, modeOf, STATUS_DEFS, hasTrait } from "./status.js";
+import { drawCards, addCards, toDiscard, toExhaust, makeInst, hasFlag, HAND_LIMIT } from "./deck.js";
 import {
   addRes, spendRes, summonAlly, placeTotem, petAct, judge, revivePet, sacrificePet, randomPetId, petTargetable,
-} from "./resources.js?v=20261029d";
-import { spawnEnemy } from "./intents.js?v=20261029d";
-import { extraCond, installMoreOps } from "./effects-more.js?v=20261029d";
-import { talentApplyBonus, talentSkipSelfHit } from "./talentHooks.js?v=20261029d";
+} from "./resources.js";
+import { spawnEnemy } from "./intents.js";
+import { extraCond, installMoreOps } from "./effects-more.js";
+import { talentApplyBonus, talentSkipSelfHit } from "./talentHooks.js";
 
 const MUL_SCALES = new Set(["combo", "combo_points"]); // "N per point" reads as base + per * count; everything else base + floor(count / per)
 
@@ -99,6 +99,7 @@ export function resolveTargets(ctx, spec, dflt) {
       if (fromEnemy) { const a = enemyAim(C, src); return a ? [a] : []; }
       if (ctx.trapFiring && ctx.attacker) return [ctx.attacker];
       if (ctx.target && isAlive(ctx.target)) return [ctx.target];
+      if (ctx.target && ctx.srcKind === "player" && ctx.card) return []; // 10-30 report: a card's later hits (Hammer of Wrath's below-50% bonus) spilled onto the NEXT enemy once the aimed one died
       const l = targetableEnemies(C);
       if (ctx.srcKind === "pet" || ctx.srcKind === "totem") return l.length ? [l[0]] : [];
       return l.length ? [C.lastTarget && isAlive(C.lastTarget) ? C.lastTarget : l[0]] : [];
@@ -262,7 +263,7 @@ op(["damage", "aoe"], (ctx, e) => {
 op("block", (ctx, e) => {
   if (runMode(ctx)) return;
   const C = ctx.C;
-  for (const t of resolveTargets(ctx, e.target, "self")) gainBlock(C, t, num(ctx, e.amount), { card: !!ctx.cardInst, cardId: ctx.card ? ctx.card.id : undefined });
+  for (const t of resolveTargets(ctx, e.target, "self")) gainBlock(C, t, num(ctx, e.amount), { card: !!ctx.cardInst, cardId: ctx.card ? ctx.card.id : undefined, raw: !!ctx.relic });  // relic block is flat: no Dexterity/gear stacking (Chris 10-31)
 });
 
 op("heal", (ctx, e) => {
@@ -274,6 +275,13 @@ op("heal", (ctx, e) => {
     return;
   }
   const C = ctx.C;
+  const pet = C.player && C.player.pet;
+  if (e.target === "pet" && pet && pet.down) { // 10-31 Chris: Mend Pet on a dead pet did nothing; it now revives at the heal amount
+    let amt = e.pct ? Math.floor(pet.maxHp * e.pct / 100) : num(ctx, e.amount);
+    if (amt >= 999) amt = pet.maxHp;
+    if (revivePet(C, 1)) pet.hp = Math.max(1, Math.min(pet.maxHp, amt));
+    return;
+  }
   for (const t of resolveTargets(ctx, e.target, "self")) {
     let amt = e.pct ? Math.floor(t.maxHp * e.pct / 100) : num(ctx, e.amount);
     if (amt >= 999) amt = t.maxHp;
@@ -329,7 +337,7 @@ op("remove", (ctx, e) => {
 
 // Engine backstop against thin-deck infinite loops (draw -> refund -> draw ...): card/effect-driven draws are capped per player turn.
 // The turn-start hand and the opening hand are drawn by combat.js directly and are not counted. Reset in combat.startPlayerTurn.
-export const MAX_EFFECT_DRAWS_PER_TURN = 10;
+export const MAX_EFFECT_DRAWS_PER_TURN = 30; // 10-30 reports: Goblin Jumper / Sprint "stopped drawing" at 10; 30 only stops true loops
 op("draw", (ctx, e) => {
   const C = ctx.C; if (!C) return;
   let n = Math.max(0, Math.floor(num(ctx, e.count, 1)));
@@ -337,11 +345,14 @@ op("draw", (ctx, e) => {
     const left = Math.max(0, MAX_EFFECT_DRAWS_PER_TURN - (C.effectDraws || 0));
     if (n > left) C.drawBlocked = "cap"; // the combat UI tells the player why the draw stopped
     n = Math.min(n, left);
-    C.effectDraws = (C.effectDraws || 0) + n;
   }
   if (n > 0) {
     const before = C.pile.hand.length;
-    drawCards(C, n);
+    const ci = ctx.cardInst, cp = C.pile; // 10-30 report: the card being played is in limbo, so a thin deck's draw found empty draw+discard and never reshuffled it in; park a plain card in discard first
+    if (ci && ctx.isCardPrimary && cp.draw.length < n && !cp.hand.includes(ci) && !cp.discard.includes(ci) && !cp.exhaust.includes(ci) && !cp.draw.includes(ci)
+      && ci.def && ci.def.type !== "power" && ci.def.type !== "token_power" && !hasFlag(ci, "exhaust") && !hasFlag(ci, "returns")) cp.discard.push(ci);
+    const got = drawCards(C, n);
+    if (ctx.srcKind !== "enemy") C.effectDraws = (C.effectDraws || 0) + got; // 10-30 report: cap counts cards actually drawn, not requested (a dry deck burned the budget)
     if (ctx.srcKind !== "enemy" && C.pile.hand.length - before < n && C.pile.hand.length >= HAND_LIMIT) C.drawBlocked = "hand";
     else if (ctx.srcKind !== "enemy" && C.pile.hand.length - before < n && !C.pile.draw.length && !C.pile.discard.length) C.drawBlocked = "empty"; // 10-29 report: draws "stopped working" silently
   }
@@ -378,7 +389,11 @@ op(["exhaust", "exhaust_hand"], (ctx, e) => {
   for (const c of pickCards(ctx, cnt, all ? true : e.random, "exhaust")) { toExhaust(ctx.C, c); ctx.C.lastExhausted = c; }
 });
 
-op("gain_energy", (ctx, e) => { if (ctx.C) ctx.C.player.energy += Math.floor(num(ctx, e.amount)); });
+op("gain_energy", (ctx, e) => { // outside your turn (combat start: Heart of the Wild; totem ticks: Mana Spring) startPlayerTurn would overwrite energy, so bank it for the next turn (10-30 reports)
+  if (!ctx.C) return;
+  const C = ctx.C, n = Math.floor(num(ctx, e.amount));
+  if (C.turn === 0 || C.phase !== "player") C.player.energyNext = (C.player.energyNext || 0) + n; else C.player.energy += n;
+});
 op("energy_next_turn", (ctx, e) => { if (ctx.C) ctx.C.player.energyNext = (ctx.C.player.energyNext || 0) + Math.floor(num(ctx, e.amount)); });
 op("gain_resource", (ctx, e) => { if (ctx.C) addRes(ctx.C, e.resource, Math.floor(num(ctx, e.amount))); });
 op("spend_resource", (ctx, e) => {

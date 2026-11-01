@@ -2,8 +2,8 @@
 // slides open beside it. Pure DOM, one document-level listener; the hand keeps its own lift + arrow logic.
 // Glossary sources: data/keywords.json (statuses), class stance/seal/form/aspect/totem cards (their own text),
 // the class resource tip. Explanations chain one level (Berserker Stance text -> its keywords).
-import { iconUrl } from "../engine/data.js?v=20261029d";
-import { overlayHost } from "./dom.js?v=20261029d";
+import { iconUrl } from "../engine/data.js";
+import { overlayHost } from "./dom.js";
 
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const SPECIAL = [ // rules words that are not statuses but players ask about
@@ -31,8 +31,11 @@ export function installCardInspect(app) {
   const kwFor = (text, seen) => { // statuses + special words mentioned in text
     const out = [], d = app.data;
     const word = (n) => new RegExp("(^|[^a-z])" + n.toLowerCase().replace(/[^a-z0-9 ]/g, "") + "([^a-z]|$)", "i");
-    if (d && d.keywords) for (const k of d.keywords.values()) if (!seen.has(k.id) && word(k.name).test(text)) { seen.add(k.id); out.push({ name: k.name, icon: k.icon, text: k.text, kind: k.kind }); }
-    for (const s of SPECIAL) if (!seen.has(s.name) && s.re.test(text)) { seen.add(s.name); out.push(s); }
+    // one entry per name: a status in keywords.json (Strength, Dexterity, Thorns) wins over the SPECIAL fallback with the same name,
+    // else the panel listed each twice in different words (10-30 player report: Elixir of the Mongoose "shows 4 buffs")
+    const key = (n) => String(n || "").toLowerCase();
+    if (d && d.keywords) for (const k of d.keywords.values()) if (!seen.has(k.id) && !seen.has(key(k.name)) && word(k.name).test(text)) { seen.add(k.id); seen.add(key(k.name)); out.push({ name: k.name, icon: k.icon, text: k.text, kind: k.kind }); }
+    for (const s of SPECIAL) if (!seen.has(key(s.name)) && s.re.test(text)) { seen.add(key(s.name)); out.push(s); }
     return out;
   };
   const classOf = (def) => { // the run's class, else whichever class pool owns this card

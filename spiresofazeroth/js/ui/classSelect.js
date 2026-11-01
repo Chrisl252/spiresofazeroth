@@ -1,13 +1,13 @@
 // Class select (stage-native): nine class plates, details + starting deck, continent / heroic / seed / pet, Begin.
-import { h, icon, cap, track, fill, tip, esc } from "./dom.js?v=20261029d";
-import { isClassUnlocked, unlockText, saveRun, saveMeta } from "../engine/save.js?v=20261029d";
-import { newRun, prepareZonePick } from "../engine/run.js?v=20261029d";
-import { newSeedString } from "../engine/rng.js?v=20261029d";
-import { heroicName, heroicOpen, heroicBlurb } from "../engine/heroic.js?v=20261029d";
-import { cssReady, btn, tog, ico, banner, scroll } from "./kit.js?v=20261029d";
-import { HOME } from "../engine/character.js?v=20261029d";
-import { beginRun } from "./runStart.js?v=20261029d";
-import { repairSpent, talentState, talentMods, talentSummary, classLevel, nextLevelXp, lockedCardIds } from "../engine/talents.js?v=20261029d";
+import { h, icon, cap, track, fill, tip, esc } from "./dom.js";
+import { isClassUnlocked, unlockText, saveRun, saveMeta } from "../engine/save.js";
+import { newRun, prepareZonePick } from "../engine/run.js";
+import { newSeedString } from "../engine/rng.js";
+import { heroicName, heroicOpen, heroicBlurb } from "../engine/heroic.js";
+import { cssReady, btn, tog, ico, banner, scroll } from "./kit.js";
+import { HOME, DEFAULT_RACE, canBe } from "../engine/character.js";
+import { beginRun } from "./runStart.js";
+import { repairSpent, talentState, talentMods, talentSummary, classLevel, nextLevelXp, lockedCardIds } from "../engine/talents.js";
 
 export const stageNative = true;
 
@@ -42,7 +42,10 @@ export async function render(app, _name, props = {}) {
       const c = data.classObj(id);
       const open = isClassUnlocked(meta, ids, id);
       const sel = id === st.cls;
-      const p = h("button", { class: `sx-clsplate ${sel ? "sel" : ""}`.trim(), type: "button", disabled: !!ch && !sel, style: { "--cc": c.color || "#c9a24b" }, "aria-pressed": String(sel), onClick: () => { st.cls = id; st.continent = null; draw(); } },
+      const p = h("button", { class: `sx-clsplate ${sel ? "sel" : ""}`.trim(), type: "button", style: { "--cc": c.color || "#c9a24b" }, "aria-pressed": String(sel), title: ch && !sel ? `Create a new ${c.name}` : undefined,
+        onClick: () => { // 10-29 report "cant pick other classes": a character is one class, so another class plate starts a new character of it
+          if (ch && !sel) return app.go("charCreate", { cls: id, race: canBe(ch.race, id) ? ch.race : DEFAULT_RACE[id], gender: ch.gender });
+          st.cls = id; st.continent = null; draw(); } },
         ico(c.icon, { size: "lg", alt: c.name }),
         h("div", { class: "sx-clsplate__t" }, h("b", {}, c.name),
           h("span", {}, h("em", {}, `${c.startingHp} HP`), `  ${(c.resource || {}).name || ""}`)),
@@ -79,7 +82,7 @@ export async function render(app, _name, props = {}) {
     const xp = ((meta.progress || {})[st.cls] || {}).xp | 0, prevT = lvl > 0 ? th[lvl - 1] : 0, pct = nxt ? Math.round(100 * Math.min(1, (xp - prevT) / Math.max(1, nxt - prevT))) : 100;
     const lockedN = data.unlocks && data.unlocks.classes && data.unlocks.classes[st.cls] ? data.unlocks.classes[st.cls].flat().filter((id) => lockedCardIds(meta, data.unlocks).has(id)).length : 0;
     const acct = h("div", { class: "sx-field" }, h("h4", {}, "Account"),
-      h("div", { class: "sx-cls__acct" }, h("b", {}, `Level ${lvl}`), h("div", { class: "sx-tal__xp" }, h("i", { style: { width: `${pct}%` } }), h("span", {}, nxt ? `${xp} / ${nxt} XP` : `${xp} XP`)),
+      h("div", { class: "sx-cls__acct" }, h("b", {}, `Level ${lvl + 1}`), h("div", { class: "sx-tal__xp" }, h("i", { style: { width: `${pct}%` } }), h("span", {}, nxt ? `${xp} / ${nxt} XP` : `${xp} XP`)),
         h("span", {}, tstate.earned ? `${tstate.earned} talent pt${tstate.earned === 1 ? "" : "s"}` : "No talent points yet"), tstate.available > 0 ? h("b", { class: "sx-tal__badge" }, String(tstate.available)) : null,
         btn(tstate.available > 0 ? "Spend talents" : "Talents", () => app.go("talents", { cls: st.cls, back: "classSelect" }), { size: "sm" })),
       h("p", { class: "sx-cls__talents" }, mods ? `Active talents: ${talentSummary(mods)}.` : "Win fights and clear acts to earn talent points. Every victory also levels the class and unlocks new cards.", lockedN ? ` ${lockedN} card${lockedN === 1 ? "" : "s"} still locked.` : ""));

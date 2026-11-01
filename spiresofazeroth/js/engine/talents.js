@@ -6,7 +6,7 @@
 // FLOORS_PER_POINT floors cleared + per act + victory, so the 51-point cap takes several runs; TALENT_LIMITS caps what talents can
 // add to a fight (one home: limitTalentMods, applied by talentMods and newRun). Measure with tools/spires/sim.mjs --talents.
 
-import { HOOKS, valueAt, modKey, talentEffects, cardList } from "./talentHookDefs.js?v=20261029d";
+import { HOOKS, valueAt, modKey, talentEffects, cardList } from "./talentHookDefs.js";
 
 export const TALENT_CAP = 51;            // a level-60 character has 51 points
 export const TIER_STEP = 5;              // points in a tree needed per tier, like the client
@@ -182,7 +182,8 @@ export function runTalentPoints(run) {
 export function awardProgress(meta, run, unlocks) {
   const cid = run.classId, victory = run.result === "victory";
   const acts = actsCleared(run); // acts fully cleared
-  const points = Math.min(TALENT_CAP - (slot(meta, cid).earned | 0), runTalentPoints(run));
+  // mid-run payouts (talentsMidRun.js payMidRun) already credited run.talentPaid of this run's points: pay only the rest
+  const points = Math.min(TALENT_CAP - (slot(meta, cid).earned | 0), runTalentPoints(run) - (run.talentPaid | 0));
   slot(meta, cid).earned = Math.min(TALENT_CAP, (slot(meta, cid).earned | 0) + Math.max(0, points));
   const th = (unlocks && unlocks.thresholds) || XP_LEVELS;
   const p = prog(meta, cid), prevLevel = classLevel(meta, cid, th);
@@ -191,7 +192,7 @@ export function awardProgress(meta, run, unlocks) {
   const level = classLevel(meta, cid, th);
   const tiers = (unlocks && unlocks.classes && unlocks.classes[cid]) || [];
   const newCards = tiers.slice(prevLevel, level).flat();
-  return { points: Math.max(0, points), xp, level, prevLevel, newCards, nextXp: nextLevelXp(meta, cid, th) };
+  return { points: Math.max(0, points) + (run.talentGot | 0), xp, level, prevLevel, newCards, nextXp: nextLevelXp(meta, cid, th) };
 }
 /** Card ids the player has not unlocked yet (empty when "unlock all" is on in settings). */
 export function lockedCardIds(meta, unlocks) {

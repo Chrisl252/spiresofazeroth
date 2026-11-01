@@ -1,24 +1,24 @@
 // Combat screen (v2, stage-native). Mounts the HUD (hud.js) and the hand (hand.js) on the 1920x1080 stage and drives the engine exactly as v1 did.
 // v2 integration: 3D actors + VFX are mounted by combatKit.js, choreography (impact instants) lives in combatDirector.js; this file sequences turns.
-import { sp, funnel, encKey } from "../analytics.js?v=20261029d";
-import { h, tip, esc, floatText, toast, sleep, modal, fill } from "./dom.js?v=20261029d";
+import { sp, funnel, encKey } from "../analytics.js";
+import { h, tip, esc, floatText, toast, sleep, modal, fill } from "./dom.js";
 import {
   playCard, canPlayWhy, cardNeedsTarget, endPlayerTurn, enemyPhase, finishRound, usePotion, resolvePending, livingEnemies, canSpare, spareEnemy,
-} from "../engine/combat.js?v=20261029d";
-import { cardCost } from "../engine/deck.js?v=20261029d";
-import { beginCombat, afterCombat } from "../engine/run.js?v=20261029d";
-import { gearLevel } from "../engine/gear.js?v=20261029d";
-import { isAlive } from "../engine/damage.js?v=20261029d";
-import { cardUselessOn } from "../engine/immunity.js?v=20261029d";
-import { previewCardVs, cardAimsDamage } from "../engine/preview.js?v=20261029d";
-import { cardEl, refreshCard, keywordLines, classColor } from "./card.js?v=20261029d";
-import { createHud } from "./hud.js?v=20261029d";
-import { createHand } from "./hand.js?v=20261029d";
-import { getKit, clearStage, watchLeave, safe, speedMul, applySettings } from "./combatKit.js?v=20261029d";
-import { createDirector } from "./combatDirector.js?v=20261029d";
-import { cardSounds } from "./cardSounds.js?v=20261029d";
-import { BUILD } from "../version.js?v=20261029d";
-import { coopStart, createCoopLink } from "./coopCombat.js?v=20261029d";
+} from "../engine/combat.js";
+import { cardCost } from "../engine/deck.js";
+import { beginCombat, afterCombat } from "../engine/run.js";
+import { gearLevel } from "../engine/gear.js";
+import { isAlive } from "../engine/damage.js";
+import { cardUselessOn } from "../engine/immunity.js";
+import { previewCardVs, cardAimsDamage } from "../engine/preview.js";
+import { cardEl, refreshCard, keywordLines, classColor } from "./card.js";
+import { createHud } from "./hud.js";
+import { createHand } from "./hand.js";
+import { getKit, clearStage, watchLeave, safe, speedMul, applySettings } from "./combatKit.js";
+import { createDirector } from "./combatDirector.js";
+import { cardSounds } from "./cardSounds.js";
+import { BUILD } from "../version.js";
+import { coopStart, createCoopLink } from "./coopCombat.js";
 
 export const stageNative = true;
 
@@ -82,7 +82,7 @@ export async function render(app) {
   });
   root.append(pendingHost);
 
-  app._combat = {
+  const mine = app._combat = { // this render's kit handle; cleanup only clears it if it is still ours (a second render of the same fight sets its own)
     C,
     st,
     hand,
@@ -311,7 +311,14 @@ export async function render(app) {
     app.C = null;
     app.save();
     const won = run.screen !== "end";
-    if (won) { await wait(app.reduced() ? 0 : 900); cleanup(); app.route(); return; } // victory: corpse stays visible on ground before transition to reward
+    if (won) { // victory: corpse stays visible on ground before transition to reward
+      await wait(app.reduced() ? 0 : 900);
+      cleanup();
+      // only if this screen is still the one showing: a player (or the co-op follow) who already moved on must not get a second route here.
+      // 10-29 drive: that stray route re-opened a fight the host had just entered -> two combat renders, the first one's teardown killed the second (host stall)
+      if (root.isConnected) app.route();
+      return;
+    }
     root.append(h("div", { class: "sp-result" }, h("h2", {}, won ? "Victory" : "Defeat"),
       h("button", { class: "sp-wowbtn sp-wowbtn--lg", type: "button", "data-autofocus": "", onClick: () => { cleanup(); app.route(); } }, "Continue")));
     const b = root.querySelector("[data-autofocus]"); if (b) b.focus();
@@ -387,7 +394,7 @@ export async function render(app) {
   let cleaned = false;
   function cleanup() {
     if (cleaned) return; cleaned = true;
-    if (app._combat && app._combat.C === C) app._combat = null;
+    if (app._combat === mine) app._combat = null; // not by C: a newer render of the same fight shares C and owns app._combat now
     if (CL) { CL.destroy(); CL = null; }
     if (st.closeTips) st.closeTips();
     document.removeEventListener("keydown", keys); hand.destroy();

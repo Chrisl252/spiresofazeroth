@@ -75,8 +75,24 @@ export function createRealArt({ root, v = "" } = {}) {
     return t;
   }
 
+  /** opaque (no-alpha) additive textures draw as hard rectangles on the flat canvas; this copy fades the edges with a radial mask */
+  const softs = new Map();
+  function soft(id) {
+    const bm = bitmaps.get(id); if (!bm) return null;
+    let t = softs.get(id);
+    if (!t) {
+      const w = bm.width, h = bm.height, c = makeCanvas(w, h), g2 = c.getContext("2d");
+      g2.drawImage(bm, 0, 0);
+      const gr = g2.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.18, w / 2, h / 2, Math.min(w, h) * 0.5);
+      gr.addColorStop(0, "rgba(0,0,0,1)"); gr.addColorStop(1, "rgba(0,0,0,0)");
+      g2.globalCompositeOperation = "destination-in"; g2.fillStyle = gr; g2.fillRect(0, 0, w, h);
+      softs.set(id, t = c);
+    }
+    return t;
+  }
+
   const api = {
-    ready, tex, tinted, ensure,
+    ready, tex, tinted, soft, ensure,
     get ok() { return ok; },
     entryFor: (cardId) => (ok && cardId && !globalThis.__spellfxOff ? real[cardId] || null : null),   // __spellfxOff = debug switch for before/after captures
     model: (id) => models[id] || null,

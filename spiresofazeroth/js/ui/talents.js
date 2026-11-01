@@ -1,10 +1,12 @@
 // Talents (stage-native): the classic three-tree talent sheet per class, paid with points earned by climbing (engine/talents.js),
 // plus the card-unlock ladder (class level from XP; data/unlocks.json). Left click learns a rank, right click unlearns one.
-import { h, icon, tip, esc, fill, cap } from "./dom.js?v=20261029d";
-import { saveMeta } from "../engine/save.js?v=20261029d";
-import { cssReady, btn, tog, ico, banner, scroll, dark } from "./kit.js?v=20261029d";
-import { talentEffects, valueAt } from "../engine/talentHookDefs.js?v=20261029d";
-import { TALENT_LIMITS, SOFT_RATE, repairSpent, EFFECTS, TALENT_CAP, TIER_STEP, FLOORS_PER_POINT, POINTS_PER_ACT, VICTORY_BONUS, talentState, treeSpent, pointsBelow, canLearn, learn, unlearn, resetTalents, talentMods, talentSummary, classLevel, nextLevelXp, lockedCardIds } from "../engine/talents.js?v=20261029d";
+// props.midRun (opened from the run bar, engine/talentsMidRun.js): the run's class only, learn-only, every rank re-stamps the run at once.
+import { h, icon, tip, esc, fill, cap } from "./dom.js";
+import { saveMeta } from "../engine/save.js";
+import { cssReady, btn, tog, ico, banner, scroll, dark } from "./kit.js";
+import { talentEffects, valueAt } from "../engine/talentHookDefs.js";
+import { beginMidRun, restampRun, midRunSpent, MID_TALENT_PRESSURE } from "../engine/talentsMidRun.js";
+import { TALENT_LIMITS, SOFT_RATE, repairSpent, EFFECTS, TALENT_CAP, TIER_STEP, FLOORS_PER_POINT, POINTS_PER_ACT, VICTORY_BONUS, talentState, treeSpent, pointsBelow, canLearn, learn, unlearn, resetTalents, talentMods, talentSummary, classLevel, nextLevelXp, lockedCardIds } from "../engine/talents.js";
 
 export const stageNative = true;
 
@@ -12,7 +14,8 @@ export async function render(app, _name, props = {}) {
   await cssReady;
   const { data, meta, stage } = app;
   stage.setBackdrop("classSelect");
-  const ids = data.classIds;
+  const mid = !!(props.midRun && app.run && app.run.screen === "map");
+  const ids = mid ? [app.run.classId] : data.classIds;
   const st = { cls: props.cls && ids.includes(props.cls) ? props.cls : meta.lastClass && ids.includes(meta.lastClass) ? meta.lastClass : ids[0] };
   const back = () => app.go(props.back || "title", props.backProps);
   const host = h("section", { class: "sx-screen sx-tal" });
@@ -22,7 +25,9 @@ export async function render(app, _name, props = {}) {
   await Promise.all(ids.map((id) => Promise.all([data.loadClass(id), data.loadTalents(id)])));
 
   for (const id of ids) if (repairSpent(meta, id, data.talentDefs.get(id))) saveMeta(meta); // Talents V2: clamp saved ranks, refund the difference
-  const save = () => { saveMeta(meta); if (app.refreshLocks) app.refreshLocks(); };
+  if (mid) beginMidRun(meta, app.run); // Hardened Foes baseline: points already spent when the run first opened the sheet
+  const save = () => { saveMeta(meta); if (app.refreshLocks) app.refreshLocks(); if (mid) app.save(); };
+  const pct = Math.round(MID_TALENT_PRESSURE * 1000) / 10;
   const unspent = (cid) => talentState(meta, cid).available;
 
   function drawTabs() {
@@ -44,7 +49,8 @@ export async function render(app, _name, props = {}) {
     if (r < t.max) say(r + 1).forEach((s, i) => lines.push(`<span class="sx-tal__next">${i === 0 ? "Next rank: " : ""}${esc(s)}</span>`));
     const why = canLearn(state, tree, t);
     if (why && r < t.max) lines.push(`<span class="sx-tal__why">${esc(why)}</span>`);
-    if (r > 0) lines.push(`<span class="sp-dim">Right click to unlearn.</span>`);
+    if (r > 0 && !mid) lines.push(`<span class="sp-dim">Right click to unlearn.</span>`);
+    if (mid && !why && r < t.max) lines.push(`<span class="sx-tal__why">Learning now: active this run, enemies +${pct}% HP for the rest of it.</span>`);
     return lines.join("<br>");
   }
 
@@ -60,8 +66,8 @@ export async function render(app, _name, props = {}) {
         const why = canLearn(state, tree, t);
         const cls = r >= t.max ? "max" : !why ? "open" : r > 0 ? "part" : "locked";
         const b = h("button", { class: `sx-tal__t ${cls}`, type: "button", "aria-label": `${t.name}, rank ${r} of ${t.max}`,
-          onClick: () => { if (learn(meta, cid, tree, t)) { save(); draw(); } },
-          onContextmenu: (ev) => { ev.preventDefault(); if (unlearn(meta, cid, tree, t)) { save(); draw(); } } },
+          onClick: () => { if (learn(meta, cid, tree, t)) { if (mid) restampRun(meta, app.run, data, tdef); save(); draw(); } },
+          onContextmenu: (ev) => { ev.preventDefault(); if (!mid && unlearn(meta, cid, tree, t)) { save(); draw(); } } },
           ico(t.icon, { size: "sm" }), h("b", { class: "sx-tal__rank" }, `${r}/${t.max}`));
         tip(b, talentTip(state, tree, t));
         grid.append(b);
@@ -78,7 +84,7 @@ export async function render(app, _name, props = {}) {
     const tiers = (unl && unl.classes && unl.classes[cid]) || [];
     const locked = lockedCardIds(meta, unl);
     const rows = tiers.map((cards, i) => h("div", { class: `sx-tal__ul ${lvl > i ? "on" : ""}` },
-      h("b", {}, `Level ${i + 1}`), h("span", {}, lvl > i ? "Unlocked" : `${th[i]} XP`),
+      h("b", {}, `Level ${i + 2}`), h("span", {}, lvl > i ? "Unlocked" : `${th[i]} XP`),
       h("div", { class: "sx-tal__cards" }, ...cards.map((id) => {
         const def = app.cardDef(id, false) || { name: cap(id), icon: "inv_misc_questionmark" };
         const open = !locked.has(id);
@@ -89,10 +95,10 @@ export async function render(app, _name, props = {}) {
     const state = talentState(meta, cid);
     const mods = talentMods(meta, cid, data.talentDefs.get(cid));
     return scroll("sx-tal__side", h("div", { class: "sx-tal__inner" },
-      h("div", { class: "sx-tal__who", style: { "--cc": cobj.color || "#c9a24b" } }, ico(cobj.icon, { size: "md", alt: cobj.name }), h("div", {}, h("h2", {}, cobj.name), h("p", {}, `Level ${lvl}${next ? "" : " (max)"}  |  ${p.runs | 0} run${p.runs === 1 ? "" : "s"}, ${p.wins | 0} win${p.wins === 1 ? "" : "s"}`))),
+      h("div", { class: "sx-tal__who", style: { "--cc": cobj.color || "#c9a24b" } }, ico(cobj.icon, { size: "md", alt: cobj.name }), h("div", {}, h("h2", {}, cobj.name), h("p", {}, `Level ${lvl + 1}${next ? "" : " (max)"}  |  ${p.runs | 0} run${p.runs === 1 ? "" : "s"}, ${p.wins | 0} win${p.wins === 1 ? "" : "s"}`))),
       h("div", { class: "sx-tal__xp" }, h("i", { style: { width: `${pct}%` } }), h("span", {}, next ? `${p.xp | 0} / ${next} XP` : `${p.xp | 0} XP`)),
       h("div", { class: "sx-tal__pts" }, h("b", {}, String(state.available)), h("span", {}, `unspent of ${state.earned} / ${TALENT_CAP} talent points`)),
-      h("p", { class: "sx-tal__sum" }, mods ? talentSummary(mods) : "No talents learned yet. Spend points on the left; every rank is active from your next run."),
+      h("p", { class: "sx-tal__sum" }, mods ? talentSummary(mods) : mid ? "No talents learned yet. A rank learned now is active from your next fight." : "No talents learned yet. Spend points on the left; every rank is active from your next run."),
       mods && Object.entries(TALENT_LIMITS).some(([k, c]) => c > 1 && mods[k] >= c) ? h("p", { class: "sx-tal__how" }, `Past its soft cap, a stat keeps growing at +1 for every ${SOFT_RATE} more. Energy and card draw stay at +1.`) : null,
       h("h4", {}, "Card unlocks"), ...rows,
       meta.settings.unlockAll ? h("p", { class: "sx-dim" }, "Unlock all cards is on in Settings.") : null,
@@ -105,13 +111,20 @@ export async function render(app, _name, props = {}) {
     const state = talentState(meta, cid);
     if (!tdef) { fill(body, h("p", { class: "sx-dim" }, "No talent data for this class yet.")); return; }
     fill(body, h("div", { class: "sx-tal__trees" }, ...tdef.trees.map((tree) => treePanel(cid, tdef, tree, state))), ladder(cid, cobj));
+    if (mid) {
+      const n = midRunSpent(app.run), novice = !app.run.talents && state.available > 0;
+      fill(foot,
+        h("span", { class: "sx-tal__hint" }, `Mid-run: left click learns a rank (no unlearning until the run ends). Hardened Foes: ${n} point${n === 1 ? "" : "s"} learned this run, enemies +${Math.round(n * pct * 10) / 10}% HP.`
+          + (novice ? " Your first point also ends Novice's Resolve (the extra HP and softer enemies) for this run." : "")));
+      return;
+    }
     fill(foot,
       h("span", { class: "sx-tal__hint" }, "Left click learns a rank, right click unlearns. Each row needs 5 points in that tree."),
       btn("Reset talents", () => { resetTalents(meta, cid); save(); draw(); }, { size: "sm", disabled: !state.used }));
   }
   draw();
   fill(host,
-    h("div", { class: "sx-cls__top" }, banner("Talents", `Points come from climbing: 1 per ${FLOORS_PER_POINT} floors cleared, more for each act and a victory.`), btn("Back", back, { size: "sm", cls: "sx-cls__back", auto: true })),
+    h("div", { class: "sx-cls__top" }, banner("Talents", mid ? `Spend points now and they work from the next fight, but each one makes this run's enemies ${pct}% tougher. Or save them for your next run.` : `Points come from climbing: 1 per ${FLOORS_PER_POINT} floors cleared, more for each act and a victory.`), btn(mid ? "Back to map" : "Back", back, { size: "sm", cls: "sx-cls__back", auto: true })),
     tabs, body, foot);
   return host;
 }

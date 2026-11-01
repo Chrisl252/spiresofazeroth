@@ -4,17 +4,17 @@
 // shift-click / Loot all / X / Enter) to take it: the row slides out with the coin sound; the last row closes the frame and the reward step follows.
 // Gear rows show the item tooltip on hover. Also used by the map TREASURE node (pd.type === "treasure": chest portrait, gear + gold are the loot).
 //   needsLoot(pd) -> bool          showLoot(app, host, pd, done) -> Promise   (host = the reward screen section; done() runs on continue)
-import { h, icon, tip, esc, toast } from "./dom.js?v=20261029d";
-import { banner, btn } from "./kit.js?v=20261029d";
-import { compareTip, gearCss, gearStrip, gearTip } from "./gearStrip.js?v=20261029d";
-import { equip, gearLevel, goesToBag, isStarter, SLOT_LABEL, syncSetBonuses } from "../engine/gear.js?v=20261029d";
-import { takeRelic, takePotion } from "../engine/run.js?v=20261029d";
-import { runEffects } from "../engine/effects.js?v=20261029d";
-import { canUsePotionOutOfCombat } from "./belt.js?v=20261029d";
-import { runBar } from "./runbar.js?v=20261029d";
-import { heroicMods } from "../engine/heroic.js?v=20261029d";
-import { sfx } from "../audio.js?v=20261029d";
-import { getKit, clearStage, lanesFor, watchLeave } from "./combatKit.js?v=20261029d";
+import { h, icon, tip, esc, toast } from "./dom.js";
+import { banner, btn } from "./kit.js";
+import { compareTip, gearCss, gearStrip, gearTip } from "./gearStrip.js";
+import { equip, gearLevel, goesToBag, isStarter, SLOT_LABEL, syncSetBonuses } from "../engine/gear.js";
+import { takeRelic, takePotion } from "../engine/run.js";
+import { runEffects } from "../engine/effects.js";
+import { canUsePotionOutOfCombat } from "./belt.js";
+import { runBar } from "./runbar.js";
+import { heroicMods } from "../engine/heroic.js";
+import { sfx } from "../audio.js";
+import { getKit, clearStage, lanesFor, watchLeave } from "./combatKit.js";
 
 export const needsLoot = (pd) => !!(pd && !pd.lootSeen && (pd.gear || (pd.type === "treasure" && (pd.gold || pd.relic))));
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -119,10 +119,12 @@ export function buildLootFrame(app, pd, { onTake = () => {}, tag = "Spoils" } = 
     const ids = pd.relicChoose ? pd.relics : pd.relics.slice(0, 1);
     for (const id of ids) {
       const r = data.relic(id); if (!r) continue;
-      const bagNote = goesToBag(run, data, id) ? `<span style="color:#9d9d9d">Your worn ${esc(SLOT_LABEL[r.slot] || "gear")} stays on: this goes to your Gear Bag.</span><br>` : "";
+      const bagNote = !pd.relicChoose && goesToBag(run, data, id) ? `<span style="color:#9d9d9d">Your worn ${esc(SLOT_LABEL[r.slot] || "gear")} stays on: this goes to your Gear Bag.</span><br>` : "";
       add(row({ ic: r.icon, name: r.name, q: r.rarity || "common", tipHtml: bagNote + gearTip(r, run, data), cls: pd.relicChoose ? "lf-row--choose" : "", sub: pd.relicChoose ? r.text : "" }), "relic", () => {
-        const ok = takeRelic(run, data, id);
+        const ok = takeRelic(run, data, id, { wear: !!pd.relicChoose }); // 10-30 report: a deliberate choose-one pick is worn (old piece -> Gear Bag), not silently bagged
+        if (ok && r.slot) syncSetBonuses(run, data);
         if (ok && run.gearBag && run.gearBag.includes(id)) toast(`${r.name} sent to your Gear Bag`);
+        else if (ok && pd.relicChoose && r.slot) toast(`Equipped ${r.name}`);
         return ok;
       }, pd.relicChoose ? "relic" : null);
     }
@@ -241,7 +243,7 @@ export async function showLoot(app, host, pd, done) {
   const fx = kit && kit.fx, P = fx && fx.particles;
   const chestSize = { fight: 330, elite: 380, boss: 440 }[pd.chest] || 330;
   let chestTimedOut = false;
-  const chestPromise = import("../stage/chest3d.js?v=20261029d")
+  const chestPromise = import("../stage/chest3d.js")
     .then(({ mountChest }) => mountChest(stage.layers.actors, { kind: pd.chest || "fight", x: cx, y: groundY, W, H, size: chestSize * (stage.portrait ? 0.8 : 1), reduced }))
     .catch((e) => { console.warn("[spires] 3d loot chest unavailable:", e && e.message); return null; });
   chest = await withTimeout(chestPromise, 4000, () => {

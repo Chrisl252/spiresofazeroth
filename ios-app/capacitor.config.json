@@ -1,0 +1,7 @@
+{
+  "appId": "com.thewowdb.spiresofazeroth",
+  "appName": "Spires of Azeroth",
+  "webDir": "www",
+  "backgroundColor": "#000000",
+  "ios": { "contentInset": "never", "allowsLinkPreview": false }
+}

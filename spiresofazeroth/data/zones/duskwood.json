@@ -9,8 +9,8 @@
   30
  ],
  "spire": {
-  "name": "Raven Hill Crypt Spire",
-  "lore": "A spire of black stone rising from the Raven Hill Cemetery. The Night Watch of Darkshire no longer patrols past the gates; Morbent Fel waits at the top."
+  "name": "Raven Hill Cemetery",
+  "lore": "The graveyard west of Darkshire, where the dead do not stay buried. The Night Watch holds Darkshire, and the worgen prowl the woods between."
  },
  "theme": {
   "primary": "#4a3a6a",

@@ -23,8 +23,8 @@ const store = {
 const MUTE = (() => { try { return new URLSearchParams(location.search).get("mute") === "1"; } catch (e) { return false; } })();
 let table = null, loading = null, unlocked = false, hidden = false;
 let want = null;                                   // last zone id asked for
-let vol = (() => { const n = parseInt(store.get(VKEY), 10); return Number.isFinite(n) ? Math.max(0, Math.min(100, n)) : 60; })();
-let ambVol = (() => { const n = parseInt(store.get(A_VOL_KEY), 10); return Number.isFinite(n) ? Math.max(0, Math.min(100, n)) : 30; })();
+let vol = (() => { const n = parseInt(store.get(VKEY), 10); return Number.isFinite(n) ? Math.max(0, Math.min(100, n)) : 48; })(); // default 48 (was 60): players said music too loud, 2026-11-02 -20%
+let ambVol = (() => { const n = parseInt(store.get(A_VOL_KEY), 10); return Number.isFinite(n) ? Math.max(0, Math.min(100, n)) : 24; })(); // default 24 (was 30): -20%, same reports
 let ambMode = (() => { const m = store.get(A_MODE_KEY); return ["occasional", "continuous", "off"].includes(m) ? m : "occasional"; })();
 let duck = false, bossOn = false, curKey = null, curAmb = null, lastMode = "";
 const music = [];                                  // voices: {el, g, t, kind}  (ambience beds live in ./ambience.js, Web Audio)

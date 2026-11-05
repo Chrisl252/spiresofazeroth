@@ -1,7 +1,7 @@
 // Extension ops and conditions (zone/event/run-level shapes). Installed into the effects.js dispatch table by installMoreOps().
 // Kept separate so effects.js stays under the size cap; each op is one function.
 import { isAlive } from "./damage.js";
-import { equip, goesToBag, stow } from "./gear.js";
+import { equip, goesToBag, markGot, owns, stow } from "./gear.js";
 import { makeInst, canUpgrade } from "./deck.js";
 
 const runOf = (ctx) => ctx.run || (ctx.C && ctx.C.run) || null;
@@ -33,10 +33,11 @@ export function installMoreOps(op, api) {
 
   op("gain_relic", (ctx, e) => {
     const run = runOf(ctx);
-    if (!run || !e.relic || run.relics.includes(e.relic)) return;
+    if (!run || !e.relic) return;
     const data = ctx.data || (ctx.C && ctx.C.data), rr = data && data.relic(e.relic);
+    if (owns(run, data, e.relic)) return; // never the same piece twice (worn, bagged, sold, or its "+" twin)
     const bag = rr && rr.slot && goesToBag(run, data, e.relic); // worn gear is never displaced: the gift waits in the Gear Bag
-    if (bag) stow(run, e.relic); else if (rr && rr.slot) equip(run, data, e.relic); else run.relics.push(e.relic); // gear: events that gave relics give gear
+    if (bag) stow(run, e.relic); else if (rr && rr.slot) equip(run, data, e.relic); else { run.relics.push(e.relic); markGot(run, e.relic); } // gear: events that gave relics give gear
     if (!bag && ctx.C && !ctx.C.relics.includes(e.relic)) ctx.C.relics.push(e.relic);
   });
 

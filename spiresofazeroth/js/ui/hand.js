@@ -10,6 +10,7 @@
 // All coordinates are stage px (hostEl covers the stage). Card faces come from card.js.
 import { cardEl } from "./card.js";
 import { cardSounds } from "./cardSounds.js";
+import { revealsStealth } from "../engine/stealth.js";
 
 const CW = 260, CH = 380;
 // hud.js LANES start at 1180 with a 240px plate; HP sits under the feet. A raised card must stay left of that bar.
@@ -86,7 +87,8 @@ export function createHand(host, o) {
     kwtip.innerHTML = lines.map((k) => `<p><b>${esc(k.name)}</b>${esc(k.text)}</p>`).join("");
     kwtip.style.display = "block";
     const r = it.rest, w = size().w, half = CW * HOVER / 2;
-    const right = r.x + half + 18, fitsRight = right + 300 < w;
+    const right = r.x + half + 18, lim = portrait() ? w : Math.min(w, ENEMY_HP_LEFT - 8); // landscape: the keyword box never crosses into the enemy HP column (11-02 report: it hid enemy HP)
+    const fitsRight = right + 300 < lim;
     kwtip.style.left = `${fitsRight ? right : Math.max(10, r.x - half - 18 - 300)}px`;
     kwtip.style.top = `${r.y - CH * HOVER / 2 + 16}px`;
   }
@@ -208,7 +210,8 @@ export function createHand(host, o) {
   // drop back down onto the hand itself cancels. (The old line was h-470, so drops on the enemies and the lower field snapped back.)
   // Portrait tucks a taller band (235 px), so its line sits just above that band instead.
   const castLine = () => size().h - (portrait() ? 260 : 120);
-  const hidden = (t) => t.classList.contains("is-stealth") && !!document.querySelector(".sp-eplate[data-uid]:not(.dead):not(.is-stealth)"); // stealthed plates are not targets while a visible enemy exists (the engine enforces the same)
+  const aimedInst = () => (S.drag && S.drag.it.inst) || (S.sel && byId(S.sel) && byId(S.sel).inst) || null;
+  const hidden = (t) => t.classList.contains("is-stealth") && !revealsStealth(aimedInst() && aimedInst().def) && !!document.querySelector(".sp-eplate[data-uid]:not(.dead):not(.is-stealth)"); // stealthed plates are not targets while a visible enemy exists (the engine enforces the same)
   const enemyAt = (cx, cy) => {
     for (const e of document.elementsFromPoint(cx, cy)) {
       const t = e.closest && e.closest("[data-uid]");

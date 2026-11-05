@@ -1,0 +1,322 @@
+{
+ "bloodelf-female": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Hair Style",
+   "Hair Color",
+   "Earrings"
+  ],
+  "n": [
+   20,
+   20,
+   20,
+   14,
+   22
+  ]
+ },
+ "bloodelf-male": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Hair Style",
+   "Hair Color",
+   "Facial Hair"
+  ],
+  "n": [
+   20,
+   20,
+   17,
+   14,
+   20
+  ]
+ },
+ "draenei-female": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Hair Style",
+   "Hair Color",
+   "Horn Style"
+  ],
+  "n": [
+   16,
+   20,
+   17,
+   11,
+   7
+  ]
+ },
+ "draenei-male": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Hair Style",
+   "Hair Color",
+   "Facial Hair"
+  ],
+  "n": [
+   18,
+   20,
+   14,
+   11,
+   8
+  ]
+ },
+ "dwarf-female": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Hair Style",
+   "Hair Color",
+   "Piercings"
+  ],
+  "n": [
+   11,
+   10,
+   14,
+   10,
+   6
+  ]
+ },
+ "dwarf-male": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Hair Style",
+   "Hair Color",
+   "Facial Hair"
+  ],
+  "n": [
+   19,
+   10,
+   11,
+   10,
+   11
+  ]
+ },
+ "gnome-female": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Hair Style",
+   "Hair Color",
+   "Earrings"
+  ],
+  "n": [
+   6,
+   7,
+   7,
+   9,
+   7
+  ]
+ },
+ "gnome-male": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Hair Style",
+   "Hair Color",
+   "Facial Hair"
+  ],
+  "n": [
+   7,
+   7,
+   7,
+   9,
+   8
+  ]
+ },
+ "human-female": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Hair Style",
+   "Hair Color",
+   "Piercings"
+  ],
+  "n": [
+   12,
+   15,
+   19,
+   10,
+   7
+  ]
+ },
+ "human-male": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Hair Style",
+   "Hair Color",
+   "Facial Hair"
+  ],
+  "n": [
+   12,
+   12,
+   12,
+   10,
+   9
+  ]
+ },
+ "nightelf-female": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Hair Style",
+   "Hair Color",
+   "Markings"
+  ],
+  "n": [
+   9,
+   9,
+   7,
+   8,
+   10
+  ]
+ },
+ "nightelf-male": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Hair Style",
+   "Hair Color",
+   "Facial Hair"
+  ],
+  "n": [
+   9,
+   9,
+   7,
+   8,
+   6
+  ]
+ },
+ "orc-female": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Hair Style",
+   "Hair Color",
+   "Piercings"
+  ],
+  "n": [
+   10,
+   9,
+   8,
+   8,
+   7
+  ]
+ },
+ "orc-male": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Hair Style",
+   "Hair Color",
+   "Facial Hair"
+  ],
+  "n": [
+   14,
+   9,
+   7,
+   8,
+   11
+  ]
+ },
+ "tauren-female": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Horn Style",
+   "Horn Color",
+   "Hair"
+  ],
+  "n": [
+   11,
+   4,
+   7,
+   3,
+   5
+  ]
+ },
+ "tauren-male": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Horn Style",
+   "Horn Color",
+   "Facial Hair"
+  ],
+  "n": [
+   19,
+   5,
+   8,
+   3,
+   7
+  ]
+ },
+ "troll-female": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Hair Style",
+   "Hair Color",
+   "Tusks"
+  ],
+  "n": [
+   15,
+   6,
+   5,
+   10,
+   6
+  ]
+ },
+ "troll-male": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Hair Style",
+   "Hair Color",
+   "Tusks"
+  ],
+  "n": [
+   15,
+   5,
+   6,
+   10,
+   11
+  ]
+ },
+ "undead-female": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Hair Style",
+   "Hair Color",
+   "Features"
+  ],
+  "n": [
+   6,
+   10,
+   10,
+   10,
+   8
+  ]
+ },
+ "undead-male": {
+  "labels": [
+   "Skin Color",
+   "Face",
+   "Hair Style",
+   "Hair Color",
+   "Features"
+  ],
+  "n": [
+   6,
+   10,
+   10,
+   10,
+   17
+  ]
+ }
+}

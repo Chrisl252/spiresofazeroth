@@ -1687,8 +1687,10 @@
       "text": "Enter Shadowform: shadow cards cost 1 less, holy cards cost 1 more. Play again to leave.",
       "effects": [
         {
-          "op": "set_form",
-          "value": "shadowform"
+          "op": "conditional",
+          "if": {"type": "form_is", "value": "shadowform"},
+          "then": [{"op": "set_form", "value": "none"}],
+          "else": [{"op": "set_form", "value": "shadowform"}]
         }
       ],
       "upgrade": {
@@ -1697,8 +1699,10 @@
         "text": "Enter Shadowform: shadow cards cost 1 less, holy cards cost 1 more. Play again to leave.",
         "effects": [
           {
-            "op": "set_form",
-            "value": "shadowform"
+            "op": "conditional",
+            "if": {"type": "form_is", "value": "shadowform"},
+            "then": [{"op": "set_form", "value": "none"}],
+            "else": [{"op": "set_form", "value": "shadowform"}]
           }
         ]
       }

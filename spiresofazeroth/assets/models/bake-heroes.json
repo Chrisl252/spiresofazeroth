@@ -1,0 +1,146 @@
+{
+ "hero-warrior": {
+  "glb": "hero-warrior.glb",
+  "bytes": 186736,
+  "clips": [
+   "idle",
+   "attack",
+   "death"
+  ],
+  "name": "warrior (human-m)",
+  "display": null,
+  "scale": 1.0,
+  "model": 119940,
+  "subst": null,
+  "textured": true,
+  "bake_s": 0.07
+ },
+ "hero-paladin": {
+  "glb": "hero-paladin.glb",
+  "bytes": 207512,
+  "clips": [
+   "idle",
+   "attack",
+   "death"
+  ],
+  "name": "paladin (dwarf-m)",
+  "display": null,
+  "scale": 1.0,
+  "model": 118355,
+  "subst": null,
+  "textured": true,
+  "bake_s": 0.02
+ },
+ "hero-hunter": {
+  "glb": "hero-hunter.glb",
+  "bytes": 270836,
+  "clips": [
+   "idle",
+   "attack",
+   "death"
+  ],
+  "name": "hunter (nightelf-f)",
+  "display": null,
+  "scale": 1.0,
+  "model": 120590,
+  "subst": null,
+  "textured": true,
+  "bake_s": 0.04
+ },
+ "hero-rogue": {
+  "glb": "hero-rogue.glb",
+  "bytes": 177224,
+  "clips": [
+   "idle",
+   "attack",
+   "death"
+  ],
+  "name": "rogue (human-f)",
+  "display": null,
+  "scale": 1.0,
+  "model": 119563,
+  "subst": null,
+  "textured": true,
+  "bake_s": 0.02
+ },
+ "hero-priest": {
+  "glb": "hero-priest.glb",
+  "bytes": 259668,
+  "clips": [
+   "idle",
+   "attack",
+   "death"
+  ],
+  "name": "priest (undead-f)",
+  "display": null,
+  "scale": 1.0,
+  "model": 121608,
+  "subst": null,
+  "textured": true,
+  "bake_s": 0.03
+ },
+ "hero-shaman": {
+  "glb": "hero-shaman.glb",
+  "bytes": 252348,
+  "clips": [
+   "idle",
+   "attack",
+   "death"
+  ],
+  "name": "shaman (orc-m)",
+  "display": null,
+  "scale": 1.0,
+  "model": 121287,
+  "subst": null,
+  "textured": true,
+  "bake_s": 0.02
+ },
+ "hero-mage": {
+  "glb": "hero-mage.glb",
+  "bytes": 160468,
+  "clips": [
+   "idle",
+   "attack",
+   "death"
+  ],
+  "name": "mage (gnome-f)",
+  "display": null,
+  "scale": 1.0,
+  "model": 119063,
+  "subst": null,
+  "textured": true,
+  "bake_s": 0.04
+ },
+ "hero-warlock": {
+  "glb": "hero-warlock.glb",
+  "bytes": 257868,
+  "clips": [
+   "idle",
+   "attack",
+   "death"
+  ],
+  "name": "warlock (undead-m)",
+  "display": null,
+  "scale": 1.0,
+  "model": 121768,
+  "subst": null,
+  "textured": true,
+  "bake_s": 0.02
+ },
+ "hero-druid": {
+  "glb": "hero-druid.glb",
+  "bytes": 213652,
+  "clips": [
+   "idle",
+   "attack",
+   "death"
+  ],
+  "name": "druid (tauren-m)",
+  "display": null,
+  "scale": 1.0,
+  "model": 122055,
+  "subst": null,
+  "textured": true,
+  "bake_s": 0.03
+ }
+}

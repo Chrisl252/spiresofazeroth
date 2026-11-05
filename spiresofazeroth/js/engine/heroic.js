@@ -1,29 +1,41 @@
-// Heroic I-X difficulty (ascension). Level 0 = Normal. Pure data -> modifier object.
-export const HEROIC_NAMES = ["Normal", "Heroic I", "Heroic II", "Heroic III", "Heroic IV", "Heroic V", "Heroic VI", "Heroic VII", "Heroic VIII", "Heroic IX", "Heroic X"];
-export const MAX_HEROIC = 10;
+// Difficulty ladder (pure data -> modifier object). Level 0 = Normal, 1-10 = Heroic I-X, 11-20 = Mythic I-X.
+// 2026-11-01 "big update": Mythic tier (a deliberate jump past Heroic X) + Ascension (endless post-victory loop that keeps your gear, deck and talents;
+// each Ascension is a huge hump on top of the run's level). Players reported "not challenging after talents and full gear".
+export const HEROIC_NAMES = ["Normal", "Heroic I", "Heroic II", "Heroic III", "Heroic IV", "Heroic V", "Heroic VI", "Heroic VII", "Heroic VIII", "Heroic IX", "Heroic X",
+  "Mythic I", "Mythic II", "Mythic III", "Mythic IV", "Mythic V", "Mythic VI", "Mythic VII", "Mythic VIII", "Mythic IX", "Mythic X"];
+export const MAX_HEROIC = 20;
+export const MYTHIC_START = 11;
 export const MIN_HEROIC_OPEN = 3; // 2026-10-27: Heroic I-III are selectable from the start; higher levels still need the win-to-unlock
-/** Highest Heroic level a character may pick: max(3, earned), capped at X. */
+/** Tier groups for the picker: [id, label, first level, last level]. */
+export const TIERS = [["normal", "Normal", 0, 0], ["heroic", "Heroic", 1, 10], ["mythic", "Mythic", 11, 20]];
+export const tierOf = (level) => (level >= MYTHIC_START ? "mythic" : level >= 1 ? "heroic" : "normal");
+/** Highest Heroic level a character may pick: max(3, earned), capped at Mythic X. */
 export function heroicOpen(meta, classId) { return Math.min(MAX_HEROIC, Math.max(MIN_HEROIC_OPEN, ((meta && meta.heroic && meta.heroic[classId]) | 0))); }
-/** One line for the difficulty picker. */
-export function heroicBlurb(level) {
-  const m = heroicMods(level);
-  if (!level) return "Normal: the standard climb.";
-  const bits = ["more elites", "+" + Math.round((m.enemyHpMult - heroicMods(0).enemyHpMult) * 100) + "% enemy HP"];
-  if (m.goldMult < 1) bits.push("less gold");
-  if (m.healMult < 1) bits.push("weaker rests");
-  if (level >= 6) bits.push("lower starting HP");
-  if (m.potionSlots < 3) bits.push("fewer potion slots");
-  if (level >= 7) bits.push("tougher normal foes");
-  if (level >= 3) bits.push(level >= 5 ? "elites and bosses hit harder" : "elites hit harder");
-  return `${heroicName(level)}: ${bits.join(", ")}.`;
-}
 
 export function heroicName(level) {
   return HEROIC_NAMES[Math.max(0, Math.min(MAX_HEROIC, level | 0))];
 }
+/** "Mythic III" or "Mythic III + Ascension 2". */
+export function difficultyLabel(level, asc = 0) {
+  return heroicName(level) + ((asc | 0) > 0 ? ` + Ascension ${asc | 0}` : "");
+}
 
-export function heroicMods(level) {
-  const L = Math.max(0, Math.min(MAX_HEROIC, level | 0));
+function baseMods(L) {
+  if (L >= MYTHIC_START) {
+    const m = L - 10; // Mythic 1-10
+    return {
+      level: L,
+      enemyHpMult: 1.65 + 0.30 + 0.06 * m, // the Mythic jump: Heroic X = 1.65, Mythic I = 2.01, Mythic X = 2.55
+      normalStrength: 2 + (m >= 6 ? 1 : 0),
+      eliteStrength: 4 + Math.floor(m / 4),
+      bossStrength: 3 + Math.floor(m / 5),
+      goldMult: 0.8,
+      healMult: 0.7,
+      startHpPenalty: 0.85,
+      potionSlots: m >= 6 ? 1 : 2,
+      eliteBonus: 1.35,
+    };
+  }
   return {
     level: L,
     enemyHpMult: 1.25 + 0.04 * L,  // 2026-10-27: Normal base +25% (was +15% from 10-18; players found Normal too easy)
@@ -36,6 +48,56 @@ export function heroicMods(level) {
     potionSlots: L >= 8 ? 2 : 3,
     eliteBonus: L >= 1 ? 1.2 : 1,      // more elites on the map
   };
+}
+
+/** Ascension n (n >= 1) stacks on top of the level: enemy HP x1.6 at A1, then x1.3 per further Ascension; +3 Strength on every enemy at A1, +2 per further. */
+export function ascensionMods(asc) {
+  const n = Math.max(0, asc | 0);
+  if (!n) return { hpMult: 1, strength: 0, healMult: 1, eliteMult: 1 };
+  return { hpMult: 1.6 * Math.pow(1.3, n - 1), strength: 3 + 2 * (n - 1), healMult: Math.pow(0.85, Math.min(n, 3)), eliteMult: 1.25 };
+}
+
+export function heroicMods(level, asc = 0) {
+  const L = Math.max(0, Math.min(MAX_HEROIC, level | 0));
+  const b = baseMods(L);
+  const a = ascensionMods(asc);
+  if (a.strength === 0) return b;
+  return {
+    ...b,
+    ascension: asc | 0,
+    enemyHpMult: b.enemyHpMult * a.hpMult,
+    normalStrength: b.normalStrength + a.strength,
+    eliteStrength: b.eliteStrength + a.strength,
+    bossStrength: b.bossStrength + a.strength,
+    healMult: b.healMult * a.healMult,
+    eliteBonus: b.eliteBonus * a.eliteMult,
+  };
+}
+
+/** The picker's stat card: concrete numbers, so the gaps between levels are visible. */
+export function heroicStats(level, asc = 0) {
+  const m = heroicMods(level, asc);
+  const pct = (x) => Math.round((x - 1) * 100);
+  return {
+    enemyHp: pct(m.enemyHpMult), normal: m.normalStrength, elite: m.eliteStrength, boss: m.bossStrength,
+    gold: pct(m.goldMult), rest: pct(m.healMult), startHp: pct(m.startHpPenalty), potions: m.potionSlots, elites: pct(m.eliteBonus),
+  };
+}
+
+/** One line for the difficulty picker. */
+export function heroicBlurb(level) {
+  const L = level | 0;
+  const s = heroicStats(L);
+  if (!L) return "Normal: the standard climb.";
+  const bits = [`+${s.enemyHp}% enemy HP`, "more elites"];
+  if (s.gold < 0) bits.push(`${s.gold}% gold`);
+  if (s.rest < 0) bits.push(`rests heal ${s.rest}%`);
+  if (s.startHp < 0) bits.push(`${s.startHp}% starting HP`);
+  if (s.potions < 3) bits.push(`${s.potions} potion slot${s.potions === 1 ? "" : "s"}`);
+  if (s.normal) bits.push(`normal foes +${s.normal} Str`);
+  if (s.elite) bits.push(`elites +${s.elite} Str`);
+  if (s.boss) bits.push(`bosses +${s.boss} Str`);
+  return `${heroicName(L)}: ${bits.join(", ")}.`;
 }
 
 // Novice's Resolve (2026-10-23): a hero with NO talent points yet (run.talents == null) is a fresh player; they get a sturdier hero and softer enemies

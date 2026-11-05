@@ -24,12 +24,26 @@
 .sp-portrait .gs-strip--bar .gs-row { grid-template-columns: repeat(8, 44px); } .sp-portrait .gs-strip--bar .gs-sock { width: 44px; height: 44px; }
 .gs-bag { display: flex; flex-direction: column; gap: 12px; }
 .gs-bag__empty { margin: 0; color: #b8a77f; font-size: 24px; }
-.gs-bag__item { display: flex; align-items: center; gap: 18px; padding: 12px 16px; border: 1px solid rgba(201,162,75,.35); border-radius: 8px; background: rgba(12,9,5,.72); }
-.gs-bag__item > img { width: 64px; height: 64px; border: 2px solid var(--q, #6b5220); border-radius: 6px; object-fit: cover; }
-.gs-bag__info { flex: 1 1 auto; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-.gs-bag__info b { color: var(--q, #fff); font: 28px var(--f-ui, serif); }
-.gs-bag__info span { color: #b8a77f; font-size: 20px; }
-.gs-bag__info p { margin: 0; color: #fff4d6; font-size: 20px; }
+/* Backpack (gearBag.js): WoW bag frame = icon grid with quality borders + purse; the detail pane sits right */
+.gs-bag__main { display: flex; gap: 22px; align-items: flex-start; }
+.gs-bag__frame { flex: 0 0 auto; padding: 10px 12px 12px; border: 2px solid #6b5220; border-radius: 10px; background: linear-gradient(#1c140b, #0c0905); box-shadow: inset 0 0 0 2px #050302, 0 4px 10px rgba(0,0,0,.6); }
+.gs-bag__title { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; color: #ffd45a; font: 24px var(--f-ui, serif); }
+.gs-bag__title img { width: 36px; height: 36px; border-radius: 50%; }
+.gs-bag__grid { display: grid; grid-template-columns: repeat(var(--cols, 4), 64px); gap: 6px; }
+.gs-bag__slot { position: relative; width: 64px; height: 64px; padding: 0; border: 2px solid var(--q, #6b5220); border-radius: 6px; background: #000; cursor: pointer; box-shadow: 0 0 0 1px #050302; }
+.gs-bag__slot img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
+.gs-bag__slot:hover, .gs-bag__slot:focus-visible { box-shadow: 0 0 0 1px #050302, 0 0 10px color-mix(in srgb, var(--q) 70%, transparent); outline: none; }
+.gs-bag__slot.is-pick { box-shadow: 0 0 0 3px #ffd45a, 0 0 12px #ffd45a; }
+.gs-bag__slot--empty { cursor: default; border: 2px solid #3a2f1c; background: url("/assets/ui/blizzard/emptyslot.png") center / 100% 100% no-repeat, #0c0905; }
+.gs-bag__purse { display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-top: 10px; color: #ffe27a; font: 22px var(--f-num, monospace); }
+.gs-bag__purse img { width: 26px; height: 26px; border-radius: 50%; } .gs-bag__purse b { font-weight: 400; }
+.gs-bag__detail { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border: 2px solid #6b5220; border-radius: 10px; background: rgba(12,9,5,.88); }
+.gs-bag__detail > p { margin: 0; color: #fff4d6; font-size: 20px; }
+.gs-bag__dhead { display: flex; align-items: center; gap: 14px; }
+.gs-bag__dhead img { width: 64px; height: 64px; border: 2px solid var(--q, #6b5220); border-radius: 6px; object-fit: cover; }
+.gs-bag__dhead div { display: flex; flex-direction: column; gap: 2px; } .gs-bag__dhead b { color: var(--q, #fff); font: 28px var(--f-ui, serif); } .gs-bag__dhead span { color: #b8a77f; font-size: 20px; }
+.gs-bag__vs { color: #b8a77f; font-size: 20px; } .gs-bag__vs--free { color: #7fd06a; }
+.sp-portrait .gs-bag__main { flex-direction: column; }
 .gs-bag__equip { flex: 0 0 auto; }
 .gs-bag__btns { display: flex; flex: 0 0 auto; gap: 6px; }
 .gs-bag__note { margin: 8px 0 0; color: #b8a77f; font-size: 20px; }
@@ -170,3 +184,4 @@
 .gs-bag__vs--free { color: #1eff00 !important; }
 @media (prefers-reduced-motion: reduce) { .lf-chip { transition: none; } }
 .sp-reduce .lf-chip { transition: none; }
+.gs-bag__detail > p.gs-bag__note { color: #b8a77f; font-size: 18px; }

@@ -7,7 +7,7 @@
 import { h, icon, tip, esc, toast } from "./dom.js";
 import { banner, btn } from "./kit.js";
 import { compareTip, gearCss, gearStrip, gearTip } from "./gearStrip.js";
-import { equip, gearLevel, goesToBag, isStarter, SLOT_LABEL, syncSetBonuses } from "../engine/gear.js";
+import { equip, gearLevel, getAutoEquip, goesToBag, isStarter, SLOT_LABEL, syncSetBonuses } from "../engine/gear.js";
 import { takeRelic, takePotion } from "../engine/run.js";
 import { runEffects } from "../engine/effects.js";
 import { canUsePotionOutOfCombat } from "./belt.js";
@@ -119,7 +119,7 @@ export function buildLootFrame(app, pd, { onTake = () => {}, tag = "Spoils" } = 
     const ids = pd.relicChoose ? pd.relics : pd.relics.slice(0, 1);
     for (const id of ids) {
       const r = data.relic(id); if (!r) continue;
-      const bagNote = !pd.relicChoose && goesToBag(run, data, id) ? `<span style="color:#9d9d9d">Your worn ${esc(SLOT_LABEL[r.slot] || "gear")} stays on: this goes to your Gear Bag.</span><br>` : "";
+      const bagNote = (!pd.relicChoose || getAutoEquip() === "never") && goesToBag(run, data, id) ? `<span style="color:#9d9d9d">Your worn ${esc(SLOT_LABEL[r.slot] || "gear")} stays on: this goes to your Gear Bag.</span><br>` : "";
       add(row({ ic: r.icon, name: r.name, q: r.rarity || "common", tipHtml: bagNote + gearTip(r, run, data), cls: pd.relicChoose ? "lf-row--choose" : "", sub: pd.relicChoose ? r.text : "" }), "relic", () => {
         const ok = takeRelic(run, data, id, { wear: !!pd.relicChoose }); // 10-30 report: a deliberate choose-one pick is worn (old piece -> Gear Bag), not silently bagged
         if (ok && r.slot) syncSetBonuses(run, data);
@@ -158,7 +158,7 @@ export function buildLootFrame(app, pd, { onTake = () => {}, tag = "Spoils" } = 
   const updatePotionStatus = () => {
     const potRow = rows.find((r) => r.kind === "potion" && !r.done);
     if (!potRow) return;
-    const slots = heroicMods(run.heroic).potionSlots;
+    const slots = heroicMods(run.heroic, run.ascension).potionSlots;
     const full = run.potions.length >= slots;
     potRow.el.classList.toggle("lf-row--belt-full", full);
     potRow.el.classList.toggle("lf-row--drink", full && canUsePotionOutOfCombat(data.potion(pd.potion)));
@@ -233,7 +233,7 @@ export async function showLoot(app, host, pd, done) {
 
   let kitTimedOut = false;
   const kitPromise = getKit(app).then((loaded) => {
-    if (!kitTimedOut && loaded.actors) { clearStage(loaded); loaded.actors.setHero({ classId: run.classId, race: (run.character || {}).race, gender: (run.character || {}).gender, gearMask: gearLevel(run) }); }
+    if (!kitTimedOut && loaded.actors) { clearStage(loaded); loaded.actors.setHero({ classId: run.classId, race: (run.character || {}).race, gender: (run.character || {}).gender, looks: (run.character || {}).looks, gearMask: gearLevel(run) }); }
     return loaded;
   }).catch((e) => { console.warn("[spires] loot stage unavailable:", e && e.message); return null; });
   kit = await withTimeout(kitPromise, 2500, () => {

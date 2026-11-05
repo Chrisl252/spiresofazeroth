@@ -18,7 +18,9 @@ export function render(app) {
   if (live) saveRun(live);
   app.hasSave = !!live || !!loadRun();
   const coopLive = !!(app.coop && app.coop.active && app.coop.active()); // co-op shares one seed: a continued solo run would put the two players on different maps (10-30 report)
-  if (app.hasSave && !coopLive) {
+  const saved = live || (app.hasSave ? loadRun() : null);
+  const sharedRun = coopLive && saved && saved.seed && saved.seed === app.coop.seedForRun(); // 11-03 reports: after spending talents on the title the co-op run had no way back in
+  if (app.hasSave && (!coopLive || sharedRun)) {
     menu.append(btn("Continue run", async () => {
       try {
         if (live || (await app.resume())) {

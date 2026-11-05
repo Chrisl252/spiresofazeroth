@@ -128,6 +128,14 @@ export function createData({ fetchJson }) {
     return base ? { ...base, ...(o && typeof o === "object" ? o : {}), id } : null;
   };
   d.zone = (id) => d.zones.get(id) || null;
+  // Zone relics only exist in relicMap once their zone is loaded. Co-op runs the PARTNER's hero locally, so their relics from zones this
+  // browser never opened were silently inert here and damage drifted between the two games (11-03 "multiplayer damage is not synced").
+  // Loads listed zones until every id is known (or the list runs out). Returns the ids still unknown.
+  d.ensureRelics = async (ids) => {
+    const missing = () => [...new Set(ids || [])].filter((id) => id && !d.relicMap.has(id));
+    for (const z of d.zoneIndex) { if (!missing().length) break; if (!d.zones.has(z.id)) await d.loadZone(z.id); }
+    return missing();
+  };
   d.zoneAvailable = async (id) => !!(await d.loadZone(id));
   d.zoneEntry = (id) => d.zoneIndex.find((z) => z.id === id) || null;
 

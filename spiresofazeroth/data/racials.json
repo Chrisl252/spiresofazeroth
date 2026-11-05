@@ -17,12 +17,12 @@
    ],
    "racial": "human",
    "token": true,
-   "text": "Racial. Remove Veiled. Scry 3. Draw 1. Exhaust.",
+   "text": "Racial. Remove Veiled from all enemies. Scry 3. Draw 1. Exhaust.",
    "effects": [
     {
      "op": "remove",
      "status": "veiled",
-     "target": "self"
+     "target": "all_enemies"
     },
     {
      "op": "scry",

@@ -26,11 +26,15 @@
 .sp-notes-foot { display: grid; place-items: center; margin-top: 18px; }
 @media (max-width: 520px) { .sp-notes-li { flex-direction: column; gap: 4px; } }
 
-.sp-update-pill { position: fixed; top: 56px; left: 50%; transform: translateX(-50%); z-index: 8999; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 22px; cursor: pointer;
-  color: #ffd100; font: 400 16px/1.2 var(--f-ui, Georgia, serif); text-shadow: 0 1px 2px #000; background: linear-gradient(180deg, #5a1d14, #2a0b08); border: 2px solid #c9a24b; border-radius: 5px;
-  box-shadow: inset 0 0 0 1px #000, 0 4px 14px rgba(0,0,0,.7); animation: sp-update-bob 2.4s ease-in-out infinite; }
+.sp-update-pill { position: fixed; top: 56px; left: 50%; transform: translateX(-50%); z-index: 8999; display: flex; align-items: center; gap: 14px; min-height: 66px; padding: 12px 34px; cursor: pointer;
+  color: #ffd100; font: 400 22px/1.2 var(--f-ui, Georgia, serif); text-shadow: 0 1px 2px #000; background: linear-gradient(180deg, #5a1d14, #2a0b08); border: 3px solid #ffcc33; border-radius: 8px;
+  box-shadow: inset 0 0 0 1px #000, 0 4px 14px rgba(0,0,0,.7), 0 0 22px rgba(255,190,60,.55); animation: sp-update-bob 2.4s ease-in-out infinite; }
 .sp-update-pill:hover, .sp-update-pill:focus-visible { filter: brightness(1.2); outline: none; border-color: #fff0a8; }
-.sp-update-dot { width: 10px; height: 10px; flex: none; border-radius: 50%; background: #2fd24a; box-shadow: 0 0 8px #2fd24a; }
+.sp-update-pill b { font-size: 26px; letter-spacing: .08em; color: #fff3c4; } .sp-update-pill small { font-size: 17px; color: #ffd100; }
+.sp-update-pill > span:not(.sp-update-dot) { display: flex; flex-direction: column; align-items: flex-start; }
+.sp-update-dot { width: 16px; height: 16px; flex: none; border-radius: 50%; background: #2fd24a; box-shadow: 0 0 8px #2fd24a; }
 @keyframes sp-update-bob { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 3px); } }
 @media (prefers-reduced-motion: reduce) { .sp-update-pill { animation: none; } }
-@media (max-width: 520px) { .sp-update-pill { font-size: 14px; padding: 8px 14px; max-width: calc(100vw - 32px); } }
+@media (max-width: 520px) { .sp-update-pill { font-size: 17px; min-height: 58px; padding: 10px 18px; max-width: calc(100vw - 32px); } .sp-update-pill b { font-size: 20px; } .sp-update-pill small { font-size: 14px; } }
+/* 11-04 report: the notes window (a kit.js stageModal, z 40) sat under the combat layers and its Close could not be pressed. Keep it on top of every game layer, under toasts. */
+.sx-modal-back:has(.sp-notes) { z-index: 9000; }

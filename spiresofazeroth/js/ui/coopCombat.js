@@ -25,11 +25,16 @@ export async function coopStart(app, run) {
   if (!m || !m.run) { if (!cancelled) toast("Co-op fight unavailable, fighting solo."); return null; }
   const { data } = app;
   await data.loadClass(m.run.classId);
+  const heldIds = (r) => [...(r.relics || []), ...Object.values(r.gear || {}), ...(r.gearBag || [])].filter((x) => typeof x === "string");
+  const unknown = await data.ensureRelics([...heldIds(run), ...heldIds(m.run)]); // both heroes' relics must resolve on BOTH browsers or the lockstep drifts
+  if (unknown.length) console.warn("[coop] relics unknown on this client", unknown);
   const mySeat = coop.seat;
   const encounter = mySeat === 0 ? run.pending.encounter : m.encounter;
   if (mySeat === 1) run.pending.encounter = encounter;
   const runs = mySeat === 0 ? [run, m.run] : [m.run, run];
   const S = Coop.startCoop({ data, runs, mySeat, encounter });
+  S.fightKey = mySeat === 0 ? coop.fightKey(run) : m.key; // the host's key names the fight on both clients
+  coop.consumeCready(m);
   S.partnerName = coop.partnerName();
   return S;
 }
@@ -41,6 +46,9 @@ export function createCoopLink(app, S, hooks) {
   const me = S.mySeat, them = 1 - me, C = S.Cs[me], P = S.Cs[them];
   const coop = app.coop;
   let chain = Promise.resolve(), dead = false, wasDown = false, lastCard = "", hashes = new Map(), warned = false;
+  let giftMode = false, lastUp = null, giftFlash = ""; // partner support: "Cast on partner" toggle, last pointer release (drag a card onto the panel), last gift line
+  const onUp = (ev) => { lastUp = { x: ev.clientX, y: ev.clientY, t: performance.now() }; };
+  document.addEventListener("pointerup", onUp, true);
   const run = (fn) => (chain = chain.then(() => (dead ? null : fn())).catch((e) => console.error("[coop] fight step", e)));
 
   // ---- partner panel -------------------------------------------------------------------------------------------------
@@ -58,6 +66,9 @@ export function createCoopLink(app, S, hooks) {
       h("div", {}, `${Math.max(0, p.hp)}/${p.maxHp} HP${p.block ? `  |  ${p.block} block` : ""}`),
       h("div", { class: "dim" }, `Energy ${p.energy}  |  Hand ${P.pile.hand.length}`),
       lastCard ? h("div", { class: "last" }, `Played: ${lastCard}`) : null,
+      giftFlash ? h("div", { class: "gift" }, giftFlash) : null,
+      !S.over && Coop.inFight(S, them) && Coop.inFight(S, me) ? h("button", { type: "button", class: "sp-coop-gift" + (giftMode ? " is-on" : ""), title: "Shield, heal and buff cards land on your partner. You can also drag the card onto this panel.",
+        onClick: () => { giftMode = !giftMode; paintPanel(); } }, giftMode ? `Casting on ${S.partnerName} (click to stop)` : `Cast heals and shields on ${S.partnerName}`) : null,
       turn ? h("div", { class: `turn ${S.active === me ? "mine" : "theirs"}` }, turn) : null,
       S.down[me] ? h("div", { class: "down" }, "You are DOWN. Your partner fights on.") : null,
       !S.over ? h("div", { class: "dim" }, `Next enemy turn: ${tgt[me]} on you, ${tgt[them]} on ${S.partnerName}`) : null);
@@ -131,6 +142,7 @@ export function createCoopLink(app, S, hooks) {
     } catch (e) { console.warn("[coop] enemy phase", e && e.message); }
     st.busy = false;
     lastCard = "";
+    announce();
     myTurnStarted();
     await checkDown();
     paintPanel();
@@ -144,19 +156,37 @@ export function createCoopLink(app, S, hooks) {
       const pre = hooks.snapBefore(); P.fx.length = 0;
       const r = Coop.applyAction(S, a);
       if (r === null) console.warn("[coop] partner action rejected here (the two games differ):", JSON.stringify({ k: a.k, uid: a.uid, idx: a.idx, uids: a.uids, active: S.active, phase: S.phase, ended: S.ended, pending: P.pending.length }));
-      const pevs = P.fx.splice(0); C.fx.length = 0;
+      const pevs = P.fx.splice(0).map((ev) => (ev && ev.uid === "partner" ? { ...ev, uid: "player" } : ev)); C.fx.length = 0; // their gift on me plays on my hero
       if (a.k === "play" && r && r.ok) { const inst = P.pile.discard.concat(P.pile.exhaust, P.powers || []).find((c) => c && c.uid === a.uid); lastCard = inst && inst.def ? inst.def.name : "a card"; }
+      if (a.k === "play" && a.ally && r && r.ok) { lastCard += " on you"; toast(`${S.partnerName} cast ${lastCard}.`); }
       else if (a.k === "potion") lastCard = "a potion";
       const D = hooks.getD();
       if (D) D.beginHold(pre);
-      await hooks.settle(pevs.filter(enemyOnly(S)), pre);
+      await hooks.settle(pevs.filter((ev) => enemyOnly(S)(ev) || (a.ally && ev.uid === "player")), pre);
       paintPanel();
+      announce();
       hooks.update();
       if (a.k === "end" || S.phase === "enemy") { if (S.phase === "player") myTurnStarted(); await maybeRound(); }
       else if (S.active === me && S.phase === "player") myTurnStarted();
     });
   }
   const offAct = coop.on("act", (m) => { if (m.a && m.a.seat === them) onPartner(m.a); });
+  // Verdict sync: whoever sees the fight end first tells the partner; a client that is still mid-fight (its copy drifted) adopts it.
+  let announced = false;
+  function announce() {
+    if (announced || !S.over) return;
+    const res = C.result === "win" ? "win" : C.result === "lose" ? "lose" : null;
+    if (!res) return;
+    announced = true; coop.send({ t: "fightend", key: S.fightKey, result: res, round: S.round });
+  }
+  const offEnd = coop.on("fightend", (m) => run(async () => {
+    if (S.over || !m || m.key !== S.fightKey) return;
+    if (!Coop.forceFinish(S, m.result)) return;
+    console.warn("[coop] adopting the partner's fight result", m.result, "at round", S.round);
+    announced = true;
+    toast(`${S.partnerName}'s game finished this fight. Moving on.`);
+    paintPanel(); hooks.st.busy = false; hooks.update();
+  }));
   const offHash = coop.on("hash", (m) => {
     const mine = hashes.get(m.round);
     if (mine && mine !== m.h && !warned) { warned = true; console.warn("[coop] desync at round", m.round, mine, m.h); toast("Co-op: the two games drifted apart this fight. It will resync after the fight."); }
@@ -169,13 +199,32 @@ export function createCoopLink(app, S, hooks) {
     await maybeRound();
   }));
 
+  // ---- partner support: is this play meant for the partner? (toggle on, or the card was released over the panel) ------------------
+  function wantsGift(inst) {
+    if (!Coop.canGift(S, me, inst)) return false;
+    if (giftMode) return true;
+    if (!lastUp || performance.now() - lastUp.t > 600) return false;
+    const r = panel.getBoundingClientRect();
+    return lastUp.x >= r.left - 12 && lastUp.x <= r.right + 12 && lastUp.y >= r.top - 12 && lastUp.y <= r.bottom + 12;
+  }
+  // my gift's fx: the events on the partner leave the stage queue (no actor for them here) and show on the panel instead
+  function takeGiftFx(evs, name) {
+    const mine = [], parts = [];
+    for (const ev of evs) {
+      if (ev && ev.uid === "partner") { if (ev.t === "block" && ev.amount) parts.push(`+${ev.amount} block`); else if (ev.t === "heal" && ev.amount) parts.push(`+${ev.amount} HP`); }
+      else mine.push(ev);
+    }
+    giftFlash = `You cast ${name || "a spell"} on ${S.partnerName}${parts.length ? `: ${parts.join(", ")}` : ""}`;
+    return mine;
+  }
+
   // ---- my own actions: apply now (it is my turn, nobody else can act), then tell the partner ------------------------------
   function local(a) {
     const act = { ...a, seat: me };
     const r = Coop.applyAction(S, act);
     if (r === null || (a.k === "play" && !(r && r.ok))) return r;
     coop.send({ t: "act", a: act });
-    queueMicrotask(() => { paintPanel(); checkDown(); });
+    queueMicrotask(() => { paintPanel(); checkDown(); announce(); });
     return r;
   }
   function endTurn() {
@@ -201,6 +250,8 @@ export function createCoopLink(app, S, hooks) {
   return {
     canAct: () => Coop.canAct(S, me),
     local, endTurn, paintPanel,
-    destroy() { dead = true; offAct(); offHash(); offClose(); panel.remove(); },
+    wantsGift, takeGiftFx,
+    setGift(v) { giftMode = !!v; paintPanel(); }, // drive-only toggle; players use the panel button
+    destroy() { dead = true; offAct(); offEnd(); offHash(); offClose(); document.removeEventListener("pointerup", onUp, true); panel.remove(); },
   };
 }

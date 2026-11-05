@@ -1,6 +1,8 @@
 // Run end (stage-native): victory / defeat banner, stat scroll, #end-hero host (class plate until the hero model lands), run_end analytics once per run.
 import { h, icon, track, toast } from "./dom.js";
-import { recordRunEnd, clearRun } from "../engine/save.js";
+import { commitRunEnd, clearRun, saveRun } from "../engine/save.js";
+import { canAscend, ascendRun, nextAscensionPreview } from "../engine/ascension.js";
+import { difficultyLabel } from "../engine/heroic.js";
 import { summarize } from "../engine/run.js";
 import { cssReady, btn, ico, scroll } from "./kit.js";
 import { mountPortrait } from "./combatKit.js";
@@ -15,7 +17,8 @@ function unlockRow(app, u) {
   const { data } = app, cname = (data.classObj(u.id) || { name: u.id }).name;
   const row = (ic, text, extra) => h("p", {}, icon(ic, "sx-end__ui", ""), text, extra || null);
   if (u.type === "class") return row("spell_holy_championsgrace", `New class: ${cname}`);
-  if (u.type === "heroic") return row("spell_holy_championsgrace", `Heroic ${u.level} for ${cname}`);
+  if (u.type === "heroic") return row("spell_holy_championsgrace", `${u.level >= 11 ? `Mythic ${u.level - 10}` : `Heroic ${u.level}`} unlocked for ${cname}`);
+  if (u.type === "ascension") return row("spell_holy_divinespirit", `New best: Ascension ${u.level} cleared with ${cname}`);
   if (u.type === "talent") return row("spell_holy_championsgrace", `+${u.points} talent point${u.points === 1 ? "" : "s"} for ${cname}`);
   if (u.type === "level") return h("div", {}, row("inv_misc_book_09", `${cname} reached level ${u.level}: new cards unlocked`),
     h("div", { class: "sx-end__cards" }, ...(u.cards || []).map((id) => { const d = app.cardDef(id, false); return h("span", {}, ico(d ? d.icon : "inv_misc_questionmark", { size: "xs" }), " ", d ? d.name : id); })));
@@ -25,19 +28,43 @@ function unlockRow(app, u) {
 
 const STAT_ICON = { Act: "inv_misc_map_01", Floors: "inv_boots_cloth_03", Fights: "inv_sword_04", Elites: "inv_misc_bone_humanskull_01", Bosses: "achievement_boss_ragnaros", Cards: "inv_misc_book_09", Relics: "inv_misc_gem_pearl_04", "Gold earned": "inv_misc_coin_17" };
 
+// The big ASCEND button (engine/ascension.js): climb again from act 1 with everything you carry, against a far harder spire. Solo victories only.
+function ascendBlock(app, run, win) {
+  const coopOn = !!(app.coop && typeof app.coop.active === "function" && app.coop.active());
+  if (!win) return null;
+  if (!canAscend(run, coopOn)) return h("p", { class: "sx-asc__off" }, "Ascension is solo only: start a solo run to ascend.");
+  const p = nextAscensionPreview(run);
+  let busy = false;
+  return h("div", { class: "sx-asc" },
+    h("button", { class: "sx-asc__btn", type: "button", "data-autofocus": "", onClick: async () => {
+      if (busy) return; busy = true;
+      try {
+        app.data.setClass(run.classId);
+        await ascendRun(run, app.data);
+        app.run = run; app.hasSave = true;
+        saveRun(run);
+        sp("run_ascend", { class: run.classId, heroic: run.heroic || 0, ascension: run.ascension });
+        track("run_ascend", { class: run.classId, heroic: run.heroic || 0, ascension: run.ascension });
+        app.route();
+      } catch (e) { busy = false; toast("Could not load the next spire. Tap Ascend again."); }
+    } },
+      h("b", {}, `ASCEND`),
+      h("span", {}, `${p.base} + Ascension ${p.level}`),
+      h("small", {}, `Enemies +${p.hpJump}% HP and +${p.strJump} Str on every foe. You keep your gear, deck, relics, gold and talents.`)));
+}
+
 export async function render(app) {
   await cssReady;
   const { run, data, meta, stage } = app;
   stage.setBackdrop(run.zoneId || "default");
   let unlocked = [];
-  if (!run.endRecorded) {
-    run.endRecorded = true;
-    unlocked = recordRunEnd(meta, run, data.classIds, data.unlocks);
+  if (!run.endLogged) { // endRecorded may already be true: reward.js credits a final-boss kill before the loot screen (engine/save.js commitRunEnd)
+    run.endLogged = true;
+    unlocked = commitRunEnd(meta, run, data.classIds, data.unlocks);
     recordRunAggregate(run, meta);
     sp("run_end", { class: run.classId, result: run.result === "victory" ? "victory" : "defeat", act: run.act, floor: run.floor + 1, zone: run.zoneId || "", cause: run.result === "victory" ? "" : encKey(run.pending && run.pending.cause), deck: (run.deck || []).map((c) => c.id), secs: run.startedAt ? Math.round((Date.now() - run.startedAt) / 1000) : 0 });
     funnel("run_end", false);
     if (app.refreshLocks) app.refreshLocks();
-    run.unlocked = unlocked;
     track("run_end", { class: run.classId, act: run.act, victory: run.result === "victory" ? 1 : 0, floor: run.floor + 1 });
     clearRun();
   } else unlocked = run.unlocked || [];
@@ -53,15 +80,16 @@ export async function render(app) {
         h("div", { class: "sx-end__who" }, h("b", { style: { color: cls.color } }, cls.name || "Hero"), h("small", {}, `${run.hp}/${run.maxHp} HP`)))),
     h("div", { class: "sx-end__main" },
       h("div", { class: `sx-end__flag ${win ? "win" : "lose"}` }, h("h1", {}, win ? "Victory" : "Defeat"),
-        h("p", {}, win ? "You conquered the spires. Azeroth is safe, for now." : `Fell in ${s.zones[s.zones.length - 1] || "the first spire"} (${(run.pending || {}).cause || "unknown"}).`)),
+        h("p", {}, win ? `${difficultyLabel(run.heroic || 0, run.ascension)} cleared. ${(run.ascension | 0) ? "The spires grow darker." : "Azeroth is safe, for now."}` : `Fell in ${s.zones[s.zones.length - 1] || "the first spire"} (${(run.pending || {}).cause || "unknown"}).`)),
+      ascendBlock(app, run, win),
       scroll("sx-end__stats", h("div", { class: "sx-stats" }, ...stats.map(([k, v]) => stat(k, v))),
         unlocked.length ? h("div", { class: "sx-end__unlock" }, h("h3", {}, "Progress"), ...unlocked.map((u) => unlockRow(app, u))) : null,
         h("p", { class: "sx-end__seed" }, "Seed: ", h("b", {}, run.seed))),
       h("div", { class: "sx-end__btns" },
         btn("Copy seed", async () => { try { await navigator.clipboard.writeText(run.seed); toast("Seed copied."); } catch (e) { toast(run.seed); } }, { size: "sm" }),
         btn(unlocked.some((u) => u.type === "talent") ? "Spend talents" : "Talents", () => { app.run = null; app.hasSave = false; app.go("talents", { cls: run.classId, back: "classSelect" }); }, { size: "sm" }),
-        btn("New run", () => { app.run = null; app.hasSave = false; app.go("charSelect"); }, { size: "lg", auto: true }),
+        btn("New run", () => { app.run = null; app.hasSave = false; app.go("charSelect"); }, { size: win ? "sm" : "lg", auto: !win }),
         btn("Title", () => { app.run = null; app.hasSave = false; app.go("title"); }, { size: "sm" }))));
-  setTimeout(() => mountPortrait(app, screen.querySelector("#end-hero"), { classId: run.classId, race: (run.character || {}).race, gender: (run.character || {}).gender, gearMask: gearLevel(run), pose: win ? "idle" : "death", pad: 120, leaveEl: screen }), 160);
+  setTimeout(() => mountPortrait(app, screen.querySelector("#end-hero"), { classId: run.classId, race: (run.character || {}).race, gender: (run.character || {}).gender, looks: (run.character || {}).looks, gearMask: gearLevel(run), pose: win ? "idle" : "death", pad: 120, leaveEl: screen }), 160);
   return screen;
 }

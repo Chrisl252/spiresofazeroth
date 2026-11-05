@@ -6,8 +6,8 @@
   "act": 4,
   "levelBand": [30,45],
   "spire": {
-    "name": "Zul'Gurub Outer Spire",
-    "lore": "The jungle crawls with Bloodscalp and Skullsplitter trolls, Venture Co. loggers and Bloodsail pirates; above it all rise the Gurubashi ruins and the Blood God's temple."
+    "name": "Zul'Gurub",
+    "lore": "The Gurubashi capital in northeastern Stranglethorn, where the Atal'ai have called back the Blood God Hakkar. Bloodscalp and Skullsplitter trolls, Venture Co. loggers and Bloodsail pirates fight over the jungle."
   },
   "theme": {
     "primary": "#2f7a3a",

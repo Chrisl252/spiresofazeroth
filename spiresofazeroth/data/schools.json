@@ -458,7 +458,8 @@
   ],
   "frozen": [
    "frost"
-  ]
+  ],
+  "fear": ["shadow", "physical", "nature", "arcane", "fire", "frost"]
  },
  "statusTypes": {
   "bleed": "dot",

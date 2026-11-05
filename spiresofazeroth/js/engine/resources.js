@@ -134,8 +134,10 @@ export function randomPetId(C) {
 function pickPetTarget(C) {
   const live = C.enemies.filter((e) => isAlive(e));
   if (!live.length) return null;
-  if (C.lastTarget && isAlive(C.lastTarget)) return C.lastTarget;
-  return live.reduce((a, b) => (b.hp < a.hp ? b : a));
+  const vis = live.filter((e) => !e.st.stealth); // pets/totems obey Stealth like cards do (11-03 stealth report)
+  const pool = vis.length ? vis : live;
+  if (pool.includes(C.lastTarget)) return C.lastTarget;
+  return pool.reduce((a, b) => (b.hp < a.hp ? b : a));
 }
 export function unitFor(C, unitId) {
   return (C.tempUnits && C.tempUnits[unitId]) || (C.cls && C.cls.units && C.cls.units[unitId]) || null;

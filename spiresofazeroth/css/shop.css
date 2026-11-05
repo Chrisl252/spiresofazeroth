@@ -50,3 +50,16 @@
 .sp-portrait .sx-shop__foot { justify-content: center; padding-bottom: 24px; }
 .sp-portrait .sx-shop__foot .sp-wowbtn { --h: 76px; min-width: 280px; }
 .sp-portrait .sx-shop__leave .sp-wowbtn { --h: 76px; }
+/* sell from the bag (shop.js): green +gold tag; first click arms */
+.sx-shelf--sell .sx-price--sell { background: #12320c; color: #b6ff9a; } .sx-ware--sell.armed .sx-price--sell { background: #6b4a08; color: #fff; }
+.sx-shelf--sell { gap: 4px; width: 100%; } .sx-shelf--sell .sx-shelf__title { font-size: 20px; }
+.sx-shelf--sell .sx-shelf__row { flex-wrap: wrap; gap: 6px 10px; justify-content: center; }
+.sx-shelf--sell .sx-ware { gap: 2px; } .sx-shelf--sell .sx-ware__body { width: auto; } .sx-shelf--sell .sx-ware__body b { display: none; }
+.sx-shelf--sell .sx-ware__ico .sx-ico { --s: 60px; } .sx-shelf--sell .sx-price { font-size: 18px; }
+/* 11-01 reports "stuck on merchant screen / cant leave": a full bag's sell shelf wrapped into extra rows and pushed Proceed below the
+   viewport (the column did not scroll). The column now scrolls, Proceed stays pinned at its bottom, and the sell row caps its own height. */
+.sx-shop__right { overflow-y: auto; overflow-x: hidden; justify-content: safe center; }
+.sx-shop__foot { position: sticky; bottom: 0; z-index: 5; padding-bottom: 8px; background: linear-gradient(transparent, rgba(0,0,0,.55) 40%); }
+.sx-shelf--sell .sx-shelf__row { max-height: 168px; overflow-y: auto; }
+/* 11-02: worn pieces on the vendor sell shelf get a dashed rim so a player knows it comes off first */
+.sx-ware--worn .sx-ware__ico { outline: 2px dashed rgba(255,209,0,.55); outline-offset: 2px; border-radius: 8px; }

@@ -29,7 +29,7 @@ export function newRun(data, { classId, continent, seed, heroic = 0, pet = null,
   const run = {
     v: RUN_VERSION, seed: String(seed), classId, continent: continent || cls.defaultContinent || "ek", heroic, pet,
     act: 0, zoneId: null, zonesVisited: [], map: null, floor: -1, col: -1, hp: maxHp, maxHp, gold: (cls.startingGold || 99) + ((T && T.gold) | 0), talents: T,
-    deck: (cls.starterDeck || []).map((id) => ({ id, up: false })), relics: [], gear: G.emptyGear(), gearBag: [], potions: [], carry: {}, disease: 0,
+    deck: (cls.starterDeck || []).map((id) => ({ id, up: false })), relics: [], gear: G.emptyGear(), gearBag: [], gotGear: [], potions: [], carry: {}, disease: 0,
     potionMiss: 0, removals: 0, seenEvents: [], seen: { cards: {}, enemies: {}, relics: {} }, spire: {},
     screen: "zonepick", pending: null, result: null,
     stats: { floors: 0, fights: 0, elites: 0, bosses: 0, kills: 0, damageTaken: 0, turns: 0, goldEarned: 0 },
@@ -54,7 +54,7 @@ export async function startSpire(run, data, zoneId) {
   run.floor = -1;
   run.col = -1;
   run.spire = { marks: [], path: [] };
-  const mods = heroicMods(run.heroic);
+  const mods = heroicMods(run.heroic, run.ascension);
   run.map = generateSpire(run.seed, `${run.act}:${zoneId}`, { eliteBonus: mods.eliteBonus, profile: data.mapProfile ? data.mapProfile(zoneId) : null });
   const rng = rngFor(run, `spire:${run.act}`);
   const hooks = zone.zoneMechanic && zone.zoneMechanic.hooks && zone.zoneMechanic.hooks.on_spire_start;
@@ -100,6 +100,14 @@ function enemyDefsFor(run, data, zone) {
   return Object.assign({}, zone ? zone.enemyDefs : {}, data.finalBossDefs());
 }
 
+// The spire's boss is fixed per run + act + zone, so the map's boss label and the fight agree (11-03 report: the map said Mutanus,
+// the fight was Lady Anacondra + Lord Cobrahn; the label read boss[0] while the node rolled the list).
+export function spireBoss(run, zone, list = null) {
+  const all = (list || (zone && zone.encounters && zone.encounters.boss) || []).filter((enc) => enc.every((id) => zone.enemyDefs[id]));
+  if (!all.length) return null;
+  return streamFor(run.seed, `bossof:${run.act}:${zone.id}`).pick(all);
+}
+
 function pickEncounter(run, data, zone, tier, rng) {
   const lists = (zone.encounters && zone.encounters[tier]) || [];
   let list = lists.filter((enc) => enc.every((id) => zone.enemyDefs[id]));
@@ -126,7 +134,7 @@ function pickEncounter(run, data, zone, tier, rng) {
   } else if (tier === "elite" && P && P.eliteTier) {
     list = list.slice(0, Math.max(1, Math.ceil(list.length * P.eliteTier))); // short spires meet the milder elites
   }
-  const enc = rng.pick(list);
+  const enc = tier === "boss" ? spireBoss(run, zone, list) : rng.pick(list);
   const extra = (P && P.extra && P.extra[tier]) || 0; // escorts from the zone's own weaker normal packs (profile.extra = { elite: n, boss: n })
   if (extra && enc.length < 4) {
     const pool = [...new Set(((zone.encounters && zone.encounters.normal) || []).slice(0, 8).flat())].filter((id) => zone.enemyDefs[id] && zone.enemyDefs[id].tier === "normal" && !enc.includes(id));
@@ -268,7 +276,7 @@ export function afterCombat(run, data, C) {
   else if (rtier === "boss" || rtier === "raid") relics = R.rollRelics(run, data, rng, 3, { minRarity: "rare" });
   const choose = tier === "elite" || rtier === "boss" || rtier === "raid";
   for (const id of cards) markSeen(run, "cards", id);
-  run.pending = { type: "reward", tier: rtier, gold, cards, potion, relics, relicChoose: choose, gear, chest: rtier === "boss" || rtier === "raid" ? "boss" : tier === "elite" ? "elite" : "fight", taken: { card: false, potion: false, relic: false }, nodeTier: tier, raid: !!run.pending.raid };
+  run.pending = { type: "reward", tier: rtier, gold, cards, potion, relics, relicChoose: choose, gear, chest: rtier === "boss" || rtier === "raid" ? "boss" : tier === "elite" ? "elite" : "fight", taken: { card: false, potion: false, relic: false }, nodeTier: tier, raid: !!run.pending.raid, final: !!run.pending.final };
   run.screen = "reward";
   return sum;
 }
@@ -279,20 +287,18 @@ export function takeCard(run, id, up = false) {
   if (run.pending && run.pending.taken) run.pending.taken.card = true;
 }
 export function takePotion(run, data, id) {
-  const slots = heroicMods(run.heroic).potionSlots;
+  const slots = heroicMods(run.heroic, run.ascension).potionSlots;
   if (run.potions.length >= slots) return false;
   run.potions.push(id);
   if (run.pending && run.pending.taken) run.pending.taken.potion = true;
   return true;
 }
 export function takeRelic(run, data, id, opts = null) { // opts.wear = the player deliberately picked this piece (choose-one boss/elite loot): it is worn, the old piece goes to the Gear Bag
-  if (run.relics.includes(id)) return false;
-  const twin = data.gear && data.gear.legacy && data.gear.legacy[id];
-  if (twin && twin !== id && (run.relics.includes(twin) || run.relics.includes(`${twin}+`))) return false; // already worn under its gear name
+  if (G.owns(run, data, id)) return false; // never the same piece twice (worn, bagged, sold, "+" or legacy twin)
   const r = data.relic(id);
-  const bag = r && r.slot && !(opts && opts.wear) && G.goesToBag(run, data, id); // 10-30 report: a boss cloak picked from the choose-one frame landed in the bag and the worn cloak stayed (no Gear Bag button on the loot frame)
+  const bag = r && r.slot && !(opts && opts.wear && G.getAutoEquip() !== "never") && G.goesToBag(run, data, id); // 11-03 report: New gear = "Never" must hold for choose-one picks too // 10-30 report: a boss cloak picked from the choose-one frame landed in the bag and the worn cloak stayed (no Gear Bag button on the loot frame)
   const eq = bag ? G.stow(run, id) : r && r.slot ? G.equip(run, data, id) : null; // gear: a free/starter socket equips; worn gear is never displaced (-> Gear Bag)
-  if (!eq) run.relics.push(id);
+  if (!eq) { run.relics.push(id); G.markGot(run, id); }
   if (run.pending) run.pending.equipped = eq;
   markSeen(run, "relics", id);
   const effs = r && r.triggers && r.triggers.on_pickup;
@@ -307,10 +313,12 @@ export async function leaveNode(run, data) {
   const node = nodeOfRun(run);
   const pd = run.pending;
   run.pending = null;
-  if (pd && pd.raid) return proceedAfterSpire(run, data);
-  if (node && node.type === "boss") return endOfSpire(run, data);
-  run.screen = "map";
-  return run.screen;
+  try {
+    if (pd && pd.raid) return await proceedAfterSpire(run, data);
+    if (node && node.type === "boss") return await endOfSpire(run, data);
+    run.screen = "map";
+    return run.screen;
+  } catch (err) { run.pending = pd; throw err; } // 11-03: a throw here (zone load) left the reward screen with no pending = Continue dead forever; keep the screen retryable
 }
 
 // Leave whatever screen the run is on (reward, vendor, rest, event, treasure, hub) and route onward.
@@ -410,7 +418,7 @@ export async function chooseZone(run, data, zoneId) {
 
 // ---- rest / hub -------------------------------------------------------------------------------------
 export function restHeal(run, data) {
-  const mods = heroicMods(run.heroic);
+  const mods = heroicMods(run.heroic, run.ascension);
   const amt = Math.floor(run.maxHp * 0.3 * mods.healMult * (1 + (((run.talents || {}).heal | 0) / 100)));
   run.hp = Math.min(run.maxHp, run.hp + amt);
   fireRun(run, data, rngFor(run, `rest:${run.floor}`), "on_rest");
@@ -461,7 +469,8 @@ export function buy(run, data, kind, idx) {
   if (shop.sold[key]) return false;
   const item = shop[kind === "card" ? "cards" : kind === "relic" ? "relics" : "potions"][idx];
   if (!item || run.gold < item.price) return false;
-  if (kind === "potion" && run.potions.length >= heroicMods(run.heroic).potionSlots) return false;
+  if (kind === "relic" && G.owns(run, data, item.id)) return false; // already got it since the stock was rolled: no charge
+  if (kind === "potion" && run.potions.length >= heroicMods(run.heroic, run.ascension).potionSlots) return false;
   run.gold -= item.price;
   shop.sold[key] = true;
   if (kind === "card") { run.deck.push({ id: item.id, up: false }); markSeen(run, "cards", item.id); }

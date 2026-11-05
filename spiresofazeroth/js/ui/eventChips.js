@@ -22,6 +22,7 @@ function walk(effs, out, nested) {
       case "draw": out.draw += e.count || 1; break;
       case "scry": out.scry += e.count || 1; break;
       case "energy_next_turn": out.energy += +e.amount || 0; break;
+      case "fight_bonus": out.energy += +e.energy || 0; out.draw += +e.draw || 0; break;
       case "block": if (self) out.block += +e.amount || 0; break;
       case "remove": if (self) out.cleanse += 1; break;
       case "start_combat": out.fight = e.tier === "elite" ? "Elite fight" : e.tier === "boss" ? "Boss fight" : "Fight"; break;

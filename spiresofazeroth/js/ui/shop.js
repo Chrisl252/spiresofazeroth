@@ -3,6 +3,8 @@
 // No Buy buttons: clicking a ware buys it. Styling: css/shop.css.
 import { h, icon, qClass, toast, fill, esc, overlayHost } from "./dom.js";
 import { buy, buyRemoval, leaveNode } from "../engine/run.js";
+import { sellable, sellGear, sellPrice, slotOf, SLOT_LABEL, isStarter } from "../engine/gear.js";
+import { compareTip } from "./gearStrip.js";
 import { cssReady, btn, dark, ico, cardSlot, stageModal, tip } from "./kit.js";
 import { runBar } from "./runbar.js";
 import { mountVendor } from "./shopVendor.js";
@@ -57,8 +59,9 @@ export function shopPanel(app, shop, redraw, hooks = {}) {
   const relics = shop.relics.map((it, i) => {
     const r = data.relic(it.id) || { name: it.id, text: "" };
     const inner = h("div", { class: "sx-ware__ico" }, ico(r.icon, { size: "lg", q: qClass(r.rarity) }));
-    tip(inner, `<b>${esc(r.name)}</b><br>${esc(r.text)}`);
-    return ware("relic", i, it, h("div", { class: "sx-ware__body" }, inner, h("b", { class: qClass(r.rarity) }, r.name)), r.icon, ".sx-bar .gs-strip, .sx-bar__strip");
+    const slot = r.id || it.id ? (SLOT_LABEL[slotOf(r)] || "") : ""; // 11-01 report: shop relics never said which equipment slot they are for
+    tip(inner, `<b>${esc(r.name)}</b>${slot ? `<br><span style="color:#b8a77f">${esc(slot)}</span>` : ""}<br>${esc(r.text)}`);
+    return ware("relic", i, it, h("div", { class: "sx-ware__body" }, inner, h("b", { class: qClass(r.rarity) }, r.name), slot ? h("small", { class: "sx-ware__slot" }, slot) : null), r.icon, ".sx-bar .gs-strip, .sx-bar__strip");
   });
   const pots = shop.potions.map((it, i) => {
     const p = data.potion(it.id) || { name: it.id, text: "" };
@@ -79,9 +82,31 @@ export function shopPanel(app, shop, redraw, hooks = {}) {
     rm.addEventListener("click", go);
     rm.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
   }
+  // sell gear (owner brick 11-01; worn + starter 11-02): bag pieces sell on one click, worn pieces arm first. EVERY tile shown here sells. A sold piece never drops again (gear.js owns()).
+  const sells = sellable(run, data).map(({ id, from }) => {
+    const r = data.relic(id);
+    const g = sellPrice(data, id), worn = !!from;
+    const el = h("div", { class: `sx-ware sx-ware--sell${worn ? " sx-ware--worn" : ""}`, role: "button", tabindex: "0", "aria-label": `Sell ${r.name} for ${g} gold` },
+      h("div", { class: "sx-ware__body" }, h("div", { class: "sx-ware__ico" }, ico(r.icon, { size: "lg", q: qClass(r.rarity) })), h("b", { class: qClass(r.rarity) }, r.name), SLOT_LABEL[slotOf(r)] ? h("small", { class: "sx-ware__slot" }, SLOT_LABEL[slotOf(r)]) : null),
+      h("div", { class: "sx-ware__tag" }, h("span", { class: "sx-price sx-price--sell" }, icon("inv_misc_coin_01", "sx-price__i", ""), `+${g}`)));
+    const note = () => worn ? `${el.classList.contains("armed") ? "Click again to sell." : "WORN. Click twice to take it off and sell it."}` : isStarter(id) ? "Starter gear. Click to sell." : "Click to sell. It never drops again this run.";
+    tip(el, () => compareTip(r, run, data, `<span style="color:#ffd45a">${worn ? "Worn: " : ""}Sell for ${g} gold. ${note()}</span><br>`));
+    const go = () => {
+      if (worn && !el.classList.contains("armed")) { el.classList.add("armed"); el.querySelector(".sx-price--sell").lastChild.textContent = "Sell?"; return; }
+      if (!sellGear(run, data, id, from)) { toast("That item can no longer be sold."); setTimeout(redraw, 0); return; }
+      sfx.play("coinSmall"); app.save(); setTimeout(redraw, 60);
+    };
+    el.addEventListener("click", go);
+    el.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+    el.dataset.worn = worn ? "1" : "";
+    return el;
+  }).filter(Boolean);
+  const bagSells = sells.filter((el) => !el.dataset.worn), wornSells = sells.filter((el) => el.dataset.worn); // 11-03 report: bag trash and worn gear were one merged row
   const shelf = (title, kids, cls = "") => h("section", { class: `sx-shelf ${cls}`.trim() }, h("h3", { class: "sx-shelf__title" }, title), h("div", { class: "sx-shelf__row" }, ...kids));
   return dark("sx-table", shelf("Cards", cards, "sx-shelf--cards"),
-    h("div", { class: "sx-table__low" }, shelf("Relics", relics), shelf("Potions", pots), shelf("Services", [rm])));
+    h("div", { class: "sx-table__low" }, shelf("Relics", relics), shelf("Potions", pots), shelf("Services", [rm])),
+    bagSells.length ? shelf("Sell from your Gear Bag", bagSells, "sx-shelf--sell") : null,
+    wornSells.length ? shelf("Sell worn gear (click twice)", wornSells, "sx-shelf--sell sx-shelf--sell-worn") : null);
 }
 
 export function pick(app, onPick, filter = () => true) {

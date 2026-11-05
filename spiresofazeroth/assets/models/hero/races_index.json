@@ -1,0 +1,5697 @@
+{
+ "warrior-human-female-0": {
+  "bytes": 262904,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-human-female-4": {
+  "bytes": 267444,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-human-female-8": {
+  "bytes": 299400,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-human-male-0": {
+  "bytes": 290316,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-human-male-4": {
+  "bytes": 301088,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-human-male-8": {
+  "bytes": 359896,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-human-female-0": {
+  "bytes": 266404,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-human-female-4": {
+  "bytes": 266612,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-human-female-8": {
+  "bytes": 325540,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-human-male-0": {
+  "bytes": 284228,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-human-male-4": {
+  "bytes": 306008,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-human-male-8": {
+  "bytes": 332892,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-human-male-0": {
+  "bytes": 292248,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-human-male-4": {
+  "bytes": 308528,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-human-male-8": {
+  "bytes": 374128,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-human-female-0": {
+  "bytes": 270748,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-human-female-4": {
+  "bytes": 276340,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-human-female-8": {
+  "bytes": 343100,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-human-male-0": {
+  "bytes": 291532,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-human-male-4": {
+  "bytes": 316596,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-human-male-8": {
+  "bytes": 350344,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-human-female-0": {
+  "bytes": 273204,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-human-female-4": {
+  "bytes": 286800,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-human-female-8": {
+  "bytes": 320628,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-human-male-0": {
+  "bytes": 289960,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-human-male-4": {
+  "bytes": 339544,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-human-male-8": {
+  "bytes": 378284,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-human-female-0": {
+  "bytes": 267240,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-human-female-4": {
+  "bytes": 317008,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-human-female-8": {
+  "bytes": 357012,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-dwarf-female-0": {
+  "bytes": 338208,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-dwarf-female-4": {
+  "bytes": 328692,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-dwarf-female-8": {
+  "bytes": 365504,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-dwarf-female-0": {
+  "bytes": 342388,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-dwarf-female-4": {
+  "bytes": 328640,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-dwarf-female-8": {
+  "bytes": 392396,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-dwarf-male-0": {
+  "bytes": 339692,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-dwarf-male-4": {
+  "bytes": 411056,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-dwarf-male-8": {
+  "bytes": 440084,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-dwarf-female-0": {
+  "bytes": 333600,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-dwarf-female-4": {
+  "bytes": 404208,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-dwarf-female-8": {
+  "bytes": 411704,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-dwarf-male-0": {
+  "bytes": 347052,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-dwarf-male-4": {
+  "bytes": 370948,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-dwarf-male-8": {
+  "bytes": 397816,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-dwarf-female-0": {
+  "bytes": 338640,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-dwarf-female-4": {
+  "bytes": 336556,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-dwarf-female-8": {
+  "bytes": 363580,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-dwarf-male-0": {
+  "bytes": 355968,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-dwarf-male-4": {
+  "bytes": 374604,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-dwarf-male-8": {
+  "bytes": 411308,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-dwarf-female-0": {
+  "bytes": 349844,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-dwarf-female-4": {
+  "bytes": 341544,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-dwarf-female-8": {
+  "bytes": 408056,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-nightelf-male-0": {
+  "bytes": 340924,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-nightelf-male-4": {
+  "bytes": 332504,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-nightelf-male-8": {
+  "bytes": 363408,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-nightelf-female-0": {
+  "bytes": 447648,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-nightelf-female-4": {
+  "bytes": 457012,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-nightelf-female-8": {
+  "bytes": 485452,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-nightelf-male-0": {
+  "bytes": 328180,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-nightelf-male-4": {
+  "bytes": 400108,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-nightelf-male-8": {
+  "bytes": 401992,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-nightelf-male-0": {
+  "bytes": 340672,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-nightelf-male-4": {
+  "bytes": 338916,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-nightelf-male-8": {
+  "bytes": 365756,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-nightelf-female-0": {
+  "bytes": 448336,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-nightelf-female-4": {
+  "bytes": 463308,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-nightelf-female-8": {
+  "bytes": 476780,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-nightelf-male-0": {
+  "bytes": 348592,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-nightelf-male-4": {
+  "bytes": 341360,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-nightelf-male-8": {
+  "bytes": 407424,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-nightelf-female-0": {
+  "bytes": 456156,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-nightelf-female-4": {
+  "bytes": 467768,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-nightelf-female-8": {
+  "bytes": 507544,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "druid-nightelf-male-0": {
+  "bytes": 356544,
+  "slots": [
+   "chest",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "druid-nightelf-male-4": {
+  "bytes": 400912,
+  "slots": [
+   "chest",
+   "head",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "druid-nightelf-male-8": {
+  "bytes": 423308,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "druid-nightelf-female-0": {
+  "bytes": 462284,
+  "slots": [
+   "chest",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "druid-nightelf-female-4": {
+  "bytes": 508612,
+  "slots": [
+   "chest",
+   "head",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "druid-nightelf-female-8": {
+  "bytes": 552396,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-gnome-male-0": {
+  "bytes": 266832,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-gnome-male-4": {
+  "bytes": 282428,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-gnome-male-8": {
+  "bytes": 319544,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-gnome-female-0": {
+  "bytes": 280940,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-gnome-female-4": {
+  "bytes": 267096,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-gnome-female-8": {
+  "bytes": 304744,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-gnome-male-0": {
+  "bytes": 266960,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-gnome-male-4": {
+  "bytes": 289424,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-gnome-male-8": {
+  "bytes": 316488,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-gnome-female-0": {
+  "bytes": 281412,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-gnome-female-4": {
+  "bytes": 274980,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-gnome-female-8": {
+  "bytes": 302100,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-gnome-male-0": {
+  "bytes": 268648,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-gnome-male-4": {
+  "bytes": 293884,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-gnome-male-8": {
+  "bytes": 333208,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-gnome-male-0": {
+  "bytes": 273836,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-gnome-male-4": {
+  "bytes": 324052,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-gnome-male-8": {
+  "bytes": 364604,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-gnome-female-0": {
+  "bytes": 289712,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-gnome-female-4": {
+  "bytes": 339288,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-gnome-female-8": {
+  "bytes": 379972,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-orc-male-0": {
+  "bytes": 351292,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-orc-male-4": {
+  "bytes": 368604,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-orc-male-8": {
+  "bytes": 398516,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-orc-female-0": {
+  "bytes": 357288,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-orc-female-4": {
+  "bytes": 349908,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-orc-female-8": {
+  "bytes": 380668,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-orc-male-0": {
+  "bytes": 335684,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-orc-male-4": {
+  "bytes": 406776,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-orc-male-8": {
+  "bytes": 434196,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-orc-female-0": {
+  "bytes": 339500,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-orc-female-4": {
+  "bytes": 385880,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-orc-female-8": {
+  "bytes": 413908,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-orc-male-0": {
+  "bytes": 350928,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-orc-male-4": {
+  "bytes": 374544,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-orc-male-8": {
+  "bytes": 401324,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-orc-female-0": {
+  "bytes": 357548,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-orc-female-4": {
+  "bytes": 357512,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-orc-female-8": {
+  "bytes": 384424,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-orc-female-0": {
+  "bytes": 365336,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-orc-female-4": {
+  "bytes": 363192,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-orc-female-8": {
+  "bytes": 394516,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-orc-male-0": {
+  "bytes": 356984,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-orc-male-4": {
+  "bytes": 405660,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-orc-male-8": {
+  "bytes": 435564,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-orc-female-0": {
+  "bytes": 362972,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-orc-female-4": {
+  "bytes": 410004,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-orc-female-8": {
+  "bytes": 442596,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-draenei-male-0": {
+  "bytes": 604796,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-draenei-male-4": {
+  "bytes": 513244,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-draenei-male-8": {
+  "bytes": 551008,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-draenei-female-0": {
+  "bytes": 607864,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-draenei-female-4": {
+  "bytes": 617336,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-draenei-female-8": {
+  "bytes": 659388,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-draenei-male-0": {
+  "bytes": 597648,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-draenei-male-4": {
+  "bytes": 502412,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-draenei-male-8": {
+  "bytes": 547256,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-draenei-female-0": {
+  "bytes": 615860,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-draenei-female-4": {
+  "bytes": 622396,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-draenei-female-8": {
+  "bytes": 671340,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-draenei-male-0": {
+  "bytes": 571708,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-draenei-male-4": {
+  "bytes": 548540,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-draenei-male-8": {
+  "bytes": 587096,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-draenei-female-0": {
+  "bytes": 597616,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-draenei-female-4": {
+  "bytes": 675176,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-draenei-female-8": {
+  "bytes": 717752,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-draenei-male-0": {
+  "bytes": 610444,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-draenei-male-4": {
+  "bytes": 517468,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-draenei-male-8": {
+  "bytes": 544980,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-draenei-female-0": {
+  "bytes": 615284,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-draenei-female-4": {
+  "bytes": 623336,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-draenei-female-8": {
+  "bytes": 651992,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-draenei-male-0": {
+  "bytes": 606492,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-draenei-male-4": {
+  "bytes": 515456,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-draenei-male-8": {
+  "bytes": 548328,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-draenei-female-0": {
+  "bytes": 612328,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-draenei-female-4": {
+  "bytes": 623344,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-draenei-female-8": {
+  "bytes": 659516,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-draenei-male-0": {
+  "bytes": 597168,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-draenei-male-4": {
+  "bytes": 507576,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-draenei-male-8": {
+  "bytes": 544160,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-draenei-female-0": {
+  "bytes": 618624,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-draenei-female-4": {
+  "bytes": 632036,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-draenei-female-8": {
+  "bytes": 670056,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-bloodelf-male-0": {
+  "bytes": 627372,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-bloodelf-male-4": {
+  "bytes": 630888,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-bloodelf-male-8": {
+  "bytes": 666268,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-bloodelf-female-0": {
+  "bytes": 705832,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-bloodelf-female-4": {
+  "bytes": 705624,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "paladin-bloodelf-female-8": {
+  "bytes": 740576,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-bloodelf-male-0": {
+  "bytes": 608384,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-bloodelf-male-4": {
+  "bytes": 683708,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-bloodelf-male-8": {
+  "bytes": 712252,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-bloodelf-female-0": {
+  "bytes": 682396,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-bloodelf-female-4": {
+  "bytes": 753716,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-bloodelf-female-8": {
+  "bytes": 781956,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-bloodelf-male-0": {
+  "bytes": 631420,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-bloodelf-male-4": {
+  "bytes": 644536,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-bloodelf-male-8": {
+  "bytes": 658072,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-bloodelf-female-0": {
+  "bytes": 694340,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-bloodelf-female-4": {
+  "bytes": 704272,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-bloodelf-female-8": {
+  "bytes": 717848,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-bloodelf-male-0": {
+  "bytes": 638040,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-bloodelf-male-4": {
+  "bytes": 643660,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-bloodelf-male-8": {
+  "bytes": 666180,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-bloodelf-female-0": {
+  "bytes": 698716,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-bloodelf-female-4": {
+  "bytes": 700680,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-bloodelf-female-8": {
+  "bytes": 723220,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-bloodelf-male-0": {
+  "bytes": 633128,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-bloodelf-male-4": {
+  "bytes": 642196,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-bloodelf-male-8": {
+  "bytes": 668568,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-bloodelf-female-0": {
+  "bytes": 705776,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-bloodelf-female-4": {
+  "bytes": 710880,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-bloodelf-female-8": {
+  "bytes": 736796,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-bloodelf-male-0": {
+  "bytes": 630624,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-bloodelf-male-4": {
+  "bytes": 671544,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-bloodelf-male-8": {
+  "bytes": 704908,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-bloodelf-female-0": {
+  "bytes": 692244,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-bloodelf-female-4": {
+  "bytes": 733320,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-bloodelf-female-8": {
+  "bytes": 766192,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-dwarf-male-0": {
+  "bytes": 347312,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-dwarf-male-4": {
+  "bytes": 364716,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-dwarf-male-8": {
+  "bytes": 396296,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-undead-male-0": {
+  "bytes": 366920,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-undead-male-4": {
+  "bytes": 387404,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-undead-male-8": {
+  "bytes": 414340,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-undead-female-0": {
+  "bytes": 387108,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-undead-female-4": {
+  "bytes": 393612,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-undead-female-8": {
+  "bytes": 420264,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-undead-male-0": {
+  "bytes": 365356,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-undead-male-4": {
+  "bytes": 389188,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-undead-male-8": {
+  "bytes": 403416,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-undead-female-0": {
+  "bytes": 386232,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-undead-female-4": {
+  "bytes": 398204,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-undead-female-8": {
+  "bytes": 405628,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-undead-male-0": {
+  "bytes": 356228,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-undead-male-4": {
+  "bytes": 374772,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-undead-male-8": {
+  "bytes": 413252,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-undead-male-0": {
+  "bytes": 353536,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-undead-male-4": {
+  "bytes": 380936,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-undead-male-8": {
+  "bytes": 407132,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-undead-female-0": {
+  "bytes": 379504,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-undead-female-4": {
+  "bytes": 392924,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-undead-female-8": {
+  "bytes": 417260,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-undead-female-0": {
+  "bytes": 375620,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-undead-female-4": {
+  "bytes": 422204,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warlock-undead-female-8": {
+  "bytes": 455500,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-tauren-male-0": {
+  "bytes": 380160,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-tauren-male-4": {
+  "bytes": 396684,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-tauren-male-8": {
+  "bytes": 419492,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-tauren-female-0": {
+  "bytes": 406612,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-tauren-female-4": {
+  "bytes": 417844,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-tauren-female-8": {
+  "bytes": 446108,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-tauren-male-0": {
+  "bytes": 369284,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-tauren-male-4": {
+  "bytes": 440508,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-tauren-male-8": {
+  "bytes": 469940,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-tauren-female-0": {
+  "bytes": 401124,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-tauren-female-4": {
+  "bytes": 472532,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-tauren-female-8": {
+  "bytes": 501984,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-tauren-male-0": {
+  "bytes": 372844,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-tauren-male-4": {
+  "bytes": 391472,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-tauren-male-8": {
+  "bytes": 413344,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-tauren-female-0": {
+  "bytes": 399928,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-tauren-female-4": {
+  "bytes": 416336,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-tauren-female-8": {
+  "bytes": 441052,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "druid-tauren-female-0": {
+  "bytes": 408784,
+  "slots": [
+   "chest",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "druid-tauren-female-4": {
+  "bytes": 457528,
+  "slots": [
+   "chest",
+   "head",
+   "legs",
+   "mainHand"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "druid-tauren-female-8": {
+  "bytes": 500056,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-troll-male-0": {
+  "bytes": 244528,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-troll-male-4": {
+  "bytes": 261996,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-troll-male-8": {
+  "bytes": 293116,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-troll-female-0": {
+  "bytes": 278980,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-troll-female-4": {
+  "bytes": 254848,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "warrior-troll-female-8": {
+  "bytes": 293404,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-troll-male-0": {
+  "bytes": 238440,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-troll-male-4": {
+  "bytes": 336264,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-troll-male-8": {
+  "bytes": 369064,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-troll-female-0": {
+  "bytes": 267236,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-troll-female-4": {
+  "bytes": 324924,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "hunter-troll-female-8": {
+  "bytes": 365148,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-troll-male-0": {
+  "bytes": 244220,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-troll-male-4": {
+  "bytes": 268068,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-troll-male-8": {
+  "bytes": 294880,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-troll-female-0": {
+  "bytes": 277992,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-troll-female-4": {
+  "bytes": 260044,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "rogue-troll-female-8": {
+  "bytes": 287508,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "offHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-troll-male-0": {
+  "bytes": 251136,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-troll-male-4": {
+  "bytes": 269836,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-troll-male-8": {
+  "bytes": 336392,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-troll-female-0": {
+  "bytes": 276864,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-troll-female-4": {
+  "bytes": 251744,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "priest-troll-female-8": {
+  "bytes": 318144,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-troll-male-0": {
+  "bytes": 252656,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-troll-male-4": {
+  "bytes": 273956,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-troll-male-8": {
+  "bytes": 305576,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-troll-female-0": {
+  "bytes": 275536,
+  "slots": [
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-troll-female-4": {
+  "bytes": 254192,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "shaman-troll-female-8": {
+  "bytes": 290812,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-troll-male-0": {
+  "bytes": 250700,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-troll-male-4": {
+  "bytes": 278396,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-troll-male-8": {
+  "bytes": 312128,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-troll-female-0": {
+  "bytes": 273292,
+  "slots": [
+   "chest",
+   "feet",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-troll-female-4": {
+  "bytes": 256196,
+  "slots": [
+   "chest",
+   "feet",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ },
+ "mage-troll-female-8": {
+  "bytes": 294020,
+  "slots": [
+   "chest",
+   "feet",
+   "hands",
+   "head",
+   "legs",
+   "mainHand",
+   "shirt",
+   "shoulder",
+   "waist",
+   "wrist"
+  ],
+  "clips": [
+   "idle",
+   "attack",
+   "cast",
+   "precast",
+   "hit",
+   "death"
+  ]
+ }
+}

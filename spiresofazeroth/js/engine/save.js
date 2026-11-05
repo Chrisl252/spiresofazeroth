@@ -88,6 +88,9 @@ export function recordRunEnd(meta, run, classIds, unlocks = null) {
       meta.heroic[run.classId] = Math.min(MAX_HEROIC, (run.heroic || 0) + 1);
       unlocked.push({ type: "heroic", id: run.classId, level: meta.heroic[run.classId] });
     }
+    const asc = run.ascension | 0; // Ascension (engine/ascension.js): best cleared Ascension per class
+    meta.bestAscension = meta.bestAscension && typeof meta.bestAscension === "object" ? meta.bestAscension : {};
+    if (asc > (meta.bestAscension[run.classId] | 0)) { meta.bestAscension[run.classId] = asc; unlocked.push({ type: "ascension", id: run.classId, level: asc }); }
   }
   const prog = awardProgress(meta, run, unlocks);
   if (prog.points > 0) unlocked.push({ type: "talent", id: run.classId, points: prog.points });
@@ -95,6 +98,16 @@ export function recordRunEnd(meta, run, classIds, unlocks = null) {
   unlocked.push({ type: "xp", id: run.classId, xp: prog.xp, nextXp: prog.nextXp, level: prog.level });
   saveMeta(meta);
   return unlocked;
+}
+
+// Idempotent run-end credit (XP, talent points, unlocks). 11-03 report: a Nefarian kill whose Continue never reached the end screen lost the whole
+// run's XP, because it was only credited when ui/runEnd.js rendered (and app.save() drops a run on screen "end"). Anyone may call this as soon as the
+// outcome is certain (final-boss kill, before the reward screen, or right after leaveNode); run.endRecorded makes the second call a no-op.
+export function commitRunEnd(meta, run, classIds, unlocks = null) {
+  if (run.endRecorded) return run.unlocked || [];
+  run.endRecorded = true;
+  run.unlocked = recordRunEnd(meta, run, classIds, unlocks);
+  return run.unlocked;
 }
 
 // ---- export / import (one pasteable string) ------------------------------------------------------

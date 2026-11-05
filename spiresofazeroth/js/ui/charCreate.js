@@ -5,20 +5,19 @@
 import { h, icon, cap, esc, tip, track, fill } from "./dom.js";
 import { btn, dark } from "./kit.js";
 import { saveMeta } from "../engine/save.js";
-import { RACE_ORDER, GENDERS, RACE_NAME, NO_LOOKS, factionOf, canBe, classAfterRaceChange, cleanName, newCharacterId, slugOf } from "../engine/character.js";
+import { RACE_ORDER, GENDERS, RACE_NAME, factionOf, canBe, classAfterRaceChange, cleanName, newCharacterId, slugOf } from "../engine/character.js";
 import { loadCharData, charCss, portraitUrl, crestUrl, randomName } from "./charData.js";
 import { racialInfo } from "../engine/racials.js";
+import { looksRows, cycleLook, randomLooks, cleanLooks } from "../engine/looks.js";
 import { createRaceViewer } from "../stage/raceViewer.js";
 
 export const stageNative = true;
-const LOOKS = ["Skin Color", "Face", "Hair Style", "Hair Color", "Facial Hair"];
-const LOOKS_WHY = "Looks are fixed for now: the datamined race bodies are single-look models, so there are no skin, face or hair variants to cycle yet.";
 
 export async function render(app, _name, props = {}) {
   const [D] = await Promise.all([loadCharData(), charCss()]);
   const { data, meta, stage } = app;
   const order = data.classIds || Object.keys(D.classes);
-  const st = { race: props.race || "human", gender: props.gender || "male", cls: props.cls || "warrior", name: "" };
+  const st = { race: props.race || "human", gender: props.gender || "male", cls: props.cls || "warrior", name: "", looks: cleanLooks({ v: 1 }, props.race || "human", props.gender || "male") };
   stage.setBackdrop("classSelect");
   const host = h("section", { class: "sx-screen cc", "data-race": st.race });
   let viewer = null;
@@ -36,14 +35,13 @@ export async function render(app, _name, props = {}) {
   for (const g of GENDERS) genderBtns[g] = h("button", { class: "cc-gender", type: "button", "data-gender": g, "aria-pressed": "false", onClick: () => pick({ gender: g }) }, cap(g));
   const classBtns = {};
   for (const id of order) classBtns[id] = h("button", { class: "cc-class", type: "button", "data-class": id, "aria-pressed": "false", onClick: () => pick({ cls: id }) }, icon(`classicon_${id}`, "", cap(id)));
-  const looksRows = LOOKS.map((label) => h("div", { class: "cc-look", title: LOOKS_WHY }, h("button", { class: "cc-look__l", type: "button", disabled: true }, label),
-    h("button", { class: "cc-arrow cc-arrow--l", type: "button", disabled: true, "aria-label": `${label} previous` }), h("button", { class: "cc-arrow cc-arrow--r", type: "button", disabled: true, "aria-label": `${label} next` })));
+  const looksBox = h("div", { class: "cc-looks", "aria-label": "Customization" });
   const left = dark("cc-left", h("div", { class: "cc-logo" }, h("b", {}, "Spires of Azeroth"), h("span", {}, "Create a Character")),
     h("div", { class: "cc-facs" }, faction("alliance"), faction("horde")),
     h("div", { class: "cc-genders", role: "group", "aria-label": "Gender" }, ...GENDERS.map((g) => genderBtns[g])),
     h("div", { class: "cc-classes", role: "group", "aria-label": "Class" }, ...order.map((id) => classBtns[id])),
-    h("div", { class: "cc-looks", "aria-label": "Customization (not available)" }, ...looksRows),
-    btn("Randomize", () => {}, { size: "sm", cls: "cc-rand", disabled: true, title: LOOKS_WHY }));
+    looksBox,
+    btn("Randomize", randomLooksNow, { size: "sm", cls: "cc-rand", title: "Randomize skin, face and hair" }));
 
   // ---- centre: model + name
   const modelEl = h("div", { class: "cc-model", "aria-label": "Character preview" });
@@ -63,7 +61,7 @@ export async function render(app, _name, props = {}) {
     const name = cleanName(nameIn.value);
     if (name.length < 2) { status.textContent = "Please enter a name for your character (2 to 12 letters)."; nameIn.focus(); return; }
     meta.characters = Array.isArray(meta.characters) ? meta.characters : [];
-    const ch = { id: newCharacterId(), name, race: st.race, gender: st.gender, classId: st.cls, looks: { ...NO_LOOKS }, created: Date.now(), lastPlayed: 0 };
+    const ch = { id: newCharacterId(), name, race: st.race, gender: st.gender, classId: st.cls, looks: cleanLooks(st.looks, st.race, st.gender), created: Date.now(), lastPlayed: 0 };
     meta.characters.push(ch);
     meta.lastClass = st.cls;
     saveMeta(meta);
@@ -77,9 +75,26 @@ export async function render(app, _name, props = {}) {
   function pick(patch) {
     const raceChanged = !!patch.race && patch.race !== st.race;
     Object.assign(st, patch);
+    if (raceChanged || patch.gender) st.looks = cleanLooks({ v: 1 }, st.race, st.gender); // each race/gender has its own option lists: back to the first look
     st.cls = classAfterRaceChange(st.race, st.cls, order); // the client's rule: keep the class if still valid, else the first valid one
     sync(raceChanged);
     if (raceChanged || patch.gender) { if (!nameIn.dataset.typed) rollName(); }
+  }
+  // ---- looks rows: only the options this race/gender really has (n > 1), arrows cycle the datamined variants, preview re-renders
+  function renderLooks() {
+    looksBox.replaceChildren(...looksRows(st.race, st.gender).map((r) => {
+      const val = h("span", { class: "cc-look__v" }, `${st.looks[r.key] + 1}/${r.n}`);
+      const step = (d) => { st.looks = cycleLook(st.looks, st.race, st.gender, r.key, d); showModel(); renderLooks(); };
+      return h("div", { class: "cc-look", "data-look": r.key }, h("span", { class: "cc-look__l" }, r.label, " ", val),
+        h("button", { class: "cc-arrow cc-arrow--l", type: "button", "aria-label": `${r.label} previous`, onClick: () => step(-1) }),
+        h("button", { class: "cc-arrow cc-arrow--r", type: "button", "aria-label": `${r.label} next`, onClick: () => step(1) }));
+    }));
+  }
+  function randomLooksNow() { st.looks = randomLooks(st.race, st.gender); showModel(); renderLooks(); }
+  function showModel() {
+    if (!viewer) return;
+    const seq = (modelEl.__seq = (modelEl.__seq || 0) + 1);
+    viewer.show(slugOf(st.race, st.gender), st.looks).then((ok) => { if (seq === modelEl.__seq) modelEl.classList.toggle("cc-model--none", !ok); }); // only the latest request may flag the model unavailable
   }
   function sync(raceChanged) {
     const R = D.byKey[st.race], C = D.classes[st.cls];
@@ -100,7 +115,7 @@ export async function render(app, _name, props = {}) {
     pC.body.replaceChildren(h("p", {}, C.blurb), ...C.lines.map((l) => h("p", { class: "cc-trait cc-trait--cls" }, l)));
     for (const p of [pF, pR, pC]) p.body.scrollTop = 0;
     if (raceChanged && stage.backdrop) stage.backdrop.setBackdrop(R.zone || "classSelect").catch(() => {}); // starting-zone art; no zone audio, this is a preview
-    if (viewer) { const seq = (modelEl.__seq = (modelEl.__seq || 0) + 1); viewer.show(slugOf(st.race, st.gender)).then((ok) => { if (seq === modelEl.__seq) modelEl.classList.toggle("cc-model--none", !ok); }); } // only the latest request may flag the model unavailable (a superseded load resolves false)
+    renderLooks(); showModel();
   }
   nameIn.addEventListener("input", () => { nameIn.dataset.typed = "1"; });
 

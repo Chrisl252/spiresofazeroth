@@ -16,7 +16,7 @@ async function remote(u, cache) {
 self.addEventListener("fetch", (e) => {
   const u = new URL(e.request.url);
   if (u.origin !== self.location.origin || e.request.method !== "GET") return;
-  if (u.pathname.startsWith("/assets/") || u.pathname.startsWith("/spiresofazeroth/assets/") || u.pathname.startsWith("/static/")) { // bundled first, remote second
+  if (u.pathname.startsWith("/assets/") || u.pathname.startsWith("/spiresofazeroth/assets/") || u.pathname.startsWith("/static/") || u.pathname.startsWith("/media/")) { // /media/sounds = library sfx // bundled first, remote second
     e.respondWith((async () => {
       let local;
       try { local = await fetch(e.request); } catch (_) { local = null; }

@@ -8,7 +8,9 @@ import { buildEnemy, chooseMove, enemyAct, checkPhases } from "./intents.js";
 import { applyStatus, turnStart, turnEnd, roundEnd, modeOf } from "./status.js";
 import { fire } from "./relics.js";
 import { makeRng } from "./rng.js";
+import { revealsStealth } from "./stealth.js";
 import { heroicMods, noviceOf } from "./heroic.js";
+import { coopTune } from "./coopTuning.js";
 import { midRunHpMult } from "./talentsMidRun.js";
 import { talentCarryBlock, talentNoExhaust, talentSweep } from "./talentHooks.js";
 
@@ -27,13 +29,13 @@ export function startCombat(o) {
   const cls = data.classObj(run.classId);
   const C = {
     data, run, cls, classId: run.classId, zone: o.zone || null, tier: o.tier || "normal", rng: o.rng || makeRng(run.seed + "|combat"),
-    enemyDefs: o.enemyDefs || {}, interactive: !!o.interactive, heroicMods: composeMods(heroicMods(run.heroic || 0), o.zoneMods, o.tier, run.talents ? 1 : noviceOf(cls, run.act).enemyHp),
+    enemyDefs: o.enemyDefs || {}, interactive: !!o.interactive, heroicMods: composeMods(heroicMods(run.heroic || 0, run.ascension), o.zoneMods, o.tier, run.talents ? 1 : noviceOf(cls, run.act).enemyHp),
     turn: 0, phase: "setup", result: null, log: [], fx: [], uidSeq: 0, actionId: 0, enemies: [], relics: run.relics.slice(),
     potions: run.potions, stats: { damageDealt: 0, damageTaken: 0, cardsPlayed: 0, kills: 0, turns: 0 }, pending: [], powers: [],
     lastSchool: null, lastCardId: null, lastTarget: null, coldDrain: 0, endTurnRequested: false,
   };
   if (run.midTalents > 0) C.heroicMods = { ...C.heroicMods, enemyHpMult: C.heroicMods.enemyHpMult * midRunHpMult(run) }; // Hardened Foes (engine/talentsMidRun.js)
-  if (o.hpMul > 0) C.heroicMods = { ...C.heroicMods, enemyHpMult: C.heroicMods.enemyHpMult * o.hpMul }; // co-op (engine/coop.js): one pack for two heroes
+  if (o.hpMul > 0) C.heroicMods = coopTune({ ...C.heroicMods, enemyHpMult: C.heroicMods.enemyHpMult * o.hpMul }, run); // co-op (engine/coop.js): one pack for two heroes
   if (o.uidBase > 0) C.uidSeq = o.uidBase; // co-op: the second hero's summons and cards never reuse the first hero's uids
   C.player = {
     kind: "player", uid: "player", name: cls ? cls.name : "Hero", icon: cls && cls.icon, hp: run.hp, maxHp: run.maxHp, block: 0,
@@ -60,10 +62,12 @@ export function startCombat(o) {
   buildPiles(C, run.deck);
   C.phase = "player";
   applyTalentsStart(C, run.talents);
+  if (run.fightBonus && run.fightBonus.energy > 0) C.player.energyNext = (C.player.energyNext || 0) + (run.fightBonus.energy | 0); // event "fight_bonus" (Sayge)
   fire(C, "on_combat_start", {});
   if (!o.sharedEnemies) for (const e of C.enemies) chooseMove(C, e);
   startPlayerTurn(C, true);
   applyTalentsFirstTurn(C, run.talents);
+  if (run.fightBonus && run.fightBonus.draw > 0) drawCards(C, run.fightBonus.draw | 0); delete run.fightBonus; // one fight only, like every other out-of-combat buff (run.carry)
   return C;
 }
 
@@ -129,13 +133,19 @@ export function startPlayerTurn(C, first = false) {
   const frozenHit = !!p.st.frozen;
   if (p.st.frozen) { energy -= 1; delete p.st.frozen; }
   if ((stunned || frozenHit) && (r.energyPerTurn || 3) > 0) energy = Math.max(1, energy); // stun + frozen never push below 1
-  if (p.st.fear) { draw -= 2; delete p.st.fear; }
+  // 11-02 report "Fear on myself doesn't show": like Sleep, the stack stays visible all turn (pip + tooltip + FEARED text) and is spent in endPlayerTurn.
+  const feared = p.st.fear > 0;
+  p._fearOwed = feared ? p.st.fear : 0;
+  if (feared) draw -= 2;
   // Sleep on the hero: this turn is lost (0 energy, cards unplayable, turn can still be ended). One stack is consumed per turn; damage wakes the hero early.
+  if (p.asleep && p._sleepOwed && p.st.sleep > 0) { p.st.sleep -= 1; if (p.st.sleep <= 0) delete p.st.sleep; } // safety: a slept turn that never reached endPlayerTurn (co-op / other paths) still spends its stack
   const asleep = p.st.sleep > 0;
-  p.asleep = asleep;
-  if (asleep) { p.st.sleep -= 1; if (p.st.sleep <= 0) delete p.st.sleep; energy = 0; }
+  p.asleep = asleep; p._sleepOwed = asleep;
+  // 11-01 Whitemane report: the last Sleep stack used to be deleted right here, so the lost turn showed no debuff. The stack now stays visible all turn and is spent in endPlayerTurn.
+  if (asleep) energy = 0;
   p.energy = Math.max(0, energy);
   if (asleep) { log(C, "Asleep: you cannot act this turn."); fx(C, { t: "miss", uid: "player", text: "ASLEEP", kind: "gold" }); }
+  else if (feared) { log(C, "Feared: -2 cards this turn."); fx(C, { t: "miss", uid: "player", text: "FEARED -2 cards", kind: "gold" }); }
   else if (stunned) { log(C, "Stunned: -1 energy this turn."); fx(C, { t: "miss", uid: "player", text: "STUNNED -1", kind: "gold" }); }
   else if (frozenHit) log(C, "Frozen: -1 energy this turn.");
   if (p.energy <= 0) { // regression telemetry: 0 energy at turn start must be explained by a visible stun
@@ -198,9 +208,9 @@ export function pickDefaultTarget(C) {
 }
 
 // A clicked/dragged target is honoured unless it is stealthed while a visible enemy exists (same rule as auto-target; co-op seats resolve it identically).
-function chooseTarget(C, targetUid) {
+function chooseTarget(C, targetUid, def) {
   const t = targetUid && C.enemies.find((e) => e.uid === targetUid && isAlive(e));
-  if (t && !(t.st.stealth && livingEnemies(C).some((e) => !e.st.stealth))) return t;
+  if (t && (revealsStealth(def) || !(t.st.stealth && livingEnemies(C).some((e) => !e.st.stealth)))) return t; // Flare-type cards may aim at a stealthed enemy (that is how it is removed)
   return pickDefaultTarget(C);
 }
 
@@ -213,7 +223,7 @@ export function playCard(C, uid, targetUid) {
   const def = inst.def;
   let target = null;
   if (def.target === "enemy" || def.target === undefined) {
-    target = chooseTarget(C, targetUid);
+    target = chooseTarget(C, targetUid, def);
   }
   // pay
   let cost = cardCost(C, inst);
@@ -307,6 +317,8 @@ export function usePotion(C, idx, targetUid) {
 // ---- turn end / enemy phase ----------------------------------------------------------
 export function endPlayerTurn(C) {
   if (C.phase !== "player" || C.result) return;
+  if (C.player.asleep && C.player._sleepOwed && C.player.st.sleep > 0) { C.player.st.sleep -= 1; if (C.player.st.sleep <= 0) delete C.player.st.sleep; } C.player._sleepOwed = false; // the slept turn is spent
+  if (C.player._fearOwed > 0) { const f = C.player.st.fear || 0; if (f <= C.player._fearOwed) delete C.player.st.fear; else C.player.st.fear = f - C.player._fearOwed; } C.player._fearOwed = 0; // the feared turn is spent (Fear applied after this point survives to the next turn)
   fire(C, "on_turn_end", {});
   turnEnd(C, C.player);
   if (!C.result) endOfTurn(C);

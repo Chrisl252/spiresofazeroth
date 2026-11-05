@@ -29,6 +29,7 @@ export function recordRunAggregate(run, meta) {
     build: BUILD,
     class: run.classId,
     heroic: Number.isInteger(run.heroic) ? run.heroic : 0,
+    ascension: run.ascension | 0,
     talent_band: talentBand(meta || {}, run.classId),
     act: run.act,
     floor: run.floor + 1,

@@ -5,11 +5,13 @@ import { h, cap, track, fill } from "./dom.js";
 import { btn, tog } from "./kit.js";
 import { saveMeta, isClassUnlocked } from "../engine/save.js";
 import { classLevel } from "../engine/talents.js";
-import { heroicOpen, heroicName, heroicBlurb } from "../engine/heroic.js";
+import { heroicOpen } from "../engine/heroic.js";
+import { difficultyPicker } from "./difficultyPicker.js";
 import { newSeedString } from "../engine/rng.js";
 import { RACE_NAME, HOME, slugOf } from "../engine/character.js";
 import { loadCharData, charCss, portraitUrl } from "./charData.js";
 import { createRaceViewer } from "../stage/raceViewer.js";
+import { looksActive, looksKey, cleanLooks } from "../engine/looks.js";
 import { beginRun } from "./runStart.js";
 
 export const stageNative = true;
@@ -44,9 +46,7 @@ export async function render(app, _name, props = {}) {
         h("img", { src: portraitUrl(c.race, c.gender), alt: "", width: 56, height: 56 }),
         h("span", { class: "cc-row__t" }, h("b", {}, c.name), h("em", {}, `Level ${classLevel(meta, c.classId, th) + 1} ${RACE_NAME[c.race]} ${cap(c.classId)}`), h("small", {}, zone)));
     });
-    const heroicBtns = h("div", { class: "cc-diff" }, h("h4", {}, "Difficulty"),
-      h("div", { class: "cc-opt", role: "group", "aria-label": "Difficulty" }, ...Array.from({ length: maxH + 1 }, (_, i) => tog(i === 0 ? "Normal" : heroicName(i), st.heroic === i, () => { st.heroic = i; draw(); }))),
-      h("p", { class: "cc-diff__t" }, heroicBlurb(st.heroic)));
+    const heroicBtns = difficultyPicker({ level: st.heroic, maxOpen: maxH, bestAsc: ((meta.bestAscension || {})[cid]) | 0, onPick: (lv) => { st.heroic = lv; draw(); } });
     const contBtns = h("div", { class: "cc-opt", role: "group", "aria-label": "Starting continent" }, ...[["ek", "Eastern Kingdoms"], ["kal", "Kalimdor"]].map(([k, n]) => tog(n, st.continent === k, () => { st.continent = k; draw(); })));
     const panel = h("div", { class: "cc-listpanel sx-wood sx-dark" }, h("h3", {}, "Spires of Azeroth"), h("div", { class: "cc-rows" }, ...rows),
       h("div", { class: "cc-runopts" }, contBtns, heroicBtns),
@@ -66,8 +66,8 @@ export async function render(app, _name, props = {}) {
       h("div", { class: "cc-enter" }, btn("Enter World", enter, { size: "lg", auto: true, cls: "cc-enterbtn" })),
       panel,
       h("div", { class: "cc-foot cc-foot--list" }, del, btn("Back", () => app.go("title"), { size: "sm", cls: "cc-back" }))));
-    const slug = slugOf(ch.race, ch.gender);
-    if (shown !== slug) { shown = slug; viewer.show(slug).then((ok) => modelEl.classList.toggle("cc-model--none", !ok)); }
+    const lk = looksActive(ch.looks) ? cleanLooks(ch.looks, ch.race, ch.gender) : undefined, slug = slugOf(ch.race, ch.gender), sk = slug + (lk ? looksKey(lk) : "");
+    if (shown !== sk) { shown = sk; viewer.show(slug, lk).then((ok) => modelEl.classList.toggle("cc-model--none", !ok)); }
     if (stage.backdrop && R.zone) stage.backdrop.setBackdrop(R.zone).catch(() => {});
   }
   draw();

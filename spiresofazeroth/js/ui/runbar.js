@@ -2,12 +2,16 @@
 import { h, icon, tip, esc, qClass } from "./dom.js";
 import { btn } from "./kit.js";
 import { gearStrip } from "./gearStrip.js";
+import { installBagKey } from "./gearBag.js";
+import { installCharKey, openCharSheet } from "./charSheet.js";
 import { talentState } from "../engine/talents.js";
 import { BUILD } from "../version.js";
 
 export function runBar(app) {
   const { run, data } = app;
   if (!run) return null;
+  installBagKey(app); // the B key toggles the Backpack (idempotent)
+  installCharKey(app); // the C key toggles the Character window (ui/charSheet.js)
   const cls = data.classObj(run.classId) || {};
   const zone = run.zoneId ? data.zone(run.zoneId) : null;
   const relics = gearStrip(app); // gear strip: 16 paper-doll sockets + set badge (replaces the relic strip)
@@ -28,7 +32,8 @@ export function runBar(app) {
     h("div", { class: "sx-bar__gold" }, icon("inv_misc_coin_01", "", ""), h("b", {}, run.gold)),
     h("div", { class: "sx-bar__act" }, "Act ", h("b", {}, `${Math.max(1, run.act)}/6`), "  Floor ", h("b", {}, Math.max(0, run.floor + 1))),
     relics, pots,
-    btn(`Gear Bag ${run.gearBag ? run.gearBag.length : 0}`, () => app.showGear(), { size: "sm", cls: "sx-bar__gear" }),
+    btn("Character", () => openCharSheet(app), { size: "sm", cls: "sx-bar__char", title: "Character: gear, stats, racial, talents (C)" }),
+    btn(`Bag ${run.gearBag ? run.gearBag.length : 0}`, () => app.showGear(), { size: "sm", cls: "sx-bar__gear", title: "Backpack (B)" }),
     btn(`Deck ${run.deck.length}`, () => app.showDeck(), { size: "sm", cls: "sx-bar__deck" }),
     // mid-run talents (engine/talentsMidRun.js): solo only (a co-op partner would wait on a menu), and only from the map so no node is half-resolved
     !(app.coop && app.coop.active && app.coop.active()) && run.screen === "map" && app.meta ? (() => { const n = talentState(app.meta, run.classId).available;

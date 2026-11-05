@@ -9,13 +9,76 @@ import { BUILD } from "../version.js";
 
 let appRef = null; // set by installPatchNotes: the window is a stage modal (stage px, same frame as every other menu panel)
 
-const SEEN_KEY = "spires.notesSeen", NOTES_ID = "2026-10-30-a", POLL_MS = 4 * 60 * 1000;
+const SEEN_KEY = "spires.notesSeen", NOTES_ID = "2026-11-01-h", POLL_MS = 4 * 60 * 1000;
 
 // Newest build first. Each entry: [tag, text] where tag is "new" | "fix" | "bal"; a leading "Name: " in the text is bolded.
 // OPEN_BUILDS: how many of the newest builds start expanded; the rest are collapsed <details>.
 const OPEN_BUILDS = 2;
 const TAGS = { new: "New", fix: "Fix", bal: "Balance" };
 const BUILDS = [
+  { id: "03d", date: "Nov 3", title: "Co-op resume and fixes", entries: [
+    ["fix", "The update notes could open in the middle of a fight with their Close button stuck under the battle. They now wait until the fight is over and always sit on top"],
+    ["fix", "Zone choice: the spire names and lore were rewritten to match the real places. No more invented towers (Gnomeregan, the Scarlet Watch Post, the Westfall Lighthouse, Dragonmaw Gates and 19 more)"],
+    ["fix", "Co-op: you can continue your shared run again. Continue run is offered on the title while the party is up (spend talents, then come back), and a re-hosted party shows Continue our run in the lobby"],
+    ["fix", "The map's boss now always matches the boss you fight (The Barrens showed Mutanus but sent you to Lady Anacondra and Lord Cobrahn)"],
+    ["fix", "Vendor: gear in your bag and gear you wear sell from separate rows"],
+    ["fix", "Character creation: female tauren no longer lose their face (eyes) on some skin colours"],
+  ] },
+  { id: "03b", date: "Nov 3", title: "Bug report fixes", entries: [
+    ["fix", "Co-op: damage no longer drifts between the two games when your partner carries relics from zones your game never opened"],
+    ["fix", "Stealth: hits that pick their own target (and pets/totems) no longer land on a stealthed enemy while another enemy is visible"],
+    ["fix", "Growl: a taunted enemy that was about to buff, heal, block or debuff now attacks you instead (not bosses, not mid-cast)"],
+    ["fix", "Stoneclaw Totem taunts the turn you place it, not from the next turn"],
+    ["fix", "Turn Undead now Fears undead (holy Fear gets through the undead Fear immunity; Shadow fears still don't)"],
+    ["fix", "New gear = Never now also holds for choose-one boss/elite loot: the pick goes to your Gear Bag"],
+  ] },
+  { id: "01h", date: "Nov 1", title: "BIG UPDATE: Mythic difficulty and Ascension", entries: [
+    ["new", "Mythic I-X: ten new difficulty levels past Heroic X. Mythic I is a big jump (enemy HP +101%, Heroic X is +65%; normal foes +2 Str, elites +4, bosses +3, 2 potion slots, weaker rests). Win Heroic X to open it."],
+    ["new", "Ascension: win a run and press the big ASCEND button on the Victory screen. You climb again from act 1 with your gear, deck, relics, gold and talents, but every enemy has 60% more HP and +3 Strength. Each Ascension after that adds another x1.3 HP and +2 Str. There is no cap: see how high your fully geared hero can go."],
+    ["new", "New difficulty picker: Normal / Heroic / Mythic tabs, a level row, and a card with the real numbers for the level you pick plus exactly what got harder since the level below it. Locked levels show what to win to open them."],
+    ["new", "The Character window and the Victory screen show your full difficulty (for example Mythic II + Ascension 3). Your best Ascension per class is saved."],
+    ["new", "The update button is bigger, so you can't miss a new build."],
+    ["fix", "Vendor: you can now sell worn gear (click twice), starter items (5 gold) and anything in your bag. Nothing on the sell shelf silently refuses a click any more."],
+    ["fix", "Bags: the Backpack could stay 'stuck closed' after a screen change until you reloaded. It now always opens."],
+    ["fix", "Boss summons no longer appear in the middle of your turn. When a boss crosses a phase (Amnennar, C'Thun and others), the summon becomes its next telegraphed move."],
+    ["fix", "Fear on your hero now shows for the whole turn (FEARED -2 cards). Hillsbrad turncoats can no longer replace your demon while it lives."],
+    ["fix", "Paladin Vengeance now gives Strength when you are hit. Upgraded Demon Skin keeps its Regen (3). Searing Totem, pet hits and Burn/Bleed ticks now show where the damage came from."],
+    ["fix", "Card tooltips no longer cover the enemy HP bars."],
+    ["fix", "Phones: tap a talent to see it, tap again (or press Learn) to spend the point. The Learn button is always on screen."],
+    ["fix", "Heroes no longer lose their face, skin or hair after a gear change or a new run."],
+  ] },
+  { id: "01g", date: "Nov 1", title: "Real character customization", entries: [
+    ["new", "Character creation: Skin Color, Face, Hair Style, Hair Color and Facial Hair now work for every race and gender, straight from the classic character options (horns for Tauren and Draenei, tusks for Trolls, earrings, piercings and markings where the race has them). Randomize works too."],
+    ["new", "Your chosen look carries into the run: your hero keeps your skin, hair and beard under their armor. Characters made before this update keep their old look."],
+  ] },
+  { id: "01f", date: "Nov 1", title: "Your bug reports, fixed", entries: [
+    ["fix", "Co-op: if one player's game finishes a fight (the elite dies), the partner's game now finishes it too instead of leaving them stuck. Old fight handshakes no longer mix two different fights."],
+    ["fix", "Flare (and any card that removes Stealth) can now be aimed at a stealthed enemy. Stealth rules are spelled out in the tooltip: single-target cards can't pick a stealthed enemy while another is visible, area attacks still hit it, the last enemy is always revealed."],
+    ["fix", "Taunt now works against bosses whose attacks are spells (Arugal's Shadow Bolt)."],
+    ["fix", "Shadowform: play it again to leave the form, and the form pip now shows when you're in it."],
+    ["fix", "Barkskin no longer knocks you out of Bear or Cat form, and 'keep your Block' effects now keep it through the enemy turn as written (Druid and Warrior)."],
+    ["fix", "Sleep on your hero now stays visible for the whole turn it costs you (Whitemane). Bosses now show Sleep and Fear immunity in their immunity row (Mograine)."],
+    ["fix", "Foe Reaper 4000 and other armored elites and bosses: armor caps lower and each blunted hit wears 1 Armor away, so they're tough but no longer unkillable."],
+    ["fix", "Sayge's Fortune of Intelligence now gives +1 Energy and draws 1 at the start of your next fight (it gave nothing)."],
+    ["fix", "Events now tell you about buffs saved for your next fight (Sayge's Strength and Armor, the Twilight Tome) instead of saying nothing happened."],
+    ["fix", "Character creation now says plainly that skin, face and hair options are coming later (every race has one look for now)."],
+    ["fix", "Models: Mograine, Whitemane, Lady Anacondra, Lord Cobrahn and the other Druids of the Fang now use the right bodies; Charlga Razorflank animates; Zhevra get a model."],
+    ["fix", "Moonwell camp: Continue the journey sits below the card choices instead of covering them."],
+    ["new", "Shop relics show which gear slot they go in. Talents: tap a talent on a phone to see its details before learning it."],
+    ["fix", "Fewer false 'game failed to start' screens (wallet browser add-ons, slow connections), and Reload now fetches a fresh copy."],
+  ] },
+  { id: "01e", date: "Nov 1", title: "Character window", entries: [
+    ["new", "Character window (press C, or the Character button on the top bar): every worn piece on a WoW paperdoll, your stats at the start of the next fight (energy, cards drawn, starting buffs from gear, relics and talents), your racial, set bonuses, talents, relics, deck and difficulty. It also opens in combat."],
+  ] },
+  { id: "01d", date: "Nov 1", title: "Merchant fix", entries: [
+    ["fix", "Merchant: with a full bag, the sell shelf pushed the Proceed button off the screen and you could not leave. The shop now scrolls and Proceed always stays visible."],
+  ] },
+  { id: "01c", date: "Nov 1", title: "Co-op: help your partner, harder fights", entries: [
+    ["new", "Co-op: cast your heals, shields and buffs on your partner. Turn on \"Cast heals and shields on ...\" in the partner panel, or drag the card onto the panel."],
+    ["fix", "Co-op: partners on different Heroic levels no longer get different maps. The guest's map now syncs to the host's."],
+    ["fix", "Co-op: fixed a fight that never started (stuck on \"Waiting... / Fight solo\") when the two games disagreed on which fight it was."],
+    ["bal", "Co-op is harder: enemies have more HP and elites and bosses hit a little harder. Aimed at about half of co-op runs winning."],
+  ] },
   { id: "30a", date: "Oct 30", title: "Overnight bug reports", entries: [
     ["fix", "Continue run: a saved run resting at the Sanctuary no longer fails with \"Could not open that screen\" after an update."],
     ["fix", "Card draw: Goblin Jumper, Sprint and other draw effects no longer stop at 10 extra draws a turn (the cap is now 30 and only guards against infinite loops)."],
@@ -239,7 +302,7 @@ function showUpdatePill(latest) {
   if (document.querySelector(".sp-update-pill")) return;
   const pill = h("button", { class: "sp-update-pill", title: `You're on ${BUILD}, the latest is ${latest}`,
     onClick: () => { pill.textContent = "Updating..."; try { if (appRef && appRef.save) appRef.save(); } catch (e) { /* the last autosave stands */ } location.reload(); } }, // persist the run first: an update must never cost progress (10-30 report)
-    h("span", { class: "sp-update-dot" }), "New update available: click to update");
+    h("span", { class: "sp-update-dot" }), h("span", {}, h("b", {}, "NEW UPDATE AVAILABLE"), h("small", {}, "Click to update now. Your run is saved.")));
   overlayHost().append(pill);
 }
 
@@ -249,7 +312,9 @@ export function installPatchNotes(app) {
   // returning players only: a first-time visitor has nothing to compare against, so the notes are marked read for them
   let returning = !!(app && app.meta && app.meta.stats && app.meta.stats.runs > 0);
   try { returning = returning || !!localStorage.getItem("spires.run.v1"); } catch (e) { /* storage blocked */ }
-  if (!seen()) { if (returning) setTimeout(openPatchNotes, 600); else markSeen(); }
+  // 11-04 report "can't press X on new update screen": opened mid-fight, the window sat under the combat layers. Wait for a calm screen.
+  const openWhenCalm = () => { const sc = app && app.run && app.run.screen; if (sc === "combat" || (app && app.screen === "combat")) setTimeout(openWhenCalm, 1500); else openPatchNotes(); };
+  if (!seen()) { if (returning) setTimeout(openWhenCalm, 600); else markSeen(); }
   let stale = false;
   const check = () => {
     if (stale || document.hidden) return;

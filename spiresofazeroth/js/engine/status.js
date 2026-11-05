@@ -37,6 +37,7 @@ export const STATUS_DEFS = {
   disease: { mode: "intensity", kind: "debuff" },    // heals -50%; carries into the next combat (-1 per combat)
   curse: { mode: "intensity", kind: "debuff" },      // deals -1 damage per stack; -1 per round
   double_next: { mode: "intensity", kind: "buff" },  // indicator only: mirrors p.dblNext (Brilliant Wizard Oil etc.), cleared when the next attack consumes it
+  vengeance: { mode: "intensity", kind: "buff" },    // player: gain 1 Strength per stack each time an enemy attack hits you (damage.js)
   enrage: { mode: "intensity", kind: "buff" },       // +1 damage per stack
   armor: { mode: "intensity", kind: "buff" },        // mechanical: each hit reduced by stacks (min 1)
   cold: { mode: "intensity", kind: "debuff" },       // at 5+ stacks: lose 1 energy next turn, -5 stacks; -1 per round
@@ -71,7 +72,7 @@ export const STATUS_DEFS = {
 
 const ROUND_DECAY = { bleed: 1, curse: 1, cold: 1 };
 const BOSS_TIERS = ["boss", "raid"];
-const CONSUMED = ["stun", "fear", "frozen", "sleep"]; // consumed when the holder skips an action, not by the round clock
+const CONSUMED = ["stun", "fear", "frozen", "sleep", "retain_block"]; // (retain_block: spent by combat.startPlayerTurn, 11-01 Barkskin report) consumed when the holder skips an action, not by the round clock
 
 export const hasTrait = (e, t) => !!(e && Array.isArray(e.traits) && e.traits.includes(t));
 export const getSt = (e, id) => (e && e.st && e.st[id]) || 0;
@@ -84,6 +85,8 @@ export function modeOf(C, id) {
 }
 
 export const ENEMY_ARMOR_CAP = 20;
+export const ENEMY_ARMOR_CAP_ELITE = 12; // elite/boss/raid foes cap lower: at 20 every spell of a 70 HP elite was reduced to 1 (11-01 Foe Reaper 4000 report)
+export const armorCapFor = (e) => (e && (e.tier === "elite" || e.tier === "boss" || e.tier === "raid") ? ENEMY_ARMOR_CAP_ELITE : ENEMY_ARMOR_CAP);
 
 export function applyStatus(C, e, id, amount, o = {}) {
   if (!e || !id) return false;
@@ -99,7 +102,7 @@ export function applyStatus(C, e, id, amount, o = {}) {
   if (amount > 0 && isEnemy(e) && BOSS_TIERS.includes(e.tier) && (id === "fear" || id === "sleep")) { fx(C, { t: "miss", uid: e.uid, text: "Immune: " + (id === "fear" ? "Fear" : "Sleep"), kind: "gold" }); return false; } // 10-29 report "Sheep doesnt work": bosses shrugged it off silently
   if (amount > 0 && isEnemy(e) && BOSS_TIERS.includes(e.tier) && (id === "stun" || id === "frozen")) amount = Math.min(amount, 1);
   if (id === "armor" && amount > 0 && isEnemy(e)) {   // enemy Armor caps at 20 so stacking foes (Westfall +2/turn) stay killable (Chris 10-31)
-    amount = Math.min(amount, ENEMY_ARMOR_CAP - (e.st.armor || 0));
+    amount = Math.min(amount, armorCapFor(e) - (e.st.armor || 0));
     if (amount <= 0) return false;
   }
   const mode = modeOf(C, id);

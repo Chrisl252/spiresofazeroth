@@ -6,7 +6,7 @@ import { BUILD } from "../version.js";
 export const ART = "/assets/loading-screens/";
 
 // Stylesheets for these screens are linked from here (one registration point, no index.html edit). Screens await cssReady before render.
-export const cssReady = Promise.all(["../../css/screens.css", "../../css/map.css", "../../css/gear.css", "../../css/talents.css", "../../css/menus.css"].map((rel) => new Promise((res) => {
+export const cssReady = Promise.all(["../../css/screens.css", "../../css/map.css", "../../css/gear.css", "../../css/talents.css", "../../css/menus.css", "../../css/difficulty.css"].map((rel) => new Promise((res) => {
   const href = `${new URL(rel, import.meta.url).href}?v=${BUILD}`; // the build cache-buster, like index.html's own stylesheets
   if (typeof document === "undefined" || document.querySelector(`link[href="${href}"]`)) return res();
   const l = document.createElement("link");

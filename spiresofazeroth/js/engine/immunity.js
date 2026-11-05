@@ -44,7 +44,10 @@ export const resistMult = (e, school) => (e && e.resist && school && e.resist[sc
 /** For UI: [{key, kind:'school'|'status', icon, name}] */
 export function immuneList(e, data) {
   const sch = (data && data.schoolsData) || {};
-  return ((e && e.immune) || []).map((k) => {
+  const list = ((e && e.immune) || []).slice();
+  // status.applyStatus makes every boss/raid immune to Fear and Sleep without listing it in e.immune (11-01 report: Mograine showed no Sleep immunity); surface it here
+  if (e && e.kind === "enemy" && (e.tier === "boss" || e.tier === "raid")) for (const k of ["fear", "sleep"]) if (!list.includes(k)) list.push(k);
+  return list.map((k) => {
     if (isSchool(k)) return { key: k, kind: "school", icon: (sch.icons || {})[k] || FALLBACK_ICON[0], name: k[0].toUpperCase() + k.slice(1) };
     const kw = data && data.status ? data.status(k) : null;
     return { key: k, kind: "status", icon: (kw && kw.icon) || FALLBACK_ICON[1], name: (kw && kw.name) || k };

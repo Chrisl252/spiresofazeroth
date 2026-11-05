@@ -1,7 +1,8 @@
 // Post-combat rewards (stage-native): gold / potion / relic plates, then cards fanned out under a gold banner. Also the treasure chest.
 import { sp } from "../analytics.js";
 import { h, icon, qClass, esc, toast, fill } from "./dom.js";
-import { takeCard, takePotion, takeRelic, leaveNode } from "../engine/run.js";
+import { takeCard, takePotion, takeRelic, leaveNode, TOTAL_ACTS } from "../engine/run.js";
+import { commitRunEnd } from "../engine/save.js";
 import { cssReady, btn, banner, plate, cardSlot, ico, tip } from "./kit.js";
 import { runBar } from "./runbar.js";
 import { needsLoot, showLoot, buildLootFrame } from "./loot.js";
@@ -38,7 +39,20 @@ export async function render(app, name) {
   stage.setBackdrop(run.zoneId || "default");
   const pd = run.pending;
   const host = h("section", { class: "sx-screen sx-reward" });
-  const go = async () => { await leaveNode(run, data); app.save(); app.route(); };
+  // 11-03 (Nefarian): the climb is won the moment the last act's final boss dies, so credit XP / talent points NOW (idempotent), before the loot screen and
+  // before app.save() can drop an "end" run; a refresh or a throwing Continue can no longer lose the run's progression.
+  if (pd.final && !pd.raid && run.act >= TOTAL_ACTS && !run.endRecorded && app.meta) {
+    try { run.result = "victory"; commitRunEnd(app.meta, run, data.classIds, data.unlocks); app.save(); } catch (e) { console.warn("[spires] early run credit failed", e && e.message); }
+  }
+  let leaving = false;
+  const go = async () => {
+    if (leaving) return; leaving = true;
+    try {
+      await leaveNode(run, data);
+      if (run.screen === "end" && !run.endRecorded && app.meta) commitRunEnd(app.meta, run, data.classIds, data.unlocks); // credit before app.save() drops the run
+      app.save(); await app.route();
+    } catch (e) { leaving = false; console.error("[spires] continue failed", e); toast("Could not continue. Tap Continue again."); }
+  };
   const redraw = () => fill(host, ...build());
   const goldPlate = (n) => plate({ ic: "inv_misc_coin_17", title: `${n} gold`, text: "Added to your purse.", cls: "sx-plate--gold sx-plate--static", size: "sm" });
 
@@ -115,7 +129,7 @@ export async function render(app, name) {
 
   // the stage after the win: dead enemies gone, the hero stays
   async function stageClear(app) {
-    try { const kit = await getKit(app); if (kit && kit.actors) { clearStage(kit); kit.actors.setHero({ classId: run.classId, race: (run.character || {}).race, gender: (run.character || {}).gender, gearMask: gearLevel(run) }); } } catch (e) { /* stage kit optional */ }
+    try { const kit = await getKit(app); if (kit && kit.actors) { clearStage(kit); kit.actors.setHero({ classId: run.classId, race: (run.character || {}).race, gender: (run.character || {}).gender, looks: (run.character || {}).looks, gearMask: gearLevel(run) }); } } catch (e) { /* stage kit optional */ }
   }
   if (name === "treasure" && needsLoot(pd)) showLoot(app, host, pd, () => (pd.relic && !pd.taken ? redraw() : go())).catch((e) => { console.warn("[spires] loot screen failed", e && e.message); pd.lootSeen = true; redraw(); }); // gear: chest + loot burst first
   else redraw();

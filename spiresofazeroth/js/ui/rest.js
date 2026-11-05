@@ -65,9 +65,8 @@ export async function render(app, name) {
         await app.route();
       } catch (err) { console.error("[spires] continue failed:", err); if (!(err && err.spToasted)) toast("Could not continue - tap again."); if (b) b.disabled = false; }
     }, { size: "lg", auto: true }));
-    if (hub) body.append(go);
     queueMicrotask(() => { stopFire = mountCampfire(canvas, { reduced: () => app.reduced(), paused: () => stage.paused }); });
-    return [runBar(app), h("div", { class: "sx-rest__glow", "aria-hidden": "true" }), canvas, body, hub ? null : go];
+    return [runBar(app), h("div", { class: "sx-rest__glow", "aria-hidden": "true" }), canvas, body, go]; // hub: go is a flex footer under the scrolling body (never overlaps the wares/cards)
   }
   redraw();
   return host;

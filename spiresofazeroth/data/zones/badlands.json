@@ -6,8 +6,8 @@
   "act": 4,
   "levelBand": [35,47],
   "spire": {
-    "name": "Uldaman Gate",
-    "lore": "The red canyons of Badlands hide the Titan vault of Uldaman, where stone watchers sleep until disturbed."
+    "name": "Uldaman",
+    "lore": "A Titan vault buried under the red canyons of the Badlands. Dark Iron dwarves and troggs dig through its halls, and the stone keepers wake when it is disturbed."
   },
   "theme": {
     "primary": "#a8542a",

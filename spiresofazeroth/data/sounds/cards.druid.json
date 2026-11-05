@@ -406,15 +406,15 @@
 },
 "enrage":{
 "cast":{
-"fdid":544954,
-"url":"/media/sounds/544954.mp3",
-"name":"Mbearattackd",
+"fdid":544953,
+"url":"/media/sounds/544953.mp3",
+"name":"Mbearattacka",
 "via":"hand"
 },
 "impact":{
-"fdid":569539,
-"url":"/media/sounds/569539.mp3",
-"name":"Dr Stampedingroar Impact 01",
+"fdid":544955,
+"url":"/media/sounds/544955.mp3",
+"name":"Mbearattackcriticala",
 "via":"hand"
 },
 "via":"hand"

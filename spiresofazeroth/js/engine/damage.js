@@ -4,6 +4,7 @@ import { damageBonus, damageMult, takenAdjust, blockBonus, onDealt, onTaken, onK
 import { fire } from "./relics.js";
 import { runEffects } from "./effects.js";
 import { immuneToSchool, resistMult } from "./immunity.js";
+import { applyStatus } from "./status.js";
 import { talentDamage, talentTaken, talentThorns, talentBlocked, talentBlock } from "./talentHooks.js";
 
 const ids = (e) => (e && (e.uid || e.kind)) || "?";
@@ -81,10 +82,20 @@ export function dealDamage(C, src, tgt, amount, o = {}) {
   if (o.cardId) dmgEv.cardId = o.cardId;
   if (o.proc || (!o.primary && !o.cardId && src && src.kind === "player")) dmgEv.proc = true;
   fx(C, dmgEv);
+  if (hpLoss > 0 && tgt.kind === "enemy" && src && (src.kind === "totem" || src.kind === "pet") && src.name) { // name the source of autonomous hits (Searing Totem ticks at turn start on a RANDOM enemy)
+    fx(C, { t: "miss", uid: ids(tgt), text: src.name + " " + hpLoss, kind: "gold" });
+    log(C, src.name + " hits " + (tgt.name || "an enemy") + " for " + hpLoss + " " + school + ".");
+  }
   if (taken > 0) wakeOnDamage(tgt);
+  // Armor wears: every player hit that the enemy's Armor actually blunted strips 1 Armor stack, so sustained pressure beats the +2/turn Westfall regrowth (11-01 Foe Reaper report)
+  if (tgt.kind === "enemy" && (tgt.tier === "elite" || tgt.tier === "boss" || tgt.tier === "raid") && src && src.kind === "player" && !o.pierce && !o.noMods && tgt.st.armor > 0 && amt > 0 && taken < amt) { tgt.st.armor -= 1; if (tgt.st.armor <= 0) delete tgt.st.armor; }
   const thorns = (tgt.st.thorns || 0) + (tgt.kind === "player" ? modeThorns(C) + talentThorns(C, tgt, blocked) : 0);
   if (src && src !== tgt && kind === "attack" && thorns > 0 && isAlive(src)) {
     dealDamage(C, tgt, src, thorns, { kind: "thorns", noMods: true, school: "physical" });
+  }
+  if (tgt.kind === "player" && tgt.st.vengeance > 0 && src && src.kind === "enemy" && kind === "attack" && isAlive(tgt)) {
+    applyStatus(C, tgt, "strength", tgt.st.vengeance); // Vengeance: gain Strength when hit
+    fx(C, { t: "miss", uid: ids(tgt), text: "Vengeance +" + tgt.st.vengeance + " Str", kind: "gold" });
   }
   if (tgt.kind === "player") talentBlocked(C, tgt, src, blocked, hpLoss, kind);
   if (src && src.kind === "player" && tgt.kind === "enemy") onDealt(C, tgt, hpLoss, school);
@@ -109,6 +120,7 @@ export function dealStatusDamage(C, e, amount, cause) {
   const loss = Math.min(e.hp, Math.floor(amount));
   e.hp -= loss;
   fx(C, { t: "dmg", uid: ids(e), amount: loss, blocked: 0, school: cause || "status", status: true });
+  if (loss > 0 && e.kind === "enemy" && cause && cause !== "self") fx(C, { t: "miss", uid: ids(e), text: cause.charAt(0).toUpperCase() + cause.slice(1) + " " + loss, kind: "gold" }); // name the DoT (Flame Shock Burn)
   if (e.kind === "player") {
     C.stats.damageTaken += loss;
     if (loss > 0) fire(C, "on_hp_loss", { amount: loss });

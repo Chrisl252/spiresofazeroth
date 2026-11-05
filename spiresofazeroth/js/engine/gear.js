@@ -101,9 +101,28 @@ export function syncSetBonuses(run, data) {
   return added;
 }
 
+// ---- ownership (11-01 owner ruling: never the same piece twice, never forced to destroy) ---------------------------------
+// run.gotGear = every base id this run ever received (worn, bagged, sold). ONE home for "does the run already have this?":
+// dropGear, rewards relicEligible, run takeRelic and effects gain_relic all ask owns(). A sold piece stays owned, so it never drops again.
+export const baseOf = (id) => String(id).replace(/\+$/, "");
+export function markGot(run, id) {
+  if (!id || isStarter(id) || String(id).startsWith("set:")) return;
+  if (!Array.isArray(run.gotGear)) run.gotGear = [];
+  const b = baseOf(id);
+  if (!run.gotGear.includes(b)) run.gotGear.push(b);
+}
+export function owns(run, data, id) {
+  if (!id) return false;
+  const b = baseOf(id), twin = data && data.gear && data.gear.legacy && data.gear.legacy[b]; // an old relic id that maps onto a gear piece = the same item
+  const bases = twin && twin !== b ? [b, baseOf(twin)] : [b];
+  const worn = Object.values(run.gear || {}), bag = run.gearBag || [], got = run.gotGear || [];
+  return bases.some((x) => got.includes(x) || [x, `${x}+`].some((y) => run.relics.includes(y) || bag.includes(y) || worn.includes(y)));
+}
+
 // ---- equipping ---------------------------------------------------------------------------------------------------------
 export function ensureGear(run, data) {
   if (!Array.isArray(run.gearBag)) run.gearBag = [];
+  if (!Array.isArray(run.gotGear)) { run.gotGear = []; for (const id of [...run.relics, ...run.gearBag, ...Object.values(run.gear || {})]) markGot(run, id); } // saves from before 11-01
   if (run.gear) return run;
   run.gear = emptyGear();
   const old = run.relics.slice();
@@ -144,6 +163,7 @@ export function equip(run, data, id, at = null) {
   }
   run.gear[key] = id;
   if (!run.relics.includes(id)) run.relics.push(id);
+  markGot(run, id);
   return { key, replaced };
 }
 
@@ -154,12 +174,11 @@ export function dropGear(run, data) {
   const before = setInfo(run, data).count;
   const piece = (slot) => (slot === "mainHand" ? g.weapon : g.pieces.find((p) => p.slot === slot));
   let id = null, upgrade = false;
-  const owned = (x) => run.relics.includes(x) || run.gearBag.includes(x) || Object.values(run.gear).includes(x); // never the same item twice
-  for (const s of DROP_ORDER) if ((!run.gear[s] || isStarter(run.gear[s])) && piece(s) && !owned(piece(s).id) && !owned(`${piece(s).id}+`)) { id = piece(s).id; break; }
-  if (!id) {
-    for (const s of DROP_ORDER) { const cur = run.gear[s]; if (cur && !isStarter(cur) && !String(cur).endsWith("+") && piece(s) && data.relic(`${cur}+`) && !owned(`${cur}+`)) { id = `${cur}+`; upgrade = true; break; } }
-  }
-  if (!id) { for (const s of DROP_ORDER) { const p = piece(s); if (p && !owned(p.id) && !owned(`${p.id}+`)) { id = p.id; break; } } } // a socket holding something else: the set piece still comes
+  const owned = (x) => owns(run, data, x); // never the same item twice (worn, bagged, sold, or its "+" twin)
+  for (const s of DROP_ORDER) if ((!run.gear[s] || isStarter(run.gear[s])) && piece(s) && !owned(piece(s).id)) { id = piece(s).id; break; }
+  // 11-01 owner ruling: never the same piece twice, so a worn piece no longer re-drops as its "+" upgrade (same name, felt like a duplicate).
+  // A set with nothing left to give returns null: treasure falls back to a relic roll, a fight win simply has no gear row.
+  if (!id) { for (const s of DROP_ORDER) { const p = piece(s); if (p && !owned(p.id)) { id = p.id; break; } } } // a socket holding something else: the set piece still comes
   if (!id) { run.stats && (run.stats.gearDry = (run.stats.gearDry || 0) + 1); return null; }
   const r = data.relic(id);
   if (goesToBag(run, data, id)) { // player report 10-25: a weaker drop kept auto-equipping over strong gear - it now waits in the Gear Bag
@@ -210,5 +229,38 @@ export function goesToBag(run, data, id) {
 export function stow(run, id) {
   if (!Array.isArray(run.gearBag)) run.gearBag = [];
   if (!run.gearBag.includes(id)) run.gearBag.push(id);
+  markGot(run, id);
   return { key: null, bagged: true };
+}
+
+// ---- selling (vendor): a bagged piece becomes gold; it stays in run.gotGear so it never drops again --------------------------
+const SELL_PRICE = { common: 35, uncommon: 50, rare: 65, epic: 80, legendary: 110 }; // ~1/4 of the vendor's relic price (rewards.js RELIC_PRICE)
+export const STARTER_SELL_PRICE = 5;   // starter outfit: sellable, but only pocket change
+export const sellPrice = (data, id) => (isStarter(id) ? STARTER_SELL_PRICE : SELL_PRICE[(data.relic(id) || {}).rarity] || SELL_PRICE.common);
+// Sell one piece. `from` = null for a bagged piece, or the paper-doll key (chest, mainHand ...) for a WORN piece (it is taken off, then sold;
+// 11-02 player reports: worn gear was on no sell shelf at all, and starter pieces sat in the bag but sellGear refused them). Returns gold or 0.
+export function sellGear(run, data, id, from = null) {
+  if (!id) return 0;
+  if (from) {
+    if (!run.gear || run.gear[from] !== id) return 0;
+    run.gear[from] = null;
+    const i = run.relics.indexOf(id);
+    if (i >= 0) run.relics.splice(i, 1);
+  } else {
+    const i = (run.gearBag || []).indexOf(id);
+    if (i < 0) return 0;
+    run.gearBag.splice(i, 1);
+  }
+  markGot(run, id);   // no-op for starters; a sold piece never drops again
+  const g = sellPrice(data, id);
+  run.gold += g;
+  if (run.stats) run.stats.gearSold = (run.stats.gearSold || 0) + 1;
+  if (from) syncSetBonuses(run, data);
+  return g;
+}
+// Everything a vendor can buy from the player: [{ id, from }] - the bag first, then worn pieces (from = socket key).
+export function sellable(run, data) {
+  const out = (run.gearBag || []).filter((id) => data.relic(id)).map((id) => ({ id, from: null }));
+  for (const k of PAPERDOLL) { const id = run.gear && run.gear[k]; if (id && data.relic(id)) out.push({ id, from: k }); }
+  return out;
 }

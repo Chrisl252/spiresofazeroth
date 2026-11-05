@@ -133,7 +133,7 @@ export function watchLeave(app, el, fn) {
 
 // Shop merchant / run-end hero: a character body in a tiny scene slot positioned over a DOM host (#shop-vendor / #end-hero).
 // Uses the shared actors instance with one temporary hero actor; cleared when the screen leaves.
-export async function mountPortrait(app, hostEl, { classId, race, gender, pose = "idle", scale = 1, pad = 40, leaveEl, gearMask } = {}) {
+export async function mountPortrait(app, hostEl, { classId, race, gender, looks, pose = "idle", scale = 1, pad = 40, leaveEl, gearMask } = {}) {
   try {
     if (!hostEl || !classId) return null;
     const kit = await getKit(app);
@@ -143,7 +143,7 @@ export async function mountPortrait(app, hostEl, { classId, race, gender, pose =
     const lane = kit.actors.lanes.hero;
     const saved = { ...lane };
     lane.x = (p0.x + p1.x) / 2; lane.y = p1.y - pad; lane.s = Math.max(0.5, Math.min(1.2, ((p1.y - p0.y) / 520) * scale));
-    kit.actors.setHero(gearMask == null ? { classId, race, gender } : { classId, race, gender, gearMask });
+    kit.actors.setHero(gearMask == null ? { classId, race, gender, looks } : { classId, race, gender, looks, gearMask });
     Object.assign(lane, saved);
     hostEl.classList.add("has-model");
     watchLeave(app, leaveEl || hostEl, () => { if (app.kit === kit) clearStage(kit); });

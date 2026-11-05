@@ -30,8 +30,10 @@
 .cc-look { display: grid; grid-template-columns: 1fr 44px 44px; gap: 8px; align-items: center; }
 .cc-look__l { width: 100%; text-align: left; font-size: 22px; min-height: 44px; }
 .cc-look button:disabled { cursor: not-allowed; opacity: .42; }
-.cc-arrow { width: 44px; height: 44px; border: 0; background: url("/assets/ui/128-redbutton-left.png") center / contain no-repeat; } .cc-arrow--r { background-image: url("/assets/ui/128-redbutton-right.png"); }
-.cc-rand { align-self: center; --btn-h: 56px; } .cc-rand:disabled { opacity: .55; }
+.cc-arrow { width: 44px; height: 44px; padding: 0; border: 0; cursor: pointer; background: url("/assets/ui/128-redbutton-arrowdown.png") center / contain no-repeat; transform: rotate(90deg); -webkit-tap-highlight-color: transparent; } /* the client's square red arrow button, turned: down -> left; the old -left/-right files are the WIDE button's halves, not arrows */
+.cc-arrow--r { transform: rotate(-90deg); }
+.cc-arrow:hover { background-image: url("/assets/ui/128-redbutton-arrowdown-highlight.png"); } .cc-arrow:active { background-image: url("/assets/ui/128-redbutton-arrowdown-pressed.png"); } .cc-arrow:disabled { background-image: url("/assets/ui/128-redbutton-arrowdown-disabled.png"); }
+.cc-rand { align-self: center; --btn-h: 72px; } .cc-rand:disabled { opacity: .55; }
 
 /* centre: model + name */
 .cc-center { position: absolute; left: 520px; right: 560px; top: 0; bottom: 0; }
@@ -92,3 +94,12 @@
 .sp-portrait .cc-wrap--list .cc-model--list { position: relative; height: 900px; inset: auto; width: 100%; }
 @media (prefers-reduced-motion: reduce) { .cc-race, .cc-class { transition: none; } }
 .cc-trait--racial { color: #f0d890; border-top: 1px solid rgba(201,162,75,.35); padding-top: 6px; } .cc-racial__ic { width: 22px; height: 22px; vertical-align: middle; border-radius: 3px; }
+
+.cc-look__l { display: flex; align-items: center; justify-content: space-between; cursor: default; }
+.cc-look__v { font-size: .75em; opacity: .7; margin-left: 8px; }
+
+/* 2026-11-03 fix: the difficulty picker (tabs + levels + stat card + ascension note, ~560px) used to squeeze .cc-rows to ~40px, so players could not pick between characters.
+   The character list now keeps a floor (3 rows); the picker block shrinks and scrolls inside the panel instead. */
+.cc-rows { flex: 1 0 290px; }
+.cc-runopts { flex: 0 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #6b5220 transparent; }
+.sp-portrait .cc-rows { flex: 0 0 auto; max-height: none; } .sp-portrait .cc-runopts { overflow: visible; }

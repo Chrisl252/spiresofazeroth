@@ -14,6 +14,8 @@
 // model that fails all keep working (never invisible). GLB per actor is parsed fresh from a cached
 // ArrayBuffer (no SkeletonUtils on the site's vendored three), so materials/skeletons are per instance.
 // Render-on-demand: rAF runs only while tweens/mixers run (idle capped ~30 fps), pauses on hidden tab.
+import { applyLooks, bodyInfo } from "./heroLooks.js";
+import { looksActive, looksKey, looksSlug, cleanLooks } from "../engine/looks.js";
 import { BUILD } from "../version.js";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
@@ -194,7 +196,7 @@ export function createActors(hostEl, opts = {}) {
       family: rec && rec.family, type: rec && rec.type, icon: spec.icon || (rec && rec.icon) || null, iconBase,
       shape: kind === "hero" ? "biped" : undefined,
     }, wake);
-    a.raceK = raceK; a.laneS = lane.s; a.kindOf = kind; a.cls = cls; a.skin = null; a.rec = rec; a.cands = cands; a.name = spec.name; a.dead = false;
+    a.looksCfg = spec.looksCfg || null; a.raceK = raceK; a.laneS = lane.s; a.kindOf = kind; a.cls = cls; a.skin = null; a.rec = rec; a.cands = cands; a.name = spec.name; a.dead = false;
     const baseLunge = a.lunge, baseDeath = a.death, baseHit = a.hit, baseCastGesture = a.castGesture;
     // In-game clips: Stand loops, Attack / Cast / Hit play once over a faded idle, Death clamps.
     // Caster attacks stay planted and release spells, melee attacks spring forward dynamically.
@@ -308,6 +310,11 @@ export function createActors(hostEl, opts = {}) {
     if (a.disposed) { disposeTree(gltf.scene); return; }
     if (!hasTexture(gltf.scene)) { disposeTree(gltf.scene); throw new Error("untextured"); } // untextured => white blob => next tier
     const root = gltf.scene;
+    if (a.kindOf === "hero" && a.looksCfg) { // character looks: re-compose the body canvas + swap hair/facial geosets (stage/heroLooks.js); a failure keeps the baked look
+      const bi = bodyInfo(cand.url, String(a.looksCfg.cls), HERO_BAKE);
+      if (bi && bi.slug === a.looksCfg.slug) { try { await applyLooks(root, { slug: bi.slug, key: bi.key, looks: a.looksCfg.looks }); } catch (e) { warnOnce("looks:" + bi.slug, e); } }
+      if (a.disposed) { disposeTree(root); return; }
+    }
     const mats = [];
     root.traverse((o) => {
       if (!o.isMesh) return;
@@ -611,10 +618,12 @@ export function createActors(hostEl, opts = {}) {
   // they queue and return null.
   function setHero(o = {}) { if (!loaded) { ready.then(() => setHero(o)); return null; } return doSetHero(o); }
   function setEnemies(l) { if (!loaded) { ready.then(() => setEnemies(l)); return null; } return doSetEnemies(l); }
-  function doSetHero({ classId, name, gearMask, race, gender } = {}) {
+  function doSetHero({ classId, name, gearMask, race, gender, looks } = {}) {
     const gearN = gearMask == null ? null : gearCount(gearMask);
     const raceSlug = raceSlugFor(classId, race, gender);
-    if (hero && hero.heroClass === classId && hero.skin && hero.raceSlug === raceSlug && gearN != null && hero.gearN !== gearN) { // same class, new gear: swap the body in place
+    const lk = RACES.includes(race) && looksActive(looks) ? cleanLooks(looks, race, gender) : null;   // null = keep the baked body look (old saves)
+    const looksCfg = lk ? { slug: looksSlug(race, gender), looks: lk, cls: classId } : null, lkey = lk ? looksSlug(race, gender) + looksKey(lk) : "";
+    if (hero && hero.heroClass === classId && hero.skin && hero.raceSlug === raceSlug && (hero.lkey || "") === lkey && gearN != null && hero.gearN !== gearN) { // same class, new gear: swap the body in place
       hero.gearN = gearN;
       if (!hero.form) { // other races swap between their baked states 0/4/8 (nearest lower), the default race through 0..8
         const next = heroCands(classId, raceSlug, gearN);
@@ -624,8 +633,8 @@ export function createActors(hostEl, opts = {}) {
     }
     if (hero) destroy(hero);
     const lane = { ...lanes.hero };
-    const a = makeActor({ uid: "player", id: "hero:" + classId, name: name || classId, lane, rec: rec("hero:" + classId), gearN, raceSlug }, "hero");
-    a.heroClass = classId; a.raceSlug = raceSlug; a.gearN = gearN; a.form = null;
+    const a = makeActor({ uid: "player", id: "hero:" + classId, name: name || classId, lane, rec: rec("hero:" + classId), gearN, raceSlug, looksCfg }, "hero");
+    a.lkey = lkey; a.heroClass = classId; a.raceSlug = raceSlug; a.gearN = gearN; a.form = null;
     a.dead = false; hero = a;
     if (pendingHeroForm) {
       const pf = pendingHeroForm;

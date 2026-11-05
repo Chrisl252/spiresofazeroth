@@ -3,7 +3,8 @@ import { h, icon, cap, track, fill, tip, esc } from "./dom.js";
 import { isClassUnlocked, unlockText, saveRun, saveMeta } from "../engine/save.js";
 import { newRun, prepareZonePick } from "../engine/run.js";
 import { newSeedString } from "../engine/rng.js";
-import { heroicName, heroicOpen, heroicBlurb } from "../engine/heroic.js";
+import { heroicOpen } from "../engine/heroic.js";
+import { difficultyPicker } from "./difficultyPicker.js";
 import { cssReady, btn, tog, ico, banner, scroll } from "./kit.js";
 import { HOME, DEFAULT_RACE, canBe } from "../engine/character.js";
 import { beginRun } from "./runStart.js";
@@ -63,8 +64,7 @@ export async function render(app, _name, props = {}) {
       deck.append(chip);
     }
 
-    const heroicBtns = h("div", { class: "sx-pick", role: "group", "aria-label": "Heroic level" });
-    for (let i = 0; i <= maxH; i++) heroicBtns.append(tog(i === 0 ? "Normal" : heroicName(i), st.heroic === i, () => { st.heroic = i; draw(); }));
+    const heroicBtns = difficultyPicker({ level: st.heroic, maxOpen: maxH, bestAsc: ((meta.bestAscension || {})[st.cls]) | 0, onPick: (lv) => { st.heroic = lv; draw(); } });
     const contBtns = h("div", { class: "sx-pick", role: "group", "aria-label": "Starting continent" },
       ...[["ek", "Eastern Kingdoms"], ["kal", "Kalimdor"]].map(([k, n]) => tog(n, st.continent === k, () => { st.continent = k; draw(); })));
     if (unbindPet) { unbindPet(); unbindPet = null; }
@@ -97,7 +97,7 @@ export async function render(app, _name, props = {}) {
       acct,
       petPick,
       h("div", { class: "sx-field" }, h("h4", {}, "Start continent"), contBtns),
-      maxH > 0 ? h("div", { class: "sx-field" }, h("h4", {}, "Difficulty"), heroicBtns, h("p", { class: "sx-hint" }, heroicBlurb(st.heroic))) : null,
+      h("div", { class: "sx-field" }, heroicBtns),
       h("label", { class: "sx-field sx-seed" }, h("h4", {}, "Seed"), seedIn, tog("Random", false, () => { st.seed = newSeedString(); draw(); }))),
       h("div", { class: "sx-cls__go" }, btn("Begin the climb", async () => {
         await beginRun(app, st, ch);

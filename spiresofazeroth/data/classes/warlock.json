@@ -640,7 +640,7 @@
       "upgrade": {
         "name": "Demon Skin (Rank 2)",
         "cost": 1,
-        "text": "Gain 8 Block and 1 Regen.",
+        "text": "Gain 8 Block and 3 Regen.",
         "effects": [
           {
             "op": "block",
@@ -649,7 +649,7 @@
           {
             "op": "apply",
             "status": "regen",
-            "stacks": 1,
+            "stacks": 3,
             "target": "self"
           }
         ]

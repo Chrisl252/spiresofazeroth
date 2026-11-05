@@ -1,7 +1,7 @@
 // Spire map (stage-native, StS2 style): parchment scroll, ONE tavern start at the bottom centre, 2-3 inked lanes, big plates.
 // Engine calls kept as they were: reachableNodes / enterNode, abandon sets run.screen = "end".
 import { h, icon, tip, toast } from "./dom.js";
-import { stepFromMap, reachableNodes, prepareZonePick } from "../engine/run.js";
+import { stepFromMap, reachableNodes, prepareZonePick, spireBoss } from "../engine/run.js";
 import { generateSpire } from "../engine/map.js";
 import { heroicMods } from "../engine/heroic.js";
 import { cssReady, ico, btn, dark } from "./kit.js";
@@ -27,9 +27,9 @@ function bossInfo(app, zone) {
   const fb = zone && zone.finalBoss && data.finalBosses.find((b) => b.id === zone.finalBoss);
   if (fb) return { name: fb.name, ic: fb.icon };
   if (zone && app.run.act >= 6 && data.finalBosses.length) return { name: "The Final Foe", ic: data.finalBosses[0].icon };
-  const id = zone && zone.encounters && zone.encounters.boss && zone.encounters.boss[0] && zone.encounters.boss[0][0];
-  const def = id && zone.enemyDefs && zone.enemyDefs[id];
-  return def ? { name: def.name, ic: def.icon } : { name: "Spire Boss", ic: NODE_ICON.boss[0] };
+  const enc = zone && zone.enemyDefs ? spireBoss(app.run, zone) : null; // the same pick the boss node will fight
+  const defs = (enc || []).map((id) => zone.enemyDefs[id]).filter(Boolean);
+  return defs.length ? { name: defs.map((d) => d.name).join(" & "), ic: defs[0].icon } : { name: "Spire Boss", ic: NODE_ICON.boss[0] };
 }
 
 const startInfo = (zone) => (zone && zone.start) || { name: "The Inn", icon: "inv_misc_beer_01" };
@@ -44,7 +44,7 @@ export async function render(app, _name, props) {
     return app.go("zonepick");
   }
   if (!run.map || !run.map.floors) {
-    const mods = heroicMods(run.heroic || 0);
+    const mods = heroicMods(run.heroic || 0, run.ascension);
     run.map = generateSpire(run.seed, `${run.act}:${run.zoneId}`, { eliteBonus: mods.eliteBonus, profile: data.mapProfile ? data.mapProfile(run.zoneId) : null });
   }
   if (!ro) stage.setBackdrop(run.zoneId || "default", { tint: { primary: "#d9b25c", secondary: "#2b1c0a", accent: "#f0d68a" } });

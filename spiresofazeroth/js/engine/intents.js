@@ -8,7 +8,7 @@
 //  - humanoid casters: cast intents, interruptible (cast_interrupt op) and fizzled by Silence
 //  - summoner: summon moves are skipped while 5+ enemies live or this unit already has 2 minions
 import { runEffects } from "./effects.js";
-import { fireTraps } from "./resources.js";
+import { fireTraps, takenAdjust } from "./resources.js";
 import { applyStatus, hasTrait, skipsAction, modifyDealt, modifyTaken, turnEnd } from "./status.js";
 import { isAlive, fx, log } from "./damage.js";
 import { resolveImmunity } from "./immunity.js";
@@ -71,7 +71,22 @@ function checkPhase(C, e) {
   if (ph.moves) for (const m of ph.moves) e.movesById[m.id] = m;
   fx(C, { t: "phase", uid: e.uid });
   log(C, `${e.name} enters a new phase!`);
-  if (ph.onEnter) runEffects({ C, src: e, srcKind: "enemy", target: C.player, move: null }, ph.onEnter);
+  if (ph.onEnter) {
+    // 11-02 reports (Amnennar / C'Thun): an HP-threshold phase summoned the instant the player's card dropped the boss under the line, mid-turn and with no warning.
+    // The summon ops are held back and become a telegraphed "summon" intent that resolves on the enemy's own action; everything else (buffs, block) still lands now.
+    // 11-03 report (Ma'ruk Wyrmscale "making moves when stunned"): the phase's damage burst also landed while the boss was stunned/feared/frozen/asleep, so it still hit the hero.
+    // While incapacitated the damaging ops are held back too and resolve as its next real action (never skipped, so no easier).
+    const incap = e.skipTurns > 0 || ["stun", "fear", "frozen", "sleep"].some((id) => e.st && e.st[id] > 0);
+    const isHeld = (x) => x && (x.op === "summon" || (incap && (x.op === "damage" || x.op === "aoe")));
+    const now = ph.onEnter.filter((x) => !isHeld(x)), held = ph.onEnter.filter(isHeld);
+    if (now.length) runEffects({ C, src: e, srcKind: "enemy", target: C.player, move: null }, now);
+    if (held.length) {
+      const effects = (e.phaseSummon ? e.phaseSummon.effects : []).concat(held);
+      const allSum = effects.every((x) => x.op === "summon");
+      const aoe = effects.some((x) => x.op === "aoe" || x.target === "all_enemies");
+      e.phaseSummon = { id: "phase-summon-" + e.phaseIdx, name: ph.name || (allSum ? "Summon Reinforcements" : "Phase Fury"), intent: allSum ? "summon" : (aoe ? "attack_multi" : "attack"), effects, phaseSummon: true };
+    }
+  }
   return true;
 }
 
@@ -127,6 +142,7 @@ export function chooseMove(C, e) {
     const tots = Object.values(p.totems || {}).filter((t) => t && t.hp > 0);
     if (tots.length && C.rng.chance(0.2)) e.aim = C.rng.pick(tots).uid;
   }
+  if (e.phaseSummon) { move = e.phaseSummon; e.phaseSummon = null; e.castProg = 0; } // the held-back phase summon is this enemy's next action, shown as a normal summon intent
   e.intent = { kind: move.intent || "unknown", move, name: move.name, total: move.castTurns || 1 };
   if (move.intent === "cast" && !(e.castProg > 0)) e.castProg = 0;
   return move;
@@ -149,6 +165,7 @@ export function intentInfo(C, e) {
         if (x.target === "self") continue;
         const t = C.player;
         a = modifyTaken(C, t, a, x.school || "physical");
+        if (t && t.kind === "player") a = takenAdjust(C, t, a, x.school || "physical"); // class-mode reductions/multipliers dealDamage applies after modifyTaken (the forecast used to skip them)
         const times = typeof x.times === "number" ? x.times : 1;
         info.dmg += a * times;
         info.hits += times;

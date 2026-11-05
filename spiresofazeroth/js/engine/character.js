@@ -1,6 +1,7 @@
 // Character profile (race / gender / name / looks): pure data, no DOM, no combat effect. The saved shape lives on run.character and in
 // meta.characters[]; both are optional, so every older save loads (characterOf() fills a default). The race x class matrix, text and
 // name lists are real client data in data/charcreate.json (built by tools/spires/build-charcreate.py from the TBC Classic tables).
+import { cleanLooks } from "./looks.js";
 export const GENDERS = ["male", "female"];
 export const RACE_ORDER = { alliance: ["human", "dwarf", "nightelf", "gnome", "draenei"], horde: ["orc", "undead", "tauren", "troll", "bloodelf"] };
 export const ALL_RACES = [...RACE_ORDER.alliance, ...RACE_ORDER.horde];
@@ -21,7 +22,7 @@ export const MATRIX = {
 export const DEFAULT_RACE = { warrior: "human", paladin: "human", hunter: "dwarf", rogue: "human", priest: "human", shaman: "orc", mage: "human", warlock: "human", druid: "nightelf" };
 export const RACE_NAME = { human: "Human", dwarf: "Dwarf", nightelf: "Night Elf", gnome: "Gnome", draenei: "Draenei", orc: "Orc", undead: "Undead", tauren: "Tauren", troll: "Troll", bloodelf: "Blood Elf" };
 export const HOME = { human: "ek", dwarf: "ek", gnome: "ek", undead: "ek", bloodelf: "ek", nightelf: "kal", draenei: "kal", orc: "kal", tauren: "kal", troll: "kal" };
-export const NO_LOOKS = { skin: 0, face: 0, hair: 0, hairColor: 0, facial: 0 }; // customization indices; the baked race bodies have a single look, so these stay 0
+export const NO_LOOKS = { skin: 0, face: 0, hair: 0, hairColor: 0, facial: 0 }; // default customization indices (variant 0 = the current look); real variants live in engine/looks.js
 
 export const factionOf = (race) => (RACE_ORDER.alliance.includes(race) ? "alliance" : "horde");
 export const canBe = (race, classId) => !!(MATRIX[race] && MATRIX[race].includes(classId));
@@ -38,7 +39,8 @@ export function characterOf(raw, classId) {
   const c = raw && typeof raw === "object" ? raw : {};
   let race = ALL_RACES.includes(c.race) ? c.race : DEFAULT_RACE[classId] || "human";
   if (classId && !canBe(race, classId)) race = DEFAULT_RACE[classId] && canBe(DEFAULT_RACE[classId], classId) ? DEFAULT_RACE[classId] : ALL_RACES.find((r) => canBe(r, classId)) || race;
-  return { id: typeof c.id === "string" ? c.id : "", race, gender: c.gender === "female" ? "female" : "male", name: cleanName(c.name), looks: { ...NO_LOOKS, ...(c.looks || {}) }, legacy: !raw };
+  const gender = c.gender === "female" ? "female" : "male";
+  return { id: typeof c.id === "string" ? c.id : "", race, gender, name: cleanName(c.name), looks: { ...NO_LOOKS, ...cleanLooks(c.looks, race, gender) }, legacy: !raw };
 }
 export const newCharacterId = () => `c${Date.now().toString(36)}${Math.floor(Math.random() * 1679616).toString(36)}`;
 // "Undead Rogue" for HUD / lists

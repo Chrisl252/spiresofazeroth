@@ -8,6 +8,7 @@ import { playCard, usePotion, spareEnemy, resolvePending, endPlayerTurn, startPl
 import { isAlive, checkDeaths } from "./damage.js";
 import { enemyAct } from "./intents.js";
 import { turnStart, roundEnd } from "./status.js";
+import { GIFT_STATUSES } from "./effects.js";
 
 export const COOP_HP_MUL = 1.6; // enemy HP for two heroes (one hero's damage alone would make every fight half as long)
 export const COOP_UID_BASE = 50000;
@@ -84,13 +85,29 @@ export function targetSeat(S, e) {
   return (Math.max(0, i) + S.round) % 2;
 }
 
-// a = { seat, k: "play"|"potion"|"spare"|"pending"|"end", uid?, target?, idx?, uids? }. Returns the engine result ({ ok } for plays).
+// Partner support (11-01 report: "i cant interact with my coop by giving him shields as priest"): a self-cast card with block, heal or a
+// listed buff can be cast ON the partner. engine/effects.js selfTargets() sends those effects to C.giftTo; draw / energy stay with the caster.
+const selfish = (e) => !e.target || e.target === "self" || e.target === "player";
+export function giftable(def) {
+  if (!def || (def.target !== "self" && def.target !== "player") || def.trap) return false;
+  return (def.effects || []).some((e) => e && ((e.op === "block" || e.op === "heal") && selfish(e) || e.op === "apply" && GIFT_STATUSES.has(e.status) && (e.target === "self" || e.target === "player") && !e.trigger));
+}
+export const canGift = (S, seat, inst) => !!inst && giftable(inst.def) && inFight(S, 1 - seat);
+function giftPlay(S, seat, C, a) {
+  const inst = C.pile.hand.find((c) => c.uid === a.uid);
+  if (!canGift(S, seat, inst)) return { ok: false, why: "That card cannot be cast on your partner." };
+  const ally = S.Cs[1 - seat].player, uid0 = ally.uid;
+  C.giftTo = ally; ally.uid = "partner"; // fx events on the partner read uid "partner" (ui/coopCombat.js), not "player"
+  try { return playCard(C, a.uid); } finally { delete C.giftTo; ally.uid = uid0; }
+}
+
+// a = { seat, k: "play"|"potion"|"spare"|"pending"|"end", uid?, target?, ally?, idx?, uids? }. ally = cast on the partner. Returns the engine result ({ ok } for plays).
 export function applyAction(S, a) {
   if (S.over || !a || (a.seat !== 0 && a.seat !== 1)) return null;
   if (a.k !== "end" && !canAct(S, a.seat)) return null;
   const r = withSeat(S, a.seat, (C) => {
     switch (a.k) {
-      case "play": return playCard(C, a.uid, a.target || undefined);
+      case "play": return a.ally ? giftPlay(S, a.seat, C, a) : playCard(C, a.uid, a.target || undefined);
       case "potion": return usePotion(C, a.idx, a.target || undefined);
       case "spare": return spareEnemy(C, a.uid);
       case "pending": return resolvePending(C, a.uids || []);
@@ -146,6 +163,20 @@ export function finishRound(S) {
   for (const s of [0, 1]) if (inFight(S, s)) withSeat(S, s, (C) => startPlayerTurn(C));
   settle(S);
   advance(S);
+}
+
+// Recovery (11-01 soft-lock: the partner killed the elite, the host's copy of it stayed alive): the partner reports the fight's verdict with the
+// matching fight key, and this client adopts it instead of waiting forever on a game that has drifted. "win" kills the pack; "lose" downs both heroes.
+export function forceFinish(S, result) {
+  if (S.over) return false;
+  if (result === "win") {
+    for (const e of S.Cs[0].enemies) if (isAlive(e)) { e.hp = 0; e.dead = true; }
+    checkDeaths(S.Cs[0]);
+  } else if (result === "lose") {
+    for (let s = 0; s < 2; s++) if (!S.gone[s]) { S.Cs[s].player.hp = 0; S.down[s] = true; S.ended[s] = true; }
+  } else return false;
+  settle(S);
+  return S.over;
 }
 
 // Cheap desync probe: both browsers compare this after every round.

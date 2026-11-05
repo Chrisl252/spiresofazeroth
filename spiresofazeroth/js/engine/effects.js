@@ -102,7 +102,7 @@ export function resolveTargets(ctx, spec, dflt) {
       if (ctx.target && ctx.srcKind === "player" && ctx.card) return []; // 10-30 report: a card's later hits (Hammer of Wrath's below-50% bonus) spilled onto the NEXT enemy once the aimed one died
       const l = targetableEnemies(C);
       if (ctx.srcKind === "pet" || ctx.srcKind === "totem") return l.length ? [l[0]] : [];
-      return l.length ? [C.lastTarget && isAlive(C.lastTarget) ? C.lastTarget : l[0]] : [];
+      return l.length ? [l.includes(C.lastTarget) ? C.lastTarget : l[0]] : []; // 11-03 report: the remembered target could be a stealthed foe (it vanished after being hit), so untargeted hits landed on it
     }
     case "all_enemies":
       if (fromEnemy) return [p].concat(p.pet && isAlive(p.pet) ? [p.pet] : [], Object.values(p.totems || {}).filter((t) => t && t.hp > 0));
@@ -151,7 +151,7 @@ export function evalCond(ctx, c) {
   let r = false;
   const val = c.value !== undefined ? c.value : c.name;
   const actor = () => (ctx.src && ctx.src.st ? ctx.src : C.player);
-  const foe = () => (ctx.srcKind === "enemy" ? C.player : ctx.target || (C.lastTarget && isAlive(C.lastTarget) ? C.lastTarget : liveEnemies(C)[0]));
+  const foe = () => (ctx.srcKind === "enemy" ? C.player : ctx.target || (targetableEnemies(C).includes(C.lastTarget) ? C.lastTarget : targetableEnemies(C)[0]));
   switch (c.type) {
     case "chance": { const pr = c.p !== undefined ? (c.p <= 1 ? c.p * 100 : c.p) : (c.pct ?? c.value ?? 50); r = rngOf(ctx).next() * 100 < pr; break; }
     case "status_on_target": {
@@ -170,7 +170,8 @@ export function evalCond(ctx, c) {
     case "enemy_intent": {
       const t = ctx.target || foe();
       const want = c.intent ?? val, kind = t && t.intent && t.intent.kind;
-      r = !!kind && (kind === want || (want === "attack" && kind === "attack_multi")) && (!c.interrupted || !!t.wasInterrupted); // multi-hit attacks are attacks (Taunt)
+      const dmgCast = kind === "cast" && !!t.intent.move && (t.intent.move.effects || []).some((x) => x.op === "damage" && x.target !== "self"); // a damaging cast (Arugal's Shadow Bolt) is an attack (Taunt, 11-01 report)
+      r = !!kind && (kind === want || (want === "attack" && (kind === "attack_multi" || dmgCast))) && (!c.interrupted || !!t.wasInterrupted); // multi-hit attacks are attacks (Taunt)
       break;
     }
     case "turn_number": {
@@ -260,10 +261,23 @@ op(["damage", "aoe"], (ctx, e) => {
   }
 });
 
+// ---- co-op partner support (engine/coop.js "ally" plays): a self-cast card's block / heal / listed buffs land on the partner hero ----
+// C.giftTo is the partner's player object, set by engine/coop.js only for the length of one card play. Draw, energy and every other
+// self effect stay with the caster. One home for the list: engine/coop.js giftable() reads GIFT_STATUSES.
+export const GIFT_STATUSES = new Set(["regen", "thorns", "armor", "dexterity", "strength", "intangible", "metallicize", "retain_block"]);
+function selfTargets(ctx, e, kind, dflt = "self") {
+  const g = ctx.C && ctx.C.giftTo;
+  if (g && ctx.srcKind === "player" && ctx.cardInst && !ctx.relic && (!e.target || e.target === "self" || e.target === "player") && (kind !== "apply" || GIFT_STATUSES.has(e.status))) {
+    if (kind === "apply" && !e.target) return resolveTargets(ctx, e.target, dflt);
+    return isAlive(g) ? [g] : [];
+  }
+  return resolveTargets(ctx, e.target, dflt);
+}
+
 op("block", (ctx, e) => {
   if (runMode(ctx)) return;
   const C = ctx.C;
-  for (const t of resolveTargets(ctx, e.target, "self")) gainBlock(C, t, num(ctx, e.amount), { card: !!ctx.cardInst, cardId: ctx.card ? ctx.card.id : undefined, raw: !!ctx.relic });  // relic block is flat: no Dexterity/gear stacking (Chris 10-31)
+  for (const t of selfTargets(ctx, e, "block")) gainBlock(C, t, num(ctx, e.amount), { card: !!ctx.cardInst, cardId: ctx.card ? ctx.card.id : undefined, raw: !!ctx.relic });  // relic block is flat: no Dexterity/gear stacking (Chris 10-31)
 });
 
 op("heal", (ctx, e) => {
@@ -282,7 +296,7 @@ op("heal", (ctx, e) => {
     if (revivePet(C, 1)) pet.hp = Math.max(1, Math.min(pet.maxHp, amt));
     return;
   }
-  for (const t of resolveTargets(ctx, e.target, "self")) {
+  for (const t of selfTargets(ctx, e, "heal")) {
     let amt = e.pct ? Math.floor(t.maxHp * e.pct / 100) : num(ctx, e.amount);
     if (amt >= 999) amt = t.maxHp;
     healEntity(C, t, amt);
@@ -316,7 +330,7 @@ op("apply", (ctx, e) => {
     list.push({ once: !!e.once, effects: [inner] });
     return;
   }
-  for (const t of resolveTargets(ctx, e.target, ctx.srcKind === "enemy" ? "player" : "enemy")) {
+  for (const t of selfTargets(ctx, e, "apply", ctx.srcKind === "enemy" ? "player" : "enemy")) {
     if (e.filter && !((!e.filter.family || t.family === e.filter.family) && (!e.filter.trait || hasTrait(t, e.filter.trait)))) continue;
     if (e.onlyType && t.type !== e.onlyType && t.family !== e.onlyType) continue;
     if (applyStatus(C, t, e.status, stacks, { duration: dur, school: e.school || (ctx.card && ctx.card.school) || undefined }) && e.status === "delayed" && e.payload) {
@@ -395,6 +409,14 @@ op("gain_energy", (ctx, e) => { // outside your turn (combat start: Heart of the
   if (C.turn === 0 || C.phase !== "player") C.player.energyNext = (C.player.energyNext || 0) + n; else C.player.energy += n;
 });
 op("energy_next_turn", (ctx, e) => { if (ctx.C) ctx.C.player.energyNext = (ctx.C.player.energyNext || 0) + Math.floor(num(ctx, e.amount)); });
+// 11-01 Sayge report: "+1 Energy, draw 1 on turn 1" did nothing out of combat (energy_next_turn / draw need a live fight). fight_bonus banks a permanent
+// opening bonus on the run (run.fightBonus {energy, draw}); combat.js pays it on turn 1 of every fight. In a fight it pays immediately.
+op("fight_bonus", (ctx, e) => {
+  const en = Math.max(0, Math.floor(num(ctx, e.energy, 0))), dr = Math.max(0, Math.floor(num(ctx, e.draw, 0)));
+  if (ctx.C) { ctx.C.player.energyNext = (ctx.C.player.energyNext || 0) + en; }
+  const run = ctx.C ? ctx.C.run : ctx.run;
+  if (run) { const b = run.fightBonus || (run.fightBonus = { energy: 0, draw: 0 }); b.energy += en; b.draw += dr; }
+});
 op("gain_resource", (ctx, e) => { if (ctx.C) addRes(ctx.C, e.resource, Math.floor(num(ctx, e.amount))); });
 op("spend_resource", (ctx, e) => {
   if (!ctx.C) return;
@@ -419,6 +441,9 @@ op("summon", (ctx, e) => {
   if (e.side === "ally" && e.from === "target") {
     const t = ctx.target;
     if (!t || t.kind !== "enemy" || !isAlive(t) || t.tier === "boss") return;
+    // 11-02 Warlock report (Hillsbad Turncoats): the converted enemy REPLACED the hero's single pet slot, so a summoned demon vanished and the enemy was deleted. A living pet now holds the slot: no conversion.
+    const pp = C.player.pet;
+    if (pp && !pp.down && (pp.hp === undefined || pp.hp > 0)) { log(C, `${t.name} wavers, but your ${pp.name || "companion"} holds the line.`); return; }
     unit = "conv_" + t.id;
     (C.tempUnits || (C.tempUnits = {}))[unit] = { name: t.name, icon: t.icon, hp: Math.max(6, Math.ceil(t.hp)), moves: (t.def.moves || []).filter((m) => m.intent !== "cast").slice(0, 3) };
     if (e.removeTarget) { t.hp = 0; t.dead = true; t.block = 0; t.intent = null; t.converted = true; }
@@ -481,7 +506,13 @@ op("repeat", (ctx, e) => {
   for (let i = 0; i < n; i++) runEffects(ctx, e.effects);
 });
 
-op("set_form", (ctx, e) => { if (ctx.C) ctx.C.player.form = e.value === "none" || e.value === null ? null : e.value; });
+op("set_form", (ctx, e) => {
+  if (!ctx.C) return;
+  const C = ctx.C, f = e.value === "none" || e.value === null ? null : e.value;
+  C.player.form = f;
+  // Priest: the class resource IS the form ("Shadowform 0/1" on the HUD), so mirror it or the pip never lights (11-01 report: "cant toggle shadow form")
+  if (C.cls && C.cls.resource && C.cls.resource.id === "form") C.player.res.form = f === "shadowform" ? 1 : 0;
+});
 op("set_stance", (ctx, e) => { if (ctx.C) ctx.C.player.stance = e.value === "none" ? null : e.value; });
 op("set_aspect", (ctx, e) => { if (ctx.C) ctx.C.player.aspect = e.value === "none" ? null : e.value; });
 // A Seal granted by gear/relics/talents has no card in ctx, so it borrows the Judgement payload of the Seal card
@@ -503,7 +534,12 @@ op("pet_action", (ctx, e) => {
   if (e.action === "sacrifice") sacrificePet(ctx.C);
   else petAct(ctx.C);
 });
-op("totem", (ctx, e) => { if (ctx.C) placeTotem(ctx.C, e.slot, e.unit); });
+op("totem", (ctx, e) => {
+  if (!ctx.C || !placeTotem(ctx.C, e.slot, e.unit)) return;
+  const t = ctx.C.player.totems[e.slot]; // 11-03 report: Stoneclaw only taunted from the NEXT turn, so the turn it went down every hit still landed on you
+  const fxs = (t && (t.effects || (t.moves && t.moves[0] && t.moves[0].effects))) || [];
+  if (fxs.some((x) => x && x.op === "taunt")) ctx.C.player.tauntRound = t.uid;
+});
 
 op("scry", (ctx, e) => {
   const C = ctx.C;
@@ -545,7 +581,21 @@ op("cast_interrupt", (ctx, e) => {
 op("taunt", (ctx, x) => { // a totem's taunt (Stoneclaw) pulls attacks onto THAT totem; it used to set "self" and send every hit to the hero (10-29 report)
   if (!ctx.C || ctx.srcKind === "enemy") return;
   ctx.C.player.tauntRound = ctx.srcKind === "totem" && ctx.src && ctx.src.uid ? ctx.src.uid : x && x.to === "pet" ? "pet" : "self";
+  if (ctx.srcKind === "player" && !(x && x.to === "pet")) forceAttack(ctx.C, ctx.target); // 11-03 report: Growl changed nothing solo (enemies already hit you); a taunted foe now drops its buff/heal/debuff and attacks you
 });
+// Taunt (Growl): a non-boss foe that is not mid-cast swaps a buff/heal/debuff/block intent for one of its own attacks, aimed at you.
+function forceAttack(C, t) {
+  if (!t || !isAlive(t) || !t.intent || t.kind !== "enemy") return;
+  if (t.tier === "boss" || t.tier === "raid" || t.castProg > 0) return;
+  if (t.intent.kind === "attack" || t.intent.kind === "attack_multi") { t.aim = "player"; return; }
+  if (!["buff", "heal", "debuff", "block"].includes(t.intent.kind)) return;
+  const atk = ((t.def && t.def.moves) || []).filter((m) => m.intent === "attack" || m.intent === "attack_multi");
+  if (!atk.length) return;
+  const move = C.rng.pick(atk);
+  t.intent = { kind: move.intent, move, name: move.name, total: move.castTurns || 1 };
+  t.aim = "player";
+  fx(C, { t: "miss", uid: t.uid, text: "Taunted", kind: "gold" });
+}
 op("revive", (ctx, e) => {
   const C = ctx.C;
   if (!C) return;

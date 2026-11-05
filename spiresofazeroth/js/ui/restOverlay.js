@@ -66,7 +66,7 @@ export function upgradeOverlay(app, host, { title = "Upgrade a card", sub = "Cho
 
 export function restOverlay(app, host, { onConfirm, flare }) {
   const { run } = app;
-  const amt = Math.floor(run.maxHp * 0.3 * heroicMods(run.heroic).healMult);
+  const amt = Math.floor(run.maxHp * 0.3 * heroicMods(run.heroic, run.ascension).healMult);
   const after = Math.min(run.maxHp, run.hp + amt);
   const { layer, close } = shell(host, "Rest", "Sit by the fire and recover.");
   const bar = (v, cls) => h("div", { class: `sx-up__hp ${cls}` }, h("i", { style: { width: `${Math.round((v / Math.max(1, run.maxHp)) * 100)}%` } }), h("span", {}, `${v} / ${run.maxHp}`));

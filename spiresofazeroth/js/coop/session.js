@@ -4,6 +4,7 @@
 // Wire messages: hello, status, lead (numbered, queued on the guest), cready, act, hash, bye. A dropped channel reconnects for 90 s.
 import { h, toast } from "../ui/dom.js";
 import { newSeedString } from "../engine/rng.js";
+import { loadRun } from "../engine/save.js";
 import { enterNode, chooseZone, enterRaidFloor, proceedAfterSpire, chooseFinalBoss } from "../engine/run.js";
 import * as net from "./net.js";
 
@@ -12,7 +13,11 @@ const SCREEN_NAMES = { map: "the map", zonepick: "zone select", raidchoice: "the
   treasure: "a treasure", vendor: "a vendor", rest: "a campfire", hub: "the sanctuary", event: "an event", healer: "the healer", end: "the run summary",
   mechchoice: "the zone mechanic", title: "the title screen", classSelect: "hero select", charSelect: "hero select", charCreate: "hero creation", talents: "talents", coopLobby: "the co-op lobby" };
 const where = (s) => SCREEN_NAMES[s] || s || "somewhere";
-const RECONNECT_MS = 90000, REJOIN_EVERY_MS = 3000; // how long a dropped channel keeps the session alive, and how often the guest retries the code
+// one cheap fingerprint of a spire map (the map is generated from seed + act + zone + the Heroic elite bonus, so two players on different
+// Heroic levels, or a guest whose run started from a different seed, get different maps: the 10-30 "different maps on co-op run" report)
+const mapSig = (map) => { let h = 2166136261; for (const ch of JSON.stringify(map || null)) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return (h >>> 0).toString(36); };
+const COOP_FIGHT_LOOSE_MS = 4000; // both players on a fight screen with different fight keys: after this long, fight the host's fight anyway
+const RECONNECT_MS = 180000, REJOIN_EVERY_MS = 3000; // how long a dropped channel keeps the session alive, and how often the guest retries the code
 
 export function installCoop(app) {
   const listeners = new Map(); // t -> Set(fn)
@@ -37,7 +42,7 @@ export function installCoop(app) {
     if (S.link && S.link.open) { S.link.send(m); return; }
     if (S.state === "reconnecting" && m.t !== "status") S.outbox.push(m);
   }
-  const sendStatus = () => { if (S.link) send(myStatus()); renderBar(); };
+  const sendStatus = () => { if (S.link) { send(myStatus()); if (S.state === "connected") saveSess(); } renderBar(); }; // saveSess refreshes the resume window
 
   function onMessage(m) {
     if (!m || typeof m !== "object") return;
@@ -54,7 +59,7 @@ export function installCoop(app) {
     } else if (m.t === "lead") {
       if (S.role === "guest" && m.n > S.lastLeadN) { S.lastLeadN = m.n; S.leads.push(m); tryFollow(); } // numbered: a resend after a reconnect is applied once
     } else if (m.t === "cready") {
-      S.cready.set(m.key, m);
+      S.cready.delete(m.key); m.rx = Date.now(); S.cready.set(m.key, m); // delete first: a re-sent key must move to the END of the map (newest)
     } else if (m.t === "bye") {
       drop("Your partner left co-op. You carry on solo.");
       return;
@@ -70,6 +75,7 @@ export function installCoop(app) {
     const again = S.state === "reconnecting";
     if (S.reconnectT) { clearTimeout(S.reconnectT); S.reconnectT = null; }
     S.link = link; S.role = role; S.seat = role === "host" ? 0 : 1; S.state = "connected";
+    saveSess();
     link.onMessage(onMessage);
     link.onClose((why) => { if (S.link !== link || why === "left") return; lostLink(); });
     link.send({ t: "hello", seed: role === "host" ? S.seed : null, name: heroName(), build: app.build });
@@ -106,6 +112,7 @@ export function installCoop(app) {
     }
   }
   function drop(msg) {
+    clearSess();
     const link = S.link;
     if (S.reconnectT) { clearTimeout(S.reconnectT); S.reconnectT = null; }
     S.link = null; S.state = "off"; S.role = null; S.seat = -1; S.partner = null; S.partnerStatus = null; S.leads = []; S.lastLeadN = 0; S.cready.clear(); S.myCready = null; S.outbox = [];
@@ -115,6 +122,35 @@ export function installCoop(app) {
     emit("close", {});
     renderBar();
   }
+  // ---- survive a page reload (11-03 report: "played a coop run and we couldnt reconnect"): the session was memory-only, so a refresh,
+  // a phone tab discard or an Android app resume lost the code and both players fell back to solo. Persist {role, code, seed}; on boot
+  // the guest rejoins the code and the host re-opens the same room, inside the usual RECONNECT_MS window.
+  const SESS_KEY = "spires.coop.session.v1", SESS_MAX_AGE = 10 * 60 * 1000;
+  function saveSess() { try { localStorage.setItem(SESS_KEY, JSON.stringify({ role: S.role, code: S.code, seed: S.seed, t: Date.now() })); } catch { /* storage blocked */ } }
+  function clearSess() { try { localStorage.removeItem(SESS_KEY); } catch { /* storage blocked */ } }
+  async function rehostLoop() {
+    while (S.state === "reconnecting" && S.role === "host") {
+      try { // the broker may still hold the old registration for a while ("unavailable-id"): keep trying
+        const room = await net.host(S.code, (link) => { if (S.state === "hosting" || S.state === "reconnecting") connected(link, "host"); else try { link.close(); } catch { /* gone */ } }, (m) => toast(m));
+        if (S.state !== "reconnecting" && S.state !== "connected") { try { room.cancel(); } catch { /* gone */ } return; }
+        S.cancelHost = room.cancel;
+        return;
+      } catch { /* retry */ }
+      await new Promise((r) => setTimeout(r, REJOIN_EVERY_MS));
+    }
+  }
+  function resumeSess() {
+    let d = null;
+    try { d = JSON.parse(localStorage.getItem(SESS_KEY) || "null"); } catch { /* none */ }
+    if (!d || !d.code || (d.role !== "host" && d.role !== "guest") || Date.now() - (d.t || 0) > SESS_MAX_AGE) { if (d) clearSess(); return; }
+    if (S.state !== "off") return;
+    S.role = d.role; S.code = d.code; S.seed = d.seed || null; S.seat = d.role === "host" ? 0 : 1; S.state = "reconnecting";
+    toast("Reconnecting to your co-op partner...");
+    S.reconnectT = setTimeout(() => { if (S.state === "reconnecting") drop("Could not reconnect to your partner. You carry on solo."); }, RECONNECT_MS);
+    renderBar();
+    if (d.role === "guest") rejoinLoop(); else rehostLoop();
+  }
+  const savedRunSeed = () => { const r = (app.run && app.run.screen !== "end" && app.run) || (() => { try { return loadRun(); } catch { return null; } })(); return r && r.screen !== "end" && r.seed ? r.seed : null; };
   const heroName = () => { const c = app.run && app.run.character; return (c && c.name) || (app.meta && app.meta.lastName) || "Adventurer"; };
 
   // ---- host leads, guest follows -----------------------------------------------------------------------------------------
@@ -139,7 +175,9 @@ export function installCoop(app) {
       toast(`Co-op: ${partnerName()} picks the way. Your game follows their choice.`);
       return false;
     }
-    send({ t: "lead", n: ++S.leadSeq, kind, arg, screen: run.screen, act: run.act, floor: run.floor, seed: run.seed });
+    const m = { t: "lead", n: ++S.leadSeq, kind, arg, screen: run.screen, act: run.act, floor: run.floor, col: run.col, seed: run.seed, zoneId: run.zoneId };
+    if (kind === "node" && run.map) { m.mapSig = mapSig(run.map); m.map = run.map; } // the guest snaps onto the host's map and spot if theirs drifted
+    send(m);
     if (!partnerAt(run)) toast(`${partnerName()} is still on ${where(ps && ps.screen)}. Their game follows your pick when they get there.`);
     return true;
   }
@@ -149,8 +187,16 @@ export function installCoop(app) {
     if (run.screen === "end") { S.leads = []; return; }
     const m = S.leads[0];
     // a pick for another run, or for a point this run is already past (the guest chose itself after a failed follow): skip it
-    const stale = m.seed !== run.seed || run.act > m.act || (run.act === m.act && m.screen === "map" && run.screen === "map" && run.floor > m.floor);
+    const stale = run.act > m.act || (run.act === m.act && m.screen === "map" && run.screen === "map" && run.floor > m.floor && (!m.mapSig || m.mapSig === mapSig(run.map)));
     if (stale) { S.leads.shift(); return tryFollow(); }
+    // Drift repair (10-30/11-01 reports: different maps, guest stuck "following" a pick that never applies, "fight solo" waits):
+    // on the map in the same act, a guest whose map or position differs from the host's adopts the host's map and spot, then follows.
+    if (m.kind === "node" && m.map && run.screen === "map" && run.act === m.act && (mapSig(run.map) !== m.mapSig || run.floor !== m.floor || run.col !== m.col)) {
+      console.warn("[coop] resync guest map", { mine: [mapSig(run.map), run.floor, run.col], host: [m.mapSig, m.floor, m.col] });
+      run.map = JSON.parse(JSON.stringify(m.map)); run.floor = m.floor; run.col = m.col;
+      if (m.zoneId && run.zoneId !== m.zoneId) run.zoneId = m.zoneId;
+      toast("Co-op: your map drifted from your partner's. It was synced to theirs.");
+    }
     if (run.screen !== m.screen || run.act !== m.act || (m.screen === "map" && run.floor !== m.floor)) { renderBar(); return; } // not there yet: every app.go() retries
     S.leads.shift(); S.applying = true;
     try {
@@ -175,15 +221,23 @@ export function installCoop(app) {
   const fightKey = (run) => `${run.act}:${run.floor}:${run.col}:${(run.pending && run.pending.nodeId) || ""}:${(run.pending && run.pending.tier) || ""}`;
   function combatReady(run, isCancelled) {
     const key = fightKey(run);
-    for (const k of [...S.cready.keys()]) if (k !== key) S.cready.delete(k); // older fights only: this fight's message stays readable
+    for (const [k, v] of [...S.cready.entries()]) if (k !== key && v.run && v.run.act !== run.act) S.cready.delete(k); // older acts only: a same-act message may be this fight under a drifted key
     S.myCready = { t: "cready", key, run: JSON.parse(JSON.stringify(run)), encounter: run.pending.encounter };
     send(S.myCready);
+    const t0 = Date.now();
     return new Promise((res) => {
       const check = () => {
         if (isCancelled()) { S.myCready = null; return res(null); }
         if (!live()) { S.myCready = null; return res(null); } // a reconnect in progress keeps waiting; a final drop fights solo
         const m = S.cready.get(key);
         if (m) { S.myCready = null; return res(m); } // not consumed: a superseded combat render read it first and then bailed, the live render must still see it
+        // keys drifted (different floor / column / node): when the partner sits on a fight too, take their newest same-act handshake.
+        // The host's encounter governs (ui/coopCombat.js coopStart), so both browsers still build the same fight.
+        const ps = S.partnerStatus;
+        if (Date.now() - t0 > COOP_FIGHT_LOOSE_MS && ps && ps.screen === "combat") {
+          const alt = [...S.cready.values()].filter((v) => v.run && v.run.act === run.act && !v.used && v.rx >= t0 - 15000).pop(); // never a fight that already ran
+          if (alt) { console.warn("[coop] fight key drift, joining partner's fight", key, alt.key); S.myCready = null; return res(alt); }
+        }
         setTimeout(check, 120);
       };
       check();
@@ -195,6 +249,7 @@ export function installCoop(app) {
   function renderBar() {
     const host = document.getElementById("app");
     if (!live()) { if (bar) { bar.remove(); bar = null; } return; }
+    if (bar && !bar.isConnected) bar = null; // a screen swap or overlay can detach it; rebuild instead of rendering into a dead node
     if (!bar) { bar = h("div", { class: "sp-coopbar", role: "status" }); host.append(bar); }
     const p = S.partnerStatus, hero = p && p.hero, run = app.run;
     const cls = hero && hero.classId ? hero.classId[0].toUpperCase() + hero.classId.slice(1) : "";
@@ -204,12 +259,24 @@ export function installCoop(app) {
     else if (S.role === "guest" && S.leads.length) state = `following ${partnerName()}'s pick`;
     else if (run && LEAD_SCREENS.has(run.screen) && partnerAt(run)) { state = "ready"; ready = true; }
     else state = `on ${where(p.screen)}`;
+    placeBar();
     bar.replaceChildren(
       h("b", {}, S.role === "host" ? "Co-op (host)" : "Co-op"),
       h("span", {}, hero ? `${partnerName()} ${cls}` : `${S.partner ? S.partner.name : "Partner"} connected`),
       hero ? h("span", { class: "sp-coopbar__hp" }, `${hero.hp}/${hero.maxHp} HP`) : null,
       h("span", { class: "sp-coopbar__where" + (ready ? " is-ready" : "") + (S.state === "reconnecting" ? " is-lost" : "") }, state),
       h("button", { type: "button", class: "sp-coopbar__leave", title: "Leave co-op", onClick: () => { if (confirm("Leave co-op? Your run continues solo.")) leave(); } }, "Leave"));
+  }
+  // 11-04 bug mail ("the coop bar blocks our equipment bar at top mid of the screen"): the bar is position:fixed, so in combat it sat on
+  // the top bar's gold + gear strip. Park it just under the combat top bar (viewport px, the stage is scaled); 6px from the top elsewhere.
+  let placeTimer = null;
+  function placeBar() {
+    if (!bar || !bar.isConnected) { if (placeTimer) { clearInterval(placeTimer); placeTimer = null; } return; }
+    const tb = document.querySelector(".sp-topbar");
+    const r = tb && tb.getBoundingClientRect();
+    const top = r && r.height > 0 && r.bottom > 0 ? Math.round(r.bottom + 8) : 6;
+    if (bar.style.top !== `${top}px`) bar.style.top = `${top}px`;
+    if (!placeTimer) { placeTimer = setInterval(placeBar, 600); window.addEventListener("resize", placeBar); } // the top bar mounts after the bar
   }
   function leave() { send({ t: "bye" }); drop("You left co-op."); }
 
@@ -222,7 +289,7 @@ export function installCoop(app) {
     on(t, f) { if (!listeners.has(t)) listeners.set(t, new Set()); listeners.get(t).add(f); return () => listeners.get(t).delete(f); },
     async host(onError) {
       if (S.state !== "off") drop(null);
-      S.code = net.newCode(); S.seed = newSeedString(); S.role = "host"; S.state = "hosting";
+      S.code = net.newCode(); S.seed = savedRunSeed() || newSeedString(); S.role = "host"; S.state = "hosting"; // a saved run's seed: partners from that run can both Continue it (11-03 "can't resume a game in MP")
       try {
         const room = await net.host(S.code, (link) => { if (S.state === "hosting" || S.state === "reconnecting") connected(link, "host"); else try { link.close(); } catch { /* gone */ } }, (m) => toast(m));
         S.cancelHost = room.cancel;
@@ -235,6 +302,9 @@ export function installCoop(app) {
       try { connected(await net.join(S.code), "guest"); return true; } catch (e) { S.state = "off"; S.role = null; throw e; }
     },
     cancel() { if (S.cancelHost) S.cancelHost(); S.cancelHost = null; if (!live()) { S.state = "off"; S.role = null; } },
+    // the fight is built: its handshake entries are spent so a later drifted-key join can never pick a finished fight's snapshot (11-01 desync)
+    consumeCready(m) { if (m) m.used = true; for (const [k, v] of [...S.cready.entries()]) if (v === m || v.used) S.cready.delete(k); },
+    fightKey,
     leave, lead, combatReady, sendStatus,
     simulateLoss: () => { if (S.link) S.link.simulateLoss(); }, // drive-only: exercises the reconnect path
   };
@@ -247,6 +317,7 @@ export function installCoop(app) {
     return r;
   };
   injectCss();
+  setTimeout(resumeSess, 0); // after main.js has wired app.go and the stage exists
 }
 
 function injectCss() {
@@ -271,6 +342,9 @@ function injectCss() {
 .sp-coop-panel .bar i{display:block;height:100%;background:linear-gradient(#e33,#911)}.sp-coop-panel .dim{color:#bba;font-size:17px}
 .sp-coop-panel .turn{margin-top:6px;font-size:18px}.sp-coop-panel .turn.mine{color:#7dff7d}.sp-coop-panel .turn.theirs{color:#ffb14a}
 .sp-coop-panel .down{color:#ff6a5a}.sp-coop-panel .last{color:#cfe;font-size:16px;margin-top:4px}
+.sp-coop-panel .gift{color:#9fe8ff;font-size:16px;margin-top:4px}
+.sp-coop-gift{pointer-events:auto;margin-top:8px;width:100%;background:#1a2a3a;color:#cfe8ff;border:1px solid #4a7aa0;border-radius:5px;font:600 15px/1.25 Georgia,serif;padding:6px 8px;cursor:pointer}
+.sp-coop-gift.is-on{background:#2a5a2a;color:#dfffd0;border-color:#7dff7d;box-shadow:0 0 10px #7dff7d66}
 .sp-eplate[data-coop-tgt]:not([data-coop-tgt=""])::after{content:attr(data-coop-tgt);position:absolute;left:50%;top:-30px;transform:translateX(-50%);white-space:nowrap;
   font:700 18px Georgia,serif;color:#ffb14a;text-shadow:0 1px 3px #000;pointer-events:none}
 .sp-eplate.sp-coop-tgt-me::after{color:#ff6a5a}

@@ -4,10 +4,10 @@
 import { sfx } from "../audio.js";
 
 const BASE = new URL("../../data/sounds/", import.meta.url).href;
-let cards = null, ui = null, loading = null;
+let cards = null, ui = null, loading = null, cls = null;
 const load = () => loading || (loading = Promise.all([fetch(BASE + "cards.json"), fetch(BASE + "ui.json")])
   .then(([a, b]) => Promise.all([a.json(), b.json()])).then(([c, u]) => { cards = c; ui = u; }).catch(() => { cards = {}; ui = {}; }));
-const key = (def) => (cards && (cards[def.id] || cards[`neutral:${def.id}`] || cards[`status:${def.id}`])) || null;
+const key = (def) => (cards && (cards[`${cls}:${def.id}`] || cards[def.id] || cards[`neutral:${def.id}`] || cards[`status:${def.id}`])) || null;
 
 export const cardSounds = {
   load,
@@ -20,7 +20,8 @@ export const cardSounds = {
   },
   ui(name) { const s = ui && ui.ui && ui.ui[name]; if (s) sfx.playUrl(s.url, { volume: 0.4, label: `ui ${name} ${s.name}` }); },
   // Current deck first (<= 40 files: cast+impact per distinct card), the rest stays lazy.
-  preload(deckIds) {
+  preload(deckIds, classId) {
+    cls = classId || cls;
     load().then(() => {
       const urls = [];
       for (const id of new Set(deckIds || [])) { const m = key({ id }); if (m) urls.push(m.cast.url, m.impact.url); }

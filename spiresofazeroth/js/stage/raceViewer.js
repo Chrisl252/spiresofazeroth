@@ -4,6 +4,7 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { BUILD } from "../version.js";
+import { applyLooks, loadBodyBuf } from "./heroLooks.js";
 
 const BASE = new URL("../../assets/models/race/", import.meta.url).href;
 const FRONT = -Math.PI / 2; // the baked bodies face +X; turn them to face the camera
@@ -76,13 +77,17 @@ export function createRaceViewer(host, { reduced = () => false } = {}) {
     });
   }
   let chain = Promise.resolve(); // one parse at a time: rapid clicks used to decode a dozen models at once and crash phone browsers
-  const show = (slug) => { const my = ++token; const p = chain.then(() => build(slug, my)); chain = p.catch(() => {}); return p; };
-  async function build(slug, my) {
+  const show = (slug, looks) => { const my = ++token; const p = chain.then(() => build(slug, my, looks)); chain = p.catch(() => {}); return p; };
+  async function build(slug, my, looks) {
     try {
       if (dead || my !== token) return false; // superseded by a newer click while queued: skip the decode entirely
-      const buf = await load(slug);
+      let buf; // with looks: the classic-model body that the looks geosets fit; without: the legacy HD race body
+      if (looks) { try { buf = await loadBodyBuf(slug); } catch (e) { looks = null; } }
+      if (!buf) buf = await load(slug);
       if (dead || my !== token) return false;
       const gltf = await new Promise((res, rej) => new GLTFLoader().parse(buf.slice(0), BASE, res, rej));
+      if (dead || my !== token) { free(gltf.scene); return false; }
+      if (looks) { try { await applyLooks(gltf.scene, { slug, key: null, looks, forceHair: true }); } catch (e) { console.warn("[spires] looks:", e && e.message); } } // skin / face / hair / facial hair (heroLooks.js); failure keeps the baked look
       if (dead || my !== token) { free(gltf.scene); return false; }
       if (model) { pivot.remove(model); free(model); }
       model = gltf.scene;

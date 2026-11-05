@@ -1,5 +1,6 @@
 // Rewards: gold, 1-of-3 card picks (common 60 / uncommon 30 / rare 9 / epic 1), potions, relics, shop stock. Seeded streams only.
 import { heroicMods } from "./heroic.js";
+import { owns } from "./gear.js";
 import { resolveImmunity, cardUselessOn } from "./immunity.js";
 
 const CARD_WEIGHTS = { common: 60, uncommon: 30, rare: 9, epic: 1 };
@@ -48,16 +49,14 @@ export function rollCardChoices(run, data, rng, { tier = "normal", count = 3 } =
 }
 
 export function rollGold(run, rng, tier) {
-  const m = heroicMods(run.heroic || 0).goldMult;
+  const m = heroicMods(run.heroic || 0, run.ascension).goldMult;
   const [lo, hi] = tier === "boss" || tier === "raid" ? [70, 90] : tier === "elite" ? [28, 40] : [10, 20];
   return Math.round(rng.int(lo, hi) * m);
 }
 
 function relicEligible(run, data, r) {
-  if (run.relics.includes(r.id) || (run.gearBag && run.gearBag.includes(r.id)) || r.legacy || r.bonus || r.tier >= 1) return false; // set pieces drop through gear.js dropGear, never as a relic roll
-  const twin = data.gear && data.gear.legacy && data.gear.legacy[r.id]; // an old id that maps onto a gear piece the run already wears = the same item twice
-  if (twin && (run.relics.includes(twin) || run.relics.includes(`${twin}+`))) return false;
-  if (r.base && run.relics.includes(r.base)) return false;
+  if (r.legacy || r.bonus || r.tier >= 1) return false; // set pieces drop through gear.js dropGear, never as a relic roll
+  if (owns(run, data, r.id)) return false; // worn, bagged, sold, its "+" twin or its legacy twin: never the same item twice
   if (r.class && r.class !== run.classId) return false;
   if (r.zone && r.zone !== run.zoneId && !(run.zonesVisited || []).includes(r.zone)) return false;
   return true;

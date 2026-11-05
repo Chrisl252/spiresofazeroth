@@ -14,13 +14,15 @@ const EMBER_URL = new URL("../../assets/fx/wow_ember.webp", import.meta.url).hre
 const BASE_IMG_URL = new URL("../../assets/ui/campfire_base.webp", import.meta.url).href;
 
 const FPS = 30;
-const FLAME_FRAMES = 58; // 58 active frames in the 8x8 Blizzard fire flipbook
+// wow_fire_flipbook.webp is 512x512 = a 4x4 grid of 128px cells (verified: cell borders are transparent only at 4x4). It was sampled as 8x8/58 frames,
+// so the flame was a quarter-frame crop of a white mask (solid white blocks, 2560x1271 report 2026-11-03). Frames 12-15 are near-empty: use the 12 solid ones.
+const FLAME_GRID = 4, FLAME_FRAMES = 12, FLAME_FPS = 12;
 
 function setFlipbookFrame(tex, frameIndex) {
   const f = Math.abs(Math.floor(frameIndex)) % FLAME_FRAMES;
-  const col = f % 8;
-  const row = Math.floor(f / 8);
-  tex.offset.set(col / 8 + INSET, 1 - (row + 1) / 8 + INSET);
+  const col = f % FLAME_GRID;
+  const row = Math.floor(f / FLAME_GRID);
+  tex.offset.set(col / FLAME_GRID + INSET, 1 - (row + 1) / FLAME_GRID + INSET);
 }
 // Every cell's flame runs to its edges, so mip levels and linear filtering blended the neighbouring frames' white-hot cores into the
 // quad: a flickering white haze behind the fire (2026-10-28, Firefox). No mips, clamped, and each frame sampled half a texel inside.
@@ -29,7 +31,7 @@ function flipbookTex(tex) {
   tex.wrapS = tex.wrapT = THREE.ClampToEdgeWrapping;
   tex.generateMipmaps = false;
   tex.minFilter = THREE.LinearFilter;
-  tex.repeat.set(1 / 8 - 2 * INSET, 1 / 8 - 2 * INSET);
+  tex.repeat.set(1 / FLAME_GRID - 2 * INSET, 1 / FLAME_GRID - 2 * INSET);
   return tex;
 }
 
@@ -89,6 +91,7 @@ function mount3DCampfire(canvas, { reduced = () => false, paused = () => false }
     blending: THREE.AdditiveBlending,
     depthWrite: false,
     side: THREE.DoubleSide,
+    color: 0xff8a2a, // the sheet is a white luminance mask: tint it to fire
   });
 
   const flameMat2 = new THREE.MeshBasicMaterial({
@@ -98,6 +101,7 @@ function mount3DCampfire(canvas, { reduced = () => false, paused = () => false }
     depthWrite: false,
     side: THREE.DoubleSide,
     opacity: 0.82,
+    color: 0xffc860,
   });
 
   // 3 crossed quads: 0, 60, -60 degrees
@@ -195,9 +199,9 @@ function mount3DCampfire(canvas, { reduced = () => false, paused = () => false }
     t += dt;
 
     // Advance fire animation
-    const f1 = Math.floor(t * FPS) % FLAME_FRAMES;
+    const f1 = Math.floor(t * FLAME_FPS) % FLAME_FRAMES;
     setFlipbookFrame(fireTex, f1);
-    const f2 = (Math.floor(t * FPS) + 17) % FLAME_FRAMES;
+    const f2 = (Math.floor(t * FLAME_FPS) + 5) % FLAME_FRAMES;
     setFlipbookFrame(fireTex2, f2);
 
     // Warm fire light flickering
@@ -336,17 +340,17 @@ function mount2DCampfire(canvas, { reduced = () => false, paused = () => false }
     // WoW fire flipbook
     if (fireImg) {
       ctx.globalCompositeOperation = "lighter";
-      const fIdx = Math.floor(t * FPS) % FLAME_FRAMES;
-      const col = fIdx % 8;
-      const row = Math.floor(fIdx / 8);
-      const fw = 64, fh = 64;
+      const fIdx = Math.floor(t * FLAME_FPS) % FLAME_FRAMES;
+      const col = fIdx % FLAME_GRID;
+      const row = Math.floor(fIdx / FLAME_GRID);
+      const fw = 128, fh = 128;
       const dw = 240, dh = 240;
       ctx.drawImage(fireImg, col * fw, row * fh, fw, fh, cx - dw / 2, base - 190, dw, dh);
 
       // Second layer offset for richness
-      const fIdx2 = (Math.floor(t * FPS) + 15) % FLAME_FRAMES;
-      const col2 = fIdx2 % 8;
-      const row2 = Math.floor(fIdx2 / 8);
+      const fIdx2 = (Math.floor(t * FLAME_FPS) + 5) % FLAME_FRAMES;
+      const col2 = fIdx2 % FLAME_GRID;
+      const row2 = Math.floor(fIdx2 / FLAME_GRID);
       const dw2 = 190, dh2 = 190;
       ctx.globalAlpha = 0.8;
       ctx.drawImage(fireImg, col2 * fw, row2 * fh, fw, fh, cx - dw2 / 2, base - 165, dw2, dh2);

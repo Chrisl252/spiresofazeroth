@@ -97,6 +97,7 @@ export async function render(app) {
     aimPreview: (inst, targetUid) => aimPreview(inst, targetUid),
     clearAimPreview: () => hud.clearPreview(),
     update,
+    coopLink: () => CL, // drive-only (tools/spires/coop-drive.mjs {"gift":true})
   };
 
   const instOf = (uid) => C.pile.hand.find((c) => c.uid === uid);
@@ -113,11 +114,11 @@ export async function render(app) {
     const pd = C.pending[0];
     if (!pd) { pendingHost.replaceChildren(); return; }
     const need = pd.count;
-    const src = pd.type === "scry" ? C.pile.draw.slice(-need) : C.pile.hand;
+    const src = pd.type === "scry" ? C.pile.draw.slice(-need).reverse() : C.pile.hand; // 11-03: draw pops from the END, so reverse -> leftmost card = the one drawn next (it showed bottom-first, so "draw 1" looked like the wrong card)
     const row = h("div", { class: "spc-grid sp-pending__row" });
     for (const inst of src) row.append(cardEl(inst.def, { C, inst, tag: "div", mini: true, data, color: color(), cls: st.picks.has(inst.uid) ? "is-sel" : "", onClick: () => { if (st.picks.has(inst.uid)) st.picks.delete(inst.uid); else if (st.picks.size < need) st.picks.add(inst.uid); update(); } }));
     const ok = h("button", { class: "sp-wowbtn sp-wowbtn--sm", type: "button", disabled: pd.type !== "scry" && st.picks.size < Math.min(need, src.length), onClick: () => { if (CL) CL.local({ k: "pending", uids: [...st.picks] }); else resolvePending(C, [...st.picks]); st.picks.clear(); update(); } }, "Confirm");
-    pendingHost.replaceChildren(h("div", { class: "sp-pending" }, h("h3", {}, pd.type === "scry" ? `Scry: choose up to ${need} to discard` : `Choose ${need} card(s) to ${pd.type}`), row, ok));
+    pendingHost.replaceChildren(h("div", { class: "sp-pending" }, h("h3", {}, pd.type === "scry" ? `Scry: choose up to ${need} to discard (leftmost is drawn first)` : `Choose ${need} card(s) to ${pd.type}`), row, ok));
   }
 
   function syncHand() {
@@ -189,13 +190,14 @@ export async function render(app) {
   function doPlay(inst, targetUid) {
     if (st.busy || st.booting) return false;
     const pre = snapBefore();
-    const r = CL ? CL.local({ k: "play", uid: inst.uid, target: targetUid || null }) || { ok: false, why: "Wait for your turn." } : playCard(C, inst.uid, targetUid || undefined);
+    const gift = !!(CL && !targetUid && CL.wantsGift(inst)); // co-op partner support: a heal / shield card cast on the partner (ui/coopCombat.js)
+    const r = CL ? CL.local({ k: "play", uid: inst.uid, target: targetUid || null, ...(gift ? { ally: true } : {}) }) || { ok: false, why: "Wait for your turn." } : playCard(C, inst.uid, targetUid || undefined);
     if (!r.ok) { toast(r.why || "Cannot play that."); update(); return false; }
     if (C.drawBlocked) { toast(C.drawBlocked === "hand" ? "Your hand is full (10 cards)." : C.drawBlocked === "empty" ? "No cards left to draw: your draw and discard piles are empty." : "Card draw limit reached (10 extra draws per turn). It resets next turn."); C.drawBlocked = null; } // player report 10-24: "unable to draw more than 8"
     if (C.classId === "druid" && K && K.actors && K.actors.setHeroForm) {
       K.actors.setHeroForm(C.player.form);
     }
-    const evs = C.fx.splice(0);
+    const evs = gift ? CL.takeGiftFx(C.fx.splice(0), inst.def && inst.def.name) : C.fx.splice(0);
     st.lastPlayed = inst.uid; st.busy = true;
     if (D) D.beginHold(pre);
     syncHand(); paint(); renderPending();
@@ -342,14 +344,14 @@ export async function render(app) {
       K = await safe0(getKit(app), 9000);
       if (K && K.actors && K.fx) {
         applySettings(app, K); clearStage(K);
-        K.actors.setHero({ classId: run.classId, race: (run.character || {}).race, gender: (run.character || {}).gender, gearMask: gearLevel(run) });
+        K.actors.setHero({ classId: run.classId, race: (run.character || {}).race, gender: (run.character || {}).gender, looks: (run.character || {}).looks, gearMask: gearLevel(run) });
         if (K.actors.setHeroForm) K.actors.setHeroForm(C.player && C.player.form ? C.player.form : null);
         K.actors.setEnemies(C.enemies.map((e) => ({ uid: e.uid, id: e.id, name: e.name, tier: e.tier, icon: e.icon })));
         root.classList.add("sp-actors-on");
         bindTargeting();
       }
       D = createDirector({ app, C, kit: K || { actors: null, fx: null }, hud, paint: (v) => hud.update(v, view()), legacy, wait });
-      cardSounds.preload((run.deck || []).map((x) => x.id));
+      cardSounds.preload((run.deck || []).map((x) => x.id), run.classId);
     } catch (e) { console.warn("[spires] combat stage unavailable:", e && e.message); D = null; K = null; }
     st.booting = false;
     update();

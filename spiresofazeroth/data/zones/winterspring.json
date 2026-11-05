@@ -7,7 +7,7 @@
  "levelBand":[53,60],
  "isHub":false,
  "units":{"hederine-acolyte":{"name":"Hederine Initiate","icon":"spell_shadow_summonsuccubus","hp":20,"moves":[{"id":"shadow-bolt","name":"Shadow Bolt","intent":"cast","cast":true,"effects":[{"op":"damage","amount":7,"school":"shadow"}],"weight":2}]}},
- "spire":{"name":"Darkwhisper Gorge / Mazthoril","lore":"A frozen ravine where the Hederine demons plot under Lord Lakmaeran, beside the cobalt dragon caverns of Mazthoril and the ice-locked ruins of Winterspring."},
+ "spire":{"name":"Darkwhisper Gorge","lore":"A frozen demon-held ravine in the south of Winterspring. The blue dragonflight nests in the caves of Mazthoril, and the Winterfall furbolgs have gone mad from fel-tainted firewater."},
  "theme":{"primary":"#6fa8d8","secondary":"#15202e","accent":"#e8f6ff","background":"winterspring"},
  "zoneMechanic":{"id":"chill","name":"Chill","icon":"spell_frost_frostarmor02","text":"At the start of your turn 1 random card in hand becomes Frozen and cannot be played this turn.","hooks":{"on_turn_start":[{"op":"apply","status":"frozen","stacks":1,"target":"hand_random","count":1}]}},
  "rest":{"id":"everlook-inn","name":"Everlook Inn","icon":"inv_drink_05","text":"Warm up at Everlook, the goblin town in the snow.","effects":[{"op":"heal","amount":26,"target":"self"},{"op":"remove","status":"frozen","target":"self"}]},

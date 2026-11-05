@@ -9,8 +9,8 @@
   10
  ],
  "spire": {
-  "name": "Gnomeregan Exterior Tower",
-  "lore": "A snow-buried watchtower above Gnomeregan's irradiated gates. Frostmane trolls hold the pass and the leper gnomes wander the slag below."
+  "name": "Gnomeregan",
+  "lore": "The gnome capital in western Dun Morogh, flooded with radiation when Mekkatorque turned his weapon on the troggs. Leper gnomes haunt the gates, and Frostmane trolls hold the hills nearby."
  },
  "theme": {
   "primary": "#a9c7e8",

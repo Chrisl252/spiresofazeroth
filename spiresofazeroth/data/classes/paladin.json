@@ -1015,14 +1015,16 @@
       "flags": [],
       "text": "Gain 2 Enrage: when you are hit, gain Strength.",
       "effects": [
-        {"op": "apply", "status": "enrage", "stacks": 2, "target": "self"}
+        {"op": "apply", "status": "enrage", "stacks": 2, "target": "self"},
+        {"op": "apply", "status": "vengeance", "stacks": 1, "target": "self"}
       ],
       "upgrade": {
         "name": "Vengeance (Rank 2)",
         "cost": 1,
         "text": "Gain 3 Enrage: when you are hit, gain Strength.",
         "effects": [
-          {"op": "apply", "status": "enrage", "stacks": 3, "target": "self"}
+          {"op": "apply", "status": "enrage", "stacks": 3, "target": "self"},
+          {"op": "apply", "status": "vengeance", "stacks": 1, "target": "self"}
         ]
       }
     },

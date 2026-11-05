@@ -22,6 +22,11 @@ export async function render(app, _name, props = {}) {
   const tabs = h("div", { class: "sx-tal__tabs", role: "tablist", "aria-label": "Class" });
   const body = h("div", { class: "sx-tal__body" });
   const foot = h("div", { class: "sx-tal__foot" });
+  // 11-01 report "cant see the talents details" (Android): the hover tooltip never fires on touch. On a no-hover device a tap SELECTS a talent and this panel shows
+  // the same text with Learn / Unlearn buttons (tap again on the same talent learns); mouse users keep hover + click-to-learn.
+  const detail = h("div", { class: "sx-tal__detail", hidden: true, "aria-live": "polite" });
+  const touchy = () => { try { return !!(window.matchMedia && window.matchMedia("(hover: none)").matches); } catch (_) { return false; } };
+  let sel = null; // { cid, tree, t } of the tapped talent (touch only)
   await Promise.all(ids.map((id) => Promise.all([data.loadClass(id), data.loadTalents(id)])));
 
   for (const id of ids) if (repairSpent(meta, id, data.talentDefs.get(id))) saveMeta(meta); // Talents V2: clamp saved ranks, refund the difference
@@ -54,6 +59,20 @@ export async function render(app, _name, props = {}) {
     return lines.join("<br>");
   }
 
+  function showDetail() {
+    if (!sel) { detail.hidden = true; return; }
+    const { cid, tree, t } = sel, state = talentState(meta, cid), r = state.spent[t.id] | 0;
+    const can = !canLearn(state, tree, t) && r < t.max;
+    const bar = h("div", { class: "sx-tal__dbtns" },
+      btn(r >= t.max ? "Maxed" : mid ? "Learn now" : "Learn rank", () => { if (learn(meta, cid, tree, t)) { if (mid) restampRun(meta, app.run, data, talentDefOf(cid)); save(); draw(); } }, { size: "sm", disabled: !can }),
+      mid ? null : btn("Unlearn", () => { if (unlearn(meta, cid, tree, t)) { save(); draw(); } }, { size: "sm", disabled: r <= 0 }),
+      btn("Close", () => { sel = null; showDetail(); }, { size: "sm" }));
+    const txt = h("div", { class: "sx-tal__dtxt" }); txt.innerHTML = talentTip(state, tree, t);
+    fill(detail, ico(t.icon, { size: "md" }), txt, bar);
+    detail.hidden = false;
+  }
+  const talentDefOf = (cid) => data.talentDefs.get(cid);
+
   function treePanel(cid, tdef, tree, state) {
     const spent = treeSpent(state, tree);
     const tiers = Math.max(...tree.talents.map((t) => t.tier));
@@ -66,7 +85,7 @@ export async function render(app, _name, props = {}) {
         const why = canLearn(state, tree, t);
         const cls = r >= t.max ? "max" : !why ? "open" : r > 0 ? "part" : "locked";
         const b = h("button", { class: `sx-tal__t ${cls}`, type: "button", "aria-label": `${t.name}, rank ${r} of ${t.max}`,
-          onClick: () => { if (learn(meta, cid, tree, t)) { if (mid) restampRun(meta, app.run, data, tdef); save(); draw(); } },
+          onClick: (ev) => { if (touchy() || (ev && ev.pointerType === "touch")) { if (sel && sel.cid === cid && sel.t.id === t.id) { if (learn(meta, cid, tree, t)) { if (mid) restampRun(meta, app.run, data, tdef); save(); draw(); } return; } sel = { cid, tree, t }; showDetail(); return; } if (learn(meta, cid, tree, t)) { if (mid) restampRun(meta, app.run, data, tdef); save(); draw(); } },
           onContextmenu: (ev) => { ev.preventDefault(); if (!mid && unlearn(meta, cid, tree, t)) { save(); draw(); } } },
           ico(t.icon, { size: "sm" }), h("b", { class: "sx-tal__rank" }, `${r}/${t.max}`));
         tip(b, talentTip(state, tree, t));
@@ -107,9 +126,12 @@ export async function render(app, _name, props = {}) {
 
   function draw() {
     drawTabs();
+    if (sel && sel.cid !== st.cls) sel = null;
     const cid = st.cls, cobj = data.classObj(cid) || { name: cap(cid) }, tdef = data.talentDefs.get(cid);
     const state = talentState(meta, cid);
     if (!tdef) { fill(body, h("p", { class: "sx-dim" }, "No talent data for this class yet.")); return; }
+    if (sel) { const nt = tdef.trees.flatMap((tr) => tr.talents.map((x) => ({ cid, tree: tr, t: x }))).find((x) => x.t.id === sel.t.id); sel = nt || null; }
+    showDetail();
     fill(body, h("div", { class: "sx-tal__trees" }, ...tdef.trees.map((tree) => treePanel(cid, tdef, tree, state))), ladder(cid, cobj));
     if (mid) {
       const n = midRunSpent(app.run), novice = !app.run.talents && state.available > 0;
@@ -125,6 +147,6 @@ export async function render(app, _name, props = {}) {
   draw();
   fill(host,
     h("div", { class: "sx-cls__top" }, banner("Talents", mid ? `Spend points now and they work from the next fight, but each one makes this run's enemies ${pct}% tougher. Or save them for your next run.` : `Points come from climbing: 1 per ${FLOORS_PER_POINT} floors cleared, more for each act and a victory.`), btn(mid ? "Back to map" : "Back", back, { size: "sm", cls: "sx-cls__back", auto: true })),
-    tabs, body, foot);
+    tabs, body, detail, foot);
   return host;
 }

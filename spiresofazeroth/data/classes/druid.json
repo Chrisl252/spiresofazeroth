@@ -2381,7 +2381,6 @@
       "target": "self",
       "flags": [],
       "text": "Gain 12 Block and Thorns 2. Retain Block next turn.",
-      "breaksForm": true,
       "effects": [
         {
           "op": "block",

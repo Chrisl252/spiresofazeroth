@@ -453,3 +453,24 @@ button.sp-pot2 {
 
 /* stealthed enemy: dimmed, not a click / drag target while a visible enemy remains */
 .sp-eplate.is-stealth { opacity: .6; } .sp-eplate.is-stealth .sp-ep__name::after { content: " (Stealthed)"; font-size: .8em; color: #9fb4d6; }
+
+/* Settings is easy to find (players couldn't spot volume, 2026-11-02): a gear icon on the combat top-bar Settings button (the one before
+   fullscreen); the run-bar twin lives in screens.css. The icon is an extra background layer over the red-button centre, so every state keeps it. */
+.sp-tb__right > .sp-wowbtn--tb:nth-last-child(2) { --gear: calc(var(--h) * .5); justify-content: flex-end; min-width: calc(var(--h) * 2.2 + var(--gear) + 36px);
+  background: url("/assets/icons/inv_misc_gear_01.jpg") no-repeat left 2px center / var(--gear) var(--gear), url("/assets/ui/_128-redbutton-center.png") repeat-x center / auto 100%;
+  background-origin: content-box, padding-box; background-clip: content-box, content-box; }
+.sp-tb__right > .sp-wowbtn--tb:nth-last-child(2):active { background-image: url("/assets/icons/inv_misc_gear_01.jpg"), url("/assets/ui/_128-redbutton-center-pressed.png"); }
+.sp-tb__right > .sp-wowbtn--tb:nth-last-child(2):disabled { background-image: url("/assets/icons/inv_misc_gear_01.jpg"), url("/assets/ui/_128-redbutton-center-disabled.png"); }
+
+/* 2026-11-03 fix (hunter, 1920x1080: "equipment grid next to potions is cut off"): the landscape top bar was ~210 design px too wide, so the flexible
+   .sp-relics2 slot that holds the gear strip (8-col socket grid, 205px) was squeezed to ~13px and clipped by its overflow:hidden. Tighten gaps / button
+   widths so the strip fits, and give the slot a floor so it can never be squeezed below the grid again. Landscape only (portrait wraps its own rows). */
+.sp-stage:not(.sp-portrait) .sp-topbar { gap: 12px; padding-left: 20px; padding-right: 20px; }
+.sp-stage:not(.sp-portrait) .sp-tb__id { min-width: 70px; }
+.sp-stage:not(.sp-portrait) .sp-tb__right { gap: 6px; }
+.sp-stage:not(.sp-portrait) .sp-tb__right > .sp-wowbtn--tb { min-width: 96px; }
+.sp-stage:not(.sp-portrait) .sp-tb__right > .sp-wowbtn--tb:nth-last-child(2) { min-width: calc(var(--h) * 2.2 + var(--gear) + 6px); }
+.sp-stage:not(.sp-portrait) .sp-tb__right > .sp-wowbtn--fs { min-width: 64px; }
+.sp-stage:not(.sp-portrait) .sp-tb__where { margin-right: 4px; }
+.sp-stage:not(.sp-portrait) .sp-relics2 { min-width: 214px; flex-shrink: 0; overflow: visible; }
+.sp-stage:not(.sp-portrait) .sp-tb__zone { display: block; max-width: 190px; overflow: hidden; text-overflow: ellipsis; } /* long zone names ellipsize instead of widening the bar */

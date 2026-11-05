@@ -11,12 +11,13 @@
 
 ## Download for desktop
 
-Windows, macOS and Linux builds are on the **[latest release](https://github.com/Chrisl252/spiresofazeroth/releases/latest)**. The builds are unsigned, so your OS will warn you the first time:
+Windows, macOS, Linux, Android and iOS builds are on the **[latest release](https://github.com/Chrisl252/spiresofazeroth/releases/latest)**. The builds are unsigned, so your OS will warn you the first time:
 
 - **Windows:** run the `.exe` (or `.msi`) installer. If SmartScreen blocks it, click **More info**, then **Run anyway**.
 - **macOS:** open the `.dmg` and drag the app to Applications. Because it is unsigned, right-click the app and choose **Open** (then Open again), or run `xattr -cr "/Applications/Spires of Azeroth.app"` once.
 - **Linux:** download the `.AppImage`, then `chmod +x` it and run it, or install the `.deb` (`sudo apt install ./Spires*.deb`).
 - **Android:** download the `.apk` and allow installs from unknown sources.
+- **iOS / iPadOS:** download the `-ios-unsigned.ipa`. It is not on the App Store and not Apple-signed, so install it with a sideloading tool: [AltStore](https://altstore.io/) or [Sideloadly](https://sideloadly.io/) (free Apple ID, re-sign every 7 days), or TrollStore on supported iOS versions. No jailbreak needed for AltStore/Sideloadly.
 
 Notes: desktop saves are separate from your browser saves (they do not carry over). The Blizzard art, models and sounds are not bundled; the app downloads them from thewowdb.com on first use and caches them, so the first launch needs an internet connection.
 

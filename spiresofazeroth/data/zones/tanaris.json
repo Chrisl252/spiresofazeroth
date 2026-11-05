@@ -7,7 +7,7 @@
  "levelBand":[40,50],
  "isHub":false,
  "units":{"sullithuz-hatchling":{"name":"Sul'lithuz Hatchling","icon":"ability_hunter_pet_silithid","hp":12,"moves":[{"id":"nip","name":"Nip","intent":"attack","effects":[{"op":"damage","amount":4}],"weight":2}]},"zulfarrak-dead-hero":{"name":"Zul'Farrak Dead Hero","icon":"inv_misc_head_undead_01","hp":16,"moves":[{"id":"rusty-blade","name":"Rusty Blade","intent":"attack","effects":[{"op":"damage","amount":6}],"weight":2}]}},
- "spire":{"name":"Zul'Farrak / Caverns of Time","lore":"The sunbaked Sandfury ruin of Zul'Farrak, with the bronze-dragonflight Caverns of Time guardian tower rising from the dunes beside Gadgetzan."},
+ "spire":{"name":"Zul'Farrak","lore":"The Sandfury troll city in the northwest of Tanaris. Gadgetzan's goblins keep the peace in the desert, and the Caverns of Time lie hidden to the east."},
  "theme":{"primary":"#c99a4a","secondary":"#3a2a14","accent":"#ffd978","background":"tanaris"},
  "zoneMechanic":{"id":"desert-heat","name":"Desert Heat","icon":"spell_fire_sealoffire","text":"At end of your turn lose 1 HP for every card in hand above 6.","hooks":{"on_turn_end":[{"op":"conditional","if":{"type":"cards_in_hand","atLeast":7},"then":[{"op":"damage","target":"self","amount":{"base":0,"scale":"cards_above_6","per":1,"max":6}}]}]}},
  "rest":{"id":"gadgetzan-inn","name":"Gadgetzan Inn","icon":"inv_drink_05","text":"Rest at the Steamwheedle inn and fill your waterskin.","effects":[{"op":"heal","amount":20,"target":"self"},{"op":"remove","status":"burn","target":"self"}]},

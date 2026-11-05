@@ -7,7 +7,7 @@
   "levelBand": [30,40],
   "spire": {
     "name": "Stromgarde Keep",
-    "lore": "The shattered capital of Arathor, torn between Syndicate usurpers, Boulderfist ogres and the Horde at Hammerfall."
+    "lore": "The capital of Stromgarde, the human kingdom that rose from ancient Arathor. The Syndicate and the Boulderfist ogres hold most of the city, and the Horde watches from Hammerfall."
   },
   "theme": {
     "primary": "#7a8a4a",

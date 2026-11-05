@@ -70,7 +70,7 @@
    "icon": "spell_shadow_possession",
    "kind": "debuff",
    "stackMode": "duration",
-   "text": "Cannot attack; moves are lost."
+   "text": "Enemy: skips its next action. Hero: draw 2 fewer cards this turn."
   },
   {
    "id": "silence",
@@ -110,7 +110,7 @@
    "icon": "ability_stealth",
    "kind": "buff",
    "stackMode": "duration",
-   "text": "Enemies cannot target you; your next attack deals bonus damage."
+   "text": "Enemies cannot target you; your next attack deals bonus damage. A stealthed enemy cannot be targeted while another enemy is visible (the last enemy is always revealed). Area effects still hit it; Flare can target it and removes Stealth."
   },
   {
    "id": "shield",
@@ -134,7 +134,7 @@
    "icon": "spell_shadow_unholyfrenzy",
    "kind": "debuff",
    "stackMode": "intensity",
-   "text": "At turn end lose HP equal to Disease and max HP is reduced for the combat."
+   "text": "Healing you receive is halved while Disease lasts. It carries into your next combat, falling by 1 after each fight."
   },
   {
    "id": "curse",
@@ -215,6 +215,14 @@
    "kind": "debuff",
    "stackMode": "duration",
    "text": "Cannot act until damaged."
+  },
+  {
+   "id": "vengeance",
+   "name": "Vengeance",
+   "icon": "spell_holy_vindication",
+   "kind": "buff",
+   "stackMode": "none",
+   "text": "Whenever an enemy attack hits you, gain 1 Strength per stack."
   },
   {
    "id": "worgen_curse",

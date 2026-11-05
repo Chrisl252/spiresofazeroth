@@ -1,6 +1,19 @@
 // Co-op lobby: host a game (shows a 6-letter code) or join one by code; once connected, both players pick a hero and start.
 // Session + rules: js/coop/session.js. Reached from the title screen's Co-op button.
 import { h, toast } from "./dom.js";
+import { loadRun } from "../engine/save.js";
+
+// 11-03 reports ("can't resume a game in MP"): the lobby only offered a new hero. When this browser's saved run is the shared one
+// (same seed as the session; the host re-hosts with its saved run's seed), both players can pick it back up.
+function sharedRunButton(app, coop) {
+  let r = app.run && app.run.screen !== "end" ? app.run : null;
+  if (!r) { try { r = loadRun(); } catch { r = null; } }
+  if (!r || r.screen === "end" || !r.seed || r.seed !== coop.seedForRun()) return [];
+  return [h("button", { class: "sp-wowbtn sp-wowbtn--lg", type: "button", onClick: async () => {
+    try { if ((app.run && app.run.seed === r.seed) || (await app.resume())) await app.route(); else toast("Could not load the saved run."); }
+    catch (e) { console.error("[coop] continue shared run", e); toast("Could not load the saved run."); }
+  } }, "Continue our run")];
+}
 
 export function render(app) {
   const coop = app.coop;
@@ -20,6 +33,7 @@ export function render(app) {
     root.append(h("h2", {}, "Party formed"), h("p", {}, `You are connected with ${pn === "your partner" ? "your partner" : pn}. ${coop.role === "host" ? "You lead the way." : "Your host leads the way."}`),
       h("p", {}, "Both of you now pick a hero. The run starts once you each enter the world."),
       h("div", { class: "sp-coop-row" },
+        ...sharedRunButton(app, coop),
         h("button", { class: "sp-wowbtn sp-wowbtn--lg", type: "button", "data-autofocus": "", onClick: () => app.go("charSelect") }, "Choose your hero"),
         h("button", { class: "sp-wowbtn", type: "button", onClick: () => { coop.leave(); rerender(); } }, "Leave party")), how);
     return root;

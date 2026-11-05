@@ -17,7 +17,7 @@ const TYPE_MS = 18;
 const chipEl = (c) => h("span", { class: `ev-chip ev-chip--${c.kind}` }, c.text);
 
 // What really happened (conditional options are only known after the roll): diff of the run before/after.
-const snapshot = (run) => ({ hp: run.hp, maxHp: run.maxHp, gold: run.gold, cards: run.deck.length, ups: run.deck.filter((c) => c.up).length, relics: run.relics.length, potions: run.potions.length });
+const snapshot = (run) => ({ hp: run.hp, maxHp: run.maxHp, gold: run.gold, cards: run.deck.length, ups: run.deck.filter((c) => c.up).length, relics: run.relics.length, potions: run.potions.length, fbEnergy: (run.fightBonus || {}).energy | 0, fbDraw: (run.fightBonus || {}).draw | 0, carry: { ...(run.carry || {}) } });
 function outcome(a, b, fight, shop) {
   const parts = [], chips = [], say = [];
   const d = (k) => b[k] - a[k];
@@ -31,6 +31,9 @@ function outcome(a, b, fight, shop) {
   if (d("ups") > 0) add("blue", "Upgraded card", "upgrade a card");
   if (d("relics") > 0) add("blue", "Gained relic", "claim a relic");
   if (d("potions") > 0) add("blue", "Gained potion", "pocket a potion");
+  if (d("fbEnergy") > 0 || d("fbDraw") > 0) { const en = d("fbEnergy"), dr = d("fbDraw"); add("blue", [en > 0 ? `+${en} Energy` : "", dr > 0 ? `Draw +${dr}` : ""].filter(Boolean).join(", ") + " next fight", `start your next fight with ${[en > 0 ? en + " extra Energy" : "", dr > 0 ? dr + " extra card" : ""].filter(Boolean).join(" and ")}`); }
+  // next-fight buffs (run.carry, filled by out-of-combat "apply" ops): Sayge Strength/Armor, Twilight Tome (11-01 report "it said nothing happened")
+  for (const [id, n] of Object.entries(b.carry || {})) { const dn = n - ((a.carry || {})[id] || 0); if (!dn) continue; const nm = id.replace(/_/g, " ").replace(/^./, (c) => c.toUpperCase()); add(dn > 0 ? "green" : "red", `${dn > 0 ? "+" : ""}${dn} ${nm} next fight`, `${dn > 0 ? "gain" : "lose"} ${Math.abs(dn)} ${nm.toLowerCase()} for your next fight`); }
   let text = say.length ? `You ${say.length > 1 ? say.slice(0, -1).join(", ") + " and " + say[say.length - 1] : say[0]}.` : "Nothing changes. You move on.";
   if (fight) { chips.push({ kind: "red", text: "A fight follows" }); text += " A fight follows."; }
   if (shop) { chips.push({ kind: "yellow", text: "Shop opens" }); text += " A shop opens."; }

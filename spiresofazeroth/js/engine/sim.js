@@ -213,3 +213,4 @@ export async function simRun(data, { classId, seed, heroic = 0, continent, maxSt
 }
 
 export { isAlive };
+export { cardScore, incomingDamage }; // co-op sim reuses the bot scoring (tools/spires/coop-sim.mjs)

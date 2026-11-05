@@ -9,8 +9,8 @@
   20
  ],
  "spire": {
-  "name": "Stonewrought Dam Tower",
-  "lore": "The great dam of Loch Modan holds back the lake and the Mo'grosh ogres of the east, and its signal tower can see both Thelsamar and the troggs of Stonesplinter Valley."
+  "name": "Stonewrought Dam",
+  "lore": "The great dwarven dam at the north end of Loch Modan. Mo'grosh ogres hold the east shore, and Stonesplinter troggs dig in the valley to the south."
  },
  "theme": {
   "primary": "#4a7fa0",

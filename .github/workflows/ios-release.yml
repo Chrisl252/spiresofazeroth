@@ -1,0 +1,68 @@
+name: iOS release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to attach the IPA to (must already exist as a GitHub Release)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  ipa:
+    runs-on: macos-latest
+    env:
+      TAG: ${{ github.event.inputs.tag || github.ref_name }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install, stage and generate the Xcode project
+        working-directory: ios-app
+        run: |
+          npm install
+          node stage.mjs
+          npx cap add ios
+          npx cap sync ios
+
+      - name: Stamp version
+        working-directory: ios-app/ios/App
+        run: |
+          VER="${TAG#v}"
+          sed -i '' "s/MARKETING_VERSION = [^;]*;/MARKETING_VERSION = ${VER};/g" App.xcodeproj/project.pbxproj
+          sed -i '' "s/CURRENT_PROJECT_VERSION = [^;]*;/CURRENT_PROJECT_VERSION = ${{ github.run_number }};/g" App.xcodeproj/project.pbxproj
+          grep -m1 MARKETING_VERSION App.xcodeproj/project.pbxproj
+
+      - name: Build (unsigned; sideload with AltStore / Sideloadly / TrollStore)
+        working-directory: ios-app/ios/App
+        run: |
+          set -o pipefail
+          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -sdk iphoneos \
+            -destination 'generic/platform=iOS' -derivedDataPath "$RUNNER_TEMP/dd" \
+            CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO build | tail -n 60
+
+      - name: Package IPA
+        run: |
+          APP=$(find "$RUNNER_TEMP/dd/Build/Products/Release-iphoneos" -maxdepth 1 -name "*.app" | head -n 1)
+          test -n "$APP"
+          mkdir -p "$RUNNER_TEMP/ipa/Payload"
+          cp -R "$APP" "$RUNNER_TEMP/ipa/Payload/"
+          (cd "$RUNNER_TEMP/ipa" && zip -qry "$GITHUB_WORKSPACE/SpiresOfAzeroth-${TAG}-ios-unsigned.ipa" Payload)
+          ls -la "SpiresOfAzeroth-${TAG}-ios-unsigned.ipa"
+
+      - name: Upload to the release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for i in $(seq 1 30); do
+            gh release view "$TAG" >/dev/null 2>&1 && break
+            echo "waiting for release $TAG"; sleep 20
+          done
+          gh release upload "$TAG" "SpiresOfAzeroth-${TAG}-ios-unsigned.ipa" --clobber

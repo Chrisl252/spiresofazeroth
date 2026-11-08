@@ -1,6 +1,6 @@
 {
   "name": "spires-of-azeroth-ios",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "private": true,
   "description": "Capacitor iOS wrapper for Spires of Azeroth (unsigned IPA built by .github/workflows/ios-release.yml)",
   "scripts": { "stage": "node stage.mjs" },

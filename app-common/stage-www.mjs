@@ -1,6 +1,6 @@
 // Shared www staging for the Capacitor apps (android-app, ios-app). Each app's stage.mjs calls stageWww(here, { head }).
 // Layout mirrors the site: the game lives at /spiresofazeroth/; absolute /assets, /static and /media paths are served from the
-// bundled offline/ copy first, then from thewowdb.com (Android: sw.js; iOS: the fetch/Audio shim in ios-app/remote-shim.js).
+// bundled offline/ copy first, then from thewowdb.com (Android: the native RemoteAssets.java interceptor; iOS: the fetch/Audio shim in ios-app/remote-shim.js).
 import { cpSync, rmSync, mkdirSync, writeFileSync, readFileSync, existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 export function stageWww(here, { head = "", sw = null } = {}) {
